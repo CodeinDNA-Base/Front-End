@@ -1,3 +1,4 @@
+
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,8 +12,10 @@ const useStyles = makeStyles((theme) => ({
     footer:{
       position:'absolute',
       bottom:0,
-      width:'100%'
-    }
+      width:'100%',
+      backgroundColor:"#011c38"
+    },
+    
   }));
 
 export default useStyles;

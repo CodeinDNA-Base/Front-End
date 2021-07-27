@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import './Styles/StyleSheet.css'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ServiceDetailsTabs(props) {
   const classes = useStyles();
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -55,7 +57,7 @@ export default function ServiceDetailsTabs(props) {
   };
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar position="static" color="black" >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -65,13 +67,12 @@ export default function ServiceDetailsTabs(props) {
           textColor="primary"
           aria-label="scrollable force tabs example"
         >
-          <Tab label="Item One"   {...a11yProps(0)} />
-          <Tab label="Item Two"   {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-          <Tab label="Item Four"  {...a11yProps(3)} />
-          <Tab label="Item Five"  {...a11yProps(4)} />
-          <Tab label="Item Six"   {...a11yProps(5)} />
-          <Tab label="Item Seven" {...a11yProps(6)} />
+          <Tab className="TabTextFonts" label="Over view"   {...a11yProps(0)} />
+          <Tab className="TabTextFonts" label="Description"   {...a11yProps(1)} />
+          <Tab className="TabTextFonts" label="Compare Package" {...a11yProps(2)} />
+          <Tab className="TabTextFonts" label="Reviews"  {...a11yProps(3)} />
+          <Tab className="TabTextFonts" label="Related Service"  {...a11yProps(4)} />
+          
         </Tabs>
       </AppBar>
       
@@ -96,6 +97,7 @@ export default function ServiceDetailsTabs(props) {
       <TabPanel value={value} index={6}>
         Item Seven
       </TabPanel> */}
-    </div>
+
+      </div>
   );
 }
