@@ -30,6 +30,7 @@ const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
 
 const [distanceFromTop,setDistanceFromTop]=useState();
 const [calculatedHeight,setCalculatedHeight]=useState();
+
 return (
   
 <StickyContainer>
@@ -65,7 +66,7 @@ return (
           <Box px={(isDesktopOrLaptopOrTabletScreen) ? 6 : 3}>
              {/* Body */}
              <Grid container spacing={1}>
-                  <Grid item lg={8} md={8} xs={12} style={{marginTop:'4%'}}>
+                  <Grid item lg={8} md={8} xs={12} >
                     {/* Service description container */}
                     <Paper className={classes.paper}>
                       <div style={
