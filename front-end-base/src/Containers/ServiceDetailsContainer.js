@@ -1,8 +1,6 @@
 import React,{useState} from 'react';
-import Grid from '@material-ui/core/Grid';
-import withWidth from '@material-ui/core/withWidth';
 import PropTypes from 'prop-types';
-import { Box } from '@material-ui/core';
+import { Box,Grid,withWidth, } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ServiceDetailsNavbar from '../Service Details/Components/ServiceDetailsNavbar';
 import { StickyContainer, Sticky } from 'react-sticky';

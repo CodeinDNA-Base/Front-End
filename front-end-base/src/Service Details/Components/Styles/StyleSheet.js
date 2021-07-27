@@ -10,12 +10,14 @@ const useStyles = makeStyles((theme) => ({
       color: "black",
     },
     footer:{
-      position:'absolute',
+      
       bottom:0,
       width:'100%',
       backgroundColor:"#011c38"
     },
-    
+    serviceDescriptionDiv:{
+      backgroundColor:"#f8f9fa"
+    }
   }));
 
 export default useStyles;
