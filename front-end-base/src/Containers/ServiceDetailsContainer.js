@@ -1,49 +1,42 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { Box,Grid,withWidth, } from '@material-ui/core';
+import { Box,Grid,withWidth,AppBar } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import ServiceDetailsNavbar from '../Service Details/Components/ServiceDetailsNavbar';
-import { StickyContainer, Sticky } from 'react-sticky';
-import ServiceDetailsTabs from '../Service Details/Components/ServiceDetailsTabs';
-import useStyles from '../Service Details/Components/Styles/StyleSheet';
 import ServiceDetailsDescriptionArea from '../Service Details/Components/ServiceDetailsDescriptionArea';
 import ServiceDetailsFooter from '../Service Details/Components/ServiceDetailsFooter';
 import Packages from '../Service Details/Components/Packages';
+import { makeStyles } from '@material-ui/core/styles';
+import NavTabBarCollectively from '../Service Details/Components/NavTabBarCollectively';
 function ServiceWorkerContainer(props) {
-
 const classes = useStyles();
 const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
-const [currentSelectedTabIndex,setCurrentSelectedTabIndex]=useState(0);
 
-const handelTabChangeEvent = (event,indexSelected)=>{setCurrentSelectedTabIndex(indexSelected);}
+const [currentSelectedTabIndex,setCurrentSelectedTabIndex]=useState(0);
+const [top,setTop]=useState();
+const [scrollPosition, setScrollPosition] = useState(0);
+const handelTabChangeEvent = (event,indexSelected)=>{setCurrentSelectedTabIndex(indexSelected)}
+const handleScroll = () => {setScrollPosition(window.pageYOffset)};
+
+useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+}, []);
 
 return (
-  
-<StickyContainer>
-  <Sticky>
-    {({style,isSticky,wasSticky,distanceFromTop,distanceFromBottom,calculatedHeight}) => (
-      <body style={style}>
-        <Grid container >
-          <Grid item xs={12} style={{marginTop:distanceFromTop}}>
-              {/* Navbar container */}
-               <ServiceDetailsNavbar/>
-           </Grid>
-          <Grid item xs={12} >
-            <Box px={(isDesktopOrLaptopOrTabletScreen) ? 6 : 0} >
-              {/* Tabs container */}
-              <ServiceDetailsTabs handelTabChangeEvent={handelTabChangeEvent} />
-           </Box>         
-          </Grid>
+<div >
+<Grid container >
+        <Grid item xs={12}>
+          <AppBar style={{backgroundColor:"transparent"}}>
+                  <NavTabBarCollectively/>
+          </AppBar>
         </Grid>
-      </body>
-    )}
-  </Sticky>
-   <Grid container spacing={1}>
         <Grid item xs={12}>
           <Box px={(isDesktopOrLaptopOrTabletScreen) ? 6 : 3}>
              {/* Body */}
-             <Grid container spacing={1}>
-                  <Grid item lg={8} md={8} xs={12} >
+             <Grid container spacing={1}  style={{marginTop:"10%"}}>
+                  <Grid item lg={8} md={8} xs={12}>
                     {/* Service description container */}
                     <ServiceDetailsDescriptionArea currentSelectedTabIndex={currentSelectedTabIndex}/>
                   </Grid>
@@ -58,10 +51,22 @@ return (
               {/* Footer */}
              <ServiceDetailsFooter/>
         </Grid>
-      </Grid>
-</StickyContainer>
-  );
+       
+</Grid> 
+</div>  
+);
 }
+
+const useStyles = makeStyles((theme) => ({
+  visibleNavbar:{
+    marginTop:20
+  },
+  hiddenNavbar:{
+    marginTop:0
+  },
+  
+}));
+
 
 ServiceWorkerContainer.propTypes = {
   width: PropTypes.oneOf(['lg', 'md', 'sm', 'xl', 'xs']).isRequired,

@@ -1,9 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import './Styles/StyleSheet.css'
-import { Grid,CardMedia} from '@material-ui/core';
+import { Grid,Typography} from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import ServiceImagesCarousel from './ServiceImagesCarousel';
+import strings from '../Strings/Strings'
 
 function ServiceDetailsDescriptionArea(props) {
     const classes = useStyles();
@@ -24,6 +25,12 @@ function ServiceDetailsDescriptionArea(props) {
                                 </div>
                             </div>    
                     </Grid>
+                    <Grid item lg={12} md={12} sm={12} className={classes.overviewrow}>
+                            {/* Over view */}
+                            <div className="OverViewHeadingFonts" >Overview</div>
+                            <div className="OverViewParaphFonts">{strings.sampleText}</div>   
+                    </Grid>
+                    
                     
               </Grid> 
         </div>
@@ -48,9 +55,14 @@ const useStyles = makeStyles((theme) => ({
        height:350,      
     },
     serviceCarousel:{
-        marginLeft:"2%"
+        marginLeft:"2%",
+        marginTop:"2%"
+
     }
-    
+    ,
+    overviewrow:{
+        marginTop:"1%",
+    }
   }));
 
 

@@ -8,7 +8,6 @@
 import React from 'react';
 import { BrowserRouter as Router,Switch, Route} from "react-router-dom";
 import ServiceDetailsContainer from './ServiceDetailsContainer';
-
 function Entrance(props) {
     return (
         <Router>

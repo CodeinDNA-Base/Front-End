@@ -10,6 +10,7 @@
     font-weight:bold;
 }
 
+                        /*Image and title fonts  */
 .ServiceTitle{
     font-family: 'Jura', sans-serif;
     font-size: 1.5rem;
@@ -22,12 +23,37 @@
 .ServiceRatingText{
     font-family: 'Jura', sans-serif;
     font-size: 20px;
-
     display: inline;
-
 
 }
 .ServiceRatingBar{
-
-   display: inline-block;
+   display: inline;
 }
+
+                        /* Over view  */
+
+.OverViewHeadingFonts{
+    font-family: 'Jura', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+.OverViewParaphFonts{
+    font-family: 'Jura', sans-serif;
+    font-size: 20px;
+}
+/* ------------------------ */
+.navdiv {
+    color: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%; 
+  }
+  .active {
+    visibility: visible;
+    transition: all 0.5s;
+  }
+  .hidden {
+    /* visibility: hidden; */
+    transition: all 0.5s;
+    transform: translateY(-57%);
+  }
