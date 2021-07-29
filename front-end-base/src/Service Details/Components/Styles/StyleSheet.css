@@ -50,6 +50,16 @@
 
                     /*  Package comparator */
 
+
+                    /* Package */
+
+.PackageText{
+    font-family: 'Jura', sans-serif;
+    font-size: 10px;
+}
+.StickThePackageContainer{
+    position: fixed;
+}
 /* ------------------------ */
 .navdiv {
     color: #fff;

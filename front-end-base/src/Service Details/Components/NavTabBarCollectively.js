@@ -22,7 +22,8 @@ export default class NavTabBarCollectively extends React.Component {
     this.state.handelTabIndex(event,indexSelected);
     this.setState({currentSelectedTabIndex:indexSelected});
   }
-  componentDidMount() {
+  componentDidMount() 
+  {
     window.addEventListener("scroll", this.handleScroll);
   }
   componentWillUnmount() {
