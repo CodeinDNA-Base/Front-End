@@ -4,12 +4,12 @@ import './Styles/StyleSheet.css'
 import { Grid,useMediaQuery} from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import strings from '../Strings/Strings'
-
 import ServiceImagesCarousel from './ServiceImagesCarousel';
 import PackageComparator from './PackageComparator';
 import ServiceReviews from './ServiceReviews';
 import RelatedService from './RelatedService';
-import $ from 'jquery'
+import useWindowDimensions from './useWindowDimensions';
+
 function ServiceDetailsDescriptionArea(props) {
     const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
     const classes = useStyles();
@@ -20,26 +20,27 @@ function ServiceDetailsDescriptionArea(props) {
     var serviceREviewsDiv = document.getElementById('serviceREviewsDiv');
     var relatedServicesDiv = document.getElementById('relatedServicesDiv');
     // console.log(overviewDiv.offsetHeight)
-    console.log(comparePackagesDiv.offsetHeight)
+    // console.log(comparePackagesDiv.offsetHeight)
+    const { height, width } = useWindowDimensions();
+    console.log(height)
     useEffect(()=>{
         switch(props.currentSelectedTabIndex)
         {
             case 0:
-                    window.scrollTo({ behavior: 'smooth', top:overviewDiv.offsetHeight})
+                    window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 0.6 : 0.7)})
             break;
             case 1:
-                    window.scrollTo({ behavior: 'smooth', top:descriptionDiv.offsetHeight+overviewDiv.offsetHeight})
+                    window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 0.9 : 1.1)})
             break;
             case 2:
-                    window.scrollTo({ behavior: 'smooth', top:descriptionDiv.offsetHeight+overviewDiv.offsetHeight+descriptionDiv.offsetHeight})
+                    window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 1.4 : 1.5)})
             break;
             case 3:
-                    window.scrollTo({ behavior: 'smooth', top:descriptionDiv.offsetHeight+overviewDiv.offsetHeight+descriptionDiv.offsetHeight+serviceREviewsDiv.offsetHeight})
+                    window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 1.6 : 1.7)})
             break;
             case 4:
-                    window.scrollTo({ behavior: 'smooth', top:descriptionDiv.offsetHeight+overviewDiv.offsetHeight+descriptionDiv.offsetHeight+serviceREviewsDiv.offsetHeight+relatedServicesDiv.offsetHeight})
+                window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 1.6 : 2)})
             break;
-            
             
         }
     },[props.currentSelectedTabIndex])
