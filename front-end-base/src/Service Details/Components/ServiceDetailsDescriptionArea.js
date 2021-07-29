@@ -26,22 +26,21 @@ function ServiceDetailsDescriptionArea(props) {
     useEffect(()=>{
         switch(props.currentSelectedTabIndex)
         {
-            case 0:
+            case 1:
                     window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 0.6 : 0.7)})
             break;
-            case 1:
+            case 2:
                     window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 0.9 : 1.1)})
             break;
-            case 2:
+            case 3:
                     window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 1.4 : 1.5)})
             break;
-            case 3:
+            case 4:
                     window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 1.6 : 1.7)})
             break;
-            case 4:
-                window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 1.6 : 2)})
-            break;
-            
+            case 0:
+                window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 0.0 : 0.0)})
+            break;   
         }
     },[props.currentSelectedTabIndex])
     
@@ -65,23 +64,16 @@ function ServiceDetailsDescriptionArea(props) {
                     </Grid>
                     <Grid item lg={12} md={12} sm={12} className={classes.overviewrow} >
                             <div id="overviewDiv">    
-                            {/* Over view */}
-                            <div  className={classes.HeadingContainer} ><div className="HeadingFonts" >Overview</div></div> 
-                            <div className={classes.ParaphContainer}> <div className="ParaphFonts">{strings.sampleText}</div></div>   
-                            </div>
-
-                            <div id="descriptionDiv">
                             {/* Description */}
-                            <div className={classes.HeadingContainer} ><div className="HeadingFonts" >Description</div></div> 
+                            <div  className={classes.HeadingContainer} ><div className="HeadingFonts" >Description</div></div> 
                             <div className={classes.ParaphContainer}> <div className="ParaphFonts">{strings.sampleText}</div></div>   
                             </div>
-
                             <div id="comparePackagesDiv">
                             {/* Compare packages */}
                             <div className={classes.HeadingContainer} ><div className="HeadingFonts" >Package Comaparison</div></div> 
                             <div className={classes.ParaphContainer}> <div className="ParaphFonts"><PackageComparator/></div></div>   
                             </div>
-
+                            
                             <div id="serviceREviewsDiv">
                             {/* Reviews */}
                             <div className={classes.HeadingContainer} ><div className="HeadingFonts" >Customer Reviews</div></div> 

@@ -1,9 +1,15 @@
+import { Grid } from '@material-ui/core';
 import React from 'react';
 
 function Packages(props) {
     return (
         <div>
-            <h1>PKG</h1>
+            <Grid container spacing={1}>
+                <Grid item>
+                    {/* Package */}
+                </Grid>
+                
+            </Grid>
         </div>
     );
 }

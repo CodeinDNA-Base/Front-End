@@ -18,7 +18,6 @@ const [currentSelectedTabIndex,setCurrentSelectedTabIndex]=useState(0);
 const [scrollPosition, setScrollPosition] = useState(0);
 const handleScroll = () => {setScrollPosition(window.pageYOffset)};
 const handelTabIndex=(event,index=0)=>{setCurrentSelectedTabIndex(index)}
-
 useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
@@ -48,7 +47,10 @@ return (
                   </Grid>
                   <Grid item lg={4} md={4} xs={12}>
                     {/* package container */}
-                    <Packages/>
+                    <div>
+                        <Packages/>
+                    </div>
+
                   </Grid>
                </Grid>
              </Box>

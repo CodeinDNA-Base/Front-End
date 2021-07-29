@@ -48,9 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ServiceDetailsTabs(props) {
   const classes = useStyles();
-
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
     props.handelTabChangeEvent(event,newValue);
