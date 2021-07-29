@@ -6,12 +6,21 @@ import { AppBar, Grid,Box} from "@material-ui/core";
 import './Styles/StyleSheet.css'
 
 export default class NavTabBarCollectively extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       show: true,
       scrollPos: 0,
+      currentSelectedTabIndex:0,
+      handelTabIndex:props.handelTabIndex.bind(props.handelTabIndex()),
+      handelTabChangeEvent:this.handelTabChangeEvent.bind(this)
     };
+  }
+
+  handelTabChangeEvent = (event,indexSelected)=>
+  {
+    this.state.handelTabIndex(event,indexSelected);
+    this.setState({currentSelectedTabIndex:indexSelected});
   }
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
@@ -26,8 +35,9 @@ export default class NavTabBarCollectively extends React.Component {
       show: document.body.getBoundingClientRect().top > this.state.scrollPos
     });
   };
+
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return(
       <AppBar style={{backgroundColor:"transparent"}}>
        
@@ -37,7 +47,7 @@ export default class NavTabBarCollectively extends React.Component {
                         <Grid container >
                             <Grid item xs={12}>
                                 <Box px={0}>
-                                    <ServiceDetailsTabs/>
+                                    <ServiceDetailsTabs handelTabChangeEvent={this.state.handelTabChangeEvent}/>
                                 </Box>
                             </Grid>
                         </Grid>

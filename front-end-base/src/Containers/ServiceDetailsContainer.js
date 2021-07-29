@@ -7,15 +7,17 @@ import ServiceDetailsFooter from '../Service Details/Components/ServiceDetailsFo
 import Packages from '../Service Details/Components/Packages';
 import { makeStyles } from '@material-ui/core/styles';
 import NavTabBarCollectively from '../Service Details/Components/NavTabBarCollectively';
+
 function ServiceWorkerContainer(props) {
+
 const classes = useStyles();
+
 const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
 
 const [currentSelectedTabIndex,setCurrentSelectedTabIndex]=useState(0);
-const [top,setTop]=useState();
 const [scrollPosition, setScrollPosition] = useState(0);
-const handelTabChangeEvent = (event,indexSelected)=>{setCurrentSelectedTabIndex(indexSelected)}
 const handleScroll = () => {setScrollPosition(window.pageYOffset)};
+const handelTabIndex=(event,index=0)=>{setCurrentSelectedTabIndex(index)}
 
 useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -27,15 +29,19 @@ useEffect(() => {
 return (
 <div >
 <Grid container >
+
         <Grid item xs={12}>
           <AppBar style={{backgroundColor:"transparent"}}>
-                  <NavTabBarCollectively/>
+                  <NavTabBarCollectively handelTabIndex={handelTabIndex}/>
           </AppBar>
         </Grid>
-        <Grid item xs={12}>
-          <Box px={(isDesktopOrLaptopOrTabletScreen) ? 6 : 3}>
-             {/* Body */}
-             <Grid container spacing={1}  style={{marginTop:"10%"}}>
+
+        <Grid container>
+            <Grid lg={1} md={1} sm={1} xs={0}></Grid>
+            <Grid item lg={10} sm={10} md={10} xs={12}>
+              <Box px={(isDesktopOrLaptopOrTabletScreen) ? 6 : 3}>
+              {/* Body */}
+                <Grid container spacing={1}  style={{marginTop:"10%"}}>
                   <Grid item lg={8} md={8} xs={12}>
                     {/* Service description container */}
                     <ServiceDetailsDescriptionArea currentSelectedTabIndex={currentSelectedTabIndex}/>
@@ -44,9 +50,12 @@ return (
                     {/* package container */}
                     <Packages/>
                   </Grid>
-             </Grid>
-          </Box>
+               </Grid>
+             </Box>
+            </Grid>
+            <Grid lg={1} md={1} sm={1} xs={0}></Grid>
         </Grid>
+
         <Grid item xs={12} className={classes.footer}>
               {/* Footer */}
              <ServiceDetailsFooter/>
@@ -71,4 +80,5 @@ const useStyles = makeStyles((theme) => ({
 ServiceWorkerContainer.propTypes = {
   width: PropTypes.oneOf(['lg', 'md', 'sm', 'xl', 'xs']).isRequired,
 };
+
 export default withWidth()(ServiceWorkerContainer);

@@ -13,7 +13,7 @@
                         /*Image and title fonts  */
 .ServiceTitle{
     font-family: 'Jura', sans-serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight:bold;
     padding-bottom: 10px;
 }
@@ -32,15 +32,24 @@
 
                         /* Over view  */
 
-.OverViewHeadingFonts{
+.HeadingFonts{
     font-family: 'Jura', sans-serif;
     font-size: 30px;
     font-weight: bold;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;                 
 }
-.OverViewParaphFonts{
-    font-family: 'Jura', sans-serif;
-    font-size: 20px;
+.ParaphFonts{
+        /* font-family: 'Jura', sans-serif; */
+         font-size: 1rem;    
 }
+                            
+
+                       /* Description*/
+
+
+                    /*  Package comparator */
+
 /* ------------------------ */
 .navdiv {
     color: #fff;
