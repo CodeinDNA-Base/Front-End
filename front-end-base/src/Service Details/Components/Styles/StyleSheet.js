@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
       color: "black",
     },
     footer:{
-      
       bottom:0,
       width:'100%',
       backgroundColor:"#011c38"

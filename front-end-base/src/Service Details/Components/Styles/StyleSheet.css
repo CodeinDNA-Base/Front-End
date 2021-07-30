@@ -59,7 +59,12 @@
 }
 .StickThePackageContainer{
     position: fixed;
+    margin-top: 1%;
 }
+.UnStickThePackageContainer{
+   margin-top:177.5%;
+}
+
 /* ------------------------ */
 .navdiv {
     color: #fff;

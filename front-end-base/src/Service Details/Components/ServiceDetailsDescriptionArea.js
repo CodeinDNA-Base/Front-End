@@ -19,8 +19,6 @@ function ServiceDetailsDescriptionArea(props) {
     var comparePackagesDiv =  document.getElementById('comparePackagesDiv');
     var serviceREviewsDiv = document.getElementById('serviceREviewsDiv');
     var relatedServicesDiv = document.getElementById('relatedServicesDiv');
-    // console.log(overviewDiv.offsetHeight)
-    // console.log(comparePackagesDiv.offsetHeight)
     const { height, width } = useWindowDimensions();
     console.log(height)
     useEffect(()=>{

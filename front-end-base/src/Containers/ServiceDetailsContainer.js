@@ -13,11 +13,31 @@ function ServiceWorkerContainer(props) {
 const classes = useStyles();
 const { height, width } = useWindowDimensions();
 const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
-const [packageContainerStickyNess,setPackageContainerStickyNess]=useState("StickThePackageContainer");
+const [packageContainerStickyNess,setPackageContainerStickyNess]=useState("");
+const [sticknessFlag,setSticknessFlag]=useState(true)
 const [currentSelectedTabIndex,setCurrentSelectedTabIndex]=useState(0);
 const [scrollPosition, setScrollPosition] = useState(0);
-const handleScroll = () => {setScrollPosition(window.pageYOffset)};
-const handelTabIndex=(event,index=0)=>{setCurrentSelectedTabIndex(index)}
+const handleScroll = () => {
+  setScrollPosition(window.pageYOffset) 
+};
+
+
+useEffect(()=>{
+if(scrollPosition>(height*0.9))
+{
+  console.log("S:"+scrollPosition)
+    setPackageContainerStickyNess("UnStickThePackageContainer")
+}
+else{
+    setPackageContainerStickyNess("StickThePackageContainer")
+}
+
+},[scrollPosition>(height*0.9)])
+
+
+const handelTabIndex=(event,index=0)=>{
+  setCurrentSelectedTabIndex(index)
+}
 
 
 useEffect(() => {
@@ -26,8 +46,9 @@ useEffect(() => {
         window.removeEventListener('scroll', handleScroll);
     };
 }, []);
-console.log("s"+scrollPosition)
-console.log("h"+document.documentElement.offsetHeight)
+
+
+// console.log("h"+document.documentElement.offsetHeight)
 return (
 <div >
 <Grid container >
@@ -47,7 +68,7 @@ return (
                   <Grid item lg={8} md={8} xs={12} >
                     {/* Service description container */}
                     <div className={classes.descriptionAreaontainer}>
-                    <ServiceDetailsDescriptionArea currentSelectedTabIndex={currentSelectedTabIndex}/>
+                          <ServiceDetailsDescriptionArea currentSelectedTabIndex={currentSelectedTabIndex}/>
                     </div>
                   </Grid>
                   <Grid item lg={4} md={4} xs={12}>
@@ -82,11 +103,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop:0
   },
   footer:{
- 
+    
   },
   packageContainer:{
+   
     width:'100%',
-    backgroundColor:"blue"
+  
   },
   descriptionAreaontainer:{
     

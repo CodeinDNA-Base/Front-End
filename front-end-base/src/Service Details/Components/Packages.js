@@ -50,7 +50,7 @@ function Packages(props) {
 const useStyles = makeStyles((theme) => ({
     mainInnerContainer:{
         height:400,
-        width:100,
+        width:360,
         backgroundColor:"gold"
     },
     mainOuterContainer:{
