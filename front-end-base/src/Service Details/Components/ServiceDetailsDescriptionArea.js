@@ -1,7 +1,8 @@
 import React,{useEffect, useRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import './Styles/StyleSheet.css'
-import { Grid,useMediaQuery} from '@material-ui/core';
+import { Grid,useMediaQuery,withWidth,Hidden} from '@material-ui/core';
+import PropTypes from 'prop-types';
 import Rating from '@material-ui/lab/Rating';
 import strings from '../Strings/Strings'
 import ServiceImagesCarousel from './ServiceImagesCarousel';
@@ -9,11 +10,10 @@ import PackageComparator from './PackageComparator';
 import ServiceReviews from './ServiceReviews';
 import RelatedService from './RelatedService';
 import useWindowDimensions from './useWindowDimensions';
-
+import Packages from './Packages';
 function ServiceDetailsDescriptionArea(props) {
     const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
     const classes = useStyles();
-
     var overviewDiv = document.getElementById('overviewDiv');
     var descriptionDiv =  document.getElementById('descriptionDiv');
     var comparePackagesDiv =  document.getElementById('comparePackagesDiv');
@@ -52,6 +52,9 @@ function ServiceDetailsDescriptionArea(props) {
                             <div className="ServiceRatingText">Rating</div>
                             <div className="ServiceRatingBar"><Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly size="small" /></div>
                     </Grid>
+
+
+
                     <Grid item lg={12} md={12} sm={12} className={classes.imageRow}>
                             {/* Image */}
                             <div className={classes.serviceImageDiv}>
@@ -63,14 +66,25 @@ function ServiceDetailsDescriptionArea(props) {
                     <Grid item lg={12} md={12} sm={12} className={classes.overviewrow} >
                             <div id="overviewDiv">    
                             {/* Description */}
+
                             <div  className={classes.HeadingContainer} ><div className="HeadingFonts" >Description</div></div> 
                             <div className={classes.ParaphContainer}> <div className="ParaphFonts">{strings.sampleText}</div></div>   
                             </div>
+                            <Hidden only={['sm', 'lg','md']}>
+
+                            <div id="comparePackagesDiv">
+                            {/* Compare packages */}
+                            <div className={classes.HeadingContainer} ><div className="HeadingFonts" >Package Comaparison</div></div> 
+                            <div className={classes.packageContainerOnMobile}><Packages/></div>   
+                            </div>
+                            </Hidden>
+                            <Hidden only="xs">
                             <div id="comparePackagesDiv">
                             {/* Compare packages */}
                             <div className={classes.HeadingContainer} ><div className="HeadingFonts" >Package Comaparison</div></div> 
                             <div className={classes.ParaphContainer}> <div className="ParaphFonts"><PackageComparator/></div></div>   
                             </div>
+                            </Hidden>
                             
                             <div id="serviceREviewsDiv">
                             {/* Reviews */}
@@ -125,8 +139,15 @@ const useStyles = makeStyles((theme) => ({
     },
     packageComparatorContainer:{
         marginTop:'2%'
+    },
+    packageContainerOnMobile:{
+       
     }
   }));
 
 
-export default ServiceDetailsDescriptionArea;
+  ServiceDetailsDescriptionArea.propTypes = {
+  width: PropTypes.oneOf(['lg', 'md', 'sm', 'xl', 'xs']).isRequired,
+};
+
+export default withWidth()(ServiceDetailsDescriptionArea);

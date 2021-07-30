@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { Box,Grid,withWidth,AppBar } from '@material-ui/core';
+import { Box,Grid,withWidth,AppBar,Hidden} from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ServiceDetailsDescriptionArea from '../Service Details/Components/ServiceDetailsDescriptionArea';
 import ServiceDetailsFooter from '../Service Details/Components/ServiceDetailsFooter';
@@ -71,6 +71,7 @@ return (
                           <ServiceDetailsDescriptionArea currentSelectedTabIndex={currentSelectedTabIndex}/>
                     </div>
                   </Grid>
+                  <Hidden only="xs">
                   <Grid item lg={4} md={4} xs={12}>
                     {/* package container */}
                     <div className={classes.packageContainer}>
@@ -79,6 +80,8 @@ return (
                         </div>
                     </div>
                   </Grid>
+                  </Hidden>
+                  
                </Grid>
              </Box>
             </Grid>
@@ -106,12 +109,10 @@ const useStyles = makeStyles((theme) => ({
     
   },
   packageContainer:{
-   
-    width:'100%',
-  
+    width:'100%'
+    
   },
   descriptionAreaontainer:{
-    
     ['@media (min-width: 960px)']: { // eslint-disable-line no-useless-computed-key
       paddingRight: '10%'
     }

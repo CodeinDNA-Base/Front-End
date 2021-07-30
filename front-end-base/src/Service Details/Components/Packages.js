@@ -49,12 +49,41 @@ function Packages(props) {
 
 const useStyles = makeStyles((theme) => ({
     mainInnerContainer:{
-        height:400,
-        width:360,
-        backgroundColor:"gold"
+        
+         // Set according to screen
+         ['@media (min-width: 960px)']
+         :
+         { // eslint-disable-line no-useless-computed-key
+                height:450,
+                width:360,
+                // Set accrding to screen
+                backgroundColor:"gold"
+         },
+         ['@media (max-width: 600px)']
+         :
+         { // eslint-disable-line no-useless-computed-key
+            height:450,
+            width:400,
+
+            // Set accrding to screen
+            backgroundColor:"blue"
+         },
     },
     mainOuterContainer:{
-        marginTop:'14%',
+       
+        // Set according to screen
+        ['@media (min-width: 960px)']
+        :
+        { // eslint-disable-line no-useless-computed-key
+            marginTop:'9%',
+        },
+        ['@media (max-width: 600px)']
+        :
+        { // eslint-disable-line no-useless-computed-key
+            marginTop:'5%',
+        },
+        
+
     }
   }));
 export default Packages;
