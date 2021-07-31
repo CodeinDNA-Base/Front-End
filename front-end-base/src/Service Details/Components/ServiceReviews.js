@@ -7,7 +7,7 @@ import ReviewsList from './ReviewsList';
 function ServiceReviews(props) {
     const classes = useStyles();
     return (
-        <div>
+        <div className={classes.container}>
             <div className={classes.ratingHeaderContainer}>
                 <div className="RatingHeading">
                     Rating :
@@ -29,13 +29,13 @@ function ServiceReviews(props) {
 
 const useStyles = makeStyles((theme) => ({
     container:{
-     
+     paddingBottom:"3%"
     },
     ratingHeaderContainer:{
         paddingBottom:'4%'
     },
     reviewContainer:{
-
+        
     }
    }));
 export default ServiceReviews;
