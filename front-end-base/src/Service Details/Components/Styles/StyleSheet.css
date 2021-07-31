@@ -58,11 +58,11 @@
 }
 .StickThePackageContainer{
     position: fixed;
-    margin-top: 1%;
+    margin-top: 1.5%;
     width:370px;
 }
 .UnStickThePackageContainer{
-   margin-top:174.5%;
+   margin-top:174.9%;
 }
 .OurpackageFonts{
     font-family: 'Jura', sans-serif;
@@ -70,7 +70,7 @@
     font-weight: bold   ;
 }
 /* ------------------------ */
-.navdiv {
+ .navdiv {
     color: #fff;
     position: fixed;
     top: 0;

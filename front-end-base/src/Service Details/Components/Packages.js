@@ -8,6 +8,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Box from '@material-ui/core/Box';
+import Icon from '@material-ui/core/Icon';
+import { Button } from '@material-ui/core';
 import './Styles/StyleSheet.css'
 function Packages(props) {
     const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
@@ -15,7 +17,7 @@ function Packages(props) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
-      setValue(newValue);
+    setValue(newValue);
     };
 
     return (
@@ -26,68 +28,52 @@ function Packages(props) {
                     <Grid container>
                        <Grid item  ld={12} md={12} sm={12} xs={12}>
                             {/* Tabs */}
-                            
-                             <div className={classes.root}>
-                                      <AppBar position="static" color="white">
-                                       <div className={classes.packageHeadingContainer}>
-                                            <div className={"OurpackageFonts"}>Our Packages</div>
-                                        </div> 
-                                        <Tabs
-                                          value={value}
-                                          onChange={handleChange}
-                                          indicatorColor="primary"
-                                          textColor="primary"
-                                          variant="scrollable"
-                                          scrollButtons="auto"
-                                          aria-label="scrollable auto tabs example"
-                                        >
-                                          <Tab label="Basic" {...a11yProps(0)} />
-                                          <Tab label="Standard" {...a11yProps(1)} />
-                                          <Tab label="Premium" {...a11yProps(2)} />
-                                        </Tabs>
-                                      </AppBar>
-                                      <TabPanel value={value} index={0}>
-                                        <div className={classes.basicPackageContainer}>
-                                        <Box
-                                            boxShadow={2}
-                                            bgcolor="background.paper"
-                                            m={1}
-                                            p={1}
-                                            style={{ width: (isDesktopOrLaptopOrTabletScreen) ? '21rem' : '25rem', height: '23rem' }}
-                                            >
-                                                <h1>Basic</h1>
-                                        </Box>
-                                        </div>
-                                      </TabPanel>
-                                      <TabPanel value={value} index={1}>
-                                        <div className={classes.standardPackageContainer}>
-                                                
-                                                <Box
-                                                boxShadow={2}
-                                                 bgcolor="background.paper"
-                                                 m={1}
-                                                 p={1}
-                                                 style={{ width: (isDesktopOrLaptopOrTabletScreen) ? '21rem' : '25rem', height: '23rem' }}
-                                                 >
-                                                <h1>Standard package</h1>
-                                                </Box>
-                                        </div>
-                                      </TabPanel>
-                                      <TabPanel value={value} index={2}>
-                                        <div className={classes.premiumPackageContainer}>
-                                                <Box
-                                                boxShadow={2}
-                                                 bgcolor="background.paper"
-                                                 m={1}
-                                                 p={1}
-                                                 style={{ width: (isDesktopOrLaptopOrTabletScreen) ? '21rem' : '25rem', height: '23rem' }}
-                                                 >
-                                                  <h1>Premium package</h1>
-                                                </Box>
-                                        </div>
-                                      </TabPanel>
-                                    </div>
-                                   
+                            <Box
+                              boxShadow={4}
+                              bgcolor="background.paper"
+                              m={1}
+                              p={1}
+                              style={{ width: (isDesktopOrLaptopOrTabletScreen) ? '100%' : '93%', height: '27rem' }}
+                            >
+                            <div className={classes.ourPackagesTitle}><h3>Our packages</h3></div>
+                            <div className={classes.root}>
+                                  <Tabs
+                                    orientation="vertical"
+                                    variant="scrollable"
+                                    value={value}
+                                    onChange={handleChange}                            
+                                    aria-label="Vertical tabs example"
+                                    className={classes.tabs}
+                                  >
+                                    <Tab label="Basic" {...a11yProps(0)} />
+                                    <Tab label="Standard" {...a11yProps(1)} />
+                                    <Tab label="Premium" {...a11yProps(2)} />
+      
+                                  </Tabs>
+
+                                  <TabPanel value={value} index={0} className={classes.TabPanel}>
+                                    Item One
+                                  </TabPanel>
+                                  <TabPanel value={value} index={1} className={classes.TabPanel}>
+                                    Two
+                                  </TabPanel>
+                                  <TabPanel value={value} index={2} className={classes.TabPanel}>
+                                    Item Three
+                                  </TabPanel>
+      
+                                </div>
+                                <div className={classes.contactContainer}>
+                                <Button
+                                   variant="contained"
+                                   color="primary"
+                                   className={classes.button}
+                                //    endIcon={<Icon>send</Icon>}
+                                 >
+                                    Contact  
+                                 </Button>  
+
+                                </div>   
+                            </Box>
                        </Grid>
                     </Grid>
                 </Grid>
@@ -96,7 +82,6 @@ function Packages(props) {
     );
 }
 
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -104,12 +89,12 @@ function TabPanel(props) {
       <div
         role="tabpanel"
         hidden={value !== index}
-        id={`scrollable-auto-tabpanel-${index}`}
-        aria-labelledby={`scrollable-auto-tab-${index}`}
+        id={`vertical-tabpanel-${index}`}
+        aria-labelledby={`vertical-tab-${index}`}
         {...other}
       >
         {value === index && (
-          <Box p={0}>
+          <Box p={3}>
             <Typography>{children}</Typography>
           </Box>
         )}
@@ -125,17 +110,38 @@ function TabPanel(props) {
   
   function a11yProps(index) {
     return {
-      id: `scrollable-auto-tab-${index}`,
-      'aria-controls': `scrollable-auto-tabpanel-${index}`,
+      id: `vertical-tab-${index}`,
+      'aria-controls': `vertical-tabpanel-${index}`,
     };
   }
-
+  
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        width: '100%',
-        backgroundColor: theme.palette.background.paper
+        backgroundColor: theme.palette.background.paper,
+        display: 'flex',
+        height: '20rem',
+      },
+      tabs: {
+        borderRight: `2px solid ${theme.palette.divider}`,
+        borderTop: `2px solid ${theme.palette.divider}`, 
+        paddingTop:'10%'
+      },
+      TabPanel:{
+        ['@media (min-width: 960px)']
+        :
+        { // eslint-disable-line no-useless-computed-key
+            borderTop: `2px solid ${theme.palette.divider}`,
+            width:'80%'  
+        },
+        ['@media (max-width: 600px)']
+        :
+        { // eslint-disable-line no-useless-computed-key
+            borderTop: `2px solid ${theme.palette.divider}`,
+            width:'80%'
+        },  
+       
       },
     mainInnerContainer:{
         
@@ -172,16 +178,12 @@ const useStyles = makeStyles((theme) => ({
             marginTop:'5%',
         },
     },
-    packageHeadingContainer:{
+    ourPackagesTitle:{
         paddingLeft:'2%',
         paddingTop:'2%'
     },
     basicPackageContainer:{
-// Set according to screen
-        // borderStyle:'solid',
-        // borderWidth:1,
-        // borderColor:'black'
-        // ,
+
         boxShadow:1,
         ['@media (min-width: 960px)']
         :
@@ -231,7 +233,16 @@ const useStyles = makeStyles((theme) => ({
         { // eslint-disable-line no-useless-computed-key
            
         },
-    }
+    },
+    contactContainer:{
+        width:'100%',
+        marginTop:'2%'
+        
+    },
+    button: {
+        marginLeft: theme.spacing(13),
+        width:'50%'
+      },
 
   }));
 export default Packages;
