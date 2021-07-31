@@ -52,7 +52,6 @@
 
 
                     /* Package */
-
 .PackageText{
     font-family: 'Jura', sans-serif;
     font-size: 10px;
@@ -60,11 +59,16 @@
 .StickThePackageContainer{
     position: fixed;
     margin-top: 1%;
+    width:370px;
 }
 .UnStickThePackageContainer{
    margin-top:174.5%;
 }
-
+.OurpackageFonts{
+    font-family: 'Jura', sans-serif;
+    font-size: 25px;
+    font-weight: bold   ;
+}
 /* ------------------------ */
 .navdiv {
     color: #fff;

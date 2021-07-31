@@ -21,7 +21,6 @@ const handleScroll = () => {
   setScrollPosition(window.pageYOffset) 
 };
 
-
 useEffect(()=>{
 if(scrollPosition>(height*0.9))
 {

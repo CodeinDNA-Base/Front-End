@@ -141,7 +141,17 @@ const useStyles = makeStyles((theme) => ({
         marginTop:'2%'
     },
     packageContainerOnMobile:{
-       
+         // Set according to screen
+         ['@media (min-width: 960px)']
+         :
+         { // eslint-disable-line no-useless-computed-key
+            
+         },
+         ['@media (max-width: 600px)']
+         :
+         { // eslint-disable-line no-useless-computed-key
+            paddingLeft:5
+         },
     }
   }));
 
