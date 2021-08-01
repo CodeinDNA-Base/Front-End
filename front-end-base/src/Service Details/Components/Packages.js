@@ -125,7 +125,9 @@ const useStyles = makeStyles((theme) => ({
       },
       tabs: {
         borderRight: `2px solid ${theme.palette.divider}`,
-        borderTop: `2px solid ${theme.palette.divider}`, 
+        borderTop: `2px solid ${theme.palette.divider}`,
+        borderBottom: `2px solid ${theme.palette.divider}`,
+         
         paddingTop:'10%'
       },
       TabPanel:{
@@ -133,12 +135,16 @@ const useStyles = makeStyles((theme) => ({
         :
         { // eslint-disable-line no-useless-computed-key
             borderTop: `2px solid ${theme.palette.divider}`,
+            borderBottom: `2px solid ${theme.palette.divider}`,
+         
             width:'80%'  
         },
         ['@media (max-width: 600px)']
         :
         { // eslint-disable-line no-useless-computed-key
             borderTop: `2px solid ${theme.palette.divider}`,
+            borderBottom: `2px solid ${theme.palette.divider}`,
+         
             width:'80%'
         },  
        

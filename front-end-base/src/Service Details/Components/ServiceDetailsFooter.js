@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppBar,Container,Typography,Toolbar } from '@material-ui/core';
-import useStyles from './Styles/StyleSheet';
+import { makeStyles } from '@material-ui/core';
 import './Styles/StyleSheet.css'
 
 function ServiceDetailsFooter(props) {
@@ -18,4 +18,11 @@ function ServiceDetailsFooter(props) {
     );
 }
 
+const useStyles = makeStyles((theme) => ({
+  footer:{
+    bottom:0,
+    width:'100%',
+    backgroundColor:"#011c38"
+  }
+   }));
 export default ServiceDetailsFooter;

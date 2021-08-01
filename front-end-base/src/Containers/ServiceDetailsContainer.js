@@ -49,7 +49,7 @@ useEffect(() => {
 
 // console.log("h"+document.documentElement.offsetHeight)
 return (
-<div >
+<div className={classes.container}>
 <Grid container >
 
         <Grid item xs={12}>
@@ -57,7 +57,6 @@ return (
                   <NavTabBarCollectively handelTabIndex={handelTabIndex}/>
           </AppBar>
         </Grid>
-
         <Grid container>
             <Grid lg={1} md={1} sm={1} xs={0}></Grid>
             <Grid item lg={10} sm={10} md={10} xs={12}>
@@ -98,6 +97,8 @@ return (
 }
 
 const useStyles = makeStyles((theme) => ({
+  container:{}
+  ,
   visibleNavbar:{
     marginTop:20
   },

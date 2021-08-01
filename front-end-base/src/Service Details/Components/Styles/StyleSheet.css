@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap');
 
-/* Background colors */
+
 
 /* Fonts */
 
@@ -24,7 +24,6 @@
     font-family: 'Jura', sans-serif;
     font-size: 20px;
     display: inline;
-
 }
 .ServiceRatingBar{
    display: inline;
@@ -45,12 +44,7 @@
 }
                             
 
-                       /* Description*/
-
-
-                    /*  Package comparator */
-
-
+                   
                     /* Package */
 .PackageText{
     font-family: 'Jura', sans-serif;
@@ -158,7 +152,8 @@
     margin-left: 16%;
     margin-top: 3%;
 }
-/* ------------------------ */
+
+/* ------------Nav bar sliding effect------------ */
  .navdiv {
     color: #fff;
     position: fixed;

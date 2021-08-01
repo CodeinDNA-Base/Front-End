@@ -31,10 +31,10 @@ function ServiceDetailsDescriptionArea(props) {
                     window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 0.9 : 1.1)})
             break;
             case 3:
-                    window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 1.4 : 1.5)})
+                    window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 2 : 1.9)})
             break;
             case 4:
-                    window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 1.6 : 1.7)})
+                    window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 4 : 4)})
             break;
             case 0:
                 window.scrollTo({ behavior: 'smooth', top:height*(isDesktopOrLaptopOrTabletScreen ? 0.0 : 0.0)})
