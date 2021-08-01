@@ -7,7 +7,7 @@ import Test from './Containers/Test';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Test />
+    <Entrance />
   </React.StrictMode>,
   document.getElementById('root')
 );
