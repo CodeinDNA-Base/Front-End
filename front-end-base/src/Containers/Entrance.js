@@ -8,6 +8,7 @@
 import React from 'react';
 import { BrowserRouter as Router,Switch, Route} from "react-router-dom";
 import ServiceDetailsContainer from './ServiceDetailsContainer';
+import AdminDashboardContainer from './AdminDashboardContainer'
 function Entrance(props) {
     return (
         <Router>
@@ -15,6 +16,10 @@ function Entrance(props) {
             <Route path="/ServiceDetails">
                 <ServiceDetailsContainer/>
             </Route>
+            <Route path="/AdminDashborad">
+                <AdminDashboardContainer/>
+            </Route>
+            
           </Switch>
       </Router>
     );
