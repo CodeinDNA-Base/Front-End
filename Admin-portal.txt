@@ -1,0 +1,49 @@
+Admin darwer
+
+->Projects
+	->Show All Projects 
+	->Add new project
+	->Search project
+	->Set trending or top most projects on home page (Set Trending project)
+	->(We will be able to update after searching or will be able to delete after we search it mean, so no need of other option)
+->Services
+	->View All Services
+	->Summry (Like statistics)
+	->Add new Service
+	->Search Service
+	->(We will be able to update after searching or will be able to delete after we search it mean, so no need of other option)	
+->Offers
+	->View All offers
+	->Make new offer
+	->Summry (Like statistics)
+	->Search Offrer
+	->create offer email and send them to users
+	->(We will be able to update after searching or will be able to delete after we search it mean, so no need of other option)		
+->User Accounts
+	->Show new accounts
+	->Show all user/client accounts
+	->Show all active users
+	->Search user ( in next version we will add some filter for user search )
+	->Show account's summury (Like statistics)
+	->Show Blocked accounts ( We can un block them after selecting them ..)
+->Orders
+(We can use either one screen with these all follwing filters or seperate screens on each button click)	
+	->Show new orders
+	->Show uncomplete orders 
+	->Show completed orders
+	->Show canceled orders
+	->Deliver Order
+	->View Summury
+->Chats
+	(as you will click it then a chat of module will be shown which will contain the contacts/users, who has sent msg..., )
+->Reviews
+	->Show new reviews
+	->View all reviews. (Here we will control either to show a review or not...)
+->User Permissions
+	-(Will be discussed later.. this will be implemented in next version)
+->Transactions
+	(As you will click then you will get all tranctions list along with filters like wrt service/project/date etc ..)
+->Manage Team
+	(Will be discussed later.. its about the the mobile assets which we will use to manager the chats and orders delivery etc... so in depth we will discuss it)
+->Manage Master database
+	(For next version will discuss it later)
