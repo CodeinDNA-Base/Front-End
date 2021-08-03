@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { alpha } from '@material-ui/core/styles';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -16,7 +16,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
@@ -27,23 +26,54 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faProjectDiagram} from '@fortawesome/free-solid-svg-icons'
-
-import ManageProjectsOptionsList from '../Admin Dashborad/Components/ManageProjectsOptionsList';
-import Temp from '../Admin Dashborad/Components/Temp';
+import ManageChats from '../Admin Dashborad/Components/ManageChats';
+import ManageMasterDatabase from '../Admin Dashborad/Components/ManageMasterDatabase';
+import ManageOrders from '../Admin Dashborad/Components/ManageOrders';
+import ManageProjects from '../Admin Dashborad/Components/ManageProjects';
+import ManageReviews from '../Admin Dashborad/Components/ManageReviews';
+import ManageServices from '../Admin Dashborad/Components/ManageServices';
+import ManageTeams from '../Admin Dashborad/Components/ManageTeams';
+import ManageTransactions from '../Admin Dashborad/Components/ManageTransactions';
+import ManageUserAccounts from '../Admin Dashborad/Components/ManageUserAccounts';
+import ManageUserPermissions from '../Admin Dashborad/Components/ManageUserPermissions';
+import Home from '../Admin Dashborad/Components/Home';
+import ManageOffers from '../Admin Dashborad/Components/ManageOffers';
 const drawerWidth = 230;
-
+const drawerIconHeight = 35;
+const drawerIconWidth = 35;
 export default function AdminDashboardContainer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const allScreens = [<ManageChats/>,<ManageMasterDatabase/>,<ManageOrders/>,
+                      <ManageProjects/>,<ManageReviews/>,<ManageServices/>,
+                      <ManageTeams/>,<ManageTransactions/>,<ManageUserAccounts/>,
+                      <ManageUserPermissions/>,<Home/>,<ManageOffers/>];
+  const [currentOpenedScreen,setCurrentOpenedScreen]=useState(allScreens[10]);
+  /**
+   * 0 : ManageChats
+   * 1 : ManageMasterDatabase
+   * 2 : ManageOrders
+   * 3 : ManageProjects
+   * 4 : ManageReviews
+   * 5 : ManageServices
+   * 6 : ManageTeams
+   * 7 : ManageTransactions
+   * 8 : ManageUserAccounts
+   * 9 : ManageUserPermissions
+   * 10 : Home
+   * 11 : ManageOffers
+   */
+
+  const handelManageOptionClickEvent = (event,index) =>
+  {
+    setCurrentOpenedScreen(allScreens[index]);
+  }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -97,7 +127,7 @@ export default function AdminDashboardContainer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-                CodeinDNA.com
+                Website Title
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -163,30 +193,92 @@ export default function AdminDashboardContainer() {
       >
         <div className={classes.toolbar}>
             {/* Top of drawer */}
-          <h2>Admin</h2>
+         
           <IconButton onClick={handleDrawerClose}>
+          <div>Admin</div>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
         <Divider />
-            
-            <List>
-                <ListItem>
-                    <ListItemIcon> <FontAwesomeIcon icon={faProjectDiagram} size="2x"/> </ListItemIcon>
-                    <ListItemText primary={"Projects"} />
-                </ListItem>
-            </List>
+        <List>
+              <ListItem button onClick={()=>{handelManageOptionClickEvent(this,3)}}>
+                  <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/project.png"/> </ListItemIcon>
+                  <ListItemText primary={"Projects"} />
+              </ListItem>
+        </List>
         <Divider />
         <List>
-            <ListItem button>
-              <ListItemIcon>Icon</ListItemIcon>
-              <ListItemText primary={"Text"} />
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,5)}} >
+              <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/100/000000/service.png"/></ListItemIcon>
+              <ListItemText primary={"Services"} />
+            </ListItem>
+        </List>
+        <Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,11)}}>
+              <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/pastel-glyph/50/000000/price-tag.png"/></ListItemIcon>
+              <ListItemText primary={"Offers"} />
+            </ListItem>
+        </List>
+        <Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,8)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-glyphs/30/000000/user-folder.png"/></ListItemIcon>
+              <ListItemText primary={"User Accounts"} />
+            </ListItem>
+        </List>
+        <Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,2)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/todo-list.png"/></ListItemIcon>
+              <ListItemText primary={"Orders"} />
+            </ListItem>
+        </List>
+        <Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,0)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/chat--v2.png"/></ListItemIcon>
+              <ListItemText primary={"Chat"} />
+            </ListItem>
+        </List>
+        <Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,4)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/customer-insight.png"/></ListItemIcon>
+              <ListItemText primary={"Customer Reviews"} />
+            </ListItem>
+        </List>
+        <Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,9)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/user-rights.png"/></ListItemIcon>
+              <ListItemText primary={"User permisions"} />
+            </ListItem>
+        </List>
+        <Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,7)}}>
+              <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/payment-history.png"/></ListItemIcon>
+              <ListItemText primary={"Transactions"} />
+            </ListItem>
+        </List><Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,6)}}>
+              <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/army-star.png"/></ListItemIcon>
+              <ListItemText primary={"Manage Team"} />
+            </ListItem>
+        </List><Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,1)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/cloud-storage.png"/></ListItemIcon>
+              <ListItemText primary={"Master database"} />
             </ListItem>
         </List>
       </Drawer>
+      
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <h1>Content</h1>
+        {currentOpenedScreen}
       </main>
     </div>
   );
@@ -239,6 +331,7 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up('sm')]: {
         width: theme.spacing(9) + 1,
       },
+      
     },
     toolbar: {
       display: 'flex',
