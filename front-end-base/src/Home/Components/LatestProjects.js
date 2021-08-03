@@ -11,43 +11,33 @@ import { Container } from "@material-ui/core";
 import "./Styles/LatestProjectStyles.css";
 import ProjectCard from "./ProjectCard";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import { DividerInservices } from "./HorizontalLine";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+	btnOutlined: {
+		color: "white",
+		borderColor: "white",
+		borderRadius: 20,
+		marginLeft: 10,
+	},
+	btnContained: {
+		backgroundColor: " #ea6645",
+		color: "white",
+		borderRadius: 20,
+		marginLeft: 10,
+		marginTop: "5%",
+	},
+}));
 
 const LatestProjects = (props) => {
-	// const itemData = [
-	// 	{
-	// 		img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-	// 		title: "Image",
-	// 		author: "author",
-	// 	},
-	// 	{
-	// 		img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-	// 		title: "Image",
-	// 		author: "author",
-	// 	},
-
-	// 	{
-	// 		img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-	// 		title: "Image",
-	// 		author: "author",
-	// 	},
-	// 	{
-	// 		img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-	// 		title: "Image",
-	// 		author: "author",
-	// 	},
-	// 	{
-	// 		img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-	// 		title: "Image",
-	// 		author: "author",
-	// 	},
-	// ];
-
+	const classes = useStyles();
 	return (
 		<div className="highlighter">
 			<Grid container spacing={0}>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 				<Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
-					<h1>Latest Projects</h1>
+					<p className="latestProjectTitle">Latest Projects</p>
 					<p>
 						Get projects done using cutting edge technologies like react, spring
 						boot and more...!
@@ -92,12 +82,18 @@ const LatestProjects = (props) => {
 			<Grid container spacing={0} style={{ marginTop: "4%" }}>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 				<Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
-					<Button variant="outlined" color="primary">
+					<Button
+						variant="contained"
+						classes={{
+							root: classes.btnContained, // class name, e.g. `classes-nesting-root-x`
+						}}
+					>
 						See More Projects
 					</Button>
 				</Grid>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 			</Grid>
+			<DividerInservices />
 		</div>
 	);
 };

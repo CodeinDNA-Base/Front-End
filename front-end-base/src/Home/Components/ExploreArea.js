@@ -15,13 +15,15 @@ import BorderColorIcon from "@material-ui/icons/BorderColor";
 import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import { Icon } from "@material-ui/core";
+import { DividerInservices } from "./HorizontalLine";
+import "./Styles/LatestProjectStyles.css";
 const ExploreArea = (props) => {
 	return (
 		<div className="highlighter">
 			<Grid container spacing={0}>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 				<Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
-					<h1>Explore Our Market</h1>
+					<p className="latestProjectTitle">Explore Our Market</p>
 					<p>
 						Get Your Project done on time and in reasonable budjet in various
 						Categories options
@@ -57,7 +59,7 @@ const ExploreArea = (props) => {
 						</Icon>
 						<p> Life Style</p>
 					</Grid>
-					{/* <Grid item xs={0} sm={4} md={3}></Grid> */}
+					<Grid item xs={0} sm={4} md={3}></Grid>
 					<Grid item xs={6} sm={4} md={3}>
 						<Icon>
 							<LocalCafeIcon style={{ fontSize: 48 }} />
@@ -74,6 +76,7 @@ const ExploreArea = (props) => {
 				</Grid>
 				<Grid xs={1} sm={2} md={1} item></Grid>
 			</Grid>
+			<DividerInservices />
 		</div>
 	);
 };

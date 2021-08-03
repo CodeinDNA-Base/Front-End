@@ -6,13 +6,14 @@ import { positions } from "@material-ui/system";
 import LatestProjects from "../Home/Components/LatestProjects";
 // import { compose, spacing, palette, breakpoints } from "@material-ui/system";
 // import styled from "styled-components";
-import Categories from "../Home/Components/Categories";
+import Services from "../Home/Components/Services";
 import Navbar from "../Home/Components/PrimaryNavbar";
 import SecondaryNavBar from "../Home/Components/SecondaryNavBar";
 import MainContainer from "../Home/Components/MainContainer";
 import ExploreArea from "../Home/Components/ExploreArea";
 import MobileFooter from "../Home/Components/MobileFooter";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import MotivationalArea from "../Home/Components/MotivationalArea";
 // const Box = styled.div`
 // 	${breakpoints(compose(spacing, palette))}
 // `;
@@ -36,21 +37,21 @@ function HomeContainer(props) {
 			</Grid>
 
 			{/* MainContainer */}
-			<Grid container spacing={0} style={{ marginTop: "5%" }}>
-				<Grid xs={0} sm={1} md={2} item></Grid>
-				<Grid item xs={12} sm={10} md={8}>
+			<Grid container spacing={0} style={{ backgroundColor: "#011c38" }}>
+				<Grid xs={0} sm={1} md={1} item></Grid>
+				<Grid item xs={12} sm={10} md={10}>
 					<MainContainer />
 				</Grid>
-				<Grid xs={0} sm={1} md={2} item></Grid>
+				<Grid xs={0} sm={1} md={1} item></Grid>
 			</Grid>
 
-			{/* Categories*/}
+			{/* Services*/}
 			<Grid container style={{ marginTop: "5%" }}>
-				<Categories />
+				<Services />
 			</Grid>
 
 			{/* projects */}
-			<Grid container style={{ marginTop: "5%" }}>
+			<Grid container style={{ marginTop: "3%" }}>
 				<Grid xs={0} sm={1} md={2} item></Grid>
 				<Grid item xs={12} sm={10} md={8}>
 					<LatestProjects />
@@ -59,7 +60,7 @@ function HomeContainer(props) {
 			</Grid>
 
 			{/* explore */}
-			<Grid container style={{ marginTop: "5%" }}>
+			<Grid container style={{ marginTop: "3%" }}>
 				<Grid xs={1} sm={2} md={3} item></Grid>
 				<Grid item xs={10} sm={8} md={6}>
 					<ExploreArea />
@@ -69,11 +70,11 @@ function HomeContainer(props) {
 
 			{/* MainContainer */}
 			<Grid container spacing={0} style={{ marginTop: "5%" }}>
-				<Grid xs={0} sm={1} md={2} item></Grid>
-				<Grid item xs={12} sm={10} md={8}>
-					<MainContainer />
+				<Grid xs={0} sm={1} md={1} item></Grid>
+				<Grid item xs={12} sm={10} md={10}>
+					<MotivationalArea />
 				</Grid>
-				<Grid xs={0} sm={1} md={2} item></Grid>
+				<Grid xs={0} sm={1} md={1} item></Grid>
 			</Grid>
 
 			{/* footer */}
