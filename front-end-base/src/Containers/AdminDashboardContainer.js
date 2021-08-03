@@ -25,7 +25,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
+import { stringCollection } from '../Admin Dashborad/Strings/StringCollection';
 import ManageChats from '../Admin Dashborad/Components/ManageChats';
 import ManageMasterDatabase from '../Admin Dashborad/Components/ManageMasterDatabase';
 import ManageOrders from '../Admin Dashborad/Components/ManageOrders';
@@ -38,7 +38,7 @@ import ManageUserAccounts from '../Admin Dashborad/Components/ManageUserAccounts
 import ManageUserPermissions from '../Admin Dashborad/Components/ManageUserPermissions';
 import Home from '../Admin Dashborad/Components/Home';
 import ManageOffers from '../Admin Dashborad/Components/ManageOffers';
-const drawerWidth = 230;
+const drawerWidth = 250;
 const drawerIconHeight = 35;
 const drawerIconWidth = 35;
 export default function AdminDashboardContainer() {
@@ -127,7 +127,7 @@ export default function AdminDashboardContainer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-                Website Title
+                {stringCollection.AdminDashboardContainer.NavBarTitle}
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -199,79 +199,87 @@ export default function AdminDashboardContainer() {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
+        <List>
+              <ListItem button onClick={()=>{handelManageOptionClickEvent(this,10)}}>
+                  <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/home.png"/> </ListItemIcon>
+                  <ListItemText primary={stringCollection.AdminDashboardContainer.HomeOption} />
+              </ListItem>
+        </List>
         <Divider />
         <List>
               <ListItem button onClick={()=>{handelManageOptionClickEvent(this,3)}}>
                   <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/project.png"/> </ListItemIcon>
-                  <ListItemText primary={"Projects"} />
+                  <ListItemText primary={stringCollection.AdminDashboardContainer.ManageProjectsOption} />
               </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,5)}} >
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/100/000000/service.png"/></ListItemIcon>
-              <ListItemText primary={"Services"} />
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageServicesOption} />
             </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,11)}}>
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/pastel-glyph/50/000000/price-tag.png"/></ListItemIcon>
-              <ListItemText primary={"Offers"} />
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageOffersOption} />
             </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,8)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-glyphs/30/000000/user-folder.png"/></ListItemIcon>
-              <ListItemText primary={"User Accounts"} />
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageUserAccountsOption} />
+            </ListItem>
+        </List>
+        <Divider />
+
+        {/* <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,9)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/user-rights.png"/></ListItemIcon>
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageUserPermissionsOption} />
+            </ListItem>
+        </List>
+        <Divider /> */}
+        
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,0)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/chat--v2.png"/></ListItemIcon>
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageChatsOption} />
             </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,2)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/todo-list.png"/></ListItemIcon>
-              <ListItemText primary={"Orders"} />
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,0)}}>
-              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/chat--v2.png"/></ListItemIcon>
-              <ListItemText primary={"Chat"} />
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageOrdersOption} />
             </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,4)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/customer-insight.png"/></ListItemIcon>
-              <ListItemText primary={"Customer Reviews"} />
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,9)}}>
-              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/user-rights.png"/></ListItemIcon>
-              <ListItemText primary={"User permisions"} />
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageReviewsOption} />
             </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,7)}}>
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/payment-history.png"/></ListItemIcon>
-              <ListItemText primary={"Transactions"} />
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageTransactionsOption} />
             </ListItem>
         </List><Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,6)}}>
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/army-star.png"/></ListItemIcon>
-              <ListItemText primary={"Manage Team"} />
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageTeamsOption} />
             </ListItem>
         </List><Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,1)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/cloud-storage.png"/></ListItemIcon>
-              <ListItemText primary={"Master database"} />
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageMasterDatabaseOption} />
             </ListItem>
         </List>
       </Drawer>
