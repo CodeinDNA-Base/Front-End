@@ -5,13 +5,19 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import useWindowDimensions from './useWindowDimensions';
+
 import { stringCollection } from '../Strings/StringCollection';
 
-function ManageUserAccounts(props) {
+import CreateAndEmailOfferTab from './CreateAndEmailOfferTab';
+import CreateNewOfferTab from './CreateNewOfferTab';
+import SearchTab from './SearchTab';
+import StatisticsTab from './StatisticsTab';
+import ViewAllOffersTab from './ViewAllOffersTab';
+
+function ManageOffers(props) {
     const classes =useStyles();
     const [value, setValue] = React.useState(0);
-    const {height,width} = useWindowDimensions();
+ 
     const tabIconHeight=30;
     const tabIconWidth=30;
 
@@ -22,7 +28,7 @@ function ManageUserAccounts(props) {
        <Grid container >
             <Grid item lg={12} xs={12}>
                 <div>
-                    <h1>{stringCollection.ManageUserAccounts.AccountsManagerTitle}</h1>
+                    <h1>{stringCollection.ManageOffers.OffersManagerTitle}</h1>
                 </div>
             </Grid>
             <Grid item lg={12} xs={12}>
@@ -37,28 +43,28 @@ function ManageUserAccounts(props) {
                           className={classes.tabs}
                         >
                         
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/material-outlined/24/000000/show-all-views.png"/>} label={stringCollection.ManageUserAccounts.ShowAllAccountTabText} {...a11yProps(0)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/online.png"/>}  label={stringCollection.ManageUserAccounts.ShowActiveUsersTabText} {...a11yProps(1)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios/50/000000/chip-card-blocked.png"/>}  label={stringCollection.ManageUserAccounts.ShowBlockedUsersTabText} {...a11yProps(2)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/statistics.png"/>}  label={stringCollection.ManageUserAccounts.ShowAccountsStatisticsTabText} {...a11yProps(3)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/80/000000/search.png"/>}  label={stringCollection.ManageUserAccounts.SearchAccountTabText} {...a11yProps(4)} />
-                          
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/material-outlined/24/000000/show-all-views.png"/>} label={stringCollection.ManageOffers.ViewAllOffersTabText} {...a11yProps(0)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/30/000000/statistics.png"/>}  label={stringCollection.ManageOffers.SummuryTabText} {...a11yProps(1)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/create-new.png"/>}  label={stringCollection.ManageOffers.CreateNewOfferTabText} {...a11yProps(2)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/send-mass-email.png"/>}  label={stringCollection.ManageOffers.CreatAndEmailOfferTabText} {...a11yProps(3)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/80/000000/search.png"/>}  label={stringCollection.ManageOffers.SearchOfferTabText} {...a11yProps(4)} />
+                        
                         </Tabs>
 
                               <TabPanel value={value} index={0}>
-                                Item One
+                                <ViewAllOffersTab/>
                               </TabPanel>
                               <TabPanel value={value} index={1}>
-                                Item Two
+                                <StatisticsTab/>
                               </TabPanel>
                               <TabPanel value={value} index={2}>
-                                Item Three
+                                <CreateNewOfferTab/>
                               </TabPanel>
                               <TabPanel value={value} index={3}>
-                                Item Four
+                                <CreateAndEmailOfferTab/>
                               </TabPanel>
                               <TabPanel value={value} index={4}>
-                                Item Five
+                                <SearchTab/>
                               </TabPanel>
                             </div>
             </Grid>
@@ -76,7 +82,7 @@ const useStyles = makeStyles((theme)=>({
       },
       tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
-        paddingTop:'3%'
+        paddingTop:'5%'
       },
 }))
 
@@ -112,5 +118,5 @@ function TabPanel(props) {
       'aria-controls': `vertical-tabpanel-${index}`,
     };
   }
-export default ManageUserAccounts;
+export default ManageOffers;
 

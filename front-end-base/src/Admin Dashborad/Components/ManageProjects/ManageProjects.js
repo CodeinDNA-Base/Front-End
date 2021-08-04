@@ -5,8 +5,13 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import useWindowDimensions from './useWindowDimensions';
+import useWindowDimensions from '../useWindowDimensions';
 import { stringCollection } from '../Strings/StringCollection';
+
+import AddNewProjectTab from './AddNewProjectTab'
+import SearchTab from './SearchTab'
+import SetTreadnigProjectTab from './SetTredingProjectTab'
+import ViewAllProjectsTab from './ViewAllProjectsTab'
 
 function ManageProjects(props) {
     const classes =useStyles();
@@ -39,24 +44,24 @@ function ManageProjects(props) {
                         
                           <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/material-outlined/24/000000/show-all-views.png"/>} label={stringCollection.ManageProjects.ShowAllTabText} {...a11yProps(0)} />
                           <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/add--v1.png"/>}  label={stringCollection.ManageProjects.AddNewProjectTabText} {...a11yProps(1)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/search.png"/>}  label={stringCollection.ManageProjects.SearchProjectTabText} {...a11yProps(2)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-glyphs/50/000000/recent-celebrity.png"/>}  label={stringCollection.ManageProjects.SetTreadnigProjectTabText} {...a11yProps(3)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-glyphs/50/000000/recent-celebrity.png"/>}  label={stringCollection.ManageProjects.SetTreadnigProjectTabText} {...a11yProps(2)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/search.png"/>}  label={stringCollection.ManageProjects.SearchProjectTabText} {...a11yProps(3)} />
                          
                         </Tabs>
 
                               <TabPanel value={value} index={0}>
-                                Item One
+                                <ViewAllProjectsTab/>
                               </TabPanel>
                               <TabPanel value={value} index={1}>
-                                Item Two
+                                <AddNewProjectTab/>
                               </TabPanel>
                               <TabPanel value={value} index={2}>
-                                Item Three
+                                <SetTreadnigProjectTab/>  
                               </TabPanel>
                               <TabPanel value={value} index={3}>
-                                Item Four
+                                <SearchTab/>
                               </TabPanel>
-                        
+
                             </div>
             </Grid>
             

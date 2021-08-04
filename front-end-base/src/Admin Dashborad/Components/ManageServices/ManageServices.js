@@ -5,10 +5,16 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import useWindowDimensions from './useWindowDimensions';
+import useWindowDimensions from '../useWindowDimensions';
 import { stringCollection } from '../Strings/StringCollection';
 
-function ManageReviews(props) {
+import AddNewServiceTab from './AddNewServiceTab';
+import SearchTab from './SearchTab';
+import StatisticsTab from './StatisticsTab';
+import ViewAllServicesTab from './ViewAllServicesTab';
+
+
+function ManageServices(props) {
     const classes =useStyles();
     const [value, setValue] = React.useState(0);
     const {height,width} = useWindowDimensions();
@@ -22,7 +28,7 @@ function ManageReviews(props) {
        <Grid container >
             <Grid item lg={12} xs={12}>
                 <div>
-                    <h1>{stringCollection.ManageReviews.ReviewManagerTitle}</h1>
+                    <h1>{stringCollection.ManageServices.ServiceManagerTitle}</h1>
                 </div>
             </Grid>
             <Grid item lg={12} xs={12}>
@@ -36,23 +42,27 @@ function ManageReviews(props) {
                           aria-label="Vertical tabs example"
                           className={classes.tabs}
                         >
-    
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-glyphs/50/000000/new.png"/>} label={stringCollection.ManageReviews.NewReviewTabText} {...a11yProps(0)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios/50/000000/invisible.png"/>}  label={stringCollection.ManageReviews.VisibleReviewsTabText} {...a11yProps(1)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/in-progress.png"/>}  label={stringCollection.ManageReviews.DiscardedReviewsTabText} {...a11yProps(2)} />
-                         
+                        
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/material-outlined/24/000000/show-all-views.png"/>} label={stringCollection.ManageServices.ViewAllServicesTabText} {...a11yProps(0)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/30/000000/statistics.png"/>}  label={stringCollection.ManageServices.SummuryTabText} {...a11yProps(1)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/dotty/80/000000/plus-2-math.png"/>}  label={stringCollection.ManageServices.AddNewServiceTabText} {...a11yProps(2)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/80/000000/search.png"/>}  label={stringCollection.ManageServices.SearchServiceTabText} {...a11yProps(3)} />
+                          
                         </Tabs>
 
                               <TabPanel value={value} index={0}>
-                                Item One
+                                <ViewAllServicesTab/>
                               </TabPanel>
                               <TabPanel value={value} index={1}>
-                                Item Two
+                                <StatisticsTab/>
                               </TabPanel>
                               <TabPanel value={value} index={2}>
-                                Item Three
+                                <AddNewServiceTab/>
                               </TabPanel>
-                              
+                              <TabPanel value={value} index={3}>
+                                <SearchTab/>
+                              </TabPanel>
+                        
                             </div>
             </Grid>
             
@@ -105,5 +115,5 @@ function TabPanel(props) {
       'aria-controls': `vertical-tabpanel-${index}`,
     };
   }
-export default ManageReviews;
+export default ManageServices;
 

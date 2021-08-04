@@ -25,22 +25,24 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { stringCollection } from '../Admin Dashborad/Strings/StringCollection';
-import ManageChats from '../Admin Dashborad/Components/ManageChats';
-import ManageMasterDatabase from '../Admin Dashborad/Components/ManageMasterDatabase';
-import ManageOrders from '../Admin Dashborad/Components/ManageOrders';
-import ManageProjects from '../Admin Dashborad/Components/ManageProjects';
-import ManageReviews from '../Admin Dashborad/Components/ManageReviews';
-import ManageServices from '../Admin Dashborad/Components/ManageServices';
-import ManageTeams from '../Admin Dashborad/Components/ManageTeams';
-import ManageTransactions from '../Admin Dashborad/Components/ManageTransactions';
-import ManageUserAccounts from '../Admin Dashborad/Components/ManageUserAccounts';
-import ManageUserPermissions from '../Admin Dashborad/Components/ManageUserPermissions';
-import Home from '../Admin Dashborad/Components/Home';
-import ManageOffers from '../Admin Dashborad/Components/ManageOffers';
+import { stringCollection } from '../Admin Dashborad/Components/Strings/StringCollection';
+import ManageChats from '../Admin Dashborad/Components/ManageChats/ManageChats';
+import ManageMasterDatabase from '../Admin Dashborad/Components/ManageMasterDatabase/ManageMasterDatabase';
+import ManageOrders from '../Admin Dashborad/Components/ManageOrders/ManageOrders';
+import ManageProjects from '../Admin Dashborad/Components/ManageProjects/ManageProjects';
+import ManageReviews from '../Admin Dashborad/Components/ManageReviews/ManageReviews';
+import ManageServices from '../Admin Dashborad/Components/ManageServices/ManageServices';
+import ManageTeams from '../Admin Dashborad/Components/ManageTeams/ManageTeams';
+import ManageTransactions from '../Admin Dashborad/Components/ManageTransactions/ManageTransactions';
+import ManageUserAccounts from '../Admin Dashborad/Components/ManageUserAccounts/ManageUserAccounts';
+import ManageUserPermissions from '../Admin Dashborad/Components/ManageUserPermisions/ManageUserPermissions';
+import Home from '../Admin Dashborad/Components/Home/Home';
+import ManageOffers from '../Admin Dashborad/Components/ManageOffers/ManageOffers';
+
 const drawerWidth = 250;
 const drawerIconHeight = 35;
 const drawerIconWidth = 35;
+
 export default function AdminDashboardContainer() {
   const classes = useStyles();
   const theme = useTheme();

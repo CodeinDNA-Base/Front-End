@@ -5,10 +5,17 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import useWindowDimensions from './useWindowDimensions';
+import useWindowDimensions from '../useWindowDimensions';
 import { stringCollection } from '../Strings/StringCollection';
 
-function ManageOrders(props) {
+import SearchTab from './SearchTab';
+import ShowAllAccountsTab from './ShowAllAccountsTab';
+import ShowAllActiveUserAccountsTab from './ShowAllActiveUserAccountsTab';
+import ShowBlockedUserAccounts from './ShowBlockedUserAccounts';
+import StatisticsTab from './StatisticsTab';
+
+
+function ManageUserAccounts(props) {
     const classes =useStyles();
     const [value, setValue] = React.useState(0);
     const {height,width} = useWindowDimensions();
@@ -22,7 +29,7 @@ function ManageOrders(props) {
        <Grid container >
             <Grid item lg={12} xs={12}>
                 <div>
-                    <h1>{stringCollection.ManageOrders.OrdersManagerTitle}</h1>
+                    <h1>{stringCollection.ManageUserAccounts.AccountsManagerTitle}</h1>
                 </div>
             </Grid>
             <Grid item lg={12} xs={12}>
@@ -36,33 +43,29 @@ function ManageOrders(props) {
                           aria-label="Vertical tabs example"
                           className={classes.tabs}
                         >
-     
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/dotty/50/000000/delivery.png"/>} label={stringCollection.ManageOrders.DeliverOrderTabText} {...a11yProps(0)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios/50/000000/create-order.png"/>}  label={stringCollection.ManageOrders.ShowNewOrdersTabText} {...a11yProps(1)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/in-progress.png"/>}  label={stringCollection.ManageOrders.ShowUnCompleteOrdersTabText} {...a11yProps(2)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/task-completed.png"/>}  label={stringCollection.ManageOrders.ShowCompleteOrdersTabText} {...a11yProps(3)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/dotty/50/000000/cancel.png"/>}  label={stringCollection.ManageOrders.ShowCanceledOrdersTabText} {...a11yProps(4)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/80/000000/search.png"/>}  label={stringCollection.ManageOrders.SearchTabText} {...a11yProps(5)} />
-                                       
+                        
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/material-outlined/24/000000/show-all-views.png"/>} label={stringCollection.ManageUserAccounts.ShowAllAccountTabText} {...a11yProps(0)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/online.png"/>}  label={stringCollection.ManageUserAccounts.ShowActiveUsersTabText} {...a11yProps(1)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios/50/000000/chip-card-blocked.png"/>}  label={stringCollection.ManageUserAccounts.ShowBlockedUsersTabText} {...a11yProps(2)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/statistics.png"/>}  label={stringCollection.ManageUserAccounts.ShowAccountsStatisticsTabText} {...a11yProps(3)} />
+                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/80/000000/search.png"/>}  label={stringCollection.ManageUserAccounts.SearchAccountTabText} {...a11yProps(4)} />
+                          
                         </Tabs>
 
                               <TabPanel value={value} index={0}>
-                                Item One
+                                <ShowAllAccountsTab/>
                               </TabPanel>
                               <TabPanel value={value} index={1}>
-                                Item Two
+                                <ShowAllActiveUserAccountsTab/>
                               </TabPanel>
                               <TabPanel value={value} index={2}>
-                                Item Three
+                                <ShowBlockedUserAccounts/>
                               </TabPanel>
                               <TabPanel value={value} index={3}>
-                                Item Four
+                                <StatisticsTab/>
                               </TabPanel>
                               <TabPanel value={value} index={4}>
-                                Item Five
-                              </TabPanel>
-                              <TabPanel value={value} index={5}>
-                                Item Six
+                                <SearchTab/>
                               </TabPanel>
                             </div>
             </Grid>
@@ -80,7 +83,7 @@ const useStyles = makeStyles((theme)=>({
       },
       tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
-        paddingTop:'ManageOrders%'
+        paddingTop:'3%'
       },
 }))
 
@@ -116,5 +119,5 @@ function TabPanel(props) {
       'aria-controls': `vertical-tabpanel-${index}`,
     };
   }
-export default ManageOrders;
+export default ManageUserAccounts;
 
