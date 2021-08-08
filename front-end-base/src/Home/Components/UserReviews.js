@@ -14,7 +14,7 @@ import Home from "@material-ui/icons/Home";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import "./Styles/servicesStyles.css";
 import { DividerInservices } from "./HorizontalLine";
-import ServiceCard from "./ServiceCard";
+import ReviewCard from "./ReviewCard";
 const useStyles = makeStyles((theme) => ({
 	root: {
 		// display: "flex",
@@ -120,17 +120,11 @@ function CardArray() {
 			justifyContent="center"
 			alignItems="center"
 		>
-			<Grid xs={10} sm={5} md={3} item>
-				<ServiceCard img={itemData[0].img} color={"#F0F7F8"} />
+			<Grid xs={10} sm={5} md={5} item>
+				<ReviewCard img={itemData[0].img} color={"#FAF8F6"} />
 			</Grid>
-			<Grid xs={10} sm={5} md={3} item>
-				<ServiceCard img={itemData[0].img} color={"#FAF8F6"} />
-			</Grid>
-			<Grid xs={10} sm={5} md={3} item>
-				<ServiceCard img={itemData[1].img} color={"#F6F9F8"} />
-			</Grid>
-			<Grid xs={10} sm={5} md={3} item>
-				<ServiceCard img={itemData[1].img} color={"#FDF6F4"} />
+			<Grid xs={10} sm={5} md={5} item>
+				<ReviewCard img={itemData[1].img} color={"#FAF8F6"} />
 			</Grid>
 
 			{/* <ImgList /> */}
@@ -138,12 +132,12 @@ function CardArray() {
 	);
 }
 
-export default function Services() {
+export default function UserReview() {
 	const classes = useStyles();
 
 	return (
 		<Grid container spacing={0}>
-			<Grid
+			{/* <Grid
 				xs={12}
 				sm={12}
 				md={12}
@@ -152,32 +146,10 @@ export default function Services() {
 				alignItems="center"
 			>
 				<Header />{" "}
-			</Grid>
-			<Carousel
-				NextIcon={<NavigateNextIcon />}
-				PrevIcon={<NavigateBeforeIcon />}
-				animation="slide"
-				timeout={500}
-				cycleNavigation={false}
-				indicatorIconButtonProps={{
-					style: {
-						display: "none",
-					},
-				}}
-				navButtonsProps={{
-					// Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
-					style: {
-						backgroundColor: "black",
-						color: "white",
-						opacity: 0.8,
-					},
-				}}
+			</Grid> */}
 
-				// OR
-			>
-				<CardArray />
-				<CardArray />
-			</Carousel>
+			<CardArray />
+
 			<DividerInservices />
 		</Grid>
 		//
@@ -190,7 +162,7 @@ function Header() {
 		<Grid container spacing={0} style={{ marginBottom: "2%" }}>
 			<Grid xs={0} sm={1} md={1} item></Grid>
 			<Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
-				<p className="servicesTitle">Popular Services </p>
+				<p className="servicesTitle">Customer Reviews </p>
 				{/* <p>
 						Get projects done using cutting edge technologies like react, spring
 						boot and more...!

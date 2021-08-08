@@ -14,6 +14,8 @@ import ExploreArea from "../Home/Components/ExploreArea";
 import MobileFooter from "../Home/Components/MobileFooter";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import MotivationalArea from "../Home/Components/MotivationalArea";
+import "./Color.css";
+import UserReview from "../Home/Components/UserReviews";
 // const Box = styled.div`
 // 	${breakpoints(compose(spacing, palette))}
 // `;
@@ -46,12 +48,16 @@ function HomeContainer(props) {
 			</Grid>
 
 			{/* Services*/}
-			<Grid container style={{ marginTop: "5%" }}>
-				<Services />
+			<Grid container spacing={0} style={{ paddingTop: "3%" }}>
+				<Grid xs={0} sm={1} md={1} item></Grid>
+				<Grid item xs={12} sm={10} md={10}>
+					<Services />
+				</Grid>
+				<Grid xs={0} sm={1} md={1} item></Grid>
 			</Grid>
 
 			{/* projects */}
-			<Grid container style={{ marginTop: "3%" }}>
+			<Grid container style={{ marginTop: "3%" }} className="colorCodeTwo">
 				<Grid xs={0} sm={1} md={2} item></Grid>
 				<Grid item xs={12} sm={10} md={8}>
 					<LatestProjects />
@@ -59,8 +65,25 @@ function HomeContainer(props) {
 				<Grid xs={0} sm={1} md={2} item></Grid>
 			</Grid>
 
+			<Grid container spacing={0} style={{ paddingTop: "3%" }}>
+				<Grid xs={0} sm={1} md={0} item></Grid>
+				<Grid item xs={12} sm={10} md={12}>
+					<UserReview />
+				</Grid>
+				<Grid xs={0} sm={1} md={0} item></Grid>
+			</Grid>
+
+			{/* Services
+			<Grid container spacing={0} style={{ paddingTop: "3%" }}>
+				<Grid xs={0} sm={1} md={1} item></Grid>
+				<Grid item xs={12} sm={10} md={10}>
+					<UserReview />
+				</Grid>
+				<Grid xs={0} sm={1} md={1} item></Grid>
+			</Grid> */}
+
 			{/* explore */}
-			<Grid container style={{ marginTop: "3%" }}>
+			<Grid container style={{ marginTop: "3%" }} className="colorCodeTwo">
 				<Grid xs={1} sm={2} md={3} item></Grid>
 				<Grid item xs={10} sm={8} md={6}>
 					<ExploreArea />
@@ -68,7 +91,6 @@ function HomeContainer(props) {
 				<Grid xs={1} sm={2} md={3} item></Grid>
 			</Grid>
 
-			{/* MainContainer */}
 			<Grid container spacing={0} style={{ marginTop: "5%" }}>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 				<Grid item xs={12} sm={10} md={10}>

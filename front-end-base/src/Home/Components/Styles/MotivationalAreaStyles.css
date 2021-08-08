@@ -19,5 +19,10 @@
 	background-image: linear-gradient(#66163b, #72103d, #7e1a49, #72103d);
 }
 .colorCodeTwo {
-	background-image: linear-gradient(#547df08f, #4e6ec78f, #4269d38f, #4666c08f);
+	background-image: linear-gradient(
+		rgb(246, 247, 250),
+		rgb(247, 248, 251),
+		rgb(252, 253, 254),
+		rgb(254, 254, 255)
+	);
 }
