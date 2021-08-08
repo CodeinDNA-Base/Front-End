@@ -14,8 +14,15 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import "../Color/Colors.css";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
 const useStyles = makeStyles((theme) => ({
+	header: {
+		backgroundColor: "#011c38",
+		boxShadow: "none",
+		transition: ".5s",
+	},
 	grow: {
 		flexGrow: 1,
 	},
@@ -81,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
 	const classes = useStyles();
+	const trigger = useScrollTrigger();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -163,7 +171,18 @@ export default function Navbar() {
 
 	return (
 		<div className={classes.grow}>
-			<AppBar position="static" color="transparent">
+			<AppBar
+				className={classes.header}
+				position="fixed"
+				elevation={trigger ? 1 : 0}
+				style={{
+					backgroundColor: trigger && "#fff",
+					color: trigger ? "rgba(0, 0, 0, 0.87)" : "#f8f9fa",
+					boxShadow: trigger
+						? "5px 0px 27px -5px rgba(0, 0, 0, 0.3) !important"
+						: undefined,
+				}}
+			>
 				<Toolbar>
 					<IconButton
 						edge="start"
@@ -174,7 +193,7 @@ export default function Navbar() {
 						<MenuIcon />
 					</IconButton>
 					<Typography className={classes.title} variant="h6" noWrap>
-						Material-UI
+						Code In DNA
 					</Typography>
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>
@@ -191,25 +210,30 @@ export default function Navbar() {
 					</div>
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
-						<IconButton aria-label="show 4 new mails" color="inherit">
-							<Badge badgeContent={4} color="secondary">
-								<MailIcon />
-							</Badge>
+						<IconButton aria-label="About" color="inherit">
+							<Typography className={classes.title} variant="h6" noWrap>
+								About
+							</Typography>
 						</IconButton>
-						<IconButton aria-label="show 17 new notifications" color="inherit">
-							<Badge badgeContent={17} color="secondary">
-								<NotificationsIcon />
-							</Badge>
+						<IconButton aria-label="Contact" color="inherit">
+							<Typography className={classes.title} variant="h6" noWrap>
+								Contact
+							</Typography>
 						</IconButton>
-						<IconButton
-							edge="end"
-							aria-label="account of current user"
-							aria-controls={menuId}
-							aria-haspopup="true"
-							onClick={handleProfileMenuOpen}
-							color="inherit"
-						>
-							<AccountCircle />
+						<IconButton aria-label="Explore" color="inherit">
+							<Typography className={classes.title} variant="h6" noWrap>
+								Explore
+							</Typography>
+						</IconButton>
+						<IconButton aria-label="Login" color="inherit">
+							<Typography className={classes.title} variant="h6" noWrap>
+								Login
+							</Typography>
+						</IconButton>
+						<IconButton aria-label="Register" color="inherit">
+							<Typography className={classes.title} variant="h6" noWrap>
+								Register
+							</Typography>
 						</IconButton>
 					</div>
 					<div className={classes.sectionMobile}>

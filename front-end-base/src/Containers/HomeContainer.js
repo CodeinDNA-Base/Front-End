@@ -30,23 +30,24 @@ function HomeContainer(props) {
 					<Navbar />
 				</Grid>
 			</Grid>
-
-			{/* secondary navbar */}
+			{/* secondary navbar
 			<Grid container spacing={0}>
 				<Grid item xs={12} sm={12} md={12}>
 					<SecondaryNavBar />
 				</Grid>
-			</Grid>
-
+			</Grid> */}
 			{/* MainContainer */}
-			<Grid container spacing={0} style={{ backgroundColor: "#011c38" }}>
+			<Grid
+				container
+				spacing={0}
+				style={{ backgroundColor: "#011c38", paddingTop: "5%" }}
+			>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 				<Grid item xs={12} sm={10} md={10}>
 					<MainContainer />
 				</Grid>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 			</Grid>
-
 			{/* Services*/}
 			<Grid container spacing={0} style={{ paddingTop: "3%" }}>
 				<Grid xs={0} sm={1} md={1} item></Grid>
@@ -55,7 +56,6 @@ function HomeContainer(props) {
 				</Grid>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 			</Grid>
-
 			{/* projects */}
 			<Grid container style={{ marginTop: "3%" }} className="colorCodeTwo">
 				<Grid xs={0} sm={1} md={2} item></Grid>
@@ -64,7 +64,6 @@ function HomeContainer(props) {
 				</Grid>
 				<Grid xs={0} sm={1} md={2} item></Grid>
 			</Grid>
-
 			<Grid container spacing={0} style={{ paddingTop: "3%" }}>
 				<Grid xs={0} sm={1} md={0} item></Grid>
 				<Grid item xs={12} sm={10} md={12}>
@@ -72,7 +71,6 @@ function HomeContainer(props) {
 				</Grid>
 				<Grid xs={0} sm={1} md={0} item></Grid>
 			</Grid>
-
 			{/* Services
 			<Grid container spacing={0} style={{ paddingTop: "3%" }}>
 				<Grid xs={0} sm={1} md={1} item></Grid>
@@ -81,7 +79,6 @@ function HomeContainer(props) {
 				</Grid>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 			</Grid> */}
-
 			{/* explore */}
 			<Grid container style={{ marginTop: "3%" }} className="colorCodeTwo">
 				<Grid xs={1} sm={2} md={3} item></Grid>
@@ -90,7 +87,6 @@ function HomeContainer(props) {
 				</Grid>
 				<Grid xs={1} sm={2} md={3} item></Grid>
 			</Grid>
-
 			<Grid container spacing={0} style={{ marginTop: "5%" }}>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 				<Grid item xs={12} sm={10} md={10}>
@@ -98,7 +94,6 @@ function HomeContainer(props) {
 				</Grid>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 			</Grid>
-
 			{/* footer */}
 			<Grid container style={{ marginTop: "5%" }} spacing={0}>
 				<Grid item md={12} xs={12} sm={12}>
