@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { makeStyles,Grid} from '@material-ui/core';
+import { makeStyles,Grid,AppBar} from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -31,22 +31,30 @@ function ManageReviews(props) {
             </Grid>
             <Grid item lg={12} xs={12}>
                     {/* Options tab */}
-                    <div className={classes.root}>
+                          <AppBar position="static" color="default">
+                    {/* <div className={classes.root}> */}
                         <Tabs
-                          orientation="vertical"
-                          variant="scrollable"
-                          value={value}
-                          onChange={handleChange}
-                          aria-label="Vertical tabs example"
-                          className={classes.tabs}
+                          // orientation="vertical"
+                          // variant="scrollable"
+                          // value={value}
+                          // onChange={handleChange}
+                          // aria-label="Vertical tabs example"
+                          // className={classes.tabs}
+                           value={value}
+                           onChange={handleChange}
+                           indicatorColor="primary"
+                           textColor="primary"
+                           variant="scrollable"
+                           scrollButtons="auto"
+                           aria-label="scrollable auto tabs example"
                         >
     
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-glyphs/50/000000/new.png"/>} label={stringCollection.ManageReviews.NewReviewTabText} {...a11yProps(0)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios/50/000000/invisible.png"/>}  label={stringCollection.ManageReviews.VisibleReviewsTabText} {...a11yProps(1)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/in-progress.png"/>}  label={stringCollection.ManageReviews.DiscardedReviewsTabText} {...a11yProps(2)} />
+                          <Tab label={stringCollection.ManageReviews.NewReviewTabText} {...a11yProps(0)} />
+                          <Tab label={stringCollection.ManageReviews.VisibleReviewsTabText} {...a11yProps(1)} />
+                          <Tab label={stringCollection.ManageReviews.DiscardedReviewsTabText} {...a11yProps(2)} />
                          
                         </Tabs>
-
+                        </AppBar>
                               <TabPanel value={value} index={0}>
                                 <NewReviewsTab/>
                               </TabPanel>
@@ -57,7 +65,7 @@ function ManageReviews(props) {
                                 <DiscardedReviewsTab/>
                               </TabPanel>
                               
-                            </div>
+                            {/* </div> */}
             </Grid>
             
        </Grid>

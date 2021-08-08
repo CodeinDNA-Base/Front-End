@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { makeStyles,Grid} from '@material-ui/core';
+import { makeStyles,Grid,AppBar} from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -21,7 +21,7 @@ function ManageOrders(props) {
   
     const tabIconHeight=30;
     const tabIconWidth=30;
-
+  
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };                  
@@ -34,25 +34,33 @@ function ManageOrders(props) {
             </Grid>
             <Grid item lg={12} xs={12}>
                     {/* Options tab */}
-                    <div className={classes.root}>
+                     <AppBar position="static" color="default">
+                    {/* <div className={classes.root}> */}
                         <Tabs
-                          orientation="vertical"
-                          variant="scrollable"
-                          value={value}
-                          onChange={handleChange}
-                          aria-label="Vertical tabs example"
-                          className={classes.tabs}
+                          // orientation="vertical"
+                          // variant="scrollable"
+                          // value={value}
+                          // onChange={handleChange}
+                          // aria-label="Vertical tabs example"
+                          // className={classes.tabs}
+                           value={value}
+                           onChange={handleChange}
+                           indicatorColor="primary"
+                           textColor="primary"
+                           variant="scrollable"
+                           scrollButtons="auto"
+                           aria-label="scrollable auto tabs example"
                         >
      
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/dotty/50/000000/delivery.png"/>} label={stringCollection.ManageOrders.DeliverOrderTabText} {...a11yProps(0)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios/50/000000/create-order.png"/>}  label={stringCollection.ManageOrders.ShowNewOrdersTabText} {...a11yProps(1)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/in-progress.png"/>}  label={stringCollection.ManageOrders.ShowUnCompleteOrdersTabText} {...a11yProps(2)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/task-completed.png"/>}  label={stringCollection.ManageOrders.ShowCompleteOrdersTabText} {...a11yProps(3)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/dotty/50/000000/cancel.png"/>}  label={stringCollection.ManageOrders.ShowCanceledOrdersTabText} {...a11yProps(4)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/80/000000/search.png"/>}  label={stringCollection.ManageOrders.SearchTabText} {...a11yProps(5)} />
+                          <Tab label={stringCollection.ManageOrders.DeliverOrderTabText} {...a11yProps(0)} />
+                          <Tab label={stringCollection.ManageOrders.ShowNewOrdersTabText} {...a11yProps(1)} />
+                          <Tab label={stringCollection.ManageOrders.ShowUnCompleteOrdersTabText} {...a11yProps(2)} />
+                          <Tab label={stringCollection.ManageOrders.ShowCompleteOrdersTabText} {...a11yProps(3)} />
+                          <Tab label={stringCollection.ManageOrders.ShowCanceledOrdersTabText} {...a11yProps(4)} />
+                          <Tab label={stringCollection.ManageOrders.SearchTabText} {...a11yProps(5)} />
                                        
                         </Tabs>
-
+                        </AppBar>
                               <TabPanel value={value} index={0}>
                                 <DeliverOrderTab/>
                               </TabPanel>
@@ -71,7 +79,7 @@ function ManageOrders(props) {
                               <TabPanel value={value} index={5}>
                                 <SearchTab/>
                               </TabPanel>
-                            </div>
+                            {/* </div> */}
             </Grid>
             
        </Grid>

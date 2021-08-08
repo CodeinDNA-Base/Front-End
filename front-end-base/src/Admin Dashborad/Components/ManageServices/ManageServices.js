@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { makeStyles,Grid} from '@material-ui/core';
+import { makeStyles,Grid,AppBar} from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -33,23 +33,31 @@ function ManageServices(props) {
             </Grid>
             <Grid item lg={12} xs={12}>
                     {/* Options tab */}
-                    <div className={classes.root}>
+                    <AppBar position="static" color="default">
+                    {/* <div className={classes.root}> */}
                         <Tabs
-                          orientation="vertical"
-                          variant="scrollable"
-                          value={value}
-                          onChange={handleChange}
-                          aria-label="Vertical tabs example"
-                          className={classes.tabs}
+                          // orientation="vertical"
+                          // variant="scrollable"
+                          // value={value}
+                          // onChange={handleChange}
+                          // aria-label="Vertical tabs example"
+                          // className={classes.tabs}
+                           value={value}
+                           onChange={handleChange}
+                           indicatorColor="primary"
+                           textColor="primary"
+                           variant="scrollable"
+                           scrollButtons="auto"
+                           aria-label="scrollable auto tabs example"
                         >
                         
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/material-outlined/24/000000/show-all-views.png"/>} label={stringCollection.ManageServices.ViewAllServicesTabText} {...a11yProps(0)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/30/000000/statistics.png"/>}  label={stringCollection.ManageServices.SummuryTabText} {...a11yProps(1)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/dotty/80/000000/plus-2-math.png"/>}  label={stringCollection.ManageServices.AddNewServiceTabText} {...a11yProps(2)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/80/000000/search.png"/>}  label={stringCollection.ManageServices.SearchServiceTabText} {...a11yProps(3)} />
+                          <Tab label={stringCollection.ManageServices.ViewAllServicesTabText} {...a11yProps(0)} />
+                          <Tab  label={stringCollection.ManageServices.SummuryTabText} {...a11yProps(1)} />
+                          <Tab label={stringCollection.ManageServices.AddNewServiceTabText} {...a11yProps(2)} />
+                          <Tab label={stringCollection.ManageServices.SearchServiceTabText} {...a11yProps(3)} />
                           
                         </Tabs>
-
+                        </AppBar>
                               <TabPanel value={value} index={0}>
                                 <ViewAllServicesTab/>
                               </TabPanel>
@@ -63,7 +71,7 @@ function ManageServices(props) {
                                 <SearchTab/>
                               </TabPanel>
                         
-                            </div>
+                            {/* </div> */}
             </Grid>
             
        </Grid>

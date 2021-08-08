@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { makeStyles,Grid} from '@material-ui/core';
+import { makeStyles,Grid,AppBar} from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -33,24 +33,32 @@ function ManageOffers(props) {
             </Grid>
             <Grid item lg={12} xs={12}>
                     {/* Options tab */}
-                    <div className={classes.root}>
+                    {/* <div className={classes.root}> */}
+                    <AppBar position="static" color="default">
                         <Tabs
-                          orientation="vertical"
-                          variant="scrollable"
-                          value={value}
-                          onChange={handleChange}
-                          aria-label="Vertical tabs example"
-                          className={classes.tabs}
+                          // orientation="vertical"
+                          // variant="scrollable"
+                          // value={value}
+                          // onChange={handleChange}
+                          // aria-label="Vertical tabs example"
+                          // className={classes.tabs}
+                           value={value}
+                           onChange={handleChange}
+                           indicatorColor="primary"
+                           textColor="primary"
+                           variant="scrollable"
+                           scrollButtons="auto"
+                           aria-label="scrollable auto tabs example"
                         >
                         
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/material-outlined/24/000000/show-all-views.png"/>} label={stringCollection.ManageOffers.ViewAllOffersTabText} {...a11yProps(0)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/30/000000/statistics.png"/>}  label={stringCollection.ManageOffers.SummuryTabText} {...a11yProps(1)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/create-new.png"/>}  label={stringCollection.ManageOffers.CreateNewOfferTabText} {...a11yProps(2)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/send-mass-email.png"/>}  label={stringCollection.ManageOffers.CreatAndEmailOfferTabText} {...a11yProps(3)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/80/000000/search.png"/>}  label={stringCollection.ManageOffers.SearchOfferTabText} {...a11yProps(4)} />
+                          <Tab  label={stringCollection.ManageOffers.ViewAllOffersTabText} {...a11yProps(0)} />
+                          <Tab label={stringCollection.ManageOffers.SummuryTabText} {...a11yProps(1)} />
+                          <Tab  label={stringCollection.ManageOffers.CreateNewOfferTabText} {...a11yProps(2)} />
+                          <Tab  label={stringCollection.ManageOffers.CreatAndEmailOfferTabText} {...a11yProps(3)} />
+                          <Tab label={stringCollection.ManageOffers.SearchOfferTabText} {...a11yProps(4)} />
                         
                         </Tabs>
-
+                        </AppBar>
                               <TabPanel value={value} index={0}>
                                 <ViewAllOffersTab/>
                               </TabPanel>
@@ -66,7 +74,7 @@ function ManageOffers(props) {
                               <TabPanel value={value} index={4}>
                                 <SearchTab/>
                               </TabPanel>
-                            </div>
+                            {/* </div> */}
             </Grid>
             
        </Grid>

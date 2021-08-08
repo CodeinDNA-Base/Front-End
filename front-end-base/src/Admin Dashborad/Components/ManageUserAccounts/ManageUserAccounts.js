@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { makeStyles,Grid} from '@material-ui/core';
+import { makeStyles,Grid,AppBar} from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -34,24 +34,33 @@ function ManageUserAccounts(props) {
             </Grid>
             <Grid item lg={12} xs={12}>
                     {/* Options tab */}
-                    <div className={classes.root}>
+                    <AppBar position="static" color="default">
+                    {/* <div className={classes.root}> */}
                         <Tabs
-                          orientation="vertical"
-                          variant="scrollable"
+                          // orientation="vertical"
+                          // variant="scrollable"
+                          // value={value}
+                          // onChange={handleChange}
+                          // aria-label="Vertical tabs example"
+                          // className={classes.tabs}
                           value={value}
                           onChange={handleChange}
-                          aria-label="Vertical tabs example"
-                          className={classes.tabs}
+                          indicatorColor="primary"
+                          textColor="primary"
+                          variant="scrollable"
+                          scrollButtons="auto"
+                          aria-label="scrollable auto tabs example"
+                        >
                         >
                         
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/material-outlined/24/000000/show-all-views.png"/>} label={stringCollection.ManageUserAccounts.ShowAllAccountTabText} {...a11yProps(0)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/online.png"/>}  label={stringCollection.ManageUserAccounts.ShowActiveUsersTabText} {...a11yProps(1)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios/50/000000/chip-card-blocked.png"/>}  label={stringCollection.ManageUserAccounts.ShowBlockedUsersTabText} {...a11yProps(2)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/50/000000/statistics.png"/>}  label={stringCollection.ManageUserAccounts.ShowAccountsStatisticsTabText} {...a11yProps(3)} />
-                          <Tab icon={<img width={tabIconWidth} height={tabIconHeight} src="https://img.icons8.com/ios-filled/80/000000/search.png"/>}  label={stringCollection.ManageUserAccounts.SearchAccountTabText} {...a11yProps(4)} />
-                          
-                        </Tabs>
+                          <Tab  label={stringCollection.ManageUserAccounts.ShowAllAccountTabText} {...a11yProps(0)} />
+                          <Tab  label={stringCollection.ManageUserAccounts.ShowActiveUsersTabText} {...a11yProps(1)} />
+                          <Tab  label={stringCollection.ManageUserAccounts.ShowBlockedUsersTabText} {...a11yProps(2)} />
+                          <Tab  label={stringCollection.ManageUserAccounts.ShowAccountsStatisticsTabText} {...a11yProps(3)} />
+                          <Tab  label={stringCollection.ManageUserAccounts.SearchAccountTabText} {...a11yProps(4)} />
 
+                        </Tabs>
+                        </AppBar>    
                               <TabPanel value={value} index={0}>
                                 <ShowAllAccountsTab/>
                               </TabPanel>
@@ -67,7 +76,7 @@ function ManageUserAccounts(props) {
                               <TabPanel value={value} index={4}>
                                 <SearchTab/>
                               </TabPanel>
-                            </div>
+                            {/* </div> */}
             </Grid>
             
        </Grid>
