@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 import ProjectBasicInfoForm from './AddNewProjectSteps/ProjectBasicInfoForm'
 import UploadImages from './AddNewProjectSteps/UploadImages';
-// import MakePackages from './AddNewProjectSteps/MakePackages';
+import Pricing from './AddNewProjectSteps/Pricing';
 // import Preview from './AddNewProjectSteps/Preview';
 
 function AddNewProjectTab(props) {
@@ -69,7 +69,7 @@ function AddNewProjectTab(props) {
   );
 }
 function getSteps() {
-  return ['Basic info of project','Upload Images','Make Packages','Preview'];
+  return ['Basic info of project','Upload Images','Pricing','Preview'];
 }
 
 function getStepContent(stepIndex) {
@@ -80,8 +80,8 @@ function getStepContent(stepIndex) {
      return <UploadImages/>;
       // return "Sample";
     case 2:
-      // return <MakePackages/>;
-      return "Sample";
+      return <Pricing/>;
+      // return "Sample";
     case 3:
       // return <Preview/>;
       return "Sample";
