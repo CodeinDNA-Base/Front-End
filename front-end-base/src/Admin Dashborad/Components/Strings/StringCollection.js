@@ -19,7 +19,7 @@ const stringCollection = {
        ShowAllTabText:"All Projects",
        AddNewProjectTabText:"New project",
        SearchProjectTabText:"Search",
-       SetTreadnigProjectTabText:"Treading Projects"
+       SetTreadnigProjectTabText:"Set Trending Projects"
    },
    ManageServices:{
        ServiceManagerTitle:"Service Manager",

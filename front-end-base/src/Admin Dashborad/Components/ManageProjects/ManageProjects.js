@@ -51,7 +51,7 @@ function ManageProjects(props) {
                            aria-label="scrollable auto tabs example"
                         >
                         
-                          <Tab  label={stringCollection.ManageProjects.ShowAllTabText} {...a11yProps(0)} />
+                          <Tab   label={stringCollection.ManageProjects.ShowAllTabText} {...a11yProps(0)} />
                           <Tab   label={stringCollection.ManageProjects.AddNewProjectTabText} {...a11yProps(1)} />
                           <Tab   label={stringCollection.ManageProjects.SetTreadnigProjectTabText} {...a11yProps(2)} />
                           <Tab   label={stringCollection.ManageProjects.SearchProjectTabText} {...a11yProps(3)} />
