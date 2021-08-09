@@ -12,7 +12,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import Slide from "@material-ui/core/Slide";
 import Home from "@material-ui/icons/Home";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import "./Styles/servicesStyles.css";
+import HeaderTitle from "./HeaderTitle";
 import { DividerInservices } from "./HorizontalLine";
 import ReviewCard from "./ReviewCard";
 const useStyles = makeStyles((theme) => ({
@@ -77,38 +77,6 @@ const itemData = [
 	},
 ];
 
-// function ImgList() {
-// 	const classes = useStyles();
-// 	const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
-// 	return (
-// 		<ImageList
-// 			className={classes.imageList}
-// 			cols={isDesktopOrLaptopOrTabletScreen ? 5 : 1.5}
-// 			gap={30}
-// 			rowHeight={220}
-// 		>
-// 			{itemData.map((item) => (
-// 				<ImageListItem
-// 					key={item.img}
-// 					classes={{
-// 						root: classes.listItems,
-// 						item: classes.RoundBorder,
-// 					}}
-// 				>
-// 					<img src={item.img} alt={item.title} />
-// 					<ImageListItemBar
-// 						title={item.title}
-// 						classes={{
-// 							root: classes.titleBar,
-// 							title: classes.title,
-// 						}}
-// 					/>
-// 				</ImageListItem>
-// 			))}
-// 		</ImageList>
-// 	);
-// }
-
 function CardArray() {
 	return (
 		<Grid
@@ -119,12 +87,13 @@ function CardArray() {
 			container
 			justifyContent="center"
 			alignItems="center"
+			spacing={6}
 		>
 			<Grid xs={10} sm={5} md={5} item>
-				<ReviewCard img={itemData[0].img} color={"#FAF8F6"} />
+				<ReviewCard img={itemData[0].img} />
 			</Grid>
 			<Grid xs={10} sm={5} md={5} item>
-				<ReviewCard img={itemData[1].img} color={"#FAF8F6"} />
+				<ReviewCard img={itemData[1].img} />
 			</Grid>
 
 			{/* <ImgList /> */}
@@ -137,7 +106,7 @@ export default function UserReview() {
 
 	return (
 		<Grid container spacing={0}>
-			{/* <Grid
+			<Grid
 				xs={12}
 				sm={12}
 				md={12}
@@ -145,8 +114,8 @@ export default function UserReview() {
 				justifyContent="center"
 				alignItems="center"
 			>
-				<Header />{" "}
-			</Grid> */}
+				<HeaderTitle title={"Customer Reviews"} />{" "}
+			</Grid>
 
 			<CardArray />
 
@@ -157,21 +126,6 @@ export default function UserReview() {
 	);
 }
 
-function Header() {
-	return (
-		<Grid container spacing={0} style={{ marginBottom: "2%" }}>
-			<Grid xs={0} sm={1} md={1} item></Grid>
-			<Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
-				<p className="servicesTitle">Customer Reviews </p>
-				{/* <p>
-						Get projects done using cutting edge technologies like react, spring
-						boot and more...!
-					</p> */}
-			</Grid>
-			<Grid xs={0} sm={1} md={1} item></Grid>
-		</Grid>
-	);
-}
 {
 	/* <Carousel
 						NextIcon={<NavigateNextIcon />}

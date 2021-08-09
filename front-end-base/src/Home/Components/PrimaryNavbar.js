@@ -173,7 +173,7 @@ export default function Navbar() {
 		<div className={classes.grow}>
 			<AppBar
 				className={classes.header}
-				position="fixed"
+			
 				elevation={trigger ? 1 : 0}
 				style={{
 					backgroundColor: trigger && "#fff",

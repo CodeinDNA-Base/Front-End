@@ -16,21 +16,16 @@ import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import { Icon } from "@material-ui/core";
 import { DividerInservices } from "./HorizontalLine";
+import HeaderTitle from "./HeaderTitle";
 import "./Styles/LatestProjectStyles.css";
 const ExploreArea = (props) => {
 	return (
 		<div className="highlighter">
-			<Grid container spacing={0}>
-				<Grid xs={0} sm={1} md={1} item></Grid>
-				<Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
-					<p className="latestProjectTitle">Explore Our Market</p>
-					<p>
-						Get Your Project done on time and in reasonable budjet in various
-						Categories options
-					</p>
-				</Grid>
-				<Grid xs={0} sm={1} md={1} item></Grid>
-			</Grid>
+			<HeaderTitle
+				title={"Explore Our Market"}
+				description={`Get Your Project done on time and in reasonable budjet in various
+						Categories options`}
+			/>
 
 			<Grid container spacing={0} style={{ marginTop: "4%" }}>
 				<Grid xs={1} sm={2} md={1} item></Grid>
@@ -81,16 +76,3 @@ const ExploreArea = (props) => {
 	);
 };
 export default ExploreArea;
-
-{
-	/* <Grid container spacing={0}>
-				<Grid xs={0} sm={1} md={1} item></Grid>
-				<Grid xs={12} sm={10} md={10} item container>
-					<Grid item xs={12} sm={6} md={3}></Grid>
-					<Grid item xs={12} sm={6} md={3}></Grid>
-					<Grid item xs={12} sm={6} md={3}></Grid>
-					<Grid item xs={12} sm={6} md={3}></Grid>
-				</Grid>
-				<Grid xs={0} sm={1} md={1} item></Grid>
-			</Grid> */
-}

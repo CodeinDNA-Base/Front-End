@@ -13,7 +13,7 @@ import ProjectCard from "./ProjectCard";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import { DividerInservices } from "./HorizontalLine";
 import { makeStyles } from "@material-ui/core";
-
+import HeaderTitle from "./HeaderTitle";
 const useStyles = makeStyles((theme) => ({
 	btnOutlined: {
 		color: "white",
@@ -34,17 +34,10 @@ const LatestProjects = (props) => {
 	const classes = useStyles();
 	return (
 		<div className="highlighter">
-			<Grid container spacing={0}>
-				<Grid xs={0} sm={1} md={1} item></Grid>
-				<Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
-					<p className="latestProjectTitle">Latest Projects</p>
-					<p>
-						Get projects done using cutting edge technologies like react, spring
-						boot and more...!
-					</p>
-				</Grid>
-				<Grid xs={0} sm={1} md={1} item></Grid>
-			</Grid>
+			<HeaderTitle
+				title={"Projects"}
+				description={`Get projects done using cutting edge technologies like react, spring boot and more...!`}
+			/>
 
 			<Grid container spacing={0} style={{ marginTop: "2%" }}>
 				<Grid xs={0} sm={1} md={1} item></Grid>

@@ -12,7 +12,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import Slide from "@material-ui/core/Slide";
 import Home from "@material-ui/icons/Home";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import "./Styles/servicesStyles.css";
+import HeaderTitle from "./HeaderTitle";
 import { DividerInservices } from "./HorizontalLine";
 import ServiceCard from "./ServiceCard";
 const useStyles = makeStyles((theme) => ({
@@ -77,37 +77,7 @@ const itemData = [
 	},
 ];
 
-// function ImgList() {
-// 	const classes = useStyles();
-// 	const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
-// 	return (
-// 		<ImageList
-// 			className={classes.imageList}
-// 			cols={isDesktopOrLaptopOrTabletScreen ? 5 : 1.5}
-// 			gap={30}
-// 			rowHeight={220}
-// 		>
-// 			{itemData.map((item) => (
-// 				<ImageListItem
-// 					key={item.img}
-// 					classes={{
-// 						root: classes.listItems,
-// 						item: classes.RoundBorder,
-// 					}}
-// 				>
-// 					<img src={item.img} alt={item.title} />
-// 					<ImageListItemBar
-// 						title={item.title}
-// 						classes={{
-// 							root: classes.titleBar,
-// 							title: classes.title,
-// 						}}
-// 					/>
-// 				</ImageListItem>
-// 			))}
-// 		</ImageList>
-// 	);
-// }
+
 
 function CardArray() {
 	return (
@@ -151,7 +121,7 @@ export default function Services() {
 				justifyContent="center"
 				alignItems="center"
 			>
-				<Header />{" "}
+				<HeaderTitle title={"Services"} />
 			</Grid>
 			<Carousel
 				NextIcon={<NavigateNextIcon />}
@@ -183,44 +153,4 @@ export default function Services() {
 		//
 		// </Grid>
 	);
-}
-
-function Header() {
-	return (
-		<Grid container spacing={0} style={{ marginBottom: "2%" }}>
-			<Grid xs={0} sm={1} md={1} item></Grid>
-			<Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
-				<p className="servicesTitle">Popular Services </p>
-				{/* <p>
-						Get projects done using cutting edge technologies like react, spring
-						boot and more...!
-					</p> */}
-			</Grid>
-			<Grid xs={0} sm={1} md={1} item></Grid>
-		</Grid>
-	);
-}
-{
-	/* <Carousel
-						NextIcon={<NavigateNextIcon />}
-						PrevIcon={<NavigateBeforeIcon />}
-						animation="slide"
-						timeout={500}
-						cycleNavigation={false}
-						indicatorIconButtonProps={{
-							style: {
-								display: "none",
-							},
-						}}
-						navButtonsProps={{
-							// Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
-							style: {
-								backgroundColor: "white",
-								color: "black",
-								opacity: 1,
-							},
-						}}
-
-						// OR
-					> */
 }
