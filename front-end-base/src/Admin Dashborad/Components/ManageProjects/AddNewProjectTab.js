@@ -4,12 +4,11 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 
 import ProjectBasicInfoForm from './AddNewProjectSteps/ProjectBasicInfoForm'
 import UploadImages from './AddNewProjectSteps/UploadImages';
-import Pricing from './AddNewProjectSteps/Pricing';
-// import Preview from './AddNewProjectSteps/Preview';
+
+import Preview from './AddNewProjectSteps/Preview';
 
 function AddNewProjectTab(props) {
   const classes = useStyles();
@@ -40,8 +39,42 @@ function AddNewProjectTab(props) {
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>All steps completed</Typography>
-            <Button onClick={handleReset}>Reset</Button>
+
+            <div className={classes.savingOptionsContainer}>
+
+                                <Button
+                                  variant="contained"
+                                  component="label"
+                                  className={classes.button}
+                                 
+                                >
+                                  Publish 
+                    
+                                </Button>
+
+                                <Button
+                                  variant="contained"
+                                  component="label"
+                                  className={classes.button}
+                                 
+                                >
+                                  Save draft 
+                    
+                                </Button>
+
+                                
+                                <Button
+                                  variant="contained"
+                                  component="label"
+                                  className={classes.button}
+                                  onClick={handleReset}
+                                >
+                                  Reset All
+                    
+                                </Button>
+
+            </div>
+            
           </div>
         ) : (
           <div >
@@ -69,7 +102,7 @@ function AddNewProjectTab(props) {
   );
 }
 function getSteps() {
-  return ['Basic info of project','Upload Images','Pricing','Preview'];
+  return ['Basic info of project','Upload Images','Preview'];
 }
 
 function getStepContent(stepIndex) {
@@ -80,11 +113,8 @@ function getStepContent(stepIndex) {
      return <UploadImages/>;
       // return "Sample";
     case 2:
-      return <Pricing/>;
+      return <Preview/>;
       // return "Sample";
-    case 3:
-      // return <Preview/>;
-      return "Sample";
     default:
       return 'Unknown stepIndex';
   }
@@ -105,7 +135,21 @@ const useStyles = makeStyles((theme)=>({
   bottomButtonContainer:{
     marginLeft:'80%'
 
-  }
+  },
+  savingOptionsContainer:{
+    width:'20%',
+    marginLeft:'40%',
+    marginTop:'5%'
+  },
+  button:{
+    display:'block',
+    marginTop:10,
+    textAlign:'center'
+
+},
+resetBtn:{
+  marginLeft:'40%'
+}
 }));
 
 export default AddNewProjectTab;

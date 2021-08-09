@@ -10,6 +10,7 @@ function ProjectBasicInfoForm(props) {
     const classes = useStyles()
     const [currency, setCurrency] = useState('React Js');
     const [chipData, setChipData] = useState([])
+    const [estimatedPrice,setEstimatedPrice]=useState(0);
     const [keyWordText,setKeyWordText]=useState();
     const handleChange = (event) => {
       setCurrency(event.target.value);
@@ -61,6 +62,7 @@ function ProjectBasicInfoForm(props) {
                     </Grid>
                     <Grid item lg={7} className={classes.imageAndOtherOptionsContainer}>
                         <Grid container className={classes.catagoriesSelector}>
+                          <Grid item xs={6}>
                            <TextField
                             id="filled-select-currency"
                             select
@@ -76,6 +78,12 @@ function ProjectBasicInfoForm(props) {
                               </MenuItem>
                             ))}
                           </TextField>
+                          </Grid>
+                          <Grid item xs={6}>
+                          <TextField id="filled-basic" label="Estimated Price"  variant="filled" onChange={(e)=>{
+                                      setEstimatedPrice(e.target.value)
+                                    }}/>
+                          </Grid>
                         </Grid>
 
                          <Grid container className={classes.keyWordsInputContainer}>
