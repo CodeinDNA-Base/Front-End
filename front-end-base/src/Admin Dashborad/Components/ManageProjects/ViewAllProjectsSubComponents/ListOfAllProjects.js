@@ -25,7 +25,7 @@ function ListOfAllProjects(props) {
                              {props.projectsList.map((item) => (
                              <ImageListItem key={item.img} cols={item.cols || 1}>
                                 <div className={classes.projectHolderContainer}>
-                                   <ProjectHolder ptojectTitle={item.ptojectTitle} key={item.key} cols={item.cols} img={item.img}/>
+                                   <ProjectHolder ptojectTitle={item.ptojectTitle} projectKey={item.projectKey} cols={item.cols} img={item.img} handelOptionSelection={props.handelOptionSelection}/>
                                 </div>
                              </ImageListItem>
                         ))}

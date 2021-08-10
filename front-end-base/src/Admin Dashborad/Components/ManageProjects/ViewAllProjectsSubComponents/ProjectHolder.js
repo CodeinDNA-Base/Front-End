@@ -39,8 +39,9 @@ function ProjectHolder(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (opt) => {
     setAnchorEl(null);
+    
   };
 
   const options = [
@@ -68,7 +69,7 @@ function ProjectHolder(props) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
+     <IconButton aria-label="settings">
             <div>
       <IconButton
         aria-label="more"
@@ -91,8 +92,13 @@ function ProjectHolder(props) {
           },
         }}
       >
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+        {options.map((option,index) => (
+          <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
+            // handleClose(index)
+            props.handelOptionSelection(e,index,props.projectKey)
+            setAnchorEl(null);
+    
+          }}>
             {option}
           </MenuItem>
         ))}
@@ -100,7 +106,7 @@ function ProjectHolder(props) {
     </div>
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title={props.ptojectTitle}
         subheader="September 14, 2016"
       />
       <CardMedia
