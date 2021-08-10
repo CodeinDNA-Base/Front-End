@@ -2,7 +2,21 @@ import React from 'react';
 import { Grid, makeStyles,Box} from '@material-ui/core';
 function CurrentProjectsSubTab(props) {
     const clasess = useStyles();
-
+    const projects = [
+        {
+            ptojectTitle:"Project 1"
+        },
+        {
+            ptojectTitle:"Project 2"
+        },
+        {
+            ptojectTitle:"Project 3"
+        },
+        {
+            ptojectTitle:"Project 4"
+        },
+        
+    ]
     return (
         <div className={clasess.container}>
             <Grid container >
@@ -21,29 +35,15 @@ function CurrentProjectsSubTab(props) {
                <Grid item xs={12} className={clasess.projectsListContainer}>
                         <Grid container>
                             {/* This will contain the 4 cards of project or what ever design is on home page */}
-                            <Grid item xs={1}></Grid>
-                            <Grid item xs={5} className={clasess.projectCardContainer}>
-                                    {/* Project 1 */}
-                                    <h4>Project 1 container</h4>
-                            </Grid>
-                            <Grid item xs={5} className={clasess.projectCardContainer}>
-                                    {/* Project 2 */}
-                                     <h4>Project 2 container</h4>
-                            </Grid>
-                            
-                            <Grid item xs={1}></Grid>
-                            
-                            <Grid item xs={1}></Grid>
-                            <Grid item xs={5} className={clasess.projectCardContainer}>
-                                    {/* Project 3 */}
-                                     <h4>Project 3 container</h4>
-                            </Grid>
-                            <Grid item xs={5} className={clasess.projectCardContainer}>
-                                    {/* Project 4 */}
-                                    <h4>Project 4 container</h4>
-                            </Grid>
-                            
-                            <Grid item xs={1}></Grid>
+                            {projects.map((item,index)=>{
+                                return(
+                                <Grid item xs={5} className={clasess.projectCardContainer}>
+                                {/* Project 1 */}
+                                <h4>{item.ptojectTitle}</h4>
+                                </Grid>
+                                )
+                                
+                            })} 
                             
                         </Grid>
                </Grid>
@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme)=>({
     },
     projectsListContainer:{
         // backgroundColor:'blue'
+        paddingLeft:'10%'
     },
     projectCardContainer:{
         // backgroundColor:'green',

@@ -12,54 +12,6 @@ function SelectProject(props) {
         
         <div >
             <Grid container className={classes.container}>
-            <Grid item xs={4} className={classes.leftSide}>
-                    <Grid container>
-                        <Grid item xs={12}>
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                              <SearchIcon />
-                            </div>
-                            <InputBase
-                              placeholder="Search…"
-                              classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                              }}
-                              inputProps={{ 'aria-label': 'search' }}
-                            />
-                         </div>
-                        </Grid>
-                        <Grid item xs={12}>
-                        <Select
-                              labelId="demo-simple-select-label"
-                              id="demo-simple-select"
-                              value={age}
-                              onChange={handleChange}
-                              className={classes.SelectContainer}
-                        >
-                           <MenuItem value={10}>By Project Id</MenuItem>
-                           <MenuItem value={20}>By Project Title</MenuItem>
-                           <MenuItem value={30}>By Catagory</MenuItem>
-                         </Select>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                        <Button
-                                   variant="contained"
-                                   color="primary"
-                                  
-                                   className={classes.button}
-                                 >
-                                  Select
-                        </Button>
-                        </Grid>
-                    </Grid>
-               
-                </Grid>
-
-                <Grid xs={8} className={classes.rightSide}>
-                </Grid>                
-                
             
             </Grid>
         </div>
@@ -69,7 +21,7 @@ const useStyles = makeStyles((theme)=>({
     container:{
         paddingLeft:'10%',
         height:190,
-        width:'190%'
+        width:'100%'
     },
     leftSide:{
         // backgroundColor:"blue",
@@ -106,26 +58,9 @@ const useStyles = makeStyles((theme)=>({
         backgroundColor:"#aecaf5",
         marginRight: theme.spacing(2),
         marginLeft: 0,
-        width: '90%',
+        width: '50%',
        
       },
 
-        formControl: {
-          margin: theme.spacing(1),
-          minWidth: 150,
-        },
-        selectEmpty: {
-          marginTop: theme.spacing(2),
-        },
-        SelectContainer:{
-            width:160,
-            marginTop:'5%',
-            marginLeft:'3%'
-        },
-
-        button:{
-            marginTop:'5%',
-            marginLeft:"15%"
-        }
 }))
 export default SelectProject;

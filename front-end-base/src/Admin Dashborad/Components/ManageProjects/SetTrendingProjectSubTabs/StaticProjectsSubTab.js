@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import SelectProject from './SelectProject';
 function StaticProjectsSubTab(props) {
-    const classes = useStyles();
+  const classes = useStyles();
     
 
   const [activeStep, setActiveStep] = React.useState(0);
@@ -60,7 +60,7 @@ function StaticProjectsSubTab(props) {
         <div className={classes.container}>
             <Grid container>
                 <Grid item xs={12}>
-                <div><h3>Select trending projects</h3> </div>
+               
                 </Grid>
             </Grid>
             <Grid container>
@@ -94,8 +94,6 @@ function StaticProjectsSubTab(props) {
                                  <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                    Back
                                  </Button>
-                                 
-
                                  <Button
                                    variant="contained"
                                    color="primary"
