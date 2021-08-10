@@ -3,11 +3,22 @@ import React,{useState} from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 function SelectProject(props) {
     const classes = useStyles();
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-      setAge(event.target.value);
-    };
+    const projects = [
+      {
+          ptojectTitle:"Project 1"
+      },
+      {
+          ptojectTitle:"Project 2"
+      },
+      {
+          ptojectTitle:"Project 3"
+      },
+      {
+          ptojectTitle:"Project 4"
+      },
+      
+  ]
+  
     return (
         
         <div >

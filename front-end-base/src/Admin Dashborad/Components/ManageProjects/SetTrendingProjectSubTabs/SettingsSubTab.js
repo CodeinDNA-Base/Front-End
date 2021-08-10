@@ -3,7 +3,7 @@ import React from 'react';
 function SettingsSubTab(props) {
     return (
         <div>
-            <h1>SettingsSubTab</h1>
+            <h1>Settings</h1>
         </div>
     );
 }
