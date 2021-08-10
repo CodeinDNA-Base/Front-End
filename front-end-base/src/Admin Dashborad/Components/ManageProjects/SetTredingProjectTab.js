@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid,makeStyles } from '@material-ui/core';
+import { Grid,makeStyles,AppBar} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -20,15 +20,17 @@ function SetTredingProjectTab(props) {
   };
 
     return (
-   
-    <div className={classes.root}>
+    <div>
+
+      <AppBar position="static" color="default">
       <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        className={classes.tabs}
+       value={value}
+       onChange={handleChange}
+       indicatorColor="primary"
+       textColor="primary"
+       variant="scrollable"
+       scrollButtons="auto"
+       aria-label="scrollable auto tabs example"
       >
         <Tab label="Current Projects" {...a11yProps(0)} />
         <Tab label="Static Projects" {...a11yProps(1)} />
@@ -36,6 +38,8 @@ function SetTredingProjectTab(props) {
         <Tab label="Display mode" {...a11yProps(3)} />
         <Tab label="Settings" {...a11yProps(4)} />
       </Tabs>
+
+      </AppBar>
       <TabPanel value={value} index={0}>
         <CurrenCurrentProjectsSubTab/>
       </TabPanel>
@@ -51,8 +55,8 @@ function SetTredingProjectTab(props) {
       <TabPanel value={value} index={4}>
         <SettingsSubTab/>
       </TabPanel>
-
     </div>
+
       
     );
 }
@@ -96,15 +100,9 @@ const useStyles = makeStyles((theme)=>({
         backgroundColor:"gold"
     },
     root: {
-        width:'100%',
-        // flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-        display: 'flex',
-        height: 410,
-      },
-      tabs: {
-        borderRight: `1px solid ${theme.palette.divider}`,
-        marginTop:'6%'
-      },
+      flexGrow: 1,
+      width: '100%',
+      backgroundColor: theme.palette.background.paper,
+    },
  }));
 export default SetTredingProjectTab;

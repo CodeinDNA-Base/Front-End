@@ -1,23 +1,52 @@
 import React from 'react';
 import { Grid, makeStyles,Box} from '@material-ui/core';
 function CurrentProjectsSubTab(props) {
-    const classes = useStyles();
+    const clasess = useStyles();
 
     return (
-        <div className={classes.container}>
-            <Grid container className={classes.topRow}>
-                <Grid item xs={6}>
-                    <div className={classes.col1}><h3>Last update : 10/08/2021</h3> </div>
+        <div className={clasess.container}>
+            <Grid container >
+                <Grid item xs={4}>
+                    <div className={clasess.col1}><h4>Current Projects</h4> </div>
                 </Grid>
-                <Grid item xs={6}>
-                    <div className={classes.col2}><h3>Display mode: Static</h3> </div>
+                <Grid item xs={4}>
+                    <div className={clasess.col1}><h4>Last update : 10/08/2021</h4> </div>
+                </Grid>
+                <Grid item xs={4}>
+                    <div className={clasess.col2}><h4>Display mode: Static</h4> </div>
                 </Grid>
             </Grid>
 
             <Grid container>
-                <Box style={{overflow: 'auto',height:340, width: '100%',textAlign:'center'}}>
-                    <h2>Get the same compoent/cards of home page</h2>
-                </Box>
+               <Grid item xs={12} className={clasess.projectsListContainer}>
+                        <Grid container>
+                            {/* This will contain the 4 cards of project or what ever design is on home page */}
+                            <Grid item xs={1}></Grid>
+                            <Grid item xs={5} className={clasess.projectCardContainer}>
+                                    {/* Project 1 */}
+                                    <h4>Project 1 container</h4>
+                            </Grid>
+                            <Grid item xs={5} className={clasess.projectCardContainer}>
+                                    {/* Project 2 */}
+                                     <h4>Project 2 container</h4>
+                            </Grid>
+                            
+                            <Grid item xs={1}></Grid>
+                            
+                            <Grid item xs={1}></Grid>
+                            <Grid item xs={5} className={clasess.projectCardContainer}>
+                                    {/* Project 3 */}
+                                     <h4>Project 3 container</h4>
+                            </Grid>
+                            <Grid item xs={5} className={clasess.projectCardContainer}>
+                                    {/* Project 4 */}
+                                    <h4>Project 4 container</h4>
+                            </Grid>
+                            
+                            <Grid item xs={1}></Grid>
+                            
+                        </Grid>
+               </Grid>
             </Grid>
         </div>
     );
@@ -25,22 +54,19 @@ function CurrentProjectsSubTab(props) {
 
 const useStyles = makeStyles((theme)=>({
     container:{
-        //  backgroundColor:'blue',
-        width:'180%',
-        height:410
+        width:'100%',
     }
     ,
     topRow:{
-        width:'100%',
-        // backgroundColor:"blue"
     },
-    col1:{
-        width:240   
+    projectsListContainer:{
+        // backgroundColor:'blue'
+    },
+    projectCardContainer:{
+        // backgroundColor:'green',
+        height:250,
+        border: '1px solid black',
+        textAlign:'center'
     }
-    ,
-    col2:{
-        width:200   
-    }
-    ,
 }));
 export default CurrentProjectsSubTab;
