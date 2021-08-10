@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid,makeStyles } from '@material-ui/core';
+import { ProjectContainer } from './ProjectContainer';
 function Preview(props) {
     const classes = useStyles();
     return (
@@ -8,7 +9,9 @@ function Preview(props) {
                <Grid item xs={12}>
                     {/* Left side project preview */}
                     <h3>Project displayer</h3>
-                    <h4>Get it from nadir's projects list component</h4>
+                    <div>
+                        <ProjectContainer/>
+                    </div>
                </Grid>
                
            </Grid>
