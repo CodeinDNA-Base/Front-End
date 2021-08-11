@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 
 import ProjectBasicInfoForm from './AddNewProjectSteps/ProjectBasicInfoForm'
 import UploadImages from './AddNewProjectSteps/UploadImages';
-
 import Preview from './AddNewProjectSteps/Preview';
 
 function AddNewProjectTab(props) {

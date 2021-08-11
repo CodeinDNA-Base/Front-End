@@ -13,10 +13,10 @@ import DeleteProjectTab from './DeleteProjectTab';
 import { UndoOutlined } from '@material-ui/icons';
 import { Update } from '@material-ui/icons';
 
-function ProjectEditor(props) {
-    const classes = useStyles();
-  const [value, setValue] = React.useState(0);
 
+function ProjectEditor(props) {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
