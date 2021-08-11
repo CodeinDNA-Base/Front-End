@@ -10,6 +10,7 @@ import UploadImages from './NewServiceTabSteps/UploadImages'
 import Preview from './NewServiceTabSteps/Preview';
 import Pricing from './NewServiceTabSteps/Pricing';
 
+
 function AddNewServiceTab(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -64,10 +65,10 @@ function AddNewServiceTab(props) {
                                 >
                                   Reset All
                                 </Button>
-          </div>
+            </div>
 
           </div>
-        ) : (
+          ) : (
           <div >
 
                <div>
@@ -105,7 +106,7 @@ function getStepContent(stepIndex) {
     case 2:
        return <Pricing/>;
     case 3:
-    return <Preview/>;
+        return <Preview/>;
     default:
       return 'Unknown stepIndex';
   }
