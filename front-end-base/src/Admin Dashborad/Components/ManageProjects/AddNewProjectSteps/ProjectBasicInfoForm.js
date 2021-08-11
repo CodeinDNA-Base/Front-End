@@ -3,7 +3,7 @@ import { Grid,makeStyles,TextField,Button,Box} from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
-
+ 
 
 function ProjectBasicInfoForm(props) {
  
@@ -53,12 +53,7 @@ function ProjectBasicInfoForm(props) {
                              rows={8}  
                              variant="filled"
                            />
-
-                          
-                                    
-                          
-                        </form>
-                       
+                        </form>                       
                     </Grid>
                     <Grid item lg={7} className={classes.imageAndOtherOptionsContainer}>
                         <Grid container className={classes.catagoriesSelector}>

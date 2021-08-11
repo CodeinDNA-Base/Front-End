@@ -1,29 +1,32 @@
 import { makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import ListOfAllProjects from './ViewAllProjectsSubComponents/ListOfAllProjects';
+import ProjectEditor from './ViewAllProjectsSubComponents/ProjectEditor';
 function ViewAllProjectsTab(props) {
     const classes = useStyles();
+    const [screenSwitcher,setScreenSwitcher]=useState(true);
+    const [selectedProjectKeyHook,setSelectedProjectKeyHook]=useState(0);
     const projectsList = [
         {
-            ptojectTitle:"Project 1",
+            projectTitle:"Project 1",
             projectKey:0,
             cols:1,
             img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
         },
         {
-            ptojectTitle:"Project 2",
+            projectTitle:"Project 2",
             projectKey:1,
             cols:1,
             img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
         },
         {
-            ptojectTitle:"Project 3",
+            projectTitle:"Project 3",
             projectKey:2,
             cols:1,
             img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
         },
         {
-            ptojectTitle:"Project 4",
+            projectTitle:"Project 4",
             projectKey:3,
             cols:1,
             img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
@@ -32,22 +35,37 @@ function ViewAllProjectsTab(props) {
     ]
     const handelOptionSelection = (event,selectedOption,selectedProjectKey)=>{
         // alert("here"+selectedOption+" - "+selectedProjectKey)
+        if(selectedOption===0)
+        {
+
+            setSelectedProjectKeyHook(selectedProjectKey)
+            setScreenSwitcher(false)
+           
+        }
+    }
+    const handelBackToListOfProjectBtnClick = (event)=>{
+        setScreenSwitcher(true)
     }
     return (
         <div className={classes.container}>
             <div className={classes.topNav}>
                     {/* Here make a nav bar like for back option etc. */}
+
             </div>
             <div className={classes.listOfProjects}>
                     {/* Load the component which will render the list of projects */}
-                    <ListOfAllProjects projectsList={projectsList} handelOptionSelection={handelOptionSelection}/>
+                    {(screenSwitcher) ? <ListOfAllProjects projectsList={projectsList} handelOptionSelection={handelOptionSelection}/> :  <ProjectEditor handelBackToListOfProjectBtnClick={handelBackToListOfProjectBtnClick} projectTitle={projectsList[selectedProjectKeyHook].projectTitle}/>}
             </div>
         </div>
     );
 }
+
 const useStyles = makeStyles((theme)=>({
     container:{
 
+    },
+    topNav:{
+       
     }
 }))
 export default ViewAllProjectsTab;

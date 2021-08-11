@@ -95,7 +95,7 @@ function UploadImages(props) {
                         </Grid>
                     </Grid>
                    
-                   
+              
                 </Grid>
                 <Grid item xs={6} className={classes.rightSide}>
                 <div><h3>Gallary</h3></div>   
