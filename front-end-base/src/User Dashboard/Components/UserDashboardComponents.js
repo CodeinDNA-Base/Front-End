@@ -1,9 +1,7 @@
 import { LoremIpsum, Avatar } from "react-lorem-ipsum";
 
 //Material-UI
-import {
-  Grid, Typography,
-} from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Box } from "@material-ui/core";
@@ -23,6 +21,7 @@ import "./Styles/FooterStyles.css";
 import "./Styles/MenubarStyles.css";
 import "./Styles/UserDashboardStyles.css";
 import "../Color/Colors.css";
+import { RecentlyViewedServices } from "./RecentlyViewedServices";
 
 export const UserDashboardComponents = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
@@ -36,55 +35,37 @@ export const UserDashboardComponents = () => {
 
       <div className="bodySection1">
         <Grid container>
-          <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
-          
-          <Grid item xs={10} sm={4} md={3} lg={2} xl={4}>
+          <Grid item xs={1} sm={1} md={1} lg={1} xl={2}></Grid>
 
-            <Box border={1}>
-               <UserProfileCard />
-            </Box>
-            <Box mt={5} border={1} >
-               <PostRequestCard />
+          <Grid item xs={10} sm={4} md={3} lg={2} xl={4}>
+            <Box>
+              <UserProfileCard />
             </Box>
             <Box mt={5} border={1}>
-               <LinkedAccounts /></Box>
-          </Grid>        
+              <PostRequestCard />
+            </Box>
+            <Box mt={5}>
+              <LinkedAccounts />
+            </Box>
+          </Grid>
 
           <Grid item xs={10} sm={6} md={7} lg={6} xl={4}>
-          <Box ml={4} border={1} p={0.5}>
-
-               <OngoingOrders />
-               </Box>
-               <Box ml={4} border={1} p={0.5}>
-               <TrendingProjects /></Box>
-               <Box ml={4} border={1} p={0.5}>
+            <Box ml={8} p={0.5}>
+              <OngoingOrders />
             </Box>
+            <Box ml={8} mt={4} border={1} p={0.5}>
+              <TrendingProjects />
+            </Box>
+
+            <Box ml={8} mt={4} border={1} p={0.5}>
+              <RecentlyViewedServices />
+            </Box>
+
           </Grid>
 
           <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
         </Grid>
       </div>
-
-      {/* <div className="bodySection2">
-        <Grid container>
-          <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
-          
-          <Grid item xs={10} sm={4} md={3} lg={2} xl={4}>
-            <div style={{border:"1px solid red", padding:"4px"}}>
-               <PostRequestCard />
-            </div>
-          </Grid>
-
-          <Grid item xs={10} sm={6} md={7} lg={6} xl={4}>
-          <Box ml={4} border={1} p={0.5}>
-               <TrendingProjects />
-            </Box>
-          </Grid>
-
-          <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
-        </Grid>
-      </div> */}
-
 
 
       {/* Footer Section */}

@@ -11,6 +11,11 @@ export const PostRequestCard = () => {
       <Box m={1} pt={3}>
         <Button variant="contained" color="primary">Post a Request</Button>
       </Box>
+
+      <Box m={1}>
+        <Button variant="contained" color="primary">Show Previous</Button>
+      </Box>
+      
     </div>
   );
 };
