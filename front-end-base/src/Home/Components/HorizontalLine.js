@@ -14,26 +14,26 @@ export const DividerInFooter = () => {
 
 export const DividerInservices = () => {
 	return (
-		<Grid container style={{ marginTop: 120 }}>
+		<Grid container style={{ marginTop: "10%" }}>
 			{/* for offset */}
-			<Grid item md={2} sm={2} xs={1}></Grid>
-			<Grid item xs={10} md={8} sm={8}>
+			<Grid item md={1} sm={1} xs={1}></Grid>
+			<Grid item xs={10} md={10} sm={10}>
 				<hr style={{ borderColor: "#f8f9fa" }} />
 			</Grid>
-			<Grid md={2} sm={2} xs={1}></Grid>
+			<Grid md={1} sm={1} xs={1}></Grid>
 		</Grid>
 	);
 };
 
 export const DividerInProjects = () => {
 	return (
-		<Grid container style={{ marginTop: 120 }}>
+		<Grid container style={{ marginTop: "5%", marginBottom: "5%" }}>
 			{/* for offset */}
-			<Grid item md={3} sm={2} xs={1}></Grid>
-			<Grid item xs={10} md={8} sm={10}>
+			<Grid item md={1} sm={1} xs={1}></Grid>
+			<Grid item xs={10} md={10} sm={10}>
 				<hr style={{ borderColor: "#f8f9fa" }} />
 			</Grid>
-			<Grid md={3} sm={1} xs={1}></Grid>
+			<Grid md={1} sm={1} xs={1}></Grid>
 		</Grid>
 	);
 };

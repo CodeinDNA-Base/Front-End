@@ -1,23 +1,12 @@
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import List from "@material-ui/core/List";
-import Box from "@material-ui/core/Box";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
-import { Button } from "@material-ui/core";
 import "../Color/Colors.css";
-import { Container } from "@material-ui/core";
-import "./Styles/LatestProjectStyles.css";
-import ProjectCard from "./ProjectCard";
-import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import { Icon } from "@material-ui/core";
 import { DividerInservices } from "./HorizontalLine";
 import HeaderTitle from "./HeaderTitle";
-import "./Styles/LatestProjectStyles.css";
+
 const ExploreArea = (props) => {
 	return (
 		<div className="highlighter">

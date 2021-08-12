@@ -95,8 +95,6 @@ function CardArray() {
 			<Grid xs={10} sm={5} md={5} item>
 				<ReviewCard img={itemData[1].img} />
 			</Grid>
-
-			{/* <ImgList /> */}
 		</Grid>
 	);
 }
@@ -118,11 +116,7 @@ export default function UserReview() {
 			</Grid>
 
 			<CardArray />
-
-			<DividerInservices />
 		</Grid>
-		//
-		// </Grid>
 	);
 }
 

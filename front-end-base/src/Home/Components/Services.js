@@ -77,8 +77,6 @@ const itemData = [
 	},
 ];
 
-
-
 function CardArray() {
 	return (
 		<Grid

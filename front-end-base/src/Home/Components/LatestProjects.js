@@ -8,10 +8,9 @@ import Divider from "@material-ui/core/Divider";
 import { Button } from "@material-ui/core";
 import "../Color/Colors.css";
 import { Container } from "@material-ui/core";
-import "./Styles/LatestProjectStyles.css";
 import ProjectCard from "./ProjectCard";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
-import { DividerInservices } from "./HorizontalLine";
+import { DividerInProjects } from "./HorizontalLine";
 import { makeStyles } from "@material-ui/core";
 import HeaderTitle from "./HeaderTitle";
 const useStyles = makeStyles((theme) => ({
@@ -86,7 +85,6 @@ const LatestProjects = (props) => {
 				</Grid>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 			</Grid>
-			<DividerInservices />
 		</div>
 	);
 };

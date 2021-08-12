@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../Home/Components/Footer";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -16,19 +16,54 @@ import Header from "../Home/Components/Header";
 import "./Color.css";
 import UserReview from "../Home/Components/UserReviews";
 import Technologies from "../Home/Components/Technologies";
+import WhatWeOffer from "../Home/Components/WhatWeOffer";
+import { useWindowDimensions } from "../Home/Components/WindowDimensions";
+import { AppBar } from "@material-ui/core";
 // const Box = styled.div`
 // 	${breakpoints(compose(spacing, palette))}
 // `;
 function HomeContainer(props) {
 	const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+	const { height, width } = useWindowDimensions();
+	const [packageContainerStickyNess, setPackageContainerStickyNess] =
+		useState("");
+	const [sticknessFlag, setSticknessFlag] = useState(true);
+	const [currentSelectedTabIndex, setCurrentSelectedTabIndex] = useState(0);
+	const [scrollPosition, setScrollPosition] = useState(0);
+	const handleScroll = () => {
+		setScrollPosition(window.pageYOffset);
+	};
+
+	useEffect(() => {
+		if (scrollPosition > height * 0.9) {
+			console.log("S:" + scrollPosition);
+			setPackageContainerStickyNess("UnStickThePackageContainer");
+		} else {
+			setPackageContainerStickyNess("StickThePackageContainer");
+		}
+	}, [scrollPosition > height * 0.9]);
+
+	const handelTabIndex = (event, index = 0) => {
+		setCurrentSelectedTabIndex(index);
+	};
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 
 	return (
 		<div style={{ flexGrow: 1 }}>
 			{/* Header */}
-			<Grid container spacing={0}>
-				<Grid item xs={12} sm={12} md={12}>
-					<Header />
-				</Grid>
+			<Grid item xs={12}>
+				<AppBar style={{ backgroundColor: "transparent" }}>
+					<Header
+						handelTabIndex={handelTabIndex}
+						packageContainerStickyNess={packageContainerStickyNess}
+					/>
+				</AppBar>
 			</Grid>
 
 			{/* MainContainer */}
@@ -54,12 +89,7 @@ function HomeContainer(props) {
 			</Grid>
 
 			{/* Technologies */}
-			<Grid
-				container
-				spacing={0}
-				style={{ paddingTop: "3%" }}
-				className="colorCodeTwo"
-			>
+			<Grid container spacing={0} style={{ paddingTop: "3%" }}>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 				<Grid item xs={12} sm={10} md={10}>
 					<Technologies />
@@ -68,7 +98,7 @@ function HomeContainer(props) {
 			</Grid>
 
 			{/* projects */}
-			<Grid container style={{ marginTop: "3%" }} className="colorCodeTwo">
+			<Grid container style={{ marginTop: "7%" }} className="colorCodeTwo">
 				<Grid xs={0} sm={1} md={2} item></Grid>
 				<Grid item xs={12} sm={10} md={8}>
 					<LatestProjects />
@@ -76,8 +106,16 @@ function HomeContainer(props) {
 				<Grid xs={0} sm={1} md={2} item></Grid>
 			</Grid>
 
-			{/*User reviews */}
 			<Grid container spacing={0} style={{ paddingTop: "3%" }}>
+				<Grid xs={0} sm={1} md={1} item></Grid>
+				<Grid item xs={12} sm={10} md={10}>
+					<WhatWeOffer />
+				</Grid>
+				<Grid xs={0} sm={1} md={1} item></Grid>
+			</Grid>
+
+			{/*User reviews */}
+			<Grid container spacing={0} style={{ paddingTop: "1%" }}>
 				<Grid xs={0} sm={1} md={0} item></Grid>
 				<Grid item xs={12} sm={10} md={12}>
 					<UserReview />
@@ -85,17 +123,17 @@ function HomeContainer(props) {
 				<Grid xs={0} sm={1} md={0} item></Grid>
 			</Grid>
 
-			{/* explore */}
+			{/* explore
 			<Grid container style={{ marginTop: "3%" }} className="colorCodeTwo">
 				<Grid xs={1} sm={2} md={3} item></Grid>
 				<Grid item xs={10} sm={8} md={6}>
 					<ExploreArea />
 				</Grid>
 				<Grid xs={1} sm={2} md={3} item></Grid>
-			</Grid>
+			</Grid> */}
 
 			{/* extra info area */}
-			<Grid container spacing={0} style={{ marginTop: "5%" }}>
+			<Grid container spacing={0} style={{ marginTop: "10%" }}>
 				<Grid xs={0} sm={1} md={1} item></Grid>
 				<Grid item xs={12} sm={10} md={10}>
 					<MotivationalArea />

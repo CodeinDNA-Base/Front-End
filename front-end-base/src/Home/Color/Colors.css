@@ -4,6 +4,12 @@
 .themeColorText {
 	color: #011c38;
 }
+themecolortwo {
+	background-color: #ea6645;
+}
+.themecolortwotext {
+	color: #ea6645;
+}
 .highlighterColor {
 	background-color: #f8f9fa;
 }
