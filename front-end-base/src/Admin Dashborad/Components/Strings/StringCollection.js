@@ -26,7 +26,8 @@ const stringCollection = {
        ViewAllServicesTabText:"View All Services",
        SummuryTabText:"Statistic",
        AddNewServiceTabText:"Create New Service",
-       SearchServiceTabText:"Search"
+       SearchServiceTabText:"Search",
+       
    },
    ManageOffers:{
        OffersManagerTitle:"Offers Manager",

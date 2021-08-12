@@ -6,12 +6,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import PreviewProjectTab from './PreviewProjectTab';
+import PreviewServiceTab from './PreviewServiceTab';
+
 import { UndoOutlined } from '@material-ui/icons';
 import { Update } from '@material-ui/icons';
 
 
-function ProjectEditor(props) {
+function ServicesEditor(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -76,7 +77,7 @@ function ProjectEditor(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={1}>
-        <PreviewProjectTab/>
+        <PreviewServiceTab/>
       </TabPanel>
    
     </div>
@@ -107,7 +108,7 @@ const useStyles = makeStyles((theme)=>({
       },
     updateBtn:{
       marginTop:5,
-      marginLeft:'38%'
+      marginLeft:'40%'
     },
     deleteBtn:{
       marginLeft:'1%',
@@ -147,4 +148,4 @@ function TabPanel(props) {
     };
   }
   
-export default ProjectEditor;
+export default ServicesEditor;
