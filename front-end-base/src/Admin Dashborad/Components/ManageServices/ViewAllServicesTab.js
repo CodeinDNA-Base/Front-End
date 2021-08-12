@@ -8,25 +8,25 @@ function ViewAllServicesTab(props) {
     const [selectedProjectKeyHook,setSelectedProjectKeyHook]=useState(0);
     const projectsList = [
         {
-            projectTitle:"Project 1",
+            projectTitle:"Service Heading",
             projectKey:0,
             cols:1,
             img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
         },
         {
-            projectTitle:"Project 2",
+            projectTitle:"Service Heading",
             projectKey:1,
             cols:1,
             img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
         },
         {
-            projectTitle:"Project 3",
+            projectTitle:"Service Heading",
             projectKey:2,
             cols:1,
             img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
         },
         {
-            projectTitle:"Project 4",
+            projectTitle:"Service Heading",
             projectKey:3,
             cols:1,
             img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"

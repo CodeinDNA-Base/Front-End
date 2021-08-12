@@ -97,7 +97,14 @@ function PackageContainer(props) {
                             </Grid>
                             <Grid item xs={12} className={classes.textFields}>
                                 {/*  */}
-                                <TextField id="outlined-basic" label="Description" variant="outlined" />
+                                <TextField
+                             id="filled-multiline-static"
+                             label="Service overview"
+                             multiline
+                             rows={3}  
+                             variant="outlined"
+                             className={classes.multilineTextField}
+                            />
                             </Grid>
 
                             <Grid item xs={8} style={{marginTop:"2%"}}>
@@ -160,5 +167,8 @@ const useStyles = makeStyles((theme)=>({
     textFields:{
         marginTop:'3%'
     },
+    multilineTextField:{
+        width:'70%'
+    }
 }))
 export default PackageContainer;

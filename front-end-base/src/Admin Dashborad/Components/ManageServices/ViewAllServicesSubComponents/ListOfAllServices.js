@@ -21,11 +21,11 @@ function ListOfAllServices(props) {
                        })
                    }  */}
                    <div className={classes.root}>
-                        <ImageList rowHeight={470} className={classes.imageList} cols={3}>
+                        <ImageList rowHeight={340} className={classes.imageList} cols={3}>
                              {props.projectsList.map((item) => (
                              <ImageListItem key={item.img} cols={item.cols || 1}>
                                 <div className={classes.projectHolderContainer}>
-                                   <ServiceHolder ptojectTitle={item.ptojectTitle} projectKey={item.projectKey} cols={item.cols} img={item.img} handelOptionSelection={props.handelOptionSelection}/>
+                                   <ServiceHolder projectTitle={item.projectTitle} projectKey={item.projectKey} cols={item.cols} img={item.img} handelOptionSelection={props.handelOptionSelection}/>
                                 </div>
                              </ImageListItem>
                         ))}

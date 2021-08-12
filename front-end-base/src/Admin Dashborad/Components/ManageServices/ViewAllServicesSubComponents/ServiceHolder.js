@@ -63,11 +63,11 @@ function ServiceHolder(props) {
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            CodeinDNA
-          </Avatar>
-        }
+        // avatar={
+        //   <Avatar aria-label="recipe" className={classes.avatar}>
+        //     CodeinDNA
+        //   </Avatar>
+        // }
         action={
      <IconButton aria-label="settings">
             <div>
@@ -106,7 +106,7 @@ function ServiceHolder(props) {
     </div>
           </IconButton>
         }
-        title={props.ptojectTitle}
+        title={props.projectTitle}
         subheader="September 14, 2016"
       />
       <CardMedia
@@ -115,11 +115,8 @@ function ServiceHolder(props) {
         title="Paella dish"
       />
       <CardContent>
-        {/* <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
-        </Typography> */}
-        <div className={classes.ratingBar}>
+       
+        {/* <div className={classes.ratingBar}>
 
         <div className={classes.ratingsRoot}>
         <h3 className={classes.ratingText}>Rating</h3>
@@ -137,48 +134,31 @@ function ServiceHolder(props) {
         
             {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
             </div>
-        </div>
-        <div className={classes.reviewBar}>
-             <div className={classes.wasItHelpFullOrNotContainer}>
+        </div> */}
+        {/* <div className={classes.reviewBar}> */}
+             {/* <div className={classes.wasItHelpFullOrNotContainer}> */}
                 {/* Was helpfull or not */}
-                <div className="Thumb">
+                {/* <div className="Thumb"> */}
                 {/* Thumbs up */}
-                <FontAwesomeIcon size="sm" icon={faThumbsUp} />
-                </div>
-                <div className="ThumbFonts">
+                {/* <FontAwesomeIcon size="sm" icon={faThumbsUp} /> */}
+                {/* </div> */}
+                {/* <div className="ThumbFonts"> */}
                     {/* Help full */}
-                    <h6>Likes [12]</h6>
-                </div>
-                <div className="Thumb">
+                    {/* <h6>Likes [12]</h6> */}
+                {/* </div> */}
+                {/* <div className="Thumb"> */}
                 {/* Thumbs up */}
-                <FontAwesomeIcon size="sm" icon={faThumbsDown} />
-                </div>
-                <div className="ThumbFonts">
+                {/* <FontAwesomeIcon size="sm" icon={faThumbsDown} /> */}
+                {/* </div> */}
+                {/* <div className="ThumbFonts"> */}
                     {/* Help full */}
-                    <h6>Dislikes [22]</h6>
-                </div>
-            </div>
-        </div>
+                    {/* <h6>Dislikes [22]</h6> */}
+                {/* </div> */}
+            {/* </div> */}
+        {/* </div> */}
         
       </CardContent>
-      {/* <CardActions disableSpacing className={classes.bottomButtons}>
-        <IconButton>
-          
-          <EditOutlined />
-
-        </IconButton>
-        <IconButton >
-          
-          <DeleteSharp />
-        
-        </IconButton>
-        
-        <IconButton>
-          
-          <UpdateRounded />
-        
-        </IconButton>
-      </CardActions> */}
+     
       
     </Card>
   );
