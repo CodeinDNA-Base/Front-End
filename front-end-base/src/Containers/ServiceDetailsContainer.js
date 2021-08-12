@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import NavTabBarCollectively from '../Service Details/Components/NavTabBarCollectively';
 import useWindowDimensions from '../Service Details/Components/useWindowDimensions';
 function ServiceWorkerContainer(props) {
+  
 
 const classes = useStyles();
 const { height, width } = useWindowDimensions();
