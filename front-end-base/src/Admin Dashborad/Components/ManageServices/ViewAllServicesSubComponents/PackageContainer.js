@@ -97,7 +97,7 @@ function PackageContainer(props) {
                             </Grid>
                             <Grid item xs={12} className={classes.textFields}>
                                 {/*  */}
-                                <TextField
+                            <TextField
                              id="filled-multiline-static"
                              label="Service overview"
                              multiline
@@ -107,13 +107,23 @@ function PackageContainer(props) {
                             />
                             </Grid>
 
-                            <Grid item xs={8} style={{marginTop:"2%"}}>
+                            <Grid item xs={6} style={{marginTop:"2%"}}>
                                     {/*  */}
-                                    <TextField id="filled-basic" label="New offer text"  variant="filled" onChange={(e)=>{
-                                      setKeyWordText(e.target.value)
-                                    }}/>
+                                   
+                                     <TextField
+                             id="filled-multiline-static"
+                             label="Service overview"
+                             multiline
+                             rows={3}  
+                             onChange={(e)=>{
+                                setKeyWordText(e.target.value)
+                              }}
+                             variant="outlined"
+                            
+                             className={classes.multilineTextFieldForChip}
+                            />
                                 </Grid>
-                                <Grid item xs={4} >
+                                <Grid item xs={6} >
                                     {/* Add key word btn */}
                                     <Button className={classes.addBtn} variant="contained" color="primary" onClick={handelAddBtnEvent}>
                                       Add
@@ -169,6 +179,15 @@ const useStyles = makeStyles((theme)=>({
     },
     multilineTextField:{
         width:'70%'
+    },
+    multilineTextFieldForChip:{
+        width:'100%'
+    },
+    
+    addBtn:{
+        marginTop:'15%',
+        marginLeft:"5%"
     }
+    
 }))
 export default PackageContainer;
