@@ -11,7 +11,9 @@ function ReviewsList(props) {
                         <ReviewRowHolder hanelScreenSwitch={props.hanelScreenSwitch}/>
                         <ReviewRowHolder hanelScreenSwitch={props.hanelScreenSwitch}/>
                         <ReviewRowHolder hanelScreenSwitch={props.hanelScreenSwitch}/>
-                        
+                        <ReviewRowHolder hanelScreenSwitch={props.hanelScreenSwitch}/>
+                        <ReviewRowHolder hanelScreenSwitch={props.hanelScreenSwitch}/>
+                        <ReviewRowHolder hanelScreenSwitch={props.hanelScreenSwitch}/>
                 </Grid>
                 <Grid item xs={1}></Grid>
             </Grid>
