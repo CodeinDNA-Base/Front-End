@@ -39,7 +39,7 @@ function ServiceRowCard(props) {
                 <Grid item xs={2}>
                     {/* thumbnail */}
                     <div className={classes.logo}> 
-                    <img className={classes.logoImg} src="https://img.icons8.com/dotty/80/000000/service.png"/>
+                    <img className={classes.logoImg} src="https://img.icons8.com/nolan/64/blockchain-technology--v1.png"/>
                     </div>
                 </Grid>
                 <Grid item xs={3}>
@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme)=>({
     },
     logo: {
         width: 60,
-        height: 60,
+        height: 65,
         borderRadius: 80,
         marginLeft: "2%",
         marginTop: "2%",
@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme)=>({
     logoImg:{
         height:50,
         width:50,
-        marginTop:-35,
+        marginTop:-45,
         marginLeft:5    
     }
     

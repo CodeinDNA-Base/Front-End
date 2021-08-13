@@ -5,9 +5,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-
 import { stringCollection } from '../Strings/StringCollection';
-
 import DeliverOrderTab from './DeliverOrderTab';
 import SearchTab from './SearchTab';
 import ShowCanceledOrdersTab from './ShowCanceledOrdersTab';
@@ -16,15 +14,15 @@ import ShowNewOrdersTab from './ShowNewOrdersTab';
 import ShowUnCompleteOrdersTab from './ShowUnCompleteOrdersTab';
 
 function ManageOrders(props) {
-    const classes =useStyles();
-    const [value, setValue] = React.useState(0);
-  
+  const [value, setValue] = React.useState(0);
+    
     const tabIconHeight=30;
     const tabIconWidth=30;
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
-    };                  
+    }; 
+  
     return (
        <Grid container >
             <Grid item lg={12} xs={12}>
@@ -52,31 +50,32 @@ function ManageOrders(props) {
                            aria-label="scrollable auto tabs example"
                         >
      
-                          <Tab label={stringCollection.ManageOrders.DeliverOrderTabText} {...a11yProps(0)} />
-                          <Tab label={stringCollection.ManageOrders.ShowNewOrdersTabText} {...a11yProps(1)} />
-                          <Tab label={stringCollection.ManageOrders.ShowUnCompleteOrdersTabText} {...a11yProps(2)} />
-                          <Tab label={stringCollection.ManageOrders.ShowCompleteOrdersTabText} {...a11yProps(3)} />
-                          <Tab label={stringCollection.ManageOrders.ShowCanceledOrdersTabText} {...a11yProps(4)} />
-                          <Tab label={stringCollection.ManageOrders.SearchTabText} {...a11yProps(5)} />
+                          {/* <Tab label={stringCollection.ManageOrders.DeliverOrderTabText} {...a11yProps(0)} /> */}
+                          <Tab label={stringCollection.ManageOrders.ShowNewOrdersTabText} {...a11yProps(0)} />
+                          <Tab label={stringCollection.ManageOrders.ShowUnCompleteOrdersTabText} {...a11yProps(1)} />
+                          <Tab label={stringCollection.ManageOrders.ShowCompleteOrdersTabText} {...a11yProps(2)} />
+                          <Tab label={stringCollection.ManageOrders.ShowCanceledOrdersTabText} {...a11yProps(3)} />
+                          <Tab label={stringCollection.ManageOrders.SearchTabText} {...a11yProps(4)} />
                                        
                         </Tabs>
                         </AppBar>
-                              <TabPanel value={value} index={0}>
+                              {/* <TabPanel value={value} index={0}>
                                 <DeliverOrderTab/>
-                              </TabPanel>
-                              <TabPanel value={value} index={1}>
+                              </TabPanel> */}
+                              
+                              <TabPanel value={value} index={0}>
                                 <ShowNewOrdersTab/>
                               </TabPanel>
-                              <TabPanel value={value} index={2}>
+                              <TabPanel value={value} index={1}>
                                 <ShowUnCompleteOrdersTab/>
                               </TabPanel>
-                              <TabPanel value={value} index={3}>
+                              <TabPanel value={value} index={2}>
                                 <ShowCompleteOrdersTab/>
                               </TabPanel>
-                              <TabPanel value={value} index={4}>
+                              <TabPanel value={value} index={3}>
                                 <ShowCanceledOrdersTab/>
                               </TabPanel>
-                              <TabPanel value={value} index={5}>
+                              <TabPanel value={value} index={4}>
                                 <SearchTab/>
                               </TabPanel>
                             {/* </div> */}
@@ -87,21 +86,23 @@ function ManageOrders(props) {
 }
 
 const useStyles = makeStyles((theme)=>({
-    root: {
+    root: 
+    {
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
         display: 'flex',
         height:450,
-      },
+    },
       tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
         paddingTop:'ManageOrders%'
       },
+     
 }))
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
+    
     return (
       <div
         role="tabpanel"
