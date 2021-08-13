@@ -9,9 +9,8 @@ export const PostRequestCard = () => {
         Get offers from sellers for your project
       </Typography>
       <Box m={1} pt={3}>
-        <Button variant="contained" color="primary">Post a Request</Button>
+        <Button variant="outlined" >Post a Request</Button>
       </Box>
-
       <Box m={1}>
         <Button variant="contained" color="primary">Show Previous</Button>
       </Box>

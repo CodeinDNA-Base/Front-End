@@ -65,10 +65,12 @@ const useStyles = makeStyles(({ palette }) => ({
 export const ProfileCardDemo = React.memo(function ProfileCard() {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
+
   const borderedGridStyles = useGutterBorderedGridStyles({
     borderColor: 'rgba(0, 0, 0, 0.08)',
     height: '50%',
   });
+
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>
@@ -103,8 +105,8 @@ export const ProfileCardDemo = React.memo(function ProfileCard() {
     <Divider light/>
       <Box display={'flex'}>
       <Box p={1} flex={'auto'} >
-          <p className={styles.statLabel}>Unknown</p>
-          <p className={styles.statValue}>Unknown</p>
+          <p className={styles.statLabel}>Payment method</p>
+          <p className={styles.statValue}>Verified</p>
         </Box>
         <Box p={1} flex={'auto'}>
           <p className={styles.statLabel}>Total Purchases</p>

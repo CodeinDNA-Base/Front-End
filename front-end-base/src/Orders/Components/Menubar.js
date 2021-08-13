@@ -236,7 +236,7 @@ export const Menubar = (props) => {
                 </Link>
               </Button>
               <Button className={classes.menuItemsRippleEffect2}>
-                <Link to="/Messaging" className="menuBarItem">
+                <Link to="Messaging" className="menuBarItem">
                   Messaging
                 </Link>
               </Button>
