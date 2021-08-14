@@ -9,8 +9,6 @@ import Divider from '@material-ui/core/Divider';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
 
-import Skeleton from '@material-ui/lab/Skeleton';
-import { DoneAll } from '@material-ui/icons';
 
 //Resources
 import profilePic from '../Resources/nadir.jpg'
@@ -19,7 +17,7 @@ import { Rating } from '@material-ui/lab';
 export const UserProfileCard=()=> {
   return (
     <div>
-      <ProfileCardDemo></ProfileCardDemo>
+      <ProfileCard></ProfileCard>
     </div>
   );
 }
@@ -62,7 +60,7 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-export const ProfileCardDemo = React.memo(function ProfileCard() {
+export const ProfileCard = React.memo(function ProfileCard() {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
 

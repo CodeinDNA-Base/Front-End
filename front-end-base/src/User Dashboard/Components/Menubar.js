@@ -27,6 +27,7 @@ import {Link} from 'react-router-dom'
 //Local Resources
 import logo from "../Resources/upwork.svg";
 import "./Styles/MenubarStyles.css";
+import { ArrowRightAltOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,15 +87,17 @@ const useStyles = makeStyles((theme) => ({
       width: "40ch",
     },
   },
+    //Show desktop view only when size is lg
   sectionDesktop: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       display: "flex",
     },
   },
+  //Don't show mobile view when size is lg 
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       display: "none",
     },
   },

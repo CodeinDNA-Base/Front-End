@@ -1,6 +1,6 @@
 
 //Material-UI
-import { Grid, Box } from "@material-ui/core";
+import { Grid, Box, Hidden } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 //Component imports
@@ -13,6 +13,7 @@ import { LinkedAccounts } from "../User Dashboard/Components/LinkedAccounts";
 import { OngoingOrders } from "../User Dashboard/Components/OngoingOrders";
 import { TrendingServices } from "../User Dashboard/Components/TrendingServices";
 import { RecentlyViewedServices } from "../User Dashboard/Components/RecentlyViewedServices";
+import { OrdersContainer } from "./OrdersContainer";
 
 //Routes
 import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
@@ -30,9 +31,7 @@ export const UserDashboardContainer = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
 
   return (
-    <Router>
-        <Switch>
-            <Route exact path="/">
+      <>
             <Grid container>
         <Grid item xs={4} sm={12} md={12}>
           <Menubar />
@@ -41,21 +40,26 @@ export const UserDashboardContainer = () => {
 
       <div className="bodySection1">
         <Grid container>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={2}></Grid>
+          <Grid item xs={0} sm={1} md={1} lg={1} xl={2}></Grid>
 
-          <Grid item xs={10} sm={4} md={3} lg={2} xl={4}>
+          
+          {/* Hide profile card, linked accounts and post request options on mobile screen */}
+          <Hidden only={["xs"]}>
+          <Grid item xs={10} sm={3} md={3} lg={2} xl={4}>
+            
             <Box>
               <UserProfileCard />
             </Box>
-            <Box mt={5} border={1}>
+            <Box mt={5}>
               <PostRequestCard />
             </Box>
             <Box mt={5}>
               <LinkedAccounts />
             </Box>
           </Grid>
+          </Hidden>
 
-          <Grid item xs={10} sm={6} md={7} lg={6} xl={4}>
+          <Grid item xs={11} sm={7} md={7} lg={7} xl={4}>
             <Box ml={8} p={0.5}>
               <OngoingOrders />
             </Box>
@@ -78,14 +82,6 @@ export const UserDashboardContainer = () => {
           </Grid>
         </Grid>
       </div>
-      </Route>
-    </Switch>
-
-    <Switch>
-        <Route exact path="/Orders">
-            
-        </Route>
-    </Switch>
-    </Router>
+  </>
   );
 };

@@ -11,11 +11,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import {
   Button,
-  Radio,
-  RadioGroup,
   Popover,
   MenuItem,
-  StepContent
 } from "@material-ui/core";
 
 import { Rating } from "@material-ui/lab";

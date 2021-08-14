@@ -12,22 +12,26 @@ import { BrowserRouter as Router,Switch, Route} from "react-router-dom";
 import ServiceDetailsContainer from './ServiceDetailsContainer';
 import {SearchProjectsContainer} from './SearchProjectsContainer';
 import { UserDashboardContainer } from './UserDashboardContainer';
+import { OrdersContainer} from './OrdersContainer'
 
 function Entrance(props) {
     return (
         <Router>
           <Switch>
 
-          <Route path="/">
-            {/* SearchProjects */}
-                {/* <SearchProjectsContainer/> */}
+          <Route exact path="/">
+                {/* SearchProjects
+                <SearchProjectsContainer/> */}
                 <UserDashboardContainer />
-            </Route>
-
-            <Route path="/ServiceDetails">
+            </Route>          
+            <Route exact path="/ServiceDetails">
                 <ServiceDetailsContainer/>
             </Route>
 
+            <Route exact path="/Orders">
+                <OrdersContainer/>
+            </Route>
+            
 
           </Switch>
       </Router>

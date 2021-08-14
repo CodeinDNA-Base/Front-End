@@ -79,12 +79,16 @@ const activeOrderCardStyles = makeStyles((theme) => ({
   },
   boxStyle: {
     textAlign: "center",
+    
   },
   serviceImageStyle:{
       width: 80,
       height: 80,
       margin: 'auto',
       borderRadius:"2px"
+  },
+  gridStyle:{
+    flex:1
   }
 }));
 
@@ -115,7 +119,7 @@ const ActiveOrderCard = () => {
           </Box>
         </Grid>
 
-        <Grid item lg={2}>
+        <Grid item lg={2} className={classes.gridStyle}>
           <Box flex={"auto"} className={classes.boxStyle}>
             <p className={classes.statLabel}>Due in</p>
             <p className={classes.statValue}>
