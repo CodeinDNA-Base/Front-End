@@ -33,15 +33,10 @@ function ShowAllAccountsTab(props) {
         },
         
     ]
-    const handelOptionSelection = (event,selectedOption,selectedProjectKey)=>{
-        // alert("here"+selectedOption+" - "+selectedProjectKey)
-        if(selectedOption===0)
-        {
-
+    const handelOptionSelection = (event,selectedProjectKey)=>{
+        // alert("here"+" - "+selectedProjectKey)
             setSelectedProjectKeyHook(selectedProjectKey)
             setScreenSwitcher(false)
-           
-        }
     }
     const handelBackToListOfProjectBtnClick = (event)=>{
         setScreenSwitcher(true)
@@ -50,11 +45,10 @@ function ShowAllAccountsTab(props) {
         <div className={classes.container}>
             <div className={classes.topNav}>
                     {/* Here make a nav bar like for back option etc. */}
-
             </div>
             <div className={classes.listOfProjects}>
                     {/* Load the component which will render the list of projects */}
-                    {(screenSwitcher) ? <ListOfAllAccounts projectsList={projectsList} handelOptionSelection={handelOptionSelection}/> :  <AccountEditor handelBackToListOfProjectBtnClick={handelBackToListOfProjectBtnClick} projectTitle={projectsList[selectedProjectKeyHook].projectTitle}/>}
+                    {(screenSwitcher) ? <ListOfAllAccounts projectsList={projectsList} handelOptionSelection={handelOptionSelection}/> :  <AccountEditor handelBackToListOfProjectBtnClick={handelBackToListOfProjectBtnClick}/>}
             </div>
         </div>
     );

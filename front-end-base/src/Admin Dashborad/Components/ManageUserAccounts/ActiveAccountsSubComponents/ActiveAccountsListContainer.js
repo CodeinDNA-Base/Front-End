@@ -13,10 +13,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import OrdersList from './OrdersList';
-import OrderView from './OrderView';
+import AccountsList from './AccountsList';
 
-function OrdersListContainer(props) {
+function ActiveAccountsListContainer(props) {
     const classes =useStyles();
     const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
@@ -62,7 +61,7 @@ function OrdersListContainer(props) {
                                   
                                     <Grid item xs={2}>
                                       {/* Todays orders */}
-                                      
+                                     
                                     </Grid>
                                     <Grid item xs={3}>
                                       {/* Todays orders */}
@@ -90,7 +89,7 @@ function OrdersListContainer(props) {
                                   </Grid>
                               </div>
                         <div className={classes.orderListContainer}>
-                          <OrdersList hanelScreenSwitch={props.hanelScreenSwitch}/>
+                          <AccountsList hanelScreenSwitch={props.hanelScreenSwitch}/>
                         </div>
         </div>
     );
@@ -176,4 +175,4 @@ const useStyles=makeStyles((theme)=>({
     }
     
 }))
-export default OrdersListContainer;
+export default ActiveAccountsListContainer;

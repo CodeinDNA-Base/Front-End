@@ -14,225 +14,143 @@ import { UpdateRounded } from '@material-ui/icons';
 import { EditOutlined } from '@material-ui/icons';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Rating from '@material-ui/lab/Rating';
-import Box from '@material-ui/core/Box';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFlag,faThumbsUp,faThumbsDown} from '@fortawesome/free-solid-svg-icons'
 import './Styles.css'
+import { Divider } from '@material-ui/core';
+
+import cx from 'clsx';
+import Box from '@material-ui/core/Box';
+
+import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
+import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
 
 const ITEM_HEIGHT = 40;
 
-function AccountCardHolder(props) {
-    const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const [value, setValue] = React.useState(2);
-    const [hover, setHover] = React.useState(-1);
+function AccountCardHolder(props){
+  const [value, setValue] = React.useState(2);
+  const styles = useStyles();
+  const shadowStyles = useFadedShadowStyles();
+  const [hover, setHover] = React.useState(-1);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (opt) => {
-    setAnchorEl(null);
-    
-  };
-
-  const options = [
-    'Edit',  
-    'Get Share link',
-  ];
-  const labels = {
-    0.5: 'Useless',
-    1: 'Useless+',
-    1.5: 'Poor',
-    2: 'Poor+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Good',
-    4: 'Good+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
-  };
+  const borderedGridStyles = useGutterBorderedGridStyles({
+    borderColor: 'rgba(0, 0, 0, 0.08)',
+    height: '50%',
+  });
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            CodeinDNA
-          </Avatar>
-        }
-        action={
-     <IconButton aria-label="settings">
-            <div>
-      <IconButton
-        aria-label="more"
-        aria-controls="long-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        <MoreVertIcon />
-      </IconButton>
-      <Menu
-        id="long-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
-          },
-        }}
-      >
-        {options.map((option,index) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
-            // handleClose(index)
-            props.handelOptionSelection(e,index,props.projectKey)
-            setAnchorEl(null);
-    
-          }}>
-            {option}
-          </MenuItem>
-        ))}
-      </Menu>
-    </div>
-          </IconButton>
-        }
-        title={props.ptojectTitle}
-        subheader="September 14, 2016"
-      />
-      <CardMedia
-        className={classes.media}
-        image={props.img}
-        title="Paella dish"
-      />
+    <Card className={cx(styles.card, shadowStyles.root)}>
+     
       <CardContent>
-        {/* <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
-        </Typography> */}
-        <div className={classes.ratingBar}>
+        <Avatar className={styles.avatar} src={"https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"} onClick={()=>{alert("Go to my profile page")}} style={{cursor:"pointer"}}/>
+        <h3 className={styles.heading} onClick={(e)=>{
 
-        <div className={classes.ratingsRoot}>
-        <h3 className={classes.ratingText}>Rating</h3>
-        <Rating
-        name="hover-feedback"
-        value={value}
-        precision={0.5}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
-        }}
-        />
-        
-            {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
-            </div>
-        </div>
-        <div className={classes.reviewBar}>
-             <div className={classes.wasItHelpFullOrNotContainer}>
-                {/* Was helpfull or not */}
-                <div className="Thumb">
-                {/* Thumbs up */}
-                <FontAwesomeIcon size="sm" icon={faThumbsUp} />
-                </div>
-                <div className="ThumbFonts">
-                    {/* Help full */}
-                    <h6>Likes [12]</h6>
-                </div>
-                <div className="Thumb">
-                {/* Thumbs up */}
-                <FontAwesomeIcon size="sm" icon={faThumbsDown} />
-                </div>
-                <div className="ThumbFonts">
-                    {/* Help full */}
-                    <h6>Dislikes [22]</h6>
-                </div>
-            </div>
-        </div>
-        
+          props.handelOptionSelection(e,props.projectKey);
+
+        }} style={{cursor:"pointer"}}>Alan Podemski</h3>
+        <Box p={1} mt={0}>
+        <Rating value={3} size="small" readOnly ></Rating><span  onClick={()=>{alert("Go to reviews from Sellers")}} style={{cursor:"pointer"}}> 4.7</span>
+        </Box>
       </CardContent>
-      {/* <CardActions disableSpacing className={classes.bottomButtons}>
-        <IconButton>
-          
-          <EditOutlined />
+      <Divider light />
+      <Box display={'flex'}>
+        <Box p={1} flex={'auto'}>
+          <p className={styles.statLabel}>Response Time</p>
+          <p className={styles.statValue}>1 Hour</p>
+        </Box>
+        <Box p={1} flex={'auto'}>
+          <p className={styles.statLabel}>Last Seen</p>
+          <p className={styles.statValue}>Active</p>
+        </Box>
+      </Box>
+      <Divider light />
+      <Box display={'flex'}>
+        <Box p={1} flex={'auto'}>
+          <p className={styles.statLabel}>Balance</p>
+          <p className={styles.statValue}>100$</p>
+        </Box>
+        <Box p={1} flex={'auto'}>
+          <p className={styles.statLabel}>Amount Spent</p>
+          <p className={styles.statValue}>+1K$</p>
+        </Box>
+      </Box>
+    <Divider light/>
+      <Box display={'flex'}>
+      <Box p={1} flex={'auto'} >
+          <p className={styles.statLabel}>Payment method</p>
+          <p className={styles.statValue}>Verified</p>
+        </Box>
+        <Box p={1} flex={'auto'}>
+          <p className={styles.statLabel}>Total Purchases</p>
+          <p className={styles.statValue}>007</p>
+        </Box>
+      </Box>
+      <Divider light/>
+      <Box display={'flex'}>
+      <Box p={1} flex={'auto'} >
+          <p className={styles.viewAccountBtn} onClick={(e)=>{
 
-        </IconButton>
-        <IconButton >
+            props.handelOptionSelection(e,props.projectKey);
           
-          <DeleteSharp />
-        
-        </IconButton>
-        
-        <IconButton>
-          
-          <UpdateRounded />
-        
-        </IconButton>
-      </CardActions> */}
-      
+        }}>View Account</p>
+        </Box>
+      </Box>
     </Card>
   );
 }
-const useStyles = makeStyles((theme)=>({
-    container:{
-        height:390
-    },
-    bottomButtons:{
-      paddingLeft:'25%'
-    },
-    bottomButtonsContainer:{
-      
-        height:50,
-        width:'100%'
-    },
-    root: {
-        maxWidth: 345,
-      },
-      media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
-      },
-      expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-          duration: theme.transitions.duration.shortest,
-        }),
-      },
-      expandOpen: {
-        transform: 'rotate(180deg)',
-      },
-      avatar: {
-        backgroundColor:"#1f0678",
-        fontSize:7
-      },
-      ratingsRoot: {
-        width: 200,
-        display: 'flex',
-        alignItems: 'center',
-      },
-      ratingBar:{
 
-      },
-      reviewBar:{
-        marginTop:-30,
-        height:50
-      },
-      ratingText:{
-          paddingRight:'6%'
-      },
-      wasItHelpFullOrNotContainer:{
-       
+const useStyles = makeStyles(({theme})=>({
+    container:{
+        height:300,
+        
+    },
+    card: {
+      borderRadius: 12,
+      textAlign: 'center',
+    },
+    avatar: {
+      width: 80,
+      height: 80,
+      margin: 'auto',
+    },
+    heading: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      letterSpacing: '0.5px',
+      marginTop: 8,
+      marginBottom: 0,
+    },
+    subheader: {
+      fontSize: 14,
+      // color: theme.grey[500],
+      marginBottom: '0.875em',
+    },
+    statLabel: {
+      fontSize: 12,
+       // color: theme.grey[500],
+      fontWeight: 500,
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+      margin: 0,
+    },
+    statValue: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginBottom: 2,
+    },
+    viewAccountBtn:{
+      cursor:'pointer',
+      // backgroundColor:"#2a0e47",
+      fontSize: 12,
+       // color: theme.grey[500],
+      fontWeight: 500,
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+      margin: 0,
+      '&:hover': {
+        background: "#e8e6eb",
+      }
     }
 }))
 

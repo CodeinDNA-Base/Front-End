@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme)=>({
 
     },
     projectHolderContainer:{
-        border:'1px solid #f7f2f7'
+        border:'1px solid #f7f2f7',
+        marginLeft:4    
     },
     root: {
         display: 'flex',
