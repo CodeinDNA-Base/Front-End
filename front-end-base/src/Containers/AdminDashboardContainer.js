@@ -223,11 +223,12 @@ export default function AdminDashboardContainer() {
         </List>
         <Divider />
         <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,11)}}>
-              <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/pastel-glyph/50/000000/price-tag.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageOffersOption} />
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,2)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/todo-list.png"/></ListItemIcon>
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageOrdersOption} />
             </ListItem>
-        </List>
+        </List>       
+
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,8)}}>
@@ -246,23 +247,26 @@ export default function AdminDashboardContainer() {
         <Divider /> */}
         
         <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,0)}}>
-              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/chat--v2.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageChatsOption} />
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,2)}}>
-              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/todo-list.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageOrdersOption} />
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,4)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/customer-insight.png"/></ListItemIcon>
               <ListItemText primary={stringCollection.AdminDashboardContainer.ManageReviewsOption} />
+            </ListItem>
+        </List>
+
+        <Divider />
+      
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,11)}}>
+              <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/pastel-glyph/50/000000/price-tag.png"/></ListItemIcon>
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageOffersOption} />
+            </ListItem>
+        </List>
+        <Divider />
+       
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,0)}}>
+              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/chat--v2.png"/></ListItemIcon>
+              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageChatsOption} />
             </ListItem>
         </List>
         <Divider />
