@@ -77,7 +77,8 @@ const itemData = [
 	},
 ];
 
-function CardArray() {
+function DesktopReviewCard() {
+	
 	return (
 		<Grid
 			xs={12}
@@ -87,11 +88,12 @@ function CardArray() {
 			container
 			justifyContent="center"
 			alignItems="center"
-			spacing={6}
+			
 		>
 			<Grid xs={10} sm={5} md={5} item>
 				<ReviewCard img={itemData[0].img} />
 			</Grid>
+			<Grid xs={0} sm={1} md={1} item></Grid>
 			<Grid xs={10} sm={5} md={5} item>
 				<ReviewCard img={itemData[1].img} />
 			</Grid>
@@ -99,9 +101,51 @@ function CardArray() {
 	);
 }
 
+const MobileReviewCard=()=>{
+	return(
+		<Grid
+			xs={12}
+			container
+
+			justifyContent="center"
+			alignItems="center"
+			
+		>
+			<Grid item xs={1}></Grid>
+			<Grid item xs={10}>
+			 <Carousel
+						NextIcon={<NavigateNextIcon />}
+						PrevIcon={<NavigateBeforeIcon />}
+						animation="slide"
+						timeout={500}
+						cycleNavigation={false}
+						indicatorIconButtonProps={{
+							style: {
+								display: "none",
+							},
+						}}
+						navButtonsProps={{
+							// Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+							style: {
+								backgroundColor: "black",
+								color: "white",
+								opacity: 0.7,
+							},
+						}}
+
+						// OR
+					>
+							<ReviewCard img={itemData[0].img} />
+							<ReviewCard img={itemData[1].img} />
+					</Carousel>
+					</Grid>
+					<Grid item xs={1}></Grid>
+		</Grid>
+	)
+}
 export default function UserReview() {
 	const classes = useStyles();
-
+	const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
 	return (
 		<Grid container spacing={0}>
 			<Grid
@@ -115,7 +159,7 @@ export default function UserReview() {
 				<HeaderTitle title={"Customer Reviews"} />{" "}
 			</Grid>
 
-			<CardArray />
+			{isDesktopOrLaptopOrTabletScreen ? <DesktopReviewCard /> : <MobileReviewCard />}
 		</Grid>
 	);
 }

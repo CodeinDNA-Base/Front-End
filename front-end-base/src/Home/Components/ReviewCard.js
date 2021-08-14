@@ -9,6 +9,7 @@ import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import Stars from "./Stars";
+import { useMediaQuery } from "@material-ui/core";
 import Star from "@material-ui/icons/Star";
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -41,13 +42,15 @@ const useStyles = makeStyles((theme) => ({
 	},
 	media: {
 		display: "flex",
-		alignSelf: "center",
+		alignSelf : isDesktopOrLaptopOrTabletScreen => isDesktopOrLaptopOrTabletScreen && "center" ,
 		flex: "1 0 auto",
+		marginTop: isDesktopOrLaptopOrTabletScreen=>isDesktopOrLaptopOrTabletScreen ? '0' : '10%'
 	},
 }));
 
 export default function ReviewCard({ img }) {
-	const classes = useStyles();
+	const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+	const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
 	const theme = useTheme();
 
 	return (
