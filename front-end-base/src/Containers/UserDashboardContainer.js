@@ -14,6 +14,7 @@ import { OngoingOrders } from "../User Dashboard/Components/OngoingOrders";
 import { TrendingServices } from "../User Dashboard/Components/TrendingServices";
 import { RecentlyViewedServices } from "../User Dashboard/Components/RecentlyViewedServices";
 import { OrdersContainer } from "./OrdersContainer";
+// import { DrawerComponent } from "../Projects/Components/DrawerComponent";
 
 //Routes
 import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
@@ -73,6 +74,8 @@ export const UserDashboardContainer = () => {
           <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
         </Grid>
       </div>
+ 
+
 
       {/* Footer Section */}
       <div>

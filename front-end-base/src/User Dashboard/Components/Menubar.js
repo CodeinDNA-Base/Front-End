@@ -2,7 +2,15 @@
 import React from "react";
 
 //Material-UI core
-import { AppBar, Divider, IconButton, InputBase, Menu, Zoom } from "@material-ui/core";
+import {
+  AppBar,
+  Divider,
+  IconButton,
+  InputBase,
+  Menu,
+  Typography,
+  Zoom,
+} from "@material-ui/core";
 import {
   MenuItem,
   Toolbar,
@@ -12,22 +20,43 @@ import {
 } from "@material-ui/core";
 import { Hidden, Fab } from "@material-ui/core";
 
-//Icons
 import { alpha, makeStyles } from "@material-ui/core/styles";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import MenuIcon from "@material-ui/icons/Menu";
 import NotificationIcon from "@material-ui/icons/NotificationImportant";
-import MoreIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import Fade from "@material-ui/core/Fade";
+
+import clsx from "clsx";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import LogoutIcon from "@material-ui/icons/ExitToApp";
+
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+
+import HomeIcon from "@material-ui/icons/Home";
+import ProfileIcon from "@material-ui/icons/AccountCircle";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import OrdersIcon from "@material-ui/icons/AddShoppingCart";
+import PaymentIcon from "@material-ui/icons/AccountBalance";
+import InboxIcon from "@material-ui/icons/Inbox";
+import SettingsIcon from "@material-ui/icons/Settings"
 
 //Routing
 
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 //Local Resources
 import logo from "../Resources/upwork.svg";
+import profilePic from "../Resources/nadir.jpg";
+
+//Styles and CSS
 import "./Styles/MenubarStyles.css";
-import { ArrowRightAltOutlined } from "@material-ui/icons";
+import { Rating } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -87,89 +116,103 @@ const useStyles = makeStyles((theme) => ({
       width: "40ch",
     },
   },
-    //Show desktop view only when size is lg
+  //Show desktop view only when size is lg
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("lg")]: {
       display: "flex",
     },
   },
-  //Don't show mobile view when size is lg 
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("lg")]: {
-      display: "none",
-    },
+  avatar: {
+    marginTop: "1rem",
+  },
+  profileMenu: {
+    marginTop: "1rem",
   },
 }));
 
 export const Menubar = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  function handleProfileMenuClick(option) {
 
+    alert(option + " was clicked");
+    handleMenuClose();
+  }
+  //User profile Menu
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
+      className={classes.profileMenu}
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      TransitionComponent={Fade}
+      // elevation={4}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar
+            src={profilePic}
+            onClick={() => {
+              alert("Display Full Image of User");
+            }}
+            style={{ cursor: "pointer" }}
+          />
+        </ListItemAvatar>
+        <ListItemText
+          className={classes.profileMenuInfo}
+          primary={<Typography variant="h6">Nadir Hussain</Typography>}
+        />
+      </ListItem>
+      <Divider />
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <a href="#"> Open</a>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          edge="end"
-          aria-label="account of current user"
-          aria-controls={menuId}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpen}
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-      </MenuItem>
+      <ListItem
+        button
+        key="settings"
+        onClick={() => handleProfileMenuClick("Settings")}
+      >
+        <ListItemIcon>
+          <SettingsIcon />
+        </ListItemIcon>
+            <Link to="/Settings" style={{textDecoration:"none", color:"black"}}><ListItemText primary="Settings" /></Link>
+      </ListItem>
+
+      <ListItem
+        button
+        key="logout"
+        onClick={() => handleProfileMenuClick("Logout")}
+      >
+        <ListItemIcon>
+          <LogoutIcon />
+        </ListItemIcon>
+        <Link to="/Logout" style={{textDecoration:"none", color:"black"}}><ListItemText primary="Logout" /></Link>
+      </ListItem>
+
+      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+    <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
     </Menu>
   );
 
@@ -209,6 +252,9 @@ export const Menubar = (props) => {
     <div className={classes.grow}>
       <AppBar className={classes.menuContainer}>
         <Toolbar>
+          <Hidden only={["lg"]}>
+            <DrawerComponent />
+          </Hidden>
           <Hidden only={["xs"]}>
             <img
               src={logo}
@@ -238,7 +284,7 @@ export const Menubar = (props) => {
                   Dashboard
                 </Link>
               </Button>
-              <Button className={classes.menuItemsRippleEffect2}>
+              <Button>
                 <Link to="/Messaging" className="menuBarItem">
                   Messaging
                 </Link>
@@ -257,40 +303,24 @@ export const Menubar = (props) => {
             <IconButton
               edge="start"
               aria-label="account of current user"
-              aria-controls={menuId}
+              // aria-controls={menuId}
               aria-haspopup="true"
-              onClick={()=>{alert("Mazak na kar yar")}}
+              onClick={() => {
+                alert("Mazak na kar yar");
+              }}
               color="inherit"
             >
               <NotificationIcon />
             </IconButton>
-
-            <IconButton
-              edge="start"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
+            <Avatar
+              className={classes.avatar}
+              src={profilePic}
               onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
+              style={{ cursor: "pointer" }}
+            />
           </div>
         </Toolbar>
       </AppBar>
-      {/* </ElevationScroll> */}
-      {renderMobileMenu}
       {renderMenu}
       <Toolbar id="back-to-top-anchor" />
       <ScrollTop {...props}>
@@ -305,3 +335,149 @@ export const Menubar = (props) => {
     </div>
   );
 };
+
+const drawerStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: "auto",
+  },
+  avatar: {
+    width: "4rem",
+    height: "4rem",
+    margin: "auto",
+  },
+  profileInfo: {
+    marginLeft: "1rem",
+  },
+});
+
+function DrawerComponent() {
+  const drawerOptions = [
+    {
+      optionTitle: "Profile",
+      optionIcon: <ProfileIcon />,
+    },
+    {
+      optionTitle: "Home",
+      optionIcon: <HomeIcon />,
+    },
+    {
+      optionTitle: "Dashboard",
+      optionIcon: <DashboardIcon />,
+    },
+    {
+      optionTitle: "Inbox",
+      optionIcon: <InboxIcon />,
+    },
+    {
+      optionTitle: "Orders",
+      optionIcon: <OrdersIcon />,
+    },
+    {
+      optionTitle: "Payment",
+      optionIcon: <PaymentIcon />,
+    },
+  ];
+  const classes = drawerStyles();
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+
+  function handleDrawerOptionClick(optionTitle) {
+    alert("Go to: " + optionTitle);
+    toggleDrawer("left", false);
+  }
+  const drawerOptionList = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar
+              className={classes.avatar}
+              src={profilePic}
+              onClick={() => {
+                alert("Display Full Image of User");
+              }}
+              style={{ cursor: "pointer" }}
+            />
+          </ListItemAvatar>
+          <ListItemText
+            className={classes.profileInfo}
+            primary={<Typography variant="h6">Nadir Hussain</Typography>}
+            secondary={<Rating value="3" size="small" readOnly />}
+          />
+        </ListItem>
+      </List>
+
+      <Divider />
+      <List>
+        {drawerOptions.map(({ optionTitle, optionIcon }) => (
+          <ListItem
+            button
+            key={optionTitle}
+            onClick={() => handleDrawerOptionClick(optionTitle)}
+          >
+            <ListItemIcon>{optionIcon}</ListItemIcon>
+            <ListItemText primary={optionTitle} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        <ListItem
+          button
+          key="logout"
+          onClick={() => handleDrawerOptionClick("Logout")}
+        >
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItem>
+      </List>
+    </div>
+  );
+
+  return (
+    <div>
+      <React.Fragment key="left">
+        <IconButton
+          aria-label="show more"
+          aria-haspopup="true"
+          color="inherit"
+          onClick={toggleDrawer("left", true)}
+        >
+          <MenuIcon fontSize="large" />
+        </IconButton>
+        <SwipeableDrawer
+          anchor={"left"}
+          open={state["left"]}
+          onClose={toggleDrawer("left", false)}
+          onOpen={toggleDrawer("left", true)}
+        >
+          {drawerOptionList("Left")}
+        </SwipeableDrawer>
+      </React.Fragment>
+    </div>
+  );
+}

@@ -28,10 +28,10 @@ function Entrance(props) {
                 <ServiceDetailsContainer/>
             </Route>
 
-            <Route exact path="/Orders">
+            {/* <Route exact path="/Orders">
                 <OrdersContainer/>
             </Route>
-            
+             */}
 
           </Switch>
       </Router>

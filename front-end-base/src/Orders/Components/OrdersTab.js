@@ -5,15 +5,17 @@ import SwipeableViews from "react-swipeable-views";
 
 //Material-UI
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
-import { AppBar, Tabs, Tab, Typography, Box, Badge, Hidden } from "@material-ui/core";
+import { AppBar, Tabs, Tab, Typography, Box, Badge, Hidden, Checkbox } from "@material-ui/core";
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Switch from '@material-ui/core/Switch';
+import WifiIcon from '@material-ui/icons/Wifi';
+import BluetoothIcon from '@material-ui/icons/Bluetooth';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -181,88 +183,70 @@ const TabContent=(props)=>{
             <Typography variant="h4">
             {props.tabTitle}
             </Typography>
-
             </Box>
-        <CustomizedTables status={props.status}/>
+            <TabContentComponent />
+
         </div>
     )
 }
 
 
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
+const tabContentComponentStyles = makeStyles((theme) => ({
   root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
   },
-}))(TableRow);
+}));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+const TabContentComponent=()=>{
+  const classes = useStyles();
+  const [checked, setChecked] = React.useState(['wifi']);
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
 
-const tableStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
 
-function CustomizedTables(props) {
-  
-  const classes = tableStyles();
+    setChecked(newChecked);
+  };
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Seller</StyledTableCell>
-            <StyledTableCell align="right">Service/Project</StyledTableCell>
-            <StyledTableCell align="right">Due at</StyledTableCell>
-            
-            {
-                props.status=="Completed" || props.status=="Delivered" ?<StyledTableCell align="right">Delivered at</StyledTableCell>:""
-            }
-            <StyledTableCell align="right">Total Price</StyledTableCell>
-            <StyledTableCell align="right">Status</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              {
-                props.status=="Completed" || props.status=="Delivered" ?<StyledTableCell align="right">12 August</StyledTableCell>:""
-            }
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <List subheader={<ListSubheader>Settings</ListSubheader>} className={classes.root}>
+      <ListItem>
+        <ListItemIcon>
+          <WifiIcon />
+        </ListItemIcon>
+        <ListItemText id="switch-list-label-wifi" primary="Wi-Fi" />
+        <ListItemSecondaryAction>
+          <Switch
+            edge="end"
+            onChange={handleToggle('wifi')}
+            checked={checked.indexOf('wifi') !== -1}
+            inputProps={{ 'aria-labelledby': 'switch-list-label-wifi' }}
+          />
+        </ListItemSecondaryAction>
+      </ListItem>
+      <ListItem>
+        <ListItemIcon>
+          <BluetoothIcon />
+        </ListItemIcon>
+        <ListItemText id="switch-list-label-bluetooth" primary="Bluetooth" />
+        <ListItemSecondaryAction>
+          <Switch
+            edge="end"
+            onChange={handleToggle('bluetooth')}
+            checked={checked.indexOf('bluetooth') !== -1}
+            inputProps={{ 'aria-labelledby': 'switch-list-label-bluetooth' }}
+          />
+        </ListItemSecondaryAction>
+      </ListItem>
+    </List>
   );
 }

@@ -64,11 +64,7 @@ export const ProfileCard = React.memo(function ProfileCard() {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
 
-  const borderedGridStyles = useGutterBorderedGridStyles({
-    borderColor: 'rgba(0, 0, 0, 0.08)',
-    height: '50%',
-  });
-
+ 
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>

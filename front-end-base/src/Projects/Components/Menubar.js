@@ -171,17 +171,6 @@ export const Menubar = (props) => {
 
   function handleSearch(event) {}
   
-  //   function ElevationScroll(props) {
-  //     const { children, window } = props;
-  //     const trigger = useScrollTrigger({
-  //       // target: window ? alert("dasd") : undefined,   // w.r.t to any component
-  //       threshold: 200,
-  //     });
-
-  //     return React.cloneElement(children, {
-  //       elevation: trigger ? 20 : 0,
-  //     });
-  //   }
 
   function ScrollTop(props) {
     const { children, window } = props;
@@ -211,7 +200,6 @@ export const Menubar = (props) => {
 
   return (
     <div className={classes.grow}>
-      {/* <ElevationScroll {...props}> */}
       <AppBar className={classes.menuContainer}>
         <Toolbar>
           <Hidden only={["xs"]}>
@@ -243,7 +231,7 @@ export const Menubar = (props) => {
                   Home
                 </a>
               </Button>
-              <Button className={classes.menuItemsRippleEffect2}>
+              <Button >
                 <a href="#" className="menuBarItem">
                   Dashboard
                 </a>
@@ -283,7 +271,6 @@ export const Menubar = (props) => {
           </div>
         </Toolbar>
       </AppBar>
-      {/* </ElevationScroll> */}
       {renderMobileMenu}
       {renderMenu}
       <Toolbar id="back-to-top-anchor" />
