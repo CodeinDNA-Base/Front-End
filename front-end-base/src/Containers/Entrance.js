@@ -5,20 +5,23 @@
  *      ->
  */
 
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import ServiceDetailsContainer from './ServiceDetailsContainer';
-import HomeContainer from './HomeContainer';
-
+import ServiceDetailsContainer from "./ServiceDetailsContainer";
+import HomeContainer from "./HomeContainer";
+import { UserDashboardContainer } from "./UserDashboardContainer";
 function Entrance(props) {
   return (
     <Router>
       <Switch>
-        <Route path="/ServiceDetails" >
+        <Route path="/ServiceDetails">
           <ServiceDetailsContainer />
         </Route>
         <Route path="/Home" exact>
           <HomeContainer />
+        </Route>
+        <Route path="/UserDashboardContainer">
+          <UserDashboardContainer />
         </Route>
       </Switch>
     </Router>
