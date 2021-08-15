@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import { stringCollection } from '../Strings/StringCollection';
-import DeliverOrderTab from './DeliverOrderTab';
+
 import SearchTab from './SearchTab';
 import ShowCanceledOrdersTab from './ShowCanceledOrdersTab';
 import ShowCompleteOrdersTab from './ShowCompleteOrdersTab';

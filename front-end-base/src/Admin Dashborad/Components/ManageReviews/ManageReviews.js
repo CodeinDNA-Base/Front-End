@@ -7,7 +7,6 @@ import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 
 import { stringCollection } from '../Strings/StringCollection';
-
 import DiscardedReviewsTab from './DiscardedReviewsTab';
 import NewReviewsTab from './NewReviewsTab';
 import VisibleReviewsTab from './VisibleReviewsTab';

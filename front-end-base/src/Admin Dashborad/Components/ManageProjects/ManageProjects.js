@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import useWindowDimensions from '../useWindowDimensions';
-import { stringCollection } from '../Strings/StringCollection';
 
+import { stringCollection } from '../Strings/StringCollection';
 import AddNewProjectTab from './AddNewProjectTab'
 import SearchTab from './SearchTab'
 import SetTreadnigProjectTab from './SetTredingProjectTab'
