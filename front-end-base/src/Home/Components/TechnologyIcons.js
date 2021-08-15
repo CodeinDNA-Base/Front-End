@@ -8,92 +8,227 @@ import HelpIcon from "@material-ui/icons/Help";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import ThumbDown from "@material-ui/icons/ThumbDown";
 import ThumbUp from "@material-ui/icons/ThumbUp";
+import { Grid, Typography } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-
+import { ReactIcon } from "../../Theme/Icons/png/TechnologyIcons";
+import colors, { ColorPalette } from "../../Theme/colors";
+import { TextFonts, Headingfonts } from "../../Theme/fonts";
+import { typography } from "@material-ui/system";
+import { useMediaQuery } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-		width: "100%",
-		color: "#007FED",
-	},
-	indicator: {
-		backgroundColor: "#ea6645",
-	},
+  root: {
+    flexGrow: 1,
+    width: "100%",
+    color: "#007FED",
+  },
 }));
 
-const TechnologyTab = withStyles((theme) => ({
-	root: {
-		textTransform: "none",
-		minWidth: 72,
-		fontWeight: theme.typography.fontWeightRegular,
-		fontSize: 22,
-		marginRight: theme.spacing(12),
-		fontFamily: [
-			"-apple-system",
-			"BlinkMacSystemFont",
-			'"Segoe UI"',
-			"Roboto",
-			'"Helvetica Neue"',
-			"Arial",
-			"sans-serif",
-			'"Apple Color Emoji"',
-			'"Segoe UI Emoji"',
-			'"Segoe UI Symbol"',
-		].join(","),
-		"&:hover": {
-			color: "#011c38",
-			opacity: 1,
-		},
-		"&$selected": {
-			color: "#011c38",
-			fontWeight: theme.typography.fontWeightMedium,
-		},
-		"&:focus": {
-			color: "#011c38",
-		},
-	},
-	selected: {},
-}))((props) => <Tab disableRipple {...props} />);
-
 export default function TechnologyIcons() {
-	const classes = useStyles();
-	const [value, setValue] = useState(0);
-
-	const handleChange = (event, newValue) => {
-		setValue(newValue);
-	};
-
-	return (
-		<div className={classes.root}>
-			<Tabs
-				value={value}
-				onChange={handleChange}
-				variant="scrollable"
-				scrollButtons="on"
-				textColor="inherit"
-				aria-label="scrollable force tabs example"
-				classes={{ indicator: classes.indicator }}
-			>
-				<TechnologyTab
-					label="React JS"
-					icon={<FavoriteIcon fontSize="large" />}
-				/>
-
-				<TechnologyTab
-					label="Angular JS"
-					icon={<PersonPinIcon fontSize="large" />}
-				/>
-				<TechnologyTab label="Node JS" icon={<HelpIcon fontSize="large" />} />
-				<TechnologyTab
-					label="Mern"
-					icon={<ShoppingBasket fontSize="large" />}
-				/>
-				<TechnologyTab label="Express" icon={<ThumbDown fontSize="large" />} />
-				<TechnologyTab
-					label="React Native"
-					icon={<ThumbUp fontSize="large" />}
-				/>
-			</Tabs>
-		</div>
-	);
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  const IconSize = isDesktopOrLaptopOrTabletScreen ? 60 : 40;
+  const classes = useStyles();
+  const handleClick = () => {};
+  return (
+    <Grid
+      md={10}
+      xs={12}
+      sm={12}
+      container
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="React"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="React"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+      <Grid
+        item
+        md={2}
+        sm={2}
+        xs={3}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ReactIcon
+          title="react"
+          fontsize={IconSize}
+          color="blue"
+          handleClick={handleClick}
+        />
+      </Grid>
+    </Grid>
+  );
 }

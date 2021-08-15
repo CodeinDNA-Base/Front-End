@@ -77,49 +77,54 @@ const itemData = [
   },
 ];
 
-const NumberToArray = (number) => {
-  let tempArray = [];
-  for (let i = 0; i < number; i++) {
-    tempArray.push(i);
-  }
-  return tempArray;
+const ServiceCardContainerForDesktop = () => {
+  return (
+    <Grid
+      xs={12}
+      sm={12}
+      md={12}
+      item
+      container
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid xs={10} sm={5} md={3} item>
+        <ServiceCard img={itemData[0].img} color={"#F0F7F8"} />
+      </Grid>{" "}
+      <Grid xs={10} sm={5} md={3} item>
+        <ServiceCard img={itemData[1].img} color={"#FAF8F6"} />
+      </Grid>{" "}
+      <Grid xs={10} sm={5} md={3} item>
+        <ServiceCard img={itemData[0].img} color={"#F6F9F8"} />
+      </Grid>{" "}
+      <Grid xs={10} sm={5} md={3} item>
+        <ServiceCard img={itemData[1].img} color={"#FDF6F4"} />
+      </Grid>
+    </Grid>
+  );
 };
 
-const ServiceCardContainer = ({ cardsPerItemOfCarousel }) => {
-  const [totalItemsReturned, setTotalItemsReturned] = useState([0, 1, 2, 3]);
-  useEffect(() => {
-    console.log("in service card container ");
-    console.log(cardsPerItemOfCarousel);
-
-    setTotalItemsReturned(NumberToArray(cardsPerItemOfCarousel));
-  }, []);
+const ServiceCardContainerForMobile = () => {
   return (
-    <>
-      {totalItemsReturned.map((item) => {
-        return (
-          <Grid xs={10} sm={5} md={3} item>
-            <ServiceCard img={itemData[0].img} color={"#F0F7F8"} />
-          </Grid>
-        );
-      })}
-    </>
+    <Grid
+      xs={12}
+      sm={12}
+      item
+      container
+      justifyContent="center"
+      alignItems="center"
+    >
+      {/* <Grid xs={1} sm={1} item></Grid> */}
+      <Grid xs={10} sm={5} item>
+        <ServiceCard img={itemData[0].img} color={"#F0F7F8"} />
+      </Grid>{" "}
+    </Grid>
   );
 };
 
 export default function Services() {
-  const classes = useStyles();
   const serviceCardColors = ["#F0F7F8", "#FAF8F6", "#F6F9F8", "#FDF6F4"];
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
-  const cardsInCarousel = isDesktopOrLaptopOrTabletScreen ? 2 : 8;
-  const [cardArrayInCarousel, setCardArrayInCarousel] = useState([0, 1]);
-  const [cardsPerItemOfCarousel, setCardsPerItemOfCarousel] = useState(4);
-  useEffect(() => {
-    setCardArrayInCarousel(() => NumberToArray(cardsInCarousel));
-    if (isDesktopOrLaptopOrTabletScreen) setCardsPerItemOfCarousel(4);
-    else setCardsPerItemOfCarousel(1);
-    console.log(cardArrayInCarousel);
-    console.log(cardsPerItemOfCarousel);
-  }, [isDesktopOrLaptopOrTabletScreen]);
 
   return (
     <Grid container spacing={0}>
@@ -155,27 +160,45 @@ export default function Services() {
 
         // OR
       >
-        {cardArrayInCarousel.map((item) => {
-          return (
-            <Grid
-              xs={12}
-              sm={12}
-              md={12}
-              item
-              container
-              justifyContent="center"
-              alignItems="center"
-            >
-              <ServiceCardContainer
-                cardsPerItemOfCarousel={cardsPerItemOfCarousel}
-              />
-            </Grid>
-          );
-        })}
+        {isDesktopOrLaptopOrTabletScreen
+          ? [1, 2].map(() => serviceItemOnDesktop())
+          : [1, 2, 3, 4, 5, 6, 7, 8].map(() => serviceItemOnMobile())}
       </Carousel>
+
       <DividerInservices />
     </Grid>
     //
     // </Grid>
   );
+}
+
+const serviceItemOnMobile = () => {
+  return <ServiceCardContainerForMobile />;
+};
+const serviceItemOnDesktop = () => {
+  return <ServiceCardContainerForDesktop />;
+};
+{
+  /** <Carousel
+        NextIcon={<NavigateNextIcon />}
+        PrevIcon={<NavigateBeforeIcon />}
+        animation="slide"
+        timeout={500}
+        cycleNavigation={false}
+        indicatorIconButtonProps={{
+          style: {
+            display: "none",
+          },
+        }}
+        navButtonsProps={{
+          // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+          style: {
+            backgroundColor: "black",
+            color: "white",
+            opacity: 0.8,
+          },
+        }}
+
+        // OR
+      > */
 }

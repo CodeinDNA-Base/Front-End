@@ -12,6 +12,17 @@ const colors = {
   info: "#2196f3",
 };
 
+export const ColorGradient = {
+  purple:
+    "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+  lightSkyBlue: `linear-gradient(
+		rgb(246, 247, 250),
+		rgb(247, 248, 251),
+		rgb(252, 253, 254),
+		rgb(254, 254, 255)
+	)`,
+};
+
 export const ColorPalette = {
   primary: {
     main: colors.primary,
