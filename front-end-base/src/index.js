@@ -2,14 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Entrance from './Containers/Entrance'
-ReactDOM.render(
-  <React.StrictMode>
-    <Entrance />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+//import Test from './Containers/Test';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
+ReactDOM.render(<Entrance />,document.getElementById('root'));
