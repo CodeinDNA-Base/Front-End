@@ -9,7 +9,7 @@ const colors = {
   error: "#d50000", //red
   success: "#4caf50",
   warning: "#ff9800",
-  info: "#2196f3",
+  info: "#2196f3", //light blue
 };
 
 export const ColorGradient = {
@@ -19,7 +19,7 @@ export const ColorGradient = {
 		rgb(246, 247, 250),
 		rgb(247, 248, 251),
 		rgb(252, 253, 254),
-		rgb(254, 254, 255)
+		rgb(254, 254, 255)  // backgroud shade of light blue
 	)`,
 };
 

@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
     button
 }));
 
-const button = ({ title, handleOnClick, variant }) => {
+const loginButton = ({ title, handleOnClick, variant , bgColor, color  }) => {
   return (
     <Button
       variant={variant}

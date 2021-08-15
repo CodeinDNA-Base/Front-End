@@ -12,7 +12,6 @@ const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: colors.primary,
     paddingTop: "4%",
-    marginBottom: "2%",
     color: colors.lightGray,
   },
   ulStyle: {
@@ -24,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
   liStyle: {
     marginBottom: "4%",
-    font: TextFonts.extraSmall,
+    font: TextFonts.XXSmall,
   },
   websiteMark: {
     color: colors.highlighter,

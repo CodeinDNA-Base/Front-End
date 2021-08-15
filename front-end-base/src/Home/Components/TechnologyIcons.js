@@ -47,7 +47,7 @@ export default function TechnologyIcons() {
         alignItems="center"
       >
         <ReactIcon
-          title="React"
+          title="react"
           fontsize={IconSize}
           color="blue"
           handleClick={handleClick}
@@ -63,7 +63,7 @@ export default function TechnologyIcons() {
         alignItems="center"
       >
         <ReactIcon
-          title="React"
+          title="react"
           fontsize={IconSize}
           color="blue"
           handleClick={handleClick}

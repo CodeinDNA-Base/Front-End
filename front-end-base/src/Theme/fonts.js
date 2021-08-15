@@ -13,5 +13,6 @@ export const TextFonts = {
   large: "500 4vw 'Roboto' , sans-serif",
   medium: "500 3vw 'Roboto' , sans-serif", // normal text size for mobile device
   small: "500 2.5vw 'Roboto' , sans-serif", // heading like gigs for desktop device
-  extraSmall: "500 1.5vw 'Roboto' , sans-serif", // normal text size for desktop device
+  extraSmall: "500 1.5vw 'Roboto' , sans-serif",
+  XXSmall: "500 1vw 'Roboto' , sans-serif", // normal text size for desktop device
 };
