@@ -10,44 +10,41 @@ import {
   Menu,
   Typography,
   Zoom,
-} from "@material-ui/core";
-import {
-  MenuItem,
+  Badge,
   Toolbar,
   Button,
   Box,
   useScrollTrigger,
+  Hidden,
+  Fab,
+  Fade,
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
 } from "@material-ui/core";
-import { Hidden, Fab } from "@material-ui/core";
 
-import { alpha, makeStyles } from "@material-ui/core/styles";
+//Mateirial-UI styles
+import { alpha, makeStyles, withStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+
+import { Rating } from "@material-ui/lab";
+//Icons
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationIcon from "@material-ui/icons/NotificationImportant";
 import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import Fade from "@material-ui/core/Fade";
-
-import clsx from "clsx";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import LogoutIcon from "@material-ui/icons/ExitToApp";
-
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-
 import HomeIcon from "@material-ui/icons/Home";
-import ProfileIcon from "@material-ui/icons/AccountCircle";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import OrdersIcon from "@material-ui/icons/AddShoppingCart";
-import PaymentIcon from "@material-ui/icons/AccountBalance";
 import InboxIcon from "@material-ui/icons/Inbox";
-import SettingsIcon from "@material-ui/icons/Settings"
+import SettingsIcon from "@material-ui/icons/Settings";
+import LogoutIcon from "@material-ui/icons/ExitToApp";
 
 //Routing
-
 import { Link } from "react-router-dom";
 
 //Local Resources
@@ -56,7 +53,6 @@ import profilePic from "../Resources/nadir.jpg";
 
 //Styles and CSS
 import "./Styles/MenubarStyles.css";
-import { Rating } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -134,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
 export const Menubar = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  
+
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -145,12 +141,21 @@ export const Menubar = (props) => {
     setAnchorEl(null);
   };
 
-  function handleProfileMenuClick(option) {
-
-    alert(option + " was clicked");
-    handleMenuClose();
-  }
   //User profile Menu
+
+  const profileMenuOptions = [
+    {
+      optionTitle: "Settings",
+      optionIcon: <SettingsIcon />,
+      route: "/settings",
+    },
+    {
+      optionTitle: "Logout",
+      optionIcon: <LogoutIcon />,
+      route: "/logout",
+    },
+  ];
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -188,39 +193,22 @@ export const Menubar = (props) => {
         />
       </ListItem>
       <Divider />
-
-      <ListItem
-        button
-        key="settings"
-        onClick={() => handleProfileMenuClick("Settings")}
-      >
-        <ListItemIcon>
-          <SettingsIcon />
-        </ListItemIcon>
-            <Link to="/Settings" style={{textDecoration:"none", color:"black"}}><ListItemText primary="Settings" /></Link>
-      </ListItem>
-
-      <ListItem
-        button
-        key="logout"
-        onClick={() => handleProfileMenuClick("Logout")}
-      >
-        <ListItemIcon>
-          <LogoutIcon />
-        </ListItemIcon>
-        <Link to="/Logout" style={{textDecoration:"none", color:"black"}}><ListItemText primary="Logout" /></Link>
-      </ListItem>
-
-      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-    <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
+      {profileMenuOptions.map(({ optionTitle, optionIcon, route }) => {
+        return (
+          <ListItem button key={optionTitle}>
+            <ListItemIcon>{optionIcon}</ListItemIcon>
+            <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+              <ListItemText primary={optionTitle} />
+            </Link>
+          </ListItem>
+        );
+      })}
     </Menu>
   );
 
-  function gotoHomePage() {
-    alert("I Will go to Home");
-  }
+  function handleSearch(event) {
 
-  function handleSearch(event) {}
+  }
 
   function ScrollTop(props) {
     const { children, window } = props;
@@ -248,19 +236,36 @@ export const Menubar = (props) => {
     );
   }
 
+  const menuOptions = [
+    {
+      optionTitle: "Dashboard",
+      route: "/userdashboard",
+    },
+    {
+      optionTitle: "Messaging",
+      route: "/messaging",
+    },
+    {
+      optionTitle: "Orders",
+      route: "/orders",
+    },
+    {
+      optionTitle: "Explore",
+      route: "/explore",
+    },
+  ];
+
   return (
     <div className={classes.grow}>
       <AppBar className={classes.menuContainer}>
         <Toolbar>
-          <Hidden only={["lg"]}>
+          <Hidden only={["lg", "xl"]}>
             <DrawerComponent />
           </Hidden>
           <Hidden only={["xs"]}>
-            <img
-              src={logo}
-              style={{ cursor: "pointer" }}
-              onClick={gotoHomePage}
-            ></img>
+            <Link to="/">
+              <img src={logo} style={{ cursor: "pointer" }} />
+            </Link>
           </Hidden>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -279,31 +284,19 @@ export const Menubar = (props) => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Box spacing={2} m={2}>
-              <Button>
-                <Link to="/" className="menuBarItem">
-                  Dashboard
-                </Link>
-              </Button>
-              <Button>
-                <Link to="/Messaging" className="menuBarItem">
-                  Messaging
-                </Link>
-              </Button>
-              <Button>
-                <Link to="/Orders" className="menuBarItem">
-                  Orders
-                </Link>
-              </Button>
-              <Button>
-                <Link to="/Payment" className="menuBarItem">
-                  Payment
-                </Link>
-              </Button>
+              {menuOptions.map(({ optionTitle, route }) => {
+                return (
+                  <Button>
+                    <Link to={route} className="menuBarItem">
+                      {optionTitle}
+                    </Link>
+                  </Button>
+                );
+              })}
             </Box>
             <IconButton
               edge="start"
               aria-label="account of current user"
-              // aria-controls={menuId}
               aria-haspopup="true"
               onClick={() => {
                 alert("Mazak na kar yar");
@@ -353,33 +346,65 @@ const drawerStyles = makeStyles({
   },
 });
 
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    backgroundColor: "#44b700",
+    color: "#44b700",
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    "&::after": {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      animation: "$ripple 1.2s infinite ease-in-out",
+      border: "1px solid currentColor",
+      content: '""',
+    },
+  },
+  "@keyframes ripple": {
+    "0%": {
+      transform: "scale(.8)",
+      opacity: 1,
+    },
+    "100%": {
+      transform: "scale(2.4)",
+      opacity: 0,
+    },
+  },
+}))(Badge);
+
 function DrawerComponent() {
   const drawerOptions = [
     {
-      optionTitle: "Profile",
-      optionIcon: <ProfileIcon />,
-    },
-    {
       optionTitle: "Home",
       optionIcon: <HomeIcon />,
+      route: "/",
     },
     {
       optionTitle: "Dashboard",
       optionIcon: <DashboardIcon />,
+      route: "/userdashboard",
     },
+
     {
       optionTitle: "Inbox",
       optionIcon: <InboxIcon />,
+      route: "/inbox",
     },
     {
       optionTitle: "Orders",
       optionIcon: <OrdersIcon />,
+      route: "/orders",
     },
     {
-      optionTitle: "Payment",
-      optionIcon: <PaymentIcon />,
+      optionTitle: "Settings",
+      optionIcon: <SettingsIcon />,
+      route: "/settings",
     },
   ];
+
   const classes = drawerStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -396,10 +421,6 @@ function DrawerComponent() {
     setState({ ...state, [anchor]: open });
   };
 
-  function handleDrawerOptionClick(optionTitle) {
-    alert("Go to: " + optionTitle);
-    toggleDrawer("left", false);
-  }
   const drawerOptionList = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -412,14 +433,23 @@ function DrawerComponent() {
       <List>
         <ListItem>
           <ListItemAvatar>
-            <Avatar
-              className={classes.avatar}
-              src={profilePic}
-              onClick={() => {
-                alert("Display Full Image of User");
+            <StyledBadge
+              overlap="circular"
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
               }}
-              style={{ cursor: "pointer" }}
-            />
+              variant="dot"
+            >
+              <Avatar
+                className={classes.avatar}
+                src={profilePic}
+                onClick={() => {
+                  alert("Display Full Image of User");
+                }}
+                style={{ cursor: "pointer" }}
+              />
+            </StyledBadge>
           </ListItemAvatar>
           <ListItemText
             className={classes.profileInfo}
@@ -431,29 +461,29 @@ function DrawerComponent() {
 
       <Divider />
       <List>
-        {drawerOptions.map(({ optionTitle, optionIcon }) => (
-          <ListItem
-            button
-            key={optionTitle}
-            onClick={() => handleDrawerOptionClick(optionTitle)}
-          >
-            <ListItemIcon>{optionIcon}</ListItemIcon>
-            <ListItemText primary={optionTitle} />
-          </ListItem>
+        {drawerOptions.map(({ optionTitle, optionIcon, route }) => (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+            <ListItem
+              button
+              key={optionTitle}
+            >
+              <ListItemIcon>{optionIcon}</ListItemIcon>
+              <ListItemText primary={optionTitle} />
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />
       <List>
-        <ListItem
-          button
-          key="logout"
-          onClick={() => handleDrawerOptionClick("Logout")}
-        >
-          <ListItemIcon>
-            <LogoutIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
+        {/* Go to Home after Logout */}
+        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+          <ListItem button key="logout">
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
+        </Link>
       </List>
     </div>
   );
