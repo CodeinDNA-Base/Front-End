@@ -1,12 +1,14 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import {Box, Badge} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
+import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
+
 
 //Resources
 import profilePic from '../Resources/nadir.jpg'
@@ -58,36 +60,6 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-
-const StyledBadge = withStyles((theme) => ({
-  badge: {
-    backgroundColor: '#44b700',
-    color: '#44b700',
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    '&::after': {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      borderRadius: '50%',
-      animation: '$ripple 1.2s infinite ease-in-out',
-      border: '1px solid currentColor',
-      content: '""',
-    },
-  },
-  '@keyframes ripple': {
-    '0%': {
-      transform: 'scale(.8)',
-      opacity: 1,
-    },
-    '100%': {
-      transform: 'scale(2.4)',
-      opacity: 0,
-    },
-  },
-}))(Badge);
-
 export const ProfileCard = React.memo(function ProfileCard() {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
@@ -96,18 +68,7 @@ export const ProfileCard = React.memo(function ProfileCard() {
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>
-      <StyledBadge
-        overlap="circular"
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        variant="dot"
-      >
-        {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
         <Avatar className={styles.avatar} src={profilePic} onClick={()=>{alert("Go to my profile page")}} style={{cursor:"pointer"}}/>
-      </StyledBadge>
-
         <h3 className={styles.heading} onClick={()=>{alert("Go my profile page")}} style={{cursor:"pointer"}}>Alan Podemski</h3>
         <Box p={1} mt={0}>
         <Rating value={3} size="small" readOnly ></Rating><span  onClick={()=>{alert("Go to reviews from Sellers")}} style={{cursor:"pointer"}}> 4.7</span>

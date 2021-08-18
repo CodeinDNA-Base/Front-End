@@ -46,7 +46,7 @@ export const SearchProjectsComponent = () => {
           <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
 
           <Grid item xs={10} sm={10} md={10} lg={8} xl={8}>
-            {Array(7)
+            {Array(10)
               .fill()
               .map((proj, ind) => {
                 return (
