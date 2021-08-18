@@ -15,6 +15,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import HeaderTitle from "./HeaderTitle";
 import { DividerInservices } from "./HorizontalLine";
 import ServiceCard from "./ServiceCard";
+import { HomePageComponentsHeading } from "../../CustomComponents/UI/Text/HomePageHeadings";
+import colors from "../../Theme/colors";
 const useStyles = makeStyles((theme) => ({
   root: {
     // display: "flex",
@@ -136,7 +138,11 @@ export default function Services() {
         justifyContent="center"
         alignItems="center"
       >
-        <HeaderTitle title={"Services"} />
+        <HomePageComponentsHeading
+          title={"Services"}
+          titleColor={colors.primary}
+        />
+        {/* <HeaderTitle title={"Services"} /> */}
       </Grid>
       <Carousel
         NextIcon={<NavigateNextIcon />}
