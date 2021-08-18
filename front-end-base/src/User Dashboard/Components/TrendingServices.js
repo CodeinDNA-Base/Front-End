@@ -1,4 +1,4 @@
-//React
+//ReactJS
 import React from "react";
 
 //Material-UI
@@ -46,15 +46,7 @@ const TrendingServiceCarousel = () => {
     },
   ];
 
-  const createStyle = (slideIndex, fineIndex) => {
-    const diff = slideIndex - fineIndex;
-    if (Math.abs(diff) > 1) return {};
-    return {
-      transform: `rotateY(${(-diff + 1) * 45}deg)`,
-    };
-  };
-
-  const renderElements = ({ index, onChangeIndex }) => (
+const renderElements = ({ index, onChangeIndex }) => (
     <>
       <div>
         {data.map(({ id }, i) => (
@@ -74,7 +66,7 @@ const TrendingServiceCarousel = () => {
 
   return (
     <Box>
-      <ParallaxSlide renderElements={renderElements}>
+<ParallaxSlide renderElements={renderElements} >
         {() =>
           data.map(({ image, id }, i) => (
             <Box>
