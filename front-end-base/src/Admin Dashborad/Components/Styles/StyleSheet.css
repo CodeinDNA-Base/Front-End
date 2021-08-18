@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+/* Manage project accordtion layout and fonts */
+.SubOptionsFonts{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20;
+ text-align: left;
+}
+.SubOptionsContainer{
+    margin-right: 2%;
+}
