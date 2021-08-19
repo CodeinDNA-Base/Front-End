@@ -3,7 +3,9 @@
 //Material-UI core
 import { Box } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
-import DesktopChatModule from "./ChatModuleComponents/DesktopChatModule"
+import DesktopChatModule from "./ChatModuleComponents/DesktopChatModule";
+import MobileChatModule from "./ChatModuleComponents/MobileChatModule";
+import { useMediaQuery } from "@material-ui/core";
 //Material-UI styles
 
 
@@ -16,6 +18,7 @@ import DesktopChatModule from "./ChatModuleComponents/DesktopChatModule"
 //Resources
 
 export const ChatModule=()=>{
+    const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
     return(
         // <Box>
         //     <Skeleton variant="text" />
@@ -23,6 +26,6 @@ export const ChatModule=()=>{
         //     <Skeleton variant="rect"  height={400} />
 
         // </Box>
-        <DesktopChatModule/>    
+    (isDesktopOrLaptopOrTabletScreen) ? <DesktopChatModule/> : <MobileChatModule/>  
     )
 }
