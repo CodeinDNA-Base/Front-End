@@ -3,7 +3,7 @@
 //Material-UI core
 import { Box } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
-
+import DesktopChatModule from "./ChatModuleComponents.js/DesktopChatModule"
 //Material-UI styles
 
 
@@ -17,10 +17,12 @@ import { Skeleton } from "@material-ui/lab"
 
 export const ChatModule=()=>{
     return(
-        <Box>
-            <Skeleton variant="text" />
-            <Skeleton variant="circle" width={80} height={80} />
-            <Skeleton variant="rect"  height={400} />
-        </Box>
+        // <Box>
+        //     <Skeleton variant="text" />
+        //     <Skeleton variant="circle" width={80} height={80} />
+        //     <Skeleton variant="rect"  height={400} />
+
+        // </Box>
+        <DesktopChatModule/>    
     )
 }
