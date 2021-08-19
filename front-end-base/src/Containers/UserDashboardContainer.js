@@ -68,11 +68,12 @@ export const UserDashboardOrders = () => {
 };
 
 export const UserDashboardChat = () => {
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   return (
     <>
       <DashboardMenu />
       <ChatContainer/>
-      <FooterComponent />
+     {(isDesktopOrLaptopOrTabletScreen) ? <FooterComponent /> : ''}
     </>
   );
 };
