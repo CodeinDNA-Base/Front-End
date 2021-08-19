@@ -32,6 +32,7 @@ import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import "./Styles/Orders.css"
 //Icons
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Link } from "react-router-dom";
 
 //Resources
 
@@ -452,7 +453,7 @@ const OrdersTable=(props)=>{
               }
               <StyledTableCell align="right">${order.price}</StyledTableCell>
               <StyledTableCell align="right">{order.status}</StyledTableCell>
-              <StyledTableCell align="right"><OrderOptionsMenu /></StyledTableCell>
+              <StyledTableCell align="right"><OrderOptionsMenu status={props.status}/></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -467,10 +468,16 @@ const OrdersTable=(props)=>{
 
 function OrderOptionsMenu() {
   
-  const options = [
-    'View Order',
-    'Contact Seller',
+  const options = [{
+      optionTitle: "View Order",
+      route: "/vieworder",
+  },
+  {
+    optionTitle: "Contact Seller",
+    route: "/messaging",
+  }
   ];
+
   const ITEM_HEIGHT = 48;
   
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -509,11 +516,13 @@ function OrderOptionsMenu() {
         }}
         TransitionComponent={Fade}
       >
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-            {option}
-          </MenuItem>
-        ))}
+        {options.map(({optionTitle, route}) =>{
+          return(
+            <MenuItem key={optionTitle} onClick={handleClose}>
+              <Link to={route} className="linkStyle">{optionTitle}</Link>
+            </MenuItem>
+          )
+        })}
       </Menu>
     </div>
   );

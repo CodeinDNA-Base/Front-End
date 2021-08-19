@@ -17,9 +17,16 @@ import ClockIcon from "@material-ui/icons/Timer";
 
 //Icons
 
+//Styles and Theme
+import "./Styles/OngoingOrders.css"
+
+//Router
+import { Link } from "react-router-dom";
+
 //Resources
 import ServiceImage from "../Resources/java1.jpg";
 import { Headingfonts, TextFonts } from "../../Theme/fonts";
+
 const ongoingOrderStyles = makeStyles({
   container: {
     flex: 1,
@@ -170,6 +177,7 @@ const ActiveOrderCard = () => {
         <Grid item lg={3}></Grid>
         <Grid item lg={3}>
           <Box flex={"auto"} className={classes.boxStyle}>
+          <Link to="/messaging" className="linkStyle">
             <Button
               variant="outlined"
               className={classes.ongoingOrderButton}
@@ -177,8 +185,10 @@ const ActiveOrderCard = () => {
             >
               Contact Seller
             </Button>
+          </Link>
           </Box>
           <Box flex={"auto"} className={classes.boxStyle} mt={1}>
+              <Link to="/vieworder" className="linkStyle">
             <Button
               variant="contained"
               color="primary"
@@ -187,6 +197,7 @@ const ActiveOrderCard = () => {
             >
               View Order
             </Button>
+            </Link>
           </Box>
         </Grid>
       </Grid>
@@ -299,15 +310,19 @@ const CompletedOrderCard = () => {
         <Grid item lg={1}></Grid>
         <Grid item lg={3}>
           <Box flex={"auto"} className={classes.boxStyle}>
+            <Link to="/messaging" className="linkStyle">
             <Button
               variant="outlined"
               className={classes.ongoingOrderButton}
               fullWidth
             >
+
               Contact Seller
             </Button>
+            </Link>
           </Box>
           <Box flex={"auto"} className={classes.boxStyle} mt={1}>
+          <Link to="/viewOrder" className="linkStyle">
             <Button
               variant="contained"
               color="primary"
@@ -316,6 +331,7 @@ const CompletedOrderCard = () => {
             >
               View Order
             </Button>
+            </Link>
           </Box>
         </Grid>
       </Grid>
@@ -428,6 +444,7 @@ const CancelledOrderCard = () => {
         <Grid item lg={1}></Grid>
         <Grid item lg={3}>
           <Box flex={"auto"} className={classes.boxStyle}>
+          <Link to="/messaging" className="linkStyle">
             <Button
               variant="outlined"
               className={classes.ongoingOrderButton}
@@ -435,8 +452,10 @@ const CancelledOrderCard = () => {
             >
               Contact Seller
             </Button>
+            </Link>
           </Box>
           <Box flex={"auto"} className={classes.boxStyle} mt={1}>
+          <Link to="/vieworder" className="linkStyle">
             <Button
               variant="contained"
               color="primary"
@@ -445,6 +464,7 @@ const CancelledOrderCard = () => {
             >
               View Order
             </Button>
+            </Link>
           </Box>
         </Grid>
       </Grid>

@@ -35,6 +35,7 @@ import { AccountSettingsCriticalSection } from "../User Dashboard/Components/Acc
 import {Orders} from "../User Dashboard/Components/Orders"
 
 import {ChatModule} from "../User Dashboard/Components/ChatModule"
+import {ViewOrder} from "../User Dashboard/Components/ViewOrder"
 
 export const UserDashboardContainer = (props) => {
   return (
@@ -76,6 +77,15 @@ export const UserDashboardChat = () => {
   );
 };
 
+export const UserDashboardViewOrder=()=>{
+  return (
+    <>
+      <DashboardMenu />
+      <ViewOrderContainer/>
+      <FooterComponent />
+    </>
+  );
+}
 const DashboardMenu = () => {
   return (
     <Grid container>
@@ -241,6 +251,23 @@ const ChatContainer=()=>{
     </div>
   );
 }
+
+const ViewOrderContainer=()=>{
+  return (
+    <div className="bodySection1">
+      <Grid container>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+        <Grid item xs={12} sm={10} md={10} lg={8} xl={8}>
+          <Box>
+            <ViewOrder />
+          </Box>
+        </Grid>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+      </Grid>
+    </div>
+  );
+}
+
 const FooterComponent = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   return (
