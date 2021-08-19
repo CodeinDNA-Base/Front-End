@@ -4,18 +4,17 @@ import { Grid, Box, Hidden, Typography } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 //Component imports
-//Component imports
+
 import { Menubar } from "../User Dashboard/Components/Menubar";
 import { Footer } from "../User Dashboard/Components/Footer";
 import MobileFooter from "../User Dashboard/Components/MobileFooter";
+
 import { UserProfileCard } from "../User Dashboard/Components/UserProfileCard";
 import { PostRequestCard } from "../User Dashboard/Components/PostRequestCard";
 import { LinkedAccounts } from "../User Dashboard/Components/LinkedAccounts";
 import { OngoingOrders } from "../User Dashboard/Components/OngoingOrders";
 import { TrendingServices } from "../User Dashboard/Components/TrendingServices";
 import { RecentlyViewedServices } from "../User Dashboard/Components/RecentlyViewedServices";
-
-// import { DrawerComponent } from "../Projects/Components/DrawerComponent";
 
 //CSS
 import "../User Dashboard/Components/Styles/FooterStyles.css";
@@ -34,6 +33,8 @@ import { AccountSettingsBalance } from "../User Dashboard/Components/AccountSett
 import { AccountSettingsCriticalSection } from "../User Dashboard/Components/AccountSettingsCriticalSection";
 
 import {Orders} from "../User Dashboard/Components/Orders"
+
+import {ChatModule} from "../User Dashboard/Components/ChatModule"
 
 export const UserDashboardContainer = (props) => {
   return (
@@ -60,6 +61,16 @@ export const UserDashboardOrders = () => {
     <>
       <DashboardMenu />
       <OrdersContainer/>
+      <FooterComponent />
+    </>
+  );
+};
+
+export const UserDashboardChat = () => {
+  return (
+    <>
+      <DashboardMenu />
+      <ChatContainer/>
       <FooterComponent />
     </>
   );
@@ -198,7 +209,7 @@ export const SettingsContainer = () => {
   );
 };
 
-export const OrdersContainer = () => {
+const OrdersContainer = () => {
 
   return (
     <div className="bodySection1">
@@ -215,6 +226,21 @@ export const OrdersContainer = () => {
   );
 };
 
+const ChatContainer=()=>{
+  return (
+    <div className="bodySection1">
+      <Grid container>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+        <Grid item xs={12} sm={10} md={10} lg={8} xl={8}>
+          <Box>
+            <ChatModule />
+          </Box>
+        </Grid>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+      </Grid>
+    </div>
+  );
+}
 const FooterComponent = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   return (

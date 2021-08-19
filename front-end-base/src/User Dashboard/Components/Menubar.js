@@ -242,7 +242,7 @@ const renderMenu = (
       route: "/userdashboard",
     },
     {
-      optionTitle: "Messaging",
+      optionTitle: "Inbox",
       route: "/messaging",
     },
     {
@@ -431,7 +431,8 @@ const classes = drawerStyles();
     >
       <List>
         <ListItem>
-          <ListItemAvatar><StyledBadge
+          <ListItemAvatar>
+            <StyledBadge
               overlap="circular"
               anchorOrigin={{
                 vertical: "bottom",

@@ -11,27 +11,27 @@ import {
   Badge,
   Hidden,
   Box,
-  Divider,
   Typography,
-  Card,
-  CardHeader,
-  CardContent,
+  IconButton,
+  Menu,
+  MenuItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Fade
 } from "@material-ui/core";
-
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 
 //Material-UI
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 
 //Styles and theme
 
+import "./Styles/Orders.css"
 //Icons
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 //Resources
 
@@ -172,66 +172,30 @@ export const Orders = () => {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <TabContentComponent tabTitle="Newest Orders" status="Newest" />
+          <OrdersTable tabTitle="Newest Orders" status="Newest" />
         </TabPanel>
 
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <TabContentComponent tabTitle="Active Orders" status="Active" />
+          <OrdersTable tabTitle="Active Orders" status="Active" />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <TabContentComponent tabTitle="Late Orders" status="Late" />
+          <OrdersTable tabTitle="Late Orders" status="Late" />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <TabContentComponent tabTitle="Delivered Orders" status="Delivered" />
+          <OrdersTable tabTitle="Delivered Orders" status="Delivered" />
         </TabPanel>
 
         <TabPanel value={value} index={4} dir={theme.direction}>
-          <TabContentComponent tabTitle="Completed Orders" status="Completed" />
+          <OrdersTable tabTitle="Completed Orders" status="Completed" />
         </TabPanel>
         <TabPanel value={value} index={5} dir={theme.direction}>
-          <TabContentComponent tabTitle="Cancelled Orders" status="Cancelled" />
+          <OrdersTable tabTitle="Cancelled Orders" status="Cancelled" />
         </TabPanel>
       </SwipeableViews>
     </div>
   );
 };
 
-const tabContentComponentStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "100%",
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
-const TabContentComponent = (props) => {
-  const classes = tabContentComponentStyles();
-  const [checked, setChecked] = React.useState(["wifi"]);
-
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
-
-  return (
-    <Card className={classes.root} elevation={2}>
-      <CardHeader
-        title={<Typography variant="h4">{props.tabTitle}</Typography>}
-      />
-      <Divider />
-      <CardContent>
-        <CustomizedTables />
-      </CardContent>
-    </Card>
-  );
-};
 
 
 
@@ -253,53 +217,304 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
-const tStyles = makeStyles({
+const tableStyles = makeStyles({
   table: {
-    minWidth:700
+    minWidth:700,
   },
 });
 
-function CustomizedTables() {
-  const classes = tStyles();
+const OrdersTable=(props)=>{
+  const newestOrdersDetail = [
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+  ];
+  
+  const activeOrdersDetail = [
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+  ];
+  
+  const lateOrdersDetail = [
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      deliveredOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      deliveredOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      deliveredOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+  ];
+
+  const deliveredOrdersDetail = [
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      deliveredOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      deliveredOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      deliveredOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+  ];
+
+  const completedOrdersDetail = [
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      deliveredOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      deliveredOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      deliveredOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+  ];
+
+  const cancelledOrdersDetail = [
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+    {
+      orderId:12,
+      seller:"CODEINDNA",
+      serviceOrProject:"Web Development",
+      dueOn:new Date().toLocaleDateString(),
+      price:451,
+      status:"New", 
+    },
+  ];
+  
+  function checkStatus(){
+    if(status=="Newest")
+      return newestOrdersDetail;
+    else if(status=="Active")
+      return activeOrdersDetail;
+    else if(status=="Late")
+      return lateOrdersDetail;
+    else if(status=="Delivered")
+      return deliveredOrdersDetail;
+    else if(status=="Completed")
+      return completedOrdersDetail;
+    else if(status=="Cancelled")
+      return cancelledOrdersDetail;
+
+  }
+  
+  const classes = tableStyles();
+  
+  const status=props.status;
+  const title=props.tabTitle;
 
   return (
+    <div>
+    <h4>{title}</h4>
+    
     <TableContainer>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Seller</StyledTableCell>
+            <StyledTableCell align="right">Service/Project</StyledTableCell>
+            <StyledTableCell align="right">Due On</StyledTableCell>
+            {
+              (status=="Delivered" || status=="Completed" || status=="Late")? 
+              <StyledTableCell align="right">Delivered On</StyledTableCell>:""
+            }
+            <StyledTableCell align="right">Total Price</StyledTableCell>
+            <StyledTableCell align="right">Status</StyledTableCell>
+            <StyledTableCell align="right">More</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {checkStatus().map((order) => (
+            <StyledTableRow hover={true} key={order.orderId} className="tableRow">
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {order.seller}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{order.serviceOrProject}</StyledTableCell>
+              <StyledTableCell align="right">{order.dueOn}</StyledTableCell>
+              {
+              (status=="Delivered" || status=="Completed" || status=="Late")? 
+                <StyledTableCell align="right">{order.deliveredOn}</StyledTableCell>:""
+              }
+              <StyledTableCell align="right">${order.price}</StyledTableCell>
+              <StyledTableCell align="right">{order.status}</StyledTableCell>
+              <StyledTableCell align="right"><OrderOptionsMenu /></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
+  );
+}
+
+
+
+
+function OrderOptionsMenu() {
+  
+  const options = [
+    'View Order',
+    'Contact Seller',
+  ];
+  const ITEM_HEIGHT = 48;
+  
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <IconButton
+        aria-label="more"
+        aria-controls="long-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        <MoreVertIcon />
+      </IconButton>
+      <Menu
+        
+        id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            maxHeight: ITEM_HEIGHT * 4.5,
+            width: '20ch',
+          },
+        }}
+        TransitionComponent={Fade}
+      >
+        {options.map((option) => (
+          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
+    </div>
   );
 }

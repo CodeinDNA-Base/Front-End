@@ -5,11 +5,8 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
-  Divider,
   Grid,
   makeStyles,
-  Slider,
-  Typography,
   useMediaQuery,
 } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
@@ -114,7 +111,7 @@ const activeOrderCardStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   serviceImageStyle: {
-    idth: "5rem",
+    width: "5rem",
     height: "5rem",
     borderRadius: "2px",
   },
