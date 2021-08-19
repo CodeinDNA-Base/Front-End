@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 import { Headingfonts } from '../../../../Theme/fonts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile,faImage,faLink } from '@fortawesome/free-solid-svg-icons';
-function DrawerContent(props) {
+function Media(props) {
     const classes=useStyles();
     const [mediaContent,setMediaContent]=useState("Images");
     return (
@@ -106,4 +106,4 @@ const useStyles = makeStyles((theme)=>({
      
 }))
 
-export default DrawerContent;
+export default Media;

@@ -5,10 +5,9 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import ChatList from './ChatList';
 import MessageCompositionOptions from './MessageCompositionOptions';
-import DrawerContent from '../Drawer/DrawerContent'
+import Media from '../Media/Media'
 import { dimensions } from '../DesktopChatModule';
 const drawerWidth = 300;
-
 
 function ChatArea(props) {
   const classes = useStyles();
@@ -50,7 +49,7 @@ function ChatArea(props) {
        
                      <div className={classes.drawerContentContainer}>
                          {/* Drawer content */}
-                         <DrawerContent/>
+                         <Media/>
                      </div>
                    </Drawer>
                    </div>

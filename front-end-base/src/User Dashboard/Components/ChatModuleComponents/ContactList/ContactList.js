@@ -7,7 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit,faTools } from '@fortawesome/free-solid-svg-icons';
 import { dimensions } from '../DesktopChatModule';
-import DrawerContent from '../Drawer/DrawerContent';
+import Media from '../Media/Media';
 function ContactList(props) {
 
     const classes = useStyles();
@@ -60,7 +60,7 @@ function ContactList(props) {
                 <Grid item xs={12}>
                     <div className={classes.contactsContainer}>
                         {/* <ContactsContainer handelContactClick={props.handelContactClick}/> */}
-                        <DrawerContent/>
+                        <Media/>
                     </div>
                 </Grid>
             </Grid>

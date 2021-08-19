@@ -3,7 +3,7 @@
 //Material-UI core
 import { Box } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
-import DesktopChatModule from "./ChatModuleComponents.js/DesktopChatModule"
+import DesktopChatModule from "./ChatModuleComponents/DesktopChatModule"
 //Material-UI styles
 
 
