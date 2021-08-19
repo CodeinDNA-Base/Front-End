@@ -238,15 +238,15 @@ const OrdersContainer = () => {
 
 const ChatContainer=()=>{
   return (
-    <div className="bodySection3">
+    <div className="bodySection1">
       <Grid container>
-        {/* <Grid item xs={0} sm={1} md={1} lg={1} xl={1}></Grid> */}
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+        <Grid item xs={12} sm={10} md={10} lg={8} xl={8}>
+          <Box>
             <ChatModule />
-          
+          </Box>
         </Grid>
-        {/* <Grid item xs={0} sm={1} md={1} lg={1} xl={1}></Grid> */}
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
       </Grid>
     </div>
   );
