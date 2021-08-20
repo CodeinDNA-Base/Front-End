@@ -1,5 +1,24 @@
 //ReactJS
 import React, { useState, useEffect } from "react";
+// Import React FilePond
+import { FilePond, registerPlugin } from 'react-filepond';
+import AvatarEditor from 'react-avatar-editor'
+import Dropzone from 'react-dropzone'
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css';
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+// `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+
+
+
 //Material-ui core
 import {
   Box,
@@ -15,9 +34,12 @@ import {
   Backdrop,
   Fade,
   Grid,
+  Badge,
 } from "@material-ui/core";
+
 //Material-UI styles
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+
 //Icons
 import EditIcon from "@material-ui/icons/Edit";
 import LinkedIn from "@material-ui/icons/LinkedIn";
@@ -27,11 +49,11 @@ import Facebook from "@material-ui/icons/Facebook";
 //Routes
 
 //Styles and Theme
+import "./Styles/AccountSettingsPersonalInfo.css"
 
 //Resources
 import profilePic from "../Resources/nadir.jpg";
-import { useFadedShadowStyles } from "@mui-treasury/styles/shadow/faded";
-import { CallMissedSharp } from "@material-ui/icons";
+import { Camera } from "@material-ui/icons";
 
 export const AccountSettingsPersonalInfo = (props) => {
   return (
@@ -58,11 +80,6 @@ const accountInfoStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     marginTop: "2rem",
   },
-  avatar: {
-    width: 120,
-    height: 120,
-    margin: "auto",
-  },
   modal: {
     display: "flex",
     alignItems: "center",
@@ -81,14 +98,14 @@ const AccountInfo = () => {
 
   const [editable, setEditable] = useState(false);
   const [name, setName] = useState("Nadir Hussain");
-  const [open, setOpen] = React.useState(false);
+  const [openChooseImage, setOpenChooseImage] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleProfileImageOpen = () => {
+    setOpenChooseImage(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleProfileImageClose = () => {
+    setOpenChooseImage(false);
   };
 
   function handleEditAccountInfo() {
@@ -104,74 +121,81 @@ const AccountInfo = () => {
 
   return (
     <div>
-    <Card className={classes.root} elevation={2}>
-      <CardHeader
-        action={
-          <IconButton>
-            <EditIcon onClick={handleEditAccountInfo} />
-          </IconButton>
-        }
-        title={<Typography variant="h4">Account</Typography>}
-      />
-      <Divider />
-      <CardContent>
-        <Avatar
-          className={classes.avatar}
-          src={profilePic}
-          onClick={handleOpen}
-          style={{ cursor: "pointer" }}
+      <Card className={classes.root} elevation={2}>
+        <CardHeader
+          action={
+            <IconButton>
+              <EditIcon onClick={handleEditAccountInfo} />
+            </IconButton>
+          }
+          title={<Typography variant="h4">Account</Typography>}
         />
-      </CardContent>
-      <Divider />
-      <CardContent>
-        <h4 contentEditable={editable} onChange={handleUpdateName}>
-          {" "}
-          {name}
-        </h4>
-        <Typography variant="h6">nadirhussaintumrani@gmail.com</Typography>
-      </CardContent>
-
-      {editable ? (
-        <div>
-          <Divider />
-          <CardHeader
-            action={
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleUpdateAccountInfo}
-              >
-                Update
-              </Button>
-            }
-          />
-        </div>
-      ) : (
-        ""
-      )}
-    </Card>
-            <div>
-            <Modal
-              aria-labelledby="postRequestModalTitle"
-              aria-describedby="postRequestModalForm"
-              className={classes.modal}
-              open={open}
-              onClose={handleClose}
-              closeAfterTransition
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 500,
-              }}
-            >
-              <Fade in={open}>
-                <div className={classes.paper}>
-                  <Box mt={-4}>
-                    <ChooseProfileImageModal handleClose={handleClose} />
-                  </Box>
-                </div>
-              </Fade>
-            </Modal>
+        <Divider />
+        <CardContent>
+          <div className="container">
+            <img
+              src={profilePic}
+              alt="profile image"
+              className="image"
+            />
+            <div className="middle">
+              <IconButton>
+                <Camera fontSize="large" onClick={handleProfileImageOpen} />
+              </IconButton>
+            </div>
           </div>
+        </CardContent>
+        <Divider />
+        <CardContent>
+          <h4 contentEditable={editable} onChange={handleUpdateName}>
+            {name}
+          </h4>
+          <Typography variant="h6">nadirhussaintumrani@gmail.com</Typography>
+        </CardContent>
+
+        {editable ? (
+          <div>
+            <Divider />
+            <CardHeader
+              action={
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleUpdateAccountInfo}
+                >
+                  Update
+                </Button>
+              }
+            />
+          </div>
+        ) : (
+          ""
+        )}
+      </Card>
+      <div>
+        <Modal
+          aria-labelledby="UpdateImageModalTitle"
+          aria-describedby="UpdateImageModalDescription"
+          className={classes.modal}
+          open={openChooseImage}
+          onClose={handleProfileImageClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={openChooseImage}>
+            <div className={classes.paper}>
+              <Box mt={-4}>
+                <ChooseProfileImageModal
+                  handleClose={handleProfileImageClose}
+                />
+              </Box>
+            </div>
+          </Fade>
+        </Modal>
+      </div>
     </div>
   );
 };
@@ -392,7 +416,6 @@ const AddRemoveAccountsModal = (props) => {
   );
 };
 
-
 const chooseProfileImageStyles = makeStyles((theme) => ({
   container: {
     textAlign: "center",
@@ -408,36 +431,151 @@ const ChooseProfileImageModal = (props) => {
 
   return (
     <div>
-    <Grid container>
-      <Grid item xl={12} sm={12} md={12} lg={12} xl={12}>
-        <CardContent>
-        <h4>Click On account to Remove</h4>
-        <Box display="flex">
-          <Box>
-            <IconButton color="primary">
-              <LinkedIn fontSize="large" />
-            </IconButton>
-
-            <IconButton color="primary">
-              <Github fontSize="large" />
-            </IconButton>
-
-            <IconButton color="primary">
-              <Facebook fontSize="large" />
-            </IconButton>
-          </Box>
-        </Box>
-      </CardContent>
-      <Divider />
-      <CardContent>
-      <Box mt={2}>
-        <Button variant="outlined" color="primary" onClick={handleConfirm}>
-          Confirm
-        </Button>
-      </Box>
-        </CardContent>
+      <Grid container>
+        <Grid item xl={12} sm={12} md={12} lg={12} xl={12}>
+          <CardContent>
+            <h4>Click On account to Remove</h4>
+            <Box display="flex">
+            {/* <FP/>
+  */}
+  <MyEditor/>
+            </Box>
+          </CardContent>
+         </Grid>
       </Grid>
-    </Grid>
     </div>
   );
 };
+
+// registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+registerPlugin(FilePondPluginImagePreview, FilePondPluginImageCrop, FilePondPluginImageTransform);
+
+// Our app
+// function FP() {
+//     const [files, setFiles] = useState([]);
+//     return (
+//       <div style={{width:"100%"}}>
+//                     <FilePond
+//                 files={files}
+//                 onupdatefiles={setFiles}
+//                 allowMultiple={true}
+//                 maxFiles={3}
+//                 // server="/api"
+//                 name="files"
+//                 allowImageCrop={true}
+//                 allowImageTransform={true}
+//                 imageCropAspectRatio={'1:1'}
+
+//                 labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+//             />
+//       </div>
+//     );
+// }
+
+// export class FP extends React.Component {
+//   constructor(props) {
+
+//     super(props);
+//     this.handleChange = this.handleChange.bind(this);
+//     this.updateProfPicUrl = this.updateProfPicUrl.bind(this);
+
+//     // this.user = this.props.user;
+//     // this.files = [];
+//     // this.pathToUrl = {};
+//     // this.basePath = `/users/${this.props.user.id}/images/profPic`;
+//     // this.process = upload.process(
+//     //   this.basePath,
+//     //   this.pond,
+//     //   this.pathToUrl,
+//     //   this.files
+//     // );
+//     // this.revert = upload.revert(this.pathToUrl, this.files);
+//   }
+
+
+//   updateProfPicUrl() {
+//     if (this.files > 0) {
+//       this.props.updateProfPicUrl(this.files, this.pathToUrl);
+//       this.props.handleCloseModal();
+//     } else {
+//       alert("Please choose a file from your computer to upload first!");
+//     }
+//     this.files = [];
+//     this.pathToUrl = {};
+//   }
+
+//   handleChange(e) {
+//     this.setState({ [e.target.name]: e.target.value });
+//   }
+
+//   render() {
+//     return (
+//       <div style={{width:"100%"}}>
+//         <FilePond
+//         ref={ref => (this.pond = ref)}
+//         files={this.files}
+//         allowMultiple={false}
+//         allowImageCrop={true}
+//         allowImageTransform={true}
+//         credits={false}
+//         imageCropAspectRatio={'1:1'}
+//         imageEditInstantEdit={true}
+//         imageCropAspectRatio={1}
+//         onupdatefiles={fileItems => {
+//             // Set current file objects to this.state
+//             this.files = fileItems.map(function(fileItem) {
+//             let file = fileItem;
+//             // file.uuid = uuid().toString();
+//             return file;
+//             });
+//         }}
+//         server={{
+//             process: this.process,
+//             revert: this.revert
+//         }}
+//         />
+//         <button
+//         onClick={() => {
+//             this.props.updateProfPicUrl(
+//             this.files,
+//             this.pathToUrl
+//             );
+//         }}
+//         className="s-btn"
+//         >
+//         Update
+//         </button>
+
+//       </div>
+//     );
+//   }
+// }
+
+
+class MyEditor extends React.Component {
+  state = {
+    image: 'http://example.com/initialimage.jpg',
+  }
+
+  handleDrop = dropped => {
+    this.setState({ image: dropped[0] })
+  }
+
+  render() {
+    return (
+      <Dropzone
+        onDrop={this.handleDrop}
+        noClick
+        noKeyboard
+        style={{ width: '250px', height: '250px' }}
+      >
+        {({ getRootProps, getInputProps }) => (
+          <div {...getRootProps()}>
+            <AvatarEditor width={250} height={250} image={this.state.image} />
+            <input {...getInputProps()} />
+          </div>
+        )}
+      </Dropzone>
+    )
+  }
+}
