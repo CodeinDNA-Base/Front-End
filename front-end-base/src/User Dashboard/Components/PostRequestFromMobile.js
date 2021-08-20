@@ -6,17 +6,12 @@ import {
   Box,
   Card,
   CardContent,
-  Modal,
-  Backdrop,
-  Fade,
   TextareaAutosize,
   CardHeader,
   Divider,
   Typography,
-  FormControlLabel,
   FormControl,
   InputLabel,
-  TextField,
   OutlinedInput,
   InputAdornment,
   Tooltip,
@@ -29,106 +24,13 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 //Material-UI Styles
-import cx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { useFadedShadowStyles } from "@mui-treasury/styles/shadow/faded";
 import { useBorderSelectStyles } from "@mui-treasury/styles/select/border";
 
 //Icons
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-//Styles and Theme
-
-//Resources
-
-export const PostRequestCard = () => {
-  return <RequestCard />;
-};
-
-const requestCardStyles = makeStyles((theme) => ({
-  card: {
-    borderRadius: 12,
-    textAlign: "center",
-  },
-  statValue: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 2,
-  },
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: "2px",
-    boxShadow: theme.shadows[2],
-    padding: theme.spacing(2, 2, 2),
-  },
-}));
-
-const RequestCard = React.memo(function ProfileCard() {
-  const classes = requestCardStyles();
-  const shadowStyles = useFadedShadowStyles();
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <div>
-      <Card className={cx(classes.card, shadowStyles.root)}>
-        <CardContent>
-          <p className={classes.statValue}>
-            Get offers from sellers for your project
-          </p>
-          <Box m={1} pt={3}>
-            <Button variant="outlined" onClick={handleOpen}>
-              Post a Request
-            </Button>
-          </Box>
-          <Box m={1}>
-            <Button variant="contained" color="primary">
-              Show Previous
-            </Button>
-          </Box>
-        </CardContent>
-      </Card>
-      <div>
-        <Modal
-          aria-labelledby="postRequestModalTitle"
-          aria-describedby="postRequestModalForm"
-          className={classes.modal}
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <div className={classes.paper}>
-              {/* <Typography variant="h4" id="postRequestModalTitle" className={classes.modalHeading}>Transition modal</Typography> */}
-              <Box mt={-4}>
-                <PostRequestModalForm id="postRequestModalForm" handleClose={handleClose}/>
-              </Box>
-            </div>
-          </Fade>
-        </Modal>
-      </div>
-    </div>
-  );
-});
-
-const modalFormStyles = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
   root: {
     marginTop: "2rem",
   },
@@ -141,8 +43,8 @@ const modalFormStyles = makeStyles((theme) => ({
   },
 }));
 
-const PostRequestModalForm = (props) => {
-  const classes = modalFormStyles();
+export const PostRequestFromMobile = (props) => {
+  const classes = useStyle();
 
   const letterLimit = 5000;
 
@@ -153,78 +55,65 @@ const PostRequestModalForm = (props) => {
     setLetterCount(letters.length);
   }
 
-  function handleSubmitRequest(){
-    alert("Send Request to admin Dashboard")
-    //Call handle close method of parent component
-    props.handleClose()
+  function handleSubmitRequest() {
+    alert("Send Request to admin Dashboard");
   }
 
   return (
     <div>
       <Grid container>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-    <Card className={classes.root} elevation={0}>
-      <CardHeader
-        title={
-          <Typography variant="h5">
-            Describe the service you are looking for- Please be detailed as much
-            as you can
-          </Typography>
-        }
-      />
-      <Divider />
-      <CardContent>
-        <form>
-          <FormControl fullWidth>
-            <Tooltip
+          <Card className={classes.root} elevation={0}>
+            <CardHeader
               title={
-                <Typography>
-                  Include all the necessary details needed to complete your
-                  request. For example: If you are looking for a logo, you can
-                  specify your company name, business type, preferred color,
-                  etc.
+                <Typography variant="h5">
+                  Describe the service you are looking for- Please be detailed
+                  as much as you can
                 </Typography>
               }
-              TransitionComponent={Zoom}
-              placement="right"
-              arrow
-            >
-              <TextareaAutosize
-                maxRows={4}
-                minRows={4}
-                aria-label="maximum height"
-                placeholder="I am Looking for ..."
-                className={classes.descriptionBox}
-                onChange={handleDescriptionChange}
-                maxLength={letterLimit}
-              />
-            </Tooltip>
-
-            <Box mt={2} display="flex">
-              <Box className={classes.attachFilesBtn}>
-                <Button variant="outlined" color="primary">
-                  Attach Files
-                </Button>
-              </Box>
-              <Box>
-                <label>
-                  {letterCount}/{letterLimit}
-                </label>
-              </Box>
-            </Box>
-          </FormControl>
-        </form>
-      </CardContent>
-      <Divider />
-      <CardContent>
-        <SelectOptions />
-      </CardContent>
-      <Divider />
-      <CardContent>
-        <CardHeader
-          title={
-            <Box mt={-2}>
-              <FormControl variant="outlined">
+            />
+            <Divider />
+            <CardContent>
+              <form>
+                <FormControl fullWidth>
+                  <TextareaAutosize
+                    maxRows={6}
+                    minRows={6}
+                    aria-label="maximum height"
+                    placeholder="I am Looking for ..."
+                    className={classes.descriptionBox}
+                    onChange={handleDescriptionChange}
+                    maxLength={letterLimit}
+                  />
+                  <Box mt={2} display="flex">
+                    <Box className={classes.attachFilesBtn}>
+                      <Button variant="outlined" color="primary">
+                        Attach Files
+                      </Button>
+                    </Box>
+                    <Box>
+                      <label>
+                        {letterCount}/{letterLimit}
+                      </label>
+                    </Box>
+                  </Box>
+                </FormControl>
+              </form>
+            </CardContent>
+            <Divider />
+            
+            <CardContent>
+              <SelectOptions />
+            </CardContent>
+            
+            <Divider />
+          </Card>
+          </Grid>
+          
+          <Grid item xs={12}>
+            
+            <Box mt={2} ml={2} mr={2}>
+              <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-adornment-amount">
                   Amount
                 </InputLabel>
@@ -239,29 +128,28 @@ const PostRequestModalForm = (props) => {
                 />
               </FormControl>
             </Box>
-          }
-          action={
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              onClick={handleSubmitRequest}
-            >
-              Submit Request
-            </Button>
-          }
-        />
-      </CardContent>
-    </Card>
-    </Grid>
+
+              <Box mt={2} ml={2} mr={2}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={handleSubmitRequest}
+                >
+                  Submit Request
+                </Button>
+              </Box>
+          </Grid>
       </Grid>
     </div>
-  
   );
 };
 
 const optionsStyles = makeStyles((theme) => ({
-  categoryText: {
+    container:{
+        alignText:"center"
+    },  
+    categoryText: {
     fontWeight: "bold",
     color: "black",
   },
@@ -314,11 +202,9 @@ const SelectOptions = () => {
     );
   };
 
-  const isItSmallOrExtraSmall = useMediaQuery("(max-width: 960px)");
-
   return (
     <Grid container>
-      <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+      <Grid item xs={12}>
         <Box>
           <Select
             disableUnderline
@@ -369,8 +255,8 @@ const SelectOptions = () => {
         </Box>
       </Grid>
 
-      <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
-      <Box className={classes.categoryBox} ml={3}>
+      <Grid item xs={12}>
+        <Box className={classes.categoryBox} mt={2}>
           <Select
             disableUnderline
             classes={{ root: borderSelectClasses.select }}
@@ -418,10 +304,10 @@ const SelectOptions = () => {
             </MenuItem>
           </Select>
         </Box>
-    </Grid>
+      </Grid>
 
-    <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
-    <Box mt={isItSmallOrExtraSmall?1:0}>
+      <Grid item xs={12}>
+        <Box mt={2}>
           <Select
             disableUnderline
             classes={{ root: borderSelectClasses.select }}
@@ -463,7 +349,7 @@ const SelectOptions = () => {
             </MenuItem>
           </Select>
         </Box>
-    </Grid>
+      </Grid>
     </Grid>
   );
 };

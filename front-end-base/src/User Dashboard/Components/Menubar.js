@@ -54,6 +54,7 @@ import profilePic from "../Resources/nadir.jpg";
 
 //Styles and CSS
 import "./Styles/MenubarStyles.css";
+import { PostAdd } from "@material-ui/icons";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -122,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   avatar: {
-    marginTop: "1rem",
+    marginTop: "0.5rem",
   },
   profileMenu: {
     marginTop: "1rem",
@@ -131,17 +132,137 @@ const useStyles = makeStyles((theme) => ({
 
 export const Menubar = (props) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const isMenuOpen = Boolean(anchorEl);
+  
+  const [notificationMenuAnchor, setNotificationMenuAnchor] = React.useState(null);
+  const isNotificationMenuOpen = Boolean(notificationMenuAnchor);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+
+  //Notification Menu
+  const   handleNotificationMenuOpen = (event) => {
+    setNotificationMenuAnchor(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const   handleNotificationMenuClose = () => {
+    setNotificationMenuAnchor(null);
   };
+
+  //Notification Menu options/items
+  
+  const notificationDetails=[
+    {
+      notificationId:0,
+      content:"Payment method added",
+      time:new Date().toLocaleTimeString(),
+      icon:<LogoutIcon />,
+      route:"/"
+    },
+    {
+      notificationId:1,
+      content:"Payment method added",
+      time:new Date().toLocaleTimeString(),
+      icon:<LogoutIcon />,
+      route:"/"
+    },
+    {
+      notificationId:2,
+      content:"Payment method added",
+      time:new Date().toLocaleTimeString(),
+      icon:<LogoutIcon />,
+      route:"/"
+    },
+    {
+      notificationId:3,
+      content:"Payment method added",
+      time:new Date().toLocaleTimeString(),
+      icon:<LogoutIcon />,
+      route:"/"
+    },
+    {
+      notificationId:3,
+      content:"Payment method added",
+      time:new Date().toLocaleTimeString(),
+      icon:<LogoutIcon />,
+      route:"/"
+    },
+    {
+      notificationId:3,
+      content:"Payment method added",
+      time:new Date().toLocaleTimeString(),
+      icon:<LogoutIcon />,
+      route:"/"
+    },
+    {
+      notificationId:3,
+      content:"Payment method added",
+      time:new Date().toLocaleTimeString(),
+      icon:<LogoutIcon />,
+      route:"/"
+    },
+    {
+      notificationId:3,
+      content:"Payment method added",
+      time:new Date().toLocaleTimeString(),
+      icon:<LogoutIcon />,
+      route:"/"
+    },
+    
+  ]
+  const notificationMenuId = "primary-search-account-menu";
+  const renderNotificationMenu = (
+  <Menu
+    className={classes.profileMenu}
+    anchorEl={notificationMenuAnchor}
+    id={notificationMenuId}
+    keepMounted
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "center",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "center",
+    }}
+    open={isNotificationMenuOpen}
+    onClose={handleNotificationMenuClose}
+    TransitionComponent={Zoom}
+
+    PaperProps={{
+      style: {
+        maxHeight: 48 * 10,
+        width: '30ch',
+      },
+    }}
+  >
+    {notificationDetails.map(({ notificationId, content, time, icon, route }) => {
+        return (
+          <>
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+          <ListItem button key={notificationId}>
+            <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={content} />
+          </ListItem>
+          </Link>
+          <Divider />
+          </>
+        );
+      })}
+    </Menu>
+  );
+
+
 //User profile Menu
+
+const [anchorEl, setAnchorEl] = React.useState(null);
+const isMenuOpen = Boolean(anchorEl);
+
+const handleProfileMenuOpen = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+
+const handleMenuClose = () => {
+  setAnchorEl(null);
+};
 
 const profileMenuOptions = [
   {
@@ -152,7 +273,7 @@ const profileMenuOptions = [
   {
     optionTitle: "Logout",
     optionIcon: <LogoutIcon />,
-    route: "/logout",
+    route: "/",
   },
 ];
 
@@ -174,7 +295,7 @@ const renderMenu = (
     }}
     open={isMenuOpen}
     onClose={handleMenuClose}
-    TransitionComponent={Fade}
+    TransitionComponent={Zoom}
     // elevation={4}
   >
     <ListItem>
@@ -195,12 +316,12 @@ const renderMenu = (
     <Divider />
     {profileMenuOptions.map(({ optionTitle, optionIcon, route }) => {
         return (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
           <ListItem button key={optionTitle}>
             <ListItemIcon>{optionIcon}</ListItemIcon>
-            <Link to={route} style={{ textDecoration: "none", color: "black" }}>
               <ListItemText primary={optionTitle} />
-            </Link>
           </ListItem>
+          </Link>
         );
       })}
     </Menu>
@@ -286,22 +407,16 @@ const renderMenu = (
             <Box spacing={2} m={2}>
             {menuOptions.map(({ optionTitle, route }) => {
                 return (
-                  <Button>
                     <Link to={route} className="menuBarItem">
                       {optionTitle}
                     </Link>
-                  </Button>
                 );
               })}
             </Box>
             <IconButton
-              edge="start"
               aria-label="account of current user"
-              // aria-controls={menuId}
               aria-haspopup="true"
-              onClick={() => {
-                alert("Mazak na kar yar");
-              }}
+              onClick={handleNotificationMenuOpen}
               color="inherit"
             >
               <NotificationIcon />
@@ -316,6 +431,7 @@ const renderMenu = (
         </Toolbar>
       </AppBar>
       {renderMenu}
+      {renderNotificationMenu}
       <Toolbar id="back-to-top-anchor" />
       <ScrollTop {...props}>
         <Fab
@@ -393,6 +509,12 @@ function DrawerComponent() {
       optionTitle: "Inbox",
       optionIcon: <InboxIcon />,
       route: "/inbox",
+    },
+
+    {
+      optionTitle: "Post Request",
+      optionIcon: <PostAdd />,
+      route:"/postrequest"
     },
     {
       optionTitle: "Orders",

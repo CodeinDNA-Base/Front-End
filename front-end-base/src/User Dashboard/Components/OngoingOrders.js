@@ -18,7 +18,7 @@ import ClockIcon from "@material-ui/icons/Timer";
 //Icons
 
 //Styles and Theme
-import "./Styles/OngoingOrders.css"
+import "./Styles/OngoingOrders.css";
 
 //Router
 import { Link } from "react-router-dom";
@@ -177,26 +177,26 @@ const ActiveOrderCard = () => {
         <Grid item lg={3}></Grid>
         <Grid item lg={3}>
           <Box flex={"auto"} className={classes.boxStyle}>
-          <Link to="/messaging" className="linkStyle">
-            <Button
-              variant="outlined"
-              className={classes.ongoingOrderButton}
-              fullWidth
-            >
-              Contact Seller
-            </Button>
-          </Link>
+            <Link to="/messaging" className="linkStyle">
+              <Button
+                variant="outlined"
+                className={classes.ongoingOrderButton}
+                fullWidth
+              >
+                Contact Seller
+              </Button>
+            </Link>
           </Box>
           <Box flex={"auto"} className={classes.boxStyle} mt={1}>
-              <Link to="/vieworder" className="linkStyle">
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.ongoingOrderButton}
-              fullWidth
-            >
-              View Order
-            </Button>
+            <Link to="/vieworder" className="linkStyle">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.ongoingOrderButton}
+                fullWidth
+              >
+                View Order
+              </Button>
             </Link>
           </Box>
         </Grid>
@@ -311,26 +311,25 @@ const CompletedOrderCard = () => {
         <Grid item lg={3}>
           <Box flex={"auto"} className={classes.boxStyle}>
             <Link to="/messaging" className="linkStyle">
-            <Button
-              variant="outlined"
-              className={classes.ongoingOrderButton}
-              fullWidth
-            >
-
-              Contact Seller
-            </Button>
+              <Button
+                variant="outlined"
+                className={classes.ongoingOrderButton}
+                fullWidth
+              >
+                Contact Seller
+              </Button>
             </Link>
           </Box>
           <Box flex={"auto"} className={classes.boxStyle} mt={1}>
-          <Link to="/viewOrder" className="linkStyle">
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.ongoingOrderButton}
-              fullWidth
-            >
-              View Order
-            </Button>
+            <Link to="/viewOrder" className="linkStyle">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.ongoingOrderButton}
+                fullWidth
+              >
+                View Order
+              </Button>
             </Link>
           </Box>
         </Grid>
@@ -444,26 +443,26 @@ const CancelledOrderCard = () => {
         <Grid item lg={1}></Grid>
         <Grid item lg={3}>
           <Box flex={"auto"} className={classes.boxStyle}>
-          <Link to="/messaging" className="linkStyle">
-            <Button
-              variant="outlined"
-              className={classes.ongoingOrderButton}
-              fullWidth
-            >
-              Contact Seller
-            </Button>
+            <Link to="/messaging" className="linkStyle">
+              <Button
+                variant="outlined"
+                className={classes.ongoingOrderButton}
+                fullWidth
+              >
+                Contact Seller
+              </Button>
             </Link>
           </Box>
           <Box flex={"auto"} className={classes.boxStyle} mt={1}>
-          <Link to="/vieworder" className="linkStyle">
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.ongoingOrderButton}
-              fullWidth
-            >
-              View Order
-            </Button>
+            <Link to="/vieworder" className="linkStyle">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.ongoingOrderButton}
+                fullWidth
+              >
+                View Order
+              </Button>
             </Link>
           </Box>
         </Grid>

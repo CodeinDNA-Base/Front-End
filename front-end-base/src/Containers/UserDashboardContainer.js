@@ -36,6 +36,7 @@ import {Orders} from "../User Dashboard/Components/Orders"
 
 import {ChatModule} from "../User Dashboard/Components/ChatModule"
 import {ViewOrder} from "../User Dashboard/Components/ViewOrder"
+import { PostRequestFromMobile } from "../User Dashboard/Components/PostRequestFromMobile";
 
 export const UserDashboardContainer = (props) => {
   return (
@@ -82,6 +83,16 @@ export const UserDashboardViewOrder=()=>{
     <>
       <DashboardMenu />
       <ViewOrderContainer/>
+      <FooterComponent />
+    </>
+  );
+}
+
+export const PostRequestFromMobileUserDashboard=()=>{
+  return (
+    <>
+      <DashboardMenu />
+      <PostRequestFromMobileContainer/>
       <FooterComponent />
     </>
   );
@@ -205,7 +216,6 @@ export const SettingsContainer = () => {
         <Hidden only={["xs"]}>
           <Grid item sm={3} md={3} lg={2} xl={2}>
             <Box>
-              <Typography variant="h4">Account Settings</Typography>
               <AccountSettingsSidebar currentStep={setCurrentStep} />
             </Box>
           </Grid>
@@ -260,6 +270,22 @@ const ViewOrderContainer=()=>{
         <Grid item xs={12} sm={10} md={10} lg={8} xl={8}>
           <Box>
             <ViewOrder />
+          </Box>
+        </Grid>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+      </Grid>
+    </div>
+  );
+}
+
+const PostRequestFromMobileContainer=()=>{
+  return (
+    <div className="bodySection1">
+      <Grid container>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+        <Grid item xs={12} sm={10} md={10} lg={8} xl={8}>
+          <Box>
+            <PostRequestFromMobile />
           </Box>
         </Grid>
         <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>

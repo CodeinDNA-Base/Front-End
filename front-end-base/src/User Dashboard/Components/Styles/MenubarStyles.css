@@ -6,8 +6,12 @@
     font-family: 'Jura';
     font-weight: bold;
     text-decoration: none;
-    font-size: 18px;
+    margin-left: 2rem;
 }
+
+/* .menuBarItem:hover{
+    border-bottom: 4px solid #ea6645;
+} */
 
 .linkStyle{
     text-decoration: none;

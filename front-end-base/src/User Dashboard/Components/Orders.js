@@ -518,9 +518,11 @@ function OrderOptionsMenu() {
       >
         {options.map(({optionTitle, route}) =>{
           return(
-            <MenuItem key={optionTitle} onClick={handleClose}>
-              <Link to={route} className="linkStyle">{optionTitle}</Link>
+            <Link to={route} className="linkStyle">
+            <MenuItem key={optionTitle}>
+              {optionTitle}
             </MenuItem>
+            </Link>
           )
         })}
       </Menu>
