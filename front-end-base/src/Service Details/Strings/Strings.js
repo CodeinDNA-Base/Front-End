@@ -119,7 +119,12 @@ export const UserDashbooard={
             choice5:"What is the name of your favorite childhood friend?"
         }
     },
-
+    accountSettingsNotifications:{
+        instruction:"Protect you account by setting an strong password.",
+        sectionHeading:"Password and Security",
+        card1Heading:"Password",
+        card2Heading:"Security Question",
+    },
     accountSettingsBalance:{
 
     },
