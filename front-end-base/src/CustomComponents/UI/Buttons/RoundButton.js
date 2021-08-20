@@ -20,11 +20,13 @@ export const RoundButton = ({
   title,
   color,
   bgColor,
-  handleClcik,
-  width = 250,
+  handleClick,
+  width,
   variant = "contained",
   borderColor,
   margin,
+  icon,
+  type
 }) => {
   const props = {
     color,
@@ -37,8 +39,11 @@ export const RoundButton = ({
   return (
     <Button
       variant={variant}
-      onClick={handleClcik}
+      onClick={handleClick}
       classes={{ root: classes.root }}
+      startIcon={icon  }
+      type={type}
+      fullWidth
     >
       {title}
     </Button>

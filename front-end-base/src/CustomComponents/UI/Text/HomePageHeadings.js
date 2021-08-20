@@ -7,8 +7,8 @@ import colors from "../../../Theme/colors";
 
 const HeadingStyles = makeStyles(() => ({
   HomePageComponentsHeadingGrid: {
-    marginBottom: "2%",
-    textAlign: "center",
+    margin: ({margin})=>margin,
+    textAlign: ({textAlign})=>textAlign,
   },
 
   HomePageComponentsHeadingTitle: {
@@ -27,12 +27,17 @@ export function HomePageComponentsHeading({
   description,
   titleColor,
   descriptionColor,
+  margin="2%",
+  textAlign='center'
 }) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = HeadingStyles({
     isDesktopOrLaptopOrTabletScreen,
     titleColor,
     descriptionColor,
+    margin,
+    textAlign
+
   });
   return (
     <Grid
@@ -40,14 +45,14 @@ export function HomePageComponentsHeading({
       spacing={0}
       className={classes.HomePageComponentsHeadingGrid}
     >
-      <Grid xs={0} sm={1} md={1} item></Grid>
-      <Grid xs={12} sm={10} md={10} item>
+      <Grid xs={1} sm={1} md={1} item></Grid>
+      <Grid xs={10} sm={10} md={10} item>
         <p className={classes.HomePageComponentsHeadingTitle}>{title} </p>
         <p className={classes.HomePageComponentsHeadingDescription}>
           {description}
         </p>
       </Grid>
-      <Grid xs={0} sm={1} md={1} item></Grid>
+      <Grid xs={1} sm={1} md={1} item></Grid>
     </Grid>
   );
 }

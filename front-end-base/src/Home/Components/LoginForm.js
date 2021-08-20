@@ -15,6 +15,7 @@ import { RoundButton } from "../../CustomComponents/UI/Buttons/RoundButton";
 import { SmallHeading } from "../../CustomComponents/UI/Text/SmallHeading";
 import "./Styles/hrStyle.css";
 import CustomAlerts from "../../CustomComponents/UI/Support/Alerts";
+//import GoogleIcon from '@material-ui/icons/Google';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -48,7 +49,7 @@ export default function LoginIn() {
   const classes = useStyles();
   const [userPassword, setUserPassword] = useState("");
   const [userId, setUserId] = useState("");
-  const [isIncorrectUserId, setIsIncorrectUserId] = useState(true);
+  const [isIncorrectUserId, setIsIncorrectUserId] = useState(false);
   const [isIncorrectPassword, setIsIncorrectPassword] = useState(true);
   const handleUserPassword = (value) => {
     setUserPassword(value);
@@ -122,6 +123,7 @@ export default function LoginIn() {
               color={colors.white}
               bgColor={colors.info}
               margin={"0% 0% 5%  0%"}
+              icon={<AccountCircle  />}
             />
           </Grid>
         </Grid>

@@ -20,6 +20,10 @@ import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
 import colors, { ColorGradient } from "../Theme/colors";
 import LoginIn from "../Home/Components/LoginForm";
+import Register from "../Home/Components/Register";
+import RegisterDetails from "../Home/Components/RegisterDetails";
+import { CustomCard } from "../CustomComponents/UI/Support/CustomCard";
+import ServicePage from "../Home/Components/ServicesPage";
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -108,68 +112,93 @@ function HomeContainer(props) {
         </AppBar>
       </Grid>
 
-      <Grid container className={classes.loginInForm}>
-        <Grid xs={0} sm={1} md={4} item></Grid>
+      <Grid container style={{ marginTop: "10%" }}>
+        <Grid xs={1} sm={1} md={1} item></Grid>
+        <Grid xs={10} sm={10} md={10} container item>
+          <ServicePage />
+        </Grid>
+        <Grid xs={1} sm={1} md={1} item></Grid>
+      </Grid>
+
+      {/* <Grid container className={classes.loginInForm}>
+        <Grid xs={1} sm={2} md={3} item></Grid>
+        <Grid item xs={10} sm={8} md={6}>
+          <RegisterDetails />
+        </Grid>
+        <Grid xs={1} sm={2} md={3} item></Grid>
+      </Grid> */}
+
+      {/* <Grid container className={classes.loginInForm}>
+        <Grid  sm={1} md={4} item></Grid>
+        <Grid item xs={12} sm={10} md={4}>
+          <Register />
+        </Grid>
+        <Grid  sm={1} md={4} item></Grid>
+      </Grid> */}
+
+      {/* <Grid container className={classes.loginInForm}>
+        <Grid  sm={1} md={4} item></Grid>
         <Grid item xs={12} sm={10} md={4}>
           <LoginIn />
         </Grid>
-        <Grid xs={0} sm={1} md={4} item></Grid>
-      </Grid>
+        <Grid  sm={1} md={4} item></Grid>
+      </Grid> */}
+
       {/* MainContainer */}
       {/* <Grid container spacing={0} className={classes.MainContainer}>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
         <Grid item xs={12} sm={10} md={10}>
           <MainContainer />
         </Grid>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
       </Grid> */}
       {/* Services*/}
       {/* <Grid container spacing={0} className={classes.services}>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
         <Grid item xs={12} sm={10} md={10}>
           <Services />
         </Grid>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
       </Grid> */}
       {/* Technologies */}
       {/* <Grid container spacing={0} className={classes.Technologies}>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
         <Grid item xs={12} sm={10} md={10}>
           <Technologies />
         </Grid>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
       </Grid> */}
       {/* projects */}
       {/* <Grid container className={classes.latestProjects}>
-        <Grid xs={0} sm={1} md={2} item></Grid>
+        <Grid  sm={1} md={2} item></Grid>
         <Grid item xs={12} sm={10} md={8}>
           <LatestProjects />
         </Grid>
-        <Grid xs={0} sm={1} md={2} item></Grid>
+        <Grid  sm={1} md={2} item></Grid>
       </Grid>
       <Grid container spacing={0} className={classes.whatWeOffer}>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
         <Grid item xs={12} sm={10} md={10}>
           <WhatWeOffer />
         </Grid>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
       </Grid> */}
       {/*User reviews */}
       {/* <Grid container className={classes.userReview}>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
         <Grid item xs={12} sm={10} md={10}>
           <UserReview />
         </Grid>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
       </Grid> */}
 
       {/* extra info area */}
       {/* <Grid container spacing={0} className={classes.motivationalArea}>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
         <Grid item xs={12} sm={10} md={10}>
           <MotivationalArea />
         </Grid>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
       </Grid> */}
       {/* footer */}
       <Grid container className={classes.footer} spacing={0}>

@@ -34,7 +34,7 @@ export default function CustomAlerts({
     <Grid
       container
       spacing={1}
-      alignItems="flex-start"
+      alignItems="center"
       justifyContent="center"
       className={classes.root}
     >

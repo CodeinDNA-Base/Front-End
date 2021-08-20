@@ -8,43 +8,39 @@ import colors from "../../../Theme/colors";
 
 const useTextFieldStyles = makeStyles(() => ({
   input: {
-    width: (isDesktopOrLaptopOrTabletScreen) =>
-      isDesktopOrLaptopOrTabletScreen ? 250 : 180,
-    font: (isDesktopOrLaptopOrTabletScreen) =>
+   
+    font: ({isDesktopOrLaptopOrTabletScreen}) =>
       isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.large,
     color: colors.black,
+    height:  ({isDesktopOrLaptopOrTabletScreen}) =>
+    isDesktopOrLaptopOrTabletScreen ? 10 :6,
+   
   },
+
 }));
-export const TextFieldWithIcon = ({
+export const StandardTextField = ({
   label,
-  icon,
   onChange,
   value,
-  type,
   width,
+  variant,
+  margin,
+  type='text'
 }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
-  const classes = useTextFieldStyles(isDesktopOrLaptopOrTabletScreen);
+  const classes = useTextFieldStyles({isDesktopOrLaptopOrTabletScreen,width,margin});
 
   return (
-    <Grid
-      container
-      spacing={1}
-      alignItems="flex-end"
-      justifyContent="center"
-      style={{ marginTop: "5%" }}
-    >
-      <Grid item>{icon}</Grid>
-      <Grid item>
         <TextField
           label={label}
           value={value}
           onChange={({ target }) => onChange(target.value)}
-          type={type}
           InputProps={{ classes: { input: classes.input } }}
-        
+          variant={variant}
+          fullWidth
+           required
+          type={type}
         />
-      </Grid>
-    </Grid>
+     
   );
 };
