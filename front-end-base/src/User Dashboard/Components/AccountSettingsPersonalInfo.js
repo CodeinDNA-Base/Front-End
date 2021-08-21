@@ -438,7 +438,6 @@ const ChooseProfileImageModal = (props) => {
             <Box display="flex">
             {/* <FP/>
   */}
-  <MyEditor/>
             </Box>
           </CardContent>
          </Grid>
@@ -472,110 +471,110 @@ registerPlugin(FilePondPluginImagePreview, FilePondPluginImageCrop, FilePondPlug
 //     );
 // }
 
-// export class FP extends React.Component {
-//   constructor(props) {
+export class FP extends React.Component {
+  constructor(props) {
 
-//     super(props);
-//     this.handleChange = this.handleChange.bind(this);
-//     this.updateProfPicUrl = this.updateProfPicUrl.bind(this);
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.updateProfPicUrl = this.updateProfPicUrl.bind(this);
 
-//     // this.user = this.props.user;
-//     // this.files = [];
-//     // this.pathToUrl = {};
-//     // this.basePath = `/users/${this.props.user.id}/images/profPic`;
-//     // this.process = upload.process(
-//     //   this.basePath,
-//     //   this.pond,
-//     //   this.pathToUrl,
-//     //   this.files
-//     // );
-//     // this.revert = upload.revert(this.pathToUrl, this.files);
-//   }
-
-
-//   updateProfPicUrl() {
-//     if (this.files > 0) {
-//       this.props.updateProfPicUrl(this.files, this.pathToUrl);
-//       this.props.handleCloseModal();
-//     } else {
-//       alert("Please choose a file from your computer to upload first!");
-//     }
-//     this.files = [];
-//     this.pathToUrl = {};
-//   }
-
-//   handleChange(e) {
-//     this.setState({ [e.target.name]: e.target.value });
-//   }
-
-//   render() {
-//     return (
-//       <div style={{width:"100%"}}>
-//         <FilePond
-//         ref={ref => (this.pond = ref)}
-//         files={this.files}
-//         allowMultiple={false}
-//         allowImageCrop={true}
-//         allowImageTransform={true}
-//         credits={false}
-//         imageCropAspectRatio={'1:1'}
-//         imageEditInstantEdit={true}
-//         imageCropAspectRatio={1}
-//         onupdatefiles={fileItems => {
-//             // Set current file objects to this.state
-//             this.files = fileItems.map(function(fileItem) {
-//             let file = fileItem;
-//             // file.uuid = uuid().toString();
-//             return file;
-//             });
-//         }}
-//         server={{
-//             process: this.process,
-//             revert: this.revert
-//         }}
-//         />
-//         <button
-//         onClick={() => {
-//             this.props.updateProfPicUrl(
-//             this.files,
-//             this.pathToUrl
-//             );
-//         }}
-//         className="s-btn"
-//         >
-//         Update
-//         </button>
-
-//       </div>
-//     );
-//   }
-// }
-
-
-class MyEditor extends React.Component {
-  state = {
-    image: 'http://example.com/initialimage.jpg',
+    // this.user = this.props.user;
+    // this.files = [];
+    // this.pathToUrl = {};
+    // this.basePath = `/users/${this.props.user.id}/images/profPic`;
+    // this.process = upload.process(
+    //   this.basePath,
+    //   this.pond,
+    //   this.pathToUrl,
+    //   this.files
+    // );
+    // this.revert = upload.revert(this.pathToUrl, this.files);
   }
 
-  handleDrop = dropped => {
-    this.setState({ image: dropped[0] })
+
+  updateProfPicUrl() {
+    if (this.files > 0) {
+      this.props.updateProfPicUrl(this.files, this.pathToUrl);
+      this.props.handleCloseModal();
+    } else {
+      alert("Please choose a file from your computer to upload first!");
+    }
+    this.files = [];
+    this.pathToUrl = {};
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
     return (
-      <Dropzone
-        onDrop={this.handleDrop}
-        noClick
-        noKeyboard
-        style={{ width: '250px', height: '250px' }}
-      >
-        {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps()}>
-            <AvatarEditor width={250} height={250} image={this.state.image} />
-            <input {...getInputProps()} />
-          </div>
-        )}
-      </Dropzone>
-    )
+      <div style={{width:"100%"}}>
+        <FilePond
+        ref={ref => (this.pond = ref)}
+        files={this.files}
+        allowMultiple={false}
+        allowImageCrop={true}
+        allowImageTransform={true}
+        credits={false}
+        imageCropAspectRatio={'1:1'}
+        imageEditInstantEdit={true}
+        imageCropAspectRatio={1}
+        onupdatefiles={fileItems => {
+            // Set current file objects to this.state
+            this.files = fileItems.map(function(fileItem) {
+            let file = fileItem;
+            // file.uuid = uuid().toString();
+            return file;
+            });
+        }}
+        server={{
+            process: this.process,
+            revert: this.revert
+        }}
+        />
+        <button
+        onClick={() => {
+            this.props.updateProfPicUrl(
+            this.files,
+            this.pathToUrl
+            );
+        }}
+        className="s-btn"
+        >
+        Update
+        </button>
+
+      </div>
+    );
   }
 }
+
+
+// class MyEditor extends React.Component {
+//   state = {
+//     image: 'http://example.com/initialimage.jpg',
+//   }
+
+//   handleDrop = dropped => {
+//     this.setState({ image: dropped[0] })
+//   }
+
+//   render() {
+//     return (
+//       <Dropzone
+//         onDrop={this.handleDrop}
+//         noClick
+//         noKeyboard
+//         style={{ width: '250px', height: '250px' }}
+//       >
+//         {({ getRootProps, getInputProps }) => (
+//           <div {...getRootProps()}>
+//             <AvatarEditor width={250} height={250} image={this.state.image} />
+//             <input {...getInputProps()} />
+//           </div>
+//         )}
+//       </Dropzone>
+//     )
+//   }
+// }
