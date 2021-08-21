@@ -2,11 +2,12 @@ import React from "react";
 import { useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import { TextFonts } from "../../../Theme/fonts";
 const RoundButtonStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: ({ bgColor }) => bgColor && bgColor,
     color: ({ color }) => color,
-    width: ({ width }) => width,
+    width: ({ width,isDesktopOrLaptopOrTabletScreen }) =>isDesktopOrLaptopOrTabletScreen ? width : 'auto',
     borderRadius: 20,
     borderColor: ({ borderColor }) => borderColor,
     margin: ({ margin }) => margin,
@@ -14,6 +15,7 @@ const RoundButtonStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: ({ bgColor }) => bgColor && bgColor,
     },
+    font:({isDesktopOrLaptopOrTabletScreen})=>isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall :TextFonts.medium
   },
 }));
 export const RoundButton = ({
@@ -28,14 +30,17 @@ export const RoundButton = ({
   icon,
   type
 }) => {
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const props = {
     color,
     bgColor,
     width,
     borderColor,
     margin,
+    isDesktopOrLaptopOrTabletScreen
   };
   const classes = RoundButtonStyles(props);
+
   return (
     <Button
       variant={variant}
@@ -44,6 +49,7 @@ export const RoundButton = ({
       startIcon={icon  }
       type={type}
       fullWidth
+      
     >
       {title}
     </Button>

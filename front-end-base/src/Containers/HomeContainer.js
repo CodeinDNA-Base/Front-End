@@ -19,7 +19,7 @@ import { AppBar, makeStyles } from "@material-ui/core";
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
 import colors, { ColorGradient } from "../Theme/colors";
-import LoginIn from "../Home/Components/LoginForm";
+import LoginForm ,{PasswordForm} from "../Home/Components/LoginForm";
 import Register from "../Home/Components/Register";
 import RegisterDetails from "../Home/Components/RegisterDetails";
 import { CustomCard } from "../CustomComponents/UI/Support/CustomCard";
@@ -61,6 +61,7 @@ const useStyles = makeStyles(() => ({
   loginInForm: {
     backgroundColor: colors.white,
     paddingTop: "7%",
+    marginTop:isDesktopOrLaptopOrTabletScreen=>isDesktopOrLaptopOrTabletScreen ? '1%' : '25%'
   },
 }));
 // const Box = styled.div`
@@ -74,6 +75,19 @@ function HomeContainer(props) {
   const [sticknessFlag, setSticknessFlag] = useState(true);
   const [currentSelectedTabIndex, setCurrentSelectedTabIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  // for login 
+  const [isLoginWithEmailClicked,setIsLoginWithEmailClicked]=useState(true);
+  const [userEmail,setUserEmail]=useState('');
+  const handleLoginWithEmailClicked=(value)=>{
+    setIsLoginWithEmailClicked(!isLoginWithEmailClicked);
+    setUserEmail(value)
+  }
+ 
+
+
+
+  
   const handleScroll = () => {
     setScrollPosition(window.pageYOffset);
   };
@@ -112,13 +126,13 @@ function HomeContainer(props) {
         </AppBar>
       </Grid>
 
-      <Grid container style={{ marginTop: "10%" }}>
+      {/* <Grid container style={{ marginTop: "10%" }}>
         <Grid xs={1} sm={1} md={1} item></Grid>
         <Grid xs={10} sm={10} md={10} container item>
           <ServicePage />
         </Grid>
         <Grid xs={1} sm={1} md={1} item></Grid>
-      </Grid>
+      </Grid> */}
 
       {/* <Grid container className={classes.loginInForm}>
         <Grid xs={1} sm={2} md={3} item></Grid>
@@ -136,13 +150,13 @@ function HomeContainer(props) {
         <Grid  sm={1} md={4} item></Grid>
       </Grid> */}
 
-      {/* <Grid container className={classes.loginInForm}>
-        <Grid  sm={1} md={4} item></Grid>
-        <Grid item xs={12} sm={10} md={4}>
-          <LoginIn />
+      <Grid container className={classes.loginInForm}>
+        <Grid  xs={1} sm={1} md={4} item></Grid>
+        <Grid item xs={10} sm={10} md={4}>
+       {isLoginWithEmailClicked  ?  <LoginForm handleLoginWithEmailClicked={handleLoginWithEmailClicked} /> : <PasswordForm  userEmail={userEmail}/>}
         </Grid>
-        <Grid  sm={1} md={4} item></Grid>
-      </Grid> */}
+        <Grid xs={1}  sm={1} md={4} item></Grid>
+      </Grid>
 
       {/* MainContainer */}
       {/* <Grid container spacing={0} className={classes.MainContainer}>
@@ -199,8 +213,8 @@ function HomeContainer(props) {
           <MotivationalArea />
         </Grid>
         <Grid  sm={1} md={1} item></Grid>
-      </Grid> */}
-      {/* footer */}
+      </Grid>  */}
+      {/* footer*/}
       <Grid container className={classes.footer} spacing={0}>
         <Grid item md={12} xs={12} sm={12}>
           {isDesktopOrLaptopOrTabletScreen ? (

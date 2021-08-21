@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core";
 import gernalClassesStyles from "../../Theme/gernalStyles";
 import colors from "../../Theme/colors";
 import { Headingfonts, TextFonts } from "../../Theme/fonts";
+import { useMediaQuery } from "@material-ui/core";
 const SubCategoriesToChipsStyles = makeStyles(() => ({
  
   ulStyle: {
@@ -12,19 +13,20 @@ const SubCategoriesToChipsStyles = makeStyles(() => ({
   },
   liStyle: {
     marginBottom: "4%",
-    font: TextFonts.XXSmall,
+    font: isDesktopOrLaptopOrTabletScreen =>isDesktopOrLaptopOrTabletScreen ?TextFonts.XXSmall :TextFonts.medium,
     color:colors.primary
   },
 }));
 
 const SelectSubCategories=()=>{
-    const classes = SubCategoriesToChipsStyles();
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+    const classes = SubCategoriesToChipsStyles(isDesktopOrLaptopOrTabletScreen);
     const gernalClasses = gernalClassesStyles();
     return (
       <Grid container spacing={0}>
         <Grid sm={1} md={1} item></Grid>
         <Grid xs={12} sm={10} md={10} item container>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={5} sm={6} md={3}>
             <ul className={classes.ulStyle}>
               <Link to="#" className={gernalClasses.linkStyle}>
                 <li className={classes.liStyle}>Team</li>
@@ -41,7 +43,7 @@ const SelectSubCategories=()=>{
               </Link>
             </ul>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={5} sm={6} md={3}>
             <ul className={classes.ulStyle}>
               <Link to="#" className={gernalClasses.linkStyle}>
                 <li className={classes.liStyle}>Team</li>
@@ -61,7 +63,7 @@ const SelectSubCategories=()=>{
               </Link>
             </ul>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={5} sm={6} md={3}>
             <ul className={classes.ulStyle}>
               <Link to="#" className={gernalClasses.linkStyle}>
                 <li className={classes.liStyle}>Team</li>
@@ -84,7 +86,7 @@ const SelectSubCategories=()=>{
               </Link>
             </ul>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={5} sm={6} md={3}>
             <ul className={classes.ulStyle}>
               <Link to="#" className={gernalClasses.linkStyle}>
                 <li className={classes.liStyle}>Team</li>

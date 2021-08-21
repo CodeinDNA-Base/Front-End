@@ -42,7 +42,8 @@ export const TextFieldWithIcon = ({
           onChange={({ target }) => onChange(target.value)}
           type={type}
           InputProps={{ classes: { input: classes.input } }}
-        
+          required
+          fullWidth
         />
       </Grid>
     </Grid>

@@ -3,6 +3,7 @@ import { Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import colors from "../../../Theme/colors";
 import { TextFonts } from "../../../Theme/fonts";
+import { useMediaQuery } from "@material-ui/core";
 const CategoryChipsStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -26,6 +27,7 @@ export const CategoryChips = ({
   link,
   margin,
 }) => {
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const CategoryChipsStyles = makeStyles({ color, bgColor, margin });
   return (
     <div className={CategoryChipsStyles.root} style={{ margin: margin }}>
@@ -36,7 +38,7 @@ export const CategoryChips = ({
         clickable
         variant="outlined"
         style={{
-          font: TextFonts.XXSmall,
+          font: isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
           color: color,
           backgroundColor: bgColor,
         }}

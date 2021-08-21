@@ -38,7 +38,7 @@ export const StandardTextField = ({
           InputProps={{ classes: { input: classes.input } }}
           variant={variant}
           fullWidth
-           required
+          required
           type={type}
         />
      
