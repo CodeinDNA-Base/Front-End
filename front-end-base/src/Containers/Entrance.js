@@ -19,7 +19,7 @@ import { SearchProjectsContainer } from "./SearchProjectsContainer";
 
 function setPaths() {
 
-  store.dispatch(actions.add_Route(routeIds.Home,"Home"));
+  store.dispatch(actions.add_Route(routeIds.Home,""));
   store.dispatch(actions.add_Route(routeIds.ServiceDetails,"ServiceDetails"));
   store.dispatch(actions.add_Route(routeIds.messaging,"messaging"));
   store.dispatch(actions.add_Route(routeIds.orders,"orders"));
@@ -28,41 +28,44 @@ function setPaths() {
   store.dispatch(actions.add_Route(routeIds.settings,"settings"));
   store.dispatch(actions.add_Route(routeIds.userdashboard,"userdashboard"));
   store.dispatch(actions.add_Route(routeIds.vieworder,"vieworder"));
-  console.log(store.getState())
+
+
+  // console.log(store.getState())
 }
 
 function Entrance(props) {
   
-  setPaths();
-  const getURL =  (routeIds)=>{
-    store.dispatch(actions.get_Route(routeIds));
-    return  (store.getState().returnedString===null) ? "Home" : store.getState().returnedString
-  }
-  
+  setPaths(); //This must be called before the any component is loaded.
+
+  // console.log(store.getState().Routes.ServiceDetails.routeUrl)
+   
+  useEffect(()=>{
+    
+  },[])
 
   return (
     <Router>
       <Switch>
         
-        <Route exact path={`/${getURL(routeIds.Home)}`} exact>
+        <Route exact path={`/${store.getState().Routes.Home.routeUrl}`} exact>
           <HomeContainer />
         </Route>
-
-        <Route exact path={`/${getURL(routeIds.ServiceDetails)}`}>
+        
+        <Route exact path={`/${store.getState().Routes.ServiceDetails.routeUrl}`}>
           <ServiceDetailsContainer />
         </Route>
 
         <Route
           exact
-          path={`/${getURL(routeIds.searchProject)}`}
+          path={`/${store.getState().Routes.searchProject.routeUrl}`}
           component={SearchProjectsContainer}
         />
-        <Route exact path={`/${getURL(routeIds.userdashboard)}`} component={UserDashboardContainer} />
-        <Route exact path={`/${getURL(routeIds.settings)}`} component={UserDashboardSettings} />
-        <Route exact path={`/${getURL(routeIds.orders)}`} component={UserDashboardOrders} />
-        <Route exact path={`/${getURL(routeIds.messaging)}`} component={UserDashboardChat} />
-        <Route exact path={`/${getURL(routeIds.vieworder)}`} component={UserDashboardViewOrder} />
-        <Route exact path={`/${getURL(routeIds.postrequest)}`} component={PostRequestFromMobileUserDashboard} />
+        <Route exact path={`/${store.getState().Routes.userdashboard.routeUrl}`} component={UserDashboardContainer} />
+        <Route exact path={`/${store.getState().Routes.settings.routeUrl}`} component={UserDashboardSettings} />
+        <Route exact path={`/${store.getState().Routes.orders.routeUrl}`} component={UserDashboardOrders} />
+        <Route exact path={`/${store.getState().Routes.messaging.routeUrl}`} component={UserDashboardChat} />
+        <Route exact path={`/${store.getState().Routes.vieworder.routeUrl}`} component={UserDashboardViewOrder} />
+        <Route exact path={`/${store.getState().Routes.postrequest.routeUrl}`} component={PostRequestFromMobileUserDashboard} />
       </Switch>
     </Router>
   );

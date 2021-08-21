@@ -9,25 +9,15 @@ const add_Route = (routeId,routeUrl) =>{
     }
 }
 
-const update_Route = (routeId,updatedRouteUrl) =>{
-  return {
-      type:actions.UPDATE_ROUTES,
-      data:{
-        routeId,  
-        routeUrl:updatedRouteUrl
-      }
-  }
-}
 
-const get_Route = (routeId) =>{
+const set_Is_Loged_IN = (isLogedIn)=>{
   return {
-      type:actions.GET_ROUTE,
-      data:{
-        routeId
-      }
+    type:actions.SET_IS_LOGED_IN,
+    data:{
+      isLogedIn
+    }
   }
 }
 
 
-
-export {add_Route,update_Route,get_Route}
+export {add_Route,set_Is_Loged_IN}
