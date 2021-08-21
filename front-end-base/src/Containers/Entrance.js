@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ServiceDetailsContainer from "./ServiceDetailsContainer";
 import HomeContainer from "./HomeContainer";
 
+import Splash from "./Splash";
+
 import store from '../Utils/Redux/store';
 import * as actions from '../Utils/Redux/Actions'
-import * as routeIds from '../Utils/Redux/routes'
+import * as routeIds from '../Utils/Routing/Routes'
 
 import {
   UserDashboardContainer,
@@ -19,7 +21,7 @@ import { SearchProjectsContainer } from "./SearchProjectsContainer";
 
 function setPaths() {
 
-  store.dispatch(actions.add_Route(routeIds.Home,""));
+  store.dispatch(actions.add_Route(routeIds.Home,"Home"));
   store.dispatch(actions.add_Route(routeIds.ServiceDetails,"ServiceDetails"));
   store.dispatch(actions.add_Route(routeIds.messaging,"messaging"));
   store.dispatch(actions.add_Route(routeIds.orders,"orders"));
@@ -28,17 +30,14 @@ function setPaths() {
   store.dispatch(actions.add_Route(routeIds.settings,"settings"));
   store.dispatch(actions.add_Route(routeIds.userdashboard,"userdashboard"));
   store.dispatch(actions.add_Route(routeIds.vieworder,"vieworder"));
-
-
-  // console.log(store.getState())
+  store.dispatch(actions.add_Route(routeIds.splash,""));
+  
 }
 
 function Entrance(props) {
   
   setPaths(); //This must be called before the any component is loaded.
 
-  // console.log(store.getState().Routes.ServiceDetails.routeUrl)
-   
   useEffect(()=>{
     
   },[])
@@ -47,6 +46,10 @@ function Entrance(props) {
     <Router>
       <Switch>
         
+      <Route exact path={`/${store.getState().Routes.splash.routeUrl}`} exact>
+          <Splash />
+        </Route>
+
         <Route exact path={`/${store.getState().Routes.Home.routeUrl}`} exact>
           <HomeContainer />
         </Route>

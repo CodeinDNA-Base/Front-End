@@ -7,5 +7,5 @@ const orders="orders";
 const messaging="messaging";
 const vieworder="vieworder";
 const postrequest="postrequest";
-
-export {Home,ServiceDetails,messaging,orders,postrequest,searchProject,settings,userdashboard,vieworder};
+const splash="splash";
+export {Home,ServiceDetails,messaging,orders,postrequest,searchProject,settings,userdashboard,vieworder,splash};

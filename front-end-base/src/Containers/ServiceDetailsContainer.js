@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,6 +9,8 @@ import { BottomNavigation, Box } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ServiceDetailsNavbar from '../Service Details/Components/ServiceDetailsNavbar';
 import { StickyContainer, Sticky } from 'react-sticky';
+import { useHistory } from 'react-router';
+import { useLocation } from 'react-router';
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -25,6 +27,21 @@ function ServiceDetailsContainer(props) {
 
 const classes = useStyles();
 const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
+let location = useLocation();
+let history = useHistory();
+
+useEffect(()=>{
+  console.log("State in Service Details : "+history.action)
+  if(history.action==='POP')
+  {
+    // Here we can clear history if we done want to and fro movement.
+    
+  }
+  else if(history.action==='PUSH'){
+  
+  }
+},[location])
+
 
 return (
     <div className={classes.root}>
