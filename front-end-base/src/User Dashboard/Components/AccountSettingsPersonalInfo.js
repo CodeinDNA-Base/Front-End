@@ -438,6 +438,7 @@ const ChooseProfileImageModal = (props) => {
             <Box display="flex">
             {/* <FP/>
   */}
+  <FP/>
             </Box>
           </CardContent>
          </Grid>
