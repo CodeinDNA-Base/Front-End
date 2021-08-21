@@ -69,11 +69,12 @@ export const UserDashboardOrders = () => {
 };
 
 export const UserDashboardChat = () => {
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   return (
     <>
       <DashboardMenu />
       <ChatContainer/>
-      <FooterComponent />
+     {(isDesktopOrLaptopOrTabletScreen) ? <FooterComponent /> : ''}
     </>
   );
 };
@@ -248,15 +249,15 @@ const OrdersContainer = () => {
 
 const ChatContainer=()=>{
   return (
-    <div className="bodySection1">
+    <div>
       <Grid container>
-        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
-        <Grid item xs={12} sm={10} md={10} lg={8} xl={8}>
-          <Box>
+        {/* <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid> */}
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          {/* <Box> */}
             <ChatModule />
-          </Box>
+          {/* </Box> */}
         </Grid>
-        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+        {/* <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid> */}
       </Grid>
     </div>
   );
