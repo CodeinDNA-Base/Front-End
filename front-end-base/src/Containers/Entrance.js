@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ServiceDetailsContainer from "./ServiceDetailsContainer";
 import HomeContainer from "./HomeContainer";
 import { UserDashboardContainer } from "./UserDashboardContainer";
+import ViewProjectContainer from "./ViewProjectContainer";
 function Entrance(props) {
   return (
     <Router>
@@ -23,6 +24,10 @@ function Entrance(props) {
         <Route path="/UserDashboardContainer">
           <UserDashboardContainer />
         </Route>
+        <Route path="/ViewProjectContainer">
+          <ViewProjectContainer />
+        </Route>
+        
       </Switch>
     </Router>
   );
