@@ -96,7 +96,7 @@ function ViewProjectDescriptionArea(props) {
                             <div id="relatedServicesDiv">
                             {/* Related Services */}
                             <div className={classes.HeadingContainer} ><div className="HeadingFonts"  style={{font:Headingfonts.small}}>Related Projects</div></div> 
-                            <div className={classes.ParaphContainer}> <div className="ParaphFonts"><RelatedService/></div></div>         
+                            {/* <div className={classes.serviceCarousel}> <div className="ParaphFonts"><RelatedService/></div></div>          */}
                             </div>
                     </Grid>
                     
@@ -133,6 +133,11 @@ const useStyles = makeStyles((theme) => ({
     ParaphContainer:{
         paddingLeft:'2%',
         paddingTop:'1%'
+    },
+    relaredServices:{
+        paddingLeft:'2%',
+        paddingTop:'1%',
+        width:400
     }
     ,
     HeadingContainer:{

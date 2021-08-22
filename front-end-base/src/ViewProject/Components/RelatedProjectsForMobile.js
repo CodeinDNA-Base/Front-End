@@ -5,15 +5,15 @@ import { faArrowAltCircleLeft,faArrowAltCircleRight } from "@fortawesome/free-so
 import styled from 'styled-components';
 // import ItemsCarousel from '../../src/ItemsCarousel';
 import ItemsCarousel from 'react-items-carousel';
-import {ProjectCard} from './ProjectCard';
+import {ProjectCardForMobile} from './ProjectCardForMobile';
 const noOfItems = 12;
-const noOfCards = 4;
+const noOfCards = 1;
 const autoPlayDelay = 2000;
-const chevronWidth = 40;
+const chevronWidth = 50;
 
 const Wrapper = styled.div`
   padding: 0 ${chevronWidth}px;
-  max-width: 1000px;
+  max-width:100%;
   margin: 0 auto;
 `;
 
@@ -23,10 +23,10 @@ const carouselItems = range(noOfItems).map(index => (
 //   <SlideItem key={index}>
 //     {index+1}
 //   </SlideItem>
-<ProjectCard  key={index}/>
+<ProjectCardForMobile  key={index}/>
 ));
 
-export default class RelatedProjects extends React.Component {
+export default class RelatedProjectsForMobile extends React.Component {
   state = {
     activeItemIndex: 0,
   };

@@ -10,6 +10,8 @@ import NavTabBarCollectively from '../ViewProject/Components/NavTabBarCollective
 import useWindowDimensions from '../ViewProject/Components/useWindowDimensions';
 import {Footer} from '../ViewProject/Components/Footer';
 import MobileFooter from '../ViewProject/Components/MobileFooter';
+import RelatedProjects from '../ViewProject/Components/RelatedProjects';
+import RelatedProjectsForMobile from '../ViewProject/Components/RelatedProjectsForMobile';
 function ViewProjectContainer(props) {
   
 const classes = useStyles();
@@ -68,9 +70,15 @@ return (
                 <Grid container spacing={1}  style={{marginTop:"10%"}}>
                   <Grid item lg={8} md={8} xs={12} >
                     {/* Service description container */}
-                    <div className={classes.descriptionAreaontainer}>
+                    <div className={classes.descriptionAreaontainer} >
                           <ViewProjectDescriptionArea currentSelectedTabIndex={currentSelectedTabIndex}/>
+                         
                     </div>
+                    <div style={{width: (isDesktopOrLaptopOrTabletScreen) ? "70rem" : "100%",marginTop:"5%"}}>
+                            
+                          {(isDesktopOrLaptopOrTabletScreen) ? <RelatedProjects/> : <RelatedProjectsForMobile/>}  
+                    </div>
+                            
                   </Grid>
                   <Hidden only="xs">
                   <Grid item lg={4} md={4} xs={12}>
