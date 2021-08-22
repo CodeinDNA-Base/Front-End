@@ -1,24 +1,11 @@
 //ReactJS
-import React, { useState, useEffect } from "react";
-// Import React FilePond
-import { FilePond, registerPlugin } from 'react-filepond';
-import AvatarEditor from 'react-avatar-editor'
-import Dropzone from 'react-dropzone'
+import React, { useState, useEffect, PureComponent } from "react";
 
-// Import FilePond styles
-import 'filepond/dist/filepond.min.css';
-
-// Import the Image EXIF Orientation and Image Preview plugins
-// Note: These need to be installed separately
-// `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
-import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
-
-
-
+import { useDropzone } from "react-dropzone";
+import Dropzone from "react-dropzone";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+// or scss:
 //Material-ui core
 import {
   Box,
@@ -45,15 +32,16 @@ import EditIcon from "@material-ui/icons/Edit";
 import LinkedIn from "@material-ui/icons/LinkedIn";
 import Github from "@material-ui/icons/GitHub";
 import Facebook from "@material-ui/icons/Facebook";
+import { Camera } from "@material-ui/icons";
 
 //Routes
 
 //Styles and Theme
-import "./Styles/AccountSettingsPersonalInfo.css"
+import "./Styles/AccountSettingsPersonalInfo.css";
 
 //Resources
 import profilePic from "../Resources/nadir.jpg";
-import { Camera } from "@material-ui/icons";
+import SmallPic from '../Resources/Small.PNG'
 
 export const AccountSettingsPersonalInfo = (props) => {
   return (
@@ -133,11 +121,7 @@ const AccountInfo = () => {
         <Divider />
         <CardContent>
           <div className="container">
-            <img
-              src={profilePic}
-              alt="profile image"
-              className="image"
-            />
+            <img src={profilePic} alt="profile image" className="image" />
             <div className="middle">
               <IconButton>
                 <Camera fontSize="large" onClick={handleProfileImageOpen} />
@@ -436,115 +420,139 @@ const ChooseProfileImageModal = (props) => {
           <CardContent>
             <h4>Click On account to Remove</h4>
             <Box display="flex">
-            {/* <FP/>
-  */}
-  <FP/>
+              <Croppper />
             </Box>
           </CardContent>
-         </Grid>
+        </Grid>
       </Grid>
     </div>
   );
 };
 
-// registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
-registerPlugin(FilePondPluginImagePreview, FilePondPluginImageCrop, FilePondPluginImageTransform);
-
-// Our app
-// function FP() {
-//     const [files, setFiles] = useState([]);
-//     return (
-//       <div style={{width:"100%"}}>
-//                     <FilePond
-//                 files={files}
-//                 onupdatefiles={setFiles}
-//                 allowMultiple={true}
-//                 maxFiles={3}
-//                 // server="/api"
-//                 name="files"
-//                 allowImageCrop={true}
-//                 allowImageTransform={true}
-//                 imageCropAspectRatio={'1:1'}
-
-//                 labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-//             />
-//       </div>
-//     );
-// }
-
-export class FP extends React.Component {
-  constructor(props) {
-
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.updateProfPicUrl = this.updateProfPicUrl.bind(this);
-
-    // this.user = this.props.user;
-    // this.files = [];
-    // this.pathToUrl = {};
-    // this.basePath = `/users/${this.props.user.id}/images/profPic`;
-    // this.process = upload.process(
-    //   this.basePath,
-    //   this.pond,
-    //   this.pathToUrl,
-    //   this.files
-    // );
-    // this.revert = upload.revert(this.pathToUrl, this.files);
+class Croppper extends PureComponent {
+ 
+  constructor(props){
+    super(props)
+    this.setFiles=this.setFiles.bind(this)
   }
+  
+  state = {
+    src: null,
+    crop: {
+      unit: '%',
+      width: 30,
+      aspect: 1 / 1
+    },
+  };
 
-
-  updateProfPicUrl() {
-    if (this.files > 0) {
-      this.props.updateProfPicUrl(this.files, this.pathToUrl);
-      this.props.handleCloseModal();
-    } else {
-      alert("Please choose a file from your computer to upload first!");
+  onSelectFile = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener('load', () =>
+        this.setState({ src: reader.result })
+      );
+      reader.readAsDataURL(e.target.files[0]);
     }
-    this.files = [];
-    this.pathToUrl = {};
+  };
+
+  onImageLoaded = (image) => {
+    this.imageRef = image;
+  };
+
+  onCropComplete = (crop) => {
+    this.makeClientCrop(crop);
+  };
+
+  onCropChange = (crop, percentCrop) => {
+    this.setState({ crop });
+  };
+
+  async makeClientCrop(crop) {
+    if (this.imageRef && crop.width && crop.height) {
+      const croppedImageUrl = await this.getCroppedImg(
+        this.imageRef,
+        crop,
+        'newFile.jpeg'
+      );
+      this.setState({ croppedImageUrl });
+    }
   }
 
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  getCroppedImg(image, crop, fileName) {
+    
+    const canvas = document.createElement('canvas');
+    const pixelRatio = window.devicePixelRatio;
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = crop.width * pixelRatio * scaleX;
+    canvas.height = crop.height * pixelRatio * scaleY;
+
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    ctx.imageSmoothingQuality = 'high';
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width * scaleX,
+      crop.height * scaleY
+    );
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            //reject(new Error('Canvas is empty'));
+            console.error('Canvas is empty');
+            return;
+          }
+          blob.name = fileName;
+          window.URL.revokeObjectURL(this.fileUrl);
+          this.fileUrl = window.URL.createObjectURL(blob);
+          resolve(this.fileUrl);
+        },
+        'image/jpeg',
+        1
+      );
+    });
   }
 
+  setFiles(files){
+    this.setState({src:files[0]})
+  }
   render() {
+    const { crop, croppedImageUrl, src } = this.state;
+    
     return (
-      <div style={{width:"100%"}}>
-        <FilePond
-        ref={ref => (this.pond = ref)}
-        files={this.files}
-        allowMultiple={false}
-        allowImageCrop={true}
-        allowImageTransform={true}
-        credits={false}
-        imageCropAspectRatio={'1:1'}
-        imageEditInstantEdit={true}
-        imageCropAspectRatio={1}
-        onupdatefiles={fileItems => {
-            // Set current file objects to this.state
-            this.files = fileItems.map(function(fileItem) {
-            let file = fileItem;
-            // file.uuid = uuid().toString();
-            return file;
-            });
-        }}
-        server={{
-            process: this.process,
-            revert: this.revert
-        }}
-        />
-        <button
-        onClick={() => {
-            this.props.updateProfPicUrl(
-            this.files,
-            this.pathToUrl
-            );
-        }}
-        className="s-btn"
-        >
-        Update
-        </button>
+      <div>
+      <div style={{display:"flex"}}>
+        {src && (
+          <div style={{width:"200px", height:"200px", marginBottom:"70px", marginLeft:'auto', marginRight:"auto"}}>
+          <ReactCrop
+            src={profilePic}
+            crop={crop}
+            ruleOfThirds
+            onImageLoaded={this.onImageLoaded}
+            onComplete={this.onCropComplete}
+            onChange={this.onCropChange}
+          />
+          </div>
+        )}
+        {croppedImageUrl && (
+          <div style={{width:"200px", height:"200px", marginLeft:'auto', marginRight:"auto"}}>
+          <img alt="Crop" style={{ maxWidth: '100%'}} src={croppedImageUrl} />
+          </div>
+        )}
+      </div>
+      <div>
+          <ImageUploader setFiles={this.setFiles} />
+        </div>
 
       </div>
     );
@@ -552,30 +560,49 @@ export class FP extends React.Component {
 }
 
 
-// class MyEditor extends React.Component {
-//   state = {
-//     image: 'http://example.com/initialimage.jpg',
-//   }
+function ImageUploader(props) {
 
-//   handleDrop = dropped => {
-//     this.setState({ image: dropped[0] })
-//   }
+  const thumbInner = {
+    display: "flex",
+    minWidth: 0,
+    overflow: "hidden",
+  };
 
-//   render() {
-//     return (
-//       <Dropzone
-//         onDrop={this.handleDrop}
-//         noClick
-//         noKeyboard
-//         style={{ width: '250px', height: '250px' }}
-//       >
-//         {({ getRootProps, getInputProps }) => (
-//           <div {...getRootProps()}>
-//             <AvatarEditor width={250} height={250} image={this.state.image} />
-//             <input {...getInputProps()} />
-//           </div>
-//         )}
-//       </Dropzone>
-//     )
-//   }
-// }
+  const img = {
+    display: "block",
+    width: "auto",
+    height: "100%",
+  };
+
+  const dropZoneStyles = {
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "20px",
+    borderWidth: 2,
+    borderRadius: 2,
+    border: "2px dashed blue ",
+    backgroundColor: "#fafafa",
+    color: "#bdbdbd",
+    transition: "border .24s ease-in-out",
+  };
+
+  const { getRootProps, getInputProps, acceptedFiles, fileRejections } =
+    useDropzone({
+      accept: "image/jpeg, image/png",
+      maxFiles: 1,
+      // maxWidth:100,  //bytes
+      // maxSize:10000
+      onDrop: (acceptedFiles) => {
+        props.setFiles(acceptedFiles)
+      },
+    });
+
+  return (
+    <div>
+      <div {...getRootProps({ className: "dropzone" })} style={dropZoneStyles}>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+      </div>
+  );
+}
