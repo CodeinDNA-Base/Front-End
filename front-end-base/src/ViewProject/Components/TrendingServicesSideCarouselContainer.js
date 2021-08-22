@@ -11,7 +11,8 @@ import Box from '@material-ui/core/Box';
 import Icon from '@material-ui/core/Icon';
 import { Button } from '@material-ui/core';
 import './Styles/StyleSheet.css'
-function Packages(props) {
+import { TrendingServicesSideCarousel } from './TrendingServicesSideCarousel';
+function TrendingServicesSideCarouselContainer(props) {
     const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
@@ -29,50 +30,13 @@ function Packages(props) {
                        <Grid item  ld={12} md={12} sm={12} xs={12}>
                             {/* Tabs */}
                             <Box
-                              boxShadow={4}
+                              boxShadow={2  }
                               bgcolor="background.paper"
                               m={1}
                               p={1}
                               style={{ width: (isDesktopOrLaptopOrTabletScreen) ? '100%' : '93%', height: '27rem' }}
                             >
-                            <div className={classes.ourPackagesTitle}><h3>Our packages</h3></div>
-                            <div className={classes.root}>
-                                  <Tabs
-                                    orientation="vertical"
-                                    variant="scrollable"
-                                    value={value}
-                                    onChange={handleChange}                            
-                                    aria-label="Vertical tabs example"
-                                    className={classes.tabs}
-                                  >
-                                    <Tab label="Basic" {...a11yProps(0)} />
-                                    <Tab label="Standard" {...a11yProps(1)} />
-                                    <Tab label="Premium" {...a11yProps(2)} />
-      
-                                  </Tabs>
-
-                                  <TabPanel value={value} index={0} className={classes.TabPanel}>
-                                    Item One
-                                  </TabPanel>
-                                  <TabPanel value={value} index={1} className={classes.TabPanel}>
-                                    Two
-                                  </TabPanel>
-                                  <TabPanel value={value} index={2} className={classes.TabPanel}>
-                                    Item Three
-                                  </TabPanel>
-      
-                                </div>
-                                <div className={classes.contactContainer}>
-                                <Button
-                                   variant="contained"
-                                   color="primary"
-                                   className={classes.button}
-                                //    endIcon={<Icon>send</Icon>}
-                                 >
-                                    Contact  
-                                 </Button>  
-
-                                </div>   
+                                <TrendingServicesSideCarousel/>
                             </Box>
                        </Grid>
                     </Grid>
@@ -251,4 +215,4 @@ const useStyles = makeStyles((theme) => ({
       },
 
   }));
-export default Packages;
+export default TrendingServicesSideCarouselContainer;

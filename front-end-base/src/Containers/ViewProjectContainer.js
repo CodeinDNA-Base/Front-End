@@ -2,12 +2,14 @@ import React,{useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { Box,Grid,withWidth,AppBar,Hidden} from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import ServiceDetailsDescriptionArea from '../ViewProject/Components/ServiceDetailsDescriptionArea';
+import ViewProjectDescriptionArea from '../ViewProject/Components/ViewProjectDescriptionArea';
 import ServiceDetailsFooter from '../ViewProject/Components/ServiceDetailsFooter';
-import Packages from '../ViewProject/Components/Packages';
+import TrendingServicesSideCarouselContainer from '../ViewProject/Components/TrendingServicesSideCarouselContainer';
 import { makeStyles } from '@material-ui/core/styles';
 import NavTabBarCollectively from '../ViewProject/Components/NavTabBarCollectively';
 import useWindowDimensions from '../ViewProject/Components/useWindowDimensions';
+import {Footer} from '../ViewProject/Components/Footer';
+import MobileFooter from '../ViewProject/Components/MobileFooter';
 function ViewProjectContainer(props) {
   
 const classes = useStyles();
@@ -67,7 +69,7 @@ return (
                   <Grid item lg={8} md={8} xs={12} >
                     {/* Service description container */}
                     <div className={classes.descriptionAreaontainer}>
-                          <ServiceDetailsDescriptionArea currentSelectedTabIndex={currentSelectedTabIndex}/>
+                          <ViewProjectDescriptionArea currentSelectedTabIndex={currentSelectedTabIndex}/>
                     </div>
                   </Grid>
                   <Hidden only="xs">
@@ -75,7 +77,7 @@ return (
                     {/* package container */}
                     <div className={classes.packageContainer}>
                         <div className={packageContainerStickyNess}>
-                              <Packages/>
+                              <TrendingServicesSideCarouselContainer/>
                         </div>
                     </div>
                   </Grid>
@@ -87,12 +89,19 @@ return (
             <Grid lg={1} md={1} sm={1} xs={0}></Grid>
         </Grid>
 
-        <Grid item xs={12} className={classes.footer}>
+        {/* <Grid item xs={12} className={classes.footer}> */}
               {/* Footer */}
-             <ServiceDetailsFooter/>
-        </Grid>
+             {/* <ServiceDetailsFooter/> */}
+        {/* </Grid> */}
        
 </Grid> 
+    <div>
+        <Grid container style={{ marginTop: "5%" }} spacing={0}>
+          <Grid item md={12} xs={12} sm={12}>
+            {isDesktopOrLaptopOrTabletScreen ? <Footer /> : <MobileFooter />}
+          </Grid>
+        </Grid>
+      </div>
 </div>  
 );
 }

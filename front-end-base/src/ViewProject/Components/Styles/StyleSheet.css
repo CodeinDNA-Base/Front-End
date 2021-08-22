@@ -53,10 +53,11 @@
 .StickThePackageContainer{
     position: fixed;
     margin-top: 1.5%;
-    width:370px;
+    width:380px;
 }
 .UnStickThePackageContainer{
    margin-top:174.9%;
+   width:380px;
 }
 .OurpackageFonts{
     font-family: 'Jura', sans-serif;

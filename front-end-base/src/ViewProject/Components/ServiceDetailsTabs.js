@@ -66,10 +66,9 @@ export default function ServiceDetailsTabs(props) {
           aria-label="scrollable force tabs example"
         >
           <Tab className="TabTextFonts" label="Over view"   {...a11yProps(0)} />
-          <Tab className="TabTextFonts" label="Description"   {...a11yProps(1)} />
-          <Tab className="TabTextFonts" label="Compare Package" {...a11yProps(2)} />
-          <Tab className="TabTextFonts" label="Reviews"  {...a11yProps(3)} />
-          <Tab className="TabTextFonts" label="Related Service"  {...a11yProps(4)} />
+          <Tab className="TabTextFonts" label="Details"   {...a11yProps(1)} />
+          <Tab className="TabTextFonts" label="Features" {...a11yProps(2)} />
+          <Tab className="TabTextFonts" label="Related Service"  {...a11yProps(3)} />
           
         </Tabs>
       </AppBar>
