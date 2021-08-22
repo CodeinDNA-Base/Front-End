@@ -11,6 +11,7 @@ import RelatedService from './RelatedProjects';
 import useWindowDimensions from './useWindowDimensions';
 import TrendingServicesSideCarouselContainer from './TrendingServicesSideCarouselContainer';
 import { Headingfonts } from '../../Theme/fonts';
+
 function ViewProjectDescriptionArea(props) {
     const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
     const classes = useStyles();
