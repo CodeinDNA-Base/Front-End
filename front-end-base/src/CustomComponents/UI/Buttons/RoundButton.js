@@ -7,6 +7,7 @@ const RoundButtonStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: ({ bgColor }) => bgColor && bgColor,
     color: ({ color }) => color,
+    //width:({width})=>width,
     width: ({ width,isDesktopOrLaptopOrTabletScreen }) =>isDesktopOrLaptopOrTabletScreen ? width : 'auto',
     borderRadius: 20,
     borderColor: ({ borderColor }) => borderColor,

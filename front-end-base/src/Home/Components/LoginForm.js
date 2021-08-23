@@ -21,6 +21,7 @@ import { Checkbox } from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 import ForgetPasswordModal from "./ForgetPasswordModal";
 //import GoogleIcon from '@material-ui/icons/Google';
+import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10%",
     alignItems: "center",
     paddingTop: "5%",
-    paddingLeft: isDesktopOrLaptopOrTabletScreen => isDesktopOrLaptopOrTabletScreen ? '1%' : '5%'
+    //paddingLeft: isDesktopOrLaptopOrTabletScreen => isDesktopOrLaptopOrTabletScreen ? '1%' : '5%'
   },
 
   text: {
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   primaryText: {
     color: colors.primary,
     fontWeight: "bolder",
-    font: TextFonts.XXSmall,
+    font: isDesktopOrLaptopOrTabletScreen=>isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall :TextFonts.medium,
     textAlign: "center",
     marginTop: "5%",
     marginBottom: "10%",
@@ -146,7 +147,7 @@ handleOpen();
           <Grid item>
             <RoundButton
               title={"Login"}
-              width={280}
+              width={260}
               color={colors.white}
               bgColor={colors.secondary}
               margin={"0% 0% 5%  0%"}
@@ -220,6 +221,7 @@ export default function LoginForm({ handleLoginWithEmailClicked ,handleSignUpCli
               bgColor={colors.secondary}
               margin={"0% 0% 5%  0%"}
               handleClick={handleLoginWithEmailClick}
+              icon={<AlternateEmailRoundedIcon />}
             />
             <div class="separator">OR</div>
           </Grid>

@@ -10,10 +10,10 @@ const useTextFieldStyles = makeStyles(() => ({
   input: {
    
     font: ({isDesktopOrLaptopOrTabletScreen}) =>
-      isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.large,
+      isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
     color: colors.black,
-    height:  ({isDesktopOrLaptopOrTabletScreen}) =>
-    isDesktopOrLaptopOrTabletScreen ? 10 :6,
+    // height:  ({isDesktopOrLaptopOrTabletScreen}) =>
+    // isDesktopOrLaptopOrTabletScreen ? 10 :5,
    
   },
 
@@ -25,7 +25,8 @@ export const StandardTextField = ({
   width,
   variant,
   margin,
-  type='text'
+  type='text',
+  size
 }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useTextFieldStyles({isDesktopOrLaptopOrTabletScreen,width,margin});
@@ -40,6 +41,7 @@ export const StandardTextField = ({
           fullWidth
           required
           type={type}
+          size={size}
         />
      
   );

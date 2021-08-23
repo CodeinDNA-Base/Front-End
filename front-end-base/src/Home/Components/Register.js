@@ -15,7 +15,7 @@ import { RoundButton } from "../../CustomComponents/UI/Buttons/RoundButton";
 import { SmallHeading } from "../../CustomComponents/UI/Text/SmallHeading";
 import "./Styles/hrStyle.css";
 import CustomAlerts from "../../CustomComponents/UI/Support/Alerts";
-
+import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: colors.white,
@@ -63,7 +63,7 @@ export default function Register({handleSignUpWithEmailClicked}) {
           value={userEmail}
           onChange={handleUserEmail}
           type={"email"}
-       
+    
         
         />
         <CustomAlerts
@@ -91,6 +91,7 @@ export default function Register({handleSignUpWithEmailClicked}) {
               color={colors.white}
               bgColor={colors.secondary}
               margin={"3% 0% 5%  0%"}
+              icon={<AlternateEmailRoundedIcon />}
               handleClick={handleContinueWithEmailClick}
             />
             <div class="separator">OR</div>
