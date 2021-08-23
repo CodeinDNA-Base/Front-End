@@ -1,11 +1,11 @@
 //ReactJS
 import React, { useState, useEffect, PureComponent } from "react";
 
+//Image dropzone and Crop libraries
 import { useDropzone } from "react-dropzone";
-import Dropzone from "react-dropzone";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-// or scss:
+
 //Material-ui core
 import {
   Box,
@@ -14,7 +14,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  Avatar,
   IconButton,
   Button,
   Modal,
@@ -32,8 +31,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import LinkedIn from "@material-ui/icons/LinkedIn";
 import Github from "@material-ui/icons/GitHub";
 import Facebook from "@material-ui/icons/Facebook";
-import { Camera } from "@material-ui/icons";
-
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import CancelIcon from '@material-ui/icons/Cancel';
 //Routes
 
 //Styles and Theme
@@ -41,7 +40,6 @@ import "./Styles/AccountSettingsPersonalInfo.css";
 
 //Resources
 import profilePic from "../Resources/nadir.jpg";
-import SmallPic from '../Resources/Small.PNG'
 
 export const AccountSettingsPersonalInfo = (props) => {
   return (
@@ -124,7 +122,7 @@ const AccountInfo = () => {
             <img src={profilePic} alt="profile image" className="image" />
             <div className="middle">
               <IconButton>
-                <Camera fontSize="large" onClick={handleProfileImageOpen} />
+                <PhotoCameraIcon fontSize="large" onClick={handleProfileImageOpen} />
               </IconButton>
             </div>
           </div>
@@ -413,14 +411,26 @@ const ChooseProfileImageModal = (props) => {
     props.handleClose();
   }
 
+  function handleClose(){
+    props.handleClose();
+  }
   return (
     <div>
       <Grid container>
         <Grid item xl={12} sm={12} md={12} lg={12} xl={12}>
           <CardContent>
-            <h4>Click On account to Remove</h4>
             <Box display="flex">
-              <Croppper />
+              <Box flex={1}>
+              <h4>Update Profile Image</h4>
+              </Box>
+              <Box mt={1}>
+              <IconButton onClick={handleClose}>
+                <CancelIcon color="primary"/>
+              </IconButton>
+            </Box>
+            </Box>
+            <Box display="flex">
+              <PhotoUploader handleClose={props.handleClose} />
             </Box>
           </CardContent>
         </Grid>
@@ -429,26 +439,26 @@ const ChooseProfileImageModal = (props) => {
   );
 };
 
-class Croppper extends PureComponent {
- 
-  constructor(props){
-    super(props)
-    this.setFiles=this.setFiles.bind(this)
+class PhotoUploader extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.setFiles = this.setFiles.bind(this);
+    this.handleUpdateProfile = this.handleUpdateProfile.bind(this);
   }
-  
+
   state = {
     src: null,
     crop: {
-      unit: '%',
+      unit: "%",
       width: 30,
-      aspect: 1 / 1
+      aspect: 1 / 1,
     },
   };
 
   onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
-      reader.addEventListener('load', () =>
+      reader.addEventListener("load", () =>
         this.setState({ src: reader.result })
       );
       reader.readAsDataURL(e.target.files[0]);
@@ -463,7 +473,7 @@ class Croppper extends PureComponent {
     this.makeClientCrop(crop);
   };
 
-  onCropChange = (crop, percentCrop) => {
+  onCropChange = (crop) => {
     this.setState({ crop });
   };
 
@@ -472,25 +482,31 @@ class Croppper extends PureComponent {
       const croppedImageUrl = await this.getCroppedImg(
         this.imageRef,
         crop,
-        'newFile.jpeg'
+        "newFile.jpeg"
       );
       this.setState({ croppedImageUrl });
     }
   }
 
-  getCroppedImg(image, crop, fileName) {
-    
-    const canvas = document.createElement('canvas');
-    const pixelRatio = window.devicePixelRatio;
+  getCroppedImg = (image, crop, maxHeight) => {
+    const canvas = document.createElement("canvas");
+
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    const ctx = canvas.getContext('2d');
+    const aspectRatio = crop.width / crop.height;
 
-    canvas.width = crop.width * pixelRatio * scaleX;
-    canvas.height = crop.height * pixelRatio * scaleY;
+    let canvasHeight = crop.height * scaleY;
+    let canvasWidth = crop.width * scaleX;
 
-    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    ctx.imageSmoothingQuality = 'high';
+    if (maxHeight && canvasHeight > maxHeight) {
+      canvasHeight = maxHeight;
+      canvasWidth = Math.round(canvasHeight * aspectRatio);
+    }
+
+    canvas.height = canvasHeight;
+    canvas.width = canvasWidth;
+
+    const ctx = canvas.getContext("2d");
 
     ctx.drawImage(
       image,
@@ -500,86 +516,156 @@ class Croppper extends PureComponent {
       crop.height * scaleY,
       0,
       0,
-      crop.width * scaleX,
-      crop.height * scaleY
+      canvasWidth,
+      canvasHeight
     );
 
     return new Promise((resolve, reject) => {
       canvas.toBlob(
         (blob) => {
           if (!blob) {
-            //reject(new Error('Canvas is empty'));
-            console.error('Canvas is empty');
+            console.error("Canvas is empty");
             return;
           }
-          blob.name = fileName;
+          blob.name = image;
           window.URL.revokeObjectURL(this.fileUrl);
           this.fileUrl = window.URL.createObjectURL(blob);
           resolve(this.fileUrl);
         },
-        'image/jpeg',
+        "image/jpeg",
         1
       );
     });
+  };
+
+  // getCroppedImg(image, crop, fileName) {
+
+  //   const canvas = document.createElement('canvas');
+  //   const pixelRatio = window.devicePixelRatio;
+  //   const scaleX = image.naturalWidth / image.width;
+  //   const scaleY = image.naturalHeight / image.height;
+  //   const ctx = canvas.getContext('2d');
+
+  //   canvas.width = crop.width * pixelRatio * scaleX;
+  //   canvas.height = crop.height * pixelRatio * scaleY;
+
+  //   ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+  //   ctx.imageSmoothingQuality = 'high';
+
+  //   ctx.drawImage(
+  //     image,
+  //     crop.x * scaleX,
+  //     crop.y * scaleY,
+  //     crop.width * scaleX,
+  //     crop.height * scaleY,
+  //     0,
+  //     0,
+  //     crop.width * scaleX,
+  //     crop.height * scaleY
+  //   );
+
+  //   return new Promise((resolve, reject) => {
+  //     canvas.toBlob(
+  //       (blob) => {
+  //         if (!blob) {
+  //           console.error('Canvas is empty');
+  //           return;
+  //         }
+  //         blob.name = fileName;
+  //         window.URL.revokeObjectURL(this.fileUrl);
+  //         this.fileUrl = window.URL.createObjectURL(blob);
+  //         resolve(this.fileUrl);
+  //       },
+  //       'image/jpeg',
+  //       1
+  //     );
+  //   });
+  // }
+
+  setFiles(file) {
+    this.setState({ src: file });
   }
 
-  setFiles(files){
-    this.setState({src:files[0]})
+  //Call APIS to update data of this user
+  handleUpdateProfile() {
+    alert("Call to API for profile Update");
+    this.props.handleClose();
   }
+
   render() {
     const { crop, croppedImageUrl, src } = this.state;
-    
+
     return (
       <div>
-      <div style={{display:"flex"}}>
-        {src && (
-          <div style={{width:"200px", height:"200px", marginBottom:"70px", marginLeft:'auto', marginRight:"auto"}}>
-          <ReactCrop
-            src={profilePic}
-            crop={crop}
-            ruleOfThirds
-            onImageLoaded={this.onImageLoaded}
-            onComplete={this.onCropComplete}
-            onChange={this.onCropChange}
-          />
-          </div>
-        )}
-        {croppedImageUrl && (
-          <div style={{width:"200px", height:"200px", marginLeft:'auto', marginRight:"auto"}}>
-          <img alt="Crop" style={{ maxWidth: '100%'}} src={croppedImageUrl} />
-          </div>
-        )}
-      </div>
-      <div>
-          <ImageUploader setFiles={this.setFiles} />
-        </div>
+        <div style={{ display: "flex" }}>
+          {src && (
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                marginBottom: "70px",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
+              <ReactCrop
+                src={src}
+                crop={crop}
+                ruleOfThirds
+                onImageLoaded={this.onImageLoaded}
+                onComplete={this.onCropComplete}
+                onChange={this.onCropChange}
+                imageAlt="Could Not load"
+                circularCrop={true}
+              />
+            </div>
+          )}
 
+          {croppedImageUrl && (
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                marginLeft: "5px",
+                marginRight: "auto",
+              }}
+            >
+              <img
+                alt="Crop"
+                style={{ maxWidth: "100%" }}
+                src={croppedImageUrl}
+              />
+            </div>
+          )}
+        </div>
+        <div>
+          <Dropzone setFiles={this.setFiles} />
+        </div>
+        <Box display="flex" mt={1}>
+          <Box flex={1}></Box>
+          <Box>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={this.handleUpdateProfile}
+              >
+                Update
+              </Button>
+            </Box>
+        </Box>
       </div>
     );
   }
 }
 
+function Dropzone(props) {
 
-function ImageUploader(props) {
-
-  const thumbInner = {
-    display: "flex",
-    minWidth: 0,
-    overflow: "hidden",
-  };
-
-  const img = {
-    display: "block",
-    width: "auto",
-    height: "100%",
-  };
 
   const dropZoneStyles = {
     flexDirection: "column",
     alignItems: "center",
     padding: "20px",
-    borderWidth: 2,
-    borderRadius: 2,
+    borderRadius: 10,
     border: "2px dashed blue ",
     backgroundColor: "#fafafa",
     color: "#bdbdbd",
@@ -593,7 +679,13 @@ function ImageUploader(props) {
       // maxWidth:100,  //bytes
       // maxSize:10000
       onDrop: (acceptedFiles) => {
-        props.setFiles(acceptedFiles)
+        const currentFile = acceptedFiles[0];
+        const myFileItemReader = new FileReader();
+        myFileItemReader.addEventListener("load", () => {
+          const myResult = myFileItemReader.result;
+          props.setFiles(myResult);
+        });
+        myFileItemReader.readAsDataURL(currentFile);
       },
     });
 
@@ -601,8 +693,8 @@ function ImageUploader(props) {
     <div>
       <div {...getRootProps({ className: "dropzone" })} style={dropZoneStyles}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>Drag and Drop or Click to attach image</p>
       </div>
-      </div>
+    </div>
   );
 }

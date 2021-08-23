@@ -10,7 +10,6 @@ import {
   Typography,
   MobileStepper,
   Button,
-  Box,
 } from "@material-ui/core";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import LikeIcon from "@material-ui/icons/ThumbUp";
@@ -40,12 +39,6 @@ export const ProjectContainer = () => {
         <Grid container>
           <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
             <CarouselItem />
-            {/* <div>
-          <Chip className={classes.chip} label="Extra Soft" />
-          <Chip className={classes.chip} label="Soft" />
-          <Chip className={classes.chip} label="Medium" />
-          <Chip className={classes.chip} label="Hard" />
-        </div> */}
           </Grid>
           <Grid item className={classes.section}>
             <Divider orientation="vertical" flexItem />
@@ -99,37 +92,29 @@ const MiddleDividers = () => {
     <div className={classes.root}>
       <div className={classes.section1}>
         <Grid container alignItems="center">
-          {/* <Grid item xs>
-            <Typography gutterBottom variant="h5">
-              Toothbrush
-            </Typography>
-          </Grid>
-          <Grid item >
-          </Grid> */}
-          {/* <Box flexGrow={1}>
+          <Grid xs={9} sm={9} md={9} lg={9} xl={9}>
             <Typography variant="h5">Offline File Sharer in Java</Typography>
-          </Box>
-          <Box>
-            <Typography variant="h6">$45.54</Typography>
-            <Rating size="small" readOnly value={2} /> (55)
-          </Box> */}
-        <Grid xs={9} sm={9} md={9} lg={9} xl={9}>
-            <Typography variant="h5">Offline File Sharer in Java</Typography>        
-        </Grid> 
-        
-        <Grid xs={3} sm={3} md={3} lg={3} xl={3} container justifyContent="center">
-            <div>
-            <Typography variant="h5">$45.54</Typography>
-            </div>
-        <div>
-        <Rating size="small" readOnly value={2}/> 
-        </div>
-        <div>
-        <Typography>Sales(913)</Typography>
+          </Grid>
 
-        </div>
-        </Grid> 
-        
+          <Grid
+            xs={3}
+            sm={3}
+            md={3}
+            lg={3}
+            xl={3}
+            container
+            justifyContent="center"
+          >
+            <div>
+              <Typography variant="h5">$45.54</Typography>
+            </div>
+            <div>
+              <Rating size="small" readOnly value={2} />
+            </div>
+            <div>
+              <Typography>Sales(913)</Typography>
+            </div>
+          </Grid>
         </Grid>
         <LoremIpsum />
       </div>

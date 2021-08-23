@@ -40,16 +40,15 @@ export const LocalProjectSearchbar = () => {
       icon: <TagFacesIcon />,
     },
     {
-        key: "node",
-        label: "Node",
-        icon: <TagFacesIcon />,
-      },
-      {
-        key: "express",
-        label: "Express",
-        icon: <TagFacesIcon />,
-      },
-      
+      key: "node",
+      label: "Node",
+      icon: <TagFacesIcon />,
+    },
+    {
+      key: "express",
+      label: "Express",
+      icon: <TagFacesIcon />,
+    },
   ]);
 
   const [searchedProject, setSearchedProject] = useState("");
@@ -58,14 +57,15 @@ export const LocalProjectSearchbar = () => {
     console.log(evt.target.innerText);
     setSearchedProject(evt.target.innerText);
   }
-  function handlerelatedProjectClick(chipClicked){
-      console.log(chipClicked.key)
+  function handlerelatedProjectClick(chipClicked) {
+    console.log(chipClicked.key);
   }
 
-  function handleRelatedProjectDelete(chipToDelete){
-    setRelatedTerm((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
-  };
-
+  function handleRelatedProjectDelete(chipToDelete) {
+    setRelatedTerm((chips) =>
+      chips.filter((chip) => chip.key !== chipToDelete.key)
+    );
+  }
 
   return (
     <div className="searchBar">
@@ -77,45 +77,46 @@ export const LocalProjectSearchbar = () => {
         getOptionLabel={(option) => option.title}
         filterOptions={filterOptions}
         renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search Projects"
-            variant="outlined"
-          />
+          <TextField {...params} label="Search Projects" variant="outlined" />
         )}
         onChange={handleSearch}
       />
 
-    <Grid container>
+      <Grid container>
         <Grid item xs={1}></Grid>
 
         <Grid item xs={10} sm={12}>
-        {searchedProject ? (
-        <Typography variant="h5" style={{color:"blue"}}>Results for "{searchedProject}"</Typography>
-      ) : (
-        ""
-      )}
+          {searchedProject ? (
+            <Typography variant="h5" style={{ color: "blue" }}>
+              Results for "{searchedProject}"
+            </Typography>
+          ) : (
+            ""
+          )}
 
-        <Typography variant="h6">
-        Related projects<br></br>
-        {relatedTerm.map((data) => {
-          return (
-            <Chip
-              className="relatedProjectsChip"
-              style={{marginRight:"1rem"}}
-              key={data.key}
-              icon={data.icon}
-              label={data.label}
-              onClick={()=>{handlerelatedProjectClick(data)}}
-              onDelete={()=>{handleRelatedProjectDelete(data)}}
-            />
-          );
-        })}
-      </Typography>
+          <Typography variant="h6">
+            Related projects<br></br>
+            {relatedTerm.map((data) => {
+              return (
+                <Chip
+                  className="relatedProjectsChip"
+                  style={{ marginRight: "1rem" }}
+                  key={data.key}
+                  icon={data.icon}
+                  label={data.label}
+                  onClick={() => {
+                    handlerelatedProjectClick(data);
+                  }}
+                  onDelete={() => {
+                    handleRelatedProjectDelete(data);
+                  }}
+                />
+              );
+            })}
+          </Typography>
         </Grid>
         <Grid item xs={1}></Grid>
-
-    </Grid>
+      </Grid>
     </div>
   );
 };
