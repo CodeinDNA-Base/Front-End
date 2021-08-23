@@ -5,20 +5,24 @@ import { HomePageComponentsHeading } from "../../CustomComponents/UI/Text/HomePa
 import { CategoryChips } from "../../CustomComponents/UI/Support/CategoryChips";
 import { SubCategoriesToChips } from "./SubCategoriesToChips";
 import { HowItWorksAreaInServices } from "./HowItWorksAreaInServices";
-import colors from "../../Theme/colors";
+import colors,{ColorGradient} from "../../Theme/colors";
 import { Link } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { DividerInProjects } from "./HorizontalLine";
 import { useMediaQuery } from "@material-ui/core";
 import { MobileCustomCard } from "../../CustomComponents/UI/Support/MobileCustomCard";
+import { FilterOptions } from "./FilterOptions";
 export const ServicePage = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const [selectedCategoryChipId, setSelectedCategoryChipId] = useState("id_0");
   return (
-    <Grid container spacing={6} justifyContent="center">
-      <Grid container style={{ marginTop: "5%" }}>
-        <Skeleton variant="rect" width={1500} height={350} />
+    <Grid container spacing={6} justifyContent="center" >
+      <Grid container justifyContent="center" alignItems='center' style={{backgroundImage:ColorGradient.lightSkyBlue}}>
+      <HomePageComponentsHeading title='Advanced Search' />
+      <Grid container justifyContent="center" alignItems='center'>
+      < FilterOptions />
+      </Grid>
       </Grid>
       <DividerInProjects />
       <HomePageComponentsHeading
@@ -85,6 +89,7 @@ export const ServicePage = () => {
 
       <HowItWorksAreaInServices />
       <DividerInProjects />
+      <Grid container justifyContent="center" alignItems='center' style={{backgroundImage:ColorGradient.lightSkyBlue}}>
       <HomePageComponentsHeading
         title="Browse more categories"
         margin={"0% 0% 2% 0%"}
@@ -123,6 +128,7 @@ export const ServicePage = () => {
         <Grid md={1} xs={1} sm={1} item></Grid>
       </Grid>
 
+</Grid>
       <SubCategoriesToChips selectedCategoryChipId={selectedCategoryChipId} />
     </Grid>
   );

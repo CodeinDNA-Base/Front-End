@@ -19,7 +19,7 @@ export const ColorGradient = {
 		rgb(246, 247, 250),
 		rgb(247, 248, 251),
 		rgb(252, 253, 254),
-		rgb(254, 254, 255)  // backgroud shade of light blue
+		rgb(254, 254, 255) 
 	)`,
 };
 
