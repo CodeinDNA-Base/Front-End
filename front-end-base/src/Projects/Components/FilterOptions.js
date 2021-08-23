@@ -76,6 +76,9 @@ const useStyles = makeStyles((theme) => ({
     fontFamily:"verdana",
     fontWeight:"bold",
     fontSize:"20px"
+  },
+  appBar:{
+    zIndex:1
   }
 }));
 
@@ -95,7 +98,7 @@ export const FilterOptions = () => {
 
   return (
     <Box mb={5}>
-      <Accordion>
+      <Accordion elevation={2}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -104,7 +107,7 @@ export const FilterOptions = () => {
           <Typography variant="h6">Apply Filter- Reach your choice</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <AppBar position="static" color="default" elevation={0}>
+          <AppBar position="static" className={classes.appBar} color="default" elevation={0}>
             <Tabs
               classes={{ root: classes.root, scroller: classes.scroller }}
               value={value}
