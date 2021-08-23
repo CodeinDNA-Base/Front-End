@@ -202,8 +202,7 @@ const carouselStyle = makeStyles((theme) => ({
     display: "block",
     maxWidth: "100%",
     overflow: "hidden",
-    width: "100%",
-    zIndex:1    
+    width: "100%",    
 
   },
 }));

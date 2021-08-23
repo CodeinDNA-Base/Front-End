@@ -35,7 +35,7 @@ import "./Styles/ViewOrder.css";
 import { Link } from "react-router-dom";
 //Icons
 import CheckedIcon from "@material-ui/icons/CheckCircle"
-import { classes } from "istanbul-lib-coverage";
+import { ProjectChatModule } from "./ProjectChatModule";
 //Resources
 
 export const ViewOrder = (props) => {
@@ -70,6 +70,7 @@ const OrderDetails = () => {
   const isItSmallOrExtraSmall = useMediaQuery("(max-width: 960px)");
 
   return (
+    <div>
     <Card className={classes.root} elevation={2}>
       <CardHeader
         title={<div className={isItSmallOrExtraSmall?classes.stepperForMobile:classes.stepperForPC}>
@@ -137,6 +138,20 @@ const OrderDetails = () => {
         </Box>
       </cardContent>
     </Card>
+        
+    <Card className={classes.root} elevation={2}>
+      <CardHeader
+        title={<Typography>
+                Order Chat
+              </Typography>
+        }
+      />
+      <Divider />
+        <CardContent>
+          <ProjectChatModule />
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
