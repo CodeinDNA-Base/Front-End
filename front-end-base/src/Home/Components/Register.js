@@ -32,16 +32,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register() {
+export default function Register({handleSignUpWithEmailClicked}) {
   const classes = useStyles();
   const [userPassword, setUserPassword] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [isIncorrectEmail, setIsIncorrectEmail] = useState(true);
+  const [isIncorrectEmail, setIsIncorrectEmail] = useState(false);
   const handleEmailPressEnter=()=>{
 
   }
   const handleContinueWithEmailClick=()=>{
+    if(userEmail.length > 0)
 
+      handleSignUpWithEmailClicked(userEmail);
+      else
+      alert('Please Enter your Email first')
   }
 
   const handleUserEmail = (value) => {
@@ -58,8 +62,9 @@ export default function Register() {
           icon={<MailIcon />}
           value={userEmail}
           onChange={handleUserEmail}
-          type={"text"}
-          onEnter={handleEmailPressEnter}
+          type={"email"}
+       
+        
         />
         <CustomAlerts
           title={" Would you like to use your work email instead? "}

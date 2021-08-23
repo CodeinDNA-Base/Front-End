@@ -150,6 +150,7 @@ handleOpen();
               color={colors.white}
               bgColor={colors.secondary}
               margin={"0% 0% 5%  0%"}
+
             />
             <div className={classes.primaryText}>Not you ?</div>
           </Grid>
@@ -159,7 +160,7 @@ handleOpen();
   );
 };
 
-export default function LoginForm({ handleLoginWithEmailClicked }) {
+export default function LoginForm({ handleLoginWithEmailClicked ,handleSignUpClicked}) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   const [userId, setUserId] = useState("");
@@ -176,6 +177,11 @@ export default function LoginForm({ handleLoginWithEmailClicked }) {
     else
     alert('please type your email')
   };
+
+  const handleSignUpClick=(event)=>{
+    event.preventDefault();
+    handleSignUpClicked()
+  }
 
   return (
     <Box boxShadow={2} justifyContent="center" alignContent="center">
@@ -247,6 +253,7 @@ export default function LoginForm({ handleLoginWithEmailClicked }) {
               variant={"outlined"}
               borderColor={colors.success}
               margin={"10% 0% 10%  0%"}
+              handleClick={handleSignUpClick}
             />
           </Grid>
         </Grid>

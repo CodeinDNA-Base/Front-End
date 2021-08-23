@@ -29,38 +29,21 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     backgroundColor: colors.white,
   },
-  MainContainer: {
-    backgroundColor: colors.primary,
-    paddingTop: (isDesktopOrLaptopOrTabletScreen) =>
-      isDesktopOrLaptopOrTabletScreen ? "5%" : "25%",
-    paddingBottom: (isDesktopOrLaptopOrTabletScreen) =>
-      isDesktopOrLaptopOrTabletScreen ? "2%" : "10%",
-  },
-  services: {
-    marginTop: "3%",
-  },
-  Technologies: {
-    marginTop: "3%",
-  },
-  latestProjects: {
-    marginTop: "7%",
-    backgroundImage: ColorGradient.lightSkyBlue,
-  },
-  whatWeOffer: {
-    paddingTop: "3%",
-  },
-  userReview: {
-    marginTop: "1%",
-  },
-  motivationalArea: {
-    marginTop: "10%",
-  },
+
   footer: {
     marginTop: "10%",
   },
+  loginInForm: {
+    backgroundColor: colors.white,
+    paddingTop: "7%",
+    marginTop: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? "1%" : "25%",
+  },
 }));
-
-function HomeContainer(props) {
+// const Box = styled.div`
+// 	${breakpoints(compose(spacing, palette))}
+// `;
+function SubServicesContainer(props) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const { height, width } = useWindowDimensions();
   const [packageContainerStickyNess, setPackageContainerStickyNess] =
@@ -69,6 +52,7 @@ function HomeContainer(props) {
   const [currentSelectedTabIndex, setCurrentSelectedTabIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
 
+ 
   const handleScroll = () => {
     setScrollPosition(window.pageYOffset);
   };
@@ -107,62 +91,15 @@ function HomeContainer(props) {
         </AppBar>
       </Grid>
 
-      {/* MainContainer */}
-      <Grid container spacing={0} className={classes.MainContainer}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <MainContainer />
+      <Grid container style={{ marginTop: "10%" }}>
+        <Grid xs={1} sm={1} md={1} item></Grid>
+        <Grid xs={10} sm={10} md={10} container item>
+          <ServicePage />
         </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
-      {/* Services*/}
-      <Grid container spacing={0} className={classes.services}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <Services />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
-      {/* Technologies */}
-      <Grid container spacing={0} className={classes.Technologies}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <Technologies />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
-      {/* projects */}
-      <Grid container className={classes.latestProjects}>
-        <Grid sm={1} md={2} item></Grid>
-        <Grid item xs={12} sm={10} md={8}>
-          <LatestProjects />
-        </Grid>
-        <Grid sm={1} md={2} item></Grid>
-      </Grid>
-      <Grid container spacing={0} className={classes.whatWeOffer}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <WhatWeOffer />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
-      {/*User reviews */}
-      <Grid container className={classes.userReview}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <UserReview />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
+        <Grid xs={1} sm={1} md={1} item></Grid>
       </Grid>
 
-      {/* extra info area */}
-      <Grid container spacing={0} className={classes.motivationalArea}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <MotivationalArea />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
+      
       {/* footer*/}
       <Grid container className={classes.footer} spacing={0}>
         <Grid item md={12} xs={12} sm={12}>
@@ -177,4 +114,4 @@ function HomeContainer(props) {
   );
 }
 
-export default HomeContainer;
+export default SubServicesContainer;

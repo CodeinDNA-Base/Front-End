@@ -29,38 +29,18 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     backgroundColor: colors.white,
   },
-  MainContainer: {
-    backgroundColor: colors.primary,
-    paddingTop: (isDesktopOrLaptopOrTabletScreen) =>
-      isDesktopOrLaptopOrTabletScreen ? "5%" : "25%",
-    paddingBottom: (isDesktopOrLaptopOrTabletScreen) =>
-      isDesktopOrLaptopOrTabletScreen ? "2%" : "10%",
-  },
-  services: {
-    marginTop: "3%",
-  },
-  Technologies: {
-    marginTop: "3%",
-  },
-  latestProjects: {
-    marginTop: "7%",
-    backgroundImage: ColorGradient.lightSkyBlue,
-  },
-  whatWeOffer: {
-    paddingTop: "3%",
-  },
-  userReview: {
-    marginTop: "1%",
-  },
-  motivationalArea: {
-    marginTop: "10%",
-  },
   footer: {
     marginTop: "10%",
   },
+  loginInForm: {
+    backgroundColor: colors.white,
+    paddingTop: "7%",
+    marginTop: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? "1%" : "25%",
+  },
 }));
 
-function HomeContainer(props) {
+function AuthenticationContainer(props) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const { height, width } = useWindowDimensions();
   const [packageContainerStickyNess, setPackageContainerStickyNess] =
@@ -68,7 +48,12 @@ function HomeContainer(props) {
   const [sticknessFlag, setSticknessFlag] = useState(true);
   const [currentSelectedTabIndex, setCurrentSelectedTabIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
+  // true stands for login, false states for sign up
+  const [isLoginOrSignUp, setIsLoginOrSignUp] = useState(true);
 
+  const handleSignUpClicked = () => {
+    setIsLoginOrSignUp(!isLoginOrSignUp);
+  };
   const handleScroll = () => {
     setScrollPosition(window.pageYOffset);
   };
@@ -107,62 +92,11 @@ function HomeContainer(props) {
         </AppBar>
       </Grid>
 
-      {/* MainContainer */}
-      <Grid container spacing={0} className={classes.MainContainer}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <MainContainer />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
-      {/* Services*/}
-      <Grid container spacing={0} className={classes.services}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <Services />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
-      {/* Technologies */}
-      <Grid container spacing={0} className={classes.Technologies}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <Technologies />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
-      {/* projects */}
-      <Grid container className={classes.latestProjects}>
-        <Grid sm={1} md={2} item></Grid>
-        <Grid item xs={12} sm={10} md={8}>
-          <LatestProjects />
-        </Grid>
-        <Grid sm={1} md={2} item></Grid>
-      </Grid>
-      <Grid container spacing={0} className={classes.whatWeOffer}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <WhatWeOffer />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
-      {/*User reviews */}
-      <Grid container className={classes.userReview}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <UserReview />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
-
-      {/* extra info area */}
-      <Grid container spacing={0} className={classes.motivationalArea}>
-        <Grid sm={1} md={1} item></Grid>
-        <Grid item xs={12} sm={10} md={10}>
-          <MotivationalArea />
-        </Grid>
-        <Grid sm={1} md={1} item></Grid>
-      </Grid>
+      {isLoginOrSignUp ? (
+        <LoginInContainer handleSignUpClicked={handleSignUpClicked} />
+      ) : (
+        <SignUPContainer />
+      )}
       {/* footer*/}
       <Grid container className={classes.footer} spacing={0}>
         <Grid item md={12} xs={12} sm={12}>
@@ -177,4 +111,77 @@ function HomeContainer(props) {
   );
 }
 
-export default HomeContainer;
+const SignUPContainer = () => {
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
+  const [isSignUpWithEmailClicked, setIsSignUpWithEmailClicked] =
+    useState(true);
+  const [userEmail, setUserEmail] = useState("");
+
+  const handleSignUpWithEmailClicked = (value) => {
+    setUserEmail(value);
+    setIsSignUpWithEmailClicked(!isSignUpWithEmailClicked);
+  };
+  return (
+    <Grid container className={classes.loginInForm}>
+      <Grid
+        sm={isSignUpWithEmailClicked ? 1 : 2}
+        md={isSignUpWithEmailClicked ? 4 : 3}
+        xs={1}
+        item
+      ></Grid>
+      <Grid
+        item
+        xs={10}
+        sm={isSignUpWithEmailClicked ? 10 : 8}
+        md={isSignUpWithEmailClicked ? 4 : 6}
+      >
+        {isSignUpWithEmailClicked ? (
+          <Register
+            handleSignUpWithEmailClicked={handleSignUpWithEmailClicked}
+          />
+        ) : (
+          <RegisterDetails
+            handleSignUpWithEmailClicked={handleSignUpWithEmailClicked}
+          />
+        )}
+      </Grid>
+      <Grid
+        sm={isSignUpWithEmailClicked ? 1 : 2}
+        md={isSignUpWithEmailClicked ? 4 : 3}
+        xs={1}
+        item
+      ></Grid>
+    </Grid>
+  );
+};
+const LoginInContainer = ({ handleSignUpClicked }) => {
+  const [isLoginWithEmailClicked, setIsLoginWithEmailClicked] = useState(true);
+  const [userEmail, setUserEmail] = useState("");
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
+
+  const handleLoginWithEmailClicked = (value) => {
+    setIsLoginWithEmailClicked(!isLoginWithEmailClicked);
+    setUserEmail(value);
+  };
+
+  return (
+    <Grid container className={classes.loginInForm}>
+      <Grid xs={1} sm={1} md={4} item></Grid>
+      <Grid item xs={10} sm={10} md={4}>
+        {isLoginWithEmailClicked ? (
+          <LoginForm
+            handleLoginWithEmailClicked={handleLoginWithEmailClicked}
+            handleSignUpClicked={handleSignUpClicked}
+          />
+        ) : (
+          <PasswordForm userEmail={userEmail} />
+        )}
+      </Grid>
+      <Grid xs={1} sm={1} md={4} item></Grid>
+    </Grid>
+  );
+};
+
+export default AuthenticationContainer;

@@ -22,6 +22,7 @@ export const TextFieldWithIcon = ({
   value,
   type,
   width,
+
 }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useTextFieldStyles(isDesktopOrLaptopOrTabletScreen);
@@ -44,6 +45,7 @@ export const TextFieldWithIcon = ({
           InputProps={{ classes: { input: classes.input } }}
           required
           fullWidth
+          
         />
       </Grid>
     </Grid>
