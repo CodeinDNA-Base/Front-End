@@ -3,18 +3,21 @@ import React, { useState, useEffect } from "react";
 
 //Material-UI core
 import Skeleton from "@material-ui/lab/Skeleton";
-
+import DesktopChatHistoryModule from "./ChatHistory/DesktopChatHistoryModule";
+import MobileChatHistoryModule from "./ChatHistory/MobileChatHistoryModule";
+import { useMediaQuery } from "@material-ui/core";
 //Style and Theme
 
 //Icons
 
 //Resources
 export const ProjectChatModule = () => {
+
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  
   return (
     <div>
-      <Skeleton variant="text" />
-      <Skeleton variant="circle" width={80} height={80} />
-      <Skeleton variant="rect" height={200} />
+       { (isDesktopOrLaptopOrTabletScreen) ? <DesktopChatHistoryModule/> : <MobileChatHistoryModule/> }
     </div>
   );
 };
