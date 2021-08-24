@@ -1,21 +1,16 @@
 import React from 'react'
-import { makeStyles, Typography } from "@material-ui/core";
+import { Box, makeStyles, Typography, useMediaQuery } from "@material-ui/core";
 import { Radio, RadioGroup, FormControlLabel, Button } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 
 const ratingStyleHook = makeStyles((theme) => ({
-    // root: {
-    //   [theme.breakpoints.down("sm")]: {
-  
-    //     marginBottom: "2px",
-    //   },
-    //   width: "18rem",
-    //   display:"inline"
-  
-    // },
-    elements: {
-      display: "inline",
-    },
+
+  elements:{
+    display:"inline",
+  },
+  ratingContainer:{
+    flex:1
+  }
   }));
   
 export const FilterByRating = () => {
@@ -25,48 +20,45 @@ export const FilterByRating = () => {
     const handleRadioChange = (event) => {
       setValue(event.target.value);
     };
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-    };
-  
+    
+    const isItXsOrSm = useMediaQuery("(max-width: 959px)");
     return (
-      <form onSubmit={handleSubmit}>
-        <Typography variant="h6">Ratings</Typography>
+      <Box>
+               <Typography variant="h6">Ratings</Typography>
+        <Box display={isItXsOrSm?"":"flex"}>
+        <Box className={classes.ratingContainer}>
         <RadioGroup
-          aria-label="quiz"
-          name="quiz"
+          aria-label="Rating"
+          name="ratingOptions"
           value={value}
           onChange={handleRadioChange}
-          className={classes.elements /*,root: classes.root*/}
+          className={classes.elements}
+          
         >
           {[1, 2, 3, 4].map((elm, ind) => {
             return (
               <FormControlLabel
                 value={"d" + ind}
-                control={<Radio />}
-                label={<Rating value={ind + 1} readOnly />}
+                control={<Radio size="small" color="primary"/>}
+                label={<Rating value={ind + 1} size="small" readOnly />}
               />
             );
           })}
         </RadioGroup>
+        </Box>
+        <Box mt={isItXsOrSm?1:0}>
         <Button
           variant="contained"
-          className={classes.priceRangeFormButtons}
-          style={{ backgroundColor: "#011c38", color: "white" }}
+          color="primary"
           size="small"
+          fullWidth
         >
-          Apply
+          Clear Filters
         </Button>
-        <Button
-          variant="contained"
-          className={classes.priceRangeFormButtons}
-          color="secondary"
-          size="small"
-        >
-          Clear
-        </Button>
-      </form>
+        </Box>
+        </Box>
+      </Box>
+        
     );
   };
   

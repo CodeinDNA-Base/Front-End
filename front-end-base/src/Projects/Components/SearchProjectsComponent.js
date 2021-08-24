@@ -1,13 +1,19 @@
-import { LoremIpsum, Avatar } from "react-lorem-ipsum";
+//ReactJS
 
-//Material-UI
+
+//Material-UI core
 import {
   Grid,
+  useMediaQuery,
 } from "@material-ui/core";
 
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+//Material-UI styles
 
-//Component imports
+
+//icons
+
+//Custom Components
+
 import { Menubar } from "./Menubar";
 import { FilterOptions } from "./FilterOptions";
 import { LocalProjectSearchbar } from "./LocalProjectSearchbar";
@@ -15,9 +21,14 @@ import { Footer } from "./Footer";
 import MobileFooter from "./MobileFooter";
 import { ProjectContainer } from "./ProjectContainer";
 import { ProjectPagination } from "./ProjectPagination";
-//CSS
+
+//Theme and Styles
 import "./Styles/FooterStyles.css";
 import "../Color/Colors.css";
+
+
+//Resources
+
 
 export const SearchProjectsComponent = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
@@ -46,13 +57,11 @@ export const SearchProjectsComponent = () => {
           <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
 
           <Grid item xs={10} sm={10} md={10} lg={8} xl={8}>
-            {Array(10)
+            {Array(7)
               .fill()
               .map((proj, ind) => {
                 return (
-                  <>
                     <ProjectContainer />
-                  </>
                 );
               })}
           </Grid>

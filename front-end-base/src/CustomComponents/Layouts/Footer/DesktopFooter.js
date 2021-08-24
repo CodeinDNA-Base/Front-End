@@ -41,7 +41,7 @@ const DesktopFooter = (props) => {
   return (
     <Grid classes={{ root: classes.root }}>
       <Grid container spacing={0}>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
         <Grid xs={12} sm={10} md={10} item container>
           <Grid item xs={12} sm={6} md={3}>
             <ul className={classes.ulStyle}>
@@ -135,7 +135,7 @@ const DesktopFooter = (props) => {
             </ul>
           </Grid>
         </Grid>
-        <Grid xs={0} sm={1} md={1} item></Grid>
+        <Grid  sm={1} md={1} item></Grid>
       </Grid>
 
       <SocialIcons />
