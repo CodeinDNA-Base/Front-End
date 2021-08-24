@@ -5,7 +5,7 @@ import { dimensions } from '../MobileChatHistoryModule';
 
 const useStyles = makeStyles((theme)=>({
     container:{
-        height:dimensions.chatListHeight,
+        height:'calc(100%)',
         overflow:'auto',
         paddingLeft:10
     },

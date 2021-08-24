@@ -6,13 +6,14 @@ import Drawer from '@material-ui/core/Drawer';
 import ChatList from './ChatList';
 import MessageCompositionOptions from './MessageCompositionOptions';
 import { dimensions } from '../DesktopChatHistoryModule';
-
+import useWindowDimensions from '../useWindowDimensions';
 
 const drawerWidth = 300;
+
 function ChatArea(props) {
   const classes = useStyles();
   const theme = useTheme();
-  
+  const {height,width}=useWindowDimensions();  
 
     return (
         <Grid container>
@@ -48,8 +49,8 @@ const useStyles = makeStyles((theme)=>({
 
     },
     root: {
-      // display: 'flex',
-      width:"70%"
+      display: 'flex',
+      width: `calc(100% - 290px)`,
     },
     appBar: {
       transition: theme.transitions.create(['margin', 'width'], {
