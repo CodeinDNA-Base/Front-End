@@ -354,11 +354,11 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(0, 0),
       // necessary for content to be below app bar
       // ...theme.mixins.toolbar,
-      marginTop:25
+      marginTop:'5%'
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(0),
     },
     grow: {
       flexGrow: 1,
