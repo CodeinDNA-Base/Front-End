@@ -1,20 +1,32 @@
+//ReactJS
 import React from "react";
-import cx from "clsx";
+
+//Material-UI core
+import {
+  Box,
+  Badge,
+  Card,
+  CardContent,
+  Avatar,
+  Divider,
+} from "@material-ui/core";
+
+//material-ui styles
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Box, Badge } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Avatar from "@material-ui/core/Avatar";
-import Divider from "@material-ui/core/Divider";
-import { useFadedShadowStyles } from "@mui-treasury/styles/shadow/faded";
+import { Rating } from "@material-ui/lab";
+import cx from "clsx";
+
+//Icons
+
+//Styles
+
 //Resources
 import profilePic from "../Resources/nadir.jpg";
-import { Rating } from "@material-ui/lab";
 
-export const UserProfileCard = () => {
+export const UserProfileCardForMobile = () => {
   return (
     <div>
-      <ProfileCard></ProfileCard>
+      <ProfileCard />
     </div>
   );
 };
@@ -87,9 +99,9 @@ const StyledBadge = withStyles((theme) => ({
 
 export const ProfileCard = React.memo(function ProfileCard() {
   const styles = useStyles();
-  const shadowStyles = useFadedShadowStyles();
+
   return (
-    <Card className={cx(styles.card, shadowStyles.root)}>
+    <Card className={cx(styles.card)} elevation={0}>
       <CardContent>
         <StyledBadge
           overlap="circular"
@@ -99,12 +111,11 @@ export const ProfileCard = React.memo(function ProfileCard() {
           }}
           variant="dot"
         >
-          {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
           <Avatar
             className={styles.avatar}
             src={profilePic}
             onClick={() => {
-              alert("Go to my profile page");
+              alert("Go to my profile page/ Settings");
             }}
             style={{ cursor: "pointer" }}
           />
@@ -113,11 +124,11 @@ export const ProfileCard = React.memo(function ProfileCard() {
         <h3
           className={styles.heading}
           onClick={() => {
-            alert("Go my profile page");
+            alert("Go my profile page/ Settings");
           }}
           style={{ cursor: "pointer" }}
         >
-          Alan Podemski
+          Nadir Hussain
         </h3>
         <Box p={1} mt={0}>
           <Rating value={3} size="small" readOnly></Rating>
@@ -139,30 +150,8 @@ export const ProfileCard = React.memo(function ProfileCard() {
           <p className={styles.statValue}>1 Hour</p>
         </Box>
         <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Last Seen</p>
-          <p className={styles.statValue}>Active</p>
-        </Box>
-      </Box>
-      <Divider light />
-      <Box display={"flex"}>
-        <Box p={1} flex={"auto"}>
           <p className={styles.statLabel}>Balance</p>
           <p className={styles.statValue}>100$</p>
-        </Box>
-        <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Amount Spent</p>
-          <p className={styles.statValue}>+1K$</p>
-        </Box>
-      </Box>
-      <Divider light />
-      <Box display={"flex"}>
-        <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Payment method</p>
-          <p className={styles.statValue}>Verified</p>
-        </Box>
-        <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Total Purchases</p>
-          <p className={styles.statValue}>007</p>
         </Box>
       </Box>
     </Card>

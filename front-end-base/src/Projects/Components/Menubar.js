@@ -2,41 +2,64 @@
 import React from "react";
 
 //Material-UI core
-import { AppBar, IconButton, InputBase, Menu, Zoom } from "@material-ui/core";
 import {
-  MenuItem,
+  AppBar,
+  Divider,
+  IconButton,
+  InputBase,
+  Menu,
+  Zoom,
   Toolbar,
-  Button,
   Box,
   useScrollTrigger,
+  Hidden,
+  Fab,
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Avatar,
 } from "@material-ui/core";
-import { Hidden, Fab } from "@material-ui/core";
+
+//Mateirial-UI styles
+import { alpha, makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 
 //Icons
-import { alpha, makeStyles } from "@material-ui/core/styles";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MoreIcon from "@material-ui/icons/MoreVert";
+
+import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
+import HomeIcon from "@material-ui/icons/Home";
+import {
+  AccountCircle,
+  AllInclusive,
+  LockOpen,
+  TrendingUp,
+} from "@material-ui/icons";
+
+//Routing
+import { Link } from "react-router-dom";
+
 //Local Resources
 import logo from "../Resources/upwork.svg";
-import "./Styles/MenubarStyles.css";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+    zIndex:1
   },
+  
   grow: {
     flexGrow: 1,
   },
   menuContainer: {
     backgroundColor: "#011c38",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   title: {
     display: "none",
@@ -81,96 +104,85 @@ const useStyles = makeStyles((theme) => ({
       width: "40ch",
     },
   },
+  //Show desktop view only when size is lg
   sectionDesktop: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       display: "flex",
     },
   },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
+  avatar: {
+    marginTop: "0.5rem",
+  },
+  profileMenu: {
+    marginTop: "1rem",
   },
 }));
 
 export const Menubar = (props) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  //User profile Menu
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  const profileMenuOptions = [
+    {
+      optionTitle: "Login",
+      optionIcon: <LockOpen />,
+      route: "/signin",
+    },
+    {
+      optionTitle: "Register",
+      optionIcon: <AccountCircle />,
+      route: "/register",
+    },
+  ];
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
+      className={classes.profileMenu}
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      TransitionComponent={Zoom}
+      // elevation={4}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {profileMenuOptions.map(({ optionTitle, optionIcon, route }) => {
+        return (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+            <ListItem button key={optionTitle}>
+              <ListItemIcon>{optionIcon}</ListItemIcon>
+              <ListItemText primary={optionTitle} />
+            </ListItem>
+          </Link>
+        );
+      })}
     </Menu>
   );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <a href="#"> Open</a>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          edge="end"
-          aria-label="account of current user"
-          aria-controls={menuId}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpen}
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-      </MenuItem>
-    </Menu>
-  );
-
-  function gotoHomePage() {
-    alert("I Will go to Home");
-  }
 
   function handleSearch(event) {}
-  
 
   function ScrollTop(props) {
     const { children, window } = props;
@@ -198,16 +210,38 @@ export const Menubar = (props) => {
     );
   }
 
+  const menuOptions = [
+    {
+      optionTitle: "Home",
+      route: "/",
+    },
+    {
+      //Go to Display services page, created by Nageeta
+      optionTitle: "Services",
+      route: "/services",
+    },
+    {
+      optionTitle: "Trending", //if user is logged in, display Dashboard option instead of trending, trending is available at Dashboard
+      route: "/trending",
+    },
+    {
+      //This contact is related to email contact not with inbox/chat
+      optionTitle: "Contact",
+      route: "/",
+    },
+  ];
+
   return (
     <div className={classes.grow}>
       <AppBar className={classes.menuContainer}>
         <Toolbar>
+          <Hidden only={["lg", "xl"]}>
+            <DrawerComponent />
+          </Hidden>
           <Hidden only={["xs"]}>
-            <img
-              src={logo}
-              style={{ cursor: "pointer" }}
-              onClick={gotoHomePage}
-            ></img>
+            <Link to="/">
+              <img src={logo} style={{ cursor: "pointer" }} />
+            </Link>
           </Hidden>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -226,52 +260,22 @@ export const Menubar = (props) => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Box spacing={2} m={2}>
-              <Button>
-                <a href="#" className="menuBarItem">
-                  Home
-                </a>
-              </Button>
-              <Button >
-                <a href="#" className="menuBarItem">
-                  Dashboard
-                </a>
-              </Button>
-              <Button>
-                <a href="#" className="menuBarItem">
-                  Explore
-                </a>
-              </Button>
-              <Button>
-                <a href="#" className="menuBarItem">
-                  Contact
-                </a>
-              </Button>
+              {menuOptions.map(({ optionTitle, route }) => {
+                return (
+                  <Link to={route} className="menuBarItem">
+                    {optionTitle}
+                  </Link>
+                );
+              })}
             </Box>
-            <IconButton
-              edge="start"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
+            <Avatar
+              className={classes.avatar}
               onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
+              style={{ cursor: "pointer" }}
+            />
           </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
       {renderMenu}
       <Toolbar id="back-to-top-anchor" />
       <ScrollTop {...props}>
@@ -286,3 +290,135 @@ export const Menubar = (props) => {
     </div>
   );
 };
+
+const drawerStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: "auto",
+  },
+  avatar: {
+    width: "4rem",
+    height: "4rem",
+    margin: "auto",
+  },
+  profileInfo: {
+    marginLeft: "1rem",
+  },
+});
+
+function DrawerComponent() {
+  const drawerOptions = [
+    {
+      optionTitle: "Home",
+      optionIcon: <HomeIcon />,
+      route: "/",
+    },
+    {
+      optionTitle: "Services",
+      optionIcon: <AllInclusive />,
+      route: "/services", //Go to services page
+    },
+
+    {
+      optionTitle: "Trending",
+      optionIcon: <TrendingUp />, //Show Dashboard if user logged in
+      route: "/trending",
+    },
+  ];
+
+
+  const loginRegisterOptions = [
+    {
+      optionTitle: "Login",
+      optionIcon: <LockOpen />,
+      route: "/login",
+    },
+
+    {
+      optionTitle: "Register",
+      optionIcon: <AccountCircle />,
+      route: "/register", //Go to services page
+    },
+  ]
+  const classes = drawerStyles();
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+  const drawerOptionList = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        <ListItem>
+          <Avatar className={classes.avatar} />
+        </ListItem>
+      </List>
+
+      <Divider />
+      <List>
+        {drawerOptions.map(({ optionTitle, optionIcon, route }) => (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+            <ListItem button key={optionTitle}>
+              <ListItemIcon>{optionIcon}</ListItemIcon>
+              <ListItemText primary={optionTitle} />
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+
+      <Divider />
+      <List>
+        {loginRegisterOptions.map(({ optionTitle, optionIcon, route }) => (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+            <ListItem button key={optionTitle}>
+              <ListItemIcon>{optionIcon}</ListItemIcon>
+              <ListItemText primary={optionTitle} />
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+
+    </div>
+  );
+
+  return (
+    <div>
+      <React.Fragment key="left">
+        <IconButton
+          aria-label="show more"
+          aria-haspopup="true"
+          color="inherit"
+          onClick={toggleDrawer("left", true)}
+        >
+          <MenuIcon fontSize="large" />
+        </IconButton>
+        <SwipeableDrawer
+          anchor={"left"}
+          open={state["left"]}
+          onClose={toggleDrawer("left", false)}
+          onOpen={toggleDrawer("left", true)}
+        >
+          {drawerOptionList("Left")}
+        </SwipeableDrawer>
+      </React.Fragment>
+    </div>
+  );
+}
