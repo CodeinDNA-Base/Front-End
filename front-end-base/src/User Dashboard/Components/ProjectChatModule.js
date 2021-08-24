@@ -9,6 +9,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 //Icons
 
 //Resources
+
 export const ProjectChatModule = () => {
   return (
     <div>

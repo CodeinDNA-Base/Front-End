@@ -25,18 +25,20 @@ import "../User Dashboard/Color/Colors.css";
 
 import { UserProfileCardForMobile } from "../User Dashboard/Components/UserProfileCardForMobile";
 import { AccountSettingsSidebar } from "../User Dashboard/Components/AccountSettingsSidebar";
-import { AccountSettingsPersonalInfo } from "../User Dashboard/Components/AccountSettingsPersonalInfo";
-import { AccountSettingsPaymentMethods } from "../User Dashboard/Components/AccountSettingsPaymentMethods";
-import { AccountSettingsSecurity } from "../User Dashboard/Components/AccountSettingsSecurity";
-import { AccountSettingsNotifications } from "../User Dashboard/Components/AccountSettingsNotifications";
-import { AccountSettingsBalance } from "../User Dashboard/Components/AccountSettingsBalance";
-import { AccountSettingsCriticalSection } from "../User Dashboard/Components/AccountSettingsCriticalSection";
+import { AccountSettingsPersonalInfo } from "../User Dashboard/Components/AccountSettings/AccountSettingsPersonalInfo";
+import { AccountSettingsPaymentMethods } from "../User Dashboard/Components/AccountSettings/AccountSettingsPaymentMethods";
+import { AccountSettingsSecurity } from "../User Dashboard/Components/AccountSettings/AccountSettingsSecurity";
+import { AccountSettingsNotifications } from "../User Dashboard/Components/AccountSettings/AccountSettingsNotifications";
+import { AccountSettingsBalance } from "../User Dashboard/Components/AccountSettings/AccountSettingsBalance";
+import { AccountSettingsCriticalSection } from "../User Dashboard/Components/AccountSettings/AccountSettingsCriticalSection";
 
 import {Orders} from "../User Dashboard/Components/Orders"
 
 import {ChatModule} from "../User Dashboard/Components/ChatModule"
 import {ViewOrder} from "../User Dashboard/Components/ViewOrder"
 import { PostRequestFromMobile } from "../User Dashboard/Components/PostRequestFromMobile";
+import {PreviousPost} from "../User Dashboard/Components/PreviousPost"
+import {ViewPostDetails} from "../User Dashboard/Components/ViewPostDetails"
 
 export const UserDashboardContainer = (props) => {
   return (
@@ -98,6 +100,27 @@ export const PostRequestFromMobileUserDashboard=()=>{
     </>
   );
 }
+
+export const UserDashboardShowPreviousPosts=()=>{
+  return(
+    <>
+      <DashboardMenu />
+      <PreviousPostContainer/>
+      <FooterComponent />
+    </>
+  )
+}
+
+export const UserDashboardViewPostDetails=()=>{
+  return(
+    <>
+      <DashboardMenu />
+      <ViewPostDetailsContainer/>
+      <FooterComponent />
+    </>
+  )
+}
+
 const DashboardMenu = () => {
   return (
     <Grid container>
@@ -279,6 +302,21 @@ const ViewOrderContainer=()=>{
   );
 }
 
+const PreviousPostContainer=()=>{
+  return (
+    <div className="bodySection1">
+      <Grid container>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+        <Grid item xs={12} sm={10} md={10} lg={8} xl={8}>
+          <Box>
+            <PreviousPost />
+          </Box>
+        </Grid>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+      </Grid>
+    </div>
+  );
+}
 const PostRequestFromMobileContainer=()=>{
   return (
     <div className="bodySection1">
@@ -295,6 +333,21 @@ const PostRequestFromMobileContainer=()=>{
   );
 }
 
+export const ViewPostDetailsContainer=()=>{
+  return (
+    <div className="bodySection1">
+      <Grid container>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+        <Grid item xs={12} sm={10} md={10} lg={8} xl={8}>
+          <Box>
+            <ViewPostDetails />
+          </Box>
+        </Grid>
+        <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+      </Grid>
+    </div>
+  );
+}
 const FooterComponent = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   return (

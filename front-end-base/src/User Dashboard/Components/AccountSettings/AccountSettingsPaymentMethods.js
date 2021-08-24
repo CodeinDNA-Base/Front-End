@@ -13,7 +13,7 @@ import Jazzcash from "@material-ui/icons/MoneyOffRounded"
 import Easypaisa from "@material-ui/icons/DriveEtaSharp"
 import UnionTransfer from "@material-ui/icons/LocalParkingSharp"
 //Resources
-import profilePic from "../Resources/nadir.jpg";
+import profilePic from "../../Resources/nadir.jpg";
 
 export const AccountSettingsPaymentMethods = (props) => {
   return (

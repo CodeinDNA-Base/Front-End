@@ -9,12 +9,16 @@ import {
   UserDashboardChat,
   UserDashboardViewOrder,
   PostRequestFromMobileUserDashboard,
+  UserDashboardShowPreviousPosts,
+  UserDashboardViewPostDetails
 } from "./UserDashboardContainer";
 import { SearchProjectsContainer } from "./SearchProjectsContainer";
 
 function Entrance(props) {
+
   return (
-    <Router>
+
+    <Router onUpdate={() => window.scrollTo(0, 0)}>
       <Switch>
         <Route exact path="/" exact>
           <HomeContainer />
@@ -35,6 +39,9 @@ function Entrance(props) {
         <Route exact path="/messaging" component={UserDashboardChat} />
         <Route exact path="/vieworder" component={UserDashboardViewOrder} />
         <Route exact path="/postrequest" component={PostRequestFromMobileUserDashboard} />
+        <Route exact path="/previousposts" component={UserDashboardShowPreviousPosts} />
+        <Route exact path="/viewpost" component={UserDashboardViewPostDetails} />    
+
       </Switch>
     </Router>
   );

@@ -36,10 +36,10 @@ import CancelIcon from '@material-ui/icons/Cancel';
 //Routes
 
 //Styles and Theme
-import "./Styles/AccountSettingsPersonalInfo.css";
+import "../Styles/AccountSettingsPersonalInfo.css";
 
 //Resources
-import profilePic from "../Resources/nadir.jpg";
+import profilePic from "../../Resources/nadir.jpg";
 
 export const AccountSettingsPersonalInfo = (props) => {
   return (
