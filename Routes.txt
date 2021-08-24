@@ -1,1 +1,45 @@
 
+Home ---> Sub Categories Page , Login ,  Register , About , Projects , Comman Contact , Serach Projects , Comman Search, Contact for getting team support
+
+Why us (Explore the market, post a job, Get quality work, pay safely)
+
+new page ---> show user/buyer review
+
+chat --> remove setting, vedio , call option, set scroll of chat screen, remove shadow from sub containers. leave offset from chat area, set margin between icons on chat bar, remove shadow.
+
+explore --> drop down (subServices, search projects)
+
+
+admin -- > decrease the size of icons, change menu bar style, 
+on like and unlike, show list of buyers. projects in project manager should be clickable
+Redesign project edit in all projects screen, we are also users
+Redesign new project screen , make description area larger in width, change field color to white
+Modify tab bar of Set trending project, one should be side bar or buttons
+Change background color of complete adin dashboard to white
+active tab should be colored on active
+
+
+Remove from service  ---> create new service ---> preview 
+1. rating option 
+2. scroll from Package Comaparison
+3. contact button
+4. select button in price
+5. Rating area
+6- Related Services
+make clickable steeper in craeted new servive in service manager.
+Add new page to preview buyer complete profile details
+change serach bar and sort by service colors and make filters instaed of sort by service alone.
+
+Add pending accounts in Cleint Account Manager, add serach filter like( money spend, by client name, completed orders).
+
+change : list of clients to cards in active and blocked options inside leint Account Manager.
+change: in Review Manager change review field, it should be user friendly.
+Complete Offers Manager first before API.
+Modify admin chat design same as defined above for buyer chat.
+Create login page for admin, with security options. 
+Create Profile managment page for admin.
+on Home page create analytics for admin (copy from fiver)..
+Service Details Container is missing
+
+
+
