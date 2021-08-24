@@ -9,25 +9,23 @@ function MessageCompositionOptions(props) {
     return (
         <div className={classes.container}>
             <Grid container>
-                <Grid item xs={1} style={{marginLeft:0}}>
-                    {/* Gif icon */}
-                </Grid>
                 
-                <Grid item xs={1}>
+                
+                <Grid item xs={1} >
                     {/* File icon */}
                     <div className={classes.iconContinaer}>
-                        <FontAwesomeIcon icon={faPaperclip} className={classes.icon}/>
+                        <FontAwesomeIcon icon={faPaperclip} size="lg" className={classes.icon}/>
                     </div>
                 </Grid>
                 
                 <Grid item xs={1}>
                     {/* Media icon */}
                     <div className={classes.iconContinaer}>
-                        <FontAwesomeIcon icon={faImage} className={classes.icon}/>
+                        <FontAwesomeIcon icon={faImage} size="lg" className={classes.icon}/>
                     </div>
                 </Grid>
                 
-                <Grid item xs={4}>
+                <Grid item xs={5}>
                     {/* Message box */}
                   
                     <div className={classes.search}>
@@ -48,20 +46,20 @@ function MessageCompositionOptions(props) {
                 <Grid item xs={1}>
                     {/* Like icon */}
                     <div className={classes.iconContinaer}>
-                        <FontAwesomeIcon icon={faPaperPlane} className={classes.icon}/>
+                        <FontAwesomeIcon icon={faPaperPlane} size="lg" className={classes.icon}/>
                     </div>
                 </Grid>
                 <Grid item xs={1}>
                     {/* Like icon */}
                     <div className={classes.iconContinaer}>
-                        <FontAwesomeIcon icon={faThumbsUp} className={classes.icon}/>
+                        <FontAwesomeIcon icon={faThumbsUp} size="lg" className={classes.icon}/>
                     </div>
                 </Grid>
                 <Grid item xs={3}>
                     {/* Like icon */}
                     <div className={classes.makeOffer}>
                         <p className={classes.makeOfferText}>
-                            Make Offer
+                            Post request
                         </p>
                     </div>
                 </Grid>
@@ -78,30 +76,37 @@ const useStyles=makeStyles((theme)=>({
         boxShadow: "1px 0px 1px #9E9E9E"
     },
     iconContinaer:{
-        // backgroundColor:"green"
+        // backgroundColor:"green",
     //     boxShadow: "1px 1px 3px #9E9E9E",
-        textAlign:'center',
-        height:60,
-        width: theme.spacing(6),
-        height: theme.spacing(6),
+       
+        
+        width:'100%',
+        height: '100%',
         borderRadius:10,
-        marginTop:'7%',
-      
+        marginTop:'auto',
+        marginBottom:"auto",
+        textAlign:'center'
     },
     makeOffer:{
         // backgroundColor:"green"
-        boxShadow: "1px 1px 3px #9E9E9E",
-        textAlign:'center',
        
        
-        width: theme.spacing(15),
-        height: theme.spacing(6),
-        borderRadius:10,
-        marginTop:'-4%',
-      
+       
+        width: '100%',
+        height: '100%',
+        // backgroundColor:'blue',
+        marginTop:'3%',
+        textAlign:'center'
     },
     makeOfferText:{
-       paddingTop:'8%',
+
+    boxShadow: "1px 1px 3px #9E9E9E",
+    margin:'auto',
+    width: '90%',
+    height: '90%',
+    borderRadius:10,
+    marginTop:'0%',
+          paddingTop:'3%',
        fontWeight:'bold'
     },
     icon:{
@@ -110,9 +115,9 @@ const useStyles=makeStyles((theme)=>({
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: "#e4ecf2",
+        backgroundColor: "#f5ffff",
         '&:hover': {
-          backgroundColor: "#e4ecf2",
+          backgroundColor: "#f5ffff",
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
@@ -121,7 +126,7 @@ const useStyles=makeStyles((theme)=>({
           marginLeft: theme.spacing(3),
           width: 'auto',
         },
-        marginTop:"3%",
+        marginTop:"2%",
         // borderRadius:0,
         boxShadow: "1px 1px 3px #9E9E9E",
       },

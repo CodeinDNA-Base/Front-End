@@ -40,7 +40,7 @@ function MessageCompositionOptionsForMobile(props) {
               <Grid item xs={3} >
                     {/* Like icon */}
                     <div className={classes.makeOffer}>
-                     <p className={classes.makeOfferText}> Create Offer</p> 
+                     <p className={classes.makeOfferText}>Post request</p> 
                     </div>
               </Grid>
               <Grid item xs={1}>
@@ -56,9 +56,9 @@ function MessageCompositionOptionsForMobile(props) {
 }
 const useStyles=makeStyles((theme)=>({
     container:{
-        backgroundColor:"#f2fcfb",
+        // backgroundColor:"#f2fcfb",
         height:'3rem',
-        boxShadow: "1px 0px 1px #9E9E9E"
+        // boxShadow: "1px 0px 1px #9E9E9E"
     },
    
     makeOffer:{

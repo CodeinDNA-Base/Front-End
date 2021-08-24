@@ -36,9 +36,12 @@ import { Link } from "react-router-dom";
 //Icons
 import CheckedIcon from "@material-ui/icons/CheckCircle"
 import { ProjectChatModule } from "./ProjectChatModule";
+import MessageCompositionOptions from "./ChatHistory/ChatArea/MessageCompositionOptions";
+import MessageCompositionOptionsForMobile from './ChatHistory/ChatArea/MessageCompositionOptionsForMobile'
 //Resources
 
 export const ViewOrder = (props) => {
+
   return (
     <div>
       <OrderDetails />
@@ -48,6 +51,9 @@ export const ViewOrder = (props) => {
 
 const orderDetailsStyles = makeStyles((theme) => ({
   root: {
+    maxWidth: "100%",
+    marginTop: "2rem",
+  },orderChatContainer:{
     maxWidth: "100%",
     marginTop: "2rem",
   },
@@ -68,7 +74,8 @@ const OrderDetails = () => {
   const[projectCost, setProjectCost]=useState(4115)
   
   const isItSmallOrExtraSmall = useMediaQuery("(max-width: 960px)");
-
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  
   return (
     <div>
     <Card className={classes.root} elevation={2}>
@@ -139,17 +146,22 @@ const OrderDetails = () => {
       </cardContent>
     </Card>
         
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.orderChatContainer} elevation={2}>
       <CardHeader
         title={<Typography>
                 Order Chat
               </Typography>
         }
+        
       />
       <Divider />
         <CardContent>
           <ProjectChatModule />
         </CardContent>
+        <Divider />
+        <CardContent>
+          {(isDesktopOrLaptopOrTabletScreen) ? <MessageCompositionOptions/> : <MessageCompositionOptionsForMobile/>}
+        </CardContent>  
       </Card>
     </div>
   );
