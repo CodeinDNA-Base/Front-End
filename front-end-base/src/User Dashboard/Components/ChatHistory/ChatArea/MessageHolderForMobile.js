@@ -11,7 +11,8 @@ import { faFile,faDownload,faFileImage} from '@fortawesome/free-solid-svg-icons'
 import { Button, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme)=>({
     container:{
-        marginTop:'1%'
+        marginTop:'1%',
+        paddingRight:'2%'
     },
     imageHolder:{
         width:'100%',
@@ -121,7 +122,7 @@ const MessageHolderForMobile = withStyles(defaultChatMsgStyles, { name: 'ChatMsg
 
                 </Typography> */}
 
-                <div className={styles.fileHolder} style={{marginLeft:(isLeft) ? "0%" : "8%"}}>
+                <div className={styles.fileHolder} style={{marginLeft:(isLeft) ? "0%" : "7%"}}>
                     <Grid  container>
 
                     <Grid item xs={2} style={{textAlign:'center'}}>
@@ -152,7 +153,7 @@ const MessageHolderForMobile = withStyles(defaultChatMsgStyles, { name: 'ChatMsg
               // eslint-disable-next-line react/no-array-index-key
 
               <div key={file.id || i} className={classes[`${side}Row`]}>
-                <div className={styles.fileHolder} style={{marginLeft:(isLeft) ? "0%" : "8%"}}>
+                <div className={styles.fileHolder} style={{marginLeft:(isLeft) ? "0%" : "7%"}}>
                     <Grid  container>
 
                     <Grid item xs={2} style={{textAlign:'center'}}>

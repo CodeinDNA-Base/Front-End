@@ -5,7 +5,7 @@ import MessageCompositionOptionsForMobile from './ChatArea/MessageCompositionOpt
 import ChatListForMobile from './ChatArea/ChatListForMobile';
 
 export const dimensions = {
-    chatListHeight:'32em',
+    chatListHeight:'25em',
     marginLeft_Container:0,
     marginRight_Container:0,
     marginTop_Container:0,
@@ -15,7 +15,7 @@ function MobileChatHistoryModule(props) {
     return (
         <div style={{position:'relative'}}>
             <Grid container>
-                <Grid item xs={12} style={{height:height-50}}>
+                <Grid item xs={12} style={{height:'calc(35rem)'}}>
                     <ChatListForMobile/>
                 </Grid>
                 {/* <Grid item xs={12}  style={{width:'100%',position:'fixed',bottom:0}}>

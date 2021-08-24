@@ -57,7 +57,7 @@ function MessageCompositionOptionsForMobile(props) {
 const useStyles=makeStyles((theme)=>({
     container:{
         // backgroundColor:"#f2fcfb",
-        height:'3rem',
+        height:'2.5rem',
         // boxShadow: "1px 0px 1px #9E9E9E"
     },
    
