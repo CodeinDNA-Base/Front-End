@@ -1,30 +1,29 @@
+
+//Reat
 import React, { useState } from 'react';
+
+//  Material UI
 import clsx from 'clsx';
-import { alpha } from '@material-ui/core/styles';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import { 
+    makeStyles,useTheme,alpha,
+} from '@material-ui/core/styles';
+
+import { 
+    Drawer,AppBar,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,
+    ListItemIcon,ListItemText,InputBase,MenuItem,Badge,Menu, Grid
+} from '@material-ui/core';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+
+//Components
+
 import { stringCollection } from '../Admin Dashborad/Components/Strings/StringCollection';
 import ManageChats from '../Admin Dashborad/Components/ManageChats/ManageChats';
 import ManageMasterDatabase from '../Admin Dashborad/Components/ManageMasterDatabase/ManageMasterDatabase';
@@ -38,10 +37,14 @@ import ManageUserAccounts from '../Admin Dashborad/Components/ManageUserAccounts
 import ManageUserPermissions from '../Admin Dashborad/Components/ManageUserPermisions/ManageUserPermissions';
 import Home from '../Admin Dashborad/Components/Home/Home';
 import ManageOffers from '../Admin Dashborad/Components/ManageOffers/ManageOffers';
+import { Headings } from '../Admin Dashborad/Components/Support/Headings';
+
 
 const drawerWidth = 250;
-const drawerIconHeight = 35;
-const drawerIconWidth = 35;
+const drawerIconHeight = 25;
+const drawerIconWidth = 25;
+const drawerFontSize='1rem';
+const drawerFontWeight='bold';
 
 export default function AdminDashboardContainer() {
   const classes = useStyles();
@@ -56,7 +59,9 @@ export default function AdminDashboardContainer() {
                       <ManageProjects/>,<ManageReviews/>,<ManageServices/>,
                       <ManageTeams/>,<ManageTransactions/>,<ManageUserAccounts/>,
                       <ManageUserPermissions/>,<Home/>,<ManageOffers/>];
+
   const [currentOpenedScreen,setCurrentOpenedScreen]=useState(allScreens[10]);
+
   /**
    * 0 : ManageChats
    * 1 : ManageMasterDatabase
@@ -77,20 +82,11 @@ export default function AdminDashboardContainer() {
     setCurrentOpenedScreen(allScreens[index]);
   }
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handleProfileMenuOpen = (event) => {setAnchorEl(event.currentTarget);};
+  const handleDrawerOpen = () => {setOpen(true);};
+  const handleDrawerClose = () => {setOpen(false);};
+  const handleMenuClose = () => {setAnchorEl(null);};
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -180,6 +176,8 @@ export default function AdminDashboardContainer() {
           </div>      
         </Toolbar>
       </AppBar>
+
+      
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -193,39 +191,49 @@ export default function AdminDashboardContainer() {
           }),
         }}
       >
-        <div className={classes.toolbar}>
+        <div>
             {/* Top of drawer */}
-         
-          <IconButton onClick={handleDrawerClose}>
-          <div>Admin</div>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+         <Grid container>
+           <Grid item xs={1}></Grid>
+           <Grid item xs={9} style={{textAlign:'center',justifyContent:'center',height:'7rem',display: (open) ? '' : 'none'}}>
+             <div style={{backgroundColor:'green',borderRadius:'50%',height:'6rem',width:'6rem',margin:'auto',marginTop:'4%'}}>Admin</div>
+            </Grid>
+           <Grid item xs={2}>
+                 <IconButton onClick={handleDrawerClose}>
+                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                 </IconButton>
+           </Grid>
+           
+         </Grid>
+          
         </div>
         <List>
               <ListItem button onClick={()=>{handelManageOptionClickEvent(this,10)}}>
                   <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/home.png"/> </ListItemIcon>
-                  <ListItemText primary={stringCollection.AdminDashboardContainer.HomeOption} />
+                  <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.HomeOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
               </ListItem>
         </List>
         <Divider />
         <List>
               <ListItem button onClick={()=>{handelManageOptionClickEvent(this,3)}}>
                   <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/project.png"/> </ListItemIcon>
-                  <ListItemText primary={stringCollection.AdminDashboardContainer.ManageProjectsOption} />
+                  <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageProjectsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
               </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,5)}} >
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/100/000000/service.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageServicesOption} />
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageServicesOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+         
             </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,2)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/todo-list.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageOrdersOption} />
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageOrdersOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+         
             </ListItem>
         </List>       
 
@@ -233,7 +241,8 @@ export default function AdminDashboardContainer() {
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,8)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-glyphs/30/000000/user-folder.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageUserAccountsOption} />
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageUserAccountsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+         
             </ListItem>
         </List>
         <Divider />
@@ -249,7 +258,8 @@ export default function AdminDashboardContainer() {
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,4)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/customer-insight.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageReviewsOption} />
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageReviewsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+         
             </ListItem>
         </List>
 
@@ -258,7 +268,8 @@ export default function AdminDashboardContainer() {
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,11)}}>
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/pastel-glyph/50/000000/price-tag.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageOffersOption} />
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageOffersOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+         
             </ListItem>
         </List>
         <Divider />
@@ -266,26 +277,30 @@ export default function AdminDashboardContainer() {
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,0)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/chat--v2.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageChatsOption} />
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageChatsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+         
             </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,7)}}>
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/payment-history.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageTransactionsOption} />
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageTransactionsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+         
             </ListItem>
         </List><Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,6)}}>
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/army-star.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageTeamsOption} />
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageTeamsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+         
             </ListItem>
         </List><Divider />
         <List>
             <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,1)}}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/cloud-storage.png"/></ListItemIcon>
-              <ListItemText primary={stringCollection.AdminDashboardContainer.ManageMasterDatabaseOption} />
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageMasterDatabaseOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+         
             </ListItem>
         </List>
       </Drawer>

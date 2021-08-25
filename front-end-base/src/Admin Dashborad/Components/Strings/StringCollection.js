@@ -1,4 +1,19 @@
 const stringCollection = {
+    AdminDashboardDrawer:{
+        NavBarTitle:"CodeInDNA.com",
+        ManageChatsOption:"Chats",
+        ManageMasterDatabaseOption:"Manage Master database",
+        ManageOrdersOption:"Orders",
+        ManageProjectsOption:"Projects",
+        ManageReviewsOption:"Customer Reviews",
+        ManageServicesOption:"Services",
+        ManageTeamsOption:"Teams",
+        ManageTransactionsOption:"Transactions",
+        ManageUserAccountsOption:"User Accounts",
+        ManageUserPermissionsOption:"User Permissions",
+        HomeOption:"Home",
+        ManageOffersOption:"Offers",
+    },
     AdminDashboardContainer:{
         NavBarTitle:"CodeInDNA.com",
         ManageChatsOption:"Chats",

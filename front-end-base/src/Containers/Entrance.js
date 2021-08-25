@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ServiceDetailsContainer from "./ServiceDetailsContainer";
 import HomeContainer from "./HomeContainer";
+import Test from "./Test";
 import {
   UserDashboardContainer,
   UserDashboardSettings,
@@ -13,7 +14,7 @@ import {
   UserDashboardViewPostDetails
 } from "./UserDashboardContainer";
 import { SearchProjectsContainer } from "./SearchProjectsContainer";
-
+import AdminDashboardContainer from './AdminDashboardContainer'
 function Entrance(props) {
 
   return (
@@ -41,6 +42,8 @@ function Entrance(props) {
         <Route exact path="/postrequest" component={PostRequestFromMobileUserDashboard} />
         <Route exact path="/previousposts" component={UserDashboardShowPreviousPosts} />
         <Route exact path="/viewpost" component={UserDashboardViewPostDetails} />    
+        <Route exact path="/admin" component={AdminDashboardContainer} />    
+        <Route exact path="/test" component={Test} />    
 
       </Switch>
     </Router>
