@@ -1,104 +1,127 @@
-import React,{useState} from 'react';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import Hidden from '@material-ui/core/Hidden';
-import withWidth from '@material-ui/core/withWidth';
+import React,{useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { BottomNavigation, Box } from '@material-ui/core';
+import { Box,Grid,withWidth,AppBar,Hidden} from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import ServiceDetailsNavbar from '../Service Details/Components/ServiceDetailsNavbar';
-import { StickyContainer, Sticky } from 'react-sticky';
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: "black",
-    },
-  }));
-
-function ServiceDetailsContainer(props) {
+import ServiceDetailsDescriptionArea from '../Service Details/Components/ServiceDetailsDescriptionArea';
+import ServiceDetailsFooter from '../Service Details/Components/ServiceDetailsFooter';
+import Packages from '../Service Details/Components/Packages';
+import { makeStyles } from '@material-ui/core/styles';
+import NavTabBarCollectively from '../Service Details/Components/NavTabBarCollectively';
+import useWindowDimensions from '../Service Details/Components/useWindowDimensions';
+function ServiceWorkerContainer(props) {
+  
 
 const classes = useStyles();
+const { height, width } = useWindowDimensions();
 const isDesktopOrLaptopOrTabletScreen = useMediaQuery('(min-width: 960px)');
+const [packageContainerStickyNess,setPackageContainerStickyNess]=useState("");
+const [sticknessFlag,setSticknessFlag]=useState(true)
+const [currentSelectedTabIndex,setCurrentSelectedTabIndex]=useState(0);
+const [scrollPosition, setScrollPosition] = useState(0);
+const handleScroll = () => {
+  setScrollPosition(window.pageYOffset) 
+};
 
-return (
-    <div className={classes.root}>
-      <Grid container spacing={1}>
-
-        <Grid item xs={12}>
-              {/* Nav bar */}
-              <ServiceDetailsNavbar/>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Box px={(isDesktopOrLaptopOrTabletScreen) ? 6 : 3}>
-             {/* Body */}
-             <Grid container spacing={1}>
-                  <Grid item xs={12}>
-                    {/* Tabs container */}
-                    <Paper className={classes.paper}
-                      
-                    >
-                   <h3>tabs</h3>
-                    </Paper>
-                  </Grid>
-                  <Grid item lg={8} md={8} xs={12}>
-                    {/* Service description container */}
-                    <Paper className={classes.paper}>
-                      <div style={
-                        {
-                          backgroundColor:"green",
-                          height:1000,
-                          alignItems:'center', 
-                        }
-                      }>
-                          {/* Call here the description componet */}
-                          <h3>Service description container</h3>
-
-                      </div>
-                    </Paper>
-                  </Grid>
-
-                  <Grid item lg={4} md={4} xs={12}>
-                    {/* package container */}
-                    <Paper className={classes.paper}>
-                    <div style={
-                        {
-                          backgroundColor:"orange",
-                          height:350,
-                          alignItems:'center', 
-                        }
-                      }>
-                          {/* Call here the description componet */}
-                          <h3>Package container</h3>
-                      </div>  
-                    </Paper>
-                  </Grid>
-                  
-             </Grid>
-          </Box>
-        </Grid>
-        <Grid item xs={12} 
-        style={{
-              left:0,
-              bottom:0,
-              right:0,
-              height:250
-              }}>
-              {/* Footer */}
-              <Paper className={classes.paper} style={{backgroundColor:"blue",height:'100%'}}>footer container</Paper>
-        </Grid>
-      </Grid>
-    </div>
-  );
+useEffect(()=>{
+if(scrollPosition>(height*0.9))
+{
+  console.log("S:"+scrollPosition)
+    setPackageContainerStickyNess("UnStickThePackageContainer")
+}
+else{
+    setPackageContainerStickyNess("StickThePackageContainer")
 }
 
-ServiceDetailsContainer.propTypes = {
+},[scrollPosition>(height*0.9)])
+
+
+const handelTabIndex=(event,index=0)=>{
+  setCurrentSelectedTabIndex(index)
+}
+
+
+useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+}, []);
+
+
+// console.log("h"+document.documentElement.offsetHeight)
+return (
+<div className={classes.container}>
+<Grid container >
+
+        <Grid item xs={12}>
+          <AppBar style={{backgroundColor:"transparent"}}>
+                  <NavTabBarCollectively handelTabIndex={handelTabIndex}/>
+          </AppBar>
+        </Grid>
+        <Grid container>
+            <Grid lg={1} md={1} sm={1} xs={0}></Grid>
+            <Grid item lg={10} sm={10} md={10} xs={12}>
+              <Box px={(isDesktopOrLaptopOrTabletScreen) ? 0 : 3} >
+              {/* Body */}
+                <Grid container spacing={1}  style={{marginTop:"10%"}}>
+                  <Grid item lg={8} md={8} xs={12} >
+                    {/* Service description container */}
+                    <div className={classes.descriptionAreaontainer}>
+                          <ServiceDetailsDescriptionArea currentSelectedTabIndex={currentSelectedTabIndex}/>
+                    </div>
+                  </Grid>
+                  <Hidden only="xs">
+                  <Grid item lg={4} md={4} xs={12}>
+                    {/* package container */}
+                    <div className={classes.packageContainer}>
+                        <div className={packageContainerStickyNess}>
+                              <Packages/>
+                        </div>
+                    </div>
+                  </Grid>
+                  </Hidden>
+                  
+               </Grid>
+             </Box>
+            </Grid>
+            <Grid lg={1} md={1} sm={1} xs={0}></Grid>
+        </Grid>
+
+        <Grid item xs={12} className={classes.footer}>
+              {/* Footer */}
+             <ServiceDetailsFooter/>
+        </Grid>
+       
+</Grid> 
+</div>  
+);
+}
+
+const useStyles = makeStyles((theme) => ({
+  container:{}
+  ,
+  visibleNavbar:{
+    marginTop:20
+  },
+  hiddenNavbar:{
+    marginTop:0
+  },
+  footer:{
+    
+  },
+  packageContainer:{
+    width:'100%'
+    
+  },
+  descriptionAreaontainer:{
+    ['@media (min-width: 960px)']: { // eslint-disable-line no-useless-computed-key
+      paddingRight: '10%'
+    }
+  }
+}));
+
+ServiceWorkerContainer.propTypes = {
   width: PropTypes.oneOf(['lg', 'md', 'sm', 'xl', 'xs']).isRequired,
 };
-export default withWidth()(ServiceDetailsContainer);
+
+export default withWidth()(ServiceWorkerContainer);
