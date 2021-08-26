@@ -59,7 +59,8 @@ export default function AdminDashboardContainer() {
   // Data hooks and vairables
   const [profileUrl,setProfileUrl]=useState('https://firebasestorage.googleapis.com/v0/b/user-accounts-7cdc4.appspot.com/o/zeeshan.jpeg?alt=media&token=2b357d32-39c7-4369-88ad-c8b06599a9f9');
   const [adminName,setAdminName]=useState('Zeeshan');
- 
+  const [currentPageId,setCurrentPageId]=useState(10);
+
   const allScreens = [<ManageChats/>,<ManageMasterDatabase/>,<ManageOrders/>,
     <ManageProjects/>,<ManageReviews/>,<ManageServices/>,
     <ManageTeams/>,<ManageTransactions/>,<ManageUserAccounts/>,
@@ -86,6 +87,7 @@ const [currentOpenedScreen,setCurrentOpenedScreen]=useState(allScreens[10]);
 
 const handelManageOptionClickEvent = (event,index) =>
 {
+  setCurrentPageId(index);
   setCurrentOpenedScreen(allScreens[index]);
 }
 
@@ -98,7 +100,6 @@ const handelManageOptionClickEvent = (event,index) =>
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  
   const handleProfileMenuOpen = (event) => {setAnchorEl(event.currentTarget);};
   const handleDrawerOpen = () => {setOpen(true);};
   const handleDrawerClose = () => {setOpen(false);};
@@ -115,7 +116,6 @@ const handelManageOptionClickEvent = (event,index) =>
     setNotificationMenuAnchor(null);
   };
 
-
   //Notification Menu options/items
   
 const profileMenuOptions = [
@@ -130,7 +130,7 @@ const profileMenuOptions = [
       route: "/",
     },
   ];
-  
+
 const menuId = "primary-search-account-menu";
 const renderMenu = (
   <Menu
@@ -255,6 +255,7 @@ const renderMenu = (
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
           }),
+          
         }}
       >
         <div>
@@ -264,7 +265,7 @@ const renderMenu = (
 
            <Grid item xs={9} style={{textAlign:'center',height:'9rem',display: (open) ? '' : 'none'}}>
              <div style={{height:'6rem',width:'6rem',margin:'auto',marginTop:'4%'}} >
-                  <Avatar alt="C" src={profileUrl} style={{width:'100%',height:'100%',cursor:'pointer'}} onClick={()=>{handelManageOptionClickEvent(this,12)}}/>
+                  <Avatar alt="zeeshan" src={profileUrl} style={{width:'100%',height:'100%',cursor:'pointer'}} onClick={()=>{handelManageOptionClickEvent(this,12)}}/>
              </div>
              <div style={{height:'2rem',width:'6rem',margin:'auto',marginTop:'2%'}}>
                   <Headings text={adminName} fontSize={adminNameFontSize} fontWeight={'bold'} style={{margin:'auto'}} />
@@ -273,7 +274,7 @@ const renderMenu = (
                   <OnlineAdmins handelManageOptionClickEvent={handelManageOptionClickEvent}/>
              </div>
             </Grid>
-           <Grid item xs={2}>
+           <Grid item xs={2} style={{display: (open) ? '' : 'none'}}>
                  <IconButton onClick={handleDrawerClose}>
                      {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                  </IconButton>
@@ -283,29 +284,42 @@ const renderMenu = (
           
         </div>
         <List>
-              <ListItem button onClick={()=>{handelManageOptionClickEvent(this,10)}}>
+              <ListItem 
+              button 
+              onClick={()=>{handelManageOptionClickEvent(this,10)}}
+              selected={(10===currentPageId) ? true : false}
+              classes={{ selected: classes.active }}>
+              
                   <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/home.png"/> </ListItemIcon>
                   <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.HomeOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
               </ListItem>
         </List>
         <Divider />
         <List>
-              <ListItem button onClick={()=>{handelManageOptionClickEvent(this,3)}}>
+              <ListItem button onClick={()=>{handelManageOptionClickEvent(this,3)}}
+              selected={(3===currentPageId) ? true : false}
+              classes={{ selected: classes.active }}
+              >
                   <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/project.png"/> </ListItemIcon>
                   <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageProjectsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
               </ListItem>
         </List>
         <Divider />
         <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,5)}} >
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,5)}} 
+            selected={(5===currentPageId) ? true : false}
+            classes={{ selected: classes.active }}
+            >
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/100/000000/service.png"/></ListItemIcon>
               <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageServicesOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
-         
             </ListItem>
         </List>
         <Divider />
         <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,2)}}>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,2)}}
+            selected={(2===currentPageId) ? true : false}
+            classes={{ selected: classes.active }}
+            >
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/todo-list.png"/></ListItemIcon>
               <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageOrdersOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
          
@@ -314,16 +328,24 @@ const renderMenu = (
 
         <Divider />
         <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,8)}}>
+
+            <ListItem 
+              button
+              onClick={()=>{handelManageOptionClickEvent(this,8)}}
+              selected={(8===currentPageId) ? true : false}
+              classes={{ selected: classes.active }}
+              >
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-glyphs/30/000000/user-folder.png"/></ListItemIcon>
               <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageUserAccountsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
-         
             </ListItem>
+
         </List>
         <Divider />
 
         {/* <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,9)}}>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,9)}}
+            selected={(9===currentPageId) ? true : false}
+              classes={{ selected: classes.active }}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/user-rights.png"/></ListItemIcon>
               <ListItemText primary={stringCollection.AdminDashboardContainer.ManageUserPermissionsOption} />
             </ListItem>
@@ -331,7 +353,9 @@ const renderMenu = (
         <Divider /> */}
         
         <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,4)}}>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,4)}}
+            selected={(4===currentPageId) ? true : false}
+            classes={{ selected: classes.active }}>
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/customer-insight.png"/></ListItemIcon>
               <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageReviewsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
          
@@ -341,7 +365,10 @@ const renderMenu = (
         <Divider />
       
         <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,11)}}>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,11)}}
+            selected={(11===currentPageId) ? true : false}
+            classes={{ selected: classes.active }}
+            >
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/pastel-glyph/50/000000/price-tag.png"/></ListItemIcon>
               <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageOffersOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
          
@@ -350,7 +377,10 @@ const renderMenu = (
         <Divider />
        
         <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,0)}}>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,0)}}
+            selected={(0===currentPageId) ? true : false}
+            classes={{ selected: classes.active }}
+            >
               <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/chat--v2.png"/></ListItemIcon>
               <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageChatsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
          
@@ -358,10 +388,11 @@ const renderMenu = (
         </List>
         <Divider />
         <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,7)}}>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,7)}}
+            selected={(7===currentPageId) ? true : false}
+            classes={{ selected: classes.active }}>
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight}  src="https://img.icons8.com/ios-filled/50/000000/payment-history.png"/></ListItemIcon>
               <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageTransactionsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
-         
             </ListItem>
         </List>
         <Divider />
@@ -423,11 +454,13 @@ const useStyles = makeStyles((theme) => ({
       whiteSpace: 'nowrap',
     },
     drawerOpen: {
+      
       width: drawerWidth,
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
       }),
+      overflowX:'hidden'
     },
     drawerClose: {
       transition: theme.transitions.create('width', {
@@ -439,6 +472,7 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up('sm')]: {
         width: theme.spacing(9) + 1,
       },
+      paddingTop:'7%',
       
     },
     toolbar: {
@@ -512,6 +546,9 @@ const useStyles = makeStyles((theme) => ({
     profileMenu: {
       marginTop: "1rem",
     },
+    active: {
+      backgroundColor: "red"
+    }
   }));
   
   

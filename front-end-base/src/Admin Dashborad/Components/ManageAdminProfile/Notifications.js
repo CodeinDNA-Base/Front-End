@@ -10,67 +10,97 @@ function Notifications(props) {
     const notificationDetails=[
         {
           notificationId:0,
-          content:"Payment method added",
+          content:"Notification",
           time:new Date().toLocaleTimeString(),
           icon:<LogoutIcon />,
           route:"/"
         },
         {
-          notificationId:1,
-          content:"Payment method added",
-          time:new Date().toLocaleTimeString(),
-          icon:<LogoutIcon />,
-          route:"/"
-        },
-        {
-          notificationId:2,
-          content:"Payment method added",
-          time:new Date().toLocaleTimeString(),
-          icon:<LogoutIcon />,
-          route:"/"
-        },
-        {
-          notificationId:3,
-          content:"Payment method added",
-          time:new Date().toLocaleTimeString(),
-          icon:<LogoutIcon />,
-          route:"/"
-        },
-        {
-          notificationId:3,
-          content:"Payment method added",
-          time:new Date().toLocaleTimeString(),
-          icon:<LogoutIcon />,
-          route:"/"
-        },
-        {
-          notificationId:3,
-          content:"Payment method added",
-          time:new Date().toLocaleTimeString(),
-          icon:<LogoutIcon />,
-          route:"/"
-        },
-        {
-          notificationId:3,
-          content:"Payment method added",
-          time:new Date().toLocaleTimeString(),
-          icon:<LogoutIcon />,
-          route:"/"
-        },
-        {
-          notificationId:3,
-          content:"Payment method added",
-          time:new Date().toLocaleTimeString(),
-          icon:<LogoutIcon />,
-          route:"/"
-        },
-        
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          {
+            notificationId:0,
+            content:"Notification",
+            time:new Date().toLocaleTimeString(),
+            icon:<LogoutIcon />,
+            route:"/"
+          },
+          
+
       ]
 
 const notificationMenuId = "primary-search-account-menu";
   
 return (
-    <Menu
+<Menu
     className={classes.profileMenu}
     anchorEl={props.notificationMenuAnchor}
     id={notificationMenuId}
@@ -84,6 +114,7 @@ return (
       vertical: "top",
       horizontal: "center",
     }}
+    
     open={props.isNotificationMenuOpen}
     onClose={props.handleNotificationMenuClose}
     TransitionComponent={Zoom}
@@ -91,7 +122,8 @@ return (
     PaperProps={{
       style: {
         maxHeight: 48 * 10,
-        width: '30ch',
+        width: '40ch',
+        padding:10
       },
     }}
   >
@@ -100,7 +132,6 @@ return (
           <>
           <Link to={route} style={{ textDecoration: "none", color: "black" }}>
           <ListItem button key={notificationId}>
-            <ListItemIcon>{icon}</ListItemIcon>
               <ListItemText primary={content} />
           </ListItem>
           </Link>
@@ -114,7 +145,9 @@ return (
 const useStyles = makeStyles((theme)=>({
  profileMenu: {
       marginTop: "1rem",
+     
     },
+    
 }));
 
 export default Notifications;
