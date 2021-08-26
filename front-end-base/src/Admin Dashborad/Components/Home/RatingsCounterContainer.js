@@ -304,7 +304,8 @@ const BorderLinearProgress_FullWidth = withStyles((theme) => ({
   root: {
     height: 10,
     borderRadius: 5,
-  
+    width:290,
+    marginLeft:'1rem'
   },
   colorPrimary: {
     backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],

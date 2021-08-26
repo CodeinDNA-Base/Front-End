@@ -12,7 +12,7 @@ function OrderOverViewChart(props) {
 	const [options,setOptions]=useState({
 		title: {	
 		},
-		backgroundColor: "#F5DEB3",
+		backgroundColor: "transparent",
 		animationEnabled: true,
 		data: [
 		{
