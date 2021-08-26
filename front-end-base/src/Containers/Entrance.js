@@ -15,6 +15,7 @@ import {
 } from "./UserDashboardContainer";
 import { SearchProjectsContainer } from "./SearchProjectsContainer";
 import AdminDashboardContainer from './AdminDashboardContainer'
+import AuthenticationContainer  from './AuthenticationContainer'
 function Entrance(props) {
 
   return (
@@ -44,6 +45,7 @@ function Entrance(props) {
         <Route exact path="/viewpost" component={UserDashboardViewPostDetails} />    
         <Route exact path="/admin" component={AdminDashboardContainer} />    
         <Route exact path="/test" component={Test} />    
+        <Route exact path="/auth" component={AuthenticationContainer} />    
 
       </Switch>
     </Router>

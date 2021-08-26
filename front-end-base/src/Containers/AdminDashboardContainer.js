@@ -10,9 +10,9 @@ import {
 
 import { 
     Drawer,AppBar,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,
-    ListItemIcon,ListItemText,InputBase,MenuItem,Badge,Menu, Grid
+    ListItemIcon,ListItemText,InputBase,MenuItem,Badge,Menu, Grid,Avatar,Zoom,ListItemAvatar
 } from '@material-ui/core';
-
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -21,6 +21,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { Link } from "react-router-dom";
+import SettingsIcon from "@material-ui/icons/Settings";
+import LogoutIcon from "@material-ui/icons/ExitToApp";
 
 //Components
 
@@ -37,16 +40,56 @@ import ManageUserAccounts from '../Admin Dashborad/Components/ManageUserAccounts
 import ManageUserPermissions from '../Admin Dashborad/Components/ManageUserPermisions/ManageUserPermissions';
 import Home from '../Admin Dashborad/Components/Home/Home';
 import ManageOffers from '../Admin Dashborad/Components/ManageOffers/ManageOffers';
+import LogedInAdminProfile from '../Admin Dashborad/Components/ManageAdminProfile/LogedInAdminProfile';
 import { Headings } from '../Admin Dashborad/Components/Support/Headings';
-
+import OnlineAdmins from '../Admin Dashborad/Components/Support/OnlineAdmins';
+import AdminProfile from '../Admin Dashborad/Components/ManageAdminProfile/AdminProfile'
+import Notifications from '../Admin Dashborad/Components/ManageAdminProfile/Notifications';
 
 const drawerWidth = 250;
 const drawerIconHeight = 25;
 const drawerIconWidth = 25;
 const drawerFontSize='1rem';
 const drawerFontWeight='bold';
+const adminNameFontSize='1.4rem';
+
 
 export default function AdminDashboardContainer() {
+
+  // Data hooks and vairables
+  const [profileUrl,setProfileUrl]=useState('https://firebasestorage.googleapis.com/v0/b/user-accounts-7cdc4.appspot.com/o/zeeshan.jpeg?alt=media&token=2b357d32-39c7-4369-88ad-c8b06599a9f9');
+  const [adminName,setAdminName]=useState('Zeeshan');
+ 
+  const allScreens = [<ManageChats/>,<ManageMasterDatabase/>,<ManageOrders/>,
+    <ManageProjects/>,<ManageReviews/>,<ManageServices/>,
+    <ManageTeams/>,<ManageTransactions/>,<ManageUserAccounts/>,
+    <ManageUserPermissions/>,<Home/>,<ManageOffers/>,<LogedInAdminProfile/>,<AdminProfile/>];
+
+const [currentOpenedScreen,setCurrentOpenedScreen]=useState(allScreens[10]);
+
+/**
+* 0 : ManageChats
+* 1 : ManageMasterDatabase
+* 2 : ManageOrders
+* 3 : ManageProjects
+* 4 : ManageReviews
+* 5 : ManageServices
+* 6 : ManageTeams
+* 7 : ManageTransactions
+* 8 : ManageUserAccounts
+* 9 : ManageUserPermissions
+* 10 : Home
+* 11 : ManageOffers
+* 12 : LogedInAdminProfile
+* 13 : AdminProfile
+*/
+
+const handelManageOptionClickEvent = (event,index) =>
+{
+  setCurrentOpenedScreen(allScreens[index]);
+}
+
+  // UI-Hooks
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -55,53 +98,89 @@ export default function AdminDashboardContainer() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const allScreens = [<ManageChats/>,<ManageMasterDatabase/>,<ManageOrders/>,
-                      <ManageProjects/>,<ManageReviews/>,<ManageServices/>,
-                      <ManageTeams/>,<ManageTransactions/>,<ManageUserAccounts/>,
-                      <ManageUserPermissions/>,<Home/>,<ManageOffers/>];
-
-  const [currentOpenedScreen,setCurrentOpenedScreen]=useState(allScreens[10]);
-
-  /**
-   * 0 : ManageChats
-   * 1 : ManageMasterDatabase
-   * 2 : ManageOrders
-   * 3 : ManageProjects
-   * 4 : ManageReviews
-   * 5 : ManageServices
-   * 6 : ManageTeams
-   * 7 : ManageTransactions
-   * 8 : ManageUserAccounts
-   * 9 : ManageUserPermissions
-   * 10 : Home
-   * 11 : ManageOffers
-   */
-
-  const handelManageOptionClickEvent = (event,index) =>
-  {
-    setCurrentOpenedScreen(allScreens[index]);
-  }
-
+  
   const handleProfileMenuOpen = (event) => {setAnchorEl(event.currentTarget);};
   const handleDrawerOpen = () => {setOpen(true);};
   const handleDrawerClose = () => {setOpen(false);};
   const handleMenuClose = () => {setAnchorEl(null);};
 
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+  const [notificationMenuAnchor, setNotificationMenuAnchor] = React.useState(null);
+  const isNotificationMenuOpen = Boolean(notificationMenuAnchor);
+  //Notification Menu
+  const   handleNotificationMenuOpen = (event) => {
+    setNotificationMenuAnchor(event.currentTarget);
+  };
+
+  const   handleNotificationMenuClose = () => {
+    setNotificationMenuAnchor(null);
+  };
+
+
+  //Notification Menu options/items
+  
+const profileMenuOptions = [
+    {
+      optionTitle: "Settings",
+      optionIcon: <SettingsIcon />,
+      route: "/",
+    },
+    {
+      optionTitle: "Logout",
+      optionIcon: <LogoutIcon />,
+      route: "/",
+    },
+  ];
+  
+const menuId = "primary-search-account-menu";
+const renderMenu = (
+  <Menu
+    className={classes.profileMenu}
+    anchorEl={anchorEl}
+    id={menuId}
+    keepMounted
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "center",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "center",
+    }}
+    open={isMenuOpen}
+    onClose={handleMenuClose}
+    TransitionComponent={Zoom}
+    // elevation={4}
+  >
+    <ListItem>
+      <ListItemAvatar>
+        <Avatar
+          src={profileUrl}
+          onClick={() => {
+            alert("Display Full Image of User");
+          }}
+          style={{ cursor: "pointer" }}
+        />
+      </ListItemAvatar>
+      <ListItemText
+        className={classes.profileMenuInfo}
+        primary={<Typography variant="h6">{adminName}</Typography>}
+      />
+    </ListItem>
+    <Divider />
+    {profileMenuOptions.map(({ optionTitle, optionIcon, route }) => {
+        return (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+          <ListItem button key={optionTitle}>
+            <ListItemIcon>{optionIcon}</ListItemIcon>
+              <ListItemText primary={optionTitle} />
+          </ListItem>
+          </Link>
+        );
+      })}
     </Menu>
   );
+
 
   return (
     <div className={classes.root}>
@@ -111,6 +190,7 @@ export default function AdminDashboardContainer() {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
+        style={{ backgroundColor: "#011c38" }}
       >
         <Toolbar>
           <IconButton
@@ -127,57 +207,43 @@ export default function AdminDashboardContainer() {
           <Typography variant="h6" noWrap>
                 {stringCollection.AdminDashboardContainer.NavBarTitle}
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+          
           <div className={classes.grow} />
+
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
+            {/* <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
-              edge="end"
               aria-label="account of current user"
-              aria-controls={menuId}
               aria-haspopup="true"
+              onClick={handleNotificationMenuOpen}
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+             
+            </IconButton>
+             <Avatar
+              className={classes.avatar}
+              src={profileUrl}
               onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+              style={{ cursor: "pointer" }}
+            />
           </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-            //   aria-controls={mobileMenuId}
-              aria-haspopup="true"
-            //   onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>      
+           
         </Toolbar>
       </AppBar>
-
-      
+      {renderMenu}     
+      {<Notifications notificationMenuAnchor={notificationMenuAnchor} isNotificationMenuOpen={isNotificationMenuOpen} handleNotificationMenuClose={handleNotificationMenuClose}/>}
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -195,8 +261,17 @@ export default function AdminDashboardContainer() {
             {/* Top of drawer */}
          <Grid container>
            <Grid item xs={1}></Grid>
-           <Grid item xs={9} style={{textAlign:'center',justifyContent:'center',height:'7rem',display: (open) ? '' : 'none'}}>
-             <div style={{backgroundColor:'green',borderRadius:'50%',height:'6rem',width:'6rem',margin:'auto',marginTop:'4%'}}>Admin</div>
+
+           <Grid item xs={9} style={{textAlign:'center',height:'9rem',display: (open) ? '' : 'none'}}>
+             <div style={{height:'6rem',width:'6rem',margin:'auto',marginTop:'4%'}} >
+                  <Avatar alt="C" src={profileUrl} style={{width:'100%',height:'100%',cursor:'pointer'}} onClick={()=>{handelManageOptionClickEvent(this,12)}}/>
+             </div>
+             <div style={{height:'2rem',width:'6rem',margin:'auto',marginTop:'2%'}}>
+                  <Headings text={adminName} fontSize={adminNameFontSize} fontWeight={'bold'} style={{margin:'auto'}} />
+             </div>
+             <div style={{height:'2rem',width:'6rem',position:'absolute',top:'5rem',right:'1rem'}}>
+                  <OnlineAdmins handelManageOptionClickEvent={handelManageOptionClickEvent}/>
+             </div>
             </Grid>
            <Grid item xs={2}>
                  <IconButton onClick={handleDrawerClose}>
@@ -288,21 +363,22 @@ export default function AdminDashboardContainer() {
               <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageTransactionsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
          
             </ListItem>
-        </List><Divider />
-        <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,6)}}>
-              <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/army-star.png"/></ListItemIcon>
-              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageTeamsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
-         
-            </ListItem>
-        </List><Divider />
-        <List>
-            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,1)}}>
-              <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/cloud-storage.png"/></ListItemIcon>
-              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageMasterDatabaseOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
-         
-            </ListItem>
         </List>
+        <Divider />
+          {/* <List>
+              <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,6)}}>
+                <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/army-star.png"/></ListItemIcon>
+                <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageTeamsOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+          
+              </ListItem>
+          </List><Divider />
+          <List>
+              <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,1)}}>
+                <ListItemIcon><img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/50/000000/cloud-storage.png"/></ListItemIcon>
+                <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageMasterDatabaseOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+          
+              </ListItem>
+          </List> */}
       </Drawer>
       
       <main className={classes.content}>
@@ -316,6 +392,9 @@ export default function AdminDashboardContainer() {
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
+    },
+    avatar: {
+      marginTop: "0.5rem",
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -430,11 +509,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
       },
     },
-    sectionMobile: {
-      display: 'flex',
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
-      },
+    profileMenu: {
+      marginTop: "1rem",
     },
   }));
   
