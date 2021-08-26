@@ -4,6 +4,9 @@ import { Headings } from '../Support/Headings';
 import { lightBorder } from '../../../Theme/borders';
 import ColumnChart from './Charts/OrderOverViewChart';
 import OrderOverViewContainer from './OrderOverViewContainer';
+import AccountsOverViewContainer from './AccountsOverViewContainer';
+import ServicesClickHistoryOverViewContainer from './ServicesClickHistoryOverViewContainer';
+import RatingsCounterContainer from './RatingsCounterContainer'
 function Home(props) {
     const classes = useStyles();
 
@@ -53,10 +56,33 @@ function Home(props) {
            <Grid container>
                <Grid item xs={1}></Grid>
                <Grid item xs={10} style={{paddingTop:'4rem'}}>
-                   {/* <ColumnChart/> */}
+                  
                    <OrderOverViewContainer/>
                </Grid>
 
+               <Grid item xs={1}></Grid>
+           </Grid>
+
+           <Grid container>
+               <Grid item xs={1}></Grid>
+               <Grid item xs={10} style={{paddingTop:'4rem'}}>
+                   <AccountsOverViewContainer/>
+               </Grid>
+               <Grid item xs={1}></Grid>
+           </Grid>
+           
+           <Grid container>
+               <Grid item xs={1}></Grid>
+               <Grid item xs={10} style={{paddingTop:'4rem'}}>
+                   <ServicesClickHistoryOverViewContainer/>
+               </Grid>
+               <Grid item xs={1}></Grid>
+           </Grid>
+           <Grid container>
+               <Grid item xs={1}></Grid>
+               <Grid item xs={10} style={{paddingTop:'4rem'}}>
+                   <RatingsCounterContainer/>
+               </Grid>
                <Grid item xs={1}></Grid>
            </Grid>
         </div>
