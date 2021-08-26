@@ -13,7 +13,7 @@ function Test(props)  {
     const classes = useStyles();
     const [InputValue,setInputValue]=useState('');
     const [selectedValue,setSelectedValue]=useState(0);
-
+    
     console.log("InputValue :"+InputValue);
     console.log("selected value :"+selectedValue);
     const listOfOptions_ForDropDown=[
@@ -118,7 +118,7 @@ function Test(props)  {
                     <Dropdown listOfOptions={listOfOptions_ForDropDown} label={"History"} value={selectedValue} setValue={setSelectedValue}/>
                 </Grid> 
                 <Grid item xs={12} style={{paddingLeft:50}}>
-                    <GroupedRadioButtons  listOfOptions={listOfOptions_RadioBoxes}/>
+                    <GroupedRadioButtons  listOfOptions={listOfOptions_RadioBoxes} value={selectedValue} setValue={setSelectedValue}/>
                 </Grid> 
                 
             </Grid>

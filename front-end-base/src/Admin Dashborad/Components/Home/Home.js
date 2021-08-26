@@ -3,6 +3,7 @@ import React,{useState} from 'react';
 import { Headings } from '../Support/Headings';
 import { lightBorder } from '../../../Theme/borders';
 import ColumnChart from './Charts/OrderOverViewChart';
+import OrderOverViewContainer from './OrderOverViewContainer';
 function Home(props) {
     const classes = useStyles();
 
@@ -51,10 +52,11 @@ function Home(props) {
            </Grid>
            <Grid container>
                <Grid item xs={1}></Grid>
-               <Grid item xs={10}>
+               <Grid item xs={10} style={{paddingTop:'4rem'}}>
                    {/* <ColumnChart/> */}
-                   
+                   <OrderOverViewContainer/>
                </Grid>
+
                <Grid item xs={1}></Grid>
            </Grid>
         </div>

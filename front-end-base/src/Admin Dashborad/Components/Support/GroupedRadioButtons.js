@@ -8,14 +8,42 @@ import { makeStyles } from '@material-ui/core';
 import { fontFamily } from '../../../Theme/fonts';
 /**
  * c
+ * const listOfOptions_RadioBoxes = [
+        {
+            optionLabel:"Style 1",
+            optionValue:"1",
+            radioBtnColor:'default'
+        },
+        {
+            optionLabel:"Style 2",
+            optionValue:"2",
+            radioBtnColor:'primary'
+        },
+        {
+            optionLabel:"Style 3",
+            optionValue:"3",
+            radioBtnColor:'secondary'
+        },
+     
+        
+    ]
+    setValue : func
+    value : hook..
+    
  */
+
 function GroupedRadioButtons(props) {
     const classes=useStyles();
+   
     return (
         <FormControl component="fieldset">
-        <RadioGroup row aria-label="position" name="position" defaultValue="top">
-          {/* <FormControlLabel value="end" control={<Radio color="primary" />} label="End" />
-          <FormControlLabel value="start" control={<Radio color="primary" />} label="End" />  */}
+        <RadioGroup row aria-label="position" name="position" defaultValue="top"
+            value={props.value}
+            onChange={(e)=>{
+                props.setValue(e.target.value);
+            }}
+        >
+         
           {
               props.listOfOptions.map((item,index)=>{
                 return(
@@ -27,6 +55,7 @@ function GroupedRadioButtons(props) {
                 )
               })
           }
+
         </RadioGroup>
 
       </FormControl>

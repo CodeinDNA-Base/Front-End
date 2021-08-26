@@ -8,12 +8,27 @@ import Select from '@material-ui/core/Select';
 import { fontFamily } from '../../../Theme/fonts';
 /**
  * 
- * listOfOptions=[
- *             {
- *              optionTitle:"Last Week",
-                optionValue:1
-               }
-        ]
+ *
+
+const listOfOptions_ForDropDown=[
+        {
+            optionTitle:"Last Month",
+            optionValue:0
+        },
+        {
+            optionTitle:"Last Week",
+            optionValue:1
+        },
+        {
+            optionTitle:"Last Day",
+            optionValue:2
+        },
+        {
+            optionTitle:"Last Hour",
+            optionValue:3
+        },
+        
+    ]
    label={""}
    value : mustBeHook
    setValue: func of hook     
