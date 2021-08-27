@@ -12,7 +12,7 @@ import { stringCollection } from '../Strings/StringCollection';
 import AddNewProjectTab from './AddNewProjectTab'
 import SetTreadnigProjectTab from './SetTredingProjectTab'
 import ViewAllProjectsTab from './ViewAllProjectsTab'
-import Filters from '../Support/Filters';
+import Filters from './Filters';
 import { lightBorder } from '../../../Theme/borders';
 
 function ManageProjects(props) {
@@ -21,10 +21,15 @@ function ManageProjects(props) {
     const {height,width} = useWindowDimensions();
     const tabIconHeight=30;
     const tabIconWidth=30;
+    const [listOfOptions_ForChipList, setListOfOptions_ForChipList] = useState([
+      // { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
+    ]);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
-    };                  
+    };
+              
+    console.log(listOfOptions_ForChipList);        
     return (
        <Grid container >
          <Grid item xs={1}></Grid>
@@ -65,7 +70,7 @@ function ManageProjects(props) {
                 <Card className={classes.tabPanelContainer}>
                     <CardContent>
                               
-                              <Filters/>
+                              <Filters listOfOptions_ForChipList={listOfOptions_ForChipList} setListOfOptions_ForChipList={setListOfOptions_ForChipList}/>
                               <Grid container>
                                   <Grid xs={1}></Grid>
                                   <Grid xs={10}>

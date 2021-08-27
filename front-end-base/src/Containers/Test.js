@@ -11,6 +11,7 @@ import Dropdown from '../Admin Dashborad/Components/Support/Dropdown';
 import GroupedRadioButtons from '../Admin Dashborad/Components/Support/GroupedRadioButtons';
 import { FilterOptions } from '../Projects/Components/FilterOptions';
 import CustomChipsList from '../Admin Dashborad/Components/Support/CustomChipsList';
+import FilterMotor from '../Admin Dashborad/Components/Support/FilterMotor';
 function Test(props)  {
     const classes = useStyles();
     const [InputValue,setInputValue]=useState('');
@@ -66,6 +67,10 @@ function Test(props)  {
         { key: 4,type:"ByRating",data:'2', label: '2 Stars' },
       ]);
       console.log(listOfOptions_ForChipList)
+
+    
+
+
     return (
         <div>
             <Grid container spacing={2}>
@@ -138,6 +143,10 @@ function Test(props)  {
                 <Grid item xs={12} style={{paddingLeft:50}}>
                     <CustomChipsList value={listOfOptions_ForChipList} setValue={setListOfOptions_ForChipList}/>
                 </Grid> 
+                <Grid item xs={12} style={{paddingLeft:50}}>
+                    <FilterMotor/>
+                </Grid> 
+                
             </Grid>
         </div>
     );
