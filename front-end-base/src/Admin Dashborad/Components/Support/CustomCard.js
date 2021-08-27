@@ -1,10 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions'; 
+import { Card,CardHeader,CardContent,CardActionArea } from '@material-ui/core';
 import Dropdown from './Dropdown';
 function CustomCard(props) {
   const classes = useStyles();

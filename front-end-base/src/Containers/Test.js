@@ -9,6 +9,7 @@ import Custom_Tabs from '../Admin Dashborad/Components/Support/Tabs';
 import CustomCard from '../Admin Dashborad/Components/Support/CustomCard';
 import Dropdown from '../Admin Dashborad/Components/Support/Dropdown';
 import GroupedRadioButtons from '../Admin Dashborad/Components/Support/GroupedRadioButtons';
+import { FilterOptions } from '../Projects/Components/FilterOptions';
 function Test(props)  {
     const classes = useStyles();
     const [InputValue,setInputValue]=useState('');
@@ -119,6 +120,9 @@ function Test(props)  {
                 </Grid> 
                 <Grid item xs={12} style={{paddingLeft:50}}>
                     <GroupedRadioButtons  listOfOptions={listOfOptions_RadioBoxes} value={selectedValue} setValue={setSelectedValue}/>
+                </Grid> 
+                <Grid item xs={12} style={{paddingLeft:50}}>
+                    <FilterOptions/>
                 </Grid> 
                 
             </Grid>
