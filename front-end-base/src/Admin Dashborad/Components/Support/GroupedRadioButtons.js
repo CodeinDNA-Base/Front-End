@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core';
 import { fontFamily } from '../../../Theme/fonts';
 /**
  * c
+ * 
  * const listOfOptions_RadioBoxes = [
         {
             optionLabel:"Style 1",
@@ -68,8 +69,8 @@ const useStyles = makeStyles((theme)=>({
     },
     btn:{
         fontFamily:fontFamily.fontFamily_1,
-        fontWeight:'bold',
-        fontSize:'1.2rem'
+        // fontWeight:'bold',
+        fontSize:'1rem'
     }
 }))
 
