@@ -10,6 +10,7 @@ import CustomCard from '../Admin Dashborad/Components/Support/CustomCard';
 import Dropdown from '../Admin Dashborad/Components/Support/Dropdown';
 import GroupedRadioButtons from '../Admin Dashborad/Components/Support/GroupedRadioButtons';
 import { FilterOptions } from '../Projects/Components/FilterOptions';
+import CustomChipsList from '../Admin Dashborad/Components/Support/CustomChipsList';
 function Test(props)  {
     const classes = useStyles();
     const [InputValue,setInputValue]=useState('');
@@ -55,6 +56,16 @@ function Test(props)  {
      
         
     ]
+
+
+    const [listOfOptions_ForChipList, setListOfOptions_ForChipList] = React.useState([
+        { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
+        { key: 1,type:"ByPrice",data:"40,100", label: 'Min 40 $ and Max 100$' },
+        { key: 2,type:"ByPrice",data:"23,20", label: 'Min 23$ and Max 20$' },
+        { key: 3,type:"ByDate",data:"Fri Aug 27 2021 20:22:44 GMT+0500 (Pakistan Standard Time)", label: 'Fri Aug 27 2021 20:22:44 GMT+0500 (Pakistan Standard Time)' },
+        { key: 4,type:"ByRating",data:'2', label: '2 Stars' },
+      ]);
+      console.log(listOfOptions_ForChipList)
     return (
         <div>
             <Grid container spacing={2}>
@@ -124,7 +135,9 @@ function Test(props)  {
                 <Grid item xs={12} style={{paddingLeft:50}}>
                     <FilterOptions/>
                 </Grid> 
-                
+                <Grid item xs={12} style={{paddingLeft:50}}>
+                    <CustomChipsList value={listOfOptions_ForChipList} setValue={setListOfOptions_ForChipList}/>
+                </Grid> 
             </Grid>
         </div>
     );

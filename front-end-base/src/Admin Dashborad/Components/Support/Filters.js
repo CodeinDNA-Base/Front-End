@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
         makeStyles,Grid,Card,CardContent,Accordion,AccordionSummary,
         AccordionDetails,Typography,FormControl,FormLabel,FormGroup,
@@ -15,6 +15,7 @@ import {RoundButton} from './RoundButton'
 import colors from '../../../Theme/colors';
 import DateTimePicker from 'react-datetime-picker';
 import { SimpleTextFields } from './TextFields';
+import CustomChipsList from './CustomChipsList';
 //https://www.npmjs.com/package/@cantonjs/react-scroll-view
 
 function Filters(props) {
@@ -25,6 +26,8 @@ function Filters(props) {
         filter_by_title_2:"By Service",
         filter_by_title_3:"By Rating",
         filter_by_title_4:"By Publish date",
+        filter_by_title_5:"By Price Range",
+        
     }
     const [filter_by_title_1_Options,setFilter_by_title_1_Options]=useState([
         {
@@ -59,39 +62,46 @@ function Filters(props) {
        const selectedOpt=parseInt(e.target.name);
        setFilter_by_title_1_Options(produce(filter_by_title_1_Options,draft=>{
            draft[selectedOpt].isCheked= !(draft[selectedOpt].isCheked)
-       }));       
+       }));
+       console.log("Here")
+       if(!filter_by_title_1_Options[selectedOpt].isCheked)
+       addElementInFilterList(filter_by_title_1_Options[selectedOpt].OptionValue,filterBy_titles.filter_by_title_1,filterBy_titles.filter_by_title_1+": "+filter_by_title_1_Options[selectedOpt].OptionLabel)       
     }
 
     const [selectedOptOfFilter_by_title_2,setSelectedOptOfFilter_by_title_2]=useState();
     const [listOfOptions_filter_by_title_2_RadioBoxes,setListOfOptions_filter_by_title_2_RadioBoxes] =useState([
         {
             optionLabel:"Style 1",
-            optionValue:"0",
+            optionValue:"Style 1",
             radioBtnColor:'default'
         },
         {
             optionLabel:"Style 2",
-            optionValue:"1",
+            optionValue:"Style 2",
             radioBtnColor:'primary'
         },
         {
             optionLabel:"Style 3",
-            optionValue:"2",
+            optionValue:"Style 3",
             radioBtnColor:'secondary'
         },
         {
             optionLabel:"Style 4",
-            optionValue:"3",
+            optionValue:"Style 4",
             radioBtnColor:'secondary'
         },
         {
             optionLabel:"Style 5",
-            optionValue:"4",
+            optionValue:"Style 5",
             radioBtnColor:'secondary'
         },
         
     ]);
 
+    useEffect(()=>{
+        if(selectedOptOfFilter_by_title_2!=undefined)
+        addElementInFilterList(selectedOptOfFilter_by_title_2,filterBy_titles.filter_by_title_2,filterBy_titles.filter_by_title_2+" : "+selectedOptOfFilter_by_title_2);
+    },[selectedOptOfFilter_by_title_2])
     // For rating.
     const [ratingValue,setRatingValue]=useState(0)
     const [hover, setHover] = React.useState(-1);
@@ -107,13 +117,14 @@ function Filters(props) {
         4.5: 'Excellent',
         5: 'Excellent+',
       };
+
     const hand_Apply_Rating = (e)=>{
-        alert("Rating applied")
+        addElementInFilterList(ratingValue,filterBy_titles.filter_by_title_3,filterBy_titles.filter_by_title_3+" : Stars selected : "+ratingValue);
     }
 
     const [selectedDate, setSelectedDate] = useState(new Date());  
     const hand_Apply_Date = (e)=>{
-        alert('Date applied: '+selectedDate)
+        addElementInFilterList(selectedDate,filterBy_titles.filter_by_title_4,filterBy_titles.filter_by_title_4+" : "+selectedDate)
     }
     
     //Price range
@@ -130,8 +141,21 @@ function Filters(props) {
     }
 
     const hand_PriceRange_Apply = (e)=>{
-        alert('Range detected: Min'+priceMinRange+" Max:"+priceMaxRange)
+        addElementInFilterList(rangeValue[0]+","+rangeValue[1],filterBy_titles.filter_by_title_5,filterBy_titles.filter_by_title_5+": Min value :"+priceMinRange+" : Max value :"+priceMaxRange);
     }
+
+    const [listOfOptions_ForChipList, setListOfOptions_ForChipList] = useState([
+        // { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
+      ]);
+    // This will be sent from some where elese. like from props.
+
+    const addElementInFilterList=(elementValue,filterValueType,filterValueLabel)=>{
+        const keyValue = listOfOptions_ForChipList.length;
+        setListOfOptions_ForChipList(produce(listOfOptions_ForChipList,draft=>{
+            draft.push({ key:keyValue,type:filterValueType,data:elementValue, label:filterValueLabel})
+        }))
+    }
+
     return (
 
         <Grid container >
@@ -212,7 +236,7 @@ function Filters(props) {
                              aria-controls="panel1a-content"
                              id="panel1a-header"
                            >
-                               <Headings text={"By Price"} fontSize={filterBy_titlesFonts}/>
+                               <Headings text={filterBy_titles.filter_by_title_5} fontSize={filterBy_titlesFonts}/>
                             </AccordionSummary>
                            <AccordionDetails>
                             <ScrollView style={{ height: '25vh',}}
@@ -262,7 +286,7 @@ function Filters(props) {
                                       title={"Apply"}
                                       width={40}
                                       color={colors.white}
-                                      bgColor={colors.secondary}
+                                      bgColor={colors.primary}
                                       margin={"0% 0% 0%  0%"}
                                       handleClick={hand_PriceRange_Apply}
                                      />
@@ -315,7 +339,7 @@ function Filters(props) {
                                       title={"Apply"}
                                       width={40}
                                       color={colors.white}
-                                      bgColor={colors.secondary}
+                                      bgColor={colors.primary}
                                       margin={"0% 0% 0%  0%"}
                                       handleClick={hand_Apply_Rating}
                                     />
@@ -341,7 +365,6 @@ function Filters(props) {
                                 <ScrollView style={{ height: '25vh',}}>
                                  <Headings text={"Set date and time"} fontSize={18}/>   
                                 <form style={{marginTop:'0.5rem'}} noValidate>
-                                 
                                    <DateTimePicker
                                         onChange={setSelectedDate}
                                         value={selectedDate}
@@ -351,6 +374,7 @@ function Filters(props) {
                                     />     
                                  </form>
                                  <div style={{textAlign:'center',marginTop:'1.5rem'}}>
+
                                         <div style={{width:190}}>
                                             <Headings text={selectedDate+""} fontWeight={'bold'}/>
                                         </div>
@@ -360,7 +384,7 @@ function Filters(props) {
                                           title={"Apply"}
                                           width={40}
                                           color={colors.white}
-                                          bgColor={colors.secondary}
+                                          bgColor={colors.primary}
                                           margin={"0% 0% 0%  0%"}
                                           handleClick={hand_Apply_Date}
                                     />
@@ -371,8 +395,37 @@ function Filters(props) {
                          </Accordion>
                     </Grid>
                 </Grid>
+               {(listOfOptions_ForChipList.length!=0) &&(   
+                <Accordion
+                        elevation={0}
+                        defaultExpanded={true}
+                >
+                           <AccordionSummary
+                             expandIcon={<ExpandMoreIcon />}
+                             aria-controls="panel1a-content"
+                             id="panel1a-header"
+                           >
+                               <Headings text={"Applied filters"} fontSize={20} fontWeight={'bold'}/>
+                               <div style={{position:'absolute',right:50}}>
+                               <RoundButton
+                                          title={"Clear All"}
+                                          width={150}
+                                          color={colors.white}
+                                          bgColor={colors.secondary}
+                                          margin={"0% 0% 0%  0%"}
+                                          handleClick={()=>{
+                                                setListOfOptions_ForChipList([]);
+                                          }}
+                                    />
+                               </div>
+                            </AccordionSummary>
+                           <AccordionDetails>
+                                <CustomChipsList value={listOfOptions_ForChipList} setValue={setListOfOptions_ForChipList}/>
+                           </AccordionDetails>
+                </Accordion>                            
+               ) }
 
-            </CardContent>
+            </CardContent> 
           </Card>
         </Grid>
         <Grid item xs={1}></Grid>
