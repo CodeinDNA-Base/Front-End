@@ -14,13 +14,25 @@ import produce from 'immer';
 function ListOfAllProjects(props) {
     const classes = useStyles();
     const [listOfProjects,setListOfProjects]=useState([]);
+    
     const [numberOfPage,setNumberOfPage]=useState();
+    const [numberOfPageWhenSearching,setNumberOfPageWhenSearhing]=useState();
+    
     const [startIndexOfPage,setStartIndexOfPage]=useState(0);
     const [endIndexOfPage,setEndIndexOfPage]=useState(9);
-    const [currentOpenPage,setCurrentOpenPage]=useState(0);
 
+    const [startIndexOfPageWhenSearching,setStartIndexOfPageWhenSearching]=useState(0);
+    const [endIndexOfPageWhenSearching,setEndIndexOfPageWhenSearching]=useState(9);
+
+
+    const [currentOpenPage,setCurrentOpenPage]=useState(0);
+    const [currentOpenPageWhenSearching,setCurrentOpenPageWhenSearching]=useState(0);
     const [list,setList]=useState();
     const [searchResults,setSearchResults]=useState([]);
+
+    
+    const [searchKeyPairs,setSearchKeyPairs] =useState();
+    
 
     const [listOfOptions_ForChipList, setListOfOptions_ForChipList] = useState([
         // { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
@@ -43,22 +55,6 @@ function ListOfAllProjects(props) {
        updateList(startIndexOfPage,(listOfProjects.length>=endIndexOfPage) ? endIndexOfPage : listOfProjects.length);
     },[listOfProjects,endIndexOfPage]);
 
-    const updateList = (startIndex,endIndex)=>{
-        const img = "https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
-        setList(listOfProjects.map((item,index)=>{
-            if(((index)>=startIndex)&&((index)<endIndex))
-            {
-                return(      
-                    <ImageListItem key={item.img} cols={item.cols || 1}>
-                        <ProjectHolder  cols={item.cols}   handelOptionSelection={props.handelOptionSelection} data={item}/>
-                    </ImageListItem>
-                    )   
-            }
-        }))
-    }
-
-    const [searchKeyPairs,setSearchKeyPairs] =useState();
-    
     useEffect(()=>{
         updateSearchKeyPair(listOfOptions_ForChipList);
     },[listOfOptions_ForChipList]);
@@ -66,11 +62,13 @@ function ListOfAllProjects(props) {
     useEffect(()=>{
         // Not call the .. FILTER ENGINE
         try{
-            const rep = FilterEngine(listOfProjects,searchKeyPairs[0]);
-            console.log(rep);
+            const searchResultsList = FilterEngine(listOfProjects,searchKeyPairs[0]);
+            console.log(searchResultsList)
+            setNumberOfPageWhenSearhing(Math.ceil((searchResultsList.length)/9));
+            updateSearchResultsList(startIndexOfPageWhenSearching,(searchResultsList.length>=endIndexOfPageWhenSearching) ? endIndexOfPageWhenSearching : searchResultsList.length,searchResultsList);
         }catch(e){}
-        
-    },[searchKeyPairs])
+
+    },[searchKeyPairs,endIndexOfPageWhenSearching])
 
     const updateSearchKeyPair = (listOfOptions_ForChipList)=>{
         let tempKeyPairs = [];
@@ -130,6 +128,40 @@ function ListOfAllProjects(props) {
         setSearchKeyPairs(tempKeyPairs);
        
     }
+    const updateList = (startIndex,endIndex)=>{
+        setList(listOfProjects.map((item,index)=>{
+            if(((index)>=startIndex)&&((index)<endIndex))
+            {
+                return(      
+                    <ImageListItem key={item.img} cols={item.cols || 1}>
+                        <ProjectHolder  cols={item.cols}   handelOptionSelection={props.handelOptionSelection} data={item}/>
+                    </ImageListItem>
+                    )   
+            }
+        }))
+    }
+
+    const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
+            if(listOfResults.length===0){
+                setSearchResults(<Headings text={"No match found.!!"} fontSize={25}/>)   
+            }
+            else
+            {
+                setSearchResults(listOfResults.map((item,index)=>{
+                    if(((index)>=startIndex)&&((index)<endIndex))
+                    {
+                        return(      
+                            <ImageListItem key={item.img} cols={item.cols || 1}>
+                                <ProjectHolder  cols={item.cols}   handelOptionSelection={props.handelOptionSelection} data={item}/>
+                            </ImageListItem>
+                            )   
+                    }
+                }));
+            }
+
+       
+
+    }
 
     const handelPageChange = (event,pageNumber)=>{
 
@@ -159,6 +191,33 @@ function ListOfAllProjects(props) {
 
     }
 
+    const handelPageChangeWhenSearching = (event,pageNumber)=>{
+
+        setCurrentOpenPageWhenSearching((prev)=>{
+            if(currentOpenPage<prev)
+            {
+                setStartIndexOfPageWhenSearching((prevSI)=>{
+                    return prevSI+9;
+                })
+                setEndIndexOfPageWhenSearching((prevSE)=>{
+                    return prevSE+9;
+                }); 
+                return (prev)
+            }
+            else
+            {
+                setStartIndexOfPageWhenSearching((prevSI)=>{
+                    return prevSI-9;
+                })
+                setEndIndexOfPageWhenSearching((prevSE)=>{
+                    return prevSE-9;
+                })
+                return (prev)
+            }
+           
+        })
+
+    }
 
 
     return (
@@ -174,24 +233,39 @@ function ListOfAllProjects(props) {
                     >
                         <CardContent>
                             
-                                { (listOfOptions_ForChipList.length!=0) && 
+                                { (listOfOptions_ForChipList.length===0) && 
                                     <div>
-                                        <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Search results"} fontSize={30}/> </div>
-
+                                       <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"All projects"} fontSize={30}/> </div>
+                              
+                                        <ImageList rowHeight={320} className={classes.imageList} cols={3}>
+                                     {list}
+                                    </ImageList>
+                                 <div>
+                                         <Pagination onChange={(e)=>{
+                                             setCurrentOpenPage(parseInt(e.target.outerText));
+                                             handelPageChange(e);
+                                         }} count={numberOfPage} variant="outlined" shape="rounded" />
+                                 </div>
                                     </div>
-                                    
+                                     
                                 }
-                                { (listOfOptions_ForChipList.length===0) &&<div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"All projects"} fontSize={30}/> </div>}
-
-                                <ImageList rowHeight={320} className={classes.imageList} cols={3}>
-                                    {list}
-                                </ImageList>
+                                { (listOfOptions_ForChipList.length!=0) &&
                                 <div>
-                                        <Pagination onChange={(e)=>{
-                                            setCurrentOpenPage(parseInt(e.target.outerText));
-                                            handelPageChange(e);
-                                        }} count={numberOfPage} variant="outlined" shape="rounded" />
-                                </div>        
+                                    <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Search results"} fontSize={30}/> </div>
+                              
+                                   <ImageList rowHeight={320} className={classes.imageList} cols={3}>
+                                     {searchResults}
+                                    </ImageList>
+                                 <div>
+                                         <Pagination onChange={(e)=>{
+                                             setCurrentOpenPageWhenSearching(parseInt(e.target.outerText));
+                                             handelPageChangeWhenSearching(e);
+                                         }} count={numberOfPageWhenSearching} variant="outlined" shape="rounded" />
+                                 </div>
+                                </div>
+                                 }
+
+                                       
                         </CardContent>
                     </Card>
                 </Grid>

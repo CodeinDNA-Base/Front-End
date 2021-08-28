@@ -71,7 +71,8 @@ import produce from 'immer';
 const requiredMatchPercentage = 100;
 
 const FilterEngine = (dataToFilter,searchKeyPairs)=>{
-    return produce(dataToFilter,draft=>{
+
+    let respoonse =  produce(dataToFilter,draft=>{
         draft = dataToFilter.map((dataItem,index_data_to_filter)=>{
                 let numberOfTimesRequired=0;
                 let numberOfTimesMatched=0;
@@ -169,10 +170,14 @@ const FilterEngine = (dataToFilter,searchKeyPairs)=>{
                 console.log("Match percentage is : "+percentage);
                 if(percentage>=requiredMatchPercentage)
                 return(dataItem)
-
+                
         });//outer map
         return draft
     });
+
+    return respoonse.filter(function( element ) {
+        return element !== undefined;
+     });
 }
 
 export {FilterEngine as default};
