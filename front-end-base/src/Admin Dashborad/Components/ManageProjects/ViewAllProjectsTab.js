@@ -22,7 +22,7 @@ function ViewAllProjectsTab(props) {
         <div className={classes.container}>
             <div>
                     {/* Load the component which will render the list of projects */}
-                    {(screenSwitcher) ? <ListOfAllProjects  handelOptionSelection={handelOptionSelection}/> :  <ProjectEditor handelBackToListOfProjectBtnClick={handelBackToListOfProjectBtnClick} projectTitle={projectsList[selectedProjectKeyHook].projectTitle}/>}
+                    {(screenSwitcher) ? <ListOfAllProjects  handelOptionSelection={handelOptionSelection}/> :  <ProjectEditor handelBackToListOfProjectBtnClick={handelBackToListOfProjectBtnClick} />}
             </div>
         </div>
     );
