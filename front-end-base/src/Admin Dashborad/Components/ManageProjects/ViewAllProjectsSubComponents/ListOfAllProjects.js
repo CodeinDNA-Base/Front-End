@@ -126,7 +126,7 @@ function ListOfAllProjects(props) {
                 return itemToReturn;
             }))
         setSearchKeyPairs(tempKeyPairs);
-       
+        
     }
     const updateList = (startIndex,endIndex)=>{
         setList(listOfProjects.map((item,index)=>{
@@ -138,7 +138,7 @@ function ListOfAllProjects(props) {
                     </ImageListItem>
                     )   
             }
-        }))
+        }));
     }
 
     const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
@@ -158,9 +158,6 @@ function ListOfAllProjects(props) {
                     }
                 }));
             }
-
-       
-
     }
 
     const handelPageChange = (event,pageNumber)=>{

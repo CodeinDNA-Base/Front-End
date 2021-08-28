@@ -12,6 +12,7 @@ import GroupedRadioButtons from '../Admin Dashborad/Components/Support/GroupedRa
 import { FilterOptions } from '../Projects/Components/FilterOptions';
 import CustomChipsList from '../Admin Dashborad/Components/Support/CustomChipsList';
 import FilterMotor from '../Admin Dashborad/Components/Support/FilterMotor';
+import { CustomPhotoUploader } from '../Admin Dashborad/Components/Support/CustomPhotoUploader';
 function Test(props)  {
     const classes = useStyles();
     const [InputValue,setInputValue]=useState('');
@@ -146,6 +147,10 @@ function Test(props)  {
                 <Grid item xs={12} style={{paddingLeft:50}}>
                     <FilterMotor/>
                 </Grid> 
+                <Grid item xs={12} style={{paddingLeft:50}}>
+                    <CustomPhotoUploader/>
+                </Grid> 
+                
                 
             </Grid>
         </div>
