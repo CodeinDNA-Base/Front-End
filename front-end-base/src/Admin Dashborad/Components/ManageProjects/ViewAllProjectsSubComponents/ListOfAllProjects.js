@@ -57,21 +57,22 @@ function ListOfAllProjects(props) {
         }))
     }
 
-    const [searchKeyPairs,setSearchKeyPairs] =useState([]);
+    const [searchKeyPairs,setSearchKeyPairs] =useState();
+    
     useEffect(()=>{
         updateSearchKeyPair(listOfOptions_ForChipList);
     },[listOfOptions_ForChipList]);
 
     useEffect(()=>{
-        console.log("Generated search key pairs :")
-        console.log(searchKeyPairs)
+        // Not call the .. FILTER ENGINE
+        const rep = FilterEngine(listOfProjects,searchKeyPairs[0]);
+        console.log(rep);
+
     },[searchKeyPairs])
 
     const updateSearchKeyPair = (listOfOptions_ForChipList)=>{
-        console.log(listOfOptions_ForChipList)
-        
-        setSearchKeyPairs(produce(searchKeyPairs,draft=>{
-            draft.push(listOfOptions_ForChipList.map((item,index)=>{
+        let tempKeyPairs = [];
+        tempKeyPairs.push(listOfOptions_ForChipList.map((item,index)=>{
                 let itemToReturn = null;
                   // { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
                 switch (item.type) {
@@ -124,10 +125,12 @@ function ListOfAllProjects(props) {
 
                 return itemToReturn;
             }))
-        }))
+        setSearchKeyPairs(tempKeyPairs);
+       
     }
 
     const handelPageChange = (event,pageNumber)=>{
+
         setCurrentOpenPage((prev)=>{
             if(currentOpenPage<prev)
             {
