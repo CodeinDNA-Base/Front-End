@@ -43,36 +43,43 @@ function Filters(props) {
     // This will be filled from API data
     const [filter_by_title_1_Options,setFilter_by_title_1_Options]=useState([
         {
-            OptionLabel:"Serive 1",
-            OptionValue:"Serive 1",
+            OptionLabel:"Java",
+            OptionValue:"Java",
             optionIndex:"0",
             isCheked:false
         },
         {
-            OptionLabel:"Serive 2",
-            OptionValue:"Serive 2",
+            OptionLabel:"React Js",
+            OptionValue:"React Js",
             optionIndex:"1",
             isCheked:false
         },
         {
-            OptionLabel:"Serive 3",
-            OptionValue:"Serive 3",
+            OptionLabel:"React Native",
+            OptionValue:"React Native",
             optionIndex:"2",
             isCheked:false
         },
         {
-            OptionLabel:"Serive 4",
-            OptionValue:"Serive 4",
+            OptionLabel:"C#",
+            OptionValue:"C#",
             optionIndex:"3",
             isCheked:false
         },
         {
-            OptionLabel:"Serive 5",
-            OptionValue:"Serive 5",
+            OptionLabel:"C++",
+            OptionValue:"C++",
+            optionIndex:"4",
+            isCheked:false
+        },
+        {
+            OptionLabel:"Andriod",
+            OptionValue:"C++",
             optionIndex:"4",
             isCheked:false
         },
         
+
     ]);
 
     const handel_filter_by_title_1_Change=(e)=>{
@@ -89,28 +96,28 @@ function Filters(props) {
     // This will be filled from API data
     const [listOfOptions_filter_by_title_2_RadioBoxes,setListOfOptions_filter_by_title_2_RadioBoxes] =useState([
         {
-            optionLabel:"Style 1",
-            optionValue:"Style 1",
+            optionLabel:"Desktop App",
+            optionValue:"Desktop App",
             radioBtnColor:'default'
         },
         {
-            optionLabel:"Style 2",
-            optionValue:"Style 2",
+            optionLabel:"Mobile App",
+            optionValue:"Mobile App",
             radioBtnColor:'primary'
         },
         {
-            optionLabel:"Style 3",
-            optionValue:"Style 3",
+            optionLabel:"Desktop Game",
+            optionValue:"Desktop Game",
             radioBtnColor:'secondary'
         },
         {
-            optionLabel:"Style 4",
-            optionValue:"Style 4",
+            optionLabel:"Mobile Game",
+            optionValue:"Mobile Game",
             radioBtnColor:'secondary'
         },
         {
-            optionLabel:"Style 5",
-            optionValue:"Style 5",
+            optionLabel:"Chating App",
+            optionValue:"Chating App",
             radioBtnColor:'secondary'
         },
         
@@ -142,7 +149,10 @@ function Filters(props) {
 
     const [selectedDate, setSelectedDate] = useState(new Date());  
     const hand_Apply_Date = (e)=>{
-        addElementInFilterList(selectedDate+"",filterBy_titles_type.filter_by_title_4_type,filterBy_titles.filter_by_title_4+" : "+selectedDate)
+        // dd-mm-yy
+        const tempDate =  `${selectedDate.getDay()}-${selectedDate.getMonth()}-${selectedDate.getFullYear()}`
+        // console.log(tempDate)
+        addElementInFilterList(tempDate,filterBy_titles_type.filter_by_title_4_type,filterBy_titles.filter_by_title_4+" : "+selectedDate)
     }
     
     //Price range
@@ -213,7 +223,6 @@ function Filters(props) {
                                             /> 
                                         )
                                     })}
-
                                 </FormGroup>
                                 </ScrollView>  
                               </FormControl>
@@ -221,7 +230,7 @@ function Filters(props) {
                            </AccordionDetails>
                          </Accordion>
                     </Grid>
-                    {/* <Grid item xs={3} className={classes.accordionCotnainer}>
+                    <Grid item xs={3} className={classes.accordionCotnainer}>
                         <Accordion
                             elevation={0}
                             style={{borderRight:lightBorder}}
@@ -240,8 +249,8 @@ function Filters(props) {
                             </ScrollView>
                            </AccordionDetails>
                          </Accordion>
-                    </Grid> */}
-                     <Grid item xs={3} className={classes.accordionCotnainer}>
+                    </Grid>
+                     {/* <Grid item xs={3} className={classes.accordionCotnainer}>
                         <Accordion
                             elevation={0}
                             style={{borderRight:lightBorder}}
@@ -310,7 +319,7 @@ function Filters(props) {
                             </ScrollView>
                            </AccordionDetails>
                          </Accordion>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={3} className={classes.accordionCotnainer}>
                         <Accordion
                             elevation={0}

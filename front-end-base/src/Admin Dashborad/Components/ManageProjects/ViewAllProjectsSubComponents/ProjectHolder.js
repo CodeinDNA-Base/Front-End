@@ -29,8 +29,6 @@ function ProjectHolder(props) {
     const [expanded, setExpanded] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-    const [value, setValue] = React.useState(2);
-    const [hover, setHover] = React.useState(-1);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -49,18 +47,6 @@ function ProjectHolder(props) {
     'Edit',  
     'Get Share link',
   ];
-  const labels = {
-    0.5: 'Useless',
-    1: 'Useless+',
-    1.5: 'Poor',
-    2: 'Poor+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Good',
-    4: 'Good+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
-  };
   return (
     <Card className={classes.root}
         elevation={0}
@@ -93,7 +79,7 @@ function ProjectHolder(props) {
         {options.map((option,index) => (
           <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
             // handleClose(index)
-            props.handelOptionSelection(e,index,props.projectKey)
+            props.handelOptionSelection(e,index,props.data)
             setAnchorEl(null);
     
           }}>
@@ -104,21 +90,17 @@ function ProjectHolder(props) {
       </div>
           </IconButton>
         }
-        title={props.ptojectTitle}
-        subheader="September 14, 2016"
+        title={props.data.projectTitle}
+        subheader={props.data.projectPublishDate}
       />
 
       <CardMedia
         className={classes.media}
-        image={props.img}
-        title="Paella dish"
+        image={props.data.projectThumbNail}
+       
       />
       <CardContent>
-        {/* <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
-        </Typography> */}
-        
+        {/* Controls */}
       </CardContent> 
     </Card>
   );

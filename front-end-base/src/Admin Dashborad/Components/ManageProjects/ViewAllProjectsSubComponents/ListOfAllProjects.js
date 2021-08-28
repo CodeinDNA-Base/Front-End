@@ -50,7 +50,7 @@ function ListOfAllProjects(props) {
             {
                 return(      
                     <ImageListItem key={item.img} cols={item.cols || 1}>
-                        <ProjectHolder ptojectTitle={"Sample Project"} projectKey={"SampleKey"} cols={item.cols} img={img} handelOptionSelection={props.handelOptionSelection}/>
+                        <ProjectHolder  cols={item.cols}   handelOptionSelection={props.handelOptionSelection} data={item}/>
                     </ImageListItem>
                     )   
             }
@@ -65,9 +65,11 @@ function ListOfAllProjects(props) {
 
     useEffect(()=>{
         // Not call the .. FILTER ENGINE
-        const rep = FilterEngine(listOfProjects,searchKeyPairs[0]);
-        console.log(rep);
-
+        try{
+            const rep = FilterEngine(listOfProjects,searchKeyPairs[0]);
+            console.log(rep);
+        }catch(e){}
+        
     },[searchKeyPairs])
 
     const updateSearchKeyPair = (listOfOptions_ForChipList)=>{

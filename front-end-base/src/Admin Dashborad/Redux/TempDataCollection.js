@@ -1,203 +1,108 @@
-const listOfProjects = [{
-    projectTitle:"Project titl 1",
-    projectDesc:"This is new project",
+const listOfProjects = [
+    {
+    projectTitle:"Project 1",
+    projectDesc:"Project desc",
     projectService:"Desktop App",
     projectSubService:"React Js",
-    projectEstimatedPrice:34,
-    projectPublishDate:{
-        month:"4",
-        date:"3",
-        year:"2019",
-        day:"Monday",
+    projectEstimatedPrice:70,
+    projectPublishDate:"3-4-2010",  //dd-mm-yy
+    projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+    projectRatingStars:5,
+    projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
     },
-    projectPublishTime:{
-        hours:"4",
-        minutes:"3",
-        seconds:"2019",
-        amOrPm:"AM",
+    {
+        projectTitle:"Project 2",
+        projectDesc:"Project desc",
+        projectService:"Mobile App",
+        projectSubService:"Andriod",
+        projectEstimatedPrice:50,
+        projectPublishDate:"4-4-2010",  //dd-mm-yy
+        projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+        projectRatingStars:5,
+        projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
     },
-    projectRatingStars:3
-},
-{
-    projectTitle:"Project titl 2",
-    projectDesc:"This is new project 2",
-    projectService:"Mobile App",
-    projectSubService:"React Native",
-    projectEstimatedPrice:20,
-    projectPublishDate:{
-        month:"2",
-        date:"7",
-        year:"2012",
-        day:"Tuseday",
+    {
+        projectTitle:"Project 3",
+        projectDesc:"Project desc",
+        projectService:"Mobile Game",
+        projectSubService:"C++",
+        projectEstimatedPrice:50,
+        projectPublishDate:"5-4-2010",  //dd-mm-yy
+        projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+        projectRatingStars:4.5,
+        projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
+    },{
+        projectTitle:"Project 4",
+        projectDesc:"Project desc",
+        projectService:"Chating App",
+        projectSubService:"React Js",
+        projectEstimatedPrice:50,
+        projectPublishDate:"6-4-2010",  //dd-mm-yy
+        projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+        projectRatingStars:3.5,
+        projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
+    },{
+        projectTitle:"Project 5",
+        projectDesc:"Project desc",
+        projectService:"React Native",
+        projectSubService:"React Js",
+        projectEstimatedPrice:30,
+        projectPublishDate:"7-4-2010",  //dd-mm-yy
+        projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+        projectRatingStars:4.5,
+        projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
+    },{
+        projectTitle:"Project 6",
+        projectDesc:"Project desc",
+        projectService:"React Native",
+        projectSubService:"React Js",
+        projectEstimatedPrice:80,
+        projectPublishDate:"8-4-2010",  //dd-mm-yy
+        projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+        projectRatingStars:5,
+        projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
+    },{
+        projectTitle:"Project 7",
+        projectDesc:"Project desc",
+        projectService:"Mobile Game",
+        projectSubService:"Andriod",
+        projectEstimatedPrice:80,
+        projectPublishDate:"3-4-2010",  //dd-mm-yy
+        projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+        projectRatingStars:5,
+        projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
+    },{
+        projectTitle:"Project 8",
+        projectDesc:"Project desc",
+        projectService:"Desktop App",
+        projectSubService:"C#",
+        projectEstimatedPrice:80,
+        projectPublishDate:"9-4-2010",  //dd-mm-yy
+        projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+        projectRatingStars:4,
+        projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
+    },{
+        projectTitle:"Project 9",
+        projectDesc:"Project desc",
+        projectService:"Desktop Game",
+        projectSubService:"Java",
+        projectEstimatedPrice:90,
+        projectPublishDate:"10-4-2010",  //dd-mm-yy
+        projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+        projectRatingStars:4.5,
+        projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
+    },{
+        projectTitle:"Project 10",
+        projectDesc:"Project desc",
+        projectService:"Desktop Game",
+        projectSubService:"C++",
+        projectEstimatedPrice:90,
+        projectPublishDate:"11-4-2010",  //dd-mm-yy
+        projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
+        projectRatingStars:3.5,   
+        projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",
     },
-    projectPublishTime:{
-        hours:"2",
-        minutes:"8",
-        seconds:"24",
-        amOrPm:"PM",
-    },
-    projectRatingStars:5
-},
-{
-    projectTitle:"Project titl 3",
-    projectDesc:"This is new project 3",
-    projectService:"Desktop App",
-    projectSubService:"React Js",
-    projectEstimatedPrice:322,
-    projectPublishDate:{
-        month:"5",
-        date:"3",
-        year:"2022",
-        day:"Tuseday",
-    },
-    projectPublishTime:{
-        hours:"7",
-        minutes:"3",
-        seconds:"22",
-        amOrPm:"PM",
-    },
-    projectRatingStars:3.5
-},
-{
-    projectTitle:"Project titl 4",
-    projectDesc:"This is new project 4",
-    projectService:"Desktop App",
-    projectSubService:"Java",
-    projectEstimatedPrice:40,
-    projectPublishDate:{
-        month:"4",
-        date:"3",
-        year:"2019",
-        day:"Monday",
-    },
-    projectPublishTime:{
-        hours:"4",
-        minutes:"3",
-        seconds:"2019",
-        amOrPm:"AM",
-    },
-    projectRatingStars:2
-},
-{
-    projectTitle:"Project titl 6",
-    projectDesc:"This is new project 6",
-    projectService:"Web App",
-    projectSubService:"React JS",
-    projectEstimatedPrice:40,
-    projectPublishDate:{
-        month:"4",
-        date:"3",
-        year:"2019",
-        day:"Monday",
-    },
-    projectPublishTime:{
-        hours:"4",
-        minutes:"3",
-        seconds:"2019",
-        amOrPm:"AM",
-    },
-    projectRatingStars:3
-},
-{
-    projectTitle:"Project titl 7",
-    projectDesc:"This is new project 7",
-    projectService:"Mobile App",
-    projectSubService:"Andriod",
-    projectEstimatedPrice:312,
-    projectPublishDate:{
-        month:"5",
-        date:"2",
-        year:"2012",
-        day:"Saturday",
-    },
-    projectPublishTime:{
-        hours:"7",
-        minutes:"3",
-        seconds:"22",
-        amOrPm:"PM",
-    },
-    projectRatingStars:3.5
-},
-{
-    projectTitle:"Project titl 8",
-    projectDesc:"This is new project 8",
-    projectService:"Desktop App",
-    projectSubService:"Java",
-    projectEstimatedPrice:40,
-    projectPublishDate:{
-        month:"4",
-        date:"3",
-        year:"2019",
-        day:"Monday",
-    },
-    projectPublishTime:{
-        hours:"4",
-        minutes:"3",
-        seconds:"2019",
-        amOrPm:"AM",
-    },
-    projectRatingStars:5
-},
-{
-    projectTitle:"Project titl 9",
-    projectDesc:"This is new project 9",
-    projectService:"Desktop App",
-    projectSubService:"Java",
-    projectEstimatedPrice:10,
-    projectPublishDate:{
-        month:"4",
-        date:"3",
-        year:"2019",
-        day:"Monday",
-    },
-    projectPublishTime:{
-        hours:"4",
-        minutes:"3",
-        seconds:"2019",
-        amOrPm:"AM",
-    },
-    projectRatingStars:2
-},
-{
-    projectTitle:"Project titl 10",
-    projectDesc:"This is new project 10",
-    projectService:"Mobile App",
-    projectSubService:"C#",
-    projectEstimatedPrice:20,
-    projectPublishDate:{
-        month:"1",
-        date:"7",
-        year:"2011",
-        day:"Tuseday",
-    },
-    projectPublishTime:{
-        hours:"2",
-        minutes:"8",
-        seconds:"24",
-        amOrPm:"AM",
-    },
-    projectRatingStars:5
-},
-{
-    projectTitle:"Project titl 11",
-    projectDesc:"This is new project 11",
-    projectService:"Mobile App",
-    projectSubService:"React Native",
-    projectEstimatedPrice:20,
-    projectPublishDate:{
-        month:"2",
-        date:"7",
-        year:"2012",
-        day:"Tuseday",
-    },
-    projectPublishTime:{
-        hours:"2",
-        minutes:"8",
-        seconds:"24",
-        amOrPm:"PM",
-    },
-    projectRatingStars:5
-},
+
 ]
 
 export {listOfProjects};
