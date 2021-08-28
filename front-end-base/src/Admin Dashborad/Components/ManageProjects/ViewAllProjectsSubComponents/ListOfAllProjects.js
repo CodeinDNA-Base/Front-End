@@ -9,7 +9,8 @@ import { Headings } from '../../Support/Headings';
 import Pagination from '@material-ui/lab/Pagination';
 import { ScrollView } from "@cantonjs/react-scroll-view";
 import {actions,store} from '../../../Redux/ReduxResourceExporter';
-
+import FilterEngine from '../FilterMotor'
+import produce from 'immer';
 function ListOfAllProjects(props) {
     const classes = useStyles();
     const [listOfProjects,setListOfProjects]=useState([]);
@@ -19,19 +20,26 @@ function ListOfAllProjects(props) {
     const [currentOpenPage,setCurrentOpenPage]=useState(0);
 
     const [list,setList]=useState();
+    const [searchResults,setSearchResults]=useState([]);
+
     const [listOfOptions_ForChipList, setListOfOptions_ForChipList] = useState([
         // { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
     ]);
+    const filterBy_titles_type={
+        filter_by_title_1_type:"projectSubService",
+        filter_by_title_2_type:"projectService",
+        filter_by_title_3_type:"projectRatingStars",
+        filter_by_title_4_type:"projectPublishDate",
+        filter_by_title_5_type:"projectEstimatedPrice",
+    }
 
     useEffect(()=>{
-       
        setListOfProjects(store.getState().ProjectsStore.ListOfProjectsLoadedFromAPI.data);
        setNumberOfPage(Math.ceil((store.getState().ProjectsStore.ListOfProjectsLoadedFromAPI.data.length/9)))
-       
     },[]);
 
     useEffect(()=>{
-       console.log("len"+listOfProjects.length)
+    //    console.log("len"+listOfProjects.length)
        updateList(startIndexOfPage,(listOfProjects.length>=endIndexOfPage) ? endIndexOfPage : listOfProjects.length);
     },[listOfProjects,endIndexOfPage]);
 
@@ -46,7 +54,76 @@ function ListOfAllProjects(props) {
                     </ImageListItem>
                     )   
             }
-            
+        }))
+    }
+
+    const [searchKeyPairs,setSearchKeyPairs] =useState([]);
+    useEffect(()=>{
+        updateSearchKeyPair(listOfOptions_ForChipList);
+    },[listOfOptions_ForChipList]);
+
+    useEffect(()=>{
+        console.log("Generated search key pairs :")
+        console.log(searchKeyPairs)
+    },[searchKeyPairs])
+
+    const updateSearchKeyPair = (listOfOptions_ForChipList)=>{
+        console.log(listOfOptions_ForChipList)
+        
+        setSearchKeyPairs(produce(searchKeyPairs,draft=>{
+            draft.push(listOfOptions_ForChipList.map((item,index)=>{
+                let itemToReturn = null;
+                  // { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
+                switch (item.type) {
+                    case filterBy_titles_type.filter_by_title_1_type:
+                            console.log(`${filterBy_titles_type.filter_by_title_1_type} fiter  type detected`)
+                            itemToReturn={
+                                withRespectTo:item.type,
+                                typeofValue:"SingleValueString",
+                                values:item.data   
+                            }
+                        break;
+                    case filterBy_titles_type.filter_by_title_2_type:
+                        console.log(`${filterBy_titles_type.filter_by_title_2_type} fiter  type detected`)
+                            itemToReturn={
+                                withRespectTo:item.type,
+                                typeofValue:"SingleValueString",
+                                values:item.data   
+                            }
+                        break;
+                    case filterBy_titles_type.filter_by_title_3_type:
+                        console.log(`${filterBy_titles_type.filter_by_title_3_type} fiter  type detected`)
+                            itemToReturn={
+                                withRespectTo:item.type,
+                                typeofValue:"SingleValueString",
+                                values:item.data   
+                            }
+                        break;   
+                    case filterBy_titles_type.filter_by_title_4_type: 
+                    console.log(`${filterBy_titles_type.filter_by_title_4_type} fiter  type detected`)   
+                            itemToReturn={
+                                withRespectTo:item.type,
+                                typeofValue:"SingleValueString",
+                                values:item.data   
+                            }
+                        break;
+                    case filterBy_titles_type.filter_by_title_5_type:
+                        console.log(`${filterBy_titles_type.filter_by_title_5_type} fiter  type detected`)
+                            //Price range. comma seperated. Make sure to conver it in int.
+                            let tempValues = item.data.split(',');
+                             itemToReturn={
+                                    withRespectTo:item.type, 
+                                    typeofValue:"Range", //Range : int
+                                    values:[tempValues[0],tempValues[1]]
+                                }
+                        break;
+                                
+                    default:
+                        break;
+                }
+
+                return itemToReturn;
+            }))
         }))
     }
 
@@ -54,19 +131,16 @@ function ListOfAllProjects(props) {
         setCurrentOpenPage((prev)=>{
             if(currentOpenPage<prev)
             {
-                // console.log("increament");
                 setStartIndexOfPage((prevSI)=>{
                     return prevSI+9;
                 })
                 setEndIndexOfPage((prevSE)=>{
                     return prevSE+9;
-                })
-                
+                }); 
                 return (prev)
             }
             else
             {
-                // console.log("dec");
                 setStartIndexOfPage((prevSI)=>{
                     return prevSI-9;
                 })
@@ -79,6 +153,8 @@ function ListOfAllProjects(props) {
         })
 
     }
+
+
 
     return (
         <div>
@@ -93,10 +169,16 @@ function ListOfAllProjects(props) {
                     >
                         <CardContent>
                             
-                                { (listOfOptions_ForChipList.length!=0) && <Headings text={"Search Results "} fontSize={25}/>}
-                                { (listOfOptions_ForChipList.length===0) && <Headings text={"All projects"} fontSize={25}/>}
-                                
-                                <ImageList rowHeight={340} className={classes.imageList} cols={3}>
+                                { (listOfOptions_ForChipList.length!=0) && 
+                                    <div>
+                                        <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Search results"} fontSize={30}/> </div>
+
+                                    </div>
+                                    
+                                }
+                                { (listOfOptions_ForChipList.length===0) &&<div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"All projects"} fontSize={30}/> </div>}
+
+                                <ImageList rowHeight={320} className={classes.imageList} cols={3}>
                                     {list}
                                 </ImageList>
                                 <div>
@@ -113,9 +195,9 @@ function ListOfAllProjects(props) {
         </div>
     );
 }
+
 const useStyles = makeStyles((theme)=>({
     container:{
-
     },
     projectHolderContainer:{
         border:'1px solid #f7f2f7'
@@ -129,7 +211,7 @@ const useStyles = makeStyles((theme)=>({
       },
       imageList: {
         width: '100%',
-        marginTop:"5rem"
+        marginTop:"1%"
       },
 }))
 export default ListOfAllProjects;

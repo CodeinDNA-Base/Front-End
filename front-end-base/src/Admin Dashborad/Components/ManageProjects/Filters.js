@@ -19,43 +19,57 @@ import CustomChipsList from '../Support/CustomChipsList';
 
 //https://www.npmjs.com/package/@cantonjs/react-scroll-view
 
+//Update second element of filter object.
+
+
 function Filters(props) {
     const classes=useStyles();
     const filterBy_titlesFonts=18;
     // This will be filled from API data
     const filterBy_titles={
         filter_by_title_1:"By Sub-Service",
-        filter_by_title_2:"By Service",
+        filter_by_title_2:"By Catagory",
         filter_by_title_3:"By Rating",
         filter_by_title_4:"By Publish date",
-        filter_by_title_5:"By Price Range",
-        
+        filter_by_title_5:"By Price Range",   
+    }
+    const filterBy_titles_type={
+        filter_by_title_1_type:"projectSubService",
+        filter_by_title_2_type:"projectService",
+        filter_by_title_3_type:"projectRatingStars",
+        filter_by_title_4_type:"projectPublishDate",
+        filter_by_title_5_type:"projectEstimatedPrice",
     }
     // This will be filled from API data
     const [filter_by_title_1_Options,setFilter_by_title_1_Options]=useState([
         {
             OptionLabel:"Serive 1",
-            OptionValue:"0",
+            OptionValue:"Serive 1",
+            optionIndex:"0",
             isCheked:false
         },
         {
             OptionLabel:"Serive 2",
-            OptionValue:"1",
+            OptionValue:"Serive 2",
+            optionIndex:"1",
             isCheked:false
         },
         {
             OptionLabel:"Serive 3",
-            OptionValue:"2",
+            OptionValue:"Serive 3",
+            optionIndex:"2",
             isCheked:false
         },
         {
             OptionLabel:"Serive 4",
-            OptionValue:"3",
+            OptionValue:"Serive 4",
+            optionIndex:"3",
             isCheked:false
         },
         {
             OptionLabel:"Serive 5",
-            OptionValue:"4",
+            OptionValue:"Serive 5",
+            optionIndex:"4",
             isCheked:false
         },
         
@@ -68,7 +82,7 @@ function Filters(props) {
        }));
        console.log("Here")
        if(!filter_by_title_1_Options[selectedOpt].isCheked)
-       addElementInFilterList(filter_by_title_1_Options[selectedOpt].OptionValue,filterBy_titles.filter_by_title_1,filterBy_titles.filter_by_title_1+": "+filter_by_title_1_Options[selectedOpt].OptionLabel)       
+       addElementInFilterList(filter_by_title_1_Options[selectedOpt].OptionValue,filterBy_titles_type.filter_by_title_1_type,filterBy_titles.filter_by_title_1+": "+filter_by_title_1_Options[selectedOpt].OptionLabel)       
     }
 
     const [selectedOptOfFilter_by_title_2,setSelectedOptOfFilter_by_title_2]=useState();
@@ -104,7 +118,7 @@ function Filters(props) {
 
     useEffect(()=>{
         if(selectedOptOfFilter_by_title_2!=undefined)
-        addElementInFilterList(selectedOptOfFilter_by_title_2,filterBy_titles.filter_by_title_2,filterBy_titles.filter_by_title_2+" : "+selectedOptOfFilter_by_title_2);
+        addElementInFilterList(selectedOptOfFilter_by_title_2,filterBy_titles_type.filter_by_title_2_type,filterBy_titles.filter_by_title_2+" : "+selectedOptOfFilter_by_title_2);
     },[selectedOptOfFilter_by_title_2])
     // For rating.
     const [ratingValue,setRatingValue]=useState(0)
@@ -123,12 +137,12 @@ function Filters(props) {
       };
 
     const hand_Apply_Rating = (e)=>{
-        addElementInFilterList(ratingValue,filterBy_titles.filter_by_title_3,filterBy_titles.filter_by_title_3+" : Stars selected : "+ratingValue);
+        addElementInFilterList(ratingValue,filterBy_titles_type.filter_by_title_3_type,filterBy_titles.filter_by_title_3+" : Stars selected : "+ratingValue);
     }
 
     const [selectedDate, setSelectedDate] = useState(new Date());  
     const hand_Apply_Date = (e)=>{
-        addElementInFilterList(selectedDate,filterBy_titles.filter_by_title_4,filterBy_titles.filter_by_title_4+" : "+selectedDate)
+        addElementInFilterList(selectedDate+"",filterBy_titles_type.filter_by_title_4_type,filterBy_titles.filter_by_title_4+" : "+selectedDate)
     }
     
     //Price range
@@ -145,7 +159,7 @@ function Filters(props) {
     }
 
     const hand_PriceRange_Apply = (e)=>{
-        addElementInFilterList(rangeValue[0]+","+rangeValue[1],filterBy_titles.filter_by_title_5,filterBy_titles.filter_by_title_5+": Min value :"+priceMinRange+" : Max value :"+priceMaxRange);
+        addElementInFilterList(rangeValue[0]+","+rangeValue[1],filterBy_titles_type.filter_by_title_5_type,filterBy_titles.filter_by_title_5+": Min value :"+priceMinRange+" : Max value :"+priceMaxRange);
     }
 
    
@@ -155,7 +169,7 @@ function Filters(props) {
         const keyValue = props.listOfOptions_ForChipList.length;
         props.setListOfOptions_ForChipList(produce(props.listOfOptions_ForChipList,draft=>{
             draft.push({ key:keyValue,type:filterValueType,data:elementValue, label:filterValueLabel})
-        }))
+        }));
     }
 
     return (
@@ -194,7 +208,7 @@ function Filters(props) {
                                             
                                             control={<Checkbox checked={item.isCheked} key={"filter_1_"+index} onChange={(e)=>{
                                                 handel_filter_by_title_1_Change(e);
-                                            }} name={item.OptionValue} />}
+                                            }} name={item.optionIndex} />}
                                             label={item.OptionLabel}
                                             /> 
                                         )
