@@ -20,6 +20,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFlag,faThumbsUp,faThumbsDown} from '@fortawesome/free-solid-svg-icons'
 import './Styles.css'
+import { lightBorder } from '../../../../Theme/borders';
 
 const ITEM_HEIGHT = 40;
 
@@ -61,16 +62,13 @@ function ProjectHolder(props) {
     5: 'Excellent+',
   };
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            CodeinDNA
-          </Avatar>
-        }
+    <Card className={classes.root}
+        elevation={0}
+    >
+    <CardHeader
         action={
      <IconButton aria-label="settings">
-            <div>
+      <div>
       <IconButton
         aria-label="more"
         aria-controls="long-menu"
@@ -103,12 +101,13 @@ function ProjectHolder(props) {
           </MenuItem>
         ))}
       </Menu>
-    </div>
+      </div>
           </IconButton>
         }
         title={props.ptojectTitle}
         subheader="September 14, 2016"
       />
+
       <CardMedia
         className={classes.media}
         image={props.img}
@@ -119,67 +118,8 @@ function ProjectHolder(props) {
           This impressive paella is a perfect party dish and a fun meal to cook together with your
           guests. Add 1 cup of frozen peas along with the mussels, if you like.
         </Typography> */}
-        <div className={classes.ratingBar}>
-
-        <div className={classes.ratingsRoot}>
-        <h3 className={classes.ratingText}>Rating</h3>
-        <Rating
-        name="hover-feedback"
-        value={value}
-        precision={0.5}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
-        }}
-        />
         
-            {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
-            </div>
-        </div>
-        <div className={classes.reviewBar}>
-             <div className={classes.wasItHelpFullOrNotContainer}>
-                {/* Was helpfull or not */}
-                <div className="Thumb">
-                {/* Thumbs up */}
-                <FontAwesomeIcon size="sm" icon={faThumbsUp} />
-                </div>
-                <div className="ThumbFonts">
-                    {/* Help full */}
-                    <h6>Likes [12]</h6>
-                </div>
-                <div className="Thumb">
-                {/* Thumbs up */}
-                <FontAwesomeIcon size="sm" icon={faThumbsDown} />
-                </div>
-                <div className="ThumbFonts">
-                    {/* Help full */}
-                    <h6>Dislikes [22]</h6>
-                </div>
-            </div>
-        </div>
-        
-      </CardContent>
-      {/* <CardActions disableSpacing className={classes.bottomButtons}>
-        <IconButton>
-          
-          <EditOutlined />
-
-        </IconButton>
-        <IconButton >
-          
-          <DeleteSharp />
-        
-        </IconButton>
-        
-        <IconButton>
-          
-          <UpdateRounded />
-        
-        </IconButton>
-      </CardActions> */}
-      
+      </CardContent> 
     </Card>
   );
 }
@@ -187,53 +127,15 @@ const useStyles = makeStyles((theme)=>({
     container:{
         height:390
     },
-    bottomButtons:{
-      paddingLeft:'25%'
-    },
-    bottomButtonsContainer:{
-      
-        height:50,
-        width:'100%'
-    },
     root: {
         maxWidth: 345,
+        border:lightBorder,
       },
       media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
       },
-      expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-          duration: theme.transitions.duration.shortest,
-        }),
-      },
-      expandOpen: {
-        transform: 'rotate(180deg)',
-      },
-      avatar: {
-        backgroundColor:"#1f0678",
-        fontSize:7
-      },
-      ratingsRoot: {
-        width: 200,
-        display: 'flex',
-        alignItems: 'center',
-      },
-      ratingBar:{
-
-      },
-      reviewBar:{
-        marginTop:-30,
-        height:50
-      },
-      ratingText:{
-          paddingRight:'6%'
-      },
-      wasItHelpFullOrNotContainer:{
-       
-    }
+     
 }))
 
 export default ProjectHolder;

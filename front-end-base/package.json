@@ -45,6 +45,7 @@
     "react-sticky": "^6.0.3",
     "react-swipeable": "^6.1.2",
     "react-swipeable-views": "^0.14.0",
+    "redux": "^4.1.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

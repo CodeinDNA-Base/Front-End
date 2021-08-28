@@ -161,11 +161,10 @@ function Filters(props) {
     return (
 
         <Grid container >
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <Card
             elevation={0}
-            style={{borderTop:lightBorder,borderLeft:lightBorder,borderRight:lightBorder}}
+            style={{borderTop:lightBorder,borderLeft:lightBorder,borderRight:lightBorder,borderBottom:lightBorder}}
           >
             <CardContent>
                 <Headings text={"Filters"} fontSize={25} fontWeight={"bold"}/>
@@ -364,7 +363,7 @@ function Filters(props) {
                                 <Headings text={filterBy_titles.filter_by_title_4} fontSize={filterBy_titlesFonts}/>
                            </AccordionSummary>
                            <AccordionDetails style={{backgroundColor:'',width:450}}>
-                                <ScrollView style={{ height: '25vh',}}>
+                                <ScrollView style={{ height: '27vh',}}>
                                  <Headings text={"Set date and time"} fontSize={18}/>   
                                 <form style={{marginTop:'0.5rem'}} noValidate>
                                    <DateTimePicker
@@ -430,7 +429,6 @@ function Filters(props) {
             </CardContent> 
           </Card>
         </Grid>
-        <Grid item xs={1}></Grid>
         </Grid>
     );
 }

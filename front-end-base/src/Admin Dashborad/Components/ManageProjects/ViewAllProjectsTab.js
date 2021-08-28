@@ -7,41 +7,12 @@ function ViewAllProjectsTab(props) {
     const classes = useStyles();
     const [screenSwitcher,setScreenSwitcher]=useState(true);
     const [selectedProjectKeyHook,setSelectedProjectKeyHook]=useState(0);
-    const projectsList = [
-        {
-            projectTitle:"Project 1",
-            projectKey:0,
-            cols:1,
-            img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
-        },
-        {
-            projectTitle:"Project 2",
-            projectKey:1,
-            cols:1,
-            img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
-        },
-        {
-            projectTitle:"Project 3",
-            projectKey:2,
-            cols:1,
-            img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
-        },
-        {
-            projectTitle:"Project 4",
-            projectKey:3,
-            cols:1,
-            img:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg"
-        },
-        
-    ]
     const handelOptionSelection = (event,selectedOption,selectedProjectKey)=>{
         // alert("here"+selectedOption+" - "+selectedProjectKey)
         if(selectedOption===0)
         {
-
             setSelectedProjectKeyHook(selectedProjectKey)
-            setScreenSwitcher(false)
-           
+            setScreenSwitcher(false)   
         }
     }
     const handelBackToListOfProjectBtnClick = (event)=>{
@@ -49,13 +20,9 @@ function ViewAllProjectsTab(props) {
     }
     return (
         <div className={classes.container}>
-            <div className={classes.topNav}>
-                    {/* Here make a nav bar like for back option etc. */}
-
-            </div>
-            <div className={classes.listOfProjects}>
+            <div>
                     {/* Load the component which will render the list of projects */}
-                    {(screenSwitcher) ? <ListOfAllProjects projectsList={projectsList} handelOptionSelection={handelOptionSelection}/> :  <ProjectEditor handelBackToListOfProjectBtnClick={handelBackToListOfProjectBtnClick} projectTitle={projectsList[selectedProjectKeyHook].projectTitle}/>}
+                    {(screenSwitcher) ? <ListOfAllProjects  handelOptionSelection={handelOptionSelection}/> :  <ProjectEditor handelBackToListOfProjectBtnClick={handelBackToListOfProjectBtnClick} projectTitle={projectsList[selectedProjectKeyHook].projectTitle}/>}
             </div>
         </div>
     );
