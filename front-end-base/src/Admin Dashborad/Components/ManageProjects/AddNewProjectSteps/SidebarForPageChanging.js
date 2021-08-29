@@ -6,6 +6,19 @@ import StepLabel from "@material-ui/core/StepLabel";
 import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { Headingfonts } from "../../../../Theme/fonts";
+import { RoundButton } from "../../../../CustomComponents/UI/Buttons/RoundButton";
+import colors from "../../../../Theme/colors";
+/***
+ * 
+    const setCurrentStepNumber = (value)=>{
+        
+    }
+
+    <SidebarForPageChanging setCurrentStepNumber={setCurrentStepNumber}/>
+
+    
+ */
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   actionsContainer: {
     marginBottom: theme.spacing(2),
+    marginTop:theme.spacing(2)
   },
   resetContainer: {
     padding: theme.spacing(3),
@@ -24,37 +38,41 @@ const useStyles = makeStyles((theme) => ({
   stepLabel: {
     color: "#000000",
     fontWeight: "bold",
+    font:Headingfonts.extraExtraSmall,
+    fontSize:20
   },
   StepContent: {
     color: "#000000",
+    
   },
+  setContent:{
+    font:Headingfonts.extraExtraSmall,
+    fontSize:18,
+
+  }
 }));
 
 function getSteps() {
   return [
-    "My Info",
-    "Billing methods",
-    "Password and Security",
-    "Notification Settings",
-    "Balance",
-    "Critical",
+    "Basic Info",
+    "Media",
+    "Preview",
+    "Publish",
   ];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return `Complete/Edit your profile by putting correct personal information.`;
+      return `Complete/Edit basic information`;
     case 1:
-      return `Add/Change your payment method that is easy for you to work on codeindna!.`;
+      return `Add/Change media of project`;
     case 2:
-      return `Protect you account by setting an strong password.`;
+      return `This is how it will be shown on website`;
     case 3:
       return `Get Notified for activities on your account.`;
-    case 4:
-      return `Check your balance in account.`;
     default:
-      return "Set Invisible or Deactivate your account.";
+      return "Publish it";
   }
 }
 
@@ -66,19 +84,18 @@ function VerticalLinearStepper(props) {
   const handleNext = () => {
     setActiveStep((prevActiveStep) => {
 
-      props.currentStep(prevActiveStep+1) //Send this number to parent component so that it can rendre respective comps
+      props.setCurrentStepNumber(prevActiveStep+1) //Send this number to parent component so that it can rendre respective comps
       return prevActiveStep + 1;      
     });
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) =>{
-      props.currentStep(prevActiveStep-1) //Send this number to parent component so that it can rendre respective comps
+      props.setCurrentStepNumber(prevActiveStep-1) //Send this number to parent component so that it can rendre respective comps
       return prevActiveStep - 1;
 
     });
     };
-    // const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
 
   return (
     <div className={classes.root}>
@@ -89,11 +106,19 @@ function VerticalLinearStepper(props) {
               <Typography className={classes.stepLabel}>{label}</Typography>
             </StepLabel>
             <StepContent>
-              <Typography classNema={classes.setContent}>
+              <div className={classes.setContent}>
                 {getStepContent(index)}
-              </Typography>
+              </div>
               <div className={classes.actionsContainer}>
                 <div>
+                {/* <RoundButton
+                   color={colors.white}
+                   bgColor={colors.secondary}
+                   title={"Back"}
+                   width="15%"
+                   margin={"0% 1% 0% 0%"}
+                   handleClick={handleBack}
+                  />  */}
                   <Button
                     variant="outlined"
                     color="primary"
@@ -112,6 +137,14 @@ function VerticalLinearStepper(props) {
                   >
                     Next
                   </Button>
+                  {/* <RoundButton
+                   color={colors.white}
+                   bgColor={colors.primary}
+                   title={"Next"}
+                   width="15%"
+                   margin={"0% 1% 0% 0%"}
+                   handleClick={handleNext}
+                  />  */}
                 </div>
               </div>
             </StepContent>
@@ -122,12 +155,10 @@ function VerticalLinearStepper(props) {
   );
 }
 
-export const AccountSettingsSidebar = (props) => {
+export const SidebarForPageChanging = (props) => {
 
- function setCurrentStep(step){
-     props.currentStep(step)
- }
+ 
   return(
-    <VerticalLinearStepper currentStep={setCurrentStep}/>
+    <VerticalLinearStepper setCurrentStepNumber={props.setCurrentStepNumber} />
   ) ;
 };

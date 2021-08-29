@@ -12,12 +12,14 @@ import GroupedRadioButtons from '../Admin Dashborad/Components/Support/GroupedRa
 import { FilterOptions } from '../Projects/Components/FilterOptions';
 import CustomChipsList from '../Admin Dashborad/Components/Support/CustomChipsList';
 import FilterMotor from '../Admin Dashborad/Components/Support/FilterMotor';
-import { CustomPhotoUploader } from '../Admin Dashborad/Components/Support/CustomPhotoUploader';
+import CustomPhotoUploader from '../Admin Dashborad/Components/Support/CustomPhotoUploader';
+import { SidebarForPageChanging } from '../Admin Dashborad/Components/Support/SidebarForPageChanging';
 function Test(props)  {
     const classes = useStyles();
     const [InputValue,setInputValue]=useState('');
     const [selectedValue,setSelectedValue]=useState(0);
-    
+    const [selectedImage,setSelectedImage]=useState()
+    const [currentStep,setCurrentStep]=useState(0);
     console.log("InputValue :"+InputValue);
     console.log("selected value :"+selectedValue);
     const listOfOptions_ForDropDown=[
@@ -67,11 +69,16 @@ function Test(props)  {
         { key: 3,type:"ByDate",data:"Fri Aug 27 2021 20:22:44 GMT+0500 (Pakistan Standard Time)", label: 'Fri Aug 27 2021 20:22:44 GMT+0500 (Pakistan Standard Time)' },
         { key: 4,type:"ByRating",data:'2', label: '2 Stars' },
       ]);
-      console.log(listOfOptions_ForChipList)
-
     
+       
 
-
+    const setCurrentStepNumber = (value)=>{
+        
+    }
+    
+    console.log("Selected image");
+    console.log(selectedImage);
+    console.log("current step"+currentStep);
     return (
         <div>
             <Grid container spacing={2}>
@@ -148,10 +155,13 @@ function Test(props)  {
                     <FilterMotor/>
                 </Grid> 
                 <Grid item xs={12} style={{paddingLeft:50}}>
-                    <CustomPhotoUploader/>
+                     <div style={{backgroundColor:""}}>
+                            <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage}/>
+                     </div>
                 </Grid> 
-                
-                
+                <Grid item xs={12} style={{paddingLeft:50}}>
+                    <SidebarForPageChanging setCurrentStepNumber={setCurrentStepNumber}/>
+                </Grid> 
             </Grid>
         </div>
     );

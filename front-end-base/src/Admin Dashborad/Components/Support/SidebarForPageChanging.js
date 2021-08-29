@@ -7,6 +7,17 @@ import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+/***
+ * 
+    const setCurrentStepNumber = (value)=>{
+        
+    }
+
+    <SidebarForPageChanging setCurrentStepNumber={setCurrentStepNumber}/>
+
+    
+ */
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -66,14 +77,14 @@ function VerticalLinearStepper(props) {
   const handleNext = () => {
     setActiveStep((prevActiveStep) => {
 
-      props.currentStep(prevActiveStep+1) //Send this number to parent component so that it can rendre respective comps
+      props.setCurrentStepNumber(prevActiveStep+1) //Send this number to parent component so that it can rendre respective comps
       return prevActiveStep + 1;      
     });
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) =>{
-      props.currentStep(prevActiveStep-1) //Send this number to parent component so that it can rendre respective comps
+      props.setCurrentStepNumber(prevActiveStep-1) //Send this number to parent component so that it can rendre respective comps
       return prevActiveStep - 1;
 
     });
@@ -122,12 +133,10 @@ function VerticalLinearStepper(props) {
   );
 }
 
-export const AccountSettingsSidebar = (props) => {
+export const SidebarForPageChanging = (props) => {
 
- function setCurrentStep(step){
-     props.currentStep(step)
- }
+ 
   return(
-    <VerticalLinearStepper currentStep={setCurrentStep}/>
+    <VerticalLinearStepper setCurrentStepNumber={props.setCurrentStepNumber} />
   ) ;
 };

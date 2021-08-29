@@ -36,26 +36,12 @@ import "../Styles/AccountSettingsPersonalInfo.css";
 
 //Resources
 
-const profilePic = "https://img.icons8.com/ios/50/000000/image.png";
+const profilePic = "https://firebasestorage.googleapis.com/v0/b/user-accounts-7cdc4.appspot.com/o/zeeshan.jpeg?alt=media&token=2b357d32-39c7-4369-88ad-c8b06599a9f9";
 
-export const CustomPhotoUploader = (props) => {
-  return (
-    <div>
-      <PersonalInfoContainers />
-    </div>
-  );
-};
-
-function PersonalInfoContainers() {
-  return (
-    <>
-      <AccountInfo />
-     
-    </>
-  );
-}
-
-const accountInfoStyles = makeStyles((theme) => ({
+// Calling method , pass it hook with setter. you will get setted image in that hook.
+{/* <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage}/> */}
+  
+const customPhotoUploader = makeStyles((theme) => ({
   root: {
     // maxWidth: "100%",
     marginTop: "2rem",
@@ -73,26 +59,22 @@ const accountInfoStyles = makeStyles((theme) => ({
   },
 }));
 
-const AccountInfo = () => {
-  const classes = accountInfoStyles();
+export default function CustomPhotoUploader(props){
 
+  const classes = customPhotoUploader();
   const [openChooseImage, setOpenChooseImage] = useState(false);
-
   const handleProfileImageOpen = () => {
     setOpenChooseImage(true);
   };
-
   const handleProfileImageClose = () => {
     setOpenChooseImage(false);
   };
-
-
   return (
     <div>
           <div className="container">
             <img src={profilePic} alt="profile image" className="image" />
             <div className="middle">
-                <PhotoCameraIcon fontSize="large" onClick={handleProfileImageOpen} />  
+                <PhotoCameraIcon fontSize="large" onClick={handleProfileImageOpen}/>  
             </div>
           </div>
     <div>
@@ -111,8 +93,9 @@ const AccountInfo = () => {
           <Fade in={openChooseImage}>
             <div className={classes.paper}>
               <Box mt={-4}>
-                <ChooseProfileImageModal
-                  handleClose={handleProfileImageClose}
+                <ChooseImageModal
+                  handleClose={handleProfileImageClose} 
+                  setSelectedImage={props.setSelectedImage}
                 />
               </Box>
             </div>
@@ -123,15 +106,14 @@ const AccountInfo = () => {
   );
 };
 
-
-const chooseProfileImageStyles = makeStyles((theme) => ({
+const chooseImageStyles = makeStyles((theme) => ({
   container: {
     textAlign: "center",
   },
 }));
 
-const ChooseProfileImageModal = (props) => {
-  const classes = chooseProfileImageStyles();
+const ChooseImageModal = (props) => {
+  const classes = chooseImageStyles();
 
   function handleConfirm() {
     props.handleClose();
@@ -157,7 +139,7 @@ const ChooseProfileImageModal = (props) => {
             </Box>
             </Box>
             <Box display="flex">
-              <PhotoUploader handleClose={props.handleClose} />
+                <PhotoPicker handleClose={props.handleClose}  setSelectedImage={props.setSelectedImage}/>
             </Box>
           </CardContent>
         </Grid>
@@ -166,7 +148,7 @@ const ChooseProfileImageModal = (props) => {
   );
 };
 
-class PhotoUploader extends PureComponent {
+class PhotoPicker extends PureComponent {
   constructor(props) {
     super(props);
     this.setFiles = this.setFiles.bind(this);
@@ -180,6 +162,7 @@ class PhotoUploader extends PureComponent {
       width: 30,
       aspect: 1 / 1,
     },
+    
   };
 
   onSelectFile = (e) => {
@@ -203,6 +186,7 @@ class PhotoUploader extends PureComponent {
   onCropChange = (crop) => {
     this.setState({ crop });
   };
+  
 
   async makeClientCrop(crop) {
     if (this.imageRef && crop.width && crop.height) {
@@ -272,8 +256,9 @@ class PhotoUploader extends PureComponent {
 
   //Call APIS to update data of this user
   handleUpdateProfile() {
-    alert("Call to API for profile Update");
-    console.log(this.state.src)
+    // alert("Call to API for profile Update");
+    // console.log(this.state.src)
+    this.props.setSelectedImage(this.state.src);
     this.props.handleClose();
   }
 

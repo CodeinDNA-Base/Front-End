@@ -38,6 +38,7 @@ function SimpleTextFields(props) {
                  {
                      style:{fontFamily:fontFamily.fontFamily_1,fontWeight:props.labelFontWeight,color:props.labelFontColor,fontSize:props.labelFontSize}
                 }}
+              {...props}  
              />
              
         </div>
@@ -66,8 +67,9 @@ function RoundedTextFields(props) {
                  {
                      style:{fontFamily:fontFamily.fontFamily_1,fontWeight:props.labelFontWeight,color:props.labelFontColor,fontSize:props.labelFontSize}
                 }}
+                {...props}
              />
-             
+            
         </div>
 
     );
@@ -105,7 +107,7 @@ function MultiLineTextFields(props) {
              variant="outlined" 
              inputProps={{style:{fontFamily:fontFamily.fontFamily_1,fontSize:fontSize,fontWeight:props.fontWeight,width:props.width,height:props.height}}}
              InputLabelProps={{style:{fontFamily:fontFamily.fontFamily_1,fontWeight:props.labelFontWeight,color:props.labelFontColor,fontSize:props.labelFontSize,}}}
-            
+             {...props}
              />
         </div>
 

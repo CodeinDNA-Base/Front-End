@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Preview(props) {
+function Media(props) {
     return (
         <div>
             <h1>This is media</h1>
@@ -8,4 +8,4 @@ function Preview(props) {
     );
 }
 
-export default Preview;
+export default Media;
