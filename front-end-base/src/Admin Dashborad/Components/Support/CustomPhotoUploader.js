@@ -33,6 +33,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 
 //Styles and Theme
 import "../Styles/AccountSettingsPersonalInfo.css";
+import { CloudUpload } from "@material-ui/icons";
 
 //Resources
 
@@ -59,7 +60,7 @@ const customPhotoUploader = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomPhotoUploader(props){
+function CustomPhotoUploader(props){
 
   const classes = customPhotoUploader();
   const [openChooseImage, setOpenChooseImage] = useState(false);
@@ -72,10 +73,10 @@ export default function CustomPhotoUploader(props){
   return (
     <div>
           <div className="container">
-            <img src={profilePic} alt="profile image" className="image" />
-            <div className="middle">
-                <PhotoCameraIcon fontSize="large" onClick={handleProfileImageOpen}/>  
+            <div  onClick={handleProfileImageOpen} style={{cursor:'pointer'}}>
+                <CloudUpload style={{fontSize:40}}/>
             </div>
+            
           </div>
     <div>
         <Modal
@@ -368,3 +369,6 @@ function Dropzone(props) {
     </div>
   );
 }
+
+export {CustomPhotoUploader as default, ChooseImageModal}
+
