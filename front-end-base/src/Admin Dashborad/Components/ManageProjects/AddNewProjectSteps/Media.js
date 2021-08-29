@@ -5,22 +5,41 @@ import { Headingfonts } from '../../../../Theme/fonts';
 import { Headings } from '../../Support/Headings';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import { Grid,Card,CardHeader,CardContent,Divider } from '@material-ui/core';
+import { Grid,Card,CardHeader,CardContent,Divider,ImageList,ImageListItem,makeStyles } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import {lightBorder} from '../../../../Theme/borders'
 import produce from 'immer';
 import CustomPhotoUploader from '../../Support/CustomPhotoUploader'
 import { Check, Close } from '@material-ui/icons';
+import ScrollView from '@cantonjs/react-scroll-view/lib/components/ScrollView';
+import ImageHolder from './ImageHolder';
 
 function Media(props) {
+    const classes = useStyles();
+
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
     
     //Data hooks
     const [thumbnailImage,setThumbnailImage]=useState(null);
-
+    const [selectedImage,setSelectedImage]=useState(null);
+    const [listOfSelectedImages,setListOfSelectedImages]=useState([]);
     const handelEditAndSaveChanges = ()=>{
         setIsEditingEnabled(!isEditingEnabled);
     }
+    const handelSelectImagesForGallary=(value)=>{
+        const key_index = listOfSelectedImages.length;
+        setListOfSelectedImages(produce(listOfSelectedImages,draf=>{
+            draf.push({key:key_index,imageUri:value,col:1});
+        }))
+    }
+    const handelDeleteImagesFromGallary = (item)=>{
+        setListOfSelectedImages(listOfSelectedImages.filter((e)=>{
+            if(item.key!=e.key)
+            return e
+        }))
+        
+    }
+
     return (
         <div style={{position:'relative'}}>
         <Card
@@ -73,17 +92,77 @@ function Media(props) {
                                         <div style={{marginTop:"10%"}}>
                                             <Headings text={"Thumbnail"} fontSize={20}/>
                                         </div>
-                                       <CustomPhotoUploader selectedImage={thumbnailImage} setSelectedImage={setThumbnailImage}/>
+                                        {
+                                            (isEditingEnabled) ? (
+                                                <div>
+                                                    <Headings text={"Unlock for new upload"} fontSize={18} fontWeight={'bold'}/>
+                                                </div>
+                                            ) : (
+                                                <CustomPhotoUploader selectedImage={thumbnailImage} setSelectedImage={setThumbnailImage}/>
+                                            )
+                                        }
                                         {/* <LibraryAddIcon color="primary" style={{fontSize:50}}/> */}
                                     </div>
                                 )
                             }
                             </div>
-                            <div>
-                                
-                            </div>
+                            
                         </Grid>
                         <Grid item xs={2}></Grid>
+                        <Grid container>
+                            <Grid item xs={2}></Grid>
+                            <Grid item xs={8}  style={{border:lightBorder,height:'20rem',marginTop:'1rem'}}>
+                            <div>
+                                {
+                                    (listOfSelectedImages.length!=0) ? (
+                                        <div>
+                                            <div style={{marginLeft:'0rem',marginTop:'0.5rem',position:'relative'}}>
+                                                    <div style={{marginLeft:'0.5rem'}}>
+                                                     <Headings text={"Gallary"} fontSize={25} fontWeight={'bold'}/>
+                                                    
+                                                    {
+                                                        (isEditingEnabled) ? 
+                                                        <div style={{position:'absolute',top:'0rem',right:'1rem'}}>
+                                                            <Headings text={"Unlock for edit"} fontSize={20} fontWeight={''}/>
+                                                        </div> 
+                                                        : (
+                                                        <div>
+                                                        <div style={{position:'absolute',top:0,right:-40}}>
+                                                        <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectImagesForGallary}/>
+                                                        </div>
+                                                        <div style={{position:'absolute',top:'0.5rem',right:'4rem'}}>
+                                                            <Headings text={"Upload"} fontSize={20} fontWeight={''}/>
+                                                        </div>
+                                                        </div>
+                                                        )
+                                                    }
+
+                                                                                                        </div>
+                                                    <Divider/> 
+                                            </div>
+                                            <ImageList rowHeight={165} className={classes.imageList} cols={3}>
+                                              {listOfSelectedImages.map((item) => (
+                                                <ImageListItem key={item.imageUri} cols={item.cols || 1}>
+                                                  {/* <img src={item.img} alt={item.title} /> */}
+                                                  <ImageHolder data={item} handelDeleteImagesFromGallary={handelDeleteImagesFromGallary} isEditingEnabled={isEditingEnabled}/>
+                                                </ImageListItem>
+                                              ))}
+                                            </ImageList>
+                                        </div>
+                                    ):(
+                                        <div style={{marginTop:'25%',textAlign:'center'}}>
+                                        <div style={{marginTop:"10%",}}>
+                                            <Headings text={"Gallary"} fontSize={20}/>
+                                        </div>
+                                            <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectImagesForGallary}/>
+                                        {/* <LibraryAddIcon color="primary" style={{fontSize:50}}/> */}
+                                        </div>
+                                    )
+                                }
+                            </div>
+                            </Grid>
+                            <Grid item xs={2}></Grid>
+                        </Grid>
                     </Grid>
             </CardContent>
 
@@ -91,5 +170,20 @@ function Media(props) {
         </div>
     );
 }
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      overflow: 'hidden',
+      backgroundColor: theme.palette.background.paper,
+    },
+    imageList: {
+      width:'100%',
+      height:'16rem',
+      marginTop:'0.5rem'
+    },
+  }));
 
 export default Media;
