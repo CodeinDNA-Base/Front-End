@@ -14,15 +14,18 @@ import TagFacesIcon from '@material-ui/icons/TagFaces';
       
       when calling 
 
-      <CustomChipsList value={listOfOptions_ForChipList} setValue={setListOfOptions_ForChipList}/>
+      <CustomChipsList canDelete={true} value={listOfOptions_ForChipList} setValue={setListOfOptions_ForChipList}/>
             
  */
-function CustomChipsList(props) {
+function CustomChipsList({canDelete=true,...props}) {
     const classes = useStyles();
     
 
     const handleDelete = (chipToDelete) => () => {
-      props.setValue((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+      if(canDelete)
+      {
+        props.setValue((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+      }
     };
     
     return (

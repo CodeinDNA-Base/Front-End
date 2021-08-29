@@ -5,7 +5,8 @@ import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton
 import colors from '../../../../Theme/colors';
 import { Headingfonts } from '../../../../Theme/fonts';
 import { Headings } from '../../Support/Headings';
-import UpdateIcon from '@material-ui/icons/Update';
+import LockIcon from '@material-ui/icons/Lock';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../Support/TextFields';
 import {lightBorder} from '../../../../Theme/borders'
 import { disable } from 'debug';
@@ -47,20 +48,24 @@ function BasicInfoForm(props) {
             <CardHeader
             action={
             <div style={{cursor:'pointer'}} >
-                {(isEditingEnabled) ? <div onClick={handelEditAndSaveChanges}><UpdateIcon color="secondary" fontSize="larg"/> </div> : <div onClick={handelEditAndSaveChanges}> <EditIcon color="primary"/> </div>}
+                {(isEditingEnabled) ? <div onClick={handelEditAndSaveChanges}><LockIcon color="secondary" fontSize="larg"/> </div> : <div onClick={handelEditAndSaveChanges}> <LockOpenIcon color="primary"/> </div>}
             </div>
             }
             
             />
+            
             <div style={{position:'absolute',top:'0.5rem',left:'0.5rem'}}>
                 <Headings  text={"Basic information"} fontSize={35}/>
             </div>
             <Divider/>
+
             <CardContent>
                 <Grid container>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={10}>
                         <div>
+                        {
+                        (isEditingEnabled) ? (
                         <SimpleTextFields 
                         fontSize={20} 
                         fontWeight={'bold'}
@@ -72,86 +77,172 @@ function BasicInfoForm(props) {
                         labelFontColor={"#a39f93"}
                         labelFontWeight={'bold'}
                         labelFontSize={13}
+                        disabled
                         />
+                            ):(
+                                <SimpleTextFields 
+                                fontSize={20} 
+                                fontWeight={'bold'}
+                                label={" Project Title"} 
+                                width={'40rem'}
+                                height={15}
+                                value={projectTitle} 
+                                setValue={setProjectTitle}
+                                labelFontColor={"#a39f93"}
+                                labelFontWeight={'bold'}
+                                labelFontSize={13}
+                                />        
+                            )
+                        }    
+                        
                         </div>
 
                         <div style={{marginTop:"1rem"}}>
-                        <MultiLineTextFields 
-                        fontSize={20} 
-                        fontWeight={'bold'}
-                        label={"Description"} 
-                        value={projectDesc} 
-                        setValue={setProjectDesc}
-                        labelFontColor={"#a39f93"}
-                        labelFontWeight={'bold'}
-                        rows={10}
-                        width={'40rem'}    
-                        />
+                        {
+                            (isEditingEnabled) ? (
+                                <MultiLineTextFields 
+                                fontSize={20} 
+                                fontWeight={'bold'}
+                                label={"Description"} 
+                                value={projectDesc} 
+                                setValue={setProjectDesc}
+                                labelFontColor={"#a39f93"}
+                                labelFontWeight={'bold'}
+                                rows={10}
+                                width={'40rem'}  
+                                disabled  
+                                />
+                            ) : (
+                                <MultiLineTextFields 
+                                fontSize={20} 
+                                fontWeight={'bold'}
+                                label={"Description"} 
+                                value={projectDesc} 
+                                setValue={setProjectDesc}
+                                labelFontColor={"#a39f93"}
+                                labelFontWeight={'bold'}
+                                rows={10}
+                                width={'40rem'}  
+                             
+                                />
+                            )
+                        }
                         </div>
                         <div style={{marginTop:'1rem'}}>
 
                            <div style={{display:'inline-block'}}>
-                           <SimpleTextFields 
-                              fontSize={20} 
-                              fontWeight={'bold'}
-                              label={"Estimated Price $"} 
-                              width={'13rem'}
-                              height={15}
-                              value={estrimatedPrice} 
-                              setValue={setEstimatedPrice}
-                              labelFontColor={"#a39f93"}
-                              labelFontWeight={'bold'}
-                              labelFontSize={13}
-                              />
+                               {
+                                   (isEditingEnabled) ? (
+                                       <SimpleTextFields 
+                                          fontSize={20} 
+                                          fontWeight={'bold'}
+                                          label={"Estimated Price $"} 
+                                          width={'40rem'}
+                                          height={15}
+                                          value={estrimatedPrice} 
+                                          setValue={setEstimatedPrice}
+                                          labelFontColor={"#a39f93"}
+                                          labelFontWeight={'bold'}
+                                          labelFontSize={13}
+                                          disabled
+                                          />
+                                   ):(
+                                    <SimpleTextFields 
+                                    fontSize={20} 
+                                    fontWeight={'bold'}
+                                    label={"Estimated Price $"} 
+                                    width={'13rem'}
+                                    height={15}
+                                    value={estrimatedPrice} 
+                                    setValue={setEstimatedPrice}
+                                    labelFontColor={"#a39f93"}
+                                    labelFontWeight={'bold'}
+                                    labelFontSize={13}
+                                    
+                                    />
+                                   )
+                               }
                            </div>
                            <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
-                           <SimpleTextFields 
-                              fontSize={20} 
-                              fontWeight={'bold'}
-                              label={"Key word"} 
-                              width={'20rem'}
-                              height={15}
-                              value={keyWordText} 
-                              setValue={setKeyWordText}
-                              labelFontColor={"#a39f93"}
-                              labelFontWeight={'bold'}
-                              labelFontSize={13}
-                              />
+                               {
+                                   (isEditingEnabled) ? <div style={{display:'none'}}></div>:
+                                    <SimpleTextFields 
+                                    fontSize={20} 
+                                    fontWeight={'bold'}
+                                    label={"Search key words"} 
+                                    width={'20rem'}
+                                    height={15}
+                                    value={keyWordText} 
+                                    setValue={setKeyWordText}
+                                    labelFontColor={"#a39f93"}
+                                    labelFontWeight={'bold'}
+                                    labelFontSize={13}
+                                    />
+                                   
+                               }
                            </div>
                            <div style={{display:'inline-block',position:'relative'}}>
                             <div style={{position:'absolute',top:-10,left:10}}>
-                                    <RoundButton
-                                        color={colors.white}
-                                        bgColor={colors.primary}
-                                        title={"Add"}
-                                        width="50%"
-                                        margin={"0% 0% 0% 0%"}
-                                        handleClick={handelInsertItemInChipList}
-                                     /> 
+                                {
+                                    (isEditingEnabled) ? <div style={{display:'none'}}></div> :(
+                                        <RoundButton
+                                            color={colors.white}
+                                            bgColor={colors.primary}
+                                            title={"Add"}
+                                            width="50%"
+                                            margin={"0% 0% 0% 0%"}
+                                            handleClick={handelInsertItemInChipList}
+                                         /> 
+                                    )
+                                }
                             </div>
 
                            </div>
                            
                         </div>
+                        
                         {
-                        (listOfOptions_ForChipList.length!=0) &&
+                            (isEditingEnabled) ? (
                         <div style={{border:lightBorder,marginTop:'1rem',position:'relative'}}>
-                            <div style={{marginLeft:'0.5rem',marginBottom:'1rem'}}>
-                                <Headings text={"Key words"} fontSize={20} fontWeight={''}/>
-                            </div>
-                            <div style={{position:'absolute',top:2,right:0}}>
-                                <RoundButton
+                            {
+                                (listOfOptions_ForChipList.length!=0) &&
+                                <div>
+                                        <div style={{marginLeft:'0.5rem',marginBottom:'1rem'}}>
+                                            <Headings text={"Key words"} fontSize={20} fontWeight={''}/>
+                                        </div>
+                                        
+                                        <CustomChipsList canDelete={false} value={listOfOptions_ForChipList} setValue={setListOfOptions_ForChipList}/>
+                                </div>   
+                            }
+                            
+                        </div>
+                            ) : (
+                        <div style={{border:lightBorder,marginTop:'1rem',position:'relative'}}>
+                            {
+                                (listOfOptions_ForChipList.length!=0) &&
+                                <div>
+                                        <div style={{marginLeft:'0.5rem',marginBottom:'1rem'}}>
+                                            <Headings text={"Key words"} fontSize={20} fontWeight={''}/>
+                                        </div>
+                                        <div style={{position:'absolute',top:2,right:0}}>
+                                        <RoundButton
                                         color={colors.white}
                                         bgColor={colors.secondary}
                                         title={"Clear"}
                                         width="30%"
                                         margin={"0% 0% 0% 0%"}
                                         handleClick={()=>{setListOfOptions_ForChipList([])}}
-                                     /> 
-                            </div>
-                            <CustomChipsList value={listOfOptions_ForChipList} setValue={setListOfOptions_ForChipList}/>
+                                        /> 
+                                        </div>
+                                        <CustomChipsList  value={listOfOptions_ForChipList} setValue={setListOfOptions_ForChipList}/>
+                                </div>   
+                            }
+                            
                         </div>
+                            )
                         }
+                        
+                        
                     </Grid>
                     <Grid item xs={1}></Grid>
                 </Grid>
