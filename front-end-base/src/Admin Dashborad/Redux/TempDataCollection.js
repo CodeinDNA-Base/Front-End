@@ -5,7 +5,7 @@ const listOfProjects = [
     projectService:"Desktop App",
     projectSubService:"React Js",
     projectEstimatedPrice:70,
-    projectPublishDate:"3-4-2010",  //dd-mm-yy
+    projectPublishDate:"30-8-2021",  //dd-mm-yy
     projectPublishTime:"22:11:14 GMT+0500 (Pakistan Standard Time)", 
     projectRatingStars:5,
     projectThumbNail:"https://www.designyourway.net/blog/wp-content/uploads/2018/08/387011_3d-cute-wallpapers-for-desktop-hd-1-jpg_1024x768_h-700x525.jpg",

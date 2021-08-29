@@ -222,8 +222,8 @@ function ListOfAllProjects(props) {
             <Filters listOfOptions_ForChipList={listOfOptions_ForChipList} setListOfOptions_ForChipList={setListOfOptions_ForChipList}/>
             <Grid container>
 
-                <Grid item xs={1}></Grid>           
-                <Grid item xs={10}>
+                        
+                <Grid item xs={12}>
                     <Card
                       elevation={0}
                       style={{border:lightBorder}}  
@@ -266,7 +266,7 @@ function ListOfAllProjects(props) {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={1}></Grid>    
+                 
             </Grid>
         </div>
     );

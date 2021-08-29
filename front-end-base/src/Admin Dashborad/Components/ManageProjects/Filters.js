@@ -150,8 +150,9 @@ function Filters(props) {
     const [selectedDate, setSelectedDate] = useState(new Date());  
     const hand_Apply_Date = (e)=>{
         // dd-mm-yy
-        const tempDate =  `${selectedDate.getDay()}-${selectedDate.getMonth()}-${selectedDate.getFullYear()}`
-        // console.log(tempDate)
+        // const tempDate =  `${selectedDate.getDay()}-${selectedDate.getMonth()}-${selectedDate.getFullYear()}`
+        const tempDate="30-8-2021";
+        console.log(tempDate)
         addElementInFilterList(tempDate,filterBy_titles_type.filter_by_title_4_type,filterBy_titles.filter_by_title_4+" : "+selectedDate)
     }
     

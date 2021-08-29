@@ -46,6 +46,7 @@ function Media(props) {
                     <Grid container>
                         <Grid item xs={2}></Grid>
                         <Grid item xs={8} style={{border:lightBorder,height:'20rem',textAlign:'center'}}>
+                            <div>
                             {
                                 (thumbnailImage!=null) ? (
                                     <div>
@@ -77,6 +78,10 @@ function Media(props) {
                                     </div>
                                 )
                             }
+                            </div>
+                            <div>
+                                
+                            </div>
                         </Grid>
                         <Grid item xs={2}></Grid>
                     </Grid>
