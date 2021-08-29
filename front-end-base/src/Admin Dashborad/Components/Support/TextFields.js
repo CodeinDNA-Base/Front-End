@@ -1,9 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { IconButton, makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { fontSize } from '@material-ui/system';
 import { fontFamily } from '../../../Theme/fonts';
+import { InputAdornment } from '@material-ui/core';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import '../Styles/TextFieldStyles.css'
+
 /**
  * 
  * fontSize
@@ -17,28 +20,30 @@ import '../Styles/TextFieldStyles.css'
  * labrlFontWeight
  */
 
-function SimpleTextFields(props) {
+function SimpleTextFields({id,label,value,setValue,fontSize,fontWeight,labelFontSize,labelFontWeight,labelFontColor,width,height,isReadOnly,...props}) {
     const classes=useStyles();
     return (
         <div >
              <TextField 
-             id={props.id}
-             label={props.label}
-             value={props.value}
+             id={id}
+             label={label}
+             value={value}
              onChange={(e)=>{
-                props.setValue(e.target.value)
+                setValue(e.target.value)
              }}
             
              variant="outlined" 
-             inputProps={
-                 {
-                     style:{fontFamily:fontFamily.fontFamily_1,fontSize:fontSize,fontWeight:props.fontWeight,width:props.width,height:props.height}
-                }}
-             InputLabelProps={
-                 {
-                     style:{fontFamily:fontFamily.fontFamily_1,fontWeight:props.labelFontWeight,color:props.labelFontColor,fontSize:props.labelFontSize}
-                }}
-              {...props}  
+                inputProps={
+                    {
+                       
+                        readOnly:isReadOnly,
+                        style:{fontFamily:fontFamily.fontFamily_1,fontSize:fontSize,fontWeight:fontWeight,width:width,height:height}
+                    }}
+                InputLabelProps={
+                    {
+                        style:{fontFamily:fontFamily.fontFamily_1,fontWeight:labelFontWeight,color:labelFontColor,fontSize:labelFontSize}
+                    }}
+                {...props}  
              />
              
         </div>
@@ -46,28 +51,30 @@ function SimpleTextFields(props) {
     );
 }
 
-function RoundedTextFields(props) {
+function RoundedTextFields({id,label,value,setValue,fontSize,fontWeight,labelFontSize,labelFontWeight,labelFontColor,width,height,isReadOnly=false,...props}) {
     const classes=useStyles();
     return (
         <div >
              <TextField 
-             id={props.id}
-             label={props.label}
-             value={props.value}
+             id={id}
+             label={label}
+             value={value}
              onChange={(e)=>{
-                props.setValue(e.target.value)
+                setValue(e.target.value)
              }}
              className="inputRounded"
              variant="outlined" 
-             inputProps={
-                 {
-                     style:{fontFamily:fontFamily.fontFamily_1,fontSize:fontSize,fontWeight:props.fontWeight,width:props.width,height:props.height}
-                }}
-             InputLabelProps={
-                 {
-                     style:{fontFamily:fontFamily.fontFamily_1,fontWeight:props.labelFontWeight,color:props.labelFontColor,fontSize:props.labelFontSize}
-                }}
-                {...props}
+            inputProps={
+                {
+                    readOnly:isReadOnly,
+                    style:{fontFamily:fontFamily.fontFamily_1,fontSize:fontSize,fontWeight:fontWeight,width:width,height:height}
+               }}
+            InputLabelProps={
+                {
+                    style:{fontFamily:fontFamily.fontFamily_1,fontWeight:labelFontWeight,color:labelFontColor,fontSize:labelFontSize}
+               }}
+             {...props}  
+
              />
             
         </div>
@@ -91,23 +98,32 @@ function RoundedTextFields(props) {
  */
 
 
-function MultiLineTextFields(props) {
+function MultiLineTextFields({id,label,value,setValue,fontSize,fontWeight,labelFontSize,labelFontWeight,labelFontColor,width,height,isReadOnly=false,...props}) {
     const classes=useStyles();
     return (
         <div className={classes.container}>
-             <TextField 
-             id={props.id}
-             label={props.label}
-             value={props.value}
+              <TextField 
+             id={id}
+             label={label}
+             value={value}
              onChange={(e)=>{
-                props.setValue(e.target.value)
+                setValue(e.target.value)
              }}
              multiline={true}
              rows={props.rows}
-             variant="outlined" 
-             inputProps={{style:{fontFamily:fontFamily.fontFamily_1,fontSize:fontSize,fontWeight:props.fontWeight,width:props.width,height:props.height}}}
-             InputLabelProps={{style:{fontFamily:fontFamily.fontFamily_1,fontWeight:props.labelFontWeight,color:props.labelFontColor,fontSize:props.labelFontSize,}}}
-             {...props}
+             variant="outlined"
+
+             inputProps={
+                {
+                    readOnly:isReadOnly,
+                    style:{fontFamily:fontFamily.fontFamily_1,fontSize:fontSize,fontWeight:fontWeight,width:width,height:height}
+               }}
+            InputLabelProps={
+                {
+                    style:{fontFamily:fontFamily.fontFamily_1,fontWeight:labelFontWeight,color:labelFontColor,fontSize:labelFontSize}
+               }}
+             {...props}  
+
              />
         </div>
 

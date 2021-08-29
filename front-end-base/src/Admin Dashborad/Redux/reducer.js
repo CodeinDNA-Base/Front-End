@@ -9,7 +9,7 @@ export default function reducer(state=storeStructure,action) {
     switch (action.type) {        
         
         // Define reducers.
-
+        
         default:
             return  produce(state,draft=> draft)
             break;

@@ -50,7 +50,7 @@ export const RoundButton = ({
       startIcon={icon  }
       type={type}
       fullWidth
-      
+      width={width}
     >
       {title}
     </Button>

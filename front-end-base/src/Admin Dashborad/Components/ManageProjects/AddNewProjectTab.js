@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme)=>({
     },
     formasAndOtherStuffContainer:{
       // backgroundColor:'blue'
-      borderLeft:lightBorder
+      // borderLeft:lightBorder
     }
 }));
 

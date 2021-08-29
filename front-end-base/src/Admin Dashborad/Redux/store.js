@@ -4,13 +4,27 @@ import { listOfProjects } from "./TempDataCollection";
 
 const storeStructure=
     {
-        ProjectsStore:{
+        ProjectsStore:
+        {
             ListOfProjectsLoadedFromAPI:{
                 data:listOfProjects,
                 lastUpdateTime:null,
             }
-        }
+        },
+
+        // HomeStore:{
+
+        //     ListOfTrendingProjects:{
+        //         data://array
+        //         lastUpdate
+        //     }
+        // }
+        // AuthenticationStore:{
+        //     //Varaibles
+        //     //Lists.
+        // }
     }
+
 const store = createStore(reducer);
 export {storeStructure, store as default}  ;
 
