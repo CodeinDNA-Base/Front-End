@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
 import colors from '../../../../Theme/colors';
 import { Headingfonts } from '../../../../Theme/fonts';
@@ -13,7 +13,7 @@ import CustomPhotoUploader from '../../Support/CustomPhotoUploader'
 import { Check, Close } from '@material-ui/icons';
 import ScrollView from '@cantonjs/react-scroll-view/lib/components/ScrollView';
 import ImageHolder from './ImageHolder';
-
+import {actions,store} from '../../../Redux/ReduxResourceExporter'
 function Media(props) {
     const classes = useStyles();
 
@@ -23,7 +23,26 @@ function Media(props) {
     const [thumbnailImage,setThumbnailImage]=useState(null);
     const [selectedImage,setSelectedImage]=useState(null);
     const [listOfSelectedImages,setListOfSelectedImages]=useState([]);
+
+    useEffect(()=>{
+        //Load data from store into hooks
+        setThumbnailImage(store.getState().ProjectsStore.Drafts.AddNewProject.Media.thumbnailImageUri);
+        setListOfSelectedImages(store.getState().ProjectsStore.Drafts.AddNewProject.Media.listOfImages);
+        setIsEditingEnabled(store.getState().ProjectsStore.Drafts.AddNewProject.Media.isEditingEnabled);
+        console.log(store.getState())
+    },[])
+
     const handelEditAndSaveChanges = ()=>{
+        if(!isEditingEnabled)
+        {
+            props.setIsLockClosed(true)
+            store.dispatch(actions.update_media_ADD_NEW_PROJECTS(thumbnailImage,listOfSelectedImages,true));
+        }
+        else
+        {
+            props.setIsLockClosed(false)
+        }
+
         setIsEditingEnabled(!isEditingEnabled);
     }
     const handelSelectImagesForGallary=(value)=>{

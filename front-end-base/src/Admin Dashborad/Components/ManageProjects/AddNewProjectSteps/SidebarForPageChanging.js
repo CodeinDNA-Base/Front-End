@@ -82,11 +82,18 @@ function VerticalLinearStepper(props) {
   const steps = getSteps();
   
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => {
-
-      props.setCurrentStepNumber(prevActiveStep+1) //Send this number to parent component so that it can rendre respective comps
-      return prevActiveStep + 1;      
-    });
+    if(props.isLockClosed)
+    {
+      setActiveStep((prevActiveStep) => {
+        props.setCurrentStepNumber(prevActiveStep+1) //Send this number to parent component so that it can rendre respective comps
+        return prevActiveStep + 1;      
+      });
+    }
+    else
+    {
+      props.handleModelOpen();
+    }
+      
   };
 
   const handleBack = () => {
@@ -159,6 +166,6 @@ export const SidebarForPageChanging = (props) => {
 
  
   return(
-    <VerticalLinearStepper setCurrentStepNumber={props.setCurrentStepNumber} />
+    <VerticalLinearStepper handleModelClose={props.handleModelClose} handleModelOpen={props.handleModelOpen} isLockClosed={props.isLockClosed} setCurrentStepNumber={props.setCurrentStepNumber} />
   ) ;
 };

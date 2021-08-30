@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, Divider,Grid,Icon } from '@material-ui/core';
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
 import colors from '../../../../Theme/colors';
@@ -11,6 +11,8 @@ import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../S
 import {lightBorder} from '../../../../Theme/borders'
 import produce from 'immer';
 import CustomChipsList from '../../Support/CustomChipsList';
+import {actions,store} from '../../../Redux/ReduxResourceExporter'
+import { TramRounded } from '@material-ui/icons';
 function BasicInfoForm(props) {
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
     //Data hooks
@@ -20,8 +22,28 @@ function BasicInfoForm(props) {
     const [keyWordText,setKeyWordText]=useState();
     const [listOfOptions_ForChipList, setListOfOptions_ForChipList]=useState([]);
 
+    useEffect(()=>{
+        //load data into hooks from store.
+        setProjectTitle(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.title);
+        setProjectDesc(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.description);
+        setEstimatedPrice(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.price);
+        setListOfOptions_ForChipList(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.listOfKeyWords);
+        setIsEditingEnabled(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.isEditingEnabled);
+    },[])
+
     const handelEditAndSaveChanges = ()=>{
-        setIsEditingEnabled(!isEditingEnabled);
+        if(!isEditingEnabled)
+        {
+            props.setIsLockClosed(true)
+            store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(projectTitle,projectDesc,estrimatedPrice,listOfOptions_ForChipList,true))
+        }
+        else
+        {
+            props.setIsLockClosed(false)
+        }
+        setIsEditingEnabled((prev)=>{
+            return !(prev)
+        });
     }
 
     const handelInsertItemInChipList=()=>{

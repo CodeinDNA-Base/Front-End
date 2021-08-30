@@ -1,4 +1,6 @@
 
-const GET_LIST_OF_PROJECTS = "GET_LIST_OF_PROJECTS"
+const UPDATE_BASIC_INFO_add_new_projects = "UPDATE_BASIC_INFO_add_new_projects"
 
-export {GET_LIST_OF_PROJECTS}
+const UPDATE_MEDIA_add_new_projects = "UPDATE_MEDIA_add_new_projects"
+
+export {UPDATE_BASIC_INFO_add_new_projects,UPDATE_MEDIA_add_new_projects}

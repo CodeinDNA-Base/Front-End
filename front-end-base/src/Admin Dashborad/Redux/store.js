@@ -9,20 +9,28 @@ const storeStructure=
             ListOfProjectsLoadedFromAPI:{
                 data:listOfProjects,
                 lastUpdateTime:null,
+            },
+            Drafts:{
+
+                AddNewProject:{
+                    BasicInfo:{
+                        title:null,
+                        description:null,
+                        price:0,
+                        listOfKeyWords:[],
+                        isEditingEnabled:false
+                    },
+                    Media:{
+                        thumbnailImageUri:null,
+                        listOfImages:[],
+                        isEditingEnabled:false
+                    }
+                }
             }
+
         },
 
-        // HomeStore:{
 
-        //     ListOfTrendingProjects:{
-        //         data://array
-        //         lastUpdate
-        //     }
-        // }
-        // AuthenticationStore:{
-        //     //Varaibles
-        //     //Lists.
-        // }
     }
 
 const store = createStore(reducer);
