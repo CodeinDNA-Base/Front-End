@@ -12,9 +12,13 @@ import {
   UserDashboardShowPreviousPosts,
   UserDashboardViewPostDetails
 } from "./UserDashboardContainer";
+
 import { SearchProjectsContainer } from "./SearchProjectsContainer";
 
+import AdminDashboardContainer from './AdminDashboardContainer'
+import SubServicesContainer from "./SubServicesContainer";
 function Entrance(props) {
+  
 
   return (
 
@@ -24,15 +28,8 @@ function Entrance(props) {
           <HomeContainer />
         </Route>
 
-        <Route exact path="/ServiceDetails">
-          <ServiceDetailsContainer />
-        </Route>
-
-        <Route
-          exact
-          path="/searchProject"
-          component={SearchProjectsContainer}
-        />
+        <Route exact path="/searchproject" component={SearchProjectsContainer} />
+        <Route exact path="/ServiceDetails" component={ServiceDetailsContainer} />
         <Route exact path="/userdashboard" component={UserDashboardContainer} />
         <Route exact path="/settings" component={UserDashboardSettings} />
         <Route exact path="/orders" component={UserDashboardOrders} />
@@ -41,7 +38,8 @@ function Entrance(props) {
         <Route exact path="/postrequest" component={PostRequestFromMobileUserDashboard} />
         <Route exact path="/previousposts" component={UserDashboardShowPreviousPosts} />
         <Route exact path="/viewpost" component={UserDashboardViewPostDetails} />    
-
+        <Route exact path="/admin" component={AdminDashboardContainer} />
+        <Route exact path="/services" component={SubServicesContainer} />
       </Switch>
     </Router>
   );
