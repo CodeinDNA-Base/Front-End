@@ -1,5 +1,5 @@
 import { Grid, makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -18,16 +18,25 @@ import Box from '@material-ui/core/Box';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
+
 import { faFlag,faThumbsUp,faThumbsDown} from '@fortawesome/free-solid-svg-icons'
 import './Styles.css'
 import { lightBorder } from '../../../../Theme/borders';
-
+import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
+import colors from '../../../../Theme/colors';
 const ITEM_HEIGHT = 40;
 
-function ProjectHolder(props) {
+function ProjectHolder({showMenueSelectionOpt,...props}) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [isChecked,setIsChecked] = useState(false);
     const open = Boolean(anchorEl);
 
   const handleExpandClick = () => {
@@ -43,25 +52,35 @@ function ProjectHolder(props) {
     
   };
 
+  const handelCheckBoxChange = () =>{
+    setIsChecked(!isChecked);
+  }
+
   const options = [
     'Edit',  
     'Get Share link',
   ];
+  const optionsWhileSelection=[
+    'Select'
+  ]
   return (
     <Card className={classes.root}
         elevation={0}
     >
     <CardHeader
-        action={
-     <IconButton aria-label="settings">
-      <div>
-      <IconButton
+  action={
+    <div>
+    
+
+            <IconButton aria-label="settings">
+        <div>
+        <IconButton
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <MoreVertIcon />
+      <MoreVertIcon />
       </IconButton>
       <Menu
         id="long-menu"
@@ -76,19 +95,43 @@ function ProjectHolder(props) {
           },
         }}
       >
-        {options.map((option,index) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
-            // handleClose(index)
-            props.handelOptionSelection(e,index,props.data)
-            setAnchorEl(null);
-    
-          }}>
-            {option}
-          </MenuItem>
-        ))}
+        <div>
+          {
+            (showMenueSelectionOpt===true) ? (
+              <div>
+                 {optionsWhileSelection.map((option,index) => (
+                  <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
+                    // handleClose(index)
+                    props.handeSelectOption(props.data);
+                    setAnchorEl(null);
+                    
+                  }}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </div>
+            ) : (
+              <div>
+                {options.map((option,index) => (
+                  <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
+                    // handleClose(index)
+                    props.handelOptionSelection(e,index,props.data)
+                    setAnchorEl(null);
+                    
+                  }}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </div>
+            )
+          }
+        </div>
+        
       </Menu>
       </div>
-          </IconButton>
+      </IconButton>
+      </div>
+
         }
         title={props.data.projectTitle}
         subheader={props.data.projectPublishDate}
@@ -97,10 +140,34 @@ function ProjectHolder(props) {
       <CardMedia
         className={classes.media}
         image={props.data.projectThumbNail}
-       
       />
       <CardContent>
-        {/* Controls */}
+        {/* <Grid container>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={4} style={{textAlign:'center'}}>
+              <RoundButton
+                title={"Apply"}
+                width={40}
+                color={colors.white}
+                bgColor={colors.primary}
+                margin={"0% 0% 0%  0%"}
+               // handleClick={hand_PriceRange_Apply}
+               />
+          </Grid>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={4} style={{textAlign:'center'}}>
+              <RoundButton
+                title={"Apply"}
+                width={40}
+                color={colors.white}
+                bgColor={colors.primary}
+                margin={"0% 0% 0%  0%"}
+               // handleClick={hand_PriceRange_Apply}
+               />
+          </Grid>
+          <Grid item xs={1}></Grid>
+         
+        </Grid> */}
       </CardContent> 
     </Card>
   );
@@ -116,6 +183,8 @@ const useStyles = makeStyles((theme)=>({
       media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
+        marginLeft:'2%',
+        marginRight:'2%',
       },
      
 }))

@@ -18,11 +18,15 @@ function ViewAllProjectsTab(props) {
     const handelBackToListOfProjectBtnClick = (event)=>{
         setScreenSwitcher(true)
     }
+    const handeSelectOption = (selectedValue) =>{
+        alert(selectedValue);
+        console.log(selectedValue)
+    }
     return (
         <div className={classes.container}>
             <div>
                     {/* Load the component which will render the list of projects */}
-                    {(screenSwitcher) ? <ListOfAllProjects  handelOptionSelection={handelOptionSelection}/> :  <ProjectEditor handelBackToListOfProjectBtnClick={handelBackToListOfProjectBtnClick} />}
+                    {(screenSwitcher) ? <ListOfAllProjects showMenueSelectionOpt={false} handeSelectOption={handeSelectOption} handelOptionSelection={handelOptionSelection}/>  :  <ProjectEditor handelBackToListOfProjectBtnClick={handelBackToListOfProjectBtnClick} />}
             </div>
         </div>
     );

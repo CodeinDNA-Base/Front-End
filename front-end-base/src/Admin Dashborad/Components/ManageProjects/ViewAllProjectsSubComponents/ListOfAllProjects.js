@@ -11,7 +11,7 @@ import { ScrollView } from "@cantonjs/react-scroll-view";
 import {actions,store} from '../../../Redux/ReduxResourceExporter';
 import FilterEngine from '../FilterMotor'
 import produce from 'immer';
-function ListOfAllProjects(props) {
+function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
     const classes = useStyles();
     const [listOfProjects,setListOfProjects]=useState([]);
     
@@ -134,7 +134,7 @@ function ListOfAllProjects(props) {
             {
                 return(      
                     <ImageListItem key={item.img} cols={item.cols || 1}>
-                        <ProjectHolder  cols={item.cols}   handelOptionSelection={props.handelOptionSelection} data={item}/>
+                        <ProjectHolder  cols={item.cols} showMenueSelectionOpt={showMenueSelectionOpt} handelOptionSelection={props.handelOptionSelection} handeSelectOption={props.handeSelectOption} data={item}/>
                     </ImageListItem>
                     )   
             }
@@ -152,7 +152,7 @@ function ListOfAllProjects(props) {
                     {
                         return(      
                             <ImageListItem key={item.img} cols={item.cols || 1}>
-                                <ProjectHolder  cols={item.cols}   handelOptionSelection={props.handelOptionSelection} data={item}/>
+                                <ProjectHolder  cols={item.cols} showMenueSelectionOpt={showMenueSelectionOpt} handeSelectOption={props.handeSelectOption} handelOptionSelection={props.handelOptionSelection} data={item}/>
                             </ImageListItem>
                             )   
                     }
@@ -233,8 +233,7 @@ function ListOfAllProjects(props) {
                                 { (listOfOptions_ForChipList.length===0) && 
                                     <div>
                                        <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"All projects"} fontSize={30}/> </div>
-                              
-                                        <ImageList rowHeight={320} className={classes.imageList} cols={3}>
+                                    <ImageList rowHeight={350} className={classes.imageList} cols={3}>
                                      {list}
                                     </ImageList>
                                  <div>

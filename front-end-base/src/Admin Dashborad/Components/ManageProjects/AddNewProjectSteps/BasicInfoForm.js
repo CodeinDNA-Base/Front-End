@@ -8,10 +8,10 @@ import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import {lightBorder} from '../../../../Theme/borders'
 import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../Support/TextFields';
-import produce from 'immer';
+import produce from 'immer'; 
 import CustomChipsList from '../../Support/CustomChipsList';
 import {actions,store} from '../../../Redux/ReduxResourceExporter'
-import { TramRounded } from '@material-ui/icons';
+
 function BasicInfoForm(props) {
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
     //Data hooks

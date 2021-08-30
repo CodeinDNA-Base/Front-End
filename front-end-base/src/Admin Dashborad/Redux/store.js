@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 import reducer from "./reducer";
-import { listOfProjects,listOfTrendingProjects } from "./TempDataCollection";
+import { listOfProjects,listOfTrendingProjects ,listOfStaticProjects} from "./TempDataCollection";
 
 const storeStructure=
     {
@@ -16,7 +16,12 @@ const storeStructure=
                 lastChoosedDisplayMode:"Static",
                 lastDataUpdateTime:null,
             },
-
+            ListOfStaticProjects:{
+                data:listOfStaticProjects,
+                lastUpdateDateAndTime:" Monday, 30 August 2021 (GMT+5) Time in Sukkur 9:11 pm",
+                lastChoosedDisplayMode:"Static",
+                lastDataUpdateTime:null,
+            },
             Drafts:{
 
                 AddNewProject:{
