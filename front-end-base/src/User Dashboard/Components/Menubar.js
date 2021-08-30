@@ -1,30 +1,29 @@
- //ReactJS
- import React from "react";
+//ReactJS
+import React, { useState } from "react";
 
- //Material-UI core
- import {
-   AppBar,
-   Divider,
-   IconButton,
-   InputBase,
-   Menu,
-   Typography,
-   Zoom, Badge,
-   Toolbar,
-   Button,
-   Box,
-   useScrollTrigger,
-   Hidden,
-   Fab,
-   Fade,
-   SwipeableDrawer,
-   List,
-   ListItem,
-   ListItemIcon,
-   ListItemText,
-   ListItemAvatar,
-   Avatar,
- } from "@material-ui/core";
+//Material-UI core
+import {
+  AppBar,
+  Divider,
+  IconButton,
+  InputBase,
+  Menu,
+  Typography,
+  Zoom,
+  Badge,
+  Toolbar,
+  Box,
+  useScrollTrigger,
+  Hidden,
+  Fab,
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+} from "@material-ui/core";
 
 //Mateirial-UI styles
 import { alpha, makeStyles, withStyles } from "@material-ui/core/styles";
@@ -44,6 +43,8 @@ import OrdersIcon from "@material-ui/icons/AddShoppingCart";
 import InboxIcon from "@material-ui/icons/Inbox";
 import SettingsIcon from "@material-ui/icons/Settings";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
+import ExploreIcon from "@material-ui/icons/Explore"
+import FeaturedPlayListIcon from '@material-ui/icons/FeaturedPlayList'
 
 //Routing
 import { Link } from "react-router-dom";
@@ -55,7 +56,6 @@ import profilePic from "../Resources/nadir.jpg";
 //Styles and CSS
 import "./Styles/MenubarStyles.css";
 import { PostAdd } from "@material-ui/icons";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -132,204 +132,263 @@ const useStyles = makeStyles((theme) => ({
 
 export const Menubar = (props) => {
   const classes = useStyles();
-  
-  const [notificationMenuAnchor, setNotificationMenuAnchor] = React.useState(null);
+
+  const [notificationMenuAnchor, setNotificationMenuAnchor] =
+    React.useState(null);
   const isNotificationMenuOpen = Boolean(notificationMenuAnchor);
 
-
   //Notification Menu
-  const   handleNotificationMenuOpen = (event) => {
+  const handleNotificationMenuOpen = (event) => {
     setNotificationMenuAnchor(event.currentTarget);
   };
 
-  const   handleNotificationMenuClose = () => {
+  const handleNotificationMenuClose = () => {
     setNotificationMenuAnchor(null);
   };
 
   //Notification Menu options/items
-  
-  const notificationDetails=[
+
+  const notificationDetails = [
     {
-      notificationId:0,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
+      notificationId: 0,
+      content: "Payment method added",
+      time: new Date().toLocaleTimeString(),
+      icon: <LogoutIcon />,
+      route: "/",
     },
     {
-      notificationId:1,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
+      notificationId: 1,
+      content: "Payment method added",
+      time: new Date().toLocaleTimeString(),
+      icon: <LogoutIcon />,
+      route: "/",
     },
     {
-      notificationId:2,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
+      notificationId: 2,
+      content: "Payment method added",
+      time: new Date().toLocaleTimeString(),
+      icon: <LogoutIcon />,
+      route: "/",
     },
     {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
+      notificationId: 3,
+      content: "Payment method added",
+      time: new Date().toLocaleTimeString(),
+      icon: <LogoutIcon />,
+      route: "/",
     },
     {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
+      notificationId: 3,
+      content: "Payment method added",
+      time: new Date().toLocaleTimeString(),
+      icon: <LogoutIcon />,
+      route: "/",
     },
     {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
+      notificationId: 3,
+      content: "Payment method added",
+      time: new Date().toLocaleTimeString(),
+      icon: <LogoutIcon />,
+      route: "/",
     },
     {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
+      notificationId: 3,
+      content: "Payment method added",
+      time: new Date().toLocaleTimeString(),
+      icon: <LogoutIcon />,
+      route: "/",
     },
     {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
+      notificationId: 3,
+      content: "Payment method added",
+      time: new Date().toLocaleTimeString(),
+      icon: <LogoutIcon />,
+      route: "/",
     },
-    
-  ]
+  ];
   const notificationMenuId = "primary-search-account-menu";
   const renderNotificationMenu = (
-  <Menu
-    className={classes.profileMenu}
-    anchorEl={notificationMenuAnchor}
-    id={notificationMenuId}
-    keepMounted
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    open={isNotificationMenuOpen}
-    onClose={handleNotificationMenuClose}
-    TransitionComponent={Zoom}
-
-    PaperProps={{
-      style: {
-        maxHeight: 48 * 10,
-        width: '30ch',
-      },
-    }}
-  >
-    {notificationDetails.map(({ notificationId, content, time, icon, route }) => {
-        return (
-          <>
-          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
-          <ListItem button key={notificationId}>
-            <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={content} />
-          </ListItem>
-          </Link>
-          <Divider />
-          </>
-        );
-      })}
+    <Menu
+      className={classes.profileMenu}
+      anchorEl={notificationMenuAnchor}
+      id={notificationMenuId}
+      keepMounted
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      open={isNotificationMenuOpen}
+      onClose={handleNotificationMenuClose}
+      TransitionComponent={Zoom}
+      PaperProps={{
+        style: {
+          maxHeight: 48 * 10,
+          width: "30ch",
+        },
+      }}
+    >
+      {notificationDetails.map(
+        ({ notificationId, content, time, icon, route }) => {
+          return (
+            <>
+              <Link
+                to={route}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <ListItem button key={notificationId}>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText primary={content} />
+                </ListItem>
+              </Link>
+              <Divider />
+            </>
+          );
+        }
+      )}
     </Menu>
   );
 
+  //User profile Menu
 
-//User profile Menu
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const isMenuOpen = Boolean(anchorEl);
 
-const [anchorEl, setAnchorEl] = React.useState(null);
-const isMenuOpen = Boolean(anchorEl);
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-const handleProfileMenuOpen = (event) => {
-  setAnchorEl(event.currentTarget);
-};
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
-const handleMenuClose = () => {
-  setAnchorEl(null);
-};
+  const profileMenuOptions = [
+    {
+      optionTitle: "Settings",
+      optionIcon: <SettingsIcon />,
+      route: "/settings",
+    },
+    {
+      optionTitle: "Logout",
+      optionIcon: <LogoutIcon />,
+      route: "/",
+    },
+  ];
 
-const profileMenuOptions = [
-  {
-    optionTitle: "Settings",
-    optionIcon: <SettingsIcon />,
-    route: "/settings",
-  },
-  {
-    optionTitle: "Logout",
-    optionIcon: <LogoutIcon />,
-    route: "/",
-  },
-];
-
-const menuId = "primary-search-account-menu";
-const renderMenu = (
-  <Menu
-    className={classes.profileMenu}
-    anchorEl={anchorEl}
-    id={menuId}
-    keepMounted
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    open={isMenuOpen}
-    onClose={handleMenuClose}
-    TransitionComponent={Zoom}
-    // elevation={4}
-  >
-    <ListItem>
-      <ListItemAvatar>
-        <Avatar
-          src={profilePic}
-          onClick={() => {
-            alert("Display Full Image of User");
-          }}
-          style={{ cursor: "pointer" }}
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      className={classes.profileMenu}
+      anchorEl={anchorEl}
+      id={menuId}
+      keepMounted
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+      TransitionComponent={Zoom}
+      // elevation={4}
+    >
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar
+            src={profilePic}
+            onClick={() => {
+              alert("Display Full Image of User");
+            }}
+            style={{ cursor: "pointer" }}
+          />
+        </ListItemAvatar>
+        <ListItemText
+          className={classes.profileMenuInfo}
+          primary={<Typography variant="h6">Nadir Hussain</Typography>}
         />
-      </ListItemAvatar>
-      <ListItemText
-        className={classes.profileMenuInfo}
-        primary={<Typography variant="h6">Nadir Hussain</Typography>}
-      />
-    </ListItem>
-    <Divider />
-    {profileMenuOptions.map(({ optionTitle, optionIcon, route }) => {
+      </ListItem>
+      <Divider />
+      {profileMenuOptions.map(({ optionTitle, optionIcon, route }) => {
         return (
           <Link to={route} style={{ textDecoration: "none", color: "black" }}>
-          <ListItem button key={optionTitle}>
-            <ListItemIcon>{optionIcon}</ListItemIcon>
+            <ListItem button key={optionTitle}>
+              <ListItemIcon>{optionIcon}</ListItemIcon>
               <ListItemText primary={optionTitle} />
-          </ListItem>
+            </ListItem>
           </Link>
         );
       })}
     </Menu>
   );
 
-  function handleSearch(event) {
+  //Explore menu
+  const [exploreMenuAnchor, setExploreMenuAnchor] = useState(null);
+  const isExploreMenuOpen = Boolean(exploreMenuAnchor);
 
-  }
+  const handleExploreMenuOpen = (event) => {
+    setExploreMenuAnchor(event.currentTarget);
+  };
+
+  const handleExploreMenuClose = () => {
+    setExploreMenuAnchor(null);
+  };
+
+  const exploreMenuOptions = [
+    {
+      optionTitle: "Services",
+      optionIcon: <FeaturedPlayListIcon/>,
+      route: "/services",
+    },
+    {
+      optionTitle: "Projects",
+      optionIcon: <FeaturedPlayListIcon />,
+      route: "/searchproject",
+    },
+  ];
+
+  const exploreMenuId = "primary-search-account-menu";
+  const renderExploreMenu = (
+    <Menu
+      className={classes.profileMenu}
+      anchorEl={exploreMenuAnchor}
+      id={exploreMenuId}
+      keepMounted
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      open={isExploreMenuOpen}
+      onClose={handleExploreMenuClose}
+      TransitionComponent={Zoom}
+      // elevation={4}
+    >
+      {exploreMenuOptions.map(({ optionTitle, optionIcon, route }) => {
+        return (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+            <ListItem button key={optionTitle}>
+              <ListItemIcon>{optionIcon}</ListItemIcon>
+              <ListItemText primary={optionTitle} />
+            </ListItem>
+          </Link>
+        );
+      })}
+    </Menu>
+  );
+
+  function handleSearch(event) {}
 
   function ScrollTop(props) {
     const { children, window } = props;
@@ -380,11 +439,11 @@ const renderMenu = (
     <div className={classes.grow}>
       <AppBar className={classes.menuContainer}>
         <Toolbar>
-        <Hidden only={["lg", "xl"]}>
+          <Hidden only={["lg", "xl"]}>
             <DrawerComponent />
           </Hidden>
           <Hidden only={["xs"]}>
-          <Link to="/">
+            <Link to="/">
               <img src={logo} style={{ cursor: "pointer" }} />
             </Link>
           </Hidden>
@@ -405,11 +464,18 @@ const renderMenu = (
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Box spacing={2} m={2}>
-            {menuOptions.map(({ optionTitle, route }) => {
-                return (
-                    <Link to={route} className="menuBarItem">
-                      {optionTitle}
-                    </Link>
+              {menuOptions.map(({ optionTitle, route }) => {
+                return optionTitle == "Explore" ? (
+                  <Link
+                    className="menuBarItem"
+                    onClick={handleExploreMenuOpen}
+                  >
+                    Explore
+                  </Link>
+                ) : (
+                  <Link to={route} className="menuBarItem">
+                    {optionTitle}
+                  </Link>
                 );
               })}
             </Box>
@@ -432,6 +498,7 @@ const renderMenu = (
       </AppBar>
       {renderMenu}
       {renderNotificationMenu}
+      {renderExploreMenu}
       <Toolbar id="back-to-top-anchor" />
       <ScrollTop {...props}>
         <Fab
@@ -510,11 +577,20 @@ function DrawerComponent() {
       optionIcon: <InboxIcon />,
       route: "/inbox",
     },
-
+    {
+      optionTitle: "Explore Services",
+      optionIcon: <ExploreIcon />,
+      route: "/services",
+    },
+    {
+      optionTitle: "Explore Project",
+      optionIcon: <ExploreIcon />,
+      route: "/searchproject",
+    },
     {
       optionTitle: "Post Request",
       optionIcon: <PostAdd />,
-      route:"/postrequest"
+      route: "/postrequest",
     },
     {
       optionTitle: "Orders",
@@ -527,7 +603,7 @@ function DrawerComponent() {
       route: "/settings",
     },
   ];
-const classes = drawerStyles();
+  const classes = drawerStyles();
   const [state, setState] = React.useState({
     left: false,
   });
@@ -559,33 +635,32 @@ const classes = drawerStyles();
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right",
-              }} variant="dot"
-              >
-                <Avatar
-                  className={classes.avatar}
-                  src={profilePic}
-                  onClick={() => {
-                    alert("Display Full Image of User");
-                  }}
-                  style={{ cursor: "pointer" }}
-                />
-              </StyledBadge>
-            </ListItemAvatar>
-            <ListItemText
-              className={classes.profileInfo}
-              primary={<Typography variant="h6">Nadir Hussain</Typography>}
-              secondary={<Rating value="3" size="small" readOnly />}
-            />
-          </ListItem>
-        </List>
-  
-        <Divider />
-        <List>{drawerOptions.map(({ optionTitle, optionIcon, route }) => (
-          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
-            <ListItem
-              button
-              key={optionTitle}
+              }}
+              variant="dot"
             >
+              <Avatar
+                className={classes.avatar}
+                src={profilePic}
+                onClick={() => {
+                  alert("Display Full Image of User");
+                }}
+                style={{ cursor: "pointer" }}
+              />
+            </StyledBadge>
+          </ListItemAvatar>
+          <ListItemText
+            className={classes.profileInfo}
+            primary={<Typography variant="h6">Nadir Hussain</Typography>}
+            secondary={<Rating value="3" size="small" readOnly />}
+          />
+        </ListItem>
+      </List>
+
+      <Divider />
+      <List>
+        {drawerOptions.map(({ optionTitle, optionIcon, route }) => (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+            <ListItem button key={optionTitle}>
               <ListItemIcon>{optionIcon}</ListItemIcon>
               <ListItemText primary={optionTitle} />
             </ListItem>
