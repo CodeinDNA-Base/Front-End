@@ -38,6 +38,7 @@
     "react-lorem-ipsum": "^1.4.9",
     "react-material-ui-carousel": "^2.3.1",
     "react-responsive": "^9.0.0-beta.2",
+    "react-responsive-carousel": "^3.2.21",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -73,4 +74,3 @@
     ]
   }
 }
-

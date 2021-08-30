@@ -35,6 +35,7 @@ const useStyles = makeStyles(() => ({
         .fade(0.5)}`,
     },
   }),
+  
   content: ({ color }) => {
     return {
       backgroundColor: color,

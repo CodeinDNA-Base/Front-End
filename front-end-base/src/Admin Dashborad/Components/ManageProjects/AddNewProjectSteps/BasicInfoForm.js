@@ -1,14 +1,13 @@
 import { Card, CardContent, CardHeader, Divider,Grid,Icon } from '@material-ui/core';
 import React,{useEffect, useState} from 'react';
-import EditIcon from '@material-ui/icons/Edit';
 import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
 import colors from '../../../../Theme/colors';
 import { Headingfonts } from '../../../../Theme/fonts';
 import { Headings } from '../../Support/Headings';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../Support/TextFields';
 import {lightBorder} from '../../../../Theme/borders'
+import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../Support/TextFields';
 import produce from 'immer';
 import CustomChipsList from '../../Support/CustomChipsList';
 import {actions,store} from '../../../Redux/ReduxResourceExporter'

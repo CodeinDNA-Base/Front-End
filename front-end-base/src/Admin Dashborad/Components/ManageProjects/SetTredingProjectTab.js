@@ -1,108 +1,66 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Grid,makeStyles,AppBar} from '@material-ui/core';
-import PropTypes from 'prop-types';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import CurrenCurrentProjectsSubTab from './SetTrendingProjectSubTabs/CurrentProjectsSubTab';
-import DynamicProjectsSubTab from './SetTrendingProjectSubTabs/DynamicProjectsSubTab';
-import SettingsSubTab from './SetTrendingProjectSubTabs/SettingsSubTab';
-import StaticProjectsSubTab from './SetTrendingProjectSubTabs/StaticProjectsSubTab';
-import DisplayModeSubTab from './SetTrendingProjectSubTabs/DisplayModeSubTab';
-
+import {lightBorder} from '../../../Theme/borders'
+import { WraningAlert } from '../Support/Alerts';
+import { SidebarForPageChanging } from './SetTrendingProjectSubTabs/SidebarForPageChanging';
+import CurrentlyVisibleProjects from './SetTrendingProjectSubTabs/CurrentlyVisibleProjects';
+import SetAndUpdateProjectsLists from './SetTrendingProjectSubTabs/SetAndUpdateProjectsLists';
+import Publish from './SetTrendingProjectSubTabs/Publish'
 function SetTredingProjectTab(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-    return (
-    <div>
-
-      <AppBar position="static" color="default">
-      <Tabs
-       value={value}
-       onChange={handleChange}
-       indicatorColor="primary"
-       textColor="primary"
-       variant="scrollable"
-       scrollButtons="auto"
-       aria-label="scrollable auto tabs example"
-      >
-        <Tab label="Current Projects" {...a11yProps(0)} />
-        <Tab label="Static Projects" {...a11yProps(1)} />
-        <Tab label="Dynamic Projects" {...a11yProps(2)} />
-        <Tab label="Display mode" {...a11yProps(3)} />
-        <Tab label="Settings" {...a11yProps(4)} />
-      </Tabs>
-
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        <CurrenCurrentProjectsSubTab/>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <StaticProjectsSubTab/>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <DynamicProjectsSubTab/>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <DisplayModeSubTab/>
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <SettingsSubTab/>
-      </TabPanel>
-    </div>
-
+  const [isLockClosed,setIsLockClosed]=useState(false);
+  const [isModelOpen, setIsModelOpen] = useState(false);
+  
+  const [currentPanel,setCurrentPanel]=useState(<CurrentlyVisibleProjects setIsLockClosed={setIsLockClosed}/>);
+  
+  const setCurrentStepNumber = (value)=>{
       
-    );
+      switch (value) {
+        case 0:
+          setCurrentPanel(<CurrentlyVisibleProjects setIsLockClosed={setIsLockClosed}/>)
+          break;
+        case 1:
+          setIsLockClosed(false);
+          setCurrentPanel(<SetAndUpdateProjectsLists/>)
+          break;
+        case 2:
+          setCurrentPanel(<Publish/>)
+          break;
+        default:
+          setCurrentPanel(<h1>Please set a existing panel</h1>)
+          break;
+      }
+   
+    
+    
+  }
+
+  
+  const handleModelOpen = () => {
+     setIsModelOpen(true);
+   };
+ 
+  const handleModelClose = () => {
+     setIsModelOpen(false);
+   };
+  return (
+    <div>
+        <Grid container>
+            <Grid item xs={3}>
+                <SidebarForPageChanging handleModelClose={handleModelClose} handleModelOpen={handleModelOpen} isLockClosed={isLockClosed} setCurrentStepNumber={setCurrentStepNumber}/>
+            </Grid>
+            <Grid item xs={9}>
+                {currentPanel}
+                <WraningAlert text={"Please hit the lock before switching to other panel"} open={isModelOpen} handleOpen={handleModelOpen} handleClose={handleModelClose} />
+            </Grid>
+        </Grid>    
+    </div>
+  );
 }
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
-  
-  TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-  };
-  
-  function a11yProps(index) {
-    return {
-      id: `vertical-tab-${index}`,
-      'aria-controls': `vertical-tabpanel-${index}`,
-    };
-  }
-  
 const useStyles = makeStyles((theme)=>({
-    container:{
-        width:"100%",
-        backgroundColor:"gold"
-    },
-    root: {
-      flexGrow: 1,
-      width: '100%',
-      backgroundColor: theme.palette.background.paper,
-    },
+   
  }));
 export default SetTredingProjectTab;
