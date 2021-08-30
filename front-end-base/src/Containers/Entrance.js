@@ -14,6 +14,11 @@ import {
 } from "./UserDashboardContainer";
 import { SearchProjectsContainer } from "./SearchProjectsContainer";
 
+<<<<<<< Updated upstream
+=======
+//import AdminDashboardContainer from './AdminDashboardContainer'
+//import SubServicesContainer from "./SubServicesContainer";
+>>>>>>> Stashed changes
 function Entrance(props) {
 
   return (
@@ -41,7 +46,12 @@ function Entrance(props) {
         <Route exact path="/postrequest" component={PostRequestFromMobileUserDashboard} />
         <Route exact path="/previousposts" component={UserDashboardShowPreviousPosts} />
         <Route exact path="/viewpost" component={UserDashboardViewPostDetails} />    
+<<<<<<< Updated upstream
 
+=======
+        {/* <Route exact path="/admin" component={AdminDashboardContainer} />
+        <Route exact path="/services" component={SubServicesContainer} /> */}
+>>>>>>> Stashed changes
       </Switch>
     </Router>
   );
