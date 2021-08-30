@@ -90,7 +90,7 @@ function Media(props) {
                                 ):(
                                     <div style={{marginTop:'25%',}}>
                                         <div style={{marginTop:"10%"}}>
-                                            <Headings text={"Thumbnail"} fontSize={20}/>
+                                            <Headings text={"Thumbnail"} fontSize={25} fontWeight={'bold'}/>
                                         </div>
                                         {
                                             (isEditingEnabled) ? (
@@ -152,10 +152,20 @@ function Media(props) {
                                     ):(
                                         <div style={{marginTop:'25%',textAlign:'center'}}>
                                         <div style={{marginTop:"10%",}}>
-                                            <Headings text={"Gallary"} fontSize={20}/>
+                                            <Headings text={"Gallary"} fontSize={25} fontWeight={'bold'}/>
                                         </div>
-                                            <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectImagesForGallary}/>
-                                        {/* <LibraryAddIcon color="primary" style={{fontSize:50}}/> */}
+                                        <div style={{position:'relative'}}>
+                                            {
+                                                (isEditingEnabled) ? (
+                                                    <div style={{}}>
+                                                        <Headings text={"Unlock for editing"} fontSize={18}/>
+                                                    </div>
+                                                ):(
+                                                    <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectImagesForGallary}/>
+                                                )
+                                            }
+                                            
+                                        </div>
                                         </div>
                                     )
                                 }
