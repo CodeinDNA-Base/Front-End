@@ -57,7 +57,7 @@ function getSteps() {
   return [
     "Currently visible",
     "Set projects",
-    "Publish",
+    "Display modes",
   ];
 }
 

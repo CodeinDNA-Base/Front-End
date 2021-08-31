@@ -7,6 +7,7 @@ function ViewAllProjectsTab(props) {
     const classes = useStyles();
     const [screenSwitcher,setScreenSwitcher]=useState(true);
     const [selectedProjectKeyHook,setSelectedProjectKeyHook]=useState(0);
+
     const handelOptionSelection = (event,selectedOption,selectedProjectKey)=>{
         // alert("here"+selectedOption+" - "+selectedProjectKey)
         if(selectedOption===0)
@@ -15,9 +16,11 @@ function ViewAllProjectsTab(props) {
             setScreenSwitcher(false)   
         }
     }
+
     const handelBackToListOfProjectBtnClick = (event)=>{
         setScreenSwitcher(true)
     }
+    
     const handeSelectOption = (selectedValue) =>{
         alert(selectedValue);
         console.log(selectedValue)

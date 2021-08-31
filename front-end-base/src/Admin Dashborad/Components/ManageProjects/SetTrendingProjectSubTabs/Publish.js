@@ -6,24 +6,54 @@ import colors from '../../../../Theme/colors';
 import { Headingfonts } from '../../../../Theme/fonts';
 import { Headings } from '../../Support/Headings';
 import {lightBorder} from '../../../../Theme/borders'
-
+import GroupedRadioButtons from '../../Support/GroupedRadioButtons';
 function Publish(props) {
     const handelPublishOnWebSite=()=>{
-        alert("Just call the api to add this in database")
+        alert("Just call the api to add this in database and seleced mode is  :"+selectedOptOfFilter_by_title_2)
     }
+
+    const [selectedOptOfFilter_by_title_2,setSelectedOptOfFilter_by_title_2]=useState();
+    const [listOfOptions_filter_by_title_2_RadioBoxes,setListOfOptions_filter_by_title_2_RadioBoxes] =useState([
+        {
+            optionLabel:"Static Mode",
+            optionValue:"Static Mode",
+            radioBtnColor:'default'
+        },
+        {
+            optionLabel:"Dynamic Mode",
+            optionValue:"Dynamic Mode",
+            radioBtnColor:'primary'
+        },
+        {
+            optionLabel:"Random Mode",
+            optionValue:"Random Mode",
+            radioBtnColor:'primary'
+        },
+        {
+            optionLabel:"Invisible Mode",
+            optionValue:"Invisible Mode",
+            radioBtnColor:'primary'
+        },
+        
+        
+    ]);
+
     return (
         <div style={{position:'relative'}}>
         <Card
             elevation={0}
-            style={{border:lightBorder,height:'10rem'}}
+            style={{border:lightBorder,height:'20rem'}}
         >
             <CardContent>
             <div style={{position:'absolute',top:'0rem',left:'0.5rem'}}>
-                <Headings  text={"Publish"} fontSize={35}/>
+                <Headings  text={"Select/Change Display mode"} fontSize={35}/>
             </div>
-            <div  style={{position:'absolute',top:'5rem',left:'0.5rem'}}>
+            <div style={{position:'absolute',top:'8rem',left:'8rem'}}>
+                <GroupedRadioButtons listOfOptions={listOfOptions_filter_by_title_2_RadioBoxes} value={selectedOptOfFilter_by_title_2} setValue={setSelectedOptOfFilter_by_title_2}/>
+             </div>
+            <div  style={{position:'absolute',top:'15rem',left:'0.5rem'}}>
             <RoundButton
-                title={"Publish it on website"}
+                title={"Update mode"}
                 width={200}
                 color={colors.white}
                 bgColor={colors.primary}

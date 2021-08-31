@@ -17,11 +17,57 @@ const storeStructure=
                 lastDataUpdateTime:null,
             },
             ListOfStaticProjects:{
-                data:listOfStaticProjects,
+                data:[
+                    {
+                        projectTitle:null,
+                        projectDesc:null,
+                        projectService:null,
+                        projectSubService:null,
+                        projectEstimatedPrice:null,
+                        projectPublishDate:null,
+                        projectThumbNail:null,
+                        clientSideViewUrl:null,
+                        listOfImage:[]
+                    },
+                    {
+                        projectTitle:null,
+                        projectDesc:null,
+                        projectService:null,
+                        projectSubService:null,
+                        projectEstimatedPrice:null,
+                        projectPublishDate:null,
+                        projectThumbNail:null,
+                        clientSideViewUrl:null,
+                        listOfImage:[]
+                    },
+                    {
+                        projectTitle:null,
+                        projectDesc:null,
+                        projectService:null,
+                        projectSubService:null,
+                        projectEstimatedPrice:null,
+                        projectPublishDate:null,
+                        projectThumbNail:null,
+                        clientSideViewUrl:null,
+                        listOfImage:[]
+                    },
+                    {
+                        projectTitle:null,
+                        projectDesc:null,
+                        projectService:null,
+                        projectSubService:null,
+                        projectEstimatedPrice:null,
+                        projectPublishDate:null,
+                        projectThumbNail:null,
+                        clientSideViewUrl:null,
+                        listOfImage:[]
+                    },
+                ],
                 lastUpdateDateAndTime:" Monday, 30 August 2021 (GMT+5) Time in Sukkur 9:11 pm",
                 lastChoosedDisplayMode:"Static",
                 lastDataUpdateTime:null,
             },
+            listOfDynamicProjectsList:[],
             Drafts:{
 
                 AddNewProject:{

@@ -23,7 +23,7 @@ function SetTredingProjectTab(props) {
           break;
         case 1:
           setIsLockClosed(false);
-          setCurrentPanel(<SetAndUpdateProjectsLists/>)
+          setCurrentPanel(<SetAndUpdateProjectsLists setIsLockClosed={setIsLockClosed}/>)
           break;
         case 2:
           setCurrentPanel(<Publish/>)
@@ -49,6 +49,7 @@ function SetTredingProjectTab(props) {
     <div>
         <Grid container>
             <Grid item xs={3}>
+              
                 <SidebarForPageChanging handleModelClose={handleModelClose} handleModelOpen={handleModelOpen} isLockClosed={isLockClosed} setCurrentStepNumber={setCurrentStepNumber}/>
             </Grid>
             <Grid item xs={9}>
