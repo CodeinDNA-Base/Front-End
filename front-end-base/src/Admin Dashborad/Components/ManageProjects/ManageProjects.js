@@ -35,12 +35,7 @@ function ManageProjects(props) {
          <Grid item xs={1}></Grid>
          <Grid item xs={10}>
            <Grid container>
-              {/* Top */}
-              {/* <Grid item lg={12} xs={12}>
-                <div className={classes.titleBar}>
-                    <h1>{}</h1>
-                </div>
-              </Grid> */}
+             
               <Grid item lg={12} xs={12}>
                 <Card className={classes.tabBarAndFilersContainer}>
                   <CardContent>
@@ -92,7 +87,7 @@ function ManageProjects(props) {
                 </Card>    
               
                 </Grid>
-              
+               
            </Grid>
          </Grid>
          <Grid item xs={1}></Grid>

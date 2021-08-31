@@ -4,7 +4,6 @@ import { lightBorder } from '../../../Theme/borders';
 import { Headings } from '../Support/Headings';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ListOfAllProjects from './ViewAllProjectsSubComponents/ListOfAllProjects';
-
 import ViewProject from './ViewAllProjectsSubComponents/ViewProject'
 function ViewAllProjectsTab(props) {
     const classes = useStyles();

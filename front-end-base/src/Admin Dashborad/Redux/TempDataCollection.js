@@ -866,4 +866,260 @@ const listOfStaticProjects=[
     
 ]
 
-export {listOfProjects,listOfTrendingProjects,listOfStaticProjects};
+
+const listOfServices=[
+    {
+        serviceTitle:"Service 1",
+        serviceDesc:"Service desc",
+        listOfSubServices:[
+            {
+                subServiceTitle:"Sub service 1",
+                subServiceValue:"Sub service 1"
+            },
+            {
+                subServiceTitle:"Sub service 2",
+                subServiceValue:"Sub service 2"
+            },
+            {
+                subServiceTitle:"Sub service 3",
+                subServiceValue:"Sub service 3"
+            },
+            {
+                subServiceTitle:"Sub service 4",
+                subServiceValue:"Sub service 4"
+            },
+            
+        ],
+        
+        packages:[
+          {
+            packageTitle:"Basic",
+            packageDesc:"This is basic package",
+            packagePrice:20,
+            listOfOfferedFeatures:[
+                {
+                    featureTitle:"Feature 1"
+                },
+                {
+                    featureTitle:"Feature 2"
+                },
+                {
+                    featureTitle:"Feature 3"
+                },
+                
+            ]
+          },
+          {
+            packageTitle:"Standard",
+            packageDesc:"This is standard package",
+            packagePrice:40,
+            listOfOfferedFeatures:[
+                {
+                    featureTitle:"Feature 1"
+                },
+                {
+                    featureTitle:"Feature 2"
+                },
+                {
+                    featureTitle:"Feature 3"
+                },
+                
+            ]
+          },
+          {
+            packageTitle:"Premium",
+            packageDesc:"This is premium package",
+            packagePrice:20,
+            listOfOfferedFeatures:[
+                {
+                    featureTitle:"Feature 1"
+                },
+                {
+                    featureTitle:"Feature 2"
+                },
+                {
+                    featureTitle:"Feature 3"
+                },
+                
+            ]
+          },
+          
+      ],
+      listOfRelatedServices:[],
+      listOfServiceReviews:[],
+      listOfRelatedProjects:[],
+      serviceRatings:4,
+      servicePublishDate:"31-08-2021",
+      serviceLastUpdateDate:"30-09-2021",
+    },
+    {
+        serviceTitle:"Service 2",
+        serviceDesc:"Service desc",
+        listOfSubServices:[
+            {
+                subServiceTitle:"Sub service 1",
+                subServiceValue:"Sub service 1"
+            },
+            {
+                subServiceTitle:"Sub service 2",
+                subServiceValue:"Sub service 2"
+            },
+            {
+                subServiceTitle:"Sub service 3",
+                subServiceValue:"Sub service 3"
+            },
+            {
+                subServiceTitle:"Sub service 4",
+                subServiceValue:"Sub service 4"
+            },
+            
+        ],
+        
+        packages:[
+          {
+            packageTitle:"Basic",
+            packageDesc:"This is basic package",
+            packagePrice:20,
+            listOfOfferedFeatures:[
+                {
+                    featureTitle:"Feature 1"
+                },
+                {
+                    featureTitle:"Feature 2"
+                },
+                {
+                    featureTitle:"Feature 3"
+                },
+                
+            ]
+          },
+          {
+            packageTitle:"Standard",
+            packageDesc:"This is standard package",
+            packagePrice:40,
+            listOfOfferedFeatures:[
+                {
+                    featureTitle:"Feature 1"
+                },
+                {
+                    featureTitle:"Feature 2"
+                },
+                {
+                    featureTitle:"Feature 3"
+                },
+                
+            ]
+          },
+          {
+            packageTitle:"Premium",
+            packageDesc:"This is premium package",
+            packagePrice:20,
+            listOfOfferedFeatures:[
+                {
+                    featureTitle:"Feature 1"
+                },
+                {
+                    featureTitle:"Feature 2"
+                },
+                {
+                    featureTitle:"Feature 3"
+                },
+                
+            ]
+          },
+          
+      ],
+      listOfRelatedServices:[],
+      listOfServiceReviews:[],
+      listOfRelatedProjects:[],
+      serviceRatings:4,
+      servicePublishDate:"1-08-2021",
+      serviceLastUpdateDate:"8-09-2021",
+    },
+    {
+        serviceTitle:"Service 3",
+        serviceDesc:"Service desc",
+        listOfSubServices:[
+            {
+                subServiceTitle:"Sub service 1",
+                subServiceValue:"Sub service 1"
+            },
+            {
+                subServiceTitle:"Sub service 2",
+                subServiceValue:"Sub service 2"
+            },
+            {
+                subServiceTitle:"Sub service 3",
+                subServiceValue:"Sub service 3"
+            },
+            {
+                subServiceTitle:"Sub service 4",
+                subServiceValue:"Sub service 4"
+            },
+            
+        ],
+        
+        packages:[
+          {
+            packageTitle:"Basic",
+            packageDesc:"This is basic package",
+            packagePrice:20,
+            listOfOfferedFeatures:[
+                {
+                    featureTitle:"Feature 1"
+                },
+                {
+                    featureTitle:"Feature 2"
+                },
+                {
+                    featureTitle:"Feature 3"
+                },
+                
+            ]
+          },
+          {
+            packageTitle:"Standard",
+            packageDesc:"This is standard package",
+            packagePrice:40,
+            listOfOfferedFeatures:[
+                {
+                    featureTitle:"Feature 1"
+                },
+                {
+                    featureTitle:"Feature 2"
+                },
+                {
+                    featureTitle:"Feature 3"
+                },
+                
+            ]
+          },
+          {
+            packageTitle:"Premium",
+            packageDesc:"This is premium package",
+            packagePrice:20,
+            listOfOfferedFeatures:[
+                {
+                    featureTitle:"Feature 1"
+                },
+                {
+                    featureTitle:"Feature 2"
+                },
+                {
+                    featureTitle:"Feature 3"
+                },
+                
+            ]
+          },
+          
+      ],
+      listOfRelatedServices:[],
+      listOfServiceReviews:[],
+      listOfRelatedProjects:[],
+      serviceRatings:4,
+      servicePublishDate:"31-08-2021",
+      serviceLastUpdateDate:"30-09-2021",
+    },
+    
+]
+export {listOfProjects,listOfTrendingProjects,listOfStaticProjects,listOfServices};

@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 import reducer from "./reducer";
-import { listOfProjects,listOfTrendingProjects ,listOfStaticProjects} from "./TempDataCollection";
+import { listOfProjects,listOfTrendingProjects ,listOfStaticProjects,listOfServices} from "./TempDataCollection";
 
 const storeStructure=
     {
@@ -96,7 +96,13 @@ const storeStructure=
             }
 
         },
-
+        ServiceAndSubServiceStore:{
+            ListOfServicesLoadedFromAPI:{
+                data:listOfServices,
+                lastDataUpdateTime:null,
+            }
+        }
+        
 
     }
 
