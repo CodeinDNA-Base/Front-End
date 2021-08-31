@@ -36,7 +36,7 @@ const listOfOptions_ForDropDown=[
          <Dropdown listOfOptions={listOfOptions_ForDropDown} label={"History"} value={selectedValue} setValue={setSelectedValue}/>
              
  */
-function Dropdown({label,value,...props}) {
+function DisabledDropdown({label,value,...props}) {
   const classes=useStyles();
 
   const handleChange = (event) => {
@@ -53,7 +53,7 @@ function Dropdown({label,value,...props}) {
           onChange={handleChange}
           label={label}
           className={classes.selecteStyle}
-          props
+          disabled
         >
           
           {
@@ -72,7 +72,8 @@ const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
       minWidth: 130,
-      width:'100%'
+      width:'100%',
+      margin:'auto'
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -94,4 +95,4 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default Dropdown;
+export default DisabledDropdown;

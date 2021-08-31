@@ -4,7 +4,7 @@ import { lightBorder } from '../../../Theme/borders';
 import { Headings } from '../Support/Headings';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ListOfAllProjects from './ViewAllProjectsSubComponents/ListOfAllProjects';
-import ProjectEditor from './ViewAllProjectsSubComponents/ProjectEditor';
+
 import ViewProject from './ViewAllProjectsSubComponents/ViewProject'
 function ViewAllProjectsTab(props) {
     const classes = useStyles();
@@ -30,7 +30,7 @@ function ViewAllProjectsTab(props) {
                                 <div onClick={handeScreenSwitch} style={{cursor:'pointer'}}>
                                     <ArrowBackIosIcon/>
                                 </div>
-                                <div style={{border:lightBorder,marginTop:'1rem',padding:'2rem'}}>
+                                <div style={{marginTop:'1rem'}}>
                                     <ViewProject projectData={selectedProjectKeyHook}/>
                                 </div>
                             </div>

@@ -11,6 +11,8 @@ import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../S
 import produce from 'immer'; 
 import CustomChipsList from '../../Support/CustomChipsList';
 import {actions,store} from '../../../Redux/ReduxResourceExporter'
+import Dropdown from '../../Support/Dropdown';
+import DisabledDropdown from '../../Support/DisabledDropdown';
 
 function BasicInfoForm(props) {
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
@@ -20,14 +22,74 @@ function BasicInfoForm(props) {
     const [estrimatedPrice,setEstimatedPrice]=useState(0);
     const [keyWordText,setKeyWordText]=useState();
     const [listOfOptions_ForChipList, setListOfOptions_ForChipList]=useState([]);
-
+    const [catagory,setCatagory]=useState("");
+    const [subCatagory,setSubCatagory]=useState("");
+    const [listOfCatagories,setListOfCatagories]=useState([
+        {
+            optionTitle:"Desktop App",
+            optionValue:"Desktop App"
+        },
+        {
+            optionTitle:"Mobile App",
+            optionValue:"Mobile App"
+        },
+        {
+            optionTitle:"Web App",
+            optionValue:"Web App"
+        },
+        {
+            optionTitle:"Chat App",
+            optionValue:"Chat App"
+        },
+        {
+            optionTitle:"Mobile Game",
+            optionValue:"Mobile Game"
+        },
+        {
+            optionTitle:"Desktop Game",
+            optionValue:"Desktop Game"
+        },
+        
+        
+    ]);
+    const [listOfSubCatagories,setListOfSubCatagories]=useState([
+        {
+            optionTitle:"React Js",
+            optionValue:"React Js"
+        },
+        {
+            optionTitle:"React Native",
+            optionValue:"React Native"
+        },
+        {
+            optionTitle:"Java",
+            optionValue:"Java"
+        },
+        {
+            optionTitle:"C#",
+            optionValue:"C#"
+        },
+        {
+            optionTitle:"Andriod",
+            optionValue:"Andriod"
+        },
+        {
+            optionTitle:"C++",
+            optionValue:"C++"
+        },
+        
+    ]);
+    
     useEffect(()=>{
         //load data into hooks from store.
         setProjectTitle(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectTitle);
         setProjectDesc(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectDesc);
         setEstimatedPrice(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectEstimatedPrice);
         setListOfOptions_ForChipList(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.listOfKeyWords);
+        setCatagory(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectService);
+        setSubCatagory(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectSubService)
         setIsEditingEnabled(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.isEditingEnabled);
+     
     },[])
     
     const handelEditAndSaveChanges = ()=>{
@@ -47,11 +109,11 @@ function BasicInfoForm(props) {
             const data = {
                 projectTitle:projectTitle,
                 projectDesc:projectDesc,
-                projectService:"Add a service",
-                projectSubService:"Add a sub service",
+                projectService:catagory,
+                projectSubService:subCatagory,
                 projectEstimatedPrice:estrimatedPrice,
-                projectPublishDate:"Add date",
-                clientSideViewUrl:"Not added yet",
+                projectPublishDate:"Not add due to issue in date picker",
+                clientSideViewUrl:"https://material-ui.com/api/select/",
                 listOfKeyWords:listOfOptions_ForChipList,
                 isEditingEnabled:true
             }
@@ -169,6 +231,47 @@ function BasicInfoForm(props) {
                             )
                         }
                         </div>
+                        <div  style={{marginTop:"1rem"}}>
+                            <Grid container>
+                                <Grid item xs={4}>
+                        <div>
+                        {
+                            (isEditingEnabled) ? (
+                                <div  >
+                                    {/* Catagory */}
+                                    <DisabledDropdown listOfOptions={listOfCatagories}label={"Select catagory"} value={catagory} setValue={setCatagory} />
+                                </div>
+                            ) : (
+                               <div  >
+                                    <Dropdown listOfOptions={listOfCatagories}label={"Select catagory"} value={catagory} setValue={setCatagory} />                 
+                               </div>
+                            )
+                        }
+                        </div>
+                        
+                                </Grid>
+                        <Grid item xs={4}>
+                                <div>
+                        {
+                            (isEditingEnabled) ? (
+                                <div style={{paddingLeft:'1rem'}}>
+                                    {/* subCatagory */}
+                                    <DisabledDropdown listOfOptions={listOfSubCatagories}label={"Select Sub catagory"} value={subCatagory} setValue={setSubCatagory} />
+                                </div>
+                            ) : (
+                               <div  style={{paddingLeft:'1rem'}}>
+                                    <Dropdown listOfOptions={listOfSubCatagories}label={"Select Sub catagory"} value={subCatagory} setValue={setSubCatagory} />                 
+                               </div>
+                            )
+                        }
+                        </div> 
+                                </Grid>
+                                <Grid item xs={4}>
+
+                                </Grid>
+
+                            </Grid>
+                        </div>
                         <div style={{marginTop:'1rem'}}>
 
                            <div style={{display:'inline-block'}}>
@@ -199,7 +302,6 @@ function BasicInfoForm(props) {
                                     labelFontColor={"#a39f93"}
                                     labelFontWeight={'bold'}
                                     labelFontSize={13}
-                                    
                                     />
                                    )
                                }

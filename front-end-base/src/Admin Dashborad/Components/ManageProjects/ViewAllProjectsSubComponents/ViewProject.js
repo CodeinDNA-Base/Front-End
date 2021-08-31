@@ -1,16 +1,36 @@
 import { Grid } from '@material-ui/core';
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import { Headings } from '../../Support/Headings';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
 import colors from '../../../../Theme/colors';
 import {store,actions} from '../../../Redux/ReduxResourceExporter'
+import { lightBorder } from '../../../../Theme/borders';
+import AddNewProjectTab from '../AddNewProjectTab';
+import { ArrowBackIos } from '@material-ui/icons';
 // https://www.npmjs.com/package/react-responsive-carousel
 function ViewProject(props) {
+    const [isEditorOpen,setIsEditorOpen]=useState(false);
     useEffect(()=>{
-        store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(props.projectData.projectTitle,props.projectData.projectDesc,props.projectData.projectEstimatedPrice,props.projectData.listOfKeyWords,true))
-    })
+        const data = {
+            projectTitle:props.projectData.projectTitle,
+            projectDesc:props.projectData.projectDesc,
+            projectService:props.projectData.projectService,
+            projectSubService:props.projectData.projectSubService,
+            projectEstimatedPrice:props.projectData.projectEstimatedPrice,
+            projectPublishDate:props.projectData.projectPublishDate,
+            clientSideViewUrl:props.projectData.clientSideViewUrl,
+            listOfKeyWords:props.projectData.listOfKeyWords,
+            isEditingEnabled:true
+        }
+        store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data));
+        store.dispatch(actions.update_media_ADD_NEW_PROJECTS(props.projectData.projectThumbNail,props.projectData.listOfImage,true));
+    },[]);
+
+    const handelPanelSwitcher=()=>{
+        setIsEditorOpen(!isEditorOpen);
+    }
     return (
         // projectTitle:"Project 2",
         // projectDesc:"Project desc",
@@ -19,10 +39,14 @@ function ViewProject(props) {
         // projectEstimatedPrice:70,
         // projectPublishDate:"30-8-2021",
         // projectThumbNail:"https://www.d
-        // listOfImage:[{}]
+        // listOfImage:[]
         // clientSideViewUrl:""
         // listOfKeyWords:[]
-        <div style={{marginTop:'2rem',paddingLeft:'1rem'}}>
+        <div>
+            {
+                (isEditorOpen===false) ? (
+                    <div>
+        <div style={{marginTop:'2rem'}}>
             
             <Grid container>
                 <Grid item xs={7}>
@@ -88,16 +112,27 @@ function ViewProject(props) {
                                       bgColor={colors.primary}
                                       margin={"0% 0% 0%  0%"}
                                       handleClick={()=>{
-                                        window.open(props.projectData.clientSideViewUrl, "_blank")
+                                        handelPanelSwitcher();
                                       }}
-                                     />
+                                    />
                     </div>            
                 </Grid>
             </Grid>
 
-           
-
-           
+            </div>
+                    </div>
+                ):(
+                    <div >
+                        <div onClick={handelPanelSwitcher} style={{paddingLeft:'1rem',cursor:'pointer'}}>
+                            <ArrowBackIos color="primary"/>
+                            
+                        </div>
+                        <div style={{border:lightBorder,paddingTop:'1rem',paddingRight:'1rem',paddingBottom:'1rem'}}>
+                            <AddNewProjectTab/>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     );
 }
