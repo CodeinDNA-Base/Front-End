@@ -26,7 +26,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import { faFlag,faThumbsUp,faThumbsDown} from '@fortawesome/free-solid-svg-icons'
-import './Styles.css'
+
 import { lightBorder } from '../../../../Theme/borders';
 import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
 import colors from '../../../../Theme/colors';

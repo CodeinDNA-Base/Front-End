@@ -133,7 +133,7 @@ const useStyles=makeStyles((theme)=>({
     dropDownOptContainer:{
         // backgroundColor:'green',
         position:'absolute',
-        right:'0rem',
+        right:'1rem',
         top:'1rem'
     },
     chartContainer:{

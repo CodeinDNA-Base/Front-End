@@ -125,7 +125,6 @@ function ViewProject(props) {
                     <div >
                         <div onClick={handelPanelSwitcher} style={{paddingLeft:'1rem',cursor:'pointer'}}>
                             <ArrowBackIos color="primary"/>
-                            
                         </div>
                         <div style={{border:lightBorder,paddingTop:'1rem',paddingRight:'1rem',paddingBottom:'1rem'}}>
                             <AddNewProjectTab/>
