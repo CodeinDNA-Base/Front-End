@@ -10,11 +10,24 @@ export default function reducer(state=storeStructure,action) {
         
         case actions.UPDATE_BASIC_INFO_add_new_projects:
         return produce(state,draft=>{
-            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.title=action.payLoad.title;
-            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.description=action.payLoad.description;
-            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.price=action.payLoad.price;
-            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.listOfKeyWords=action.payLoad.listOfKeyWords;
-            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.isEditingEnabled=action.payLoad.isEditingEnabled;
+            // projectTitle:null,
+            // projectDesc:null,
+            // projectService:null,
+            // projectSubService:null,
+            // projectEstimatedPrice:null,
+            // projectPublishDate:null,
+            // clientSideViewUrl:null,
+            // listOfKeyWords:[]
+            // isEditingEnabled:false
+            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.projectTitle=action.payLoad.projectData.projectTitle;
+            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.projectDesc=action.payLoad.projectData.projectDesc;
+            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.projectService=action.payLoad.projectData.projectService;
+            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.projectSubService=action.payLoad.projectData.projectSubService;
+            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.projectEstimatedPrice=action.payLoad.projectData.projectEstimatedPrice;
+            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.projectPublishDate=action.payLoad.projectData.projectPublishDate;
+            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.clientSideViewUrl=action.payLoad.projectData.clientSideViewUrl;
+            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.listOfKeyWords=action.payLoad.projectData.listOfKeyWords;
+            draft.ProjectsStore.Drafts.AddNewProject.BasicInfo.isEditingEnabled=action.payLoad.projectData.isEditingEnabled;
             return draft;
         });
         break;

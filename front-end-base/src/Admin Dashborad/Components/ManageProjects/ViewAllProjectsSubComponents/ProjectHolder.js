@@ -57,8 +57,7 @@ function ProjectHolder({showMenueSelectionOpt,...props}) {
   }
 
   const options = [
-    'Edit',  
-    'Get Share link',
+    'View'
   ];
   const optionsWhileSelection=[
     'Select'
@@ -66,6 +65,7 @@ function ProjectHolder({showMenueSelectionOpt,...props}) {
   return (
     <Card className={classes.root}
         elevation={0}
+         
     >
     <CardHeader
   action={
@@ -102,7 +102,6 @@ function ProjectHolder({showMenueSelectionOpt,...props}) {
                  {optionsWhileSelection.map((option,index) => (
                   <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
                     // handleClose(index)
-                    props.handeSelectOption(props.data);
                     setAnchorEl(null);
                     
                   }}>
@@ -115,7 +114,7 @@ function ProjectHolder({showMenueSelectionOpt,...props}) {
                 {options.map((option,index) => (
                   <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
                     // handleClose(index)
-                    props.handelOptionSelection(e,index,props.data)
+                    props.handelOptionSelection(props.data)
                     setAnchorEl(null);
                     
                   }}>
@@ -140,8 +139,19 @@ function ProjectHolder({showMenueSelectionOpt,...props}) {
       <CardMedia
         className={classes.media}
         image={props.data.projectThumbNail}
+        style={{cursor:'pointer'}}
+        onClick={()=>{
+          window.open(props.data.clientSideViewUrl, "_blank")
+        }}
+     
       />
-      <CardContent>
+      <CardContent
+       style={{cursor:'pointer'}}
+       onClick={()=>{
+        window.open(props.data.clientSideViewUrl, "_blank")
+      }}
+   
+      >
         {/* <Grid container>
           <Grid item xs={1}></Grid>
           <Grid item xs={4} style={{textAlign:'center'}}>

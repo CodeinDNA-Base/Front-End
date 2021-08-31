@@ -134,7 +134,7 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
             {
                 return(      
                     <ImageListItem key={item.img} cols={item.cols || 1}>
-                        <ProjectHolder  cols={item.cols} showMenueSelectionOpt={showMenueSelectionOpt} handelOptionSelection={props.handelOptionSelection} handeSelectOption={props.handeSelectOption} data={item}/>
+                        <ProjectHolder  cols={item.cols} showMenueSelectionOpt={showMenueSelectionOpt} handelOptionSelection={props.handelOptionSelection}  data={item}/>
                     </ImageListItem>
                     )   
             }
@@ -152,7 +152,7 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
                     {
                         return(      
                             <ImageListItem key={item.img} cols={item.cols || 1}>
-                                <ProjectHolder  cols={item.cols} showMenueSelectionOpt={showMenueSelectionOpt} handeSelectOption={props.handeSelectOption} handelOptionSelection={props.handelOptionSelection} data={item}/>
+                                <ProjectHolder  cols={item.cols}  handeSelectOption={props.handeSelectOption} handelOptionSelection={props.handelOptionSelection} data={item}/>
                             </ImageListItem>
                             )   
                     }

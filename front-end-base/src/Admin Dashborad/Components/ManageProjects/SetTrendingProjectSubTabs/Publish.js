@@ -59,7 +59,7 @@ function Publish(props) {
                 bgColor={colors.primary}
                 margin={"0% 0% 0%  150%"}
                 handleClick={handelPublishOnWebSite}
-                />
+            />
             </div>
             </CardContent>
 

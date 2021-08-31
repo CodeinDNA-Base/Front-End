@@ -1,13 +1,9 @@
 import * as actions from './actionTypes'
-const update_baic_info_ADD_NEW_PROJECTS = (projectTitle,projectDescription,estimatedPrice,listOfKeyWords,isEditingEnabled)=>{
+const update_baic_info_ADD_NEW_PROJECTS = (projectData)=>{
     return {
         type:actions.UPDATE_BASIC_INFO_add_new_projects,
         payLoad:{
-            title:projectTitle,
-            description:projectDescription,
-            price:estimatedPrice,
-            listOfKeyWords:listOfKeyWords,
-            isEditingEnabled:isEditingEnabled
+            projectData:projectData,
         }
     }
    

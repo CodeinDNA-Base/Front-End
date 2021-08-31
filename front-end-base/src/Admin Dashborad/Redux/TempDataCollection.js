@@ -2,7 +2,7 @@ const listOfProjects = [
     {
       //dd-mm-yy
       projectTitle:"Project 1",
-      projectDesc:"Project desc",
+      projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare", 
       projectService:"Mobile App",
       projectSubService:"Andriod",
       projectEstimatedPrice:50,
@@ -31,11 +31,32 @@ const listOfProjects = [
                 key:5,
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },  
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },
     {
         projectTitle:"Project 2",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Mobile App",
         projectSubService:"Andriod",
         projectEstimatedPrice:50,
@@ -65,11 +86,32 @@ const listOfProjects = [
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },
     {
         projectTitle:"Project 3",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Mobile App",
         projectSubService:"C++",
         projectEstimatedPrice:0,
@@ -99,10 +141,31 @@ const listOfProjects = [
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },{
         projectTitle:"Project 4",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Chating App",
         projectSubService:"React Js",
         projectEstimatedPrice:50,
@@ -132,10 +195,31 @@ const listOfProjects = [
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },{
         projectTitle:"Project 5",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Mobile App",
         projectSubService:"React Native",
         projectEstimatedPrice:30,
@@ -165,10 +249,31 @@ const listOfProjects = [
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },{
         projectTitle:"Project 6",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Mobile App",
         projectSubService:"React Native",
         projectEstimatedPrice:80,
@@ -198,10 +303,31 @@ const listOfProjects = [
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },{
         projectTitle:"Project 7",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Mobile Game",
         projectSubService:"Andriod",
         projectEstimatedPrice:80,
@@ -231,10 +357,31 @@ const listOfProjects = [
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },{
         projectTitle:"Project 8",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Desktop App",
         projectSubService:"C#",
         projectEstimatedPrice:80,
@@ -264,10 +411,31 @@ const listOfProjects = [
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },{
         projectTitle:"Project 9",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Desktop Game",
         projectSubService:"Java",
         projectEstimatedPrice:90,
@@ -297,10 +465,31 @@ const listOfProjects = [
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },{
         projectTitle:"Project 10",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Desktop Game",
         projectSubService:"C++",
         projectEstimatedPrice:90,
@@ -330,11 +519,32 @@ const listOfProjects = [
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },
     {
         projectTitle:"Project 10",
-        projectDesc:"Project desc",
+       projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare",
+       
         projectService:"Desktop Game",
         projectSubService:"C++",
         projectEstimatedPrice:90,
@@ -362,6 +572,26 @@ const listOfProjects = [
             },  {
                 key:5,
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
+            },
+            
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
             },
             
         ]
@@ -398,6 +628,26 @@ const listOfTrendingProjects=[
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     },
     {
@@ -428,6 +678,26 @@ const listOfTrendingProjects=[
             },  {
                 key:5,
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
+            },
+            
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
             },
             
         ]
@@ -461,6 +731,26 @@ const listOfTrendingProjects=[
             },  {
                 key:5,
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
+            },
+            
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
             },
             
         ]
@@ -497,6 +787,26 @@ const listOfTrendingProjects=[
                 imageUri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzKGUojlGUBbLIdvtkqVIoG2aJR6hEpoQaA&usqp=CAU"
             },
             
+        ],
+        listOfKeyWords:[
+
+            {
+                key:0,
+                label:"This will be used for searching",
+            },
+            {
+                key:1,
+                label:"This will be used for searching",
+            },
+            {
+                key:2,
+                label:"This will be used for searching",
+            },
+            {
+                key:3,
+                label:"This will be used for searching",
+            },
+            
         ]
     
     },
@@ -513,7 +823,8 @@ const listOfStaticProjects=[
         projectPublishDate:null,
         projectThumbNail:null,
         clientSideViewUrl:null,
-        listOfImage:[]
+        listOfImage:[],
+        listOfKeyWords:[]
     },
     {
         projectTitle:null,
@@ -524,7 +835,8 @@ const listOfStaticProjects=[
         projectPublishDate:null,
         projectThumbNail:null,
         clientSideViewUrl:null,
-        listOfImage:[]
+        listOfImage:[],
+        listOfKeyWords:[]
     },
     {
         projectTitle:null,
@@ -535,7 +847,8 @@ const listOfStaticProjects=[
         projectPublishDate:null,
         projectThumbNail:null,
         clientSideViewUrl:null,
-        listOfImage:[]
+        listOfImage:[],
+        listOfKeyWords:[]
     },
     {
         projectTitle:null,
@@ -546,8 +859,11 @@ const listOfStaticProjects=[
         projectPublishDate:null,
         projectThumbNail:null,
         clientSideViewUrl:null,
-        listOfImage:[]
+        listOfImage:[],
+        listOfKeyWords:[]
+        
     },
     
 ]
+
 export {listOfProjects,listOfTrendingProjects,listOfStaticProjects};

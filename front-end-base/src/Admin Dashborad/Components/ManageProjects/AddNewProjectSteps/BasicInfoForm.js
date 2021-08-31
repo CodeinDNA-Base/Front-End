@@ -23,18 +23,39 @@ function BasicInfoForm(props) {
 
     useEffect(()=>{
         //load data into hooks from store.
-        setProjectTitle(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.title);
-        setProjectDesc(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.description);
-        setEstimatedPrice(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.price);
+        setProjectTitle(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectTitle);
+        setProjectDesc(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectDesc);
+        setEstimatedPrice(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectEstimatedPrice);
         setListOfOptions_ForChipList(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.listOfKeyWords);
         setIsEditingEnabled(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.isEditingEnabled);
     },[])
-
+    
     const handelEditAndSaveChanges = ()=>{
+        // projectTitle:"Project 2",
+        // projectDesc:"Project desc",
+        // projectService:"Web App",
+        // projectSubService:"React Js",
+        // projectEstimatedPrice:70,
+        // projectPublishDate:"30-8-2021",
+        // projectThumbNail:"https://www.d
+        // listOfImage:[{}]
+        // clientSideViewUrl:""
+        // listOfKeyWords:[]
         if(!isEditingEnabled)
         {
             props.setIsLockClosed(true)
-            store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(projectTitle,projectDesc,estrimatedPrice,listOfOptions_ForChipList,true))
+            const data = {
+                projectTitle:projectTitle,
+                projectDesc:projectDesc,
+                projectService:"Add a service",
+                projectSubService:"Add a sub service",
+                projectEstimatedPrice:estrimatedPrice,
+                projectPublishDate:"Add date",
+                clientSideViewUrl:"Not added yet",
+                listOfKeyWords:listOfOptions_ForChipList,
+                isEditingEnabled:true
+            }
+            store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data))
         }
         else
         {

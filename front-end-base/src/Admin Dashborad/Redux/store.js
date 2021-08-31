@@ -27,7 +27,8 @@ const storeStructure=
                         projectPublishDate:null,
                         projectThumbNail:null,
                         clientSideViewUrl:null,
-                        listOfImage:[]
+                        listOfImage:[],
+                        listOfKeyWords:[]
                     },
                     {
                         projectTitle:null,
@@ -38,7 +39,9 @@ const storeStructure=
                         projectPublishDate:null,
                         projectThumbNail:null,
                         clientSideViewUrl:null,
-                        listOfImage:[]
+                        listOfImage:[],
+                        listOfKeyWords:[]
+                        
                     },
                     {
                         projectTitle:null,
@@ -49,7 +52,8 @@ const storeStructure=
                         projectPublishDate:null,
                         projectThumbNail:null,
                         clientSideViewUrl:null,
-                        listOfImage:[]
+                        listOfImage:[],
+                        listOfKeyWords:[]
                     },
                     {
                         projectTitle:null,
@@ -60,7 +64,8 @@ const storeStructure=
                         projectPublishDate:null,
                         projectThumbNail:null,
                         clientSideViewUrl:null,
-                        listOfImage:[]
+                        listOfImage:[],
+                        listOfKeyWords:[]
                     },
                 ],
                 lastUpdateDateAndTime:" Monday, 30 August 2021 (GMT+5) Time in Sukkur 9:11 pm",
@@ -72,9 +77,13 @@ const storeStructure=
 
                 AddNewProject:{
                     BasicInfo:{
-                        title:null,
-                        description:null,
-                        price:0,
+                        projectTitle:null,
+                        projectDesc:null,
+                        projectService:null,
+                        projectSubService:null,
+                        projectEstimatedPrice:null,
+                        projectPublishDate:null,
+                        clientSideViewUrl:null,
                         listOfKeyWords:[],
                         isEditingEnabled:false
                     },
