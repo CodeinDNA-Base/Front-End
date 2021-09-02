@@ -11,19 +11,33 @@ function Publish(props) {
     const handelPublishOnWebSite=()=>{
         alert("Just call the api to add this in database")
         const data = {
-            projectTitle:null,
-            projectDesc:null,
-            projectService:null,
-            projectSubService:null,
-            projectEstimatedPrice:null,
-            projectPublishDate:null,
-            clientSideViewUrl:null,
-            listOfKeyWords:[],
-            isEditingEnabled:false
+                serviceTitle:null,
+                serviceDesc:null,
+                listOfSubServices:[],
+                listOfKeyWords:[],
+                isEditingEnabled:false
         }
-        store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data));
-        store.dispatch(actions.update_media_ADD_NEW_PROJECTS(null,[],false));
-        
+        const data2 = {
+            isEditingEnabled:false,
+            Basic:{
+                packageDescription:null,
+                packagePrice:null,
+                listOfFeatures:[],
+            },
+            Standard:{
+                packageDescription:null,
+                packagePrice:null,
+                listOfFeatures:[],
+             },
+            Premium:{
+                packageDescription:null,
+                packagePrice:null,
+                listOfFeatures:[],
+             }
+        }
+        store.dispatch(actions.update_baic_info_ADD_NEW_SERVICE(data));
+        store.dispatch(actions.update_media_ADD_NEW_SERVICE(null,[],false));
+        store.dispatch(actions.update_packages_ADD_NEW_SERVICE(data2))
     }
     return (
         <div style={{position:'relative'}}>

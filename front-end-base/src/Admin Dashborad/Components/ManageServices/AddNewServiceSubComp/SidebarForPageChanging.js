@@ -56,6 +56,7 @@ function getSteps() {
   return [
     "Basic Info",
     "Media",
+    "Packages",
     "Preview",
     "Publish",
   ];
@@ -68,8 +69,10 @@ function getStepContent(step) {
     case 1:
       return `Add/Change media of project`;
     case 2:
-      return `This is how it will be shown on website`;
+        return `Set up packages`;
     case 3:
+      return `This is how it will be shown on website`;
+    case 4:
       return `Get Notified for activities on your account.`;
     default:
       return "Publish it";

@@ -31,6 +31,24 @@ export default function reducer(state=storeStructure,action) {
             return draft;
         });
         break;
+
+        case actions.UPDATE_BASIC_INFO_add_new_service:
+        return produce(state,draft=>{
+                        // serviceTitle:null,
+                        // serviceDesc:null,
+                        // listOfSubServices:[],
+                        // listOfKeyWords:[],
+                        // isEditingEnabled:false
+            draft.ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceTitle=action.payLoad.serviceData.serviceTitle;
+            draft.ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceDesc=action.payLoad.serviceData.serviceDesc;
+            draft.ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfSubServices=action.payLoad.serviceData.listOfSubServices;
+            draft.ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfKeyWords=action.payLoad.serviceData.listOfKeyWords;
+            draft.ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.isEditingEnabled=action.payLoad.serviceData.isEditingEnabled;
+            return draft;
+        });
+        break;
+        
+
         case actions.UPDATE_MEDIA_add_new_projects:
      
             return produce(state,draft=>{
@@ -41,6 +59,18 @@ export default function reducer(state=storeStructure,action) {
             });
             
             break;
+        case actions.UPDATE_MEDIA_add_new_service:
+     
+                return produce(state,draft=>{
+                    draft.ServiceAndSubServiceStore.Draft.CreateNewService.Media.thumbnailImageUri=action.payLoad.thumbnailImageUri;
+                    draft.ServiceAndSubServiceStore.Draft.CreateNewService.Media.listOfImages=action.payLoad.listOfImages;
+                    draft.ServiceAndSubServiceStore.Draft.CreateNewService.Media.isEditingEnabled=action.payLoad.isEditingEnabled;
+                    return draft;
+                });
+                
+            break;
+            
+            
         case actions.ADD_PROJECT_IN_STATIC_LIST_OF_PROJECTS_set_trending_projects:
 
         return produce(state,draft=>{
@@ -64,6 +94,48 @@ export default function reducer(state=storeStructure,action) {
             return draft
         })
             break;
+
+        case actions.UPDATE_PACKAGES_add_new_service:
+            // Packages:{
+            //     Basic:{
+            //         packageDescription:null,
+            //         packagePrice:0,
+            //         listOfFeatures:[],
+            //     },
+            //     Standard:{
+            //         packageDescription:null,
+            //         packagePrice:0,
+            //         listOfFeatures:[],
+            //     },
+            //     Premium:{
+            //         packageDescription:null,
+            //         packagePrice:0,
+            //         listOfFeatures:[],
+            //     }
+            // }
+
+            return produce(state,draft=>{
+
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.packageDescription=action.payLoad.packagContainer.Basic.packageDescription;
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.packagePrice=action.payLoad.packagContainer.Basic.packagePrice;
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.listOfFeatures=action.payLoad.packagContainer.Basic.listOfFeatures;
+                
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.packageDescription=action.payLoad.packagContainer.Standard.packageDescription;
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.packagePrice=action.payLoad.packagContainer.Standard.packagePrice;
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.listOfFeatures=action.payLoad.packagContainer.Standard.listOfFeatures;
+                
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.packageDescription=action.payLoad.packagContainer.Premium.packageDescription;
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.packagePrice=action.payLoad.packagContainer.Premium.packagePrice;
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.listOfFeatures=action.payLoad.packagContainer.Premium.listOfFeatures;
+                
+                draft.ServiceAndSubServiceStore.Draft.CreateNewService.Packages.isEditingEnabled=action.payLoad.packagContainer.isEditingEnabled;
+                
+                
+                return draft
+            })
+
+            break;
+
         default:
             return  produce(state,draft=> draft)
             break;

@@ -26,17 +26,17 @@ function Media(props) {
 
     useEffect(()=>{
         //Load data from store into hooks
-        setThumbnailImage(store.getState().ProjectsStore.Drafts.AddNewProject.Media.thumbnailImageUri);
-        setListOfSelectedImages(store.getState().ProjectsStore.Drafts.AddNewProject.Media.listOfImages);
-        setIsEditingEnabled(store.getState().ProjectsStore.Drafts.AddNewProject.Media.isEditingEnabled);
-        console.log(store.getState())
+        setThumbnailImage(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.thumbnailImageUri);
+        setListOfSelectedImages(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.listOfImages);
+        setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.isEditingEnabled);
+        
     },[])
 
     const handelEditAndSaveChanges = ()=>{
         if(!isEditingEnabled)
         {
             props.setIsLockClosed(true)
-            store.dispatch(actions.update_media_ADD_NEW_PROJECTS(thumbnailImage,listOfSelectedImages,true));
+            store.dispatch(actions.update_media_ADD_NEW_SERVICE(thumbnailImage,listOfSelectedImages,true));
         }
         else
         {

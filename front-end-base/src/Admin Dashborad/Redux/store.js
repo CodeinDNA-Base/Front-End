@@ -100,6 +100,40 @@ const storeStructure=
             ListOfServicesLoadedFromAPI:{
                 data:listOfServices,
                 lastDataUpdateTime:null,
+            },
+            Draft:{
+                CreateNewService:{
+                    BasicInfo:{
+                        serviceTitle:null,
+                        serviceDesc:null,
+                        listOfSubServices:[],
+                        listOfKeyWords:[],
+                        isEditingEnabled:false
+                    },
+                    Media:{
+                        thumbnailImageUri:null,
+                        listOfImages:[],
+                        isEditingEnabled:false
+                    },
+                    Packages:{
+                        isEditingEnabled:false,
+                        Basic:{
+                            packageDescription:null,
+                            packagePrice:0,
+                            listOfFeatures:[],
+                        },
+                        Standard:{
+                            packageDescription:null,
+                            packagePrice:0,
+                            listOfFeatures:[],
+                        },
+                        Premium:{
+                            packageDescription:null,
+                            packagePrice:0,
+                            listOfFeatures:[],
+                        }
+                    }
+                }
             }
         }
         

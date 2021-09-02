@@ -10,14 +10,15 @@ import Publish from './AddNewServiceSubComp/Publish';
 
 import {lightBorder} from '../../../Theme/borders'
 import { WraningAlert } from '../Support/Alerts';
+import Packages from './AddNewServiceSubComp/Packages';
 
 function AddNewServiceTab(props) {
 
   const classes = useStyles();
   const [isLockClosed,setIsLockClosed]=useState(false);
   const [isModelOpen, setIsModelOpen] = useState(false);
-  
   const [currentPanel,setCurrentPanel]=useState(<BasicInfoForm setIsLockClosed={setIsLockClosed}/>);
+  
   
   const setCurrentStepNumber = (value)=>{
   
@@ -31,10 +32,14 @@ function AddNewServiceTab(props) {
           setCurrentPanel(<Media setIsLockClosed={setIsLockClosed}/>)
           break;
         case 2:
-          setCurrentPanel(<Preview/>)
+          setIsLockClosed(false);
+          setCurrentPanel(<Packages setIsLockClosed={setIsLockClosed}/>)
           break;
         case 3:
-          setCurrentPanel(<Publish/>)
+          setCurrentPanel(<Preview setIsLockClosed={setIsLockClosed}/>)
+          break;
+        case 4:
+          setCurrentPanel(<Publish setIsLockClosed={setIsLockClosed}/>)
           break;  
         default:
           setCurrentPanel(<h1>Please set a existing panel</h1>)

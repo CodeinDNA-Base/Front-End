@@ -26,13 +26,28 @@ function BasicInfoForm(props) {
     
     useEffect(()=>{
         //load data into hooks from store.
-       
+        setServiceTitle(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceTitle);
+        setServiceDesc(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceDesc);
+        setlistOfOptions_ForChipList_OfSearchKeyWords(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfKeyWords);
+        setlistOfOptions_ForChipList_OfSubServices(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfSubServices);
+        setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.isEditingEnabled);
+    
     },[])
     
     const handelEditAndSaveChanges = ()=>{
         if(!isEditingEnabled)
         {
-           
+
+            props.setIsLockClosed(true);  
+            // Updating data in redux store..
+            const data ={
+                serviceTitle:serviceTitle,
+                serviceDesc:serviceDesc,
+                listOfSubServices:listOfOptions_ForChipList_OfSubServices,
+                listOfKeyWords:listOfOptions_ForChipList_OfSearchKeyWords,
+                isEditingEnabled:true
+            }
+            store.dispatch(actions.update_baic_info_ADD_NEW_SERVICE(data));
         }
         else
         {
