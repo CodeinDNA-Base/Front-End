@@ -10,14 +10,16 @@ import {
   UserDashboardViewOrder,
   PostRequestFromMobileUserDashboard,
   UserDashboardShowPreviousPosts,
-  UserDashboardViewPostDetails
+  UserDashboardViewPostDetails,
 } from "./UserDashboardContainer";
 import { SearchProjectsContainer } from "./SearchProjectsContainer";
-
+import AuthenticationContainer from "./AuthenticationContainer";
+import AdminDashboardContainer from "./AdminDashboardContainer";
+import SubServicesContainer from "./SubServicesContainer";
+import ContactUsContainer from "./ContactUsContainer";
+import AboutUsContainer from "./AboutUsContainer";
 function Entrance(props) {
-
   return (
-
     <Router onUpdate={() => window.scrollTo(0, 0)}>
       <Switch>
         <Route exact path="/" exact>
@@ -38,10 +40,26 @@ function Entrance(props) {
         <Route exact path="/orders" component={UserDashboardOrders} />
         <Route exact path="/messaging" component={UserDashboardChat} />
         <Route exact path="/vieworder" component={UserDashboardViewOrder} />
-        <Route exact path="/postrequest" component={PostRequestFromMobileUserDashboard} />
-        <Route exact path="/previousposts" component={UserDashboardShowPreviousPosts} />
-        <Route exact path="/viewpost" component={UserDashboardViewPostDetails} />    
-
+        <Route
+          exact
+          path="/postrequest"
+          component={PostRequestFromMobileUserDashboard}
+        />
+        <Route
+          exact
+          path="/previousposts"
+          component={UserDashboardShowPreviousPosts}
+        />
+        <Route
+          exact
+          path="/viewpost"
+          component={UserDashboardViewPostDetails}
+        />
+        <Route exact path="/Login" component={AuthenticationContainer} />
+        <Route exact path="/admin" component={AdminDashboardContainer} />
+        <Route exact path="/subServices" component={SubServicesContainer} />
+        <Route exact path="/contactUs" component={ContactUsContainer} />
+        <Route excat path='/About' component={AboutUsContainer} />
       </Switch>
     </Router>
   );

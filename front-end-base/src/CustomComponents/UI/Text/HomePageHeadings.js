@@ -16,9 +16,19 @@ const HeadingStyles = makeStyles(() => ({
       isDesktopOrLaptopOrTabletScreen
         ? Headingfonts.medium
         : Headingfonts.extraExtraLarge,
+    fontWeight: ({ isDesktopOrLaptopOrTabletScreen }) =>
+    isDesktopOrLaptopOrTabletScreen && 'bolder' ,
     color: ({ titleColor }) => titleColor,
   },
-  // HomePageComponentsHeadingDescription: {},
+  HomePageComponentsHeadingDescription: {
+    font: ({ isDesktopOrLaptopOrTabletScreen }) =>
+    isDesktopOrLaptopOrTabletScreen
+      ? TextFonts.extraSmall
+      : TextFonts.large,
+  color: ({ descriptionColor}) => descriptionColor,
+  fontWeight: ({ isDesktopOrLaptopOrTabletScreen }) =>
+  isDesktopOrLaptopOrTabletScreen && 'bolder' ,
+  },
 
 }));
 

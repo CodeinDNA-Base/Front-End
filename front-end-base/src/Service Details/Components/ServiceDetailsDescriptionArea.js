@@ -4,7 +4,7 @@ import './Styles/StyleSheet.css'
 import { Grid,useMediaQuery,withWidth,Hidden} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Rating from '@material-ui/lab/Rating';
-import strings from '../Strings/Strings'
+import {strings} from '../Strings/Strings'
 import ServiceImagesCarousel from './ServiceImagesCarousel';
 import PackageComparator from './PackageComparator';
 import ServiceReviews from './ServiceReviews';
@@ -68,7 +68,7 @@ function ServiceDetailsDescriptionArea(props) {
                             {/* Description */}
 
                             <div  className={classes.HeadingContainer} ><div className="HeadingFonts" >Description</div></div> 
-                            <div className={classes.ParaphContainer}> <div className="ParaphFonts">{strings.sampleText}</div></div>   
+                            <div className={classes.ParaphContainer}> <div className="ParaphFonts">{'hello'}</div></div>   
                             </div>
                             <Hidden only={['sm', 'lg','md']}>
 
