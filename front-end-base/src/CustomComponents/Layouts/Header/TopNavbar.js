@@ -13,19 +13,24 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import LogoutIcon from "@material-ui/icons/ExitToApp";
 import { Divider } from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
 import { Hidden } from "@material-ui/core";
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
-import Logo from '../../Theme/Icons/png/logo.png'
-import { ListItemAvatar } from "@material-ui/core";
-import Avatar from "antd/lib/avatar/avatar";
+import { Avatar } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import colors from "../../../Theme/colors";
+import { TextFonts, Headingfonts } from "../../../Theme/fonts";
+import { useMediaQuery } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
- 
+  menuBarItem: {
+    color: colors.white,
+    marginLeft: "2rem",
+    textDecoration: "none",
+    font: Headingfonts.extraSmall,
+  },
   title: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
@@ -71,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionDesktop: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       display: "flex",
     },
   },
@@ -81,10 +86,24 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  avatar: {
+    marginTop: "0.5rem",
+    cursor: "pointer",
+  },
 }));
 
-export default function PrimaryNavbar() {
-  const classes = useStyles();
+export default function TopNavbar({
+  navbarMenuOptions,
+  isAvatar,
+  navbarAvatar,
+  isNavBarIconButtons,
+  navbarIconButtons,
+  drawerMenuOptions,
+  darwerMenuExtraOptions,
+  drawerListItemAvatar,
+}) {
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -107,13 +126,17 @@ export default function PrimaryNavbar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  
+
   return (
     <div className={classes.grow}>
       <AppBar position="static" style={{ backgroundColor: "#011c38" }}>
         <Toolbar>
           <Hidden only={["lg"]}>
-            <DrawerComponent />
+            <DrawerComponent
+              drawerMenuOptions={drawerMenuOptions}
+              darwerMenuExtraOptions={darwerMenuExtraOptions}
+              drawerListItemAvatar={drawerListItemAvatar}
+            />
           </Hidden>
           <Typography className={classes.title} variant="h6" noWrap>
             CODE IN DNA
@@ -133,27 +156,43 @@ export default function PrimaryNavbar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="About" color="inherit">
-              <Typography className={classes.title} variant="h6" noWrap>
-                About
-              </Typography>
-            </IconButton>
-            <IconButton aria-label="Contact" color="inherit">
-              <Typography className={classes.title} variant="h6" noWrap>
-                Contact
-              </Typography>
-            </IconButton>
-            <IconButton aria-label="Login" color="inherit">
-              <Typography className={classes.title} variant="h6" noWrap>
-                Login
-              </Typography>
-            </IconButton>
-            <hr />
-            <IconButton aria-label="Register" color="inherit">
-              <Typography className={classes.title} variant="h6" noWrap>
-                Register
-              </Typography>
-            </IconButton>
+            <Box spacing={2} m={2}>
+              {navbarMenuOptions.map(({ title, route, onClick }) => (
+                <Link to={route} className={classes.menuBarItem}>
+                  {title}
+                </Link>
+              ))}
+            </Box>
+
+            {isNavBarIconButtons &&
+              navbarIconButtons.map(
+                ({
+                  ariaLabel,
+                  ariaHaspopup,
+                  onClick,
+                  color,
+                  icon,
+                  subMenu,
+                }) => (
+                  <IconButton
+                    aria-label={ariaLabel}
+                    aria-haspopup={ariaHaspopup}
+                    onClick={onClick}
+                    color={color}
+                  >
+                    {icon}
+                    {subMenu}
+                  </IconButton>
+                )
+              )}
+
+            {isAvatar && (
+              <Avatar
+                className={classes.avatar}
+                src={navbarAvatar.src}
+                onClick={navbarAvatar.onClick}
+              />
+            )}
           </div>
         </Toolbar>
       </AppBar>
@@ -172,26 +211,17 @@ const drawerStyles = makeStyles({
     width: "4rem",
     height: "4rem",
     margin: "auto",
+    cursor: "pointer",
   },
   profileInfo: {
     marginLeft: "1rem",
   },
 });
-function DrawerComponent() {
-  const drawerOptions = [
-    {
-      optionTitle: "Contact",
-    },
-    {
-      optionTitle: "About",
-    },
-    {
-      optionTitle: "Login",
-    },
-    {
-      optionTitle: "Register",
-    },
-  ];
+function DrawerComponent({
+  drawerMenuOptions,
+  darwerMenuExtraOptions,
+  drawerListItemAvatar,
+}) {
   const classes = drawerStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -221,45 +251,26 @@ function DrawerComponent() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        <ListItem>
-		<ListItemAvatar>
-          <Avatar
-            src={Logo}
-            onClick={() => {
-              alert("Display Full Image of User");
-            }}
-            style={{ cursor: "pointer"}}
-          />
-        </ListItemAvatar>
-         
-        </ListItem>
-      </List>
+      <List>{drawerListItemAvatar}</List>
 
       <Divider />
       <List>
-        {drawerOptions.map(({ optionTitle }) => (
-          <ListItem
-            button
-            key={optionTitle}
-            onClick={() => handleDrawerOptionClick(optionTitle)}
-          >
-            <ListItemText primary={optionTitle} />
+        {drawerMenuOptions.map(({ title, route, icon, onClick }) => (
+          <ListItem button key={title} onClick={() => onClick(title)}>
+            {icon !== undefined && <ListItemIcon>{icon}</ListItemIcon>}
+
+            <ListItemText primary={title} />
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        <ListItem
-          button
-          key="Advanced Search"
-          onClick={() => handleDrawerOptionClick("Advanced Search")}
-        >
-          <ListItemIcon>
-            <SearchRoundedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Advanced Search" />
-        </ListItem>
+        {darwerMenuExtraOptions.map(({ title, route, icon, onClick }) => (
+          <ListItem button key={title} onClick={() => onClick(title)}>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText primary={title} />
+          </ListItem>
+        ))}
       </List>
     </div>
   );

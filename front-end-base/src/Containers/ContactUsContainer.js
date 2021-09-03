@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Header from "../Home/Components/Header";
 import { useWindowDimensions } from "../Home/Components/WindowDimensions";
 import { AppBar, makeStyles } from "@material-ui/core";
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
 import colors, { ColorGradient } from "../Theme/colors";
-import ContactUsGlobalForm from '../Home/Components/ContactUsGlobalForm'
+import ContactUsGlobalForm from "../Home/Components/ContactUsGlobalForm";
+import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -16,10 +16,11 @@ const useStyles = makeStyles(() => ({
   footer: {
     marginTop: "10%",
   },
-  
-  contactForm:{
-      marginTop:isDesktopOrLaptopOrTabletScreen=>isDesktopOrLaptopOrTabletScreen ? '10%' : '35%'
-  }
+
+  contactForm: {
+    marginTop: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? "10%" : "35%",
+  },
 }));
 
 function ContactUsContainer(props) {
@@ -56,15 +57,24 @@ function ContactUsContainer(props) {
   }, []);
 
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
-
+  // navbr options
+  const navbarMenuOptions = [
+    { title: "About", route: "about" },
+    { title: "Conatct", route: "contact" },
+    { title: "Login", route: "login" },
+    { title: "Register", route: "register" },
+  ];
+   
   return (
     <div className={classes.root}>
       {/* Header */}
       <Grid item xs={12}>
         <AppBar>
-          <Header
+          <CustomNavbar
             handelTabIndex={handelTabIndex}
             packageContainerStickyNess={packageContainerStickyNess}
+            navbarMenuOptions={navbarMenuOptions}
+            isNavbarTabs={false}
           />
         </AppBar>
       </Grid>

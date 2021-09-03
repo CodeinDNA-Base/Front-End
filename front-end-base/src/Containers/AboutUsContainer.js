@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Header from "../Home/Components/Header";
 import { useWindowDimensions } from "../Home/Components/WindowDimensions";
 import { AppBar, makeStyles } from "@material-ui/core";
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
 import colors, { ColorGradient } from "../Theme/colors";
 import AboutUsMenu from "../Home/Components/AboutUsMenu";
+import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -68,18 +68,25 @@ function AboutUsContainer(props) {
   }, []);
 
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
-
+  const navbarMenuOptions = [
+    { title: "About", route: "about" },
+    { title: "Conatct", route: "contact" },
+    { title: "Login", route: "login" },
+    { title: "Register", route: "register" },
+  ];
   return (
     <div className={classes.root}>
       {/* Header */}
-      {/* <Grid item xs={12}>
+      <Grid item xs={12}>
         <AppBar>
-          <Header
+          <CustomNavbar
             handelTabIndex={handelTabIndex}
             packageContainerStickyNess={packageContainerStickyNess}
+            navbarMenuOptions={navbarMenuOptions}
+            isNavbarTabs={false}
           />
         </AppBar>
-      </Grid> */}
+      </Grid>
 
       <Grid container justifyContent="center">
         <AboutUsMenu />

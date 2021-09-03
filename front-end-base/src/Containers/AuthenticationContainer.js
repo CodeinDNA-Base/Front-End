@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { positions } from "@material-ui/system";
-import LatestProjects from "../Home/Components/LatestProjects";
-// import { compose, spacing, palette, breakpoints } from "@material-ui/system";
-// import styled from "styled-components";
-import Services from "../Home/Components/Services";
-import MainContainer from "../Home/Components/MainContainer";
-import ExploreArea from "../Home/Components/ExploreArea";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import MotivationalArea from "../Home/Components/MotivationalArea";
-import Header from "../Home/Components/Header";
-import UserReview from "../Home/Components/UserReviews";
-import Technologies from "../Home/Components/Technologies";
-import WhatWeOffer from "../Home/Components/WhatWeOffer";
 import { useWindowDimensions } from "../Home/Components/WindowDimensions";
 import { AppBar, makeStyles } from "@material-ui/core";
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
@@ -22,8 +9,7 @@ import colors, { ColorGradient } from "../Theme/colors";
 import LoginForm, { PasswordForm } from "../Home/Components/LoginForm";
 import Register from "../Home/Components/Register";
 import RegisterDetails from "../Home/Components/RegisterDetails";
-import { CustomCard } from "../CustomComponents/UI/Support/CustomCard";
-import ServicePage from "../Home/Components/ServicesPage";
+import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -79,15 +65,22 @@ function AuthenticationContainer(props) {
   }, []);
 
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
-
+  const navbarMenuOptions = [
+    { title: "About", route: "about" },
+    { title: "Conatct", route: "contact" },
+    { title: "Login", route: "login" },
+    { title: "Register", route: "register" },
+  ];
   return (
     <div className={classes.root}>
       {/* Header */}
       <Grid item xs={12}>
         <AppBar>
-          <Header
+          <CustomNavbar
             handelTabIndex={handelTabIndex}
             packageContainerStickyNess={packageContainerStickyNess}
+            navbarMenuOptions={navbarMenuOptions}
+            isNavbarTabs={false}
           />
         </AppBar>
       </Grid>

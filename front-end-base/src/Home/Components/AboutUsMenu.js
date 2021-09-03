@@ -85,7 +85,7 @@ export default function AboutUsMenu() {
           textColor="primary"
           variant="scrollable"
           scrollButtons="auto"
-          aria-label="scrollable auto tabs example"
+          aria-label="About Us Menu"
         >
           <Tab label="About Us" {...a11yProps(0)} />
           <Tab label="Our Team" {...a11yProps(1)} />

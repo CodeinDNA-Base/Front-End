@@ -55,11 +55,12 @@ function Entrance(props) {
           path="/viewpost"
           component={UserDashboardViewPostDetails}
         />
-        <Route exact path="/Login" component={AuthenticationContainer} />
+        <Route exact path="/login" component={AuthenticationContainer} />
+        <Route exact path="/register" component={AuthenticationContainer} />
         <Route exact path="/admin" component={AdminDashboardContainer} />
         <Route exact path="/subServices" component={SubServicesContainer} />
-        <Route exact path="/contactUs" component={ContactUsContainer} />
-        <Route excat path='/About' component={AboutUsContainer} />
+        <Route exact path="/contact" component={ContactUsContainer} />
+        <Route excat path='/about' component={AboutUsContainer} />
       </Switch>
     </Router>
   );
