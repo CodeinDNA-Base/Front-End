@@ -15,6 +15,7 @@ import { LinkedAccounts } from "../User Dashboard/Components/LinkedAccounts";
 import { OngoingOrders } from "../User Dashboard/Components/OngoingOrders";
 import { TrendingServices } from "../User Dashboard/Components/TrendingServices";
 import { RecentlyViewedServices } from "../User Dashboard/Components/RecentlyViewedServices";
+import {RecentlyViewedProjects} from "../User Dashboard/Components/RecentlyViewedProjects";
 
 //CSS
 import "../User Dashboard/Components/Styles/FooterStyles.css";
@@ -171,10 +172,12 @@ const DashboardHome = () => {
           <Box
             ml={isDesktopOrLaptopOrTabletScreen ? 8 : 0}
             mt={4}
-            border={1}
             p={0.5}
           >
             <RecentlyViewedServices />
+            <Box mt={4}>
+            <RecentlyViewedProjects />
+            </Box>
           </Box>
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
