@@ -2,11 +2,10 @@ import { Divider } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import BasicInfoForm from './BasicInfoForm';
 import Media from './Media';
-import {actions,store} from '../../../Redux/ReduxResourceExporter'
 import Packages from './Packages';
 function Preview(props) {
     useEffect(()=>{
-        console.log(store.getState())
+        // console.log(store.getState())
     })
     return (
         <div>

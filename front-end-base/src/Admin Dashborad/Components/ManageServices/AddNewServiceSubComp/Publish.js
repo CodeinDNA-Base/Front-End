@@ -6,38 +6,37 @@ import colors from '../../../../Theme/colors';
 import { Headingfonts } from '../../../../Theme/fonts';
 import { Headings } from '../../Support/Headings';
 import {lightBorder} from '../../../../Theme/borders'
-import {store,actions} from '../../../Redux/ReduxResourceExporter'
 function Publish(props) {
     const handelPublishOnWebSite=()=>{
         alert("Just call the api to add this in database")
-        const data = {
-                serviceTitle:null,
-                serviceDesc:null,
-                listOfSubServices:[],
-                listOfKeyWords:[],
-                isEditingEnabled:false
-        }
-        const data2 = {
-            isEditingEnabled:false,
-            Basic:{
-                packageDescription:null,
-                packagePrice:null,
-                listOfFeatures:[],
-            },
-            Standard:{
-                packageDescription:null,
-                packagePrice:null,
-                listOfFeatures:[],
-             },
-            Premium:{
-                packageDescription:null,
-                packagePrice:null,
-                listOfFeatures:[],
-             }
-        }
-        store.dispatch(actions.update_baic_info_ADD_NEW_SERVICE(data));
-        store.dispatch(actions.update_media_ADD_NEW_SERVICE(null,[],false));
-        store.dispatch(actions.update_packages_ADD_NEW_SERVICE(data2))
+        // const data = {
+        //         serviceTitle:null,
+        //         serviceDesc:null,
+        //         listOfSubServices:[],
+        //         listOfKeyWords:[],
+        //         isEditingEnabled:false
+        // }
+        // const data2 = {
+        //     isEditingEnabled:false,
+        //     Basic:{
+        //         packageDescription:null,
+        //         packagePrice:null,
+        //         listOfFeatures:[],
+        //     },
+        //     Standard:{
+        //         packageDescription:null,
+        //         packagePrice:null,
+        //         listOfFeatures:[],
+        //      },
+        //     Premium:{
+        //         packageDescription:null,
+        //         packagePrice:null,
+        //         listOfFeatures:[],
+        //      }
+        // }
+        // store.dispatch(actions.update_baic_info_ADD_NEW_SERVICE(data));
+        // store.dispatch(actions.update_media_ADD_NEW_SERVICE(null,[],false));
+        // store.dispatch(actions.update_packages_ADD_NEW_SERVICE(data2))
     }
     return (
         <div style={{position:'relative'}}>

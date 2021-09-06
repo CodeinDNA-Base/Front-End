@@ -9,7 +9,6 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import {lightBorder} from '../../../../Theme/borders'
 import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../Support/TextFields';
 import produce from 'immer';
-import {actions,store} from '../../../Redux/ReduxResourceExporter'
 import { ArrowBackIos, CloudUpload } from '@material-ui/icons';
 import ProjectSelectionr from './ProjectSelectionr';
 import ListOfAllProjects from '../ViewAllProjectsSubComponents/ListOfAllProjects';
@@ -33,23 +32,23 @@ function SetAndUpdateProjectsLists(props) {
 
     useEffect(()=>{
 
-        setlistOfStaticProjects(store.getState().ProjectsStore.ListOfStaticProjects.data);
-        setLastUpdateTimeAndDate(store.getState().ProjectsStore.ListOfStaticProjects.lastUpdateDateAndTime);
-        setLastChoosedDisplayMode(store.getState().ProjectsStore.ListOfStaticProjects.lastChoosedDisplayMode);
-        setlistOfSelectedItems(store.getState().ProjectsStore.listOfDynamicProjectsList);
-        setIsDataLoadedFromRedux(true);
+        // setlistOfStaticProjects(store.getState().ProjectsStore.ListOfStaticProjects.data);
+        // setLastUpdateTimeAndDate(store.getState().ProjectsStore.ListOfStaticProjects.lastUpdateDateAndTime);
+        // setLastChoosedDisplayMode(store.getState().ProjectsStore.ListOfStaticProjects.lastChoosedDisplayMode);
+        // setlistOfSelectedItems(store.getState().ProjectsStore.listOfDynamicProjectsList);
+        // setIsDataLoadedFromRedux(true);
         
     },[])
 
     useEffect(()=>{
-        setlistOfStaticProjects(store.getState().ProjectsStore.ListOfStaticProjects.data);
+        // setlistOfStaticProjects(store.getState().ProjectsStore.ListOfStaticProjects.data);
     },[refresher]);
 
     const handelEditAndSaveChanges = ()=>{
         if(!isEditingEnabled){
             alert("Until you publish it, these are loacal changes.")
             props.setIsLockClosed(true);            
-            store.dispatch(actions.add_projects_in_dynamic_projects_list_SET_TRENDING_PROJECTS(listOfSelectedItems))
+            // store.dispatch(actions.add_projects_in_dynamic_projects_list_SET_TRENDING_PROJECTS(listOfSelectedItems))
         }
         setIsEditingEnabled((prev)=>{
             return !(prev)
@@ -83,20 +82,20 @@ function SetAndUpdateProjectsLists(props) {
         // alert(selectedValue);
         switch (selectedProjectIndex) {
             case 0:
-                store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,0));
+                // store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,0));
                 handePageSwitchFotSataticProjectsSelector();
                 break;
             case 1:
-                store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,1));
+                // store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,1));
                 handePageSwitchFotSataticProjectsSelector();
                 break;
             case 2:
-                store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,2));
+                // store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,2));
                 handePageSwitchFotSataticProjectsSelector();
               
                 break;
             case 3:
-                store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,3));
+                // store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,3));
                 handePageSwitchFotSataticProjectsSelector();
                 
                 break;

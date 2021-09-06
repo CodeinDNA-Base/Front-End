@@ -1,0 +1,223 @@
+import { createSlice } from "@reduxjs/toolkit";
+import produce from 'immer'
+import { 
+        loadAccountsOverViewChartData,loadOrdersOverViewChartData,loadServiceOverViewChartData,
+        loadSummuryData,loadRatingsData
+    } from "./Thunks";
+const initialState={
+    earnings:0,
+    avgSellingPrice:0,
+    ordersCompleted:0,
+    onlineUsers:0,
+    onlineTeamMembers:0,
+    earnedInThisMonth:0,
+    ordersOverViewChartData:[],
+    accountsOverViewChartData:[],
+    serviceOverViewChartData:[],
+    ratings:{
+        allTimeRatings:0,
+        fiveStarRating:0,
+        fourStarRating:0,
+        threeStarRating:0,
+        twoStarRating:0,
+        oneStarRating:0,
+        communicationWithSeller:0
+        serviceAsDescribed:0,
+        buyAgainOrRecommended:0,
+    }
+    ratedOrdersPercentage:0,
+    
+    isLoading_LoadAccountsOverViewChartData: false,
+    hasError_LoadAccountsOverViewChartData: false,
+
+    isLoading_LoadOrdersOverViewChartData: false,
+    hasError_LoadOrdersOverViewChartData: false,
+
+    isLoading_LoadServiceOverViewChartData: false,
+    hasError_LoadServiceOverViewChartData: false,
+
+    isLoading_LoadSummuryData: false,
+    hasError_LoadSummuryData: false,
+
+    isLoading_LoadRatingsData: false,
+    hasError_LoadRatingsData: false,
+
+
+}
+
+const options = {
+    name:"homePanel",
+    initialState:initialState,
+    reducer:{
+
+      
+        // Add
+        // { label: "Verified/Active Accounts",  y: 10  },
+
+        addOrdersOverViewChartData:(state,action)=>{
+            return produce(state,draft=>{
+               return draft.ordersOverViewChartData.push(action.payload)
+            })
+        },
+        addAccountsOverViewChartData:(state,action)=>{
+            return produce(state,draft=>{
+                return draft.accountsOverViewChartData.push(action.payload)
+            })
+        },
+        addServiceOverViewChartData:(state,action)=>{
+            return produce(state,draft=>{
+                return draft.serviceOverViewChartData.push(action.payload)
+            })
+        },
+
+        //Remove
+        updateOrdersOverViewChartData:(state,action)=>{
+            return produce(state,draft=>{
+               return draft.ordersOverViewChartData.map((item)=>{
+                   if(item.id===action.id)
+                   {
+                       return action.payload
+                   }
+                   else{
+                       return item;
+                   }
+               })
+            })
+        },
+        //update
+        updateAccountsOverViewChartData:(state,action)=>{
+            return produce(state,draft=>{
+                return draft.accountsOverViewChartData.map((item)=>{
+                    if(item.id===action.id)
+                    {
+                        return action.payload
+                    }
+                    else{
+                        return item;
+                    }
+                })
+            })
+        },
+        updateServiceOverViewChartData:(state,action)=>{
+            return produce(state,draft=>{
+                return draft.serviceOverViewChartData.map((item)=>{
+                    if(item.id===action.id)
+                    {
+                        return action.payload
+                    }
+                    else{
+                        return item;
+                    }
+                })
+            })
+        },
+
+        //update ratings.
+        updateRatings:(state,action)=>{
+            return produce(state,draft=>{
+                draft.ratings = action.payload
+            })
+        }
+
+        //update completed orders %.
+        updateRatedOrdersPercentage:(state,action)=>{
+            return produce(state,draft=>{
+                draft.ratedOrdersPercentage = action.payload
+            })
+        }
+        
+        },
+
+        extraReducers: {
+            
+            // loadAccountsOverViewChartData
+
+            [loadAccountsOverViewChartData.pending]: (state, action) => {
+              state.isLoading_LoadAccountsOverViewChartData = true;
+              state.hasError_LoadAccountsOverViewChartData = false;
+            },
+            [loadAccountsOverViewChartData.fulfilled]: (state, action) => {
+              state.accountsOverViewChartData = action.payload;
+              state.isLoading_LoadAccountsOverViewChartData = false;
+              state.hasError_LoadAccountsOverViewChartData = false;
+            },
+            [loadAccountsOverViewChartData.rejected]: (state, action) => {
+              state.isLoading_LoadAccountsOverViewChartData = false;
+              state.hasError_LoadAccountsOverViewChartData = true;
+            }
+
+            // loadOrdersOverViewChartData
+            
+            [loadOrdersOverViewChartData.pending]: (state, action) => {
+                state.isLoading_LoadOrdersOverViewChartData = true;
+                state.hasError_LoadOrdersOverViewChartData = false;
+              },
+              [loadOrdersOverViewChartData.fulfilled]: (state, action) => {
+                state.accountsOverViewChartData = action.payload;
+                state.isLoading_LoadOrdersOverViewChartData = false;
+                state.hasError_LoadOrdersOverViewChartData = false;
+              },
+              [loadOrdersOverViewChartData.rejected]: (state, action) => {
+                state.isLoading_LoadAccountsOverViewChartData = false;
+                state.hasError_LoadOrdersOverViewChartData = true;
+              }
+            
+            // loadAccountsOverViewChartData
+
+            [loadServiceOverViewChartData.pending]: (state, action) => {
+                state.isLoading_LoadServiceOverViewChartData = true;
+                state.hasError_LoadServiceOverViewChartData = false;
+              },
+              [loadServiceOverViewChartData.fulfilled]: (state, action) => {
+                state.serviceOverViewChartData = action.payload;
+                state.isLoading_LoadServiceOverViewChartData = false;
+                state.hasError_LoadServiceOverViewChartData = false;
+              },
+              [loadServiceOverViewChartData.rejected]: (state, action) => {
+                state.isLoading_LoadServiceOverViewChartData = false;
+                state.hasError_LoadServiceOverViewChartData = true;
+              }
+            // loadSummuryData
+
+            [loadSummuryData.pending]: (state, action) => {
+                state.isLoading_LoadSummuryData = true;
+                state.hasError_LoadSummuryData = false;
+              },
+              [loadSummuryData.fulfilled]: (state, action) => {
+                
+                state.earnings = action.payload.earnings
+                state.avgSellingPrice = action.payload.avgSellingPrice
+                state.ordersCompleted = action.payload.ordersCompleted
+                state.onlineUsers = action.payload.onlineUsers
+                state.onlineTeamMembers = action.payload.onlineTeamMembers
+                state.earnedInThisMonth = action.payload.earnedInThisMonth
+
+                state.isLoading_LoadSummuryData = false;
+                state.hasError_LoadSummuryData = false;
+              },
+              [loadSummuryData.rejected]: (state, action) => {
+                state.isLoading_LoadSummuryData = false;
+                state.hasError_LoadSummuryData = true;
+              }
+              
+
+              // loadRatingsData
+
+            [loadRatingsData.pending]: (state, action) => {
+                state.isLoading_LoadRatingsData = true;
+                state.hasError_LoadRatingsData = false;
+              },
+              [loadRatingsData.fulfilled]: (state, action) => {
+                
+                state.ratings = action.payload
+                state.isLoading_LoadRatingsData = false;
+                state.hasError_LoadRatingsData = false;
+              },
+              [loadRatingsData.rejected]: (state, action) => {
+                state.isLoading_LoadRatingsData = false;
+                state.hasError_LoadRatingsData = true;
+              }
+              
+          }
+    }
+}

@@ -7,7 +7,6 @@ import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import {lightBorder} from '../../../../Theme/borders'
 import { Card, CardContent, CardHeader, Divider,Grid,Icon } from '@material-ui/core';
-import {actions,store} from '../../../Redux/ReduxResourceExporter'
 import ViewProject from './ViewProject';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 function CurrentlyVisibleProjects(props) {
@@ -20,9 +19,9 @@ function CurrentlyVisibleProjects(props) {
     const [selectedProjectIndex,setSelectedProjectIndex]=useState(0);
     useEffect(()=>{
 
-        setListOfProjects(store.getState().ProjectsStore.ListOfTrendingProjectsLoadedFromAPI.data);
-        setLastUpdateTimeAndDate(store.getState().ProjectsStore.ListOfTrendingProjectsLoadedFromAPI.lastUpdateDateAndTime);
-        setLastChoosedDisplayMode(store.getState().ProjectsStore.ListOfTrendingProjectsLoadedFromAPI.lastChoosedDisplayMode);
+        // setListOfProjects(store.getState().ProjectsStore.ListOfTrendingProjectsLoadedFromAPI.data);
+        // setLastUpdateTimeAndDate(store.getState().ProjectsStore.ListOfTrendingProjectsLoadedFromAPI.lastUpdateDateAndTime);
+        // setLastChoosedDisplayMode(store.getState().ProjectsStore.ListOfTrendingProjectsLoadedFromAPI.lastChoosedDisplayMode);
         
         props.setIsLockClosed(true);
     },[])

@@ -10,7 +10,6 @@ import {lightBorder} from '../../../../Theme/borders'
 import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../Support/TextFields';
 import produce from 'immer'; 
 import CustomChipsList from '../../Support/CustomChipsList';
-import {actions,store} from '../../../Redux/ReduxResourceExporter'
 import Dropdown from '../../Support/Dropdown';
 import DisabledDropdown from '../../Support/DisabledDropdown';
 
@@ -82,13 +81,13 @@ function BasicInfoForm(props) {
     
     useEffect(()=>{
         //load data into hooks from store.
-        setProjectTitle(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectTitle);
-        setProjectDesc(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectDesc);
-        setEstimatedPrice(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectEstimatedPrice);
-        setListOfOptions_ForChipList(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.listOfKeyWords);
-        setCatagory(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectService);
-        setSubCatagory(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectSubService)
-        setIsEditingEnabled(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.isEditingEnabled);
+        // setProjectTitle(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectTitle);
+        // setProjectDesc(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectDesc);
+        // setEstimatedPrice(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectEstimatedPrice);
+        // setListOfOptions_ForChipList(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.listOfKeyWords);
+        // setCatagory(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectService);
+        // setSubCatagory(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectSubService)
+        // setIsEditingEnabled(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.isEditingEnabled);
      
     },[])
     
@@ -106,18 +105,18 @@ function BasicInfoForm(props) {
         if(!isEditingEnabled)
         {
             props.setIsLockClosed(true)
-            const data = {
-                projectTitle:projectTitle,
-                projectDesc:projectDesc,
-                projectService:catagory,
-                projectSubService:subCatagory,
-                projectEstimatedPrice:estrimatedPrice,
-                projectPublishDate:"Not add due to issue in date picker",
-                clientSideViewUrl:"https://material-ui.com/api/select/",
-                listOfKeyWords:listOfOptions_ForChipList,
-                isEditingEnabled:true
-            } 
-            store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data))
+            // const data = {
+            //     projectTitle:projectTitle,
+            //     projectDesc:projectDesc,
+            //     projectService:catagory,
+            //     projectSubService:subCatagory,
+            //     projectEstimatedPrice:estrimatedPrice,
+            //     projectPublishDate:"Not add due to issue in date picker",
+            //     clientSideViewUrl:"https://material-ui.com/api/select/",
+            //     listOfKeyWords:listOfOptions_ForChipList,
+            //     isEditingEnabled:true
+            // } 
+            // store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data))
         }
         else
         {

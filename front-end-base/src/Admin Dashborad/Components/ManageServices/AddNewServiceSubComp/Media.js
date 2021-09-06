@@ -13,7 +13,6 @@ import CustomPhotoUploader from '../../Support/CustomPhotoUploader'
 import { Check, Close } from '@material-ui/icons';
 import ScrollView from '@cantonjs/react-scroll-view/lib/components/ScrollView';
 import ImageHolder from './ImageHolder';
-import {actions,store} from '../../../Redux/ReduxResourceExporter'
 function Media(props) {
     const classes = useStyles();
 
@@ -26,9 +25,9 @@ function Media(props) {
 
     useEffect(()=>{
         //Load data from store into hooks
-        setThumbnailImage(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.thumbnailImageUri);
-        setListOfSelectedImages(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.listOfImages);
-        setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.isEditingEnabled);
+        // setThumbnailImage(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.thumbnailImageUri);
+        // setListOfSelectedImages(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.listOfImages);
+        // setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.isEditingEnabled);
         
     },[])
 
@@ -36,7 +35,7 @@ function Media(props) {
         if(!isEditingEnabled)
         {
             props.setIsLockClosed(true)
-            store.dispatch(actions.update_media_ADD_NEW_SERVICE(thumbnailImage,listOfSelectedImages,true));
+            // store.dispatch(actions.update_media_ADD_NEW_SERVICE(thumbnailImage,listOfSelectedImages,true));
         }
         else
         {

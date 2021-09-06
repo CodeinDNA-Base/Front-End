@@ -5,7 +5,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
 import colors from '../../../../Theme/colors';
-import {store,actions} from '../../../Redux/ReduxResourceExporter'
 import { lightBorder } from '../../../../Theme/borders';
 import AddNewProjectTab from '../AddNewProjectTab';
 import { ArrowBackIos } from '@material-ui/icons';
@@ -13,19 +12,19 @@ import { ArrowBackIos } from '@material-ui/icons';
 function ViewProject(props) {
     const [isEditorOpen,setIsEditorOpen]=useState(false);
     useEffect(()=>{
-        const data = {
-            projectTitle:props.projectData.projectTitle,
-            projectDesc:props.projectData.projectDesc,
-            projectService:props.projectData.projectService,
-            projectSubService:props.projectData.projectSubService,
-            projectEstimatedPrice:props.projectData.projectEstimatedPrice,
-            projectPublishDate:props.projectData.projectPublishDate,
-            clientSideViewUrl:props.projectData.clientSideViewUrl,
-            listOfKeyWords:props.projectData.listOfKeyWords,
-            isEditingEnabled:true
-        }
-        store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data));
-        store.dispatch(actions.update_media_ADD_NEW_PROJECTS(props.projectData.projectThumbNail,props.projectData.listOfImage,true));
+        // const data = {
+        //     projectTitle:props.projectData.projectTitle,
+        //     projectDesc:props.projectData.projectDesc,
+        //     projectService:props.projectData.projectService,
+        //     projectSubService:props.projectData.projectSubService,
+        //     projectEstimatedPrice:props.projectData.projectEstimatedPrice,
+        //     projectPublishDate:props.projectData.projectPublishDate,
+        //     clientSideViewUrl:props.projectData.clientSideViewUrl,
+        //     listOfKeyWords:props.projectData.listOfKeyWords,
+        //     isEditingEnabled:true
+        // }
+        // store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data));
+        // store.dispatch(actions.update_media_ADD_NEW_PROJECTS(props.projectData.projectThumbNail,props.projectData.listOfImage,true));
     },[]);
 
     const handelPanelSwitcher=()=>{

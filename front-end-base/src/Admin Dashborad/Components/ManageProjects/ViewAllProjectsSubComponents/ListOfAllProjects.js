@@ -8,7 +8,6 @@ import { lightBorder } from '../../../../Theme/borders';
 import { Headings } from '../../Support/Headings';
 import Pagination from '@material-ui/lab/Pagination';
 import { ScrollView } from "@cantonjs/react-scroll-view";
-import {actions,store} from '../../../Redux/ReduxResourceExporter';
 import FilterEngine from '../FilterMotor'
 import produce from 'immer';
 function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
@@ -46,8 +45,8 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
     }
 
     useEffect(()=>{
-       setListOfProjects(store.getState().ProjectsStore.ListOfProjectsLoadedFromAPI.data);
-       setNumberOfPage(Math.ceil((store.getState().ProjectsStore.ListOfProjectsLoadedFromAPI.data.length/9)))
+    //    setListOfProjects(store.getState().ProjectsStore.ListOfProjectsLoadedFromAPI.data);
+    //    setNumberOfPage(Math.ceil((store.getState().ProjectsStore.ListOfProjectsLoadedFromAPI.data.length/9)))
     },[]);
 
     useEffect(()=>{

@@ -12,7 +12,6 @@ import ScrollView from '@cantonjs/react-scroll-view/lib/components/ScrollView';
 import GroupedRadioButtons from '../../Support/GroupedRadioButtons';
 import CustomChipsList from '../../Support/CustomChipsList';
 import produce from 'immer';
-import {actions,store} from '../../../Redux/ReduxResourceExporter'
 function Packages(props) {
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
     const [selectedFeature_FromList_Basic,setSelectedFeature_FromList_Basic]=useState();
@@ -31,23 +30,23 @@ function Packages(props) {
 
     useEffect(()=>{
         // Loading data from store.
-        setDesc_Basic(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.packageDescription);
-        setDesc_Standard(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.packageDescription);
-        setDesc_Premium(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.packageDescription);
+        // setDesc_Basic(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.packageDescription);
+        // setDesc_Standard(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.packageDescription);
+        // setDesc_Premium(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.packageDescription);
         
         
-        setPrice_Basic(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.packagePrice);
-        setPrice_Standard(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.packagePrice);
-        setPrice_Premium(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.packagePrice);
+        // setPrice_Basic(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.packagePrice);
+        // setPrice_Standard(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.packagePrice);
+        // setPrice_Premium(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.packagePrice);
         
-        setListOfOptions_ForChipList_Basic(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.listOfFeatures);
-        setListOfOptions_ForChipList_Standard(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.listOfFeatures);
-        setListOfOptions_ForChipList_Premium(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.listOfFeatures);
+        // setListOfOptions_ForChipList_Basic(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.listOfFeatures);
+        // setListOfOptions_ForChipList_Standard(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.listOfFeatures);
+        // setListOfOptions_ForChipList_Premium(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.listOfFeatures);
 
-        setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.isEditingEnabled);
+        // setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.isEditingEnabled);
         
 
-        console.log(store.getState());
+        // console.log(store.getState());
     },[])
 
     const handelEditAndSaveChanges = ()=>{
@@ -71,26 +70,26 @@ function Packages(props) {
             //         listOfFeatures:[],
             //     }
             // }
-            const data = {
-                isEditingEnabled:true,
-                Basic:{
-                    packageDescription:desc_Basic,
-                    packagePrice:price_Basic,
-                    listOfFeatures:listOfOptions_ForChipList_Basic,
-                },
-                Standard:{
-                    packageDescription:desc_Standard,
-                    packagePrice:price_Standard,
-                    listOfFeatures:listOfOptions_ForChipList_Standard,
-                },
-                Premium:{
-                    packageDescription:desc_Premium,
-                    packagePrice:price_Premium,
-                    listOfFeatures:listOfOptions_ForChipList_Premium,
-                }
-            }
+            // const data = {
+            //     isEditingEnabled:true,
+            //     Basic:{
+            //         packageDescription:desc_Basic,
+            //         packagePrice:price_Basic,
+            //         listOfFeatures:listOfOptions_ForChipList_Basic,
+            //     },
+            //     Standard:{
+            //         packageDescription:desc_Standard,
+            //         packagePrice:price_Standard,
+            //         listOfFeatures:listOfOptions_ForChipList_Standard,
+            //     },
+            //     Premium:{
+            //         packageDescription:desc_Premium,
+            //         packagePrice:price_Premium,
+            //         listOfFeatures:listOfOptions_ForChipList_Premium,
+            //     }
+            // }
             props.setIsLockClosed(true);  
-            store.dispatch(actions.update_packages_ADD_NEW_SERVICE(data));
+            // store.dispatch(actions.update_packages_ADD_NEW_SERVICE(data));
 
         }
         else

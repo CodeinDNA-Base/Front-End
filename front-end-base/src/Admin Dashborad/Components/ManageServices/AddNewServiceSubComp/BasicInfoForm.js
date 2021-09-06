@@ -10,7 +10,6 @@ import {lightBorder} from '../../../../Theme/borders'
 import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../Support/TextFields';
 import produce from 'immer'; 
 import CustomChipsList from '../../Support/CustomChipsList';
-import {actions,store} from '../../../Redux/ReduxResourceExporter'
 
 
 function BasicInfoForm(props) {
@@ -26,11 +25,11 @@ function BasicInfoForm(props) {
     
     useEffect(()=>{
         //load data into hooks from store.
-        setServiceTitle(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceTitle);
-        setServiceDesc(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceDesc);
-        setlistOfOptions_ForChipList_OfSearchKeyWords(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfKeyWords);
-        setlistOfOptions_ForChipList_OfSubServices(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfSubServices);
-        setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.isEditingEnabled);
+        // setServiceTitle(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceTitle);
+        // setServiceDesc(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceDesc);
+        // setlistOfOptions_ForChipList_OfSearchKeyWords(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfKeyWords);
+        // setlistOfOptions_ForChipList_OfSubServices(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfSubServices);
+        // setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.isEditingEnabled);
     
     },[])
     
@@ -40,14 +39,14 @@ function BasicInfoForm(props) {
 
             props.setIsLockClosed(true);  
             // Updating data in redux store..
-            const data ={
-                serviceTitle:serviceTitle,
-                serviceDesc:serviceDesc,
-                listOfSubServices:listOfOptions_ForChipList_OfSubServices,
-                listOfKeyWords:listOfOptions_ForChipList_OfSearchKeyWords,
-                isEditingEnabled:true
-            }
-            store.dispatch(actions.update_baic_info_ADD_NEW_SERVICE(data));
+            // const data ={
+            //     serviceTitle:serviceTitle,
+            //     serviceDesc:serviceDesc,
+            //     listOfSubServices:listOfOptions_ForChipList_OfSubServices,
+            //     listOfKeyWords:listOfOptions_ForChipList_OfSearchKeyWords,
+            //     isEditingEnabled:true
+            // }
+            // store.dispatch(actions.update_baic_info_ADD_NEW_SERVICE(data));
         }
         else
         {
