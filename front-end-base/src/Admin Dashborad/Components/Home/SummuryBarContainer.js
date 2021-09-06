@@ -8,7 +8,11 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions'; 
 import { useSelector } from 'react-redux';
-import { selectAll, selectOrdersCompleted } from './Redux compoents/Selectors';
+import { 
+        selectAll, selectOrdersCompleted,selectEarnedInThisMonth,
+        selectAvgSellingPrice,selectOnlineUsers,selectOnlineTeamMembers,
+        selectEarnings
+    } from './Redux compoents/Selectors';
 
 function SummuryBarContainer(props) {
     const classes=useStyles();
@@ -20,14 +24,25 @@ function SummuryBarContainer(props) {
     const [onlineTeamMemebers,setOnlineTeamMemebers]=useState('0');
 
     const {isLoading_LoadSummuryData} = useSelector(selectAll);
-    const ordersCompletedResponse = useSelector(selectOrdersCompleted);
 
+    const ordersCompletedResponse = useSelector(selectOrdersCompleted);
+    const earnedInCurrentMonthResponse=useSelector(selectEarnedInThisMonth);
+    const avgSellingPriceResponse = useSelector(selectAvgSellingPrice);
+    const earningsResponse= useSelector(selectEarnings);
+    const onlineUsersResponse = useSelector(selectOnlineUsers);
+    const onlineTeamMembersResponse = useSelector(selectOnlineTeamMembers);
 
     useEffect(()=>{
+        
         SetOrdersCompleted(ordersCompletedResponse);
+        setEarnedInCurrentMonth(earnedInCurrentMonthResponse);
+        setAvgSellingPrice(avgSellingPriceResponse);
+        setEarnings(earningsResponse);
+        setOnlineUsers(onlineUsersResponse);
+        setOnlineTeamMemebers(onlineTeamMembersResponse);
+
     },[isLoading_LoadSummuryData]);
 
-    
     return (
         <Card className={classes.root}>
             <CardContent>

@@ -21,9 +21,9 @@ function Home(props) {
     const sliceState = useSelector(selectAll);
     useEffect(()=>{
         //Calling all apis of to update slice.
-        dispatch(loadAccountsOverViewChartData());
-        dispatch(loadOrdersOverViewChartData());
-        dispatch(loadServiceOverViewChartData());
+        dispatch(loadAccountsOverViewChartData({selectedPeriod:"default"}));
+        dispatch(loadOrdersOverViewChartData({selectedPeriod:"default"}));
+        dispatch(loadServiceOverViewChartData({selectedPeriod:"default"}));
         dispatch(loadSummuryData());
         dispatch(loadRatedOrdersPercentageData());
         dispatch(loadRatingsData());

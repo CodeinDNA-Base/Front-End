@@ -1,6 +1,11 @@
 import React,{useEffect, useState} from 'react';
 import CanvasJSReact from '../../../../Canvas Assets/canvasjs.react';
 import produce from 'immer';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAll, selectAllOrdersOverViewChartData } from '../Redux compoents/Selectors';
+import { loadOrdersOverViewChartData } from '../Redux compoents/Thunks';
+import Skeleton from '@material-ui/lab/Skeleton';
+import { Headings } from '../../Support/Headings';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
  //https://canvasjs.com/react-charts/animated-chart/ : Soruce
@@ -8,7 +13,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function OrderOverViewChart(props) {
 	// console.log("GM:"+props.graphMode)
-	const [reReder,setReRender]=useState(true);
+	const [selectedPeriod,setSelectedPeriod]=useState();
 	const [options,setOptions]=useState({
 		title: {	
 		},
@@ -19,61 +24,59 @@ function OrderOverViewChart(props) {
 			// Change type to "doughnut", "line", "splineArea", etc.
 			type:"bar",
 			dataPoints: [
-				{ label: "Completed",  y: 10  },
-				{ label: "Canceled", y: 15  },
-				{ label: "Pending", y: 25  },
-				{ label: "In-progress",  y: 30  },
-			
+				{ label: "Completed",  y: 0  },
+				{ label: "Canceled", y: 0  },
+				{ label: "Pending", y: 0  },
+				{ label: "In-progress",  y: 0  },	
 			]
 		}
 		]
 	});
+	const dispatch = useDispatch();
+	const {isLoading_LoadOrdersOverViewChartData} = useSelector(selectAll);
+	const dataPointsResponse = useSelector(selectAllOrdersOverViewChartData);
 
+	useEffect(()=>{
+		//loading data into graph
+		handelDataPointsLoad(dataPointsResponse);
+	},[isLoading_LoadOrdersOverViewChartData,dataPointsResponse])
+	useEffect(()=>{
+		//When history opt changes.
+		dispatch(loadOrdersOverViewChartData({selectedPeriod})); 
+	},[selectedPeriod]);
 	useEffect(()=>{
 		// When graph mode changes
 		setOptions(produce(options,draft=>{
 			draft.data[0].type=props.graphMode
-		}))
-		
-	},[props.graphMode])
-
+		}));
+	},[props.graphMode]);
 	useEffect(()=>{
 		switch(props.selecteHistoryValue)
 		{
 			case 0:
 				// Last year
 				console.log("year")
-				setOptions(produce(options,draft=>{
-					draft.data[0].dataPoints[0].y=10
-				}))
+				setSelectedPeriod("year")
 			break;
 
 			case 1:
 				// Last month
 				console.log("Month")
-				setOptions(produce(options,draft=>{
-					draft.data[0].dataPoints[0].y=50
-				}))
+				setSelectedPeriod("month")
 			break;
 
 			case 2:
 				// Last week
-				setOptions(produce(options,draft=>{
-					draft.data[0].dataPoints[0].y=220
-				}))
+				setSelectedPeriod("lastWeek")
 			break;
 
 			case 3:
 				// Last dayconsole.log("here")
-				setOptions(produce(options,draft=>{
-					draft.data[0].dataPoints[0].y=30
-				}))
+				setSelectedPeriod("lastDay")
 			break;
 			case 4:
 				// Last Hour
-				setOptions(produce(options,draft=>{
-					draft.data[0].dataPoints[0].y=45
-				}))
+				setSelectedPeriod("lastHour")
 			break;
 
 			default:
@@ -81,11 +84,56 @@ function OrderOverViewChart(props) {
 				break;
 		}
 		
-	},[props.selecteHistoryValue])
+	},[props.selecteHistoryValue]);
+
+	const handelDataPointsLoad = (listOfPoints)=>{
+		console.log("data points for order over view");
+		console.log(listOfPoints);
+		
+		setOptions(produce(options,draft=>{
+			
+			listOfPoints.map((item,index)=>{
+				draft.data[0].dataPoints[index].label=item.label;
+				draft.data[0].dataPoints[index].y=item.y;
+			});
+
+			return draft
+		}));
+	}
 
 	return (
 		<div>
-			<CanvasJSChart options = {options}/>
+			{
+				(isLoading_LoadOrdersOverViewChartData) ? (
+					<div style={{height:'25rem',marginTop:''}}>
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <div style={{textAlign:'center'}}>
+							 <Headings text={"Please wait.. loading data..!!"} fontSize={30} fontWeight={'bold'}/>
+						 </div>
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+						 <Skeleton />
+					</div>
+				):(
+					<CanvasJSChart options = {options}/>
+				)
+			}
 		</div>
 		);
 }

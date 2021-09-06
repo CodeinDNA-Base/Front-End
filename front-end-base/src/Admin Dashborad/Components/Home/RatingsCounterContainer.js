@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles,withStyles} from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -13,97 +13,83 @@ import OrderOverViewChart from './Charts/OrderOverViewChart';
 import Dropdown from '../Support/Dropdown';
 import GroupedRadioButtons from '../Support/GroupedRadioButtons'
 import ServicesClickHistoryOverViewChart from './Charts/ServicesClickHistoryOverViewChart';
-
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAll, selectRatedOrdersPercentage, selectRatings } from './Redux compoents/Selectors';
+import { loadRatedOrdersPercentageData, loadRatingsData } from './Redux compoents/Thunks';
+import Skeleton from '@material-ui/lab/Skeleton';
 function ServicesClickHistoryOverViewContainer(props) {
     const classes=useStyles();
-    const [selecteHistoryValue,setSelecteHistoryValue]=useState();
-    const [selectGraphMode,setSelectGraphMode]=useState('column')
+ 
     const [allTimeRating,setAllTimeRating]=useState(0)
-    const [allTimeRatingValue,setAllTimeRatingValue]=useState(4);
-    const [fiveStar,setFiveStar]=useState(90);
-    const [fourStar,setFourStar]=useState(43);
-    const [threeStar,setThreeStar]=useState(10);
-    const [twoStar,setTwoStar]=useState(3);
-    const [oneStar,setOneStar]=useState(23);
+    const [allTimeRatingValue,setAllTimeRatingValue]=useState(0);
+    const [fiveStar,setFiveStar]=useState(0);
+    const [fourStar,setFourStar]=useState(0);
+    const [threeStar,setThreeStar]=useState(0);
+    const [twoStar,setTwoStar]=useState(0);
+    const [oneStar,setOneStar]=useState(0);
     const [fiveStarTimes,setFiveStarTimes]=useState(0);
     const [fourStarTimes,setFourStarTimes]=useState(0);
     const [threeStarTimes,setThreeStarTimes]=useState(0);
     const [twoStarTimes,setTwoStarTimes]=useState(0);
     const [oneStarTimes,setOneStarTimes]=useState(0);
 
-    const [communicationWithSeller,setCommunicationWithSeller]=useState(3);
-    const [serviceAsDescribed,setServiceAsDescribed]=useState(3);
-    const [buyAgainAndRecommended,setBuyAgainAndRecommended]=useState(4);
+    const [communicationWithSeller,setCommunicationWithSeller]=useState(0);
+    const [serviceAsDescribed,setServiceAsDescribed]=useState(0);
+    const [buyAgainAndRecommended,setBuyAgainAndRecommended]=useState(0);
     
-    const [communicationWithSellerTimes,setCommunicationWithSellerTimes]=useState(3);
-    const [serviceAsDescribedTimes,setServiceAsDescribedTimes]=useState(3);
-    const [buyAgainAndRecommendedTimes,setBuyAgainAndRecommendedTimes]=useState(4);
+    const [communicationWithSellerTimes,setCommunicationWithSellerTimes]=useState(0);
+    const [serviceAsDescribedTimes,setServiceAsDescribedTimes]=useState(0);
+    const [buyAgainAndRecommendedTimes,setBuyAgainAndRecommendedTimes]=useState(0);
     
-    const [ratedOrdersPerc,setRatedOrdersPerc]=useState(39);
+    const [ratedOrdersPerc,setRatedOrdersPerc]=useState(0);
 
-    const listOfOptions_ForDropDown=[
-        {
-            optionTitle:"Last Year",
-            optionValue:0
-        },
-        {
-            optionTitle:"Last Month",
-            optionValue:1
-        },
-        {
-            optionTitle:"Last Week",
-            optionValue:2
-        },
-        {
-            optionTitle:"Last Day",
-            optionValue:3
-        },
-        {
-            optionTitle:"Last Hour",
-            optionValue:4
-        },
-        
-    ]
-    const listOfOptions_RadioBoxes = [
-        {
-            optionLabel:"Line",
-            optionValue:"line",
-            radioBtnColor:'default'
-        },
-        {
-            optionLabel:"Spline Area",
-            optionValue:"splineArea",
-            radioBtnColor:'primary'
-        },
-        {
-            optionLabel:"Doughnut",
-            optionValue:"doughnut",
-            radioBtnColor:'secondary'
-        },
-        {
-            optionLabel:"Bar",
-            optionValue:"bar",
-            radioBtnColor:'secondary'
-        },
-        {
-            optionLabel:"Pie",
-            optionValue:"pie",
-            radioBtnColor:'secondary'
-        },
-        
-        {
-            optionLabel:"Column bar",
-            optionValue:"column",
-            radioBtnColor:'secondary'
-        },
-        
-     
-        
-    ]
+
 //    label={""}
 //    value : mustBeHook
-//    setValue: func of hook     
+//    setValue: func of hook
+    const {isLoading_LoadRatingsData,isLoading_LoadRatedOrdersPercentageData} = useSelector(selectAll);
+    const dispatch = useDispatch();
+    const ratingData = useSelector(selectRatings);
+    const ratedPerc = useSelector(selectRatedOrdersPercentage)
+    useEffect(()=>{
 
+       console.log(ratedPerc);
+       console.log("Loading data for ratings")
+       setAllTimeRatingValue(parseFloat(ratingData.allTimeRatings));
+       setAllTimeRating(parseInt(ratingData.allTimeRatingsTimes));
+    
+       setFiveStar(parseFloat(ratingData.fiveStarRating));
+       setFiveStarTimes(parseInt(ratingData.fiveStarRatingTimes));
+
+       setFourStar(parseFloat(ratingData.fourStarRating));
+       setFourStarTimes(parseInt(ratingData.fourStarRatingTimes)) 
+
+       setThreeStar(parseFloat(ratingData.threeStarRating));
+       setThreeStarTimes(parseInt(ratingData.threeStarRatingTimes))
+
+       setTwoStar(parseFloat(ratingData.twoStarRating));
+       setTwoStarTimes(parseInt(ratingData.twoStarRatingTimes));
+
+       setOneStar(parseFloat(ratingData.oneStarRating));
+       setOneStarTimes(parseInt(ratingData.oneStarRatingTimes));
+
+       setCommunicationWithSeller(parseFloat(ratingData.communicationWithSeller));
+       setServiceAsDescribed(parseFloat(ratingData.serviceAsDescribed));
+       setBuyAgainAndRecommended(parseFloat(ratingData.buyAgainOrRecommended));
+
+       setCommunicationWithSellerTimes(parseInt(ratingData.communicationWithSellerTimes));
+       setServiceAsDescribedTimes(parseInt(ratingData.serviceAsDescribedTimes));
+       setBuyAgainAndRecommendedTimes(parseInt(ratingData.buyAgainOrRecommendedTimes));
+       
+       setRatedOrdersPerc(parseInt(ratedPerc));
+
+    },[isLoading_LoadRatingsData,ratingData])
+    const handelRefresh = ()=>{
+        
+        dispatch(loadRatingsData());
+        dispatch(loadRatedOrdersPercentageData());
+    }
     return (
         <Card className={classes.root}>
         <CardHeader
@@ -112,18 +98,38 @@ function ServicesClickHistoryOverViewContainer(props) {
                 <div className={classes.overViewHeadingTitle}>
                     <Headings text={"Rating counter"} fontSize={25} fontWeight={'bold'}/>
                 </div>
-                {/* <div className={classes.radioBoxOptionsContainer}>
-                    <GroupedRadioButtons listOfOptions={listOfOptions_RadioBoxes} value={selectGraphMode} setValue={setSelectGraphMode}/>
+                <div style={{position:'absolute',top:'0.5rem',right:'1rem',cursor:'pointer'}} onClick={handelRefresh}>
+                    <AutorenewIcon fontSize="large"/>
                 </div>
-                <div className={classes.dropDownOptContainer}>
-                    <Dropdown listOfOptions={listOfOptions_ForDropDown} label={"History"} value={selecteHistoryValue} setValue={setSelecteHistoryValue} />
-                </div> */}
-                
             </div>
           }
         
         />
-        
+        {
+            (isLoading_LoadRatedOrdersPercentageData && isLoading_LoadRatingsData) ? (
+                <div style={{height:'24rem',marginTop:'1rem',padding:'2rem'}}>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <div style={{textAlign:'center'}}>
+                        <Headings text={"Please wait..fetching data..!!"} fontSize={25} fontWeight={'bold'}/>
+                    </div>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    <Skeleton/>
+                    
+                </div>
+            ) : (
+                <div>
+                   
         <CardContent>
           {/* <h1>Content</h1> */}
           <div className={classes.chartContainer}>
@@ -131,13 +137,13 @@ function ServicesClickHistoryOverViewContainer(props) {
                     <Grid item xs={4} style={{backgroundColor:"",padding:'1rem'}}>
                         <div >
                             <div style={{display:'inline-block'}}>
-                                <Headings text={`All-Time Rating ${allTimeRating}`} fontSize={18} fontWeight={'bold'}/>
+                                <Headings text={`All-Time Rating ${allTimeRatingValue}`} fontSize={18} fontWeight={'bold'}/>
                             </div>
                             <div  style={{display:'inline-block',position:"absolute",marginLeft:'1rem'}}>
                                 <Rating name="disabled" value={allTimeRatingValue} disabled />
                             </div>
                             <div  style={{display:'inline-block',position:"absolute",marginLeft:'9rem'}}>
-                                 <Headings text={`(${0})`} fontSize={18}/>
+                                 <Headings text={`(${allTimeRating})`} fontSize={18}/>
                             </div>
                             
                         </div>
@@ -250,6 +256,9 @@ function ServicesClickHistoryOverViewContainer(props) {
           </div>
           
         </CardContent>
+                </div>
+            )
+        }
         
       </Card>
     );

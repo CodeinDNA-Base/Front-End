@@ -13,8 +13,8 @@ import {
 
 export const loadOrdersOverViewChartData = createAsyncThunk(
     'homePanel/loadOrdersOverViewChartData',
-    async () =>{
-        const response = await DataLoader_ForLoadOrdersOverViewChartData().then((resp)=>{
+    async (args,thunkApi) =>{
+        const response = await DataLoader_ForLoadOrdersOverViewChartData(args).then((resp)=>{
             return resp
         },(error)=>{
             throw error
@@ -24,8 +24,8 @@ export const loadOrdersOverViewChartData = createAsyncThunk(
 )
 export const loadAccountsOverViewChartData = createAsyncThunk(
     'homePanel/loadAccountsOverViewChartData',
-    async () =>{
-        const response = await DataLoader_ForLoadAccountsOverViewChartData().then((resp)=>{
+    async (args,thunkApi) =>{
+        const response = await DataLoader_ForLoadAccountsOverViewChartData(args).then((resp)=>{
             return resp
         },(error)=>{
             throw error
@@ -35,8 +35,8 @@ export const loadAccountsOverViewChartData = createAsyncThunk(
 )
 export const loadServiceOverViewChartData = createAsyncThunk(
     'homePanel/loadServiceOverViewChartData',
-    async () =>{
-        const response = await DataLoader_ForLoadServiceOverViewChartData().then((resp)=>{
+    async (args,thunkApi) =>{
+        const response = await DataLoader_ForLoadServiceOverViewChartData(args).then((resp)=>{
             return resp
         },(error)=>{
             throw error
@@ -60,11 +60,13 @@ export const loadSummuryData = createAsyncThunk(
 export const loadRatingsData = createAsyncThunk(
     'homePanel/loadRatingsData',
     async () =>{
+        console.log("Loading rating data start")
         const response = await DataLoader_ForRatingsData().then((resp)=>{
             return resp
         },(error)=>{
             throw error
         })
+        console.log("Loading rating data end")   
         return response;
     }
 )
@@ -80,59 +82,3 @@ export const loadRatedOrdersPercentageData = createAsyncThunk(
         return response;
     }
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const tempApi = ()=>{
-//     return new Promise(function(resolve,rejected){
-//         setTimeout(() => {
-//            rejected([{test:"tabahi"}]); 
-//         }, 5000);
-//     })
-// }
-
-// export const load = createAsyncThunk(
-//     'authentication/callTheAPI',
-//     async () => {
-//         // const response =  api();
-//         console.log("Loading started")
-//         const resp = await tempApi().then((success)=>{
-//             return success
-//         },(error)=>{
-//             throw "Failed to load"
-//         });
-//         console.log("Loading ended with response")
-//         console.log(resp)
-//         return resp;
-//     }
-// );
