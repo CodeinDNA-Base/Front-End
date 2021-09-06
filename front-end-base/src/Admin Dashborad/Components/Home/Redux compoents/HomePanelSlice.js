@@ -155,7 +155,7 @@ const options = {
                 state.hasError_LoadOrdersOverViewChartData = false;
               },
               [loadOrdersOverViewChartData.fulfilled]: (state, action) => {
-                state.accountsOverViewChartData = action.payload;
+                state.ordersOverViewChartData = action.payload;
                 state.isLoading_LoadOrdersOverViewChartData = false;
                 state.hasError_LoadOrdersOverViewChartData = false;
               },

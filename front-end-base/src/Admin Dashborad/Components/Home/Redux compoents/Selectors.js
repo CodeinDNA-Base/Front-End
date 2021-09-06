@@ -1,3 +1,6 @@
+export const selectAll = ((state)=>{
+    return state;
+})
 export const  selectEarnings = ((state)=>{
     return state.earnings
 })
@@ -16,7 +19,6 @@ export const  selectOnlineTeamMembers = ((state)=>{
 export const  selectEarnedInThisMonth = ((state)=>{
     return state.earnedInThisMonth
 })
-
 export const  selectAllOrdersOverViewChartData = ((state)=>{
     return state.ordersOverViewChartData
 })

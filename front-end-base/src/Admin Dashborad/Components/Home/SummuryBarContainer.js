@@ -1,4 +1,4 @@
-import React,{useState}from 'react';
+import React,{useEffect, useState}from 'react';
 import { makeStyles,Grid } from '@material-ui/core';
 import { Headings } from '../Support/Headings';
 import { lightBorder } from '../../../Theme/borders';
@@ -7,6 +7,8 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions'; 
+import { useSelector } from 'react-redux';
+import { selectAll, selectOrdersCompleted } from './Redux compoents/Selectors';
 
 function SummuryBarContainer(props) {
     const classes=useStyles();
@@ -17,6 +19,15 @@ function SummuryBarContainer(props) {
     const [onlineUsers,setOnlineUsers]=useState('0');
     const [onlineTeamMemebers,setOnlineTeamMemebers]=useState('0');
 
+    const {isLoading_LoadSummuryData} = useSelector(selectAll);
+    const ordersCompletedResponse = useSelector(selectOrdersCompleted);
+
+
+    useEffect(()=>{
+        SetOrdersCompleted(ordersCompletedResponse);
+    },[isLoading_LoadSummuryData]);
+
+    
     return (
         <Card className={classes.root}>
             <CardContent>

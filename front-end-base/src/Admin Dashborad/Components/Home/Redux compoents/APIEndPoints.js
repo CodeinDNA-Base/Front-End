@@ -1,10 +1,11 @@
-import { 
+import {
+
         OrdersOverViewChartData,
         AccountsOverViewChartData,
         ServiceOverViewChartData,
         RatedOrdersPercentageData,
         RatingsData, SummuryData,
-        
+
     } from "./TempData";
 
 export const DataLoader_ForLoadOrdersOverViewChartData = ()=>{
@@ -14,6 +15,7 @@ export const DataLoader_ForLoadOrdersOverViewChartData = ()=>{
         }, 3000);
     })
 }
+
 export const DataLoader_ForLoadAccountsOverViewChartData = ()=>{
     return new Promise(function(resolve,rejected){
         setTimeout(() => {

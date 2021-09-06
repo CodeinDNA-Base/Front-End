@@ -1,5 +1,5 @@
 import { Grid, makeStyles } from '@material-ui/core';
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { Headings } from '../Support/Headings';
 import { lightBorder } from '../../../Theme/borders';
 import ColumnChart from './Charts/OrderOverViewChart';
@@ -9,11 +9,28 @@ import ServicesClickHistoryOverViewContainer from './ServicesClickHistoryOverVie
 import RatingsCounterContainer from './RatingsCounterContainer'
 import MEGAControllsCotnainer from './MEGAControllsCotnainer';
 import SummuryBarContainer from './SummuryBarContainer';
-
+import { selectAll } from './Redux compoents/Selectors';
+import { useSelector,useDispatch } from 'react-redux';
+import { 
+        loadAccountsOverViewChartData, loadOrdersOverViewChartData, 
+        loadRatedOrdersPercentageData, loadRatingsData, loadServiceOverViewChartData,
+        loadSummuryData } from './Redux compoents/Thunks';
 function Home(props) {
     const classes = useStyles();
-    //Summury
-    
+    const dispatch = useDispatch();
+    const sliceState = useSelector(selectAll);
+    useEffect(()=>{
+        //Calling all apis of to update slice.
+        dispatch(loadAccountsOverViewChartData());
+        dispatch(loadOrdersOverViewChartData());
+        dispatch(loadServiceOverViewChartData());
+        dispatch(loadSummuryData());
+        dispatch(loadRatedOrdersPercentageData());
+        dispatch(loadRatingsData());
+        
+        console.log("Home slice state")
+        console.log(sliceState);
+    },[])
     return (
         <div>
            <Grid container>
