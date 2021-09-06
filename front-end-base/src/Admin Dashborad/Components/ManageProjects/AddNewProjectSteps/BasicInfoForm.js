@@ -116,7 +116,7 @@ function BasicInfoForm(props) {
                 clientSideViewUrl:"https://material-ui.com/api/select/",
                 listOfKeyWords:listOfOptions_ForChipList,
                 isEditingEnabled:true
-            }
+            } 
             store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data))
         }
         else

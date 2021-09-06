@@ -2,7 +2,9 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import { Headings } from '../../Support/Headings';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+
 import { Carousel } from 'react-responsive-carousel';
+
 import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
 import colors from '../../../../Theme/colors';
 // https://www.npmjs.com/package/react-responsive-carousel
@@ -17,6 +19,7 @@ function ViewProject(props) {
         // projectThumbNail:"https://www.d
         // listOfImage:[{}]
         // clientSideViewUrl:""
+        
         <div style={{marginTop:'2rem',paddingLeft:'1rem'}}>
             
             <Grid container>

@@ -951,7 +951,7 @@ const listOfServices=[
       serviceRatings:4,
       servicePublishDate:"31-08-2021",
       serviceLastUpdateDate:"30-09-2021",
-    },
-    
+    },    
 ]
+
 export {listOfProjects,listOfTrendingProjects,listOfStaticProjects,listOfServices};
