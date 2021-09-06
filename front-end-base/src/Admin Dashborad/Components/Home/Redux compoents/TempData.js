@@ -34,7 +34,7 @@ export const RatingsData = {
 	threeStarRating:20,
 	twoStarRating:10,
 	oneStarRating:2,
-	communicationWithSeller:5
+	communicationWithSeller:5,
 	serviceAsDescribed:4.2,
 	buyAgainOrRecommended:4,
 }

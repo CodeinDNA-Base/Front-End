@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import produce from 'immer'
 import { 
         loadAccountsOverViewChartData,loadOrdersOverViewChartData,loadServiceOverViewChartData,
-        loadSummuryData,loadRatingsData
+        loadSummuryData,loadRatingsData,loadRatedOrdersPercentageData
     } from "./Thunks";
 const initialState={
     earnings:0,
@@ -21,12 +21,12 @@ const initialState={
         threeStarRating:0,
         twoStarRating:0,
         oneStarRating:0,
-        communicationWithSeller:0
+        communicationWithSeller:0,
         serviceAsDescribed:0,
-        buyAgainOrRecommended:0,
-    }
+        buyAgainOrRecommended:0
+    },
+
     ratedOrdersPercentage:0,
-    
     isLoading_LoadAccountsOverViewChartData: false,
     hasError_LoadAccountsOverViewChartData: false,
 
@@ -41,6 +41,9 @@ const initialState={
 
     isLoading_LoadRatingsData: false,
     hasError_LoadRatingsData: false,
+
+    isLoading_LoadRatedOrdersPercentageData: false,
+    hasError_LoadRatedOrdersPercentageData: false,
 
 
 }
@@ -117,8 +120,7 @@ const options = {
             return produce(state,draft=>{
                 draft.ratings = action.payload
             })
-        }
-
+        },
         //update completed orders %.
         updateRatedOrdersPercentage:(state,action)=>{
             return produce(state,draft=>{
@@ -129,7 +131,7 @@ const options = {
         },
 
         extraReducers: {
-            
+
             // loadAccountsOverViewChartData
 
             [loadAccountsOverViewChartData.pending]: (state, action) => {
@@ -144,7 +146,7 @@ const options = {
             [loadAccountsOverViewChartData.rejected]: (state, action) => {
               state.isLoading_LoadAccountsOverViewChartData = false;
               state.hasError_LoadAccountsOverViewChartData = true;
-            }
+            },
 
             // loadOrdersOverViewChartData
             
@@ -160,7 +162,7 @@ const options = {
               [loadOrdersOverViewChartData.rejected]: (state, action) => {
                 state.isLoading_LoadAccountsOverViewChartData = false;
                 state.hasError_LoadOrdersOverViewChartData = true;
-              }
+              },
             
             // loadAccountsOverViewChartData
 
@@ -176,7 +178,7 @@ const options = {
               [loadServiceOverViewChartData.rejected]: (state, action) => {
                 state.isLoading_LoadServiceOverViewChartData = false;
                 state.hasError_LoadServiceOverViewChartData = true;
-              }
+              },
             // loadSummuryData
 
             [loadSummuryData.pending]: (state, action) => {
@@ -198,7 +200,7 @@ const options = {
               [loadSummuryData.rejected]: (state, action) => {
                 state.isLoading_LoadSummuryData = false;
                 state.hasError_LoadSummuryData = true;
-              }
+              },
               
 
               // loadRatingsData
@@ -216,8 +218,29 @@ const options = {
               [loadRatingsData.rejected]: (state, action) => {
                 state.isLoading_LoadRatingsData = false;
                 state.hasError_LoadRatingsData = true;
-              }
+              },
+
+              
+              // loadRatedOrdersPercentageData
+
+            [loadRatedOrdersPercentageData.pending]: (state, action) => {
+                state.isLoading_LoadRatedOrdersPercentageData = true;
+                state.hasError_LoadRatedOrdersPercentageData = false;
+              },
+              [loadRatedOrdersPercentageData.fulfilled]: (state, action) => {
+                
+                state.ratedOrdersPercentage = action.payload.ratedOrdersPercentage
+                state.isLoading_LoadRatedOrdersPercentageData = false;
+                state.hasError_LoadRatedOrdersPercentageData = false;
+              },
+              [loadRatedOrdersPercentageData.rejected]: (state, action) => {
+                state.isLoading_LoadRatedOrdersPercentageData = false;
+                state.hasError_LoadRatedOrdersPercentageData = true;
+              },
               
           }
     }
-}
+
+
+const homeSlice = createSlice(options);
+export const homeReducer =  homeSlice.reducer;
