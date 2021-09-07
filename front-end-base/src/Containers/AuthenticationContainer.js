@@ -3,13 +3,22 @@ import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useWindowDimensions } from "../Home/Components/WindowDimensions";
 import { AppBar, makeStyles } from "@material-ui/core";
+
+// footer
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
+
+// colors
 import colors, { ColorGradient } from "../Theme/colors";
-import LoginForm, { PasswordForm } from "../Home/Components/LoginForm";
-import Register from "../Home/Components/Register";
-import RegisterDetails from "../Home/Components/RegisterDetails";
+
+// custom compoents
+import LoginForm, { PasswordForm } from "../Home/Components/AuthenticationPage/LoginForm";
+import Register from "../Home/Components/AuthenticationPage/Register";
+import RegisterDetails from "../Home/Components/AuthenticationPage/Register";
+
+// navbar
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
+
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,

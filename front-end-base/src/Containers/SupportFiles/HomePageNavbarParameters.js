@@ -6,6 +6,9 @@ import { Avatar } from "@material-ui/core";
 import { ListItemAvatar } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
 
+export const isNavbarTabs=true;
+export const isAvatar=false;
+export const isNavBarIconButtons=false;
 // navbar menu options here
 export const navbarMenuOptions = [
   // icon is optional here
@@ -45,23 +48,21 @@ export const drawerMenuOptions = [
   {
     title: "About",
     route: "about",
-    icon: <NotificationImportant />,
-    onClick: function (title) {
+       onClick: function (title) {
       alert(title);
     },
   },
   {
     title: "Conatct",
     route: "contact",
-    icon: <NotificationImportant />,
-    onClick: function (title) {
+       onClick: function (title) {
       alert(title);
     },
   },
   {
     title: "Login",
     route: "login",
-    icon: <NotificationImportant />,
+    // icon: <NotificationImportant />,
     onClick: function (title) {
       alert(title);
     },
@@ -69,7 +70,7 @@ export const drawerMenuOptions = [
   {
     title: "Register",
     route: "register",
-    icon: <NotificationImportant />,
+    // icon: <NotificationImportant />,
     onClick: function (title) {
       alert(title);
     },
@@ -77,7 +78,7 @@ export const drawerMenuOptions = [
   {
     title: "Setting",
     route: "setting",
-    icon: <NotificationImportant />,
+    // icon: <NotificationImportant />,
     onClick: function (title) {
       alert(title);
     },
@@ -86,14 +87,14 @@ export const drawerMenuOptions = [
 
 // options after divider in drawer like search or logout
 export const darwerMenuExtraOptions = [
-  {
-    title: "Logout",
-    route: "about",
-    icon: <NotificationImportant />,
-    onClick: function (title) {
-      alert(title);
-    },
-  },
+  // {
+  //   title: "Logout",
+  //   route: "about",
+  //   // icon: <NotificationImportant />,
+  //   onClick: function (title) {
+  //     alert(title);
+  //   },
+  // },
   {
     title: "Advanced Search",
     route: "/",

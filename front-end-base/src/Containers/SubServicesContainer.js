@@ -3,10 +3,18 @@ import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useWindowDimensions } from "../Home/Components/WindowDimensions";
 import { AppBar, makeStyles } from "@material-ui/core";
+
+// footer
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
+
+// colors
 import colors, { ColorGradient } from "../Theme/colors";
-import ServicePage from "../Home/Components/ServicesPage";
+
+// custom components
+import ServicePage from "../Home/Components/SubServicesPage/ServicesPage";
+
+// navbar
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
 const useStyles = makeStyles(() => ({
   root: {
