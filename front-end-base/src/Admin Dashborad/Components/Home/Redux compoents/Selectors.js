@@ -1,36 +1,36 @@
 export const selectAll = ((state)=>{
-    return state;
+    return state.homePanel;
 })
 export const  selectEarnings = ((state)=>{
-    return state.earnings
+    return state.homePanel.earnings
 })
 export const  selectAvgSellingPrice = ((state)=>{
-    return state.avgSellingPrice
+    return state.homePanel.avgSellingPrice
 })
 export const  selectOrdersCompleted = ((state)=>{
-    return state.ordersCompleted
+    return state.homePanel.ordersCompleted
 })
 export const  selectOnlineUsers = ((state)=>{
-    return state.onlineUsers
+    return state.homePanel.onlineUsers
 })
 export const  selectOnlineTeamMembers = ((state)=>{
-    return state.onlineTeamMembers
+    return state.homePanel.onlineTeamMembers
 })
 export const  selectEarnedInThisMonth = ((state)=>{
-    return state.earnedInThisMonth
+    return state.homePanel.earnedInThisMonth
 })
 export const  selectAllOrdersOverViewChartData = ((state)=>{
-    return state.ordersOverViewChartData
+    return state.homePanel.ordersOverViewChartData
 })
 export const  selectAllAccountsOverViewChartData = ((state)=>{
-    return state.accountsOverViewChartData
+    return state.homePanel.accountsOverViewChartData
 })
 export const  selectAllServiceOverViewChartData = ((state)=>{
-    return state.serviceOverViewChartData
+    return state.homePanel.serviceOverViewChartData
 })
 
 export const  selectByIdOrdersOverViewChartData =(args)=>(state)=>{
-    return state.ordersOverViewChartData.filter((item)=>{
+    return state.homePanel.ordersOverViewChartData.filter((item)=>{
         if(item.id===args.id)
         {
             return item
@@ -38,7 +38,7 @@ export const  selectByIdOrdersOverViewChartData =(args)=>(state)=>{
     })
 }
 export const  selectByIdAccountsOverViewChartData =(args)=>(state)=>{
-    return state.accountsOverViewChartData.filter((item)=>{
+    return state.homePanel.accountsOverViewChartData.filter((item)=>{
         if(item.id===args.id)
         {
             return item
@@ -46,7 +46,7 @@ export const  selectByIdAccountsOverViewChartData =(args)=>(state)=>{
     })
 }
 export const  selectByIdServiceOverViewChartData =(args)=>(state)=>{
-    return state.serviceOverViewChartData.filter((item)=>{
+    return state.homePanel.serviceOverViewChartData.filter((item)=>{
         if(item.id===args.id)
         {
             return item
@@ -55,8 +55,8 @@ export const  selectByIdServiceOverViewChartData =(args)=>(state)=>{
 }
 
 export const selectRatings = (state)=>{
-    return state.ratings
+    return state.homePanel.ratings
 }
 export const selectRatedOrdersPercentage =(state)=>{
-    return state.ratedOrdersPercentage
+    return state.homePanel.ratedOrdersPercentage
 }

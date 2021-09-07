@@ -37,7 +37,8 @@ function AccountsOverViewChart(props) {
 
 	useEffect(()=>{
 		//loading data into graph
-		handelDataPointsLoad(dataPointsResponse);
+			handelDataPointsLoad(dataPointsResponse);
+		
 	},[isLoading_LoadAccountsOverViewChartData,dataPointsResponse])
 	useEffect(()=>{
 		//When history opt changes.

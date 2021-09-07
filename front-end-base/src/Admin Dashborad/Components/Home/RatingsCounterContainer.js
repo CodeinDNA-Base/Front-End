@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions'; 
 import { Grid } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -44,10 +43,6 @@ function ServicesClickHistoryOverViewContainer(props) {
     
     const [ratedOrdersPerc,setRatedOrdersPerc]=useState(0);
 
-
-//    label={""}
-//    value : mustBeHook
-//    setValue: func of hook
     const {isLoading_LoadRatingsData,isLoading_LoadRatedOrdersPercentageData} = useSelector(selectAll);
     const dispatch = useDispatch();
     const ratingData = useSelector(selectRatings);
@@ -56,6 +51,7 @@ function ServicesClickHistoryOverViewContainer(props) {
 
        console.log(ratedPerc);
        console.log("Loading data for ratings")
+
        setAllTimeRatingValue(parseFloat(ratingData.allTimeRatings));
        setAllTimeRating(parseInt(ratingData.allTimeRatingsTimes));
     
@@ -84,6 +80,7 @@ function ServicesClickHistoryOverViewContainer(props) {
        
        setRatedOrdersPerc(parseInt(ratedPerc));
 
+       
     },[isLoading_LoadRatingsData,ratingData])
     const handelRefresh = ()=>{
         

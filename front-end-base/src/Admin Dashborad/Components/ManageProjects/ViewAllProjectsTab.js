@@ -11,7 +11,6 @@ function ViewAllProjectsTab(props) {
     const [selectedProjectKeyHook,setSelectedProjectKeyHook]=useState();
     const [isViewProjectOpen,setIsViewProjectOpen]=useState(false);
     const handelOptionSelection = (selectedProject)=>{
-        
         setSelectedProjectKeyHook(selectedProject);
         handeScreenSwitch();
     }

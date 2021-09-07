@@ -41,7 +41,9 @@ function ServicesClickHistoryOverViewChart(props) {
 
 	useEffect(()=>{
 		//loading data into graph
-		handelDataPointsLoad(dataPointsResponse);
+		
+			handelDataPointsLoad(dataPointsResponse);
+		
 	},[isLoading_LoadServiceOverViewChartData,dataPointsResponse])
 	useEffect(()=>{
 		//When history opt changes.

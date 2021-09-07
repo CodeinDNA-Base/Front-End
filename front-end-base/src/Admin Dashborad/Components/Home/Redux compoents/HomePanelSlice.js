@@ -36,6 +36,7 @@ const initialState={
     },
 
     ratedOrdersPercentage:0,
+    
     isLoading_LoadAccountsOverViewChartData: false,
     hasError_LoadAccountsOverViewChartData: false,
 
@@ -59,87 +60,9 @@ const initialState={
 const options = {
     name:"homePanel",
     initialState:initialState,
-    reducer:{      
-        // Add
-        // { label: "Verified/Active Accounts",  y: 10  },
-
-        // addOrdersOverViewChartData:(state,action)=>{
-        //     return produce(state,draft=>{
-        //        return draft.ordersOverViewChartData.push(action.payload)
-        //     })
-        // },
-        // addAccountsOverViewChartData:(state,action)=>{
-        //     return produce(state,draft=>{
-        //         return draft.accountsOverViewChartData.push(action.payload)
-        //     })
-        // },
-        // addServiceOverViewChartData:(state,action)=>{
-        //     return produce(state,draft=>{
-        //         return draft.serviceOverViewChartData.push(action.payload)
-        //     })
-        // },
-
-        // //Remove
-        // updateOrdersOverViewChartData:(state,action)=>{
-        //     return produce(state,draft=>{
-        //        return draft.ordersOverViewChartData.map((item)=>{
-        //            if(item.id===action.id)
-        //            {
-        //                return action.payload
-        //            }
-        //            else{
-        //                return item;
-        //            }
-        //        })
-        //     })
-        // },
-        // //update
-        // updateAccountsOverViewChartData:(state,action)=>{
-        //     return produce(state,draft=>{
-        //         return draft.accountsOverViewChartData.map((item)=>{
-        //             if(item.id===action.id)
-        //             {
-        //                 return action.payload
-        //             }
-        //             else{
-        //                 return item;
-        //             }
-        //         })
-        //     })
-        // },
-        // updateServiceOverViewChartData:(state,action)=>{
-        //     return produce(state,draft=>{
-        //         return draft.serviceOverViewChartData.map((item)=>{
-        //             if(item.id===action.id)
-        //             {
-        //                 return action.payload
-        //             }
-        //             else{
-        //                 return item;
-        //             }
-        //         })
-        //     })
-        // },
-
-        // //update ratings.
-        // updateRatings:(state,action)=>{
-        //     return produce(state,draft=>{
-        //         draft.ratings = action.payload
-        //     })
-        // },
-        // //update completed orders %.
-        // updateRatedOrdersPercentage:(state,action)=>{
-        //     return produce(state,draft=>{
-        //         draft.ratedOrdersPercentage = action.payload
-        //     })
-        // }
-        
-        },
-
-        extraReducers: {
-
+    reducer:{},
+    extraReducers:{
             // loadAccountsOverViewChartData
-
             [loadAccountsOverViewChartData.pending]: (state, action) => {
               state.isLoading_LoadAccountsOverViewChartData = true;
               state.hasError_LoadAccountsOverViewChartData = false;

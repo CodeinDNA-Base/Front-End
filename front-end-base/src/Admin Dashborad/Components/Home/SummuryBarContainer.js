@@ -23,7 +23,7 @@ function SummuryBarContainer(props) {
     const [onlineUsers,setOnlineUsers]=useState('0');
     const [onlineTeamMemebers,setOnlineTeamMemebers]=useState('0');
 
-    const {isLoading_LoadSummuryData} = useSelector(selectAll);
+    const status = useSelector(selectAll);
 
     const ordersCompletedResponse = useSelector(selectOrdersCompleted);
     const earnedInCurrentMonthResponse=useSelector(selectEarnedInThisMonth);
@@ -31,6 +31,9 @@ function SummuryBarContainer(props) {
     const earningsResponse= useSelector(selectEarnings);
     const onlineUsersResponse = useSelector(selectOnlineUsers);
     const onlineTeamMembersResponse = useSelector(selectOnlineTeamMembers);
+
+    console.log("is loading summury data: ")
+    console.log(status)
 
     useEffect(()=>{
         
@@ -41,7 +44,7 @@ function SummuryBarContainer(props) {
         setOnlineUsers(onlineUsersResponse);
         setOnlineTeamMemebers(onlineTeamMembersResponse);
 
-    },[isLoading_LoadSummuryData]);
+    },[]);
 
     return (
         <Card className={classes.root}>
