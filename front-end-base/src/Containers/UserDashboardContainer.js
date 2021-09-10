@@ -41,84 +41,85 @@ import { PostRequestFromMobile } from "../User Dashboard/Components/PostRequestF
 import {PreviousPost} from "../User Dashboard/Components/PreviousPost"
 import {ViewPostDetails} from "../User Dashboard/Components/ViewPostDetails"
 
-export const UserDashboardContainer = (props) => {
+import Scroll from "./Scroll";
+export const UserDashboardContainer = () => {
   return (
-    <>
+    <Scroll>
       <DashboardMenu />
       <DashboardHome />
       <FooterComponent />
-    </>
+    </Scroll>
   );
 };
 
 export const UserDashboardSettings = () => {
   return (
-    <>
+    <Scroll>
       <DashboardMenu />
       <SettingsContainer />
       <FooterComponent />
-    </>
+      </Scroll>
   );
 };
 
 export const UserDashboardOrders = () => {
   return (
-    <>
+    <Scroll>
       <DashboardMenu />
       <OrdersContainer/>
       <FooterComponent />
-    </>
+    </Scroll>
   );
 };
 
 export const UserDashboardChat = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   return (
-    <>
+    <Scroll>
       <DashboardMenu />
       <ChatContainer/>
      {(isDesktopOrLaptopOrTabletScreen) ? <FooterComponent /> : ''}
-    </>
+    </Scroll>
   );
 };
 
 export const UserDashboardViewOrder=()=>{
   return (
-    <>
+    <Scroll>
       <DashboardMenu />
       <ViewOrderContainer/>
       <FooterComponent />
-    </>
+    </Scroll>
   );
 }
 
 export const PostRequestFromMobileUserDashboard=()=>{
   return (
-    <>
+    <Scroll>
       <DashboardMenu />
       <PostRequestFromMobileContainer/>
       <FooterComponent />
-    </>
+    </Scroll>
   );
 }
 
 export const UserDashboardShowPreviousPosts=()=>{
   return(
-    <>
+    <Scroll>
       <DashboardMenu />
       <PreviousPostContainer/>
       <FooterComponent />
-    </>
+    </Scroll>
   )
 }
 
 export const UserDashboardViewPostDetails=()=>{
   return(
-    <>
+    <Scroll>
       <DashboardMenu />
       <ViewPostDetailsContainer/>
       <FooterComponent />
-    </>
+    </Scroll>
   )
 }
 
@@ -183,6 +184,7 @@ const DashboardHome = () => {
         <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
       </Grid>
     </div>
+
   );
 };
 

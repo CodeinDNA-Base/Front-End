@@ -1,97 +1,149 @@
 //ReactJS
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-//Material-UI core
-import { makeStyles } from "@material-ui/core/styles";
-import ImageList from "@material-ui/core/ImageList";
-import ImageListItem from "@material-ui/core/ImageListItem";
-import ImageListItemBar from "@material-ui/core/ImageListItemBar";
-import IconButton from "@material-ui/core/IconButton";
+//Material-UI
+import Grid from "@material-ui/core/Grid";
 
-//Material-UI styles
+import {
+  makeStyles,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Typography,
+  Box,
+} from "@material-ui/core";
 
-//Icons
-import StarBorderIcon from "@material-ui/icons/StarBorder";
+import Color from "color";
+import { Link } from "react-router-dom";
 
-//Theme and styles
-import { ColorGradient } from "../../../Theme/colors";
+//icons
 
-//Resources
+//Styles and theme
 
-const useStyles = makeStyles((theme) => ({
+//resources
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+//action creators
+
+//selectors
+import {
+  selectRecentProjects,
+  selectHasProjectError,
+  selectIsProjectLoading,
+} from "../../Redux/slices/recentlyViewedProjectsSlice";
+
+//thunks
+import { fetchProjectDetails } from "../../Redux/slices/recentlyViewedProjectsSlice";
+import { Rating } from "@material-ui/lab";
+
+export const RecentProjectsForMobile = () => {
+
+  return (
+    <Grid container spacing={0} style={{ marginTop: "2%" }}>
+      <div style={{ width: "100%", overflow: "auto", display: "flex" }}>
+        {Array(4)
+          .fill()
+          .map((item) => {
+            return (
+              <Grid item md={6} lg={3} xl={3}>
+                <Link to="searchproject" style={{ textDecoration: "none" }}>
+                  <Box mt={4} mr={2}>
+                    <CustomCard />
+                  </Box>
+                </Link>
+              </Grid>
+            );
+          })}
+      </div>
+    </Grid>
+  );
+};
+
+const useStyles = makeStyles(() => ({
   actionArea: {
     borderRadius: 16,
     transition: "0.2s",
     "&:hover": {
-      transform: "scale(1.1)",
+      transform: "scaleY(1.01)",
     },
   },
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
+
+  card: ({ color }) => ({
+    maxWidth: 192,
+    borderRadius: 16,
+    boxShadow: "none",
+    "&:hover": {
+      boxShadow: `0 6px 12px 0 ${Color(color)
+        .rotate(-12)
+        .darken(0.2)
+        .fade(0.5)}`,
+    },
+    backgroundColor: "#203f52",
+  }),
+  content: ({ color }) => {
+    return {
+      backgroundColor: color,
+      padding: "10px",
+    };
   },
-  imageList: {
-    flexWrap: "nowrap",
-    transform: "translateZ(0)",
+  media: {
+    width: "100%",
   },
   title: {
-    color: theme.palette.primary.light,
+    fontFamily: "Keania One",
+    fontSize: "12px",
+    color: "#fff",
+    textTransform: "uppercase",
   },
-  titleBar: {
-    background: ColorGradient.purple,
+  subtitle: {
+    fontFamily: "Montserrat",
+    color: "#fff",
+    opacity: 0.87,
+    marginTop: "1rem",
+    fontWeight: 500,
+    fontSize: 14,
   },
 }));
 
-const projectsData = [
-  {
-    img: "https://images.unsplash.com/photo-1581089786257-d34fe7d9bff6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-    title: "Website",
-    author: "just By fashion",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1490971688337-f2c79913ea7d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-    title: "Website",
-    author: "just By fashion",
-  },
-  {
-    img: "https://images5.alphacoders.com/690/thumb-1920-690653.png",
-    title: "Website",
-    author: "just By fashion",
-  },
-  {
-    img: "https://www.itp.net/public/styles/full_img_sml/public/images/2019/05/27/44485-pubg_base1.jpg?itok=EF911Xan",
-    title: "Website",
-    author: "just By fashion",
-  },
-];
-export const RecentProjectsForMobile = () => {
+const CustomCard = () => {
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+  const recentProjects = useSelector(selectRecentProjects);
+  const isLoading = useSelector(selectIsProjectLoading);
+  const encounteredError = useSelector(selectHasProjectError);
+
+  //Now from orders, get active, cancelled and completed orders by checking their status
+  useEffect(() => {
+    dispatch(fetchProjectDetails("status")); //dispatch thunk with status of order or simply bring all orders for this user
+  }, [dispatch]);
+
   return (
-    <div className={classes.root}>
-      <ImageList className={classes.imageList} cols={1.2} gap={8}>
-        {" "}
-        {projectsData.map((item) => (
-          <ImageListItem key={item.img} className={classes.actionArea}>
-            <img src={item.img} alt={item.title} />
-            <ImageListItemBar
-              title={item.title}
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-              actionIcon={
-                <IconButton aria-label={`star ${item.title}`}>
-                  <StarBorderIcon className={classes.title} />
-                </IconButton>
-              }
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </div>
+    <CardActionArea className={classes.actionArea}>
+      <Card className={classes.card}>
+        <CardMedia
+          className={classes.media}
+          component={"img"}
+          image={
+            "https://images.unsplash.com/photo-1490971688337-f2c79913ea7d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+          }
+        />
+        <CardContent className={classes.content}>
+          <Typography className={classes.title}>
+            Offline Whatsapp for Desktop
+          </Typography>
+          <Box display="flex">
+            <Box flex={1}>
+              <Typography className={classes.subtitle}>$125</Typography>
+            </Box>
+            <Box mt={2}>
+              <Rating value={5} size="small" readOnly />
+            </Box>
+          </Box>
+        </CardContent>
+      </Card>
+    </CardActionArea>
   );
 };

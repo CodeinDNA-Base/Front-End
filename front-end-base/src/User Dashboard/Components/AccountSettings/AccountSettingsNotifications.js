@@ -1,5 +1,5 @@
 //ReactJS
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 //Material-UI core
 import {
@@ -26,6 +26,20 @@ import { makeStyles } from "@material-ui/core/styles";
 
 
 //Resources
+
+
+//react-redux
+import { useDispatch, useSelector } from "react-redux";
+
+//Thunks
+import { fetchNotificationInfoDetails } from "../../Redux/slices/notificationInfoSlice";
+
+//selectors
+import {
+  selectNotificationInfo,
+  selectIsNotificationInfoLoading,
+  selectHasNotificationInfoError,
+} from "../../Redux/slices/notificationInfoSlice";
 
 export const AccountSettingsNotifications = (props) => {
   return (
@@ -90,6 +104,17 @@ const MobileNotifications = () => {
     },
   ];
   
+      //Redux store: operations
+      const dispatch=useDispatch()
+      const notificationsInfo=useSelector(selectNotificationInfo)
+      const isLoading=useSelector(selectIsNotificationInfoLoading)
+      const encounteredError=useSelector(selectHasNotificationInfoError)
+    
+      useEffect(() => {
+        dispatch(fetchNotificationInfoDetails("email or id of user"));
+      }, [dispatch]);
+
+      
   return (
     <Card className={classes.root} elevation={2}>
       <CardHeader

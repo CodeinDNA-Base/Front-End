@@ -1,3 +1,7 @@
+//ReactJS
+import React, {useState, useEffect} from 'react'
+
+//Material-UI
 import Grid from "@material-ui/core/Grid";
 
 import {
@@ -7,29 +11,45 @@ import {
   CardMedia,
   CardContent,
   Typography,
+  Box,
 } from "@material-ui/core";
-import Color from "color";
 
-export const RecentProjectsForDesktop = (props) => {
-  const classes = useStyles();
+import Color from "color";
+import { Link } from "react-router-dom";
+
+//icons
+
+//Styles and theme
+
+//resources
+
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
+//action creators
+
+//selectors
+import { selectRecentProjects,selectHasProjectError, selectIsProjectLoading } from '../../Redux/slices/recentlyViewedProjectsSlice';
+//thunks
+import { fetchProjectDetails } from '../../Redux/slices/recentlyViewedProjectsSlice';
+import { Rating } from '@material-ui/lab';
+
+export const RecentProjectsForDesktop = () => {
 
   return (
     <Grid container spacing={0} style={{ marginTop: "2%" }}>
-      <Grid xs={0} sm={1} md={1} item></Grid>
-      <Grid xs={12} sm={10} md={10} item container spacing={4}>
-        <Grid item xs={12} sm={9} md={6}>
-          <CustomCard />
-        </Grid>
-        <Grid item xs={12} sm={9} md={6}>
-          <CustomCard />
-        </Grid>
-        <Grid item xs={12} sm={9} md={6}>
-          <CustomCard />
-        </Grid>
-        <Grid item xs={12} sm={9} md={6}>
-          <CustomCard />
-        </Grid>
-      </Grid>
+      {Array(4)
+        .fill()
+        .map((item) => {
+          return (
+            <Grid item md={6} lg={3} xl={3}>
+              <Link to="searchproject" style={{ textDecoration: "none" }}>
+                <Box mt={4}>
+                  <CustomCard />
+                </Box>
+              </Link>
+            </Grid>
+          );
+        })}
       <Grid xs={0} sm={1} md={1} item></Grid>
     </Grid>
   );
@@ -40,12 +60,12 @@ const useStyles = makeStyles(() => ({
     borderRadius: 16,
     transition: "0.2s",
     "&:hover": {
-      transform: "scale(1.1)",
+      transform: "scaleY(1.01)",
     },
   },
 
   card: ({ color }) => ({
-    minWidth: 256,
+    maxWidth: 192,
     borderRadius: 16,
     boxShadow: "none",
     "&:hover": {
@@ -59,16 +79,15 @@ const useStyles = makeStyles(() => ({
   content: ({ color }) => {
     return {
       backgroundColor: color,
-      padding: "1rem 1.5rem 1.5rem",
+      padding: "10px",
     };
   },
   media: {
-    height: 200,
     width: "100%",
   },
   title: {
     fontFamily: "Keania One",
-    fontSize: "1.5rem",
+    fontSize: "12px",
     color: "#fff",
     textTransform: "uppercase",
   },
@@ -85,6 +104,17 @@ const useStyles = makeStyles(() => ({
 const CustomCard = () => {
   const classes = useStyles();
 
+  const dispatch=useDispatch()
+  const recentProjects=useSelector(selectRecentProjects)
+  const isLoading=useSelector(selectIsProjectLoading)
+  const encounteredError=useSelector(selectHasProjectError)
+
+  //Now from orders, get active, cancelled and completed orders by checking their status
+  useEffect(() => {
+      dispatch(fetchProjectDetails("status")) //dispatch thunk with status of order or simply bring all orders for this user
+  }, [dispatch])
+
+
   return (
     <CardActionArea className={classes.actionArea}>
       <Card className={classes.card}>
@@ -96,10 +126,17 @@ const CustomCard = () => {
           }
         />
         <CardContent className={classes.content}>
-          <Typography className={classes.title} variant={"h2"}>
-            Hello Card
+          <Typography className={classes.title}>
+            Offline Whatsapp for Desktop
           </Typography>
-          <Typography className={classes.subtitle}>World Card</Typography>
+          <Box display="flex">
+            <Box flex={1}>
+              <Typography className={classes.subtitle}>$125</Typography>
+            </Box>
+            <Box mt={2}>
+              <Rating value={5} size="small" readOnly />
+            </Box>
+          </Box>
         </CardContent>
       </Card>
     </CardActionArea>

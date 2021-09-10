@@ -13,6 +13,7 @@
     "@material-ui/pickers": "^3.3.10",
     "@mui-treasury/components": "^1.10.1",
     "@mui-treasury/styles": "^1.13.1",
+    "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -34,7 +35,9 @@
     "react-image-crop": "^9.0.2",
     "react-lorem-ipsum": "^1.4.9",
     "react-material-ui-carousel": "^2.3.1",
+    "react-redux": "^7.2.5",
     "react-responsive": "^9.0.0-beta.2",
+    "react-responsive-carousel": "^3.2.21",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -42,6 +45,7 @@
     "react-sticky": "^6.0.3",
     "react-swipeable": "^6.1.2",
     "react-swipeable-views": "^0.14.0",
+    "redux": "^4.1.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -67,5 +71,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.9"
   }
 }

@@ -28,8 +28,10 @@ import "./Styles/ViewPostDetails.css"
 
 //Custom components
 import { PostRequestModal } from "./PostRequestModal";
+import Scroll from "../../Containers/Scroll";
 
 //Resources
+
 
 const postStyles = makeStyles((theme) => ({
   root: {

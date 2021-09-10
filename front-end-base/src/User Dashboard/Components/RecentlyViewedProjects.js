@@ -1,23 +1,25 @@
 //ReactJS
+import React, {useState, useEffect} from 'react'
 
 //Material-UI core
-import { RecentProjectsForMobile } from "./RecentlyViewProjects/RecentProjectsForMobile";
-import {RecentProjectsForDesktop} from "./RecentlyViewProjects/RecentProjectsForDesktop"
+import { Button, Grid,makeStyles, useMediaQuery } from "@material-ui/core";
+
 //Material-UI styles
 
 //Icons
 
 //Theme and styles
+import "../Color/Colors.css";
 
 //Resources
 
-import Grid from "@material-ui/core/Grid";
-import { Button } from "@material-ui/core";
-import "../Color/Colors.css";
-import { makeStyles } from "@material-ui/core";
+
+//custom components
+import { RecentProjectsForMobile } from "./RecentlyViewProjects/RecentProjectsForMobile";
+import { RecentProjectsForDesktop } from "./RecentlyViewProjects/RecentProjectsForDesktop";
 import HeaderTitle from "./RecentlyViewProjects/HeaderTitle";
 
-import { useMediaQuery } from "@material-ui/core";
+
 const useStyles = makeStyles(() => ({
   btnContained: {
     backgroundColor: " #011c38",
@@ -30,11 +32,10 @@ const useStyles = makeStyles(() => ({
 export const RecentlyViewedProjects = (props) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles();
+
   return (
     <div className="highlighter">
-      <HeaderTitle
-        title={"Recently Viewed Projects"}
-      />
+      <HeaderTitle title={"Recently Viewed Projects"} />
       {isDesktopOrLaptopOrTabletScreen ? (
         <RecentProjectsForDesktop />
       ) : (

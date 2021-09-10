@@ -38,7 +38,21 @@ import CheckedIcon from "@material-ui/icons/CheckCircle"
 import { ProjectChatModule } from "./ProjectChatModule";
 import MessageCompositionOptions from "./ChatHistory/ChatArea/MessageCompositionOptions";
 import MessageCompositionOptionsForMobile from './ChatHistory/ChatArea/MessageCompositionOptionsForMobile'
+
 //Resources
+
+
+//Redux
+import {useDispatch, useSelector} from "react-redux"
+//Action creators
+
+
+//selectors
+import {selectOrder,
+  selectIsOrderLoading,
+  selectHasOrderError} from "../Redux/slices/viewOrderSlice"
+//thunks
+import {fetchOrderDetails} from "../Redux/slices/viewOrderSlice"
 
 export const ViewOrder = (props) => {
 
@@ -70,11 +84,23 @@ const orderDetailsStyles = makeStyles((theme) => ({
 
 const OrderDetails = () => {
 
+
   const classes = orderDetailsStyles();
   const[projectCost, setProjectCost]=useState(4115)
   
   const isItSmallOrExtraSmall = useMediaQuery("(max-width: 960px)");
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  
+  const dispatch=useDispatch()
+  const orderDetails=useSelector(selectOrder)
+  const isLoading=useSelector(selectIsOrderLoading)
+  const encounteredError=useSelector(selectHasOrderError)
+
+
+  useEffect(() => {
+    dispatch(fetchOrderDetails("orderId that was clicked"));
+  }, [dispatch]);
+
   
   return (
     <div>
@@ -253,8 +279,6 @@ const PackageAndProjectDetails = () => {
   ];
   return (
     <div>
-      {/* <h4>{title}</h4> */}
-
       <TableContainer>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
@@ -267,7 +291,7 @@ const PackageAndProjectDetails = () => {
           </TableHead>
           <TableBody>
             {packageDetails.map(({serviceTitle, offers, quantity, duration, amount}) => (
-              <TableRow hover={true} key={serviceTitle} className="tableRow">
+              <TableRow key={serviceTitle} className="tableRow">
                 <StyledTableCell component="th" scope="row">
                   {serviceTitle}
                   {offers.map((offer)=>{

@@ -73,7 +73,7 @@ const RequestCard = React.memo(function ProfileCard() {
 
   return (
     <div>
-      <Card className={cx(classes.card, shadowStyles.root)}>
+      <Card className={cx(classes.card, /*shadowStyles.root*/)}>
         <CardContent>
           <p className={classes.statValue}>
             Get offers from sellers for your project

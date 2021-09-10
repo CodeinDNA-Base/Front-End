@@ -1,5 +1,5 @@
 //ReactJS
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //Material-UI core
 import {
@@ -27,6 +27,18 @@ import { Link } from "react-router-dom";
 import ServiceImage from "../Resources/java1.jpg";
 import { Headingfonts, TextFonts } from "../../Theme/fonts";
 
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+
+//action Creators
+
+//Thunks
+import { fetchOrderDetails } from "../Redux/slices/ordersSlice";
+//Selectors
+import  {selectOrders, selectHasOrderError, selectIsOrderLoading } from "../Redux/slices/ordersSlice"
+import ListSkeleton from "../../CustomComponents/UI/Skelton/ListSkeleton";
+
 const ongoingOrderStyles = makeStyles({
   container: {
     flex: 1,
@@ -39,16 +51,28 @@ const ongoingOrderStyles = makeStyles({
 export const OngoingOrders = () => {
   const classes = ongoingOrderStyles();
 
+  const dispatch=useDispatch()
+  const orders=useSelector(selectOrders)
+  const isLoading=useSelector(selectIsOrderLoading)
+  const encounteredError=useSelector(selectHasOrderError)
+
+  //Now from orders, get active, cancelled and completed orders by checking their status
+  useEffect(() => {
+      dispatch(fetchOrderDetails("status")) //dispatch thunk with status of order or simply bring all orders for this user
+  }, [dispatch])
+
+  //Get these numbers from API
   const [activeOrders, setActiveOrders] = useState(0);
   const [completedOrders, setCompletedOrders] = useState(0);
   const [cancelledOrders, setCancelledOrders] = useState(0);
 
-  const [option, setOption] = useState(0);
 
+  const [option, setOption] = useState(0);
   function setOptionHandler(op) {
     setOption(op);
   }
   function renderSelectedOption() {
+
     if (option == 0) {
       return <ActiveOrderCard />;
     } else if (option == 1) {
@@ -68,10 +92,14 @@ export const OngoingOrders = () => {
           <OrderOptions setOptionHandler={setOptionHandler} />
         </Box>
       </Box>
-      <Box>{renderSelectedOption}</Box>
+      <Box>{
+        isLoading?<ListSkeleton height={5}/>:
+        renderSelectedOption
+      }</Box>
     </div>
   );
 };
+
 const OrderOptions = (props) => {
   function handleSelection(event) {
     props.setOptionHandler(event.target.value);

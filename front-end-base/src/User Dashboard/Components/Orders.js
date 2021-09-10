@@ -1,5 +1,6 @@
 //ReactJS
-import React from "react";
+import React, {useState, useEffect} from "react";
+
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 
@@ -35,6 +36,19 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link } from "react-router-dom";
 
 //Resources
+
+
+//Redux
+
+import {useDispatch, useSelector} from "react-redux"
+//action creators
+
+//selectors
+
+import {selectAllOrders, selectAreAllOrdersLoading, selectHasError} from "../Redux/slices/allOrdersSlice"
+//thunks
+
+import {fetchAllOrders} from "../Redux/slices/allOrdersSlice"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -91,6 +105,7 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 export const Orders = () => {
+
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -102,6 +117,8 @@ export const Orders = () => {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+
 
   //To generate the tabs dynamically
   const tabList = [
@@ -227,6 +244,21 @@ const tableStyles = makeStyles({
 });
 
 const OrdersTable=(props)=>{
+
+  //Fetch respective orders from store when clicked on particular tab
+
+const dispatch=useDispatch()
+
+const allOrders=useSelector(selectAllOrders)
+const isLoading=useSelector(selectAreAllOrdersLoading)
+const encounteredError=useSelector(selectHasError)
+
+
+useEffect(() => {
+  dispatch(fetchAllOrders("Where status is completed, cancelled, late, newest, or else"));
+}, [dispatch]);
+
+
   const newestOrdersDetail = [
     {
       orderId:12,
@@ -441,7 +473,7 @@ const OrdersTable=(props)=>{
         </TableHead>
         <TableBody>
           {checkStatus().map((order) => (
-            <StyledTableRow hover={true} key={order.orderId} className="tableRow">
+            <StyledTableRow hover={true} key={order.orderId} className="tableRow" onClick={()=>{alert("Goto this order details page")}}>
               <StyledTableCell component="th" scope="row">
                 {order.seller}
               </StyledTableCell>

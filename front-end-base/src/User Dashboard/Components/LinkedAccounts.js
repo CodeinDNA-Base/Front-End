@@ -33,7 +33,7 @@ const LinkedAccountsCard = React.memo(function ProfileCard() {
   const classes = useStyles();
   const shadowStyles = useFadedShadowStyles();
   return (
-    <Card className={cx(classes.card, shadowStyles.root)}>
+    <Card className={cx(classes.card, /*shadowStyles.root*/)}>
       <CardContent>
         <p className={classes.statValue}>Linked Accounts</p>
         <Box m={1} pt={3}>

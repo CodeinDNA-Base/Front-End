@@ -1,5 +1,5 @@
 //ReactJS
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 //Material-UI core
 import {
@@ -22,6 +22,22 @@ import cx from "clsx";
 
 //Resources
 import profilePic from "../Resources/nadir.jpg";
+
+//react-redux
+import { useDispatch, useSelector } from "react-redux";
+
+//Thunks
+import { fetchUserDetails } from "../Redux/slices/userProfileSlice";
+
+//selectors
+import {
+  selectUserProfile,
+  selectIsProfileLoading,
+  selectHasProfileError,
+} from "../Redux/slices/userProfileSlice";
+import { Skeleton } from "antd";
+
+//actionCreators
 
 export const UserProfileCardForMobile = () => {
   return (
@@ -99,7 +115,18 @@ const StyledBadge = withStyles((theme) => ({
 
 export const ProfileCard = React.memo(function ProfileCard() {
   const styles = useStyles();
+  const dispatch=useDispatch()
+  
+  const userDetails=useSelector(selectUserProfile)
+  const isLoading=useSelector(selectIsProfileLoading)
+  const encounteredError=useSelector(selectHasProfileError)
 
+
+  useEffect(() => {
+    dispatch(fetchUserDetails("orderId that was clicked"));
+  }, [dispatch]);
+
+  
   return (
     <Card className={cx(styles.card)} elevation={0}>
       <CardContent>

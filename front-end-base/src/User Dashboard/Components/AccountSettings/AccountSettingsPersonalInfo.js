@@ -41,6 +41,21 @@ import "../Styles/AccountSettingsPersonalInfo.css";
 //Resources
 import profilePic from "../../Resources/nadir.jpg";
 
+//react-redux
+import { useDispatch, useSelector } from "react-redux";
+
+//Thunks
+import { fetchPersonalInfoDetails } from "../../Redux/slices/personalInfoSlice";
+
+//selectors
+import {
+  selectPersonalInfo,
+  selectIsPersonalInfoLoading,
+  selectHasPersonalInfoError,
+} from "../../Redux/slices/personalInfoSlice";
+
+//actionCreators
+
 export const AccountSettingsPersonalInfo = (props) => {
   return (
     <div>
@@ -104,6 +119,17 @@ const AccountInfo = () => {
   function handleUpdateName(event) {
     setName(event.target.value);
   }
+
+
+  //Redux store: operations
+  const dispatch=useDispatch()
+  const personalInfo=useSelector(selectPersonalInfo)
+  const isLoading=useSelector(selectIsPersonalInfoLoading)
+  const encounteredError=useSelector(selectHasPersonalInfoError)
+
+  useEffect(() => {
+    dispatch(fetchPersonalInfoDetails("email or id of user"));
+  }, [dispatch]);
 
   return (
     <div>

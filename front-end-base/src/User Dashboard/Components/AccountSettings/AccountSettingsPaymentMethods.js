@@ -1,19 +1,39 @@
-import { Box, Button, Divider, FormControl, InputLabel, MenuItem, TextField, Typography } from "@material-ui/core";
+//ReactJS
+import React, {useState, useEffect} from "react";
 
-import React from "react";
+//Material-ui core
+import { Box, Button, Divider, Typography, Card,CardHeader, CardContent } from "@material-ui/core";
+
+//material-ui styles
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
 
-//Icons
+
+//icons
+import IconButton from "@material-ui/core/IconButton";
 import Jazzcash from "@material-ui/icons/MoneyOffRounded"
 import Easypaisa from "@material-ui/icons/DriveEtaSharp"
 import UnionTransfer from "@material-ui/icons/LocalParkingSharp"
+
+//theme and styles
+
+
+//custom components
+
 //Resources
 import profilePic from "../../Resources/nadir.jpg";
+
+//Redux
+import {useDispatch, useSelector} from "react-redux"
+//Action creators
+
+//selectors
+import {
+  selectPaymentlInfo,
+  selectIsPaymentInfoLoading,
+  selectHasPaymentInfoError
+} from "../../Redux/slices/paymentInfoSlice"
+//thunks
+import {fetchPaymentInfoDetails} from "../../Redux/slices/paymentInfoSlice"
 
 export const AccountSettingsPaymentMethods = (props) => {
   return (
@@ -48,7 +68,21 @@ const attachedMethodsStyles = makeStyles((theme) => ({
 }));
 
 const AttachedMethods = () => {
+
+
   const classes = attachedMethodsStyles();
+  
+
+  const dispatch=useDispatch()
+  const paymentInfo=useSelector(selectPaymentlInfo)
+  const isLoading=useSelector(selectIsPaymentInfoLoading)
+  const encounteredError=useSelector(selectHasPaymentInfoError)
+
+
+useEffect(() => {
+  dispatch(fetchPaymentInfoDetails("Give user id here who is logged in"));
+}, [dispatch]);
+
   return (
     <Card className={classes.root} elevation={2}>
       <CardHeader
@@ -95,6 +129,8 @@ const availableMethodsStyles = makeStyles((theme) => ({
 
 const AvailableMethods = () => {
   const classes = availableMethodsStyles();
+
+
   return (
     <Card className={classes.root} elevation={2}>
       <CardHeader

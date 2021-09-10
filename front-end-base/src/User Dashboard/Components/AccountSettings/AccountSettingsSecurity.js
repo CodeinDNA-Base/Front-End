@@ -1,5 +1,5 @@
 //ReactJS
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //Material-UI core
 import {
@@ -13,11 +13,12 @@ import {
   Card,
   CardHeader,
   CardContent,
-
+  Select
 } from "@material-ui/core";
 
 //material-UI styles
 import { makeStyles } from "@material-ui/core/styles";
+import { useBorderSelectStyles } from "@mui-treasury/styles/select/border";
 
 //Icons
 import IconButton from "@material-ui/core/IconButton";
@@ -25,8 +26,20 @@ import EditIcon from "@material-ui/icons/Edit";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 //Resources
-import { Select } from "@material-ui/core";
-import { useBorderSelectStyles } from "@mui-treasury/styles/select/border";
+
+
+//Redux
+import {useDispatch, useSelector} from "react-redux"
+//Action creators
+
+//selectors
+import {
+  selectSecurityInfo,
+  selectIsSecurityInfoLoading,
+  selectHasSecurityInfoError
+} from "../../Redux/slices/securityInfoSlice"
+//thunks
+import {fetchSecurityInfoDetails} from "../../Redux/slices/securityInfoSlice"
 
 export const AccountSettingsSecurity = (props) => {
   return (
@@ -61,6 +74,7 @@ const passwordStyles = makeStyles((theme) => ({
 }));
 
 const Password = () => {
+  
   const classes = passwordStyles();
 
   const [strength, setStrength] = useState(0);
@@ -69,6 +83,7 @@ const Password = () => {
   const [oldPassword, setOldPassword] = useState();
   const [newPassword, setNewPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+
 
   function handleOldPassword(event) {
     setOldPassword(event.target.value);
@@ -97,6 +112,18 @@ const Password = () => {
   function handleConfirmPassword(event) {
     setConfirmPassword(event.target.value);
   }
+
+
+  //Redux operations
+  const dispatch=useDispatch()
+  const securityInfo=useSelector(selectSecurityInfo)
+  const isLoading=useSelector(selectIsSecurityInfoLoading)
+  const encounteredError=useSelector(selectHasSecurityInfoError)
+
+
+useEffect(() => {
+  dispatch(fetchSecurityInfoDetails("Give user id here who is logged in"));
+}, [dispatch]);
 
   return (
     <Card className={classes.root} elevation={2}>
