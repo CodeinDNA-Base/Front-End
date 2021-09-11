@@ -60,7 +60,7 @@ const initialState={
 const options = {
     name:"homePanel",
     initialState:initialState,
-    reducer:{},
+    reducers:{},
     extraReducers:{
             // loadAccountsOverViewChartData
             [loadAccountsOverViewChartData.pending]: (state, action) => {
@@ -172,4 +172,7 @@ const options = {
 
 
 const homeSlice = createSlice(options);
-export const homeReducer =  homeSlice.reducer;
+const {reducer,actions} =  homeSlice;
+export { reducer as homeReducer };
+
+console.log(homeSlice)

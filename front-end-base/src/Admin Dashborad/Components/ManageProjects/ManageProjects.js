@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import useWindowDimensions from '../useWindowDimensions';
 import { fontFamily } from '../../../Theme/fonts';
@@ -14,6 +14,10 @@ import SetTreadnigProjectTab from './SetTredingProjectTab'
 import ViewAllProjectsTab from './ViewAllProjectsTab'
 
 import { lightBorder } from '../../../Theme/borders';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { selectAll, selectListOfProjects } from './Redux Components/Selectors';
+import { loadDataOfLastChoosedDisplayMode, loadDataOfLastDataUpdateTime, loadDataOfLastUpdateDateAndTime, loadDataOfListOfDraftProjects, loadDataOfListOfDynamicProjects, loadDataOfListOfProjects, loadDataOfListOfStaticProjects } from './Redux Components/Thunks';
 
 function ManageProjects(props) {
     const classes =useStyles();
@@ -21,15 +25,17 @@ function ManageProjects(props) {
     const {height,width} = useWindowDimensions();
     const tabIconHeight=30;
     const tabIconWidth=30;
+
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        //load all data for one time.
+        dispatch(loadDataOfListOfProjects());
+    },[])
     
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-    
-    
-    
-     
     return (
        <Grid container >
          <Grid item xs={1}></Grid>

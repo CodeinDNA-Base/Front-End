@@ -13,6 +13,9 @@ import CustomPhotoUploader from '../../Support/CustomPhotoUploader'
 import { Check, Close } from '@material-ui/icons';
 import ScrollView from '@cantonjs/react-scroll-view/lib/components/ScrollView';
 import ImageHolder from './ImageHolder';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectMedia } from '../Redux Components/Selectors';
+import { updateMediaTempProjectDataHolder } from '../Redux Components/ProjectManagerSlice';
 function Media(props) {
     const classes = useStyles();
 
@@ -23,19 +26,27 @@ function Media(props) {
     const [selectedImage,setSelectedImage]=useState(null);
     const [listOfSelectedImages,setListOfSelectedImages]=useState([]);
 
+    const mediaFromStore = useSelector(selectMedia);
+    const dispatch = useDispatch();
     useEffect(()=>{
         //Load data from store into hooks
-        // setThumbnailImage(store.getState().ProjectsStore.Drafts.AddNewProject.Media.thumbnailImageUri);
-        // setListOfSelectedImages(store.getState().ProjectsStore.Drafts.AddNewProject.Media.listOfImages);
-        // setIsEditingEnabled(store.getState().ProjectsStore.Drafts.AddNewProject.Media.isEditingEnabled);
-        // console.log(store.getState())
-    },[])
+        setThumbnailImage(mediaFromStore.thumbnailImageUri);
+        setListOfSelectedImages(mediaFromStore.listOfImages);
+        setIsEditingEnabled(mediaFromStore.isEditingEnabled);
+
+    },[mediaFromStore])
 
     const handelEditAndSaveChanges = ()=>{
         if(!isEditingEnabled)
         {
             props.setIsLockClosed(true)
+            const payload = {
+                thumbnailImageUri: thumbnailImage,
+                listOfImages:listOfSelectedImages,
+                isEditingEnabled: true
+            }
             // store.dispatch(actions.update_media_ADD_NEW_PROJECTS(thumbnailImage,listOfSelectedImages,true));
+            dispatch(updateMediaTempProjectDataHolder(payload));
         }
         else
         {

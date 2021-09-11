@@ -102,6 +102,7 @@ function ProjectHolder({showMenueSelectionOpt,...props}) {
                  {optionsWhileSelection.map((option,index) => (
                   <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
                     // handleClose(index)
+                    props.handelOptionSelection(props.data)
                     setAnchorEl(null);
                     
                   }}>

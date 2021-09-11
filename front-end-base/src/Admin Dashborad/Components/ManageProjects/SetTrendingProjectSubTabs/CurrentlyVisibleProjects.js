@@ -9,6 +9,11 @@ import {lightBorder} from '../../../../Theme/borders'
 import { Card, CardContent, CardHeader, Divider,Grid,Icon } from '@material-ui/core';
 import ViewProject from './ViewProject';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import Skeleton from '@material-ui/lab/Skeleton';
+import { useSelector } from 'react-redux';
+import { selectAll, selectLastChoosedDisplayMode, selectLastDataUpdateTime, selectLastUpdateDateAndTimeOfListOfCurrentDisplayTrendingProject, selectListOfCurrentDisplayTrendingProject } from '../Redux Components/Selectors';
+import { useDispatch } from 'react-redux';
+import { loadDataOffListOfCurrentDisplayTrendingProject,loadDataOfLastChoosedDisplayMode,loadDataOfLastUpdateDateAndTime,loadDataOfLastDataUpdateTime, loadDataOfListOfDynamicProjects } from '../Redux Components/Thunks';
 function CurrentlyVisibleProjects(props) {
 
     const [isEditingEnabled,setIsEditingEnabled]=useState(true);
@@ -17,14 +22,30 @@ function CurrentlyVisibleProjects(props) {
     const [lastDataUpdateTimeAndDate,setLastUpdateTimeAndDate]=useState(null);
     const [lastChoosedDisplayMode,setLastChoosedDisplayMode]=useState(null);
     const [selectedProjectIndex,setSelectedProjectIndex]=useState(0);
+
+    //setting up data from store into list.
+
+    const listOfCurrentDisplayTrendingProject = useSelector(selectListOfCurrentDisplayTrendingProject);
+    const lastChoosedDisplayMode_FromStore = useSelector(selectLastChoosedDisplayMode);
+    const lastUpdateDateAndTime_FromStore = useSelector(selectLastUpdateDateAndTimeOfListOfCurrentDisplayTrendingProject);
+    const {isLoading_LastChoosedDisplayMode,isLoading_LastUpdateDateAndTime} = useSelector(selectAll);
+
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        //Loading data from api.
+        dispatch(loadDataOffListOfCurrentDisplayTrendingProject());
+        dispatch(loadDataOfLastChoosedDisplayMode());
+       
+    },[])
+
     useEffect(()=>{
 
-        // setListOfProjects(store.getState().ProjectsStore.ListOfTrendingProjectsLoadedFromAPI.data);
-        // setLastUpdateTimeAndDate(store.getState().ProjectsStore.ListOfTrendingProjectsLoadedFromAPI.lastUpdateDateAndTime);
-        // setLastChoosedDisplayMode(store.getState().ProjectsStore.ListOfTrendingProjectsLoadedFromAPI.lastChoosedDisplayMode);
-        
+        setListOfProjects(listOfCurrentDisplayTrendingProject);
+        setLastUpdateTimeAndDate(lastUpdateDateAndTime_FromStore);
+        setLastChoosedDisplayMode(lastChoosedDisplayMode_FromStore);
+
         props.setIsLockClosed(true);
-    },[])
+    },[listOfCurrentDisplayTrendingProject,lastChoosedDisplayMode_FromStore,lastUpdateDateAndTime_FromStore]);
 
     const handelEditAndSaveChanges = ()=>{  
     }
@@ -52,12 +73,21 @@ function CurrentlyVisibleProjects(props) {
             <Divider/>
 
             <CardContent>
+                {
+                    (isLoading_LastChoosedDisplayMode || isLoading_LastUpdateDateAndTime) ? (
+                        <div>
+                            <Headings  text={"Loading.. Please wait..."} fontSize={25}/>
+                                    <Skeleton />
+                                    <Skeleton />
+                                    <Skeleton />
+                                    <Skeleton />
+                        </div>
+                    ):(
 
+                <div>
                 <div style={{border:lightBorder,padding:'0.5rem'}}>
-
                     <Headings text={`Last update time and date : ${lastDataUpdateTimeAndDate}`} fontSize={18}/>
                     <Headings text={`Last choosed display mode : ${lastChoosedDisplayMode}`} fontSize={18}/>
-
                 </div>
                 {
                     (isViewProjectOpen) && 
@@ -158,6 +188,10 @@ function CurrentlyVisibleProjects(props) {
                     
                     )
                 }
+                </div>
+                    )
+                }
+                
             </CardContent>
 
         </Card>

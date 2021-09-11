@@ -44,7 +44,7 @@ function SummuryBarContainer(props) {
         setOnlineUsers(onlineUsersResponse);
         setOnlineTeamMemebers(onlineTeamMembersResponse);
 
-    },[]);
+    },[status]);
 
     return (
         <Card className={classes.root}>

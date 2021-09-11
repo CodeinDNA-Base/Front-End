@@ -7,12 +7,14 @@ import { Headingfonts } from '../../../../Theme/fonts';
 import { Headings } from '../../Support/Headings';
 import {lightBorder} from '../../../../Theme/borders'
 import GroupedRadioButtons from '../../Support/GroupedRadioButtons';
+import { useSelector } from 'react-redux';
+import { selectLastChoosedDisplayMode} from '../Redux Components/Selectors';
 function Publish(props) {
     const handelPublishOnWebSite=()=>{
         alert("Just call the api to add this in database and seleced mode is  :"+selectedOptOfFilter_by_title_2)
     }
 
-    const [selectedOptOfFilter_by_title_2,setSelectedOptOfFilter_by_title_2]=useState();
+    const [selectedOptOfFilter_by_title_2,setSelectedOptOfFilter_by_title_2]=useState("Static Mode");
     const [listOfOptions_filter_by_title_2_RadioBoxes,setListOfOptions_filter_by_title_2_RadioBoxes] =useState([
         {
             optionLabel:"Static Mode",
@@ -37,6 +39,12 @@ function Publish(props) {
         
         
     ]);
+
+    const lastChoosedDisplayMode = useSelector(selectLastChoosedDisplayMode)
+
+    useEffect(()=>{
+        setSelectedOptOfFilter_by_title_2(lastChoosedDisplayMode);
+    },[lastChoosedDisplayMode])
 
     return (
         <div style={{position:'relative'}}>

@@ -6,23 +6,33 @@ import colors from '../../../../Theme/colors';
 import { Headingfonts } from '../../../../Theme/fonts';
 import { Headings } from '../../Support/Headings';
 import {lightBorder} from '../../../../Theme/borders'
+import { useDispatch } from 'react-redux';
+import { updateBasicInfoTempProjectDataHolder, updateMediaTempProjectDataHolder } from '../Redux Components/ProjectManagerSlice';
 function Publish(props) {
+
+    const dispatch = useDispatch();
+
     const handelPublishOnWebSite=()=>{
         alert("Just call the api to add this in database")
-        // const data = {
-        //     projectTitle:null,
-        //     projectDesc:null,
-        //     projectService:null,
-        //     projectSubService:null,
-        //     projectEstimatedPrice:null,
-        //     projectPublishDate:null,
-        //     clientSideViewUrl:null,
-        //     listOfKeyWords:[],
-        //     isEditingEnabled:false
-        // }
-        // store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data));
-        // store.dispatch(actions.update_media_ADD_NEW_PROJECTS(null,[],false));
+        const payload_basicInfo = {
+            projectTitle:null,
+            projectDesc:null,
+            projectService:null,
+            projectSubService:null,
+            projectEstimatedPrice:null,
+            projectPublishDate:null,
+            clientSideViewUrl:null,
+            listOfKeyWords:[],
+            isEditingEnabled:false
+        }
+        const payload_media = {
+            thumbnailImageUri: null,
+            listOfImages:[],
+            isEditingEnabled: true
+        }
         
+        dispatch(updateBasicInfoTempProjectDataHolder(payload_basicInfo));
+        dispatch(updateMediaTempProjectDataHolder(payload_media));
     }
     return (
         <div style={{position:'relative'}}>

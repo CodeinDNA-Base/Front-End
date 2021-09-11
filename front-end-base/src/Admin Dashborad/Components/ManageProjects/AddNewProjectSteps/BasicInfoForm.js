@@ -12,7 +12,9 @@ import produce from 'immer';
 import CustomChipsList from '../../Support/CustomChipsList';
 import Dropdown from '../../Support/Dropdown';
 import DisabledDropdown from '../../Support/DisabledDropdown';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { selectBasicInfo } from '../Redux Components/Selectors';
+import {updateBasicInfoTempProjectDataHolder} from '../Redux Components/ProjectManagerSlice'
 function BasicInfoForm(props) {
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
     //Data hooks
@@ -79,17 +81,19 @@ function BasicInfoForm(props) {
         
     ]);
     
+    const basicInfoFromStore = useSelector(selectBasicInfo);
+    const dispatch = useDispatch();
     useEffect(()=>{
         //load data into hooks from store.
-        // setProjectTitle(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectTitle);
-        // setProjectDesc(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectDesc);
-        // setEstimatedPrice(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectEstimatedPrice);
-        // setListOfOptions_ForChipList(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.listOfKeyWords);
-        // setCatagory(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectService);
-        // setSubCatagory(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.projectSubService)
-        // setIsEditingEnabled(store.getState().ProjectsStore.Drafts.AddNewProject.BasicInfo.isEditingEnabled);
-     
-    },[])
+        setProjectTitle(basicInfoFromStore.projectTitle);
+        setProjectDesc(basicInfoFromStore.projectDesc);
+        setEstimatedPrice(basicInfoFromStore.projectEstimatedPrice);
+        setListOfOptions_ForChipList(basicInfoFromStore.listOfKeyWords);
+        setCatagory(basicInfoFromStore.projectService);
+        setSubCatagory(basicInfoFromStore.projectSubService)
+        setIsEditingEnabled(basicInfoFromStore.isEditingEnabled);
+        console.log("Basic info loaded")
+    },[basicInfoFromStore])
     
     const handelEditAndSaveChanges = ()=>{
         // projectTitle:"Project 2",
@@ -105,18 +109,19 @@ function BasicInfoForm(props) {
         if(!isEditingEnabled)
         {
             props.setIsLockClosed(true)
-            // const data = {
-            //     projectTitle:projectTitle,
-            //     projectDesc:projectDesc,
-            //     projectService:catagory,
-            //     projectSubService:subCatagory,
-            //     projectEstimatedPrice:estrimatedPrice,
-            //     projectPublishDate:"Not add due to issue in date picker",
-            //     clientSideViewUrl:"https://material-ui.com/api/select/",
-            //     listOfKeyWords:listOfOptions_ForChipList,
-            //     isEditingEnabled:true
-            // } 
-            // store.dispatch(actions.update_baic_info_ADD_NEW_PROJECTS(data))
+            const data = {
+                projectTitle:projectTitle,
+                projectDesc:projectDesc,
+                projectService:catagory,
+                projectSubService:subCatagory,
+                projectEstimatedPrice:estrimatedPrice,
+                projectPublishDate:"Not add due to issue in date picker",
+                clientSideViewUrl:"https://material-ui.com/api/select/",
+                listOfKeyWords:listOfOptions_ForChipList,
+                isEditingEnabled:true
+            } 
+            dispatch(updateBasicInfoTempProjectDataHolder(data));
+           
         }
         else
         {

@@ -10,6 +10,9 @@ import Pagination from '@material-ui/lab/Pagination';
 import { ScrollView } from "@cantonjs/react-scroll-view";
 import FilterEngine from '../FilterMotor'
 import produce from 'immer';
+import Skeleton from '@material-ui/lab/Skeleton';
+import { useSelector } from 'react-redux';
+import { selectAll, selectListOfProjects } from '../Redux Components/Selectors';
 function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
     const classes = useStyles();
     const [listOfProjects,setListOfProjects]=useState([]);
@@ -22,17 +25,11 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
 
     const [startIndexOfPageWhenSearching,setStartIndexOfPageWhenSearching]=useState(0);
     const [endIndexOfPageWhenSearching,setEndIndexOfPageWhenSearching]=useState(9);
-
-
     const [currentOpenPage,setCurrentOpenPage]=useState(0);
     const [currentOpenPageWhenSearching,setCurrentOpenPageWhenSearching]=useState(0);
     const [list,setList]=useState();
     const [searchResults,setSearchResults]=useState([]);
-
-    
     const [searchKeyPairs,setSearchKeyPairs] =useState();
-    
-
     const [listOfOptions_ForChipList, setListOfOptions_ForChipList] = useState([
         // { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
     ]);
@@ -44,13 +41,15 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
         filter_by_title_5_type:"projectEstimatedPrice",
     }
 
+    const listOfAllProjectsFromStore = useSelector(selectListOfProjects); //this will be updated and will cause auto render as soon as sotre get updated.
+    const {isLoading_ListOfProjects} = useSelector(selectAll);
     useEffect(()=>{
-    //    setListOfProjects(store.getState().ProjectsStore.ListOfProjectsLoadedFromAPI.data);
-    //    setNumberOfPage(Math.ceil((store.getState().ProjectsStore.ListOfProjectsLoadedFromAPI.data.length/9)))
-    },[]);
+        //setting up list of projects in project's rneder list.
+       setListOfProjects(listOfAllProjectsFromStore);
+       setNumberOfPage(Math.ceil((listOfAllProjectsFromStore.length/9)))
+    },[listOfAllProjectsFromStore]);
 
     useEffect(()=>{
-    //    console.log("len"+listOfProjects.length)
        updateList(startIndexOfPage,(listOfProjects.length>=endIndexOfPage) ? endIndexOfPage : listOfProjects.length);
     },[listOfProjects,endIndexOfPage]);
 
@@ -221,26 +220,39 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
             <Filters listOfOptions_ForChipList={listOfOptions_ForChipList} setListOfOptions_ForChipList={setListOfOptions_ForChipList}/>
             <Grid container>
 
-                        
                 <Grid item xs={12}>
                     <Card
                       elevation={0}
                       style={{border:lightBorder}}  
                     >
                         <CardContent>
-                            
+                            {
+                                (isLoading_ListOfProjects) ? (
+                                    <div>
+                                    <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Fetching projects.."} fontSize={30}/> </div>
+                                    <Skeleton />
+                                    <Skeleton />
+                                    <Skeleton />
+                                    <Skeleton />
+                                    </div>
+                                ):(
+
+                            <div>
                                 { (listOfOptions_ForChipList.length===0) && 
                                     <div>
-                                       <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"All projects"} fontSize={30}/> </div>
-                                    <ImageList rowHeight={350} className={classes.imageList} cols={3}>
-                                     {list}
-                                    </ImageList>
-                                 <div>
+                                        
+                                        <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"All projects"} fontSize={30}/> </div>
+                                            
+                                            <ImageList rowHeight={350} className={classes.imageList} cols={3}>
+                                            {list}
+                                            </ImageList>
+                                            
+                                        <div>
                                          <Pagination onChange={(e)=>{
                                              setCurrentOpenPage(parseInt(e.target.outerText));
                                              handelPageChange(e);
                                          }} count={numberOfPage} variant="outlined" shape="rounded" />
-                                 </div>
+                                        </div>
                                     </div>
                                      
                                 }
@@ -259,6 +271,9 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
                                  </div>
                                 </div>
                                  }
+                                </div>
+                                )
+                            }
 
                                        
                         </CardContent>

@@ -6,8 +6,10 @@ import { Headings } from '../../Support/Headings';
 
 function ImageHolder(props) {
     const [imageUri,setImageUri]=useState(null);
+    const [index,setIndex]=useState()
     useEffect(()=>{
         setImageUri(props.data.imageUri);
+        setIndex(props.index);
     },[])
     return (
         <Card
@@ -25,7 +27,7 @@ function ImageHolder(props) {
                             <Check/>
                        ):(
                            <div style={{cursor:'pointer'}} onClick={()=>{
-                            props.handelDeleteImagesFromGallary(props.data)
+                            props.handelDeleteImagesFromGallary(props.data,index);
                             }}>
                             <Close/>
                         </div>   

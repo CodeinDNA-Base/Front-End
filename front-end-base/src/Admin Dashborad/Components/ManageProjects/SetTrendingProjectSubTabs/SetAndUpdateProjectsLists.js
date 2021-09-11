@@ -14,9 +14,16 @@ import ProjectSelectionr from './ProjectSelectionr';
 import ListOfAllProjects from '../ViewAllProjectsSubComponents/ListOfAllProjects';
 import CachedIcon from '@material-ui/icons/Cached';
 import ImageHolder from './ImageHolder';
+import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/core';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch'
+import { useSelector,useDispatch } from 'react-redux';
+
+import { selectAll, selectListOfDynamicProjectsList, selectListOfStaticProjects } from '../Redux Components/Selectors';
+import { loadDataOfListOfDynamicProjects, loadDataOfListOfStaticProjects } from '../Redux Components/Thunks';
+import { addProjectInDynamicListOfProjects, removeProjectByIdFromDynamicListOfProjects, updateByIdListOfStaticProjects } from '../Redux Components/ProjectManagerSlice';
 function SetAndUpdateProjectsLists(props) {
+    const classes = useStyles();
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
     const [isDataLoadedFromRedux,setIsDataLoadedFromRedux]=useState(false);
     const [listOfStaticProjects,setlistOfStaticProjects]=useState([])
@@ -28,27 +35,47 @@ function SetAndUpdateProjectsLists(props) {
     const [refresher,setRefresher]=useState(true);
     const [listOfSelectedItems,setlistOfSelectedItems]=useState([]);
     
-    const classes = useStyles();
+    const listOfStaticProjects_FromStore = useSelector(selectListOfStaticProjects);
+    const listOfDynamicProjectsList_FromStore = useSelector(selectListOfDynamicProjectsList);
+    
+    const dispatch = useDispatch();
 
     useEffect(()=>{
-
-        // setlistOfStaticProjects(store.getState().ProjectsStore.ListOfStaticProjects.data);
-        // setLastUpdateTimeAndDate(store.getState().ProjectsStore.ListOfStaticProjects.lastUpdateDateAndTime);
-        // setLastChoosedDisplayMode(store.getState().ProjectsStore.ListOfStaticProjects.lastChoosedDisplayMode);
-        // setlistOfSelectedItems(store.getState().ProjectsStore.listOfDynamicProjectsList);
-        // setIsDataLoadedFromRedux(true);
-        
+        dispatch(loadDataOfListOfStaticProjects()); 
+        dispatch(loadDataOfListOfDynamicProjects());
     },[])
 
+    // useEffect(()=>{
+
+        
+    //     // setLastUpdateTimeAndDate(store.getState().ProjectsStore.ListOfStaticProjects.lastUpdateDateAndTime);
+    //     // setLastChoosedDisplayMode(store.getState().ProjectsStore.ListOfStaticProjects.lastChoosedDisplayMode);
+    //     // We need to generate a special array for loadig into list .. for dynamic list
+      
+    // },[listOfStaticProjects_FromStore])
+
     useEffect(()=>{
-        // setlistOfStaticProjects(store.getState().ProjectsStore.ListOfStaticProjects.data);
+        setlistOfStaticProjects(listOfStaticProjects_FromStore);
+    
+    },[listOfStaticProjects_FromStore]);
+
+    useEffect(()=>{
+       var tempList=[]
+       listOfDynamicProjectsList_FromStore.forEach((item,index) => {
+           tempList.push({key:index,imageUri:item.projectThumbNail,seletedItem:item,col:1});
+       });
+       setlistOfSelectedItems(tempList);
+      
+    },[listOfDynamicProjectsList_FromStore])
+
+    useEffect(()=>{
+         setlistOfStaticProjects(listOfStaticProjects_FromStore);
     },[refresher]);
 
     const handelEditAndSaveChanges = ()=>{
         if(!isEditingEnabled){
-            alert("Until you publish it, these are loacal changes.")
-            props.setIsLockClosed(true);            
-            // store.dispatch(actions.add_projects_in_dynamic_projects_list_SET_TRENDING_PROJECTS(listOfSelectedItems))
+            alert("Call the thunx for updating the data to API.")
+            props.setIsLockClosed(true);   
         }
         setIsEditingEnabled((prev)=>{
             return !(prev)
@@ -62,42 +89,35 @@ function SetAndUpdateProjectsLists(props) {
         setIsProjectSelectorForDynamicProjectsListOpen(!isProjectSelectorForDynamicProjectsListOpen);
     }
     const handelSelectItemsForList=(selectedItem)=>{
-        const key_index = listOfSelectedItems.length;
-        setlistOfSelectedItems(produce(listOfSelectedItems,draf=>{
-            draf.push({key:key_index,imageUri:selectedItem.projectThumbNail,seletedItem:selectedItem,col:1});
-        }))
+        dispatch(addProjectInDynamicListOfProjects(selectedItem));
         handePageSwitchFotDynamicProjectsSelector();
     }
 
-    const handelDeleteOfSelectItemsForList = (item)=>{
-        setlistOfSelectedItems(listOfSelectedItems.filter((e)=>{
-            if(item.key!=e.key)
-            return e
-        }))
-        
+    const handelDeleteOfSelectItemsForList = (item,index)=>{
+        dispatch(removeProjectByIdFromDynamicListOfProjects({selectedProject:item.seletedItem,index}));
     }
 
-    const handelOptionSelection = (event,selectedOption,selectedProjectKey)=>{}
-    const handeSelectOption = (selectedValue) =>{
-        // alert(selectedValue);
+    const handeSelectOption=()=>{}
+
+    const handelOptionSelection = (selectedValue) =>{
+        console.log(selectedValue);
         switch (selectedProjectIndex) {
             case 0:
-                // store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,0));
+                dispatch(updateByIdListOfStaticProjects({selectedProject:selectedValue,index:0}))
                 handePageSwitchFotSataticProjectsSelector();
                 break;
             case 1:
-                // store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,1));
+                dispatch(updateByIdListOfStaticProjects({selectedProject:selectedValue,index:1}))
                 handePageSwitchFotSataticProjectsSelector();
                 break;
             case 2:
-                // store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,2));
+                dispatch(updateByIdListOfStaticProjects({selectedProject:selectedValue,index:2}))
                 handePageSwitchFotSataticProjectsSelector();
-              
+
                 break;
             case 3:
-                // store.dispatch(actions.add_projects_in_static_projects_list_SET_TRENDING_PROJECTS(selectedValue,3));
+                dispatch(updateByIdListOfStaticProjects({selectedProject:selectedValue,index:3}))
                 handePageSwitchFotSataticProjectsSelector();
-                
                 break;
                         
             default:
@@ -131,11 +151,18 @@ function SetAndUpdateProjectsLists(props) {
             <Divider/>
 
             <CardContent>
-                <div>
-                    <Headings  text={"Projects for Static Display Mode"} fontSize={30}/>
-                </div>
+               
                 {
-                    (isDataLoadedFromRedux===true) &&
+                
+                (listOfStaticProjects.length!=0) ? (
+                        
+                <div>
+                <div>
+                     <Headings  text={"Projects for Static Display Mode"} fontSize={30}/>
+                </div>    
+                {
+                    
+                    
                     <div>
                         {
                             (isProjectSelectorForStaticProjectsListOpen===true) ? (
@@ -306,107 +333,129 @@ function SetAndUpdateProjectsLists(props) {
                         }
                     </div>
                 }
-
-                <Divider/>
-
-                <div >
-                    <Headings  text={"Projects for Dynamic Display Mode"} fontSize={30}/>
                 </div>
-                
-
-                {/* Dynamic project */}
-                
-                {
-                    (isProjectSelectorForDynamicProjectsListOpen===true) ? (
-                        <div>
-                            <Grid container style={{marginTop:"1rem",border:lightBorder,padding:'0.5rem'}}>
-                            <Grid item={12} style={{padding:'0.5rem',height:'40%'}}>
-                                <div style={{border:lightBorder,padding:'0.5rem',width:'2.2rem',textAlign:'center',borderRadius:'15%',cursor:'pointer'}}
-                                    onClick={handePageSwitchFotSataticProjectsSelector}
-                                >    
-                                    <ArrowBackIos/>
-                                </div>
-                                <div style={{marginTop:'1rem'}}>
-                                    <ListOfAllProjects showMenueSelectionOpt={true} handeSelectOption={handelSelectItemsForList} handelOptionSelection={handelOptionSelection}/>
-                                </div>
-                  
-                            </Grid>
-                        </Grid>
-                        </div>
                     ):(
                         <div>
-                            <Grid container>
-                                        <Grid item xs={2}></Grid>
-                                        <Grid item xs={8}  style={{border:lightBorder,height:'35rem',marginTop:'1rem'}}>
-                                        <div>
-                                            {
-                                                (listOfSelectedItems.length!=0) ? (
-                                                    <div>
-                                                        <div style={{marginLeft:'0rem',marginTop:'0.5rem',position:'relative'}}>
-                                                                <div style={{marginLeft:'0.5rem'}}>
-                                                                 <Headings text={"List of projects"} fontSize={25} fontWeight={'bold'}/>
-                                                                
-                                                                {
-                                                                    (isEditingEnabled) ? 
-                                                                    <div style={{position:'absolute',top:'0rem',right:'1rem'}}>
-                                                                        <Headings text={"Unlock for edit"} fontSize={20} fontWeight={''}/>
-                                                                    </div> 
-                                                                    : (
-                                                                    <div>
-                                                                    <div style={{position:'absolute',top:0,right:2,cursor:'pointer'}} onClick={handePageSwitchFotDynamicProjectsSelector}>
-                                                                        {/* <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectItemsForList}/> */}
-                                                                        <ImageSearchIcon color="primary"/>
-                                                                    </div>
-                                                                    <div style={{position:'absolute',top:'0.2rem',right:'2rem'}} >
-                                                                        <Headings text={"Select project"} fontSize={20} fontWeight={''}/>
-                                                                    </div>
-                                                                    </div>
-                                                                    )
-                                                                }
-            
-                                                                </div>
-                                                                <Divider/> 
-                                                        </div>
-                                                        <ImageList rowHeight={250} className={classes.imageList} cols={3}>
-                                                          {listOfSelectedItems.map((item) => (
-                                                            <ImageListItem key={item.imageUri} cols={item.cols || 1}>
-                                                              {/* <img src={item.img} alt={item.title} /> */}
-                                                              <ImageHolder data={item} handelDeleteImagesFromGallary={handelDeleteOfSelectItemsForList} isEditingEnabled={isEditingEnabled}/>
-                                                            </ImageListItem>
-                                                          ))}
-                                                        </ImageList>
-                                                    </div>
-                                                ):(
-                                                    <div style={{marginTop:'25%',textAlign:'center'}}>
-                                                    <div style={{marginTop:"10%",}}>
-                                                        <Headings text={"Projects list"} fontSize={25} fontWeight={'bold'}/>
-                                                    </div>
-                                                    <div style={{position:'relative'}}>
-                                                        {
-                                                            (isEditingEnabled) ? (
-                                                                <div style={{}}>
-                                                                    <Headings text={"Unlock for editing"} fontSize={18}/>
-                                                                </div>
-                                                            ):(
-                                                                <div onClick={handePageSwitchFotDynamicProjectsSelector} style={{cursor:'pointer'}}>
-                                                                    <Headings text={"Selecte project"} fontSize={18}/>                
-                                                                </div>
-                                                                // <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectItemsForList}/>
-                                                            )
-                                                        }
-                                                        
-                                                    </div>
-                                                    </div>
-                                                )
-                                            }
-                                        </div>
-                                        </Grid>
-                                        <Grid item xs={2}></Grid>
-                                    </Grid>
-                                
+                            <Headings  text={"Loading List of Static projects"} fontSize={30}/>
+                            <Skeleton />
+						    <Skeleton />
                         </div>
                     )
                 }
+
+                <Divider/>
+                {
+                    (listOfSelectedItems.length===0) ? (
+                        <div>
+                        <Headings  text={"Loading List of Dynamic projects..."} fontSize={30}/>
+                        <Skeleton />
+                        <Skeleton />
+                    </div>
+                    ):(
+                        <div>
+                            <div >
+                                <Headings  text={"Projects for Dynamic Display Mode"} fontSize={30}/>
+                            </div>
+                            
+            
+                            {/* Dynamic project */}
+                            
+                            {
+                                (isProjectSelectorForDynamicProjectsListOpen===true) ? (
+                                    <div>
+                                        <Grid container style={{marginTop:"1rem",border:lightBorder,padding:'0.5rem'}}>
+                                        <Grid item={12} style={{padding:'0.5rem',height:'40%'}}>
+                                            <div style={{border:lightBorder,padding:'0.5rem',width:'2.2rem',textAlign:'center',borderRadius:'15%',cursor:'pointer'}}
+                                                onClick={handePageSwitchFotSataticProjectsSelector}
+                                            >    
+                                                <ArrowBackIos/>
+                                            </div>
+                                            <div style={{marginTop:'1rem'}}>
+                                                <ListOfAllProjects showMenueSelectionOpt={true} handeSelectOption={handelOptionSelection} handelOptionSelection={handelSelectItemsForList}/>
+                                            </div>
+                              
+                                        </Grid>
+                                    </Grid>
+                                    </div>
+                                ):(
+                                    <div>
+                                        <Grid container>
+                                                    <Grid item xs={2}></Grid>
+                                                    <Grid item xs={8}  style={{border:lightBorder,height:'35rem',marginTop:'1rem'}}>
+                                                    <div>
+                                                        {
+                                                            (listOfSelectedItems.length!=0) ? (
+                                                                <div>
+                                                                    <div style={{marginLeft:'0rem',marginTop:'0.5rem',position:'relative'}}>
+                                                                            <div style={{marginLeft:'0.5rem'}}>
+                                                                             <Headings text={"List of projects"} fontSize={25} fontWeight={'bold'}/>
+                                                                            
+                                                                            {
+                                                                                (isEditingEnabled) ? 
+                                                                                <div style={{position:'absolute',top:'0rem',right:'1rem'}}>
+                                                                                    <Headings text={"Unlock for edit"} fontSize={20} fontWeight={''}/>
+                                                                                </div> 
+                                                                                : (
+                                                                                <div>
+                                                                                <div style={{position:'absolute',top:0,right:2,cursor:'pointer'}} onClick={handePageSwitchFotDynamicProjectsSelector}>
+                                                                                    {/* <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectItemsForList}/> */}
+                                                                                    <ImageSearchIcon color="primary"/>
+                                                                                </div>
+                                                                                <div style={{position:'absolute',top:'0.2rem',right:'2rem'}} >
+                                                                                    <Headings text={"Select project"} fontSize={20} fontWeight={''}/>
+                                                                                </div>
+                                                                                </div>
+                                                                                )
+                                                                            }
+                        
+                                                                            </div>
+                                                                            <Divider/> 
+                                                                    </div>
+                                                                    <ImageList rowHeight={250} className={classes.imageList} cols={3}>
+                                                                      {listOfSelectedItems.map((item,index) => (
+                                                                        <ImageListItem key={item.imageUri} cols={item.cols || 1}>
+                                                                          {/* <img src={item.img} alt={item.title} /> */}
+                                                                          <ImageHolder data={item} index={index} handelDeleteImagesFromGallary={handelDeleteOfSelectItemsForList} isEditingEnabled={isEditingEnabled}/>
+                                                                        </ImageListItem>
+                                                                      ))}
+                                                                    </ImageList>
+                                                                </div>
+                                                            ):(
+                                                                <div style={{marginTop:'25%',textAlign:'center'}}>
+                                                                <div style={{marginTop:"10%",}}>
+                                                                    <Headings text={"Projects list"} fontSize={25} fontWeight={'bold'}/>
+                                                                </div>
+                                                                <div style={{position:'relative'}}>
+                                                                    {
+                                                                        (isEditingEnabled) ? (
+                                                                            <div style={{}}>
+                                                                                <Headings text={"Unlock for editing"} fontSize={18}/>
+                                                                            </div>
+                                                                        ):(
+                                                                            <div onClick={handePageSwitchFotDynamicProjectsSelector} style={{cursor:'pointer'}}>
+                                                                                <Headings text={"Selecte project"} fontSize={18}/>                
+                                                                            </div>
+                                                                            // <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectItemsForList}/>
+                                                                        )
+                                                                    }
+                                                                    
+                                                                </div>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </div>
+                                                    </Grid>
+                                                    <Grid item xs={2}></Grid>
+                                                </Grid>
+                                            
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )
+
+                }                
+
 
                 
                 <Divider/>
