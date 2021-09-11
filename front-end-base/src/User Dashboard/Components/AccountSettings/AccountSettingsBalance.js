@@ -13,8 +13,8 @@ import {
   TableRow,
   Typography,
   Card,
-  CardHeader, 
-  CardContent
+  CardHeader,
+  CardContent,
 } from "@material-ui/core";
 
 //material ui styles
@@ -28,18 +28,29 @@ import { makeStyles } from "@material-ui/core/styles";
 
 //resources
 
-
 //react-redux
 import { useDispatch, useSelector } from "react-redux";
 
 //Thunks
-import { fetchBalanceInfoDetails } from "../../Redux/slices/balanceInfoSlice";
+import { fetchBalance, fetchPurchaseHistory } from "../../Redux/slices/balanceInfoSlice";
 
 //selectors
 import {
-  selectBalanceInfo,
-  selectIsBalanceInfoLoading,
-  selectHasBalanceInfoError,
+  selectBalance,
+  selectIsBalanceLoading,
+  selectHasBalanceError,
+  selectPurchaseHistory,
+  selectIsPurchaseHistoryLoading,
+  selectHasPurchaseHistoryError,
+} from "../../Redux/slices/balanceInfoSlice";
+
+//action creators
+
+import {
+  getThisMonthPurchaseHistory,
+  getLast3MonthsPurchaseHistory,
+  getLast1YearPurchaseHistory,
+  getAllTimePurchaseHistory,
 } from "../../Redux/slices/balanceInfoSlice";
 
 export const AccountSettingsBalance = (props) => {
@@ -75,17 +86,16 @@ const currentBalanceStyles = makeStyles((theme) => ({
 const CurrentBalance = () => {
   const classes = currentBalanceStyles();
 
-    //Redux store: operations
-    const dispatch=useDispatch()
-    const balanceInfo=useSelector(selectBalanceInfo)
-    const isLoading=useSelector(selectIsBalanceInfoLoading)
-    const encounteredError=useSelector(selectHasBalanceInfoError)
-  
-    useEffect(() => {
-      dispatch(fetchBalanceInfoDetails("email or id of user"));
-    }, [dispatch]);
+  //Redux store: operations
+  const dispatch = useDispatch();
+  const balance = useSelector(selectBalance);
+  const isLoadingBalance = useSelector(selectIsBalanceLoading);
+  const encounteredErrorInBalance = useSelector(selectHasBalanceError);
 
-    
+  useEffect(() => {
+    dispatch(fetchBalance("email or id of user"));
+  }, [dispatch]);
+
   return (
     <Card className={classes.root} elevation={2}>
       <CardHeader
@@ -132,6 +142,18 @@ const PurchaseHistory = () => {
   const [duration, setDuration] = useState(1);
 
   function handleHistoryClick(duration) {
+    if(duration==0){
+      dispatch(getAllTimePurchaseHistory())
+    }
+    else if(duration==1){
+      dispatch(getThisMonthPurchaseHistory())
+    }
+    else if(duration==3){
+      dispatch(getLast3MonthsPurchaseHistory())
+    }
+    else if(duration==12){
+      dispatch(getLast1YearPurchaseHistory())
+    }
     setDuration(duration);
   }
 
@@ -146,6 +168,15 @@ const PurchaseHistory = () => {
       return <AllTimeHistory />;
     }
   }
+
+  const dispatch=useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchPurchaseHistory("email or id of user"));
+  }, [dispatch]);
+
+
+
   return (
     <Card className={classes.root} elevation={2}>
       <CardHeader

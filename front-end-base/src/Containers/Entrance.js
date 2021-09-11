@@ -16,6 +16,7 @@ import { SearchProjectsContainer } from "./SearchProjectsContainer";
 
 import AdminDashboardContainer from './AdminDashboardContainer'
 import SubServicesContainer from "./SubServicesContainer";
+import AuthenticationContainer from "./AuthenticationContainer"
 
 function Entrance(props) {
 
@@ -36,6 +37,7 @@ function Entrance(props) {
           path="/searchProject"
           component={SearchProjectsContainer}
         />
+        <Route exact path="/login" component={AuthenticationContainer} />
         <Route exact path="/userdashboard" component={UserDashboardContainer} />
         <Route exact path="/settings" component={UserDashboardSettings} />
         <Route exact path="/orders" component={UserDashboardOrders} />
