@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import produce from 'immer'
-import { act } from "react-dom/test-utils";
 import {
     loadDataOfLastChoosedDisplayMode, loadDataOfLastDataUpdateTime, loadDataOfLastUpdateDateAndTime,
     loadDataOfListOfDraftProjects, loadDataOfListOfDynamicProjects, loadDataOfListOfProjects,
@@ -353,6 +352,21 @@ const options = {
             [updateStaticProjectsList.rejected]: (state, action) => {
                 state.isLoading_UpdateStaticProjectsList = false;
                 state.hasError_UpdateStaticProjectsList = true;
+            },
+
+            // updateProjectInDatabase
+            [updateProjectInDatabase.pending]: (state, action) => {
+                state.isLoading_UpdateProjectInDatabase = true;
+                state.hasError_UpdateProjectInDatabase = false;
+            },
+            [updateProjectInDatabase.fulfilled]: (state, action) => {
+                state.tempProjectDataHolder = action.payload;
+                state.isLoading_UpdateProjectInDatabase = false;
+                state.hasError_UpdateProjectInDatabase = false;
+            },
+            [updateProjectInDatabase.rejected]: (state, action) => {
+                state.isLoading_UpdateProjectInDatabase = false;
+                state.hasError_UpdateProjectInDatabase = true;
             },
     }
 }

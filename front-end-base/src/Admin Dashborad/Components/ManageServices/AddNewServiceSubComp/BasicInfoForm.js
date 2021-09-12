@@ -10,7 +10,9 @@ import {lightBorder} from '../../../../Theme/borders'
 import { RoundedTextFields, SimpleTextFields,MultiLineTextFields } from '../../Support/TextFields';
 import produce from 'immer'; 
 import CustomChipsList from '../../Support/CustomChipsList';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTempServiceDataHolderBasicInfo } from '../Redux Components/Selectors';
+import { updateTempServiceDataHolderBasicInfo } from '../Redux Components/ServiceManagerSlice';
 
 function BasicInfoForm(props) {
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
@@ -23,15 +25,17 @@ function BasicInfoForm(props) {
     const [listOfOptions_ForChipList_OfSearchKeyWords, setlistOfOptions_ForChipList_OfSearchKeyWords]=useState([]);
     const [listOfOptions_ForChipList_OfSubServices, setlistOfOptions_ForChipList_OfSubServices]=useState([]);
     
+    const dispatch = useDispatch();
+    const basicInfo_FromStore = useSelector(selectTempServiceDataHolderBasicInfo);
     useEffect(()=>{
         //load data into hooks from store.
-        // setServiceTitle(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceTitle);
-        // setServiceDesc(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.serviceDesc);
-        // setlistOfOptions_ForChipList_OfSearchKeyWords(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfKeyWords);
-        // setlistOfOptions_ForChipList_OfSubServices(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.listOfSubServices);
-        // setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.BasicInfo.isEditingEnabled);
+        setServiceTitle(basicInfo_FromStore.serviceTitle);
+        setServiceDesc(basicInfo_FromStore.serviceDesc);
+        setlistOfOptions_ForChipList_OfSearchKeyWords(basicInfo_FromStore.listOfKeyWords);
+        setlistOfOptions_ForChipList_OfSubServices(basicInfo_FromStore.listOfSubServices);
+        setIsEditingEnabled(basicInfo_FromStore.isEditingEnabled);
     
-    },[])
+    },[basicInfo_FromStore]);
     
     const handelEditAndSaveChanges = ()=>{
         if(!isEditingEnabled)
@@ -39,14 +43,14 @@ function BasicInfoForm(props) {
 
             props.setIsLockClosed(true);  
             // Updating data in redux store..
-            // const data ={
-            //     serviceTitle:serviceTitle,
-            //     serviceDesc:serviceDesc,
-            //     listOfSubServices:listOfOptions_ForChipList_OfSubServices,
-            //     listOfKeyWords:listOfOptions_ForChipList_OfSearchKeyWords,
-            //     isEditingEnabled:true
-            // }
-            // store.dispatch(actions.update_baic_info_ADD_NEW_SERVICE(data));
+            const payload ={
+                serviceTitle:serviceTitle,
+                serviceDesc:serviceDesc,
+                listOfSubServices:listOfOptions_ForChipList_OfSubServices,
+                listOfKeyWords:listOfOptions_ForChipList_OfSearchKeyWords,
+                isEditingEnabled:true
+            }
+            dispatch(updateTempServiceDataHolderBasicInfo(payload));
         }
         else
         {

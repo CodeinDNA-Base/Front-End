@@ -107,7 +107,8 @@ export const addProjectToDatabase = createAsyncThunk(
 export const updateProjectInDatabase = createAsyncThunk(
     'projectManagerPanel/updateProjectInDatabase',
     async(args,thunkApi)=>{
-        const response = {} //Call the api.
+
+        const response = {} //Call the api. //this will return the same type of object.
         return response;
     }
 )

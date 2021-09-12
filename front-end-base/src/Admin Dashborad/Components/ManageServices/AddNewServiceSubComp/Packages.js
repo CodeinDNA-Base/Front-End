@@ -12,6 +12,9 @@ import ScrollView from '@cantonjs/react-scroll-view/lib/components/ScrollView';
 import GroupedRadioButtons from '../../Support/GroupedRadioButtons';
 import CustomChipsList from '../../Support/CustomChipsList';
 import produce from 'immer';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectisEditingForPakcagePanel, selectTempServiceDataHolderPackagesBasic, selectTempServiceDataHolderPackagesPremium, selectTempServiceDataHolderPackagesStandard } from '../Redux Components/Selectors';
+import { updateIsEditingFlagOfBasicInfoForm, updateTempServiceDataHolderPackagesBasic, updateTempServiceDataHolderPackagesPremium, updateTempServiceDataHolderPackagesStandard } from '../Redux Components/ServiceManagerSlice';
 function Packages(props) {
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
     const [selectedFeature_FromList_Basic,setSelectedFeature_FromList_Basic]=useState();
@@ -27,27 +30,29 @@ function Packages(props) {
     const [price_Standard,setPrice_Standard]=useState();
     const [price_Premium,setPrice_Premium]=useState();
     
-
+    const dispatch = useDispatch();
+    const basicInfo_FromStore = useSelector(selectTempServiceDataHolderPackagesBasic);
+    const standard_FromStore = useSelector(selectTempServiceDataHolderPackagesStandard);
+    const premium_FromStoe = useSelector(selectTempServiceDataHolderPackagesPremium);
+    const is_EditingEnable_FromStore = useSelector(selectisEditingForPakcagePanel);
     useEffect(()=>{
         // Loading data from store.
-        // setDesc_Basic(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.packageDescription);
-        // setDesc_Standard(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.packageDescription);
-        // setDesc_Premium(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.packageDescription);
+        setDesc_Basic(basicInfo_FromStore.packageDescription);
+        setDesc_Standard(standard_FromStore.packageDescription);
+        setDesc_Premium(premium_FromStoe.packageDescription);
         
         
-        // setPrice_Basic(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.packagePrice);
-        // setPrice_Standard(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.packagePrice);
-        // setPrice_Premium(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.packagePrice);
+        setPrice_Basic(basicInfo_FromStore.packagePrice);
+        setPrice_Standard(standard_FromStore.packagePrice);
+        setPrice_Premium(premium_FromStoe.packagePrice);
         
-        // setListOfOptions_ForChipList_Basic(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Basic.listOfFeatures);
-        // setListOfOptions_ForChipList_Standard(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Standard.listOfFeatures);
-        // setListOfOptions_ForChipList_Premium(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.Premium.listOfFeatures);
+        setListOfOptions_ForChipList_Basic(basicInfo_FromStore.listOfFeatures);
+        setListOfOptions_ForChipList_Standard(standard_FromStore.listOfFeatures);
+        setListOfOptions_ForChipList_Premium(premium_FromStoe.listOfFeatures);
 
-        // setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Packages.isEditingEnabled);
-        
-
-        // console.log(store.getState());
-    },[])
+        setIsEditingEnabled(is_EditingEnable_FromStore.isEditingEnabled);
+     
+    },[basicInfo_FromStore,standard_FromStore,premium_FromStoe,is_EditingEnable_FromStore])
 
     const handelEditAndSaveChanges = ()=>{
         if(!isEditingEnabled)
@@ -78,9 +83,9 @@ function Packages(props) {
             //         listOfFeatures:listOfOptions_ForChipList_Basic,
             //     },
             //     Standard:{
-            //         packageDescription:desc_Standard,
-            //         packagePrice:price_Standard,
-            //         listOfFeatures:listOfOptions_ForChipList_Standard,
+                    // packageDescription:desc_Standard,
+                    // packagePrice:price_Standard,
+                    // listOfFeatures:listOfOptions_ForChipList_Standard,
             //     },
             //     Premium:{
             //         packageDescription:desc_Premium,
@@ -88,17 +93,35 @@ function Packages(props) {
             //         listOfFeatures:listOfOptions_ForChipList_Premium,
             //     }
             // }
-            props.setIsLockClosed(true);  
-            // store.dispatch(actions.update_packages_ADD_NEW_SERVICE(data));
+            const basic_payload = {
+                        packageDescription:desc_Basic,
+                        packagePrice:price_Basic,
+                        listOfFeatures:listOfOptions_ForChipList_Basic,
+                    }
+            const standard_payload = {
+                packageDescription:desc_Standard,
+                packagePrice:price_Standard,
+                listOfFeatures:listOfOptions_ForChipList_Standard,
+            }        
+            const premium_payload = {
+                packageDescription:desc_Premium,
+                packagePrice:price_Premium,
+                listOfFeatures:listOfOptions_ForChipList_Premium,  
+            }
 
+           
+            // store.dispatch(actions.update_packages_ADD_NEW_SERVICE(data));
+            dispatch(updateTempServiceDataHolderPackagesBasic(basic_payload));
+            dispatch(updateTempServiceDataHolderPackagesPremium(premium_payload));
+            dispatch(updateTempServiceDataHolderPackagesStandard(standard_payload));
+            dispatch(updateIsEditingFlagOfBasicInfoForm(true))
+            props.setIsLockClosed(true);  
         }
         else
         {
             props.setIsLockClosed(false)
         }
-        setIsEditingEnabled((prev)=>{
-            return !(prev)
-        });
+        setIsEditingEnabled(!isEditingEnabled);
     }
     const handelInsertItemInChipList_Basic=()=>{
         const key_index = listOfOptions_ForChipList_Basic.length;

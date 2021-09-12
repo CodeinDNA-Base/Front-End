@@ -36,9 +36,11 @@ function AddNewServiceTab(props) {
           setCurrentPanel(<Packages setIsLockClosed={setIsLockClosed}/>)
           break;
         case 3:
+          setIsLockClosed(false);
           setCurrentPanel(<Preview setIsLockClosed={setIsLockClosed}/>)
           break;
         case 4:
+          
           setCurrentPanel(<Publish setIsLockClosed={setIsLockClosed}/>)
           break;  
         default:

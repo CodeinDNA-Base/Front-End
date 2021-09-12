@@ -13,6 +13,9 @@ import CustomPhotoUploader from '../../Support/CustomPhotoUploader'
 import { Check, Close } from '@material-ui/icons';
 import ScrollView from '@cantonjs/react-scroll-view/lib/components/ScrollView';
 import ImageHolder from './ImageHolder';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTempServiceDataHolderMedia } from '../Redux Components/Selectors';
+import { updateTempServiceDataHolderMedia } from '../Redux Components/ServiceManagerSlice';
 function Media(props) {
     const classes = useStyles();
 
@@ -23,19 +26,28 @@ function Media(props) {
     const [selectedImage,setSelectedImage]=useState(null);
     const [listOfSelectedImages,setListOfSelectedImages]=useState([]);
 
+    const dispatch = useDispatch();
+    const media_FromStore = useSelector(selectTempServiceDataHolderMedia);
+
     useEffect(()=>{
+       
         //Load data from store into hooks
-        // setThumbnailImage(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.thumbnailImageUri);
-        // setListOfSelectedImages(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.listOfImages);
-        // setIsEditingEnabled(store.getState().ServiceAndSubServiceStore.Draft.CreateNewService.Media.isEditingEnabled);
+        setThumbnailImage(media_FromStore.thumbnailImageUri);
+        setListOfSelectedImages(media_FromStore.listOfImages);
+        setIsEditingEnabled(media_FromStore.isEditingEnabled);
         
-    },[])
+    },[media_FromStore])
 
     const handelEditAndSaveChanges = ()=>{
         if(!isEditingEnabled)
         {
             props.setIsLockClosed(true)
-            // store.dispatch(actions.update_media_ADD_NEW_SERVICE(thumbnailImage,listOfSelectedImages,true));
+            const payload = {
+                thumbnailImageUri: thumbnailImage,
+                listOfImages:listOfSelectedImages,
+                isEditingEnabled: true
+            }
+            dispatch(updateTempServiceDataHolderMedia(payload));
         }
         else
         {
