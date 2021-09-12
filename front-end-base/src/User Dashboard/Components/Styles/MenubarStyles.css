@@ -7,6 +7,7 @@
     font-weight: bold;
     text-decoration: none;
     margin-left: 2rem;
+    cursor: pointer;
 }
 
 /* .menuBarItem:hover{

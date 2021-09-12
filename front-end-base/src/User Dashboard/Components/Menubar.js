@@ -43,8 +43,8 @@ import OrdersIcon from "@material-ui/icons/AddShoppingCart";
 import InboxIcon from "@material-ui/icons/Inbox";
 import SettingsIcon from "@material-ui/icons/Settings";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
-import ExploreIcon from "@material-ui/icons/Explore"
-import FeaturedPlayListIcon from '@material-ui/icons/FeaturedPlayList'
+import ExploreIcon from "@material-ui/icons/Explore";
+import FeaturedPlayListIcon from "@material-ui/icons/FeaturedPlayList";
 
 //Routing
 import { Link } from "react-router-dom";
@@ -55,7 +55,7 @@ import profilePic from "../Resources/nadir.jpg";
 
 //Styles and CSS
 import "./Styles/MenubarStyles.css";
-import { PostAdd } from "@material-ui/icons";
+import { PostAdd, Speaker } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -124,10 +124,34 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     marginTop: "0.5rem",
+
   },
   profileMenu: {
-    marginTop: "1rem",
+    marginTop: "0.5rem",
   },
+  notificationMenu:{
+    marginTop: "0.5rem",
+  },
+  timeStyles: {
+    fontSize: "0.7rem",
+    fontWeight: "bold",
+  },
+  notificationIcon:{
+    marginTop:15,
+    marginRight:25,
+    marginLeft:10,
+    cursor:"pointer",
+
+  },
+  notificationText:{
+    overflow:"hidden"
+  },
+  notificationAppBar:{
+    top: 'auto',
+    bottom: 0,
+    position:"sticky",
+    backgroundColor:"#C1C1C1"
+  }
 }));
 
 export const Menubar = (props) => {
@@ -151,7 +175,7 @@ export const Menubar = (props) => {
   const notificationDetails = [
     {
       notificationId: 0,
-      content: "Payment method added",
+      content: "Payment method added dja asdj dasjk dasdk dsakd",
       time: new Date().toLocaleTimeString(),
       icon: <LogoutIcon />,
       route: "/",
@@ -208,8 +232,10 @@ export const Menubar = (props) => {
   ];
   const notificationMenuId = "primary-search-account-menu";
   const renderNotificationMenu = (
-    <Menu
-      className={classes.profileMenu}
+    
+      <Menu
+
+      className={classes.notificationMenu}
       anchorEl={notificationMenuAnchor}
       id={notificationMenuId}
       keepMounted
@@ -228,10 +254,12 @@ export const Menubar = (props) => {
       PaperProps={{
         style: {
           maxHeight: 48 * 10,
-          width: "30ch",
+          width: "35ch",
         },
       }}
     >
+
+
       {notificationDetails.map(
         ({ notificationId, content, time, icon, route }) => {
           return (
@@ -242,7 +270,13 @@ export const Menubar = (props) => {
               >
                 <ListItem button key={notificationId}>
                   <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText primary={content} />
+                  <ListItemText
+
+                    primary={<span className={classes.notificationText}>{content}</span>}
+                    secondary={
+                      <span className={classes.timeStyles}>{time}</span>
+                    }
+                  />
                 </ListItem>
               </Link>
               <Divider />
@@ -250,6 +284,19 @@ export const Menubar = (props) => {
           );
         }
       )}
+
+<div className={classes.notificationAppBar}>
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="open drawer">
+            <Speaker />
+          </IconButton>
+          <div className={classes.grow} />
+          <IconButton color="inherit">
+            <SettingsIcon />
+          </IconButton>
+        </Toolbar>
+      </div>
+
     </Menu>
   );
 
@@ -344,7 +391,7 @@ export const Menubar = (props) => {
   const exploreMenuOptions = [
     {
       optionTitle: "Services",
-      optionIcon: <FeaturedPlayListIcon/>,
+      optionIcon: <FeaturedPlayListIcon />,
       route: "/services",
     },
     {
@@ -466,10 +513,7 @@ export const Menubar = (props) => {
             <Box spacing={2} m={2}>
               {menuOptions.map(({ optionTitle, route }) => {
                 return optionTitle == "Explore" ? (
-                  <Link
-                    className="menuBarItem"
-                    onClick={handleExploreMenuOpen}
-                  >
+                  <Link className="menuBarItem" onClick={handleExploreMenuOpen}>
                     Explore
                   </Link>
                 ) : (
@@ -479,14 +523,10 @@ export const Menubar = (props) => {
                 );
               })}
             </Box>
-            <IconButton
-              aria-label="account of current user"
-              aria-haspopup="true"
-              onClick={handleNotificationMenuOpen}
-              color="inherit"
-            >
-              <NotificationIcon />
-            </IconButton>
+
+            <Badge badgeContent={8} color="primary" className={classes.notificationIcon} onClick={handleNotificationMenuOpen}>
+            <NotificationIcon />
+            </Badge>
             <Avatar
               className={classes.avatar}
               src={profilePic}

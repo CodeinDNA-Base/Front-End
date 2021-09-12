@@ -24,10 +24,13 @@ balanceInfoSlice: Used in settings/balanaceSettings
                 Must return an array where first index of array must hold total balance and other should be objects each object representing purchased service for purchase history holding balanceInformation of user
 
     [
-        451,//total balance in account
+        balance:{
+            availableBalance: 451,
+
+        }
         {
-            serviceId/projectID: Fhjdshaj4545
-             serviceTitle/projectTitle: MERN website for business
+            orderId:
+            purchaseTitle: MERN website for business
             purchaseDate: August 12,2021
             costPaid: 142
         }
@@ -39,24 +42,30 @@ exp:
     fetchLast3Months:(state, action)=>{
         return result.slice(1,).filter(item=>item.month in range of last 3)
     }
-    
+
 --------------------------------------------------------------------------------------------------------
 userProfileSlice:-> Must return object with details like
     {
         fullName:
         rating:
+        profileImage:
+        securityQuestion:
         responseTime:
         lastSeen:
         balance:
+        contact:
+        address: {
+
+        }
         amountSpent:
         paymentMethod: verified or Not
         totalPurchases:50
         totalRatedPurchases:45
+        
         linkedAccounts:[
             {
                 accountName:"LinkedIn",
                 icon:"Linked Icon",
-                linkedOn:"12 August 2021",
             },
             {
                 accountName:"Github",
@@ -70,27 +79,37 @@ userProfileSlice:-> Must return object with details like
 
 ordersSlice: must return array of objects, each object representing one order with these properties
 
-    [
-        {
-            orderId:1212FA45D,
-            price:214,
-            status: completed
-            dueOn:August 12, 2021
-            postedOn: August 10, 2021
-            serviceThumbnail:<link>
-            projectThumbnail: <link>,
-        },
-    ]
+
+
+    {
+        completed:[
+            {
+                orderId:1212FA45D,
+                price:214,
+                status: completed
+                dueOn:August 12, 2021
+                deliveredOn: August 10, 2021
+                thumbnail:
+            },
+        ]
+}
+    
 
 --------------------------------------------------------------------------------------------------------
 viewOrderSlice: must return an object corresponding to specific order by ID
 
         {
+            orderId:1212FA45D,
+            price:214,
+            status: completed
+            startDate:
+            dueOn:August 12, 2021
+            deliveredOn: August 10, 2021 || none
             description:requirements described by user
-            serviceId:S787QJH445S
-            projectId:Pdsads45P
+            projectOrServiceId:S787QJH445S,
+            isProjectOrService:
             quantity: 12,
-            package:"basic", premium etc
+            package:"basic", "premium"
             packageOffers:["Application Audit", "Project Plan", "Cost Estimation" ....]
         },
 
@@ -113,6 +132,7 @@ recentlyViewedServicesSlice: -> Must return array of 4 objects, each object repr
             sells:2000,
             basicPrice:451
         },
+
         {
             serviceId:"454S45SWRDPDL1"
             serviceTitle:"You will get Custom Website",
@@ -137,14 +157,14 @@ recentlyViewedProjectsSlice:-> Must return array of 4 objects, each representing
             projectThumbnail:image,
             deliveryDays:2 days,
             ratings: 4,
-            price:451
+            price:451,
         }
 ]
 
 
 --------------------------------------------------------------------------------------------------------
 trendingServicesSlice:
-Must return an array of objects, each object representing service or project
+Must return an array of objects, each object representing service
 
 [
     {
@@ -154,4 +174,6 @@ Must return an array of objects, each object representing service or project
 ]
 
 When clicked, go to that service and fetch the required data on that page for that service which was clicked
+
+
 
