@@ -1,7 +1,5 @@
 import React,{useState} from 'react';
 import {makeStyles } from '@material-ui/core/styles';
-import OrdersListContainer from './CompleteOrdersSubComponents/OrdersListContainer';
-import OrderView from './CompleteOrdersSubComponents/OrderView';
 
 function ShowCompleteOrdersTab(props) {
     const classes =useStyles();
@@ -12,7 +10,7 @@ function ShowCompleteOrdersTab(props) {
     return (
         <div>
             <h1>Complete orders</h1>
-        </div>
+        </div>  
     );
 }
 

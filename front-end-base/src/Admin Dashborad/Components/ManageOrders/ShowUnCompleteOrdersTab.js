@@ -1,7 +1,6 @@
 import React,{useState} from 'react';
 import {makeStyles } from '@material-ui/core/styles';
-import OrdersListContainer from './UnCompleteOrdersSubComponents/OrdersListContainer';
-import OrderView from './UnCompleteOrdersSubComponents/OrderView';
+
 function ShowUnCompleteOrdersTab(props) {
     const classes =useStyles();
     const [screenSwitcher,setScreenSwitcher]=useState(true);
