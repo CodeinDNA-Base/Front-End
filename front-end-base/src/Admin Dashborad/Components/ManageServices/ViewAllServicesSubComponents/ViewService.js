@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { Link } from '@material-ui/core';
 import { 
     updateTempServiceDataHolderBasicInfo,
     updateTempServiceDataHolderPackagesPremium,
@@ -81,7 +82,7 @@ function ViewService(props) {
         dispatch(updateTempServiceDataHolderPackagesStandard(standard_payload));
         dispatch(updateTempServiceDataHolderMedia(payload_media));
         dispatch(updateTempServiceDataHolderBasicInfo(payload_basicInfo));
-        console.log(props.serviceData.packages[0])
+        
     },[]);
 
     const handelPanelSwitcher=()=>{
@@ -145,6 +146,36 @@ function ViewService(props) {
                         </div>
                     </div>
 
+                    <div>   
+                        <div>
+                        <Headings text={`Related projects`} fontSize={25} fontWeight={'bold'}/>
+                        </div>  
+                        <div style={{marginLeft:'2rem'}}>
+                            {
+                            props.serviceData.listOfRelatedProjects.map((item)=>{
+                                return <div style={{display:'block'}}>
+                                    <Link
+                                      component="button"
+                                      variant="body2"
+                                      onClick={() => {
+                                        window.open(item.projectUrl, "_blank")
+                                      }}
+                                    >
+                                     {item.projectTitle}
+                                    </Link>
+                                </div>
+                            })
+                            }
+                        </div>
+                    </div>
+                    <div>   
+                        <div>
+                        <Headings text={`Service Rating:`} fontSize={25} fontWeight={'bold'}/>
+                        </div>  
+                        <div style={{marginLeft:'2rem'}}>
+                           <Headings text={`${props.serviceData.serviceRatings}`}/>
+                        </div>
+                    </div>
                     <div>     
                         <Headings text={`Basic Package:`} fontSize={25} fontWeight={'bold'}/>
                     </div>
