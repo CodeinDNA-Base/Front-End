@@ -35,64 +35,48 @@ function Packages(props) {
     const standard_FromStore = useSelector(selectTempServiceDataHolderPackagesStandard);
     const premium_FromStoe = useSelector(selectTempServiceDataHolderPackagesPremium);
     const is_EditingEnable_FromStore = useSelector(selectisEditingForPakcagePanel);
+
+    useEffect(()=>{
+        setIsEditingEnabled(is_EditingEnable_FromStore.isEditingEnabled);
+    },[is_EditingEnable_FromStore]);
     useEffect(()=>{
         // Loading data from store.
         setDesc_Basic(basicInfo_FromStore.packageDescription);
         setDesc_Standard(standard_FromStore.packageDescription);
         setDesc_Premium(premium_FromStoe.packageDescription);
         
-        
+
         setPrice_Basic(basicInfo_FromStore.packagePrice);
         setPrice_Standard(standard_FromStore.packagePrice);
         setPrice_Premium(premium_FromStoe.packagePrice);
         
-        setListOfOptions_ForChipList_Basic(basicInfo_FromStore.listOfFeatures);
-        setListOfOptions_ForChipList_Standard(standard_FromStore.listOfFeatures);
-        setListOfOptions_ForChipList_Premium(premium_FromStoe.listOfFeatures);
+        const tempArray_for_basic=[];
+        basicInfo_FromStore.listOfFeatures.forEach((element,index) => {
+            tempArray_for_basic.push({key:index,label:element.featureTitle})
+        });
 
-        setIsEditingEnabled(is_EditingEnable_FromStore.isEditingEnabled);
+        setListOfOptions_ForChipList_Basic(tempArray_for_basic);
+
+        const tempArray_for_standard=[];
+        basicInfo_FromStore.listOfFeatures.forEach((element,index) => {
+             tempArray_for_standard.push({key:index,label:element.featureTitle})
+        });
+
+        setListOfOptions_ForChipList_Standard(tempArray_for_standard);
+
+        const tempArray_for_premium=[];
+        basicInfo_FromStore.listOfFeatures.forEach((element,index) => {
+             tempArray_for_premium.push({key:index,label:element.featureTitle})
+        });
+
+        setListOfOptions_ForChipList_Premium(tempArray_for_premium);
+
      
-    },[basicInfo_FromStore,standard_FromStore,premium_FromStoe,is_EditingEnable_FromStore])
+    },[basicInfo_FromStore,standard_FromStore,premium_FromStoe])
 
     const handelEditAndSaveChanges = ()=>{
         if(!isEditingEnabled)
         {
-            // Packages:{
-                // isEditingEnabled:false
-            //     Basic:{
-            //         packageDescription:null,
-            //         packagePrice:0,
-            //         listOfFeatures:[],
-            //     },
-            //     Standard:{
-            //         packageDescription:null,
-            //         packagePrice:0,
-            //         listOfFeatures:[],
-            //     },
-            //     Premium:{
-            //         packageDescription:null,
-            //         packagePrice:0,
-            //         listOfFeatures:[],
-            //     }
-            // }
-            // const data = {
-            //     isEditingEnabled:true,
-            //     Basic:{
-            //         packageDescription:desc_Basic,
-            //         packagePrice:price_Basic,
-            //         listOfFeatures:listOfOptions_ForChipList_Basic,
-            //     },
-            //     Standard:{
-                    // packageDescription:desc_Standard,
-                    // packagePrice:price_Standard,
-                    // listOfFeatures:listOfOptions_ForChipList_Standard,
-            //     },
-            //     Premium:{
-            //         packageDescription:desc_Premium,
-            //         packagePrice:price_Premium,
-            //         listOfFeatures:listOfOptions_ForChipList_Premium,
-            //     }
-            // }
             const basic_payload = {
                         packageDescription:desc_Basic,
                         packagePrice:price_Basic,
@@ -109,12 +93,11 @@ function Packages(props) {
                 listOfFeatures:listOfOptions_ForChipList_Premium,  
             }
 
-           
-            // store.dispatch(actions.update_packages_ADD_NEW_SERVICE(data));
             dispatch(updateTempServiceDataHolderPackagesBasic(basic_payload));
             dispatch(updateTempServiceDataHolderPackagesPremium(premium_payload));
             dispatch(updateTempServiceDataHolderPackagesStandard(standard_payload));
-            dispatch(updateIsEditingFlagOfBasicInfoForm(true))
+            dispatch(updateIsEditingFlagOfBasicInfoForm(true));
+
             props.setIsLockClosed(true);  
         }
         else

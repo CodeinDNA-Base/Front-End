@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import produce from 'immer'
-import { loadListOfServices,loadServiceClicksOverViewChartData } from "./Thunks";
+import { loadListOfServices,loadServiceClicksOverViewChartData,addProjectToDatabase,DeleteService,SetVisiblityOfService} from "./Thunks";
 const initialState = {
     listOfServices:[],
+
     tempServiceDataHolder:{
-                   
+                    isBeingUsedInEditor:true,
                     BasicInfo:{
                         serviceTitle:null,
                         serviceDesc:null,
@@ -43,6 +44,15 @@ const initialState = {
 
     isLoading_loadServiceClicksOverViewChartData: false,
     hasError_loadServiceClicksOverViewChartData: false,
+
+    isLoading_AddProjectToDatabase: false,
+    hasError_AddProjectToDatabase: false,
+
+    isLoading_DeleteService: false,
+    hasError_DeleteService: false,
+
+    isLoading_SetVisiblityOfService: false,
+    hasError_SetVisiblityOfService: false,
 
 }
 
@@ -88,7 +98,12 @@ const options = {
                 return draft
             })
         },
-        
+        updateIsBeingUsedInEditor:(state,action)=>{
+            return produce(state,draft=>{
+                draft.tempServiceDataHolder.isBeingUsedInEditor=action.payload;
+                return draft
+            })
+        }
     },
 
     extraReducers:{
@@ -98,7 +113,7 @@ const options = {
               state.hasError_LoadListOfServices = false;
             },
             [loadListOfServices.fulfilled]: (state, action) => {
-              state.listOfSubServices = action.payload;
+              state.listOfServices = action.payload;
               state.isLoading_LoadListOfServices = false;
               state.hasError_LoadListOfServices = false;
             },
@@ -121,6 +136,52 @@ const options = {
                 state.isLoading_loadServiceClicksOverViewChartData = false;
                 state.hasError_loadServiceClicksOverViewChartData = true;
               },
+
+              //addProjectToDatabase
+            [addProjectToDatabase.pending]: (state, action) => {
+                state.isLoading_AddProjectToDatabase = true;
+                state.hasError_AddProjectToDatabase = false;
+              },
+              [addProjectToDatabase.fulfilled]: (state, action) => {
+                state.listOfServices.push(action.payload);
+                state.isLoading_AddProjectToDatabase = false;
+                state.hasError_AddProjectToDatabase = false;
+              },
+              [addProjectToDatabase.rejected]: (state, action) => {
+                state.isLoading_AddProjectToDatabase = false;
+                state.hasError_AddProjectToDatabase = true;
+              },
+
+              //DeleteService
+              [DeleteService.pending]: (state, action) => {
+                state.isLoading_DeleteService = true;
+                state.hasError_DeleteService = false;
+              },
+              [DeleteService.fulfilled]: (state, action) => {
+                // state.listOfServices = action.payload;
+                state.isLoading_DeleteService = false;
+                state.hasError_DeleteService = false;
+              },
+              [DeleteService.rejected]: (state, action) => {
+                state.isLoading_DeleteService = false;
+                state.hasError_DeleteService = true;
+              },  
+            
+              
+                //SetVisiblityOfService
+                [SetVisiblityOfService.pending]: (state, action) => {
+                    state.isLoading_SetVisiblityOfService = true;
+                    state.hasError_SetVisiblityOfService = false;
+                  },
+                  [SetVisiblityOfService.fulfilled]: (state, action) => {
+                    // state.listOfServices.push(action.payload);
+                    state.isLoading_SetVisiblityOfService = false;
+                    state.hasError_SetVisiblityOfService = false;
+                  },
+                  [SetVisiblityOfService.rejected]: (state, action) => {
+                    state.isLoading_SetVisiblityOfService = false;
+                    state.hasError_SetVisiblityOfService = true;
+                  },  
   
     }
 }
@@ -134,5 +195,6 @@ export const {
     updateTempServiceDataHolderPackagesBasic,
     updateTempServiceDataHolderPackagesStandard,
     updateTempServiceDataHolderPackagesPremium,
-    updateIsEditingFlagOfBasicInfoForm
+    updateIsEditingFlagOfBasicInfoForm,
+    updateIsBeingUsedInEditor
 } = actions;

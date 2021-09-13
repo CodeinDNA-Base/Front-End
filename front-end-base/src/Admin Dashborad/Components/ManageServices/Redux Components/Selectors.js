@@ -28,7 +28,9 @@ export const selectisEditingForPakcagePanel=(state)=>{
     return state.serviceManagerPanel.tempServiceDataHolder.Packages.isEditingEnabled
 }
 
-
+export const selectIsBeingUsedInEditor = (state)=>{
+    return state.serviceManagerPanel.tempServiceDataHolder.isBeingUsedInEditor
+}
 
 
 

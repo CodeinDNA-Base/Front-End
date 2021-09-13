@@ -1,19 +1,30 @@
 import { makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { lightBorder } from '../../../Theme/borders';
 import { Headings } from '../Support/Headings';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 import ListOfAllServices from './ViewAllServicesSubComponents/ListOfAllServices';
+import { useDispatch } from 'react-redux';
+import { loadListOfServices } from './Redux Components/Thunks';
+import ViewService from './ViewAllServicesSubComponents/ViewService';
+import { selectIsBeingUsedInEditor } from './Redux Components/Selectors';
 
 function ViewAllServicesTab(props) {
     const classes = useStyles();
     const [screenSwitcher,setScreenSwitcher]=useState(true);
     const [selectedServiceKeyHook,setselectedServiceKeyHook]=useState();
     const [isViewServiceOpen,setisViewServiceOpen]=useState(false);
-    const handelOptionSelection = (selectedProject)=>{
+
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(loadListOfServices());
+        // dispatch(selectIsBeingUsedInEditor(true));
+    },[])
+ 
+    const handelOptionSelection = (selectedService)=>{
         
-        setselectedServiceKeyHook(selectedProject);
+        setselectedServiceKeyHook(selectedService);
         handeScreenSwitch();
     }
     const handeScreenSwitch = ()=>{
@@ -31,7 +42,7 @@ function ViewAllServicesTab(props) {
                                     <ArrowBackIosIcon/>
                                 </div>
                                 <div style={{marginTop:'1rem'}}>
-                                    <Headings text={"View Service"}/>
+                                    <ViewService serviceData={selectedServiceKeyHook}/>
                                     {/* <ViewProject projectData={selectedServiceKeyHook}/> */}
                                 </div>
                             </div>

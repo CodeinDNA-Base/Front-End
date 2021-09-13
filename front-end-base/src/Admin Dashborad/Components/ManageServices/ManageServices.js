@@ -9,6 +9,8 @@ import AddNewServiceTab from './AddNewServiceTab';
 
 import StatisticsTab from './StatisticsTab';
 import ViewAllServicesTab from './ViewAllServicesTab';
+import { useDispatch } from 'react-redux';
+import { updateIsBeingUsedInEditor } from './Redux Components/ServiceManagerSlice';
 
 function ManageServices(props) {
     const classes =useStyles();
@@ -16,8 +18,21 @@ function ManageServices(props) {
     const {height,width} = useWindowDimensions();
     const tabIconHeight=30;
     const tabIconWidth=30;
-
+    const dispatch = useDispatch();
     const handleChange = (event, newValue) => {
+      switch (newValue) {
+        case 0: 
+          dispatch(updateIsBeingUsedInEditor(true))
+          break;
+        case 1:
+          break;
+        case 2:
+          dispatch(updateIsBeingUsedInEditor(false))    
+          break;
+          
+        default:
+          break;
+      }
       setValue(newValue);
     };                  
     return (

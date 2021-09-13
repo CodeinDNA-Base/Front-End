@@ -31,9 +31,25 @@ function BasicInfoForm(props) {
         //load data into hooks from store.
         setServiceTitle(basicInfo_FromStore.serviceTitle);
         setServiceDesc(basicInfo_FromStore.serviceDesc);
-        setlistOfOptions_ForChipList_OfSearchKeyWords(basicInfo_FromStore.listOfKeyWords);
+        // setlistOfOptions_ForChipList_OfSearchKeyWords(basicInfo_FromStore.listOfKeyWords);
         setlistOfOptions_ForChipList_OfSubServices(basicInfo_FromStore.listOfSubServices);
+        
         setIsEditingEnabled(basicInfo_FromStore.isEditingEnabled);
+
+        const tempArrayForSearchKeyWords = [];
+        basicInfo_FromStore.listOfKeyWords.map((item,index)=>{
+            tempArrayForSearchKeyWords.push({key:index,label:item.keyWordText})
+            return item
+        })
+        setlistOfOptions_ForChipList_OfSearchKeyWords(tempArrayForSearchKeyWords);
+
+        const tempArrayForSubServices = [];
+        basicInfo_FromStore.listOfSubServices.map((item,index)=>{
+            tempArrayForSubServices.push({key:index,label:item.subServiceTitle})
+            return item
+        })
+        setlistOfOptions_ForChipList_OfSubServices(tempArrayForSubServices);
+       
     
     },[basicInfo_FromStore]);
     

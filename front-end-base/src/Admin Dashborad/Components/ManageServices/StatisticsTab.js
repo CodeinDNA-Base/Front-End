@@ -1,9 +1,9 @@
 import React from 'react';
-
+import ServicesClickHistoryOverViewContainer from './StatisticsSubComponents/ServicesClickHistoryOverViewContainer';
 function StatisticsTab(props) {
     return (
         <div>
-            <h1>StatisticsTab</h1>
+            <ServicesClickHistoryOverViewContainer/>
         </div>
     );
 }

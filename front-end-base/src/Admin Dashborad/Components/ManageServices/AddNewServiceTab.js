@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {Grid, makeStyles} from '@material-ui/core';
 
 import { SidebarForPageChanging } from './AddNewServiceSubComp/SidebarForPageChanging';
@@ -11,7 +11,8 @@ import Publish from './AddNewServiceSubComp/Publish';
 import {lightBorder} from '../../../Theme/borders'
 import { WraningAlert } from '../Support/Alerts';
 import Packages from './AddNewServiceSubComp/Packages';
-
+import { useDispatch } from 'react-redux';
+import { updateIsBeingUsedInEditor } from './Redux Components/ServiceManagerSlice';
 function AddNewServiceTab(props) {
 
   const classes = useStyles();
@@ -19,6 +20,8 @@ function AddNewServiceTab(props) {
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [currentPanel,setCurrentPanel]=useState(<BasicInfoForm setIsLockClosed={setIsLockClosed}/>);
   
+  const dispatch = useDispatch();
+
   
   const setCurrentStepNumber = (value)=>{
   

@@ -30,6 +30,7 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
     const [list,setList]=useState();
     const [searchResults,setSearchResults]=useState([]);
     const [searchKeyPairs,setSearchKeyPairs] =useState();
+    
     const [listOfOptions_ForChipList, setListOfOptions_ForChipList] = useState([
         // { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
     ]);
@@ -43,6 +44,7 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
 
     const listOfAllProjectsFromStore = useSelector(selectListOfProjects); //this will be updated and will cause auto render as soon as sotre get updated.
     const {isLoading_ListOfProjects} = useSelector(selectAll);
+
     useEffect(()=>{
         //setting up list of projects in project's rneder list.
        setListOfProjects(listOfAllProjectsFromStore);
@@ -126,7 +128,8 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
         setSearchKeyPairs(tempKeyPairs);
         
     }
-    const updateList = (startIndex,endIndex)=>{
+
+const updateList = (startIndex,endIndex)=>{
         setList(listOfProjects.map((item,index)=>{
             if(((index)>=startIndex)&&((index)<endIndex))
             {
@@ -139,7 +142,7 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
         }));
     }
 
-    const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
+const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
             if(listOfResults.length===0){
                 setSearchResults(<Headings text={"No match found.!!"} fontSize={25}/>)   
             }
@@ -287,6 +290,7 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
 
 const useStyles = makeStyles((theme)=>({
     container:{
+
     },
     projectHolderContainer:{
         border:'1px solid #f7f2f7'
@@ -303,4 +307,5 @@ const useStyles = makeStyles((theme)=>({
         marginTop:"1%"
       },
 }))
+
 export default ListOfAllProjects;

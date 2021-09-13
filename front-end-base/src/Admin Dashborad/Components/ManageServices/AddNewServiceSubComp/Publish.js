@@ -6,38 +6,32 @@ import colors from '../../../../Theme/colors';
 import { Headingfonts } from '../../../../Theme/fonts';
 import { Headings } from '../../Support/Headings';
 import {lightBorder} from '../../../../Theme/borders'
+import { useDispatch, useSelector } from 'react-redux';
+import { addProjectToDatabase } from '../Redux Components/Thunks';
+import { selectIsBeingUsedInEditor } from '../Redux Components/Selectors';
 function Publish(props) {
+    const dispatch = useDispatch();
+    const [btnLabel,setBtnLabel]=useState();
+    const isBeingUsedInEditor = useSelector(selectIsBeingUsedInEditor);
     const handelPublishOnWebSite=()=>{
+        
         alert("Just call the api to add this in database")
-        // const data = {
-        //         serviceTitle:null,
-        //         serviceDesc:null,
-        //         listOfSubServices:[],
-        //         listOfKeyWords:[],
-        //         isEditingEnabled:false
-        // }
-        // const data2 = {
-        //     isEditingEnabled:false,
-        //     Basic:{
-        //         packageDescription:null,
-        //         packagePrice:null,
-        //         listOfFeatures:[],
-        //     },
-        //     Standard:{
-        //         packageDescription:null,
-        //         packagePrice:null,
-        //         listOfFeatures:[],
-        //      },
-        //     Premium:{
-        //         packageDescription:null,
-        //         packagePrice:null,
-        //         listOfFeatures:[],
-        //      }
-        // }
-        // store.dispatch(actions.update_baic_info_ADD_NEW_SERVICE(data));
-        // store.dispatch(actions.update_media_ADD_NEW_SERVICE(null,[],false));
-        // store.dispatch(actions.update_packages_ADD_NEW_SERVICE(data2))
+        dispatch(addProjectToDatabase());
     }
+    useEffect(()=>{
+     
+        if(isBeingUsedInEditor===true)
+        {
+            setBtnLabel("Update the Service");
+            //update
+        }
+        else
+        {
+            setBtnLabel("Publish on website")
+            //publish
+        }
+    },[])
+    
     return (
         <div style={{position:'relative'}}>
         <Card
@@ -50,7 +44,7 @@ function Publish(props) {
             </div>
             <div  style={{position:'absolute',top:'5rem',left:'0.5rem'}}>
             <RoundButton
-                title={"Publish it on website"}
+                title={btnLabel}
                 width={200}
                 color={colors.white}
                 bgColor={colors.primary}
