@@ -11,9 +11,7 @@ function ShowCompleteOrdersTab(props) {
     }
     return (
         <div>
-            <div className={classes.topControlsBar}>
-                {(screenSwitcher) ? <OrdersListContainer  hanelScreenSwitch={hanelScreenSwitch}/> : <OrderView hanelScreenSwitch={hanelScreenSwitch}/>}
-            </div>
+            <h1>Complete orders</h1>
         </div>
     );
 }

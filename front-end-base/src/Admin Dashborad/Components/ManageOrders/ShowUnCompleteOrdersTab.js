@@ -10,9 +10,7 @@ function ShowUnCompleteOrdersTab(props) {
     }
     return (
         <div>
-            <div className={classes.topControlsBar}>
-                {(screenSwitcher) ? <OrdersListContainer  hanelScreenSwitch={hanelScreenSwitch}/> : <OrderView hanelScreenSwitch={hanelScreenSwitch}/>}
-            </div>
+            <h1>In progress orders</h1>
         </div>
     );
 }

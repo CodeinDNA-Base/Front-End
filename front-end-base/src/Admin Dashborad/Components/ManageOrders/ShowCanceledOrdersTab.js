@@ -10,9 +10,7 @@ function ShowCanceledOrdersTab(props) {
     }
     return (
         <div>
-            <div className={classes.topControlsBar}>
-                {(screenSwitcher) ? <OrdersListContainer  hanelScreenSwitch={hanelScreenSwitch}/> : <OrderView hanelScreenSwitch={hanelScreenSwitch}/>}
-            </div>
+          <h1>Canceled orders</h1>
         </div>
     );
 }

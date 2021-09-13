@@ -10,9 +10,7 @@ function ShowNewOrdersTab(props) {
     }
     return (
         <div>
-            <div className={classes.topControlsBar}>
-                {(screenSwitcher) ? <OrdersListContainer  hanelScreenSwitch={hanelScreenSwitch}/> : <OrderView hanelScreenSwitch={hanelScreenSwitch}/>}
-            </div>
+            <h1>New orders</h1>
         </div>
     );
 }
