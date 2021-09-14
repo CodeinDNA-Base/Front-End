@@ -7,10 +7,12 @@ import {
   LATESTPROJECTS,
   ALLSERVICES,
   LATESTREVIEWS,
+  SEARCHBYCATEGORY
 } from "./Home/Components/Slices/HomePageSlices/HomePageConstants";
 import { LOGININDETAILS } from "./Home/Components/Slices/AuthenticationPageSlices/AuthenticationPageConstants";
 import { TEAMDETAIL } from "./Home/Components/Slices/AboutPageSlices/AboutPageConstant";
 import teamDetailReducer from "./Home/Components/Slices/AboutPageSlices/OurTeamSlices";
+import searchbyCategoryReducer from './Home/Components/Slices/HomePageSlices/SearchCardSlice'
 export default configureStore({
   reducer: {
     [LATESTPROJECTS]: latestProjectsReducer,
@@ -18,5 +20,6 @@ export default configureStore({
     [LATESTREVIEWS]: latestReviewsReducer,
     [LOGININDETAILS]: loginDetialsReducer,
     [TEAMDETAIL]: teamDetailReducer,
+    [SEARCHBYCATEGORY] :searchbyCategoryReducer
   },
 });

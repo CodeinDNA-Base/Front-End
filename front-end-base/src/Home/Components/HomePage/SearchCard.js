@@ -12,6 +12,17 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import colors from "../../../Theme/colors";
 import { TextFonts, Headingfonts } from "../../../Theme/fonts";
+import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loadSearchResults,
+  loadServiceWithSubServices,
+} from "../Slices/HomePageSlices/SearchCardSlice";
+import { selectServicesAndSubServices } from "../Slices/HomePageSlices/SearchCardSlice";
+
+// styles
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "80%",
@@ -50,16 +61,67 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SearchCard() {
+  //redux
+  const dispatch = useDispatch();
+  const services_and_subServices = useSelector(selectServicesAndSubServices);
+  const { loadServiceWithSubServicesIsLoading } = useSelector(
+    (state) => state.searchByCategory
+  );
+
+  useEffect(() => {
+    dispatch(loadServiceWithSubServices());
+  }, [dispatch]);
+
   const classes = useStyles();
 
-  const [age, setAge] = useState("");
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  // local states
+  const [category, setCatgory] = useState("");
+  const [subCategory, setSubCatgory] = useState("");
+  const [subCategories, setSubCategories] = useState([]);
+  const [keyword, setKeyword] = useState("");
+  const [isSubCaregoryDisabled, setIsSubCaregoryDisabled] = useState(true);
+
   const [state, setState] = useState({
     raised: false,
     shadow: 1,
   });
+
+  // hanlders
+  const handleCategoryChange = (event) => {
+    setCatgory(event.target.value);
+    setIsSubCaregoryDisabled(false);
+
+    setSubCategories(
+      services_and_subServices.filter(
+        (service) => service.title === event.target.value
+      )[0].subServices
+    );
+  };
+  const handleSubCategoryChange = ({ target }) => {
+    setSubCatgory(target.value);
+  };
+  const handleKewordChange = ({ target }) => {
+    setKeyword(target.value);
+  };
+
+  const ReInitializeSearchCardStates = () => {
+    setKeyword("");
+    setCatgory("");
+    setSubCategories([]);
+    setIsSubCaregoryDisabled(true);
+    setSubCatgory("");
+  };
+  
+  const handleCardSearchClick = () => {
+    // needs to define gernal validations here
+    dispatch(loadSearchResults({ keyword, category, subCategory })).then(
+      () => {
+        alert("navigative to sub category page");
+        ReInitializeSearchCardStates();
+      },
+      () => alert("error in serach results")
+    );
+  };
   return (
     <Card
       className={classes.root}
@@ -76,34 +138,55 @@ export default function SearchCard() {
 
       <CardContent>
         <form className={classes.form} noValidate autoComplete="off">
-          <TextField id="standard-basic" label="Keyword" />
+          <TextField
+            id="standard-basic"
+            label="Keyword"
+            value={keyword}
+            onChange={handleKewordChange}
+          />
           <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">Category</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={age}
-              onChange={handleChange}
+              value={category}
+              onChange={handleCategoryChange}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {!loadServiceWithSubServicesIsLoading &&
+                services_and_subServices.map((service) => (
+                  <MenuItem value={service.title}>{service.title}</MenuItem>
+                ))}
             </Select>
           </FormControl>
-          <TextField id="standard-basic" label="Price" />
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Sub category</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={subCategory}
+              onChange={handleSubCategoryChange}
+              disabled={isSubCaregoryDisabled}
+            >
+              {!loadServiceWithSubServicesIsLoading &&
+                subCategories.map((category) => (
+                  <MenuItem value={category}>{category} </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
         </form>
       </CardContent>
 
       <CardActions style={{ marginBottom: 20 }}>
-        <Button
+        <RoundButton
+          title={`Search`}
+          color={colors.white}
+          bgColor={colors.secondary}
+          handleClick={handleCardSearchClick}
+          width={"100%"}
           variant="contained"
-          style={{ width: "100%" }}
-          classes={{
-            root: classes.button, // class name, e.g. `classes-nesting-root-x`
-          }}
-        >
-          Search
-        </Button>
+          margin={"2% 1% 1% 1%"}
+          type={"submit"}
+        />
       </CardActions>
     </Card>
   );

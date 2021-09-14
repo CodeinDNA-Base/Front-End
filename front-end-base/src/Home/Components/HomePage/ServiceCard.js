@@ -8,7 +8,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+
 export default function ServiceCard({ image, color, title, description }) {
+  // styles
   const useStyles = makeStyles({
     root: {
       marginLeft: "6%",
@@ -24,7 +26,6 @@ export default function ServiceCard({ image, color, title, description }) {
       marginTop: "10%",
     },
   });
-
   const classes = useStyles();
 
   return (
