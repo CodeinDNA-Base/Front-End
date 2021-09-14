@@ -17,14 +17,14 @@ export const ListOfNewOrders=[
         orderItemQuantity:"2",
         listOfAttachment:[
             {
-                type:"file",
-                Title:"Design",
+                type:"File",
+                Title:"Design.txt",
                 DownloadUrl:"",
                 content:"",
             },
             {
-                type:"file",
-                Title:"Flow",
+                type:"File",
+                Title:"Flow.zip",
                 DownloadUrl:"",
                 content:"",
             },
@@ -36,7 +36,7 @@ export const ListOfNewOrders=[
             },
             {
                 type:"Video",
-                Title:"Demo",
+                Title:"Demo.mp4",
                 DownloadUrl:"",
                 content:"",
             },
@@ -75,13 +75,13 @@ export const ListOfNewOrders=[
         orderItemQuantity:"1",
         listOfAttachment:[
             {
-                type:"file",
+                type:"File",
                 Title:"Design",
                 DownloadUrl:"",
                 content:"",
             },
             {
-                type:"file",
+                type:"File",
                 Title:"Flow",
                 DownloadUrl:"",
                 content:"",
@@ -133,13 +133,13 @@ export const ListOfNewOrders=[
         orderItemQuantity:"5",
         listOfAttachment:[
             {
-                type:"file",
+                type:"File",
                 Title:"Design",
                 DownloadUrl:"",
                 content:"",
             },
             {
-                type:"file",
+                type:"File",
                 Title:"Flow",
                 DownloadUrl:"",
                 content:"",
@@ -191,13 +191,13 @@ export const ListOfNewOrders=[
         orderItemQuantity:"2",
         listOfAttachment:[
             {
-                type:"file",
+                type:"File",
                 Title:"Design",
                 DownloadUrl:"",
                 content:"",
             },
             {
-                type:"file",
+                type:"File",
                 Title:"Flow",
                 DownloadUrl:"",
                 content:"",

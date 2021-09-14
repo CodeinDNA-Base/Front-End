@@ -1,11 +1,34 @@
 import { Grid,Link,Divider } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { lightBorder } from '../../../../Theme/borders';
 import { Headings } from '../../Support/Headings';
 import CheckIcon from '@material-ui/icons/Check';
 import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
 import colors from '../../../../Theme/colors';
+import OrderChatContainer from './OrderChatContainer';
+
+import ImageList from '@material-ui/core/ImageList';
+import ImageListItem from '@material-ui/core/ImageListItem';
+import { makeStyles } from '@material-ui/core';
+import FileAttachmentHolder from './FileAttachmentHolder';
+import VideoAttachmentHolder from './VideoAttachmentHolder'
+import ImageAttachmentHolder from './ImageAttachmentHolder'
 function ViewOrder(props) {
+
+    const classes = useStyles();
+    const [isOrderChatOpen,setIsOrderChatOpen]=useState(false);
+    const [attachmentsList,setAttachmentsList]=useState([]);
+
+    useEffect(()=>{
+       setAttachmentsList(props.selectedOrder.listOfAttachment)
+    },[])
+
+    const handelAcceptAndStartOrder = ()=>{
+        alert("Call the thunk which will add this order in progress list.");
+    }
+    const handeDeclineOrder=()=>{
+        alert("Call the thunk which will add this order in canceled list.")
+    }
     return (
         <div>
             <Grid container>
@@ -20,7 +43,7 @@ function ViewOrder(props) {
                                       color={colors.white}
                                       bgColor={colors.primary}
                                       margin={"0% 0% 0%  0%"}
-                                    //   handleClick={hand_PriceRange_Apply}
+                                      handleClick={handelAcceptAndStartOrder}
                                      />
                        </div>
                        <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
@@ -30,7 +53,7 @@ function ViewOrder(props) {
                                       color={colors.white}
                                       bgColor={colors.secondary}
                                       margin={"0% 0% 0%  0%"}
-                                    //   handleClick={hand_PriceRange_Apply}
+                                      handleClick={handeDeclineOrder}
                                      />
                         
                        </div>         
@@ -130,9 +153,36 @@ function ViewOrder(props) {
                                     {/* Quantity */}
                                     <Headings text={`${props.selectedOrder.orderItemQuantity}`}/>
                                 </Grid>
-                                
+
+                                {/* Attachment */}
+                            
+                            <Grid container style={{backgroundColor:'#abd1ed'}}>
+                                <Grid item xs={8} style={{paddingLeft:'1rem'}}>
+                                    {/* item */}
+                                    <Headings text={`Attachments`} fontWeight={'bold'}/>
+                                </Grid> 
                             </Grid>
+
+                            <Grid container >
+                                <Grid item xs={12} style={{padding:'1rem'}}>
+                                    {/* item */}
+                                    <ImageList rowHeight={200} className={classes.imageList} cols={3}>
+                                        {attachmentsList.map((item,index) => (
+                                          <ImageListItem key={index} cols={item.cols || 1}>
+                                            {(item.type==="File") && <FileAttachmentHolder attachment={item}/>}
+                                            {(item.type==="Image") && <ImageAttachmentHolder attachment={item}/>}
+                                            {(item.type==="Video") && <VideoAttachmentHolder attachment={item}/>}
+                                            
+                                          </ImageListItem>
+                                        ))}
+                                      </ImageList>
+                                </Grid> 
+                            </Grid>
+
+                            </Grid>
+
                         </Grid>
+                    
                         <Grid container>
                             <Grid item xs={12} style={{textAlign:'center',marginTop:'1rem'}}>
                             <RoundButton
@@ -141,10 +191,28 @@ function ViewOrder(props) {
                                       color={colors.white}
                                       bgColor={colors.primary}
                                       margin={"0% 0% 0%  0%"}
-                                    //   handleClick={hand_PriceRange_Apply}
+                                      handleClick={()=>{
+                                          setIsOrderChatOpen(true); 
+                                      }}
                                      />
                             </Grid>
                         </Grid>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                    {
+                                        (isOrderChatOpen===true) ? (
+                                            <div>
+                                                <OrderChatContainer/>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                               
+                                            </div>
+                                        )
+                                    }
+                            </Grid>
+                        </Grid>
+                        
                     </Grid>
                 </Grid>
                 <Grid item xs={1}></Grid>
@@ -153,4 +221,16 @@ function ViewOrder(props) {
     );
 }
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+     
+      backgroundColor: theme.palette.background.paper,
+    },
+    imageList: {
+      width: '100%',
+      height: 300,
+     
+    },
+  }));
+  
 export default ViewOrder;
