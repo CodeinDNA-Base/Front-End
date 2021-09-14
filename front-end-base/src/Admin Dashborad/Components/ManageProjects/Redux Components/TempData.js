@@ -1,6 +1,6 @@
 export const ListOfProjects=
 [     
-    {
+    { 
     //dd-mm-yy
     projectTitle:"Project 1",
     projectDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare", 

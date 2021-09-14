@@ -30,15 +30,15 @@ function Filters(props) {
         filter_by_title_1:"By Sub-Service",
         filter_by_title_2:"By Catagory",
         filter_by_title_3:"By Rating",
-        filter_by_title_4:"By Publish date",
+        filter_by_title_4:"By Delivery Date",
         filter_by_title_5:"By Price Range",   
     }
     const filterBy_titles_type={
-        filter_by_title_1_type:"projectSubService",
-        filter_by_title_2_type:"projectService",
+        filter_by_title_1_type:"selectedSubService",
+        filter_by_title_2_type:"selectedService",
         filter_by_title_3_type:"projectRatingStars",
-        filter_by_title_4_type:"projectPublishDate",
-        filter_by_title_5_type:"projectEstimatedPrice",
+        filter_by_title_4_type:"orderDeliveryDate",
+        filter_by_title_5_type:"orderEstimatedPrice",
     }
     // This will be filled from API data
     const [filter_by_title_1_Options,setFilter_by_title_1_Options]=useState([
@@ -251,7 +251,7 @@ function Filters(props) {
                            </AccordionDetails>
                          </Accordion>
                     </Grid>
-                     {/* <Grid item xs={3} className={classes.accordionCotnainer}>
+                     <Grid item xs={3} className={classes.accordionCotnainer}>
                         <Accordion
                             elevation={0}
                             style={{borderRight:lightBorder}}
@@ -320,8 +320,8 @@ function Filters(props) {
                             </ScrollView>
                            </AccordionDetails>
                          </Accordion>
-                    </Grid> */}
-                    <Grid item xs={3} className={classes.accordionCotnainer}>
+                    </Grid>
+                    {/* <Grid item xs={3} className={classes.accordionCotnainer}>
                         <Accordion
                             elevation={0}
                             style={{borderRight:lightBorder}}
@@ -332,7 +332,7 @@ function Filters(props) {
                              id="panel1a-header"
                            >
 
-                            <Headings text={filterBy_titles.filter_by_title_3} fontSize={filterBy_titlesFonts}/>
+                           <Headings text={filterBy_titles.filter_by_title_3} fontSize={filterBy_titlesFonts}/>
                            </AccordionSummary>
                            <AccordionDetails>
                            <ScrollView style={{ height: '25vh',}}>
@@ -373,7 +373,7 @@ function Filters(props) {
                             </ScrollView>             
                            </AccordionDetails>
                          </Accordion>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={3} className={classes.accordionCotnainer}>
                         <Accordion
                             elevation={0}
