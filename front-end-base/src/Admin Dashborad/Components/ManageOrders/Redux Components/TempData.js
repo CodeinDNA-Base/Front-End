@@ -252,6 +252,22 @@ export const listOfInProgressOrders = [
         orderItemQuantity:"2",
         orderStartDate:"12-09-2021",
         orderStartTime:"4:00 PM",
+        orderDeliveryFiles:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+
+            
+        ],
         listOfAttachment:[
             {
                 type:"File",
@@ -312,6 +328,22 @@ export const listOfInProgressOrders = [
         orderItemQuantity:"2",
         orderStartDate:"12-09-2021",
         orderStartTime:"4:00 PM",
+        orderDeliveryFiles:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+
+            
+        ],
         listOfAttachment:[
             {
                 type:"File",
@@ -354,4 +386,385 @@ export const listOfInProgressOrders = [
             },
         ]
       }, 
+]
+
+export const listOfCanceledOrders = [
+    { 
+        userName:"Zeeshan",
+        userEmail:"zeeshanahmedd0010@gmail.com",
+        orderId:"34324245DFDFS",
+        orderDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare", 
+        selectedService:"Mobile App",
+        selectedSubService:"Andriod",
+        orderEstimatedPrice:50,
+        orderDeliveryDate:"4-4-2010",  //dd-mm-yy
+        orderDeliveryTime:"6:40 PM",  //dd-mm-yy
+        orderPlacementDate:"4-4-2010",  //dd-mm-yy
+        orderPlacementTime:"6:40 PM",  //dd-mm-yy
+        orderType:"Custom Order",
+        orderDuration:"10 days",
+        orderItemQuantity:"2",
+        orderStartDate:"12-09-2021",
+        orderStartTime:"4:00 PM",
+        orderCancelDate:"12-09-2021",
+        orderCancelTime:"4:00 PM",
+        orderCancelReason:"Could not agree on cost.",
+        orderDeliveryFiles:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+
+            
+        ],
+        listOfAttachment:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"File",
+                Title:"Flow.zip",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Image",
+                Title:"Image323.jpg",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Video",
+                Title:"Demo.mp4",
+                DownloadUrl:"",
+                content:"",
+            },
+
+        ],
+        listOfItemsInOrder:[
+            {
+                itemTitle:"Firebase integration"
+            },
+            {
+                itemTitle:"Database integration"
+            },
+            {
+                itemTitle:"Redux integration"
+            },
+            {
+                itemTitle:"Deployment on server"
+            },
+        ]
+      },
+      
+]
+
+
+export const listOfCompletedOrders = [
+    { 
+        userName:"Zeeshan",
+        userEmail:"zeeshanahmedd0010@gmail.com",
+        orderId:"34324245DFDFS",
+        orderDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare", 
+        selectedService:"Mobile App",
+        selectedSubService:"Andriod",
+        orderEstimatedPrice:50,
+        orderDeliveryDate:"4-4-2010",  //dd-mm-yy
+        orderDeliveryTime:"6:40 PM",  //dd-mm-yy
+        orderPlacementDate:"4-4-2010",  //dd-mm-yy
+        orderPlacementTime:"6:40 PM",  //dd-mm-yy
+        orderType:"Custom Order",
+        orderDuration:"10 days",
+        orderItemQuantity:"2",
+        orderStartDate:"12-09-2021",
+        orderStartTime:"4:00 PM",
+        orderCompletionDate:"12-09-2021",
+        orderCompletionTime:"4:00 PM",
+        orderCancelReason:"Could not agree on cost.",
+        orderDeliveryFiles:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+           
+            
+        ],
+        listOfAttachment:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"File",
+                Title:"Flow.zip",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Image",
+                Title:"Image323.jpg",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Video",
+                Title:"Demo.mp4",
+                DownloadUrl:"",
+                content:"",
+            },
+
+        ],
+        listOfItemsInOrder:[
+            {
+                itemTitle:"Firebase integration"
+            },
+            {
+                itemTitle:"Database integration"
+            },
+            {
+                itemTitle:"Redux integration"
+            },
+            {
+                itemTitle:"Deployment on server"
+            },
+        ]
+      },
+ 
+      { 
+        userName:"Zeeshan",
+        userEmail:"zeeshanahmedd0010@gmail.com",
+        orderId:"34324245DFDFS",
+        orderDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare", 
+        selectedService:"Mobile App",
+        selectedSubService:"Andriod",
+        orderEstimatedPrice:50,
+        orderDeliveryDate:"4-4-2010",  //dd-mm-yy
+        orderDeliveryTime:"6:40 PM",  //dd-mm-yy
+        orderPlacementDate:"4-4-2010",  //dd-mm-yy
+        orderPlacementTime:"6:40 PM",  //dd-mm-yy
+        orderType:"Custom Order",
+        orderDuration:"10 days",
+        orderItemQuantity:"2",
+        orderStartDate:"12-09-2021",
+        orderStartTime:"4:00 PM",
+        orderCompletionDate:"12-09-2021",
+        orderCompletionTime:"4:00 PM",
+        orderCancelReason:"Could not agree on cost.",
+        orderDeliveryFiles:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            
+        ],
+        listOfAttachment:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"File",
+                Title:"Flow.zip",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Image",
+                Title:"Image323.jpg",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Video",
+                Title:"Demo.mp4",
+                DownloadUrl:"",
+                content:"",
+            },
+
+        ],
+        listOfItemsInOrder:[
+            {
+                itemTitle:"Firebase integration"
+            },
+            {
+                itemTitle:"Database integration"
+            },
+            {
+                itemTitle:"Redux integration"
+            },
+            {
+                itemTitle:"Deployment on server"
+            },
+        ]
+      },
+      { 
+        userName:"Zeeshan",
+        userEmail:"zeeshanahmedd0010@gmail.com",
+        orderId:"34324245DFDFS",
+        orderDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare", 
+        selectedService:"Mobile App",
+        selectedSubService:"Andriod",
+        orderEstimatedPrice:50,
+        orderDeliveryDate:"4-4-2010",  //dd-mm-yy
+        orderDeliveryTime:"6:40 PM",  //dd-mm-yy
+        orderPlacementDate:"4-4-2010",  //dd-mm-yy
+        orderPlacementTime:"6:40 PM",  //dd-mm-yy
+        orderType:"Custom Order",
+        orderDuration:"10 days",
+        orderItemQuantity:"2",
+        orderStartDate:"12-09-2021",
+        orderStartTime:"4:00 PM",
+        orderCompletionDate:"12-09-2021",
+        orderCompletionTime:"4:00 PM",
+        orderCancelReason:"Could not agree on cost.",
+        orderDeliveryFiles:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+        
+            
+        ],
+        listOfAttachment:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"File",
+                Title:"Flow.zip",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Image",
+                Title:"Image323.jpg",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Video",
+                Title:"Demo.mp4",
+                DownloadUrl:"",
+                content:"",
+            },
+
+        ],
+        listOfItemsInOrder:[
+            {
+                itemTitle:"Firebase integration"
+            },
+            {
+                itemTitle:"Database integration"
+            },
+            {
+                itemTitle:"Redux integration"
+            },
+            {
+                itemTitle:"Deployment on server"
+            },
+        ]
+      },
+      { 
+        userName:"Zeeshan",
+        userEmail:"zeeshanahmedd0010@gmail.com",
+        orderId:"34324245DFDFS",
+        orderDesc:"Posuere nascetur condimentum, maecenas natoque platea congue netus nec commodo rutrum vivamus semper. Orci natoque augue montes faucibus dapibus faucibus pellentesque luctus hendrerit conubia. Ullamcorper mi aenean ipsum eget duis malesuada himenaeos at. Lobortis mus sociosqu risus leo. Fringilla sollicitudin donec quis vehicula dignissim ridiculus eros montes. Luctus adipiscing ante eleifend iaculis cubilia molestie ornare", 
+        selectedService:"Mobile App",
+        selectedSubService:"Andriod",
+        orderEstimatedPrice:50,
+        orderDeliveryDate:"4-4-2010",  //dd-mm-yy
+        orderDeliveryTime:"6:40 PM",  //dd-mm-yy
+        orderPlacementDate:"4-4-2010",  //dd-mm-yy
+        orderPlacementTime:"6:40 PM",  //dd-mm-yy
+        orderType:"Custom Order",
+        orderDuration:"10 days",
+        orderItemQuantity:"2",
+        orderStartDate:"12-09-2021",
+        orderStartTime:"4:00 PM",
+        orderCompletionDate:"12-09-2021",
+        orderCompletionTime:"4:00 PM",
+        orderCancelReason:"Could not agree on cost.",
+        orderDeliveryFiles:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+
+            
+        ],
+        listOfAttachment:[
+            {
+                type:"File",
+                Title:"Design.txt",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"File",
+                Title:"Flow.zip",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Image",
+                Title:"Image323.jpg",
+                DownloadUrl:"",
+                content:"",
+            },
+            {
+                type:"Video",
+                Title:"Demo.mp4",
+                DownloadUrl:"",
+                content:"",
+            },
+
+        ],
+        listOfItemsInOrder:[
+            {
+                itemTitle:"Firebase integration"
+            },
+            {
+                itemTitle:"Database integration"
+            },
+            {
+                itemTitle:"Redux integration"
+            },
+            {
+                itemTitle:"Deployment on server"
+            },
+        ]
+      },
+  
 ]

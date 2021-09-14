@@ -16,9 +16,6 @@ import ImageAttachmentHolder from './ImageAttachmentHolder'
 function ViewOrder(props) {
 
     const classes = useStyles();
-    const [isViewOrderDetailsOpen,setIsViewOrderDetailsOpen]=useState(true);
-    const [isDeliverOderOpen,setIsDeliverOderOpen]=useState(false);
-    const [isCancelOderOpen,setIsCancelOderOpen]=useState(false);
     const [isOrderChatOpen,setIsOrderChatOpen]=useState(false);
     const [attachmentsList,setAttachmentsList]=useState([]);
     const [deliveryFilesList,setDeliveryFilesList]=useState([]);
@@ -26,94 +23,19 @@ function ViewOrder(props) {
     useEffect(()=>{
        setAttachmentsList(props.selectedOrder.listOfAttachment)
        setDeliveryFilesList(props.selectedOrder.orderDeliveryFiles);
+   
     },[])
 
-    const handelViewOrderDetails = ()=>{
-        setIsViewOrderDetailsOpen(true);
-        setIsCancelOderOpen(false);
-        setIsDeliverOderOpen(false);
-    }
-
-    const handelDelivery=()=>{
-        // alert("Deliver order")
-        setIsViewOrderDetailsOpen(false);
-        setIsCancelOderOpen(false);
-        setIsDeliverOderOpen(true);
-    }
    
     const handeCancelOrder=()=>{
-        // alert("Call the thunk which will add this order in canceled list.")
-        setIsViewOrderDetailsOpen(false);
-        setIsCancelOderOpen(true);
-        setIsDeliverOderOpen(false);
+        alert("Call the thunk which will add this order in canceled list.")
     }
-
     return (
         <div>
             <Grid container>
                 <Grid item xs={1}></Grid>
                 <Grid item xs={10} style={{position:'relative'}}>
-                    <div style={{position:'absolute',right:0,top:0}}>
-                    <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
-                                <RoundButton
-                                      title={"View order details"}
-                                      width={250}
-                                      color={colors.white}
-                                      bgColor={colors.primary}
-                                      margin={"0% 0% 0%  0%"}
-                                      handleClick={handelViewOrderDetails}
-                                     />
-                        
-                       </div>    
-                    <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
-                                <RoundButton
-                                      title={"Deliver order"}
-                                      width={150}
-                                      color={colors.white}
-                                      bgColor={colors.primary}
-                                      margin={"0% 0% 0%  0%"}
-                                      handleClick={handelDelivery}
-                                     />
-                        
-                       </div>     
-                       <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
-                                <RoundButton
-                                      title={"Cancel Order"}
-                                      width={150}
-                                      color={colors.white}
-                                      bgColor={colors.secondary}
-                                      margin={"0% 0% 0%  0%"}
-                                      handleClick={handeCancelOrder}
-                                     />
-                        
-                       </div>         
-                         
-                    </div>
-
-                    {
-                    //    Cancel order
-                        (isViewOrderDetailsOpen===false && isDeliverOderOpen===false && isCancelOderOpen===true) && <div>
-                    <Grid container style={{marginTop:'2.5rem'}}>
-                        <Grid item xs={12} style={{border:lightBorder,padding:'1rem'}}>
-                            <h1>Cancel  order</h1>
-                        </Grid>     
-                    </Grid>
-                    </div>
-                   }
-
-                   {
-                    //    Deliver order
-                        (isViewOrderDetailsOpen===false && isDeliverOderOpen===true && isCancelOderOpen===false) && <div>
-                    <Grid container style={{marginTop:'2.5rem'}}>
-                        <Grid item xs={12} style={{border:lightBorder,padding:'1rem'}}>
-                            <h1>Deliver  order</h1>
-                        </Grid>     
-                    </Grid>
-                    </div>
-                   }
-                    {
-                        // View order details ....
-                        (isViewOrderDetailsOpen===true && isDeliverOderOpen===false && isCancelOderOpen===false) && <div>
+                    
                     <Grid container style={{marginTop:'2.5rem'}}>
                         <Grid item xs={12} style={{border:lightBorder,padding:'1rem'}}>
                             <Grid container>
@@ -149,6 +71,10 @@ function ViewOrder(props) {
                                             {/* Date of placement */}
                                             <Headings text={` Date and time of start: ${props.selectedOrder.orderStartDate} @ ${props.selectedOrder.orderStartTime}`} fontWeight={'bold'} fontSize={12}/>
                                         </Grid>
+                                        <Grid item xs={12} style={{backgroundColor:'red'}}>
+                                            {/* Date of placement */}
+                                            <Headings text={` Date and time of Cancel: ${props.selectedOrder.orderCancelDate} @ ${props.selectedOrder.orderCancelTime}`} fontWeight={'bold'} fontSize={12}/>
+                                        </Grid>
                                         
                                     </Grid>
                                 </Grid>
@@ -169,7 +95,11 @@ function ViewOrder(props) {
                         <Grid container style={{border:lightBorder,padding:'1rem'}}>
                             <Grid item xs={12}>
                                 {/* Desc */}
-                                <Headings text={`${props.selectedOrder.orderDesc}`}/>
+                                <Headings text={`Order desc : ${props.selectedOrder.orderDesc}`}/>
+                            </Grid>
+                            <Grid item xs={12} style={{backgroundColor:'red'}}>
+                                {/* Desc */}
+                                <Headings text={`Reason of cancel : ${props.selectedOrder.orderCancelReason}`} fontWeight={'bold'}/>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} style={{border:lightBorder}}>
@@ -238,9 +168,9 @@ function ViewOrder(props) {
                                 </Grid> 
                             </Grid>
 
-                             {/* Delivery files */}
+    {/* Delivery files */}
                             
-                         <Grid container style={{backgroundColor:'#abd1ed'}}>
+    <Grid container style={{backgroundColor:'#abd1ed'}}>
                                 <Grid item xs={8} style={{paddingLeft:'1rem'}}>
                                     {/* item */}
                                     <Headings text={`Delivery files`} fontWeight={'bold'}/>
@@ -263,45 +193,18 @@ function ViewOrder(props) {
                                 </Grid> 
                             </Grid>
 
-
                             </Grid>
 
                         </Grid>
                     
-                        <Grid container>
-                            <Grid item xs={12} style={{textAlign:'center',marginTop:'1rem'}}>
-                            <RoundButton
-                                      title={"Contact Buyer"}
-                                      width={200}
-                                      color={colors.white}
-                                      bgColor={colors.primary}
-                                      margin={"0% 0% 0%  0%"}
-                                      handleClick={()=>{
-                                          setIsOrderChatOpen(true); 
-                                      }}
-                                     />
-                            </Grid>
-                        </Grid>
+                        
                         <Grid container>
                             <Grid item xs={12}>
-                                    {
-                                        (isOrderChatOpen===true) ? (
-                                            <div>
-                                                <OrderChatContainer/>
-                                            </div>
-                                        ) : (
-                                            <div>
-                                               
-                                            </div>
-                                        )
-                                    }
+                                    <OrderChatContainer/>
                             </Grid>
                         </Grid>
                         
                     </Grid>
-                        </div>
-                    }
-
                 </Grid>
                 <Grid item xs={1}></Grid>
             </Grid>

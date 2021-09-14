@@ -1,27 +1,62 @@
-import React,{useState} from 'react';
-import {makeStyles } from '@material-ui/core/styles';
-
+import { makeStyles } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { lightBorder } from '../../../Theme/borders';
+import { Headings } from '../Support/Headings';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ListOfCanceledOrders from './CanceledOrdersSubComponents/ListOfCanceledOrders'
+import { useDispatch } from 'react-redux';
+import { loadListOfCanceledOrder } from './Redux Components/Thunks';
+import ViewOrder from './CanceledOrdersSubComponents/ViewOrder';
 function ShowCanceledOrdersTab(props) {
-    const classes =useStyles();
+    const classes = useStyles();
     const [screenSwitcher,setScreenSwitcher]=useState(true);
-    const hanelScreenSwitch = (event,index) =>{
-      setScreenSwitcher(!screenSwitcher);
+    const [selectedOrder,setselectedOrder]=useState();
+    const [isViewProjectOpen,setIsViewProjectOpen]=useState(false);
+    const handelOptionSelection = (selectedProject)=>{
+        setselectedOrder(selectedProject);
+        handeScreenSwitch();
     }
+    const handeScreenSwitch = ()=>{
+        setIsViewProjectOpen(!isViewProjectOpen);
+    }
+    
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(loadListOfCanceledOrder());
+    },[])
     return (
-        <div>
-          <h1>Canceled orders</h1>
+        <div className={classes.container}>
+            <div>
+                    {
+                        (isViewProjectOpen===true) ? (
+                            
+                            <div >
+                                <div onClick={handeScreenSwitch} style={{cursor:'pointer'}}>
+                                    <ArrowBackIosIcon/>
+                                </div>
+                                <div style={{marginTop:'1rem'}}>
+                                    <ViewOrder selectedOrder={selectedOrder}/>
+                                </div>
+                            </div>
+                        ):(
+                            <div style={{marginTop:'1rem'}}>
+                                <ListOfCanceledOrders showMenueSelectionOpt={false}  handelOptionSelection={handelOptionSelection}/>
+                            </div>
+                        )
+                        
+                    }
+            </div>
         </div>
     );
 }
 
-const useStyles=makeStyles((theme)=>({
-    topControlsBar:{
-        // backgroundColor:"blue",
-        height:70,
-        border:'1px solid #f7f2f7',
-        marginTop:"1%"
-      },
-   
-    
+const useStyles = makeStyles((theme)=>({
+    container:{
+
+    },
+    topNav:{
+       
+    }
 }))
 export default ShowCanceledOrdersTab;

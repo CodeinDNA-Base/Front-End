@@ -1,4 +1,4 @@
-import { listOfInProgressOrders, ListOfNewOrders } from "./TempData";
+import { listOfCanceledOrders, listOfCompletedOrders, listOfInProgressOrders, ListOfNewOrders } from "./TempData";
 
 export const  DataLoader_ForListOfNewOrders = ()=>{
      return new Promise(function(resolve,rejected){
@@ -20,7 +20,7 @@ export const  DataLoader_ForListOfCompletedOrders = ()=>{
      return new Promise(function(resolve,rejected){
         console.log("A call has arrived to DataLoader_ForListOfCompletedOrders")
         setTimeout(() => {
-            resolve()
+            resolve(listOfCompletedOrders)
         }, 3000);
     })
 }
@@ -28,7 +28,7 @@ export const  DataLoader_ForListOfCanceledOrder = ()=>{
      return new Promise(function(resolve,rejected){
         console.log("A call has arrived to DataLoader_ForListOfCanceledOrder")
         setTimeout(() => {
-            resolve()
+            resolve(listOfCanceledOrders)
         }, 3000);
     })
 }
