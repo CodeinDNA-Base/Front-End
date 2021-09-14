@@ -7,38 +7,15 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { DividerInservices } from "../HorizontalLine";
 import { HomePageComponentsHeading } from "../../../CustomComponents/UI/Text/HomePageHeadings";
 import colors from "../../../Theme/colors";
-import ServiceCard from './ServiceCard'
-// dumpy data
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-    title: "SEO",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Web Developement",
-    author: "author",
-  },
+import ServiceCard from "./ServiceCard";
 
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Graphic Designing",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-    title: "Voice",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Desktop Development",
-    author: "author",
-  },
-];
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import { selectAllServices } from "../Slices/HomePageSlices/ServicesSlices";
+import { loadAllServices } from "../Slices/HomePageSlices/ServicesSlices";
 
-const ServiceCardContainerForDesktop = () => {
+const ServiceCardContainerForDesktop = ({ services_chunck, isLoading }) => {
+  const colorArray = ["#F0F7F8", "#FAF8F6", "#F6F9F8", "#FDF6F4"];
   return (
     <Grid
       xs={12}
@@ -49,23 +26,22 @@ const ServiceCardContainerForDesktop = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Grid xs={10} sm={5} md={3} item>
-        <ServiceCard img={itemData[0].img} color={"#F0F7F8"} />
-      </Grid>{" "}
-      <Grid xs={10} sm={5} md={3} item>
-        <ServiceCard img={itemData[1].img} color={"#FAF8F6"} />
-      </Grid>{" "}
-      <Grid xs={10} sm={5} md={3} item>
-        <ServiceCard img={itemData[0].img} color={"#F6F9F8"} />
-      </Grid>{" "}
-      <Grid xs={10} sm={5} md={3} item>
-        <ServiceCard img={itemData[1].img} color={"#FDF6F4"} />
-      </Grid>
+      {!isLoading &&
+        services_chunck.map((service, index) => (
+          <Grid xs={10} sm={5} md={3} item key={service.serviceId}>
+            <ServiceCard
+              image={service.serviceImage}
+              color={colorArray[index]}
+              title={service.serviceName}
+              description={service.serviceDescription}
+            />
+          </Grid>
+        ))}
     </Grid>
   );
 };
 
-const ServiceCardContainerForMobile = () => {
+const ServiceCardContainerForMobile = ({ service, isLoading }) => {
   return (
     <Grid
       xs={12}
@@ -75,17 +51,32 @@ const ServiceCardContainerForMobile = () => {
       justifyContent="center"
       alignItems="center"
     >
-      {/* <Grid xs={1} sm={1} item></Grid> */}
-      <Grid xs={10} sm={5} item>
-        <ServiceCard img={itemData[0].img} color={"#F0F7F8"} />
-      </Grid>{" "}
+      {!isLoading && (
+        <Grid xs={10} sm={5} item>
+          <ServiceCard
+            image={service.serviceImage}
+            title={service.serviceName}
+            description={service.serviceDescription}
+            color={"#F0F7F8"}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 };
 
 export default function Services() {
-  const serviceCardColors = ["#F0F7F8", "#FAF8F6", "#F6F9F8", "#FDF6F4"];
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  const { isLoading } = useSelector((state) => state.allServices);
+  const { hasError } = useSelector((state) => state.allServices);
+  const all_services = useSelector(selectAllServices);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadAllServices());
+    console.log("in services");
+    console.log(all_services);
+  }, [dispatch]);
 
   return (
     <Grid container spacing={0}>
@@ -126,8 +117,18 @@ export default function Services() {
         // OR
       >
         {isDesktopOrLaptopOrTabletScreen
-          ? [1, 2].map(() => serviceItemOnDesktop())
-          : [1, 2, 3, 4, 5, 6, 7, 8].map(() => serviceItemOnMobile())}
+          ? [
+              { start: 0, end: 4 },
+              { start: 4, end: 8 },
+            ].map((item) => {
+              return serviceItemOnDesktop(
+                all_services.slice(item.start, item.end),
+                isLoading
+              );
+            })
+          : [0, 1, 2, 3, 4, 5, 6, 7].map((item) => {
+              return serviceItemOnMobile(all_services[item], isLoading);
+            })}
       </Carousel>
 
       <DividerInservices />
@@ -137,9 +138,16 @@ export default function Services() {
   );
 }
 
-const serviceItemOnMobile = () => {
-  return <ServiceCardContainerForMobile />;
+const serviceItemOnMobile = (service, isLoading) => {
+  return (
+    <ServiceCardContainerForMobile service={service} isLoading={isLoading} />
+  );
 };
-const serviceItemOnDesktop = () => {
-  return <ServiceCardContainerForDesktop />;
+const serviceItemOnDesktop = (services_chunck, isLoading) => {
+  return (
+    <ServiceCardContainerForDesktop
+      services_chunck={services_chunck}
+      isLoading={isLoading}
+    />
+  );
 };

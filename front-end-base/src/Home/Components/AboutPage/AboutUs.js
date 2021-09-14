@@ -8,6 +8,9 @@ import { SmallHeading } from "../../../CustomComponents/UI/Text/SmallHeading";
 import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
+// strings Constants
+import {COMPANY_OVERVIEW,COMPANY_OVERVIEW_TITLE,ABOUTUS_EXPLORE_TITLE} from '../../Strings/AboutUsStrings'
+
 const AboutUsStyles = makeStyles(() => ({
   media: {
     maxWidth: `100%`,
@@ -49,16 +52,9 @@ const AboutUs = (props) => {
           container
           className={classes.companyOverView}
         >
-          <SmallHeading title={`Company Overview`} margin={"0%"} />
+          <SmallHeading title={COMPANY_OVERVIEW} margin={"0%"} />
           <p>
-            Freelancer.com is the world's largest freelancing and crowdsourcing
-            marketplace by number of users and projects. We connect over
-            54,770,370 employers and freelancers globally from over 247
-            countries, regions and territories. Through our marketplace,
-            employers can hire freelancers to do work in areas such as software
-            development, writing, data entry and design right through to
-            engineering, the sciences, sales and marketing, accounting and legal
-            services.
+           {COMPANY_OVERVIEW_TITLE}
           </p>
         </Grid>
         <Grid
@@ -113,14 +109,14 @@ const AboutUs = (props) => {
           className={classes.contact}
         >
           <SmallHeading
-            title={`Start Your Journey Today`}
+            title={ABOUTUS_EXPLORE_TITLE}
             margin={"0%"}
             color={colors.secondary}
           />
         </Grid>
         <Grid item container justifyContent="center">
           <RoundButton
-            title={"Submit Proposals"}
+            title={"Buy Services"}
             color={colors.white}
             bgColor={colors.secondary}
             margin={"2% 0% 0% 0%"}

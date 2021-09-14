@@ -1,17 +1,17 @@
+import { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core";
 import Color from "color";
 import HeaderTitle from "../HeaderTitle";
 import { CustomCard } from "./ProjectCard";
-const useStyles = makeStyles(() => ({
-  actionArea: {
-    borderRadius: 16,
-    transition: "0.2s",
-    "&:hover": {
-      transform: "scale(1.1)",
-    },
-  },
 
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { selectLatestProjects } from "../Slices/HomePageSlices/LatestProjectSlice";
+import { loadLatestProjects } from "../Slices/HomePageSlices/LatestProjectSlice";
+
+const useStyles = makeStyles(() => ({
+ 
   card: ({ color }) => ({
     minWidth: 256,
     borderRadius: 16,
@@ -51,6 +51,15 @@ const useStyles = makeStyles(() => ({
 
 const LatestProjectsForDesktop = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const latest_Projects = useSelector(selectLatestProjects);
+  const { isLoading } = useSelector((state) => state.latestProjects);
+  const { hasError } = useSelector((state) => state.latestProjects);
+
+  useEffect(() => {
+    dispatch(loadLatestProjects());
+  }, [dispatch]);
+
   const styles = useStyles({ color: "#203f52" });
   const styles2 = useStyles({ color: "#4d137f" });
   const styles3 = useStyles({ color: "#ff9900" });
@@ -58,46 +67,42 @@ const LatestProjectsForDesktop = (props) => {
   return (
     <Grid container spacing={0} style={{ marginTop: "2%" }}>
       <Grid xs={0} sm={1} md={1} item></Grid>
-      <Grid xs={12} sm={10} md={10} item container spacing={4}>
-        <Grid item xs={12} sm={9} md={6}>
-          <CustomCard
-            classes={styles}
-            title={"Website"}
-            subtitle={"Just By Fashion"}
-            image={
-              "https://images.unsplash.com/photo-1581089786257-d34fe7d9bff6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-            }
-          />
+      {!isLoading && (
+        <Grid xs={12} sm={10} md={10} item container spacing={4}>
+          <Grid item xs={12} sm={9} md={6}>
+            <CustomCard
+              classes={styles}
+              title={latest_Projects[0].projectTitle}
+              subtitle={latest_Projects[0].projectSubtitle}
+              image={latest_Projects[0].projectImage}
+            />
+          </Grid>
+          <Grid item xs={12} sm={9} md={6}>
+            <CustomCard
+              classes={styles2}
+              title={latest_Projects[1].projectTitle}
+              subtitle={latest_Projects[1].projectSubtitle}
+              image={latest_Projects[1].projectImage}
+            />
+          </Grid>
+          <Grid item xs={12} sm={9} md={6}>
+            <CustomCard
+              classes={styles3}
+              title={latest_Projects[2].projectTitle}
+              subtitle={latest_Projects[2].projectSubtitle}
+              image={latest_Projects[2].projectImage}
+            />
+          </Grid>
+          <Grid item xs={12} sm={9} md={6}>
+            <CustomCard
+              classes={styles4}
+              title={latest_Projects[3].projectTitle}
+              subtitle={latest_Projects[3].projectSubtitle}
+              image={latest_Projects[3].projectImage}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={9} md={6}>
-          <CustomCard
-            classes={styles2}
-            title={"File Filter Desktop app"}
-            subtitle={"C sharp and dot Net"}
-            image={
-              "https://images.unsplash.com/photo-1490971688337-f2c79913ea7d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-            }
-          />
-        </Grid>
-        <Grid item xs={12} sm={9} md={6}>
-          <CustomCard
-            classes={styles3}
-            title={"Face Recoginization"}
-            subtitle={"Neural Networks"}
-            image={"https://images5.alphacoders.com/690/thumb-1920-690653.png"}
-          />
-        </Grid>
-        <Grid item xs={12} sm={9} md={6}>
-          <CustomCard
-            classes={styles4}
-            title={"3D Games"}
-            subtitle={"C sharp, Unity"}
-            image={
-              "https://www.itp.net/public/styles/full_img_sml/public/images/2019/05/27/44485-pubg_base1.jpg?itok=EF911Xan"
-            }
-          />
-        </Grid>
-      </Grid>
+      )}
       <Grid xs={0} sm={1} md={1} item></Grid>
     </Grid>
   );

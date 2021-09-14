@@ -18,20 +18,19 @@ import { FormControlLabel } from "@material-ui/core";
 import { Checkbox } from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 import ForgetPasswordModal from "./ForgetPasswordModal";
-import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
+import AlternateEmailRoundedIcon from "@material-ui/icons/AlternateEmailRounded";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import {
+  checkUserId,
+  checkUserPassword,
+} from "../Slices/AuthenticationPageSlices/LoginFormSlicer";
+import {
+  selectUserId,
+  selectUserPassword,
+  selectUserToken,
+} from "../Slices/AuthenticationPageSlices/LoginFormSlicer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,20 +50,24 @@ const useStyles = makeStyles((theme) => ({
   primaryText: {
     color: colors.primary,
     fontWeight: "bolder",
-    font: isDesktopOrLaptopOrTabletScreen=>isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall :TextFonts.medium,
+    font: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
     textAlign: "center",
     marginTop: "5%",
     marginBottom: "10%",
-    cursor:'pointer'
+    cursor: "pointer",
   },
-  forgetPassword:{
+  forgetPassword: {
     color: colors.secondary,
-    font: isDesktopOrLaptopOrTabletScreen=> isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.small,
+    font: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.small,
     textAlign: "center",
-    cursor:'pointer'
-  }, label:{
-    font: isDesktopOrLaptopOrTabletScreen=> isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
-  }
+    cursor: "pointer",
+  },
+  label: {
+    font: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
+  },
 }));
 
 export const PasswordForm = ({ userEmail }) => {
@@ -73,7 +76,7 @@ export const PasswordForm = ({ userEmail }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   const [open, setOpen] = React.useState(false);
-
+  const dispatch = useDispatch();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -86,11 +89,22 @@ export const PasswordForm = ({ userEmail }) => {
     console.log(value);
   };
 
-  const handleForgetPassword=()=>{
-handleOpen();
-  }
-
-
+  const handleForgetPassword = () => {
+    handleOpen();
+  };
+  const handleLoginClick = () => {
+    if (userPassword.length > 0) {
+      dispatch(checkUserPassword({ userPassword })).then(
+        () => {
+          alert("password verified");
+          setUserPassword("");
+        },
+        () => alert("error")
+      );
+    } else {
+      alert("please enter password");
+    }
+  };
   return (
     <Box boxShadow={2} justifyContent="center" alignContent="center">
       <ForgetPasswordModal open={open} handleClose={handleClose} />
@@ -102,27 +116,32 @@ handleOpen();
           value={userPassword}
           onChange={handleUserPassword}
           type={"password"}
-       
         />
         <Grid container justifyContent="center" alignItems="center">
-          <Grid item style={{marginRight:'3%'}}>
+          <Grid item style={{ marginRight: "3%" }}>
             {" "}
-            <FormControlLabel 
+            <FormControlLabel
               control={
                 <Checkbox
                   // checked={state.checkedB}
                   // onChange={handleChange}
                   name="checkedB"
                   color="primary"
-                  size='small'
+                  size="small"
                 />
               }
               label="Remember Me"
-            classes={{label:classes.label}}
+              classes={{ label: classes.label }}
             />
           </Grid>
-          <Grid item style={{marginLeft:'3%'}}>
-           <div className={classes.forgetPassword} onClick={handleForgetPassword}> Forget Password </div>
+          <Grid item style={{ marginLeft: "3%" }}>
+            <div
+              className={classes.forgetPassword}
+              onClick={handleForgetPassword}
+            >
+              {" "}
+              Forget Password{" "}
+            </div>
           </Grid>
         </Grid>
         <CustomAlerts
@@ -149,7 +168,7 @@ handleOpen();
               color={colors.white}
               bgColor={colors.secondary}
               margin={"0% 0% 5%  0%"}
-
+              handleClick={handleLoginClick}
             />
             <div className={classes.primaryText}>Not you ?</div>
           </Grid>
@@ -159,28 +178,45 @@ handleOpen();
   );
 };
 
-export default function LoginForm({ handleLoginWithEmailClicked ,handleSignUpClicked}) {
+export default function LoginForm({
+  handleLoginWithEmailClicked,
+  handleSignUpClicked,
+}) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   const [userId, setUserId] = useState("");
   const [isIncorrectUserId, setIsIncorrectUserId] = useState(false);
 
+  //redux
+  const dispatch = useDispatch();
+  const { checkUserIdIsLoading } = useSelector((state) => state.loginDetails);
+  const { checkUserIdHasError } = useSelector((state) => state.loginDetails);
+  const { checkUserPasswordAndReturnUserDetailsIfExistsHasError } = useSelector(
+    (state) => state.loginDetails
+  );
+  const { checkUserPasswordAndReturnUserDetailsIfExistsIsLoading } =
+    useSelector((state) => state.loginDetails);
+
+  // handlers
   const handleUserId = (value) => {
     setUserId(value);
     console.log(value);
   };
   const handleLoginWithEmailClick = (event) => {
     event.preventDefault();
-    if(userId.length > 0)
-    handleLoginWithEmailClicked(userId);
-    else
-    alert('please type your email')
+    if (userId.length > 0) {
+      // check user id in database first
+      dispatch(checkUserId({ userId })).then(
+        (result) => handleLoginWithEmailClicked(userId),
+        (error) => alert("user not exists")
+      );
+    } else alert("please type your email");
   };
 
-  const handleSignUpClick=(event)=>{
+  const handleSignUpClick = (event) => {
     event.preventDefault();
-    handleSignUpClicked()
-  }
+    handleSignUpClicked();
+  };
 
   return (
     <Box boxShadow={2} justifyContent="center" alignContent="center">
@@ -213,7 +249,7 @@ export default function LoginForm({ handleLoginWithEmailClicked ,handleSignUpCli
         >
           <Grid item>
             <RoundButton
-              title={"Continue With Email"}
+              title={"Login With Email"}
               width={280}
               color={colors.white}
               bgColor={colors.secondary}
@@ -244,7 +280,7 @@ export default function LoginForm({ handleLoginWithEmailClicked ,handleSignUpCli
           style={{ marginTop: "5%" }}
           alignItems="center"
         >
-          <Grid item container justifyContent='center' alignItems='center'>
+          <Grid item container justifyContent="center" alignItems="center">
             <Typography>Don't have an account yet? Create Now!</Typography>
             <RoundButton
               title={"Sign Up"}

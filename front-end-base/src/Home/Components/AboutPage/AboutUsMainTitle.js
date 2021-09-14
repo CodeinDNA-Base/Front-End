@@ -7,6 +7,9 @@ import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 import colors from "../../../Theme/colors";
 import { Headingfonts, TextFonts } from "../../../Theme/fonts";
 
+// string constants
+import {CAREER_TITLE,CAREER_SUBTITLE} from '../../Strings/AboutUsStrings'
+
 const AboutUsMainTitleStyles = makeStyles((theme) => ({
     subtitle: {
       font: (isDesktopOrLaptopOrTabletScreen) =>
@@ -42,10 +45,10 @@ const AboutUsMainTitleText=()=>{
     const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
     const classes = AboutUsMainTitleStyles(isDesktopOrLaptopOrTabletScreen);
     return( <div>
-        <p className={classes.title}>Independent talent with Action, Community & Quality  </p>
+        <p className={classes.title}>{CAREER_TITLE} </p>
   
         <p className={classes.subtitle}>
-          Be the Part of Our Community, to grow your bussiness smoothly
+        {CAREER_SUBTITLE}
         </p>
         <Box style={{ marginTop: 20 }}>
           <RoundButton  title='Contact Us' color={colors.white} bgColor={colors.secondary}  />

@@ -6,7 +6,9 @@ import colors from "../../../Theme/colors";
 import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 import { TextFonts } from "../../../Theme/fonts";
 import { useMediaQuery } from "@material-ui/core";
-import { TextFieldWithIcon } from "../../../CustomComponents/UI/Form/TextFields";
+import AttachmentSharpIcon from "@material-ui/icons/AttachmentSharp";
+
+// temp queries
 const queries = [
   { label: "How i can place my order", value: "How i can place my order" },
   {
@@ -15,18 +17,33 @@ const queries = [
   },
   { label: "I forget my email address", value: "I forget my email address" },
 ];
+
+// styles
 const useContactFormStyles = makeStyles(() => ({
-  textArea: { marginTop:isDesktopOrLaptopOrTabletScreen=>isDesktopOrLaptopOrTabletScreen ? "5%" : '7%' },
-  textField:{width:isDesktopOrLaptopOrTabletScreen=>isDesktopOrLaptopOrTabletScreen ? '49%' : '100%'},
+  textArea: {
+    marginTop: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? "5%" : "7%",
+  },
+  textField: {
+    width: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? "49%" : "100%",
+  },
   fonts: {
     font: (isDesktopOrLaptopOrTabletScreen) =>
       isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
   },
   margin: {
-    marginTop: isDesktopOrLaptopOrTabletScreen=> isDesktopOrLaptopOrTabletScreen ? "3%" :'6%',
+    marginTop: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? "3%" : "6%",
   },
-  marginRightOne:{ marginRight: isDesktopOrLaptopOrTabletScreen => isDesktopOrLaptopOrTabletScreen && '1%'},
-  marginLeftOne:{marginLeft: isDesktopOrLaptopOrTabletScreen => isDesktopOrLaptopOrTabletScreen && '1%'},
+  marginRightOne: {
+    marginRight: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen && "1%",
+  },
+  marginLeftOne: {
+    marginLeft: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen && "1%",
+  },
   card: {
     boxShadow:
       "0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.19)",
@@ -35,7 +52,13 @@ const useContactFormStyles = makeStyles(() => ({
     paddingRight: "10%",
     paddingBottom: "5%",
   },
+  attachmentIcon:{
+    float:'left',
+    transform: 'rotate(145deg)',
+    cursor:'pointer'
+  }
 }));
+
 const ContactUsGlobalForm = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const [query, setQuery] = useState("");
@@ -45,11 +68,13 @@ const ContactUsGlobalForm = () => {
     useState("none");
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
-  const [name,setName]=useState("");
-  const handleSetName=(event)=>{
+  const [name, setName] = useState("");
+
+  // hanlders
+  const handleSetName = (event) => {
     event.preventDefault();
-    setName(event.target.value)
-  }
+    setName(event.target.value);
+  };
   const handleSetEmail = (event) => {
     event.preventDefault();
     setEmail(event.target.value);
@@ -81,6 +106,7 @@ const ContactUsGlobalForm = () => {
     setEmail("");
     setName("");
   };
+
   return (
     <Grid container justifyContent="center" alignItems="center">
       <form className={classes.card}>
@@ -91,7 +117,12 @@ const ContactUsGlobalForm = () => {
             label="Full Name"
             defaultValue=""
             variant="outlined"
-            className={[classes.fonts,classes.textField,classes.marginRightOne,classes.margin]}
+            className={[
+              classes.fonts,
+              classes.textField,
+              classes.marginRightOne,
+              classes.margin,
+            ]}
             value={name}
             onChange={handleSetName}
             required
@@ -103,16 +134,19 @@ const ContactUsGlobalForm = () => {
             label="Email"
             defaultValue=""
             variant="outlined"
-            className={[classes.fonts,classes.textField,classes.marginLeftOne,classes.margin]}
+            className={[
+              classes.fonts,
+              classes.textField,
+              classes.marginLeftOne,
+              classes.margin,
+            ]}
             value={email}
             onChange={handleSetEmail}
             required
-            
             size="small"
             type="email"
           />
         </Box>
-
         <TextField
           id="customerQueries"
           select
@@ -141,14 +175,14 @@ const ContactUsGlobalForm = () => {
           <Divider />
           <option className={classes.fonts}>Other</option>
         </TextField>
-        <Box display={isDisplayOtherQueryField} >
+        <Box display={isDisplayOtherQueryField}>
           <TextField
             id="ootherQuery"
             label="query"
             defaultValue=""
             variant="outlined"
             fullWidth
-            className={[classes.margin, classes.fonts,]}
+            className={[classes.margin, classes.fonts]}
             size="small"
             value={customeQuery}
             onChange={handleSetCustomeQuery}
@@ -159,7 +193,7 @@ const ContactUsGlobalForm = () => {
           id="description"
           label="Description"
           multiline
-          rows={ isDesktopOrLaptopOrTabletScreen ? 10 : 5}
+          rows={isDesktopOrLaptopOrTabletScreen ? 10 : 5}
           defaultValue=""
           variant="outlined"
           fullWidth
@@ -168,6 +202,9 @@ const ContactUsGlobalForm = () => {
           onChange={handleSetDescription}
           required
         />
+        <div className={classes.attachmentIcon} onClick={()=>alert('attach')}>
+          <AttachmentSharpIcon />
+        </div>
         <RoundButton
           title={"Submit"}
           width={"100%"}
