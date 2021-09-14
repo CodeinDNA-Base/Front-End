@@ -37,6 +37,14 @@ const AboutUsStyles = makeStyles(() => ({
 const AboutUs = (props) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = AboutUsStyles(isDesktopOrLaptopOrTabletScreen);
+
+  // handlers
+  const handleBuyProjectsClick=()=>{
+    alert(`naviagate to nadir's page`)
+  }
+  const handleBuyServicesClick=()=>{
+    alert(`navigate to nigeeta's page`)
+  }
   return (
     <Grid container justifyContent="center">
       <Grid item md={12} xs={12} sm={12}>
@@ -120,12 +128,14 @@ const AboutUs = (props) => {
             color={colors.white}
             bgColor={colors.secondary}
             margin={"2% 0% 0% 0%"}
+            handleClick={handleBuyServicesClick}
           />
           <RoundButton
             title={"Buy Projects"}
             color={colors.white}
             bgColor={colors.secondary}
             margin={"2% 0% 0% 2%"}
+            handleClick={handleBuyProjectsClick}
           />
         </Grid>
       </Grid>

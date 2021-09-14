@@ -126,7 +126,7 @@ export default function TopNavbar({
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
+  const handleLogoClick = () => {};
   return (
     <div className={classes.grow}>
       <AppBar position="static" style={{ backgroundColor: "#011c38" }}>
@@ -138,9 +138,9 @@ export default function TopNavbar({
               drawerListItemAvatar={drawerListItemAvatar}
             />
           </Hidden>
-          <Typography className={classes.title} variant="h6" noWrap>
-            CODE IN DNA
-          </Typography>
+          <IconButton className={classes.title} onClick={handleLogoClick}>
+            <Link to="/"> CODE IN DNA</Link>
+          </IconButton>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

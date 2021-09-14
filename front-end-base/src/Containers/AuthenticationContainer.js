@@ -12,12 +12,26 @@ import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
 import colors, { ColorGradient } from "../Theme/colors";
 
 // custom compoents
-import LoginForm, { PasswordForm } from "../Home/Components/AuthenticationPage/LoginForm";
+import LoginForm, {
+  PasswordForm,
+} from "../Home/Components/AuthenticationPage/LoginForm";
 import Register from "../Home/Components/AuthenticationPage/Register";
 import RegisterDetails from "../Home/Components/AuthenticationPage/Register";
 
 // navbar
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
+
+// navbar parameters
+import {
+  navbarMenuOptions,
+  drawerMenuOptions,
+  darwerMenuExtraOptions,
+  navbarTabsOptions,
+  drawerListItemAvatar,
+  isNavbarTabs,
+  isNavBarIconButtons,
+  isAvatar,
+} from "./SupportFiles/HomePageNavbarParameters";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -90,6 +104,11 @@ function AuthenticationContainer(props) {
             packageContainerStickyNess={packageContainerStickyNess}
             navbarMenuOptions={navbarMenuOptions}
             isNavbarTabs={false}
+            isAvatar={false}
+            isNavBarIconButtons={false}
+            drawerMenuOptions={drawerMenuOptions}
+            darwerMenuExtraOptions={darwerMenuExtraOptions}
+            drawerListItemAvatar={drawerListItemAvatar}
           />
         </AppBar>
       </Grid>

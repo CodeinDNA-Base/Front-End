@@ -43,8 +43,8 @@ const TeamCardStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     position: "relative",
     [theme.breakpoints.up("md")]: {
-      width: ({expand}) => expand ? "80%" : "100%",
-      height: ({expand}) => expand ? "80%" : "100%",
+      width: ({ expand }) => (expand ? "80%" : "100%"),
+      height: ({ expand }) => (expand ? "80%" : "100%"),
       marginLeft: theme.spacing(-3),
       marginTop: 0,
       transform: "translateX(-8px)",
@@ -90,13 +90,14 @@ export const TeamCard = React.memo(function BlogCard({
   position,
 }) {
   const [expanded, setExpanded] = React.useState(false);
-  const styles = TeamCardStyles({expanded});
+  const styles = TeamCardStyles({ expanded });
   const { button: buttonStyles, ...contentStyles } =
     useBlogTextInfoContentStyles();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const description_array = Array.from(description);
   //const shadowStyles = useOverShadowStyles();
   return (
     <Card className={cx(styles.root)}>
@@ -106,7 +107,7 @@ export const TeamCard = React.memo(function BlogCard({
           classes={contentStyles}
           overline={position}
           heading={name}
-          body={description}
+          body={description_array.slice(0, 90)}
         />
         <span className={styles.readMoreButton}>Read More</span>
         <IconButton
@@ -122,21 +123,7 @@ export const TeamCard = React.memo(function BlogCard({
       </CardContent>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-            over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-            stirring occasionally until lightly browned, 6 to 8 minutes.
-            Transfer shrimp to a large plate and set aside, leaving chicken and
-            chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes,
-            onion, salt and pepper, and cook, stirring often until thickened and
-            fragrant, about 10 minutes. Add saffron broth and remaining 4 1/2
-            cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then
-            serve.
-          </Typography>
+          <Typography paragraph>{description_array.slice(90)}</Typography>
         </CardContent>
       </Collapse>
     </Card>

@@ -6,32 +6,30 @@ import Box from "@material-ui/core/Box";
 import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 import colors from "../../../Theme/colors";
 import { Headingfonts, TextFonts } from "../../../Theme/fonts";
+import ContactFormModal from "./ContactFormModal";
 
 // string constants
-import {CAREER_TITLE,CAREER_SUBTITLE} from '../../Strings/AboutUsStrings'
+import { CAREER_TITLE, CAREER_SUBTITLE } from "../../Strings/AboutUsStrings";
 
 const AboutUsMainTitleStyles = makeStyles((theme) => ({
-    subtitle: {
-      font: (isDesktopOrLaptopOrTabletScreen) =>
-        isDesktopOrLaptopOrTabletScreen ? TextFonts.extraSmall : TextFonts.large,
-      color: colors.lightBlack,
-    },
-    title: {
-      font: (isDesktopOrLaptopOrTabletScreen) =>
-        isDesktopOrLaptopOrTabletScreen
-          ? Headingfonts.large
-          : Headingfonts.XXXLarge,
-      color: colors.secondary,
-      
-    },
+  subtitle: {
+    font: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? TextFonts.extraSmall : TextFonts.large,
+    color: colors.lightBlack,
+  },
+  title: {
+    font: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen
+        ? Headingfonts.large
+        : Headingfonts.XXXLarge,
+    color: colors.secondary,
+  },
+}));
 
-  }));
-
-  
 const AboutUsMainTitle = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   return (
-    <Grid container spacing={0} >
+    <Grid container spacing={0}>
       {!isDesktopOrLaptopOrTabletScreen && <Grid item xs={1} sm={1}></Grid>}
       <Grid item md={8} sm={10} xs={10}>
         <AboutUsMainTitleText />
@@ -40,24 +38,33 @@ const AboutUsMainTitle = () => {
   );
 };
 
+const AboutUsMainTitleText = () => {
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  const classes = AboutUsMainTitleStyles(isDesktopOrLaptopOrTabletScreen);
+  const [open, setOpen] = React.useState(false);
 
-const AboutUsMainTitleText=()=>{
-    const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
-    const classes = AboutUsMainTitleStyles(isDesktopOrLaptopOrTabletScreen);
-    return( <div>
-        <p className={classes.title}>{CAREER_TITLE} </p>
-  
-        <p className={classes.subtitle}>
-        {CAREER_SUBTITLE}
-        </p>
-        <Box style={{ marginTop: 20 }}>
-          <RoundButton  title='Contact Us' color={colors.white} bgColor={colors.secondary}  />
-          
-        </Box>
-      </div>)
-}
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleContactClick = () => {
+    setOpen(true);
+  };
+  return (
+    <div>
+      <p className={classes.title}>{CAREER_TITLE} </p>
+      <ContactFormModal open={open} handleClose={handleClose} />
 
-
-
+      <p className={classes.subtitle}>{CAREER_SUBTITLE}</p>
+      <Box style={{ marginTop: 20 }}>
+        <RoundButton
+          title="Contact Us"
+          color={colors.white}
+          bgColor={colors.secondary}
+          handleClick={handleContactClick}
+        />
+      </Box>
+    </div>
+  );
+};
 
 export default AboutUsMainTitle;

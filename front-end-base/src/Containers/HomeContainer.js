@@ -5,14 +5,13 @@ import { useWindowDimensions } from "../Home/Components/WindowDimensions";
 import { AppBar, makeStyles } from "@material-ui/core";
 
 // custom components
-import LatestProjects from '../Home/Components/HomePage/LatestProjects'
-import Services from '../Home/Components/HomePage/Services'
+import LatestProjects from "../Home/Components/HomePage/LatestProjects";
+import Services from "../Home/Components/HomePage/Services";
 import MainContainer from "../Home/Components/HomePage/MainContainer";
-import MotivationalArea from '../Home/Components/HomePage/MotivationalArea'
+import MotivationalArea from "../Home/Components/HomePage/MotivationalArea";
 import UserReview from "../Home/Components/HomePage/UserReviews";
-import Technologies from '../Home/Components/HomePage/Technologies'
-import WhatWeOffer from "../Home/Components/SubServicesPage/WhatWeOffer";
-
+import Technologies from "../Home/Components/HomePage/Technologies";
+import WhatWeOffer from "../Home/Components/HomePage/WhatWeOffer";
 
 // navbar
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
@@ -33,9 +32,8 @@ import {
   drawerListItemAvatar,
   isNavbarTabs,
   isNavBarIconButtons,
-  isAvatar
+  isAvatar,
 } from "./SupportFiles/HomePageNavbarParameters";
-
 
 const useStyles = makeStyles(() => ({
   root: {

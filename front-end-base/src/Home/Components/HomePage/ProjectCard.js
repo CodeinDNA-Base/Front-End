@@ -7,21 +7,28 @@ import Typography from "@material-ui/core/Typography";
 import { CardActionArea } from "@material-ui/core";
 
 export function CustomCard({ classes, image, title, subtitle }) {
-	
-	
-	return (
-		<CardActionArea className={classes.actionArea}>
+  // handlers
+  const hanldeProjectCardClick = () => {
+    alert("go to zeeshan project page");
+  };
+  return (
+    <CardActionArea
+      className={classes.actionArea}
+      onClick={hanldeProjectCardClick}
+    >
       <Card className={classes.card}>
-        <CardMedia classes={{media:classes.media} } component={'img'}
-		image={image} />
+        <CardMedia
+          classes={{ media: classes.media }}
+          component={"img"}
+          image={image}
+        />
         <CardContent className={classes.content}>
-          <Typography className={classes.title} variant={'h2'}>
+          <Typography className={classes.title} variant={"h2"}>
             {title}
           </Typography>
           <Typography className={classes.subtitle}>{subtitle}</Typography>
         </CardContent>
       </Card>
     </CardActionArea>
-	);
+  );
 }
-

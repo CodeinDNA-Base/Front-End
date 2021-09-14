@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Divider, Grid, makeStyles, Box } from "@material-ui/core";
 import { SmallHeading } from "../../../CustomComponents/UI/Text/SmallHeading";
 import { TextField } from "@material-ui/core";
@@ -7,6 +7,14 @@ import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 import { TextFonts } from "../../../Theme/fonts";
 import { useMediaQuery } from "@material-ui/core";
 import AttachmentSharpIcon from "@material-ui/icons/AttachmentSharp";
+
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectStandardQueries,
+  sendContactFormDetails,
+  loadStandardQueries,
+} from "../Slices/AboutPageSlices/ContactUsGlobalFormSlicer";
 
 // temp queries
 const queries = [
@@ -52,15 +60,37 @@ const useContactFormStyles = makeStyles(() => ({
     paddingRight: "10%",
     paddingBottom: "5%",
   },
-  attachmentIcon:{
-    float:'left',
-    transform: 'rotate(145deg)',
-    cursor:'pointer'
-  }
+  attachmentIcon: {
+    float: "left",
+    transform: "rotate(145deg)",
+    cursor: "pointer",
+  },
 }));
 
 const ContactUsGlobalForm = () => {
+  // redux
+  const dispatch = useDispatch();
+  const standard_queries = useSelector(selectStandardQueries);
+  const { loadStandardQueriesIsLoading } = useSelector(
+    (state) => state.contactFormDetails
+  );
+  const { loadStandardQueriesHasError } = useSelector(
+    (state) => state.contactFormDetails
+  );
+  const { sendContactFormDetailsIsLoading } = useSelector(
+    (state) => state.contactFormDetails
+  );
+  const { sendContactFormDetailsHasError } = useSelector(
+    (state) => state.contactFormDetails
+  );
+
+  useEffect(() => {
+    dispatch(loadStandardQueries());
+  }, [dispatch]);
+
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+
+  // local states
   const [query, setQuery] = useState("");
   const [customeQuery, setCustomeQuery] = useState("");
   const classes = useContactFormStyles(isDesktopOrLaptopOrTabletScreen);
@@ -99,14 +129,22 @@ const ContactUsGlobalForm = () => {
   };
   const handleSubmitClick = (event) => {
     event.preventDefault();
-    alert("submitted");
+    let userQuery = isDisplayOtherQueryField === "none" ? query : customeQuery;
+    dispatch(
+      sendContactFormDetails({ name, email, description, userQuery })
+    ).then(() => {
+      alert("submitted");
+      clearForm();
+    });
+  };
+
+  const clearForm = () => {
     setCustomeQuery("");
     setDescription("");
     setQuery(queries[0].label);
     setEmail("");
     setName("");
   };
-
   return (
     <Grid container justifyContent="center" alignItems="center">
       <form className={classes.card}>
@@ -163,15 +201,16 @@ const ContactUsGlobalForm = () => {
           // helperText="Please select your query"
           variant="outlined"
         >
-          {queries.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-              className={classes.fonts}
-            >
-              {option.label}
-            </option>
-          ))}
+          {!loadStandardQueriesIsLoading &&
+            standard_queries.map((query) => (
+              <option
+                key={query.value}
+                value={query.value}
+                className={classes.fonts}
+              >
+                {query.label}
+              </option>
+            ))}
           <Divider />
           <option className={classes.fonts}>Other</option>
         </TextField>
@@ -202,7 +241,7 @@ const ContactUsGlobalForm = () => {
           onChange={handleSetDescription}
           required
         />
-        <div className={classes.attachmentIcon} onClick={()=>alert('attach')}>
+        <div className={classes.attachmentIcon} onClick={() => alert("attach")}>
           <AttachmentSharpIcon />
         </div>
         <RoundButton

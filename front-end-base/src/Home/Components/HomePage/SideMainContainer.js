@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import colors from "../../../Theme/colors";
 import { Headingfonts, TextFonts } from "../../../Theme/fonts";
 import { useMediaQuery } from "@material-ui/core";
+import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 const useStyles = makeStyles((theme) => ({
   subtitle: {
     font: (isDesktopOrLaptopOrTabletScreen) =>
@@ -35,7 +36,9 @@ const useStyles = makeStyles((theme) => ({
 const SideMainContainer = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
-
+  // hanlder
+  const handleJoinNowClick = () => {alert('open modal for registration')};
+  const handleExploreThePlaceClick = () => {alert('navigate to nadir project page')};
   return (
     <div>
       <p className={classes.title}>Join Siba Overflow Today </p>
@@ -45,22 +48,22 @@ const SideMainContainer = () => {
         our experts
       </p>
       <Box style={{ marginTop: 20 }}>
-        <Button
+        <RoundButton
           variant="contained"
-          classes={{
-            root: classes.btnContained, // class name, e.g. `classes-nesting-root-x`
-          }}
-        >
-          Join Now
-        </Button>
-        <Button
+          title="Join Now"
+          bgColor={colors.secondary}
+          color={colors.white}
+          handleClick={handleJoinNowClick}
+        />
+
+        <RoundButton
           variant="outlined"
-          classes={{
-            root: classes.btnOutlined, // class name, e.g. `classes-nesting-root-x`
-          }}
-        >
-          Explore the place
-        </Button>
+          title={`Explore the Place`}
+          color={colors.white}
+          borderColor={colors.white}
+          margin={"0% 0% 0% 2%"}
+          handleClick={handleExploreThePlaceClick}
+        />
       </Box>
     </div>
   );

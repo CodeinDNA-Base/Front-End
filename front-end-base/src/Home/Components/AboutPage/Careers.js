@@ -6,8 +6,6 @@ import { useMediaQuery } from "@material-ui/core";
 import colors, { ColorGradient } from "../../../Theme/colors";
 import { makeStyles } from "@material-ui/core";
 
-
-
 const CareersStyles = makeStyles((theme) => ({
   aboutUsMainTitle: {
     padding: "0%  2% 0% 2%",

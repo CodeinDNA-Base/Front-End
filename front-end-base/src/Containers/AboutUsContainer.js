@@ -13,7 +13,17 @@ import colors, { ColorGradient } from "../Theme/colors";
 
 // custom components
 import AboutUsMenu from "../Home/Components/AboutPage/AboutUsMenu";
-
+// navbar parameters
+import {
+  navbarMenuOptions,
+  drawerMenuOptions,
+  darwerMenuExtraOptions,
+  navbarTabsOptions,
+  drawerListItemAvatar,
+  isNavbarTabs,
+  isNavBarIconButtons,
+  isAvatar,
+} from "./SupportFiles/HomePageNavbarParameters";
 // navbar
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
 
@@ -93,6 +103,11 @@ function AboutUsContainer(props) {
             packageContainerStickyNess={packageContainerStickyNess}
             navbarMenuOptions={navbarMenuOptions}
             isNavbarTabs={false}
+            isAvatar={false}
+            isNavBarIconButtons={false}
+            drawerMenuOptions={drawerMenuOptions}
+            darwerMenuExtraOptions={darwerMenuExtraOptions}
+            drawerListItemAvatar={drawerListItemAvatar}
           />
         </AppBar>
       </Grid>

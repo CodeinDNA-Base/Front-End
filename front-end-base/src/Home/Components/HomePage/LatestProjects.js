@@ -6,6 +6,7 @@ import HeaderTitle from "../HeaderTitle";
 import LatestProjectsForDesktop from "./LatestProjectsForDesktop";
 import LatestProjectsForMobile from "./LatestProjectsForMobile";
 import { useMediaQuery } from "@material-ui/core";
+import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 const useStyles = makeStyles(() => ({
   btnContained: {
     backgroundColor: " #011c38",
@@ -19,6 +20,10 @@ const useStyles = makeStyles(() => ({
 const LatestProjects = (props) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles();
+  // hanlders
+  const handleSeeMoreProjectsClick=()=>{
+    alert('go to nadir projects page')
+  }
   return (
     <div className={classes.root}>
       <HeaderTitle
@@ -33,14 +38,15 @@ const LatestProjects = (props) => {
       <Grid container spacing={0} style={{ marginTop: "4%" }}>
         <Grid xs={0} sm={1} md={1} item></Grid>
         <Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
-          <Button
+          <RoundButton
             variant="contained"
-            classes={{
-              root: classes.btnContained, // class name, e.g. `classes-nesting-root-x`
-            }}
-          >
-            See More Projects
-          </Button>
+           title={`See more projects`}
+           color={colors.white}
+           bgColor={colors.primary}
+           handleClick={handleSeeMoreProjectsClick}
+
+         />
+         
         </Grid>
         <Grid xs={0} sm={1} md={1} item></Grid>
       </Grid>

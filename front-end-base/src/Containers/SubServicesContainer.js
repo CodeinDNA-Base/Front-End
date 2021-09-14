@@ -16,6 +16,17 @@ import ServicePage from "../Home/Components/SubServicesPage/ServicesPage";
 
 // navbar
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
+// navbar parameters
+import {
+  navbarMenuOptions,
+  drawerMenuOptions,
+  darwerMenuExtraOptions,
+  navbarTabsOptions,
+  drawerListItemAvatar,
+  isNavbarTabs,
+  isNavBarIconButtons,
+  isAvatar,
+} from "./SupportFiles/HomePageNavbarParameters";
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -44,7 +55,6 @@ function SubServicesContainer(props) {
   const [currentSelectedTabIndex, setCurrentSelectedTabIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
 
- 
   const handleScroll = () => {
     setScrollPosition(window.pageYOffset);
   };
@@ -79,6 +89,13 @@ function SubServicesContainer(props) {
           <CustomNavbar
             handelTabIndex={handelTabIndex}
             packageContainerStickyNess={packageContainerStickyNess}
+            navbarMenuOptions={navbarMenuOptions}
+            isNavbarTabs={false}
+            isAvatar={false}
+            isNavBarIconButtons={false}
+            drawerMenuOptions={drawerMenuOptions}
+            darwerMenuExtraOptions={darwerMenuExtraOptions}
+            drawerListItemAvatar={drawerListItemAvatar}
           />
         </AppBar>
       </Grid>
@@ -91,7 +108,6 @@ function SubServicesContainer(props) {
         <Grid xs={1} sm={1} md={1} item></Grid>
       </Grid>
 
-      
       {/* footer*/}
       <Grid container className={classes.footer} spacing={0}>
         <Grid item md={12} xs={12} sm={12}>
