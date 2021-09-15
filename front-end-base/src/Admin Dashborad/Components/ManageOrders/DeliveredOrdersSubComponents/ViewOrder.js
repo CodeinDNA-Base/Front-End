@@ -24,10 +24,14 @@ function ViewOrder(props) {
     const [isChatOpen,setIsChatOpen]=useState(false);
     const [isOrderChatOpen,setIsOrderChatOpen]=useState(false);
     const [attachmentsList,setAttachmentsList]=useState([]);
-
+    const [deliveryFilesList,setDeliveryFilesList]=useState([]);
+    
     useEffect(()=>{
        setAttachmentsList(props.selectedOrder.listOfAttachment)
+       setDeliveryFilesList(props.selectedOrder.orderDeliveryFiles);
     },[])
+
+
     const handelChatOpen=()=>{
         setIsViewOrderDetailsOpen(false);
         setIsCancelOderOpen(false);
@@ -81,8 +85,7 @@ function ViewOrder(props) {
                       handleClick={handelChatOpen}
                      />
                     </div> 
-                      <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
-                                    {/* Start */}
+                      {/* <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
                                     <RoundButton
                                       title={"Accespt and Start Order"}
                                       width={250}
@@ -91,7 +94,7 @@ function ViewOrder(props) {
                                       margin={"0% 0% 0%  0%"}
                                       handleClick={handelAcceptAndStartOrder}
                                      />
-                       </div>
+                       </div> */}
                        <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
                                 <RoundButton
                                       title={"Decline"}
@@ -171,7 +174,10 @@ function ViewOrder(props) {
                                             {/* Date of placement */}
                                             <Headings text={` Date and Time of placement :${props.selectedOrder.orderPlacementDate} @ ${props.selectedOrder.orderPlacementTime}`} fontWeight={'bold'} fontSize={12}/>
                                         </Grid>
-                                        
+                                        <Grid item xs={12}>
+                                            {/* Date of placement */}
+                                            <Headings text={` Date and Time of submission :${props.selectedOrder.orderSubmitionDate} @ ${props.selectedOrder.orderSubmitionTime}`} fontWeight={'bold'} fontSize={12}/>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={3}>
@@ -259,6 +265,32 @@ function ViewOrder(props) {
                                       </ImageList>
                                 </Grid> 
                             </Grid>
+
+                                {/* Delivery files */}
+                            
+                         <Grid container style={{backgroundColor:'#abd1ed'}}>
+                                <Grid item xs={8} style={{paddingLeft:'1rem'}}>
+                                    {/* item */}
+                                    <Headings text={`Delivery files`} fontWeight={'bold'}/>
+                                </Grid> 
+                            </Grid>
+
+                            <Grid container >
+                                <Grid item xs={12} style={{padding:'1rem'}}>
+                                    {/* item */}
+                                    <ImageList rowHeight={200} className={classes.imageList} cols={3}>
+                                        {deliveryFilesList.map((item,index) => (
+                                          <ImageListItem key={index} cols={item.cols || 1}>
+                                            {(item.type==="File") && <FileAttachmentHolder attachment={item}/>}
+                                            {(item.type==="Image") && <ImageAttachmentHolder attachment={item}/>}
+                                            {(item.type==="Video") && <VideoAttachmentHolder attachment={item}/>}
+                                            
+                                          </ImageListItem>
+                                        ))}
+                                      </ImageList>
+                                </Grid> 
+                            </Grid>
+
 
                             </Grid>
 

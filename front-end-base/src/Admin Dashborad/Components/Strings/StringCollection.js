@@ -64,7 +64,7 @@ const stringCollection = {
    ManageOrders:{
        OrdersManagerTitle:"Orders Manager",
        DeliverOrderTabText:"Deliver ",
-       ShowNewOrdersTabText:"New ",
+       ShowNewOrdersTabText:"",
        ShowUnCompleteOrdersTabText:"In-progress ",
        ShowCompleteOrdersTabText:"Complete ",
        ShowCanceledOrdersTabText:"Canceled ",

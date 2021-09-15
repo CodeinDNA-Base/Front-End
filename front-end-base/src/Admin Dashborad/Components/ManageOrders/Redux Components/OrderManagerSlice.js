@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import produce from 'immer'
-import { loadListOfNewOrders,loadListOfInProgressOrders,loadListOfCompletedOrders,loadListOfCanceledOrder } from "./Thunks";
+import { loadListOfDeliveredOrders,loadListOfInProgressOrders,loadListOfCompletedOrders,loadListOfCanceledOrder } from "./Thunks";
 const initialState={
-    listOfNewOrders:[],
+    listOfDeliveredOrders:[],
     listOfInProgressOrders:[],
     listOfCompletedOrders:[],
     listOfCanceledOrder:[],
 
-    isLoading_LoadListOfNewOrders: false,
-    hasError_LoadListOfNewOrders: false,
+    isLoading_LoadListOfDeliveredOrders: false,
+    hasError_LoadListOfDeliveredOrders: false,
 
     isLoading_LoadListOfInProgressOrders: false,
     hasError_LoadListOfInProgressOrders: false,
@@ -26,19 +26,19 @@ const options = {
     initialState: initialState,
     reducers: {},
     extraReducers: {
-        // loadListOfNewOrders
-        [loadListOfNewOrders.pending]: (state, action) => {
-            state.isLoading_LoadListOfNewOrders = true;
-            state.hasError_LoadListOfNewOrders = false;
+        // loadListOfDeliveredOrders
+        [loadListOfDeliveredOrders.pending]: (state, action) => {
+            state.isLoading_LoadListOfDeliveredOrders = true;
+            state.hasError_LoadListOfDeliveredOrders = false;
         },
-        [loadListOfNewOrders.fulfilled]: (state, action) => {
-            state.listOfNewOrders = action.payload;
-            state.isLoading_LoadListOfNewOrders = false;
-            state.hasError_LoadListOfNewOrders = false;
+        [loadListOfDeliveredOrders.fulfilled]: (state, action) => {
+            state.listOfDeliveredOrders = action.payload;
+            state.isLoading_LoadListOfDeliveredOrders = false;
+            state.hasError_LoadListOfDeliveredOrders = false;
         },
-        [loadListOfNewOrders.rejected]: (state, action) => {
-            state.isLoading_LoadListOfNewOrders = false;
-            state.hasError_LoadListOfNewOrders = true;
+        [loadListOfDeliveredOrders.rejected]: (state, action) => {
+            state.isLoading_LoadListOfDeliveredOrders = false;
+            state.hasError_LoadListOfDeliveredOrders = true;
         },
 
          // loadListOfInProgressOrders

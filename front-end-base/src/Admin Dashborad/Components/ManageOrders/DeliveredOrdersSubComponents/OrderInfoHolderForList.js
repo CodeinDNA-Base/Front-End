@@ -168,6 +168,10 @@ function OrderInfoHolderForList({showMenueSelectionOpt,...props}) {
                 <Grid item xs={6} style={{padding:'1rem',border:lightBorder}} >      
                     <Headings text={`Placement Date :  ${props.data.orderPlacementDate}`} fontWeight={'bold'}/> 
                 </Grid>
+                <Grid item xs={12} style={{padding:'1rem',border:lightBorder}} >
+                    <Headings text={`Submition Date :  ${props.data.orderSubmitionDate}`} fontWeight={'bold'}/>
+                </Grid>
+                
                 <Grid item xs={12} style={{textAlign:'center',padding:'1rem',border:lightBorder}}>
                     <Headings text={`Catagory :  ${props.data.selectedService}`} fontWeight={'bold'}/>
                     <Headings text={`Prefered language :  ${props.data.selectedSubService}`} fontWeight={'bold'}/>

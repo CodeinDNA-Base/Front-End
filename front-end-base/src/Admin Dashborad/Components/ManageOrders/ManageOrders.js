@@ -8,7 +8,7 @@ import { Headings } from '../Support/Headings';
 
 import ShowCanceledOrdersTab from './ShowCanceledOrdersTab';
 import ShowCompleteOrdersTab from './ShowCompleteOrdersTab';
-import ShowNewOrdersTab from './ShowNewOrdersTab';
+import ShowDeliveredOrdersTab from './ShowDeliveredOrdersTab';
 import ShowUnCompleteOrdersTab from './ShowUnCompleteOrdersTab';
 
 function ManageOrders(props) {
@@ -46,10 +46,10 @@ function ManageOrders(props) {
                      >
      
                           {/* <Tab label={stringCollection.ManageOrders.DeliverOrderTabText} {...a11yProps(0)} /> */}
-                          <Tab className={classes.tabElementStyle} label={stringCollection.ManageOrders.ShowNewOrdersTabText} {...a11yProps(0)} />
-                          <Tab className={classes.tabElementStyle} label={stringCollection.ManageOrders.ShowUnCompleteOrdersTabText} {...a11yProps(1)} />
-                          <Tab className={classes.tabElementStyle} label={stringCollection.ManageOrders.ShowCompleteOrdersTabText} {...a11yProps(2)} />
-                          <Tab className={classes.tabElementStyle} label={stringCollection.ManageOrders.ShowCanceledOrdersTabText} {...a11yProps(3)} />
+                          <Tab className={classes.tabElementStyle} label={stringCollection.ManageOrders.ShowUnCompleteOrdersTabText} {...a11yProps(0)} />
+                          <Tab className={classes.tabElementStyle} label={stringCollection.ManageOrders.ShowCompleteOrdersTabText} {...a11yProps(1)} />
+                          <Tab className={classes.tabElementStyle} label={stringCollection.ManageOrders.ShowCanceledOrdersTabText} {...a11yProps(2)} />
+                          <Tab className={classes.tabElementStyle} label={"Delivered"} {...a11yProps(3)} />
                                        
                         </Tabs>
                         </AppBar>
@@ -65,19 +65,19 @@ function ManageOrders(props) {
                               <Grid container>
                                 
                                   <Grid xs={12}>
-                                       <TabPanel value={value} index={0}>
-                                          <ShowNewOrdersTab/>
-                                        </TabPanel>
-                                        <TabPanel value={value} index={1}>
+                                      
+                                        <TabPanel value={value} index={0}>
                                          <ShowUnCompleteOrdersTab/>
                                        </TabPanel>
-                                       <TabPanel value={value} index={2}>
+                                       <TabPanel value={value} index={1}>
                                          <ShowCompleteOrdersTab/>
                                        </TabPanel>
-                                       <TabPanel value={value} index={3}>
+                                       <TabPanel value={value} index={2}>
                                          <ShowCanceledOrdersTab/>
                                        </TabPanel>
-                                       
+                                       <TabPanel value={value} index={3}>
+                                         <ShowDeliveredOrdersTab/>
+                                       </TabPanel>
                                   </Grid>
                                   
                               </Grid>

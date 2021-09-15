@@ -2,13 +2,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { 
     DataLoader_ForListOfCanceledOrder,
     DataLoader_ForListOfCompletedOrders,
+    DataLoader_ForListOfDeliveredOrders,
     DataLoader_ForListOfInProgressOrders,
-    DataLoader_ForListOfNewOrders } from "./APIEndPoints";
+     } from "./APIEndPoints";
 
-export const loadListOfNewOrders =  createAsyncThunk(
-    'ordersManagerPanel/loadListOfNewOrders',
+export const loadListOfDeliveredOrders =  createAsyncThunk(
+    'ordersManagerPanel/loadListOfDeliveredOrders',
     async()=>{
-        const response = await DataLoader_ForListOfNewOrders().then((resp)=>{
+        const response = await DataLoader_ForListOfDeliveredOrders().then((resp)=>{
             return resp
         },(error)=>{
             throw error;

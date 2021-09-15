@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { lightBorder } from '../../../Theme/borders';
 import { Headings } from '../Support/Headings';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ListOfNewOrders from './NewOrdersSubComponents/ListOfNewOrders'
+import ListOfDeliveredOrders from './DeliveredOrdersSubComponents/ListOfDeliveredOrders'
 import { useDispatch } from 'react-redux';
-import { loadListOfNewOrders } from './Redux Components/Thunks';
-import ViewOrder from './NewOrdersSubComponents/ViewOrder';
-function ShowNewOrdersTab(props) {
+import { loadListOfDeliveredOrders } from './Redux Components/Thunks';
+import ViewOrder from './DeliveredOrdersSubComponents/ViewOrder';
+function ShowDeliveredOrdersTab(props) {
     const classes = useStyles();
     const [screenSwitcher,setScreenSwitcher]=useState(true);
     const [selectedOrder,setselectedOrder]=useState();
@@ -23,7 +23,7 @@ function ShowNewOrdersTab(props) {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(loadListOfNewOrders());
+        dispatch(loadListOfDeliveredOrders());
     },[])
     return (
         <div className={classes.container}>
@@ -41,7 +41,7 @@ function ShowNewOrdersTab(props) {
                             </div>
                         ):(
                             <div style={{marginTop:'1rem'}}>
-                                <ListOfNewOrders showMenueSelectionOpt={false}  handelOptionSelection={handelOptionSelection}/>
+                                <ListOfDeliveredOrders showMenueSelectionOpt={false}  handelOptionSelection={handelOptionSelection}/>
                             </div>
                         )
                         
@@ -59,4 +59,4 @@ const useStyles = makeStyles((theme)=>({
        
     }
 }))
-export default ShowNewOrdersTab;
+export default ShowDeliveredOrdersTab;

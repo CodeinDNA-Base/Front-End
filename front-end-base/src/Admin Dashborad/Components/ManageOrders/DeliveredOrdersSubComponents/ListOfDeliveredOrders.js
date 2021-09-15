@@ -12,9 +12,9 @@ import FilterEngine from '../FilterMotor'
 import produce from 'immer';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useSelector } from 'react-redux';
-import { selectAll, selectListOfNewOrders } from '../Redux Components/Selectors';
+import { selectAll, selectListOfDeliveredOrders } from '../Redux Components/Selectors';
 import OrderInfoHolderForList from './OrderInfoHolderForList';
-function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
+function ListOfDeliveredOrders({showMenueSelectionOpt=false,...props}) {
     const classes = useStyles();
     const [listOfNewOrders,setlistOfNewOrders]=useState([]);
     
@@ -44,8 +44,8 @@ function ListOfAllProjects({showMenueSelectionOpt=false,...props}) {
         filter_by_title_5_type:"orderEstimatedPrice",
     }
 
-    const listOfNewOrders_FromStore = useSelector(selectListOfNewOrders); //this will be updated and will cause auto render as soon as sotre get updated.
-    const {isLoading_LoadListOfNewOrders} = useSelector(selectAll);
+    const listOfNewOrders_FromStore = useSelector(selectListOfDeliveredOrders); //this will be updated and will cause auto render as soon as sotre get updated.
+    const {isLoading_LoadListOfDeliveredOrders} = useSelector(selectAll);
 
     useEffect(()=>{
        // setting up list of projects in project's rneder list.
@@ -233,9 +233,9 @@ const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
                     >
                         <CardContent>
                             {
-                                (isLoading_LoadListOfNewOrders) ? (
+                                (isLoading_LoadListOfDeliveredOrders) ? (
                                     <div>
-                                    <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Fetching new orders.."} fontSize={30}/> </div>
+                                    <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Fetching delivered orders.."} fontSize={30}/> </div>
                                     <Skeleton />
                                     <Skeleton />
                                     <Skeleton />
@@ -247,9 +247,9 @@ const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
                                 { (listOfOptions_ForChipList.length===0) && 
                                     <div>
                                         
-                                        <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"New orders"} fontSize={30}/> </div>
+                                        <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Delivered orders"} fontSize={30}/> </div>
                                             
-                                            <ImageList rowHeight={450} className={classes.imageList} cols={3}>
+                                            <ImageList rowHeight={550} className={classes.imageList} cols={3}>
                                             {list}
                                             </ImageList>
                                             
@@ -266,7 +266,7 @@ const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
                                 <div>
                                     <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Search results"} fontSize={30}/> </div>
                               
-                                   <ImageList rowHeight={450} className={classes.imageList} cols={3}>
+                                   <ImageList rowHeight={550} className={classes.imageList} cols={3}>
                                      {searchResults}
                                     </ImageList>
                                  <div>
@@ -311,4 +311,4 @@ const useStyles = makeStyles((theme)=>({
       },
 }))
 
-export default ListOfAllProjects;
+export default ListOfDeliveredOrders;

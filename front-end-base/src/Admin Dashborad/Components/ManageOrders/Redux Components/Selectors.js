@@ -1,8 +1,8 @@
 export const selectAll = (state)=>{
     return state.ordersManagerPanel;
 }
-export const  selectListOfNewOrders = (state)=>{
-    return state.ordersManagerPanel.listOfNewOrders ;
+export const  selectListOfDeliveredOrders = (state)=>{
+    return state.ordersManagerPanel.listOfDeliveredOrders ;
 }
 export const  selectListOfInProgressOrders = (state)=>{
     return state.ordersManagerPanel.listOfInProgressOrders;
