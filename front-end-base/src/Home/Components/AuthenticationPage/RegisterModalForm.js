@@ -16,13 +16,12 @@ import { SmallHeading } from "../../../CustomComponents/UI/Text/SmallHeading";
 import { TextFonts } from "../../../Theme/fonts";
 import { FormLabel, useMediaQuery } from "@material-ui/core";
 import ModalContainer from "../../../CustomComponents/UI/Support/ModalContainer";
-import {TermsAndServicesContent} from "../AboutPage/TermsAndServices";
+import { TermsAndServicesContent } from "../AboutPage/TermsAndServices";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     width: "100%",
   },
   paper: {
-    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -57,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RegisterDetails({ handleSignInClicked }) {
+export default function RegisterModalForm({ handleSignInClicked }) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   const [firstName, setFirstName] = useState("");
@@ -65,7 +64,7 @@ export default function RegisterDetails({ handleSignInClicked }) {
   const [country, setCountry] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  // useEffect(()=>{alert('in register details')},[])
+
   const handleSignInClick = () => {
     handleSignInClicked();
   };
@@ -85,12 +84,34 @@ export default function RegisterDetails({ handleSignInClicked }) {
         open={open}
         handleClose={handleClose}
         Component={<TermsAndServicesContent totalGrid={12} />}
+        width={'50%'}
       />
       <CssBaseline />
       <div className={classes.paper}>
         <form className={classes.form} noValidate>
-          <SmallHeading title={"Complete your Information"} />
+          <SmallHeading title={"Found Something"} />
+          <Grid
+            
+            container
+            spacing={1}
+            alignItems="flex-end"
+            justifyContent="center"
+          >
+            <Grid item>
+              <RoundButton
+                title={"Continue with Google"}
+                width={280}
+                color={colors.white}
+                bgColor={colors.info}
+                margin={"0% 0% 10%  0%"}
+                //icon={<MailIcon />}
+              />
+              <div class="separator">OR</div>
+            </Grid>
+          </Grid>
+          
           <Grid container spacing={2}>
+            
             <Grid item xs={6} sm={6} md={6}>
               <StandardTextField
                 variant="outlined"
@@ -106,6 +127,15 @@ export default function RegisterDetails({ handleSignInClicked }) {
                 label="last Name"
                 value={lastName}
                 onChange={(value) => setLastName(value)}
+                size={"small"}
+              />
+            </Grid>
+            <Grid item xs={12} md={12} sm={12}>
+              <StandardTextField
+                variant="outlined"
+                label="Email Address"
+                value={userName}
+                onChange={(value) => setUserName(value)}
                 size={"small"}
               />
             </Grid>
@@ -155,7 +185,10 @@ export default function RegisterDetails({ handleSignInClicked }) {
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I accept the terms and the conditions"
               />
-              <FormLabel className={classes.viewTermsLabel} onClick={handleViewTermsClick}>
+              <FormLabel
+                className={classes.viewTermsLabel}
+                onClick={handleViewTermsClick}
+              >
                 View Terms
               </FormLabel>
             </Grid>

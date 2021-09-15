@@ -50,73 +50,81 @@ const TermsAndServices = () => {
   return (
     <Grid container justifyContent="center" className={classes.root}>
       <Grid item md={2}></Grid>
-      <Grid conatiner item xs={12} md={8} sm={12} className={classes.Conatiner}>
-        <HomePageComponentsHeading
-          title={TERMSANDSERVICES_TITLE}
-          description={"Welcome to CodeInDNA.com"}
-          titleColor={colors.lightBlack}
-          descriptionColor={colors.highlighter}
-          margin={"0%"}
-        />
-        <div className={classes.paragraph}>
-          {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHONE}{" "}
-        </div>
-
-        <div className={classes.paragraph}>
-          {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHTWO}{" "}
-        </div>
-        <div className={classes.paragraph}>
-          {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHTHREE}{" "}
-        </div>
-        <div className={classes.paragraph}>
-          {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHFOUR}{" "}
-        </div>
-        <div className={classes.paragraph}>
-          {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHFIVE}{" "}
-        </div>
-        <SmallHeading title={`Custom Offer`} />
-        <ul>
-          <li className={classes.bulletPoints}>
-            {TERMSANDSERVICES_CUSTOMOFFERS.POINTONE}
-          </li>
-          <li className={classes.bulletPoints}>
-            {TERMSANDSERVICES_CUSTOMOFFERS.POINTTWO}
-          </li>
-          <li className={classes.bulletPoints}>
-            {TERMSANDSERVICES_CUSTOMOFFERS.POINTTHREE}
-          </li>
-          <li className={classes.bulletPoints}>
-            {TERMSANDSERVICES_CUSTOMOFFERS.POINTFOUR}
-          </li>
-          <li className={classes.bulletPoints}>
-            {TERMSANDSERVICES_CUSTOMOFFERS.POINTFIVE.text}
-            <ul style={{ marginTop: "1%" }}>
-              <li className={classes.bulletPoints}>
-                {TERMSANDSERVICES_CUSTOMOFFERS.POINTFIVE.subPoints.ONE}
-              </li>
-              <li className={classes.bulletPoints}>
-                {TERMSANDSERVICES_CUSTOMOFFERS.POINTFIVE.subPoints.TWO}
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <SmallHeading title={`Orders`} />
-        <ul>
-          <li className={classes.bulletPoints}>
-            {TERMSANDSERVICES_ORDERS.POINTONE}
-          </li>
-          <li className={classes.bulletPoints}>
-            {TERMSANDSERVICES_ORDERS.POINTTWO}
-          </li>
-        </ul>
-        <SmallHeading title={`Violation`} />
-        <div className={classes.paragraph}>
-          {TERMSANDSERVICES_VIOLATION.POINT_ONE}
-        </div>
-      </Grid>
+      <TermsAndServicesContent />
       <Grid item md={2}></Grid>
     </Grid>
   );
 };
 
+export const TermsAndServicesContent = ({totalGrid}) => {
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  const classes = TermsAndServicesStyles(isDesktopOrLaptopOrTabletScreen);
+  return (
+
+    <Grid conatiner item xs={12} md={totalGrid} sm={12} className={classes.Conatiner}>
+      <HomePageComponentsHeading
+        title={TERMSANDSERVICES_TITLE}
+        description={"Welcome to CodeInDNA.com"}
+        titleColor={colors.lightBlack}
+        descriptionColor={colors.highlighter}
+        margin={"0%"}
+      />
+      <div className={classes.paragraph}>
+        {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHONE}{" "}
+      </div>
+
+      <div className={classes.paragraph}>
+        {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHTWO}{" "}
+      </div>
+      <div className={classes.paragraph}>
+        {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHTHREE}{" "}
+      </div>
+      <div className={classes.paragraph}>
+        {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHFOUR}{" "}
+      </div>
+      <div className={classes.paragraph}>
+        {TERMSANDSERVICES_INTROCONTENT.PARAGRAPHFIVE}{" "}
+      </div>
+      <SmallHeading title={`Custom Offer`} />
+      <ul>
+        <li className={classes.bulletPoints}>
+          {TERMSANDSERVICES_CUSTOMOFFERS.POINTONE}
+        </li>
+        <li className={classes.bulletPoints}>
+          {TERMSANDSERVICES_CUSTOMOFFERS.POINTTWO}
+        </li>
+        <li className={classes.bulletPoints}>
+          {TERMSANDSERVICES_CUSTOMOFFERS.POINTTHREE}
+        </li>
+        <li className={classes.bulletPoints}>
+          {TERMSANDSERVICES_CUSTOMOFFERS.POINTFOUR}
+        </li>
+        <li className={classes.bulletPoints}>
+          {TERMSANDSERVICES_CUSTOMOFFERS.POINTFIVE.text}
+          <ul style={{ marginTop: "1%" }}>
+            <li className={classes.bulletPoints}>
+              {TERMSANDSERVICES_CUSTOMOFFERS.POINTFIVE.subPoints.ONE}
+            </li>
+            <li className={classes.bulletPoints}>
+              {TERMSANDSERVICES_CUSTOMOFFERS.POINTFIVE.subPoints.TWO}
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <SmallHeading title={`Orders`} />
+      <ul>
+        <li className={classes.bulletPoints}>
+          {TERMSANDSERVICES_ORDERS.POINTONE}
+        </li>
+        <li className={classes.bulletPoints}>
+          {TERMSANDSERVICES_ORDERS.POINTTWO}
+        </li>
+      </ul>
+      <SmallHeading title={`Violation`} />
+      <div className={classes.paragraph}>
+        {TERMSANDSERVICES_VIOLATION.POINT_ONE}
+      </div>
+    </Grid>
+  );
+};
 export default TermsAndServices;

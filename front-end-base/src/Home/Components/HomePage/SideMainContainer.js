@@ -6,6 +6,8 @@ import colors from "../../../Theme/colors";
 import { Headingfonts, TextFonts } from "../../../Theme/fonts";
 import { useMediaQuery } from "@material-ui/core";
 import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
+import ModalContainer from "../../../CustomComponents/UI/Support/ModalContainer";
+import RegisterModalForm from "../AuthenticationPage/RegisterModalForm";
 const useStyles = makeStyles((theme) => ({
   subtitle: {
     font: (isDesktopOrLaptopOrTabletScreen) =>
@@ -37,10 +39,22 @@ const SideMainContainer = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   // hanlder
-  const handleJoinNowClick = () => {alert('open modal for registration')};
+  const handleJoinNowClick = () => {setOpen(true)};
   const handleExploreThePlaceClick = () => {alert('navigate to nadir project page')};
+
+  // for modal
+   
+   const [open, setOpen] = React.useState(false);
+
+   const handleClose = () => {
+     setOpen(false);
+   };
+   const handleViewTermsClick = () => {
+     setOpen(true);
+   };
   return (
     <div>
+      <ModalContainer  width={'30%'} height={'90%'} open={open} handleClose={handleClose} Component={<RegisterModalForm />}/>
       <p className={classes.title}>Join Siba Overflow Today </p>
 
       <p className={classes.subtitle}>

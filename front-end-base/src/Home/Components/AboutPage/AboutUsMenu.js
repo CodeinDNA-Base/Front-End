@@ -104,7 +104,7 @@ export default function AboutUsMenu() {
         <Careers />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <TermsAndServices />
+        <TermsAndServices totalGrid={8} />
       </TabPanel>
       <TabPanel value={value} index={4}>
         <Grid

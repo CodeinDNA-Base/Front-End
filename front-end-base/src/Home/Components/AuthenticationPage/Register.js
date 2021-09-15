@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register({handleSignUpWithEmailClicked}) {
   const classes = useStyles();
+  // useEffect(()=>{alert('in register')},[])
   const [userPassword, setUserPassword] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [isIncorrectEmail, setIsIncorrectEmail] = useState(false);
@@ -36,8 +37,7 @@ export default function Register({handleSignUpWithEmailClicked}) {
   }
   const handleContinueWithEmailClick=()=>{
     if(userEmail.length > 0)
-
-      handleSignUpWithEmailClicked(userEmail);
+    handleSignUpWithEmailClicked(userEmail);
       else
       alert('Please Enter your Email first')
   }

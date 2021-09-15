@@ -16,7 +16,7 @@ import LoginForm, {
   PasswordForm,
 } from "../Home/Components/AuthenticationPage/LoginForm";
 import Register from "../Home/Components/AuthenticationPage/Register";
-import RegisterDetails from "../Home/Components/AuthenticationPage/Register";
+import RegisterDetails from "../Home/Components/AuthenticationPage/RegisterDetails";
 
 // navbar
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
@@ -69,7 +69,7 @@ function AuthenticationContainer(props) {
 
   useEffect(() => {
     if (scrollPosition > height * 0.9) {
-      console.log("S:" + scrollPosition);
+  
       setPackageContainerStickyNess("UnStickThePackageContainer");
     } else {
       setPackageContainerStickyNess("StickThePackageContainer");
@@ -116,7 +116,7 @@ function AuthenticationContainer(props) {
       {isLoginOrSignUp ? (
         <LoginInContainer handleSignUpClicked={handleSignUpClicked} />
       ) : (
-        <SignUPContainer />
+        <SignUPContainer handleSignInClicked={handleSignUpClicked} />
       )}
       {/* footer*/}
       <Grid container className={classes.footer} spacing={0}>
@@ -132,7 +132,7 @@ function AuthenticationContainer(props) {
   );
 }
 
-const SignUPContainer = () => {
+const SignUPContainer = ({handleSignInClicked}) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   const [isSignUpWithEmailClicked, setIsSignUpWithEmailClicked] =
@@ -141,8 +141,13 @@ const SignUPContainer = () => {
 
   const handleSignUpWithEmailClicked = (value) => {
     setUserEmail(value);
-    setIsSignUpWithEmailClicked(!isSignUpWithEmailClicked);
+    setIsSignUpWithEmailClicked(false);
   };
+  const hello=(value)=>{
+    setUserEmail(value);
+   setIsSignUpWithEmailClicked(false);
+    alert(value)
+  }
   return (
     <Grid container className={classes.loginInForm}>
       <Grid
@@ -159,11 +164,11 @@ const SignUPContainer = () => {
       >
         {isSignUpWithEmailClicked ? (
           <Register
-            handleSignUpWithEmailClicked={handleSignUpWithEmailClicked}
+            handleSignUpWithEmailClicked={hello}
           />
         ) : (
           <RegisterDetails
-            handleSignUpWithEmailClicked={handleSignUpWithEmailClicked}
+          handleSignInClicked={handleSignInClicked}
           />
         )}
       </Grid>
