@@ -13,13 +13,17 @@ import { makeStyles } from '@material-ui/core';
 import FileAttachmentHolder from './FileAttachmentHolder';
 import VideoAttachmentHolder from './VideoAttachmentHolder'
 import ImageAttachmentHolder from './ImageAttachmentHolder'
+import DeliverOrder from './DeliverOrder';
+import CancelOrder from './CancelOrder';
 function ViewOrder(props) {
-
+ 
     const classes = useStyles();
     const [isViewOrderDetailsOpen,setIsViewOrderDetailsOpen]=useState(true);
     const [isDeliverOderOpen,setIsDeliverOderOpen]=useState(false);
     const [isCancelOderOpen,setIsCancelOderOpen]=useState(false);
     const [isOrderChatOpen,setIsOrderChatOpen]=useState(false);
+    const [isChatOpen,setIsChatOpen]=useState(false);
+   
     const [attachmentsList,setAttachmentsList]=useState([]);
     const [deliveryFilesList,setDeliveryFilesList]=useState([]);
     
@@ -28,10 +32,17 @@ function ViewOrder(props) {
        setDeliveryFilesList(props.selectedOrder.orderDeliveryFiles);
     },[])
 
+    const handelChatOpen=()=>{
+        setIsViewOrderDetailsOpen(false);
+        setIsCancelOderOpen(false);
+        setIsDeliverOderOpen(false);
+        setIsOrderChatOpen(true)
+    }
     const handelViewOrderDetails = ()=>{
         setIsViewOrderDetailsOpen(true);
         setIsCancelOderOpen(false);
         setIsDeliverOderOpen(false);
+        setIsOrderChatOpen(false)
     }
 
     const handelDelivery=()=>{
@@ -39,6 +50,7 @@ function ViewOrder(props) {
         setIsViewOrderDetailsOpen(false);
         setIsCancelOderOpen(false);
         setIsDeliverOderOpen(true);
+        setIsOrderChatOpen(false)
     }
    
     const handeCancelOrder=()=>{
@@ -46,6 +58,7 @@ function ViewOrder(props) {
         setIsViewOrderDetailsOpen(false);
         setIsCancelOderOpen(true);
         setIsDeliverOderOpen(false);
+        setIsOrderChatOpen(false)
     }
 
     return (
@@ -64,7 +77,18 @@ function ViewOrder(props) {
                                       handleClick={handelViewOrderDetails}
                                      />
                         
-                       </div>    
+                       </div>
+                       <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
+                                <RoundButton
+                                      title={"Chat"}
+                                      width={100}
+                                      color={colors.white}
+                                      bgColor={colors.secondary}
+                                      margin={"0% 0% 0%  0%"}
+                                      handleClick={handelChatOpen}
+                                     />
+                        
+                       </div>           
                     <div style={{display:'inline-block',marginLeft:'0.5rem'}}>
                                 <RoundButton
                                       title={"Deliver order"}
@@ -92,10 +116,21 @@ function ViewOrder(props) {
 
                     {
                     //    Cancel order
-                        (isViewOrderDetailsOpen===false && isDeliverOderOpen===false && isCancelOderOpen===true) && <div>
+                    (isViewOrderDetailsOpen===false && isDeliverOderOpen===false && isCancelOderOpen===false && isOrderChatOpen===true) && <div>
                     <Grid container style={{marginTop:'2.5rem'}}>
                         <Grid item xs={12} style={{border:lightBorder,padding:'1rem'}}>
-                            <h1>Cancel  order</h1>
+                            <OrderChatContainer/>
+                        </Grid>     
+                    </Grid>
+                    </div>
+                   }
+
+                    {
+                    //    Cancel order
+                    (isViewOrderDetailsOpen===false && isDeliverOderOpen===false && isCancelOderOpen===true && isOrderChatOpen===false) && <div>
+                    <Grid container style={{marginTop:'2.5rem'}}>
+                        <Grid item xs={12} style={{border:lightBorder,padding:'1rem'}}>
+                            <CancelOrder selectedOrder={props.selectedOrder}/>
                         </Grid>     
                     </Grid>
                     </div>
@@ -103,17 +138,17 @@ function ViewOrder(props) {
 
                    {
                     //    Deliver order
-                        (isViewOrderDetailsOpen===false && isDeliverOderOpen===true && isCancelOderOpen===false) && <div>
+                        (isViewOrderDetailsOpen===false && isDeliverOderOpen===true && isCancelOderOpen===false && isOrderChatOpen===false) && <div>
                     <Grid container style={{marginTop:'2.5rem'}}>
                         <Grid item xs={12} style={{border:lightBorder,padding:'1rem'}}>
-                            <h1>Deliver  order</h1>
+                            <DeliverOrder selectedOrder={props.selectedOrder}/>
                         </Grid>     
                     </Grid>
                     </div>
                    }
                     {
                         // View order details ....
-                        (isViewOrderDetailsOpen===true && isDeliverOderOpen===false && isCancelOderOpen===false) && <div>
+                        (isViewOrderDetailsOpen===true && isDeliverOderOpen===false && isCancelOderOpen===false && isOrderChatOpen===false) && <div>
                     <Grid container style={{marginTop:'2.5rem'}}>
                         <Grid item xs={12} style={{border:lightBorder,padding:'1rem'}}>
                             <Grid container>
@@ -268,35 +303,6 @@ function ViewOrder(props) {
 
                         </Grid>
                     
-                        <Grid container>
-                            <Grid item xs={12} style={{textAlign:'center',marginTop:'1rem'}}>
-                            <RoundButton
-                                      title={"Contact Buyer"}
-                                      width={200}
-                                      color={colors.white}
-                                      bgColor={colors.primary}
-                                      margin={"0% 0% 0%  0%"}
-                                      handleClick={()=>{
-                                          setIsOrderChatOpen(true); 
-                                      }}
-                                     />
-                            </Grid>
-                        </Grid>
-                        <Grid container>
-                            <Grid item xs={12}>
-                                    {
-                                        (isOrderChatOpen===true) ? (
-                                            <div>
-                                                <OrderChatContainer/>
-                                            </div>
-                                        ) : (
-                                            <div>
-                                               
-                                            </div>
-                                        )
-                                    }
-                            </Grid>
-                        </Grid>
                         
                     </Grid>
                         </div>

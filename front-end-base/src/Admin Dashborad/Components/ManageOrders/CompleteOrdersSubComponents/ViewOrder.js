@@ -106,8 +106,8 @@ function ViewOrder(props) {
                                 <Grid item xs={2}>
                                     {/* Duration */}
                                     <Headings text={`Duration`} fontWeight={'bold'}/>
-                                </Grid>                                                                                            zzzzz
-                                zzz
+                                </Grid>                                                                                           
+                                
                                 <Grid item xs={2}>
                                     {/* Quantity */}
                                     <Headings text={`Quantity`} fontWeight={'bold'}/>

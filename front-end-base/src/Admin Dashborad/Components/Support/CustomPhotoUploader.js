@@ -6,6 +6,10 @@ import { useDropzone } from "react-dropzone";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
+//       <CustomPhotoUploader setSelectedFile={setSelectedFile} selectedImage={selectedImage} setSelectedImage={handelSelectImagesForGallary}/>
+                                      
+
+
 //Material-ui core
 import {
   Box,
@@ -97,6 +101,7 @@ function CustomPhotoUploader(props){
                 <ChooseImageModal
                   handleClose={handleProfileImageClose} 
                   setSelectedImage={props.setSelectedImage}
+                  setSelectedFile={props.setSelectedFile}
                 />
               </Box>
             </div>
@@ -140,7 +145,7 @@ const ChooseImageModal = (props) => {
             </Box>
             </Box>
             <Box display="flex">
-                <PhotoPicker handleClose={props.handleClose}  setSelectedImage={props.setSelectedImage}/>
+                <PhotoPicker handleClose={props.handleClose}  setSelectedImage={props.setSelectedImage} setSelectedFile={props.setSelectedFile}/>
             </Box>
           </CardContent>
         </Grid>
@@ -154,10 +159,12 @@ class PhotoPicker extends PureComponent {
     super(props);
     this.setFiles = this.setFiles.bind(this);
     this.handleUpdateProfile = this.handleUpdateProfile.bind(this);
+
   }
 
   state = {
     src: null,
+    fileContent:null,
     crop: {
       unit: "%",
       width: 30,
@@ -250,9 +257,9 @@ class PhotoPicker extends PureComponent {
     });
   };
 
-  setFiles(file) {
+  setFiles(file,fileContent) {
     
-    this.setState({ src: file });
+    this.setState({ src: file,fileContent:fileContent });
   }
 
   //Call APIS to update data of this user
@@ -260,6 +267,7 @@ class PhotoPicker extends PureComponent {
     // alert("Call to API for profile Update");
     // console.log(this.state.src)
     this.props.setSelectedImage(this.state.src);
+    this.props.setSelectedFile(this.state.fileContent)
     this.props.handleClose();
   }
 
@@ -351,10 +359,11 @@ function Dropzone(props) {
       // maxSize:10000
       onDrop: (acceptedFiles) => {
         const currentFile = acceptedFiles[0];
+        const file = currentFile;
         const myFileItemReader = new FileReader();
         myFileItemReader.addEventListener("load", () => {
           const myResult = myFileItemReader.result;
-          props.setFiles(myResult);
+          props.setFiles(myResult,file);
         });
         myFileItemReader.readAsDataURL(currentFile);
       },

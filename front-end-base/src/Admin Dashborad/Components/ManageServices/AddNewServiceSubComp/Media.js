@@ -20,7 +20,8 @@ function Media(props) {
     const classes = useStyles();
 
     const [isEditingEnabled,setIsEditingEnabled]=useState(false);
-    
+    const [selectedFile,setSelectedFile]=useState();
+  
     //Data hooks
     const [thumbnailImage,setThumbnailImage]=useState(null);
     const [selectedImage,setSelectedImage]=useState(null);
@@ -128,7 +129,7 @@ function Media(props) {
                                                     <Headings text={"Unlock for new upload"} fontSize={18} fontWeight={'bold'}/>
                                                 </div>
                                             ) : (
-                                                <CustomPhotoUploader selectedImage={thumbnailImage} setSelectedImage={setThumbnailImage}/>
+                                                <CustomPhotoUploader setSelectedFile={setSelectedFile} selectedImage={thumbnailImage} setSelectedImage={setThumbnailImage}/>
                                             )
                                         }
                                         {/* <LibraryAddIcon color="primary" style={{fontSize:50}}/> */}
@@ -158,7 +159,7 @@ function Media(props) {
                                                         : (
                                                         <div>
                                                         <div style={{position:'absolute',top:0,right:-40}}>
-                                                        <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectImagesForGallary}/>
+                                                        <CustomPhotoUploader setSelectedFile={setSelectedFile} selectedImage={selectedImage} setSelectedImage={handelSelectImagesForGallary}/>
                                                         </div>
                                                         <div style={{position:'absolute',top:'0.5rem',right:'4rem'}}>
                                                             <Headings text={"Upload"} fontSize={20} fontWeight={''}/>
@@ -191,7 +192,7 @@ function Media(props) {
                                                         <Headings text={"Unlock for editing"} fontSize={18}/>
                                                     </div>
                                                 ):(
-                                                    <CustomPhotoUploader selectedImage={selectedImage} setSelectedImage={handelSelectImagesForGallary}/>
+                                                    <CustomPhotoUploader setSelectedFile={setSelectedFile} selectedImage={selectedImage} setSelectedImage={handelSelectImagesForGallary}/>
                                                 )
                                             }
                                             
