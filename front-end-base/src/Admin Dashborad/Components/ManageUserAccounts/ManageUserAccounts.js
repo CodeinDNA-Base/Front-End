@@ -1,104 +1,129 @@
 import React,{useState} from 'react';
-import { makeStyles,Grid,AppBar} from '@material-ui/core';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { AppBar } from '@material-ui/core';
+import {Box,Tab,Tabs,Typography, makeStyles,Grid,Card,CardContent} from '@material-ui/core';
 import PropTypes from 'prop-types';
-import useWindowDimensions from '../useWindowDimensions';
+import { fontFamily } from '../../../Theme/fonts';
 import { stringCollection } from '../Strings/StringCollection';
+import { Headings } from '../Support/Headings';
 
-import SearchTab from './SearchTab';
-import ShowAllAccountsTab from './ShowAllAccountsTab';
-import ShowAllActiveUserAccountsTab from './ShowAllActiveUserAccountsTab';
-import ShowBlockedUserAccounts from './ShowBlockedUserAccounts';
+import ActiveAccountsTab from './ActiveAccountsTab';
+import BlockedAccountsTab from './BlockedAccountsTab';
 import StatisticsTab from './StatisticsTab';
 
 
-function ManageUserAccounts(props) {
-    const classes =useStyles();
-    const [value, setValue] = React.useState(0);
-    const {height,width} = useWindowDimensions();
+function ManageOrders(props) {
+  const [value, setValue] = React.useState(0);
+    const classes = useStyles();
     const tabIconHeight=30;
     const tabIconWidth=30;
-
+  
     const handleChange = (event, newValue) => {
       setValue(newValue);
-    };                  
+    }; 
+  
     return (
-       <Grid container >
-            <Grid item lg={12} xs={12}>
-                <div>
-                    <h1>{stringCollection.ManageUserAccounts.AccountsManagerTitle}</h1>
-                </div>
-            </Grid>
-            <Grid item lg={12} xs={12}>
-                    {/* Options tab */}
-                    <AppBar position="static" color="default">
-                    {/* <div className={classes.root}> */}
-                        <Tabs
-                          // orientation="vertical"
-                          // variant="scrollable"
-                          // value={value}
-                          // onChange={handleChange}
-                          // aria-label="Vertical tabs example"
-                          // className={classes.tabs}
-                          value={value}
-                          onChange={handleChange}
-                          indicatorColor="primary"
-                          textColor="primary"
-                          variant="scrollable"
-                          scrollButtons="auto"
-                          aria-label="scrollable auto tabs example"
-                        >
-                        >
-                        
-                          <Tab  label={stringCollection.ManageUserAccounts.ShowAllAccountTabText} {...a11yProps(0)} />
-                          <Tab  label={stringCollection.ManageUserAccounts.ShowActiveUsersTabText} {...a11yProps(1)} />
-                          <Tab  label={stringCollection.ManageUserAccounts.ShowBlockedUsersTabText} {...a11yProps(2)} />
-                          <Tab  label={stringCollection.ManageUserAccounts.ShowAccountsStatisticsTabText} {...a11yProps(3)} />
-                          <Tab  label={stringCollection.ManageUserAccounts.SearchAccountTabText} {...a11yProps(4)} />
-
+      <Grid container >
+      <Grid item xs={1}></Grid>
+      <Grid item xs={10}>
+        <Grid container>
+          
+           <Grid item lg={12} xs={12}>
+             <Card className={classes.tabBarAndFilersContainer}>
+               <CardContent>
+                 <Headings text={"Client Accounts Manager"} fontSize={30} fontWeight={'bolder'}/>
+                 <AppBar position="static" color="inherit"
+                   style={{border: '1px solid #e8eaed',borderRadius:'0%',marginTop:'1rem'}}
+                   elevation={0}
+                  >
+                     <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        variant="scrollable"
+                        scrollButtons="auto"
+                        aria-label="scrollable auto tabs example"
+                     >
+     
+                          {/* <Tab label={stringCollection.ManageOrders.DeliverOrderTabText} {...a11yProps(0)} /> */}
+                          <Tab className={classes.tabElementStyle} label={"Active Accounts"} {...a11yProps(0)} />
+                          <Tab className={classes.tabElementStyle} label={"Blocke Accounts"} {...a11yProps(1)} />
+                          <Tab className={classes.tabElementStyle} label={"Statistics"} {...a11yProps(2)} />
+                             
                         </Tabs>
-                        </AppBar>    
-                              <TabPanel value={value} index={0}>
-                                <ShowAllAccountsTab/>
-                              </TabPanel>
-                              <TabPanel value={value} index={1}>
-                                <ShowAllActiveUserAccountsTab/>
-                              </TabPanel>
-                              <TabPanel value={value} index={2}>
-                                <ShowBlockedUserAccounts/>
-                              </TabPanel>
-                              <TabPanel value={value} index={3}>
-                                <StatisticsTab/>
-                              </TabPanel>
-                              <TabPanel value={value} index={4}>
-                                <SearchTab/>
-                              </TabPanel>
-                            {/* </div> */}
-            </Grid>
-            
+                        </AppBar>
+                  </CardContent>
+                </Card>
+
+                             
+                              
+                             
+                  <Card className={classes.tabPanelContainer}>
+                    <CardContent>
+                              
+                              <Grid container>
+                                
+                                  <Grid xs={12}>
+                                      
+                                        <TabPanel value={value} index={0}>
+                                         <ActiveAccountsTab/>
+                                       </TabPanel>
+                                       <TabPanel value={value} index={1}>
+                                         <BlockedAccountsTab/>
+                                       </TabPanel>
+                                       <TabPanel value={value} index={2}>
+                                         <StatisticsTab/>
+                                       </TabPanel>
+                                   
+                                  </Grid>
+                              </Grid>
+                            
+                    </CardContent>
+                    </Card>    
+              
+              </Grid>
+             
+         </Grid>
        </Grid>
+       <Grid item xs={1}></Grid>
+     </Grid>
     );
 }
 
 const useStyles = makeStyles((theme)=>({
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-        display: 'flex',
-        height:450,
-      },
-      tabs: {
-        borderRight: `1px solid ${theme.palette.divider}`,
-        paddingTop:'3%'
-      },
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    display: 'flex',
+    height:460,
+  },
+  tabs: {
+    borderRight: `1px solid ${theme.palette.divider}`,
+    paddingTop:'7%'
+  },
+  titleBar:{
+    // marginTop:50
+  },
+  tabElementStyle:{
+    fontFamily:fontFamily.fontFamily_1,
+    textDecorationColor:'black',
+    color:'black',
+    fontWeight:'bold',
+    fontSize:'1rem',
+    textTransform:'capitalize'
+  },
+  tabBarAndFilersContainer:{
+    marginTop:'2rem'
+  },
+  tabPanelContainer:{
+    marginTop:'0rem'
+  }
+     
 }))
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
+    
     return (
       <div
         role="tabpanel"
@@ -128,5 +153,5 @@ function TabPanel(props) {
       'aria-controls': `vertical-tabpanel-${index}`,
     };
   }
-export default ManageUserAccounts;
+export default ManageOrders;
 

@@ -11,7 +11,7 @@ const initialState={
     isLoading_LoadListOfDeclinedOrderRequests: false,
     hasError_LoadListOfDeclinedOrderRequests: false,
 }
-
+ 
 const options = {
     name: "requestsManagerPanel",
     initialState: initialState,

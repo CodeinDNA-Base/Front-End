@@ -12,11 +12,11 @@ import FilterEngine from '../FilterMotor'
 import produce from 'immer';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useSelector } from 'react-redux';
-import { selectAll, selectListOfInProgressOrders } from '../Redux Components/Selectors';
-import OrderInfoHolderForList from './OrderInfoHolderForList';
-function ListOfInProgressOrders({showMenueSelectionOpt=false,...props}) {
+import { selectAll, selectListOfActiveUserAccounts } from '../Redux Components/Selectors';
+import UserAccountDataHolderForList from './UserAccountDataHolderForList';
+function ListOfActiveUserAccounts({showMenueSelectionOpt=false,...props}) {
     const classes = useStyles();
-    const [listOfNewOrders,setlistOfNewOrders]=useState([]);
+    const [listOfActiveUserAccounts,setlistOfActiveUserAccounts]=useState([]);
     
     const [numberOfPage,setNumberOfPage]=useState();
     const [numberOfPageWhenSearching,setNumberOfPageWhenSearhing]=useState();
@@ -37,25 +37,28 @@ function ListOfInProgressOrders({showMenueSelectionOpt=false,...props}) {
     ]);
     const filterBy_titles_type={
         //must match with the keys in temp file and filter.
-        filter_by_title_1_type:"selectedSubService",
-        filter_by_title_2_type:"selectedService",
+        filter_by_title_1_type:"accountStatus",
+        filter_by_title_2_type:"countary",
         filter_by_title_3_type:"projectRatingStars",
-        filter_by_title_4_type:"orderDeliveryDate",
-        filter_by_title_5_type:"orderEstimatedPrice",
+        filter_by_title_4_type:"accountCreationDate",
+        filter_by_title_5_type:"totalAmmountSpent",
+        filter_by_title_6_type:"lastSeen",
+        filter_by_title_7_type:"userName",
+        
     }
 
-    const listOfInProgressOrderFromStore = useSelector(selectListOfInProgressOrders); //this will be updated and will cause auto render as soon as sotre get updated.
-    const {isLoading_LoadListOfInProgressOrders} = useSelector(selectAll);
+    const listOfActiveUserAccountsFromStore = useSelector(selectListOfActiveUserAccounts); //this will be updated and will cause auto render as soon as sotre get updated.
+    const {isLoading_LoadListOfActiveUserAccounts} = useSelector(selectAll);
 
     useEffect(()=>{
        // setting up list of projects in project's rneder list.
-       setlistOfNewOrders(listOfInProgressOrderFromStore);
-       setNumberOfPage(Math.ceil((listOfInProgressOrderFromStore.length/9)))
-    },[listOfInProgressOrderFromStore]);
+       setlistOfActiveUserAccounts(listOfActiveUserAccountsFromStore);
+       setNumberOfPage(Math.ceil((listOfActiveUserAccountsFromStore.length/9)))
+    },[listOfActiveUserAccountsFromStore]);
 
     useEffect(()=>{
-       updateList(startIndexOfPage,(listOfNewOrders.length>=endIndexOfPage) ? endIndexOfPage : listOfNewOrders.length);
-    },[listOfNewOrders,endIndexOfPage]);
+       updateList(startIndexOfPage,(listOfActiveUserAccounts.length>=endIndexOfPage) ? endIndexOfPage : listOfActiveUserAccounts.length);
+    },[listOfActiveUserAccounts,endIndexOfPage]);
 
     useEffect(()=>{
         updateSearchKeyPair(listOfOptions_ForChipList);
@@ -64,7 +67,7 @@ function ListOfInProgressOrders({showMenueSelectionOpt=false,...props}) {
     useEffect(()=>{
         // Not call the .. FILTER ENGINE
         try{
-            const searchResultsList = FilterEngine(listOfNewOrders,searchKeyPairs[0]);
+            const searchResultsList = FilterEngine(listOfActiveUserAccounts,searchKeyPairs[0]);
             console.log(searchResultsList)
             setNumberOfPageWhenSearhing(Math.ceil((searchResultsList.length)/9));
             updateSearchResultsList(startIndexOfPageWhenSearching,(searchResultsList.length>=endIndexOfPageWhenSearching) ? endIndexOfPageWhenSearching : searchResultsList.length,searchResultsList);
@@ -77,6 +80,7 @@ function ListOfInProgressOrders({showMenueSelectionOpt=false,...props}) {
         tempKeyPairs.push(listOfOptions_ForChipList.map((item,index)=>{
                 let itemToReturn = null;
                   // { key: 0,type:"ByRating",data:"4", label: '4 Stars' },
+                  console.log(item)
                 switch (item.type) {
                     case filterBy_titles_type.filter_by_title_1_type:
                             console.log(`${filterBy_titles_type.filter_by_title_1_type} fiter  type detected`)
@@ -120,6 +124,27 @@ function ListOfInProgressOrders({showMenueSelectionOpt=false,...props}) {
                                     values:[tempValues[0],tempValues[1]]
                                 }
                         break;
+                        case filterBy_titles_type.filter_by_title_6_type:
+                            console.log(`${filterBy_titles_type.filter_by_title_6_type} fiter  type detected`)
+                                //Price range. comma seperated. Make sure to conver it in int.
+                                console.log("Created key");
+                                itemToReturn={
+                                    withRespectTo:item.type,
+                                    typeofValue:"SingleValueString",
+                                    values:item.data   
+                                }
+                        break;
+                        
+                        case filterBy_titles_type.filter_by_title_7_type:
+                            console.log(`${filterBy_titles_type.filter_by_title_7_type} fiter  type detected`)
+                                //Price range. comma seperated. Make sure to conver it in int.
+                                console.log("Created key");
+                                itemToReturn={
+                                    withRespectTo:item.type,
+                                    typeofValue:"SingleValueString",
+                                    values:item.data   
+                                }
+                        break;
                                 
                     default:
                         break;
@@ -132,12 +157,12 @@ function ListOfInProgressOrders({showMenueSelectionOpt=false,...props}) {
     }
 
 const updateList = (startIndex,endIndex)=>{
-        setList(listOfNewOrders.map((item,index)=>{
+        setList(listOfActiveUserAccounts.map((item,index)=>{
             if(((index)>=startIndex)&&((index)<endIndex))
             {
                 return(      
                     <ImageListItem key={item.img} cols={item.cols || 1}>
-                        <OrderInfoHolderForList  cols={item.cols} showMenueSelectionOpt={showMenueSelectionOpt} handelOptionSelection={props.handelOptionSelection}  data={item}/>
+                        <UserAccountDataHolderForList  cols={item.cols} showMenueSelectionOpt={showMenueSelectionOpt} handelOptionSelection={props.handelOptionSelection}  data={item}/>
                     </ImageListItem>
                     )   
             }
@@ -155,8 +180,8 @@ const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
                     {
                         return(      
                             <ImageListItem key={item.img} cols={item.cols || 1}>
-                                {/* <OrderInfoHolderForList  /> */}
-                                <OrderInfoHolderForList  cols={item.cols}  handeSelectOption={props.handeSelectOption} handelOptionSelection={props.handelOptionSelection} data={item}/>
+                                {/* <UserAccountDataHolderForList  /> */}
+                                <UserAccountDataHolderForList  cols={item.cols}  handeSelectOption={props.handeSelectOption} handelOptionSelection={props.handelOptionSelection} data={item}/>
                             </ImageListItem>
                             )   
                     }
@@ -233,9 +258,9 @@ const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
                     >
                         <CardContent>
                             {
-                                (isLoading_LoadListOfInProgressOrders) ? (
+                                (isLoading_LoadListOfActiveUserAccounts) ? (
                                     <div>
-                                    <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Fetching Inprogress orders.."} fontSize={30}/> </div>
+                                    <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Fetching Active User Accounts.."} fontSize={30}/> </div>
                                     <Skeleton />
                                     <Skeleton />
                                     <Skeleton />
@@ -247,7 +272,7 @@ const updateSearchResultsList = (startIndex,endIndex,listOfResults)=>{
                                 { (listOfOptions_ForChipList.length===0) && 
                                     <div>
                                         
-                                        <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Inprogress orders"} fontSize={30}/> </div>
+                                        <div style={{marginTop:"1%",paddingBottom:'1%'}}> <Headings text={"Active User Accounts"} fontSize={30}/> </div>
                                             
                                             <ImageList rowHeight={500} className={classes.imageList} cols={3}>
                                             {list}
@@ -311,4 +336,4 @@ const useStyles = makeStyles((theme)=>({
       },
 }))
 
-export default ListOfInProgressOrders;
+export default ListOfActiveUserAccounts;

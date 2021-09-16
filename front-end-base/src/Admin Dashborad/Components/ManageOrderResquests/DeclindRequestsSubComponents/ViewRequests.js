@@ -235,9 +235,9 @@ function ViewRequests(props) {
                             <Grid container >
                                 <Grid item xs={12} style={{padding:'1rem'}}>
                                     {/* item */}
-                                    <ImageList rowHeight={200} className={classes.imageList} cols={3}>
+                                    <ImageList rowHeight={90} className={classes.imageList} cols={3}>
                                         {attachmentsList.map((item,index) => (
-                                          <ImageListItem key={index} cols={item.cols || 1}>
+                                          <ImageListItem key={index} cols={1}>
                                             {(item.type==="File") && <FileAttachmentHolder attachment={item}/>}
                                             {(item.type==="Image") && <ImageAttachmentHolder attachment={item}/>}
                                             {(item.type==="Video") && <VideoAttachmentHolder attachment={item}/>}

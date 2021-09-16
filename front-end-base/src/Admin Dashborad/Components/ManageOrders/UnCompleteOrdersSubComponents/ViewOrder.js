@@ -260,7 +260,7 @@ function ViewOrder(props) {
                             <Grid container >
                                 <Grid item xs={12} style={{padding:'1rem'}}>
                                     {/* item */}
-                                    <ImageList rowHeight={200} className={classes.imageList} cols={3}>
+                                    <ImageList rowHeight={90} className={classes.imageList} cols={3}>
                                         {attachmentsList.map((item,index) => (
                                           <ImageListItem key={index} cols={item.cols || 1}>
                                             {(item.type==="File") && <FileAttachmentHolder attachment={item}/>}
@@ -276,7 +276,7 @@ function ViewOrder(props) {
                              {/* Delivery files */}
                             
                          <Grid container style={{backgroundColor:'#abd1ed'}}>
-                                <Grid item xs={8} style={{paddingLeft:'1rem'}}>
+                                <Grid item xs={90} style={{paddingLeft:'1rem'}}>
                                     {/* item */}
                                     <Headings text={`Delivery files`} fontWeight={'bold'}/>
                                 </Grid> 
@@ -285,7 +285,7 @@ function ViewOrder(props) {
                             <Grid container >
                                 <Grid item xs={12} style={{padding:'1rem'}}>
                                     {/* item */}
-                                    <ImageList rowHeight={200} className={classes.imageList} cols={3}>
+                                    <ImageList rowHeight={90} className={classes.imageList} cols={3}>
                                         {deliveryFilesList.map((item,index) => (
                                           <ImageListItem key={index} cols={item.cols || 1}>
                                             {(item.type==="File") && <FileAttachmentHolder attachment={item}/>}

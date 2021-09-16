@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { DataLoader_ForListOfDeclinedOrderRequests, DataLoader_ForListOfNewOrderRequests } from "./APIEndPoints";
 
 export const loadListOfNewOrderRequests =  createAsyncThunk(
-    'ordersManagerPanel/loadListOfNewOrderRequests',
+    'requestsManagerPanel/loadListOfNewOrderRequests',
     async()=>{
         const response = DataLoader_ForListOfNewOrderRequests().then((resp)=>{
             return resp
@@ -14,7 +14,7 @@ export const loadListOfNewOrderRequests =  createAsyncThunk(
 )
 
 export const loadListOfDeclinedOrderRequests =  createAsyncThunk(
-    'ordersManagerPanel/loadListOfDeclinedOrderRequests',
+    'requestsManagerPanel/loadListOfDeclinedOrderRequests',
     async()=>{
         const response = DataLoader_ForListOfDeclinedOrderRequests().then((resp)=>{
             return resp
