@@ -17,7 +17,17 @@ import { TextFonts } from "../../../Theme/fonts";
 import { FormLabel, useMediaQuery } from "@material-ui/core";
 import ModalContainer from "../../../CustomComponents/UI/Support/ModalContainer";
 import { TermsAndServicesContent } from "../AboutPage/TermsAndServices";
-const useStyles = makeStyles((theme) => ({
+import { useHistory } from "react-router";
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import {
+  sendUserDetailsForRegistration,
+  selectBasicDetailsOfUser,
+  selectEmail,
+} from "../Slices/AuthenticationPageSlices/RegisterDetailsSlice";
+
+// styles
+const registerModalFormStyles = makeStyles((theme) => ({
   formControl: {
     width: "100%",
   },
@@ -56,42 +66,75 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RegisterModalForm({ handleSignInClicked }) {
+export default function RegisterModalForm() {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
-  const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
+  const classes = registerModalFormStyles(isDesktopOrLaptopOrTabletScreen);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [country, setCountry] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [isAcceptTermsAndConditions, setIsAcceptTermsAndConditions] =
+    useState(false);
+  const history = useHistory();
+
+  // redux
+  const dispatch = useDispatch();
 
   const handleSignInClick = () => {
-    handleSignInClicked();
+   history.push('/Login')
   };
 
   // for modal
   const [open, setOpen] = React.useState(false);
 
+  // handlers
   const handleClose = () => {
     setOpen(false);
   };
   const handleViewTermsClick = () => {
     setOpen(true);
   };
+  const handleACceptTermsAndConditions = () => {
+    setIsAcceptTermsAndConditions(!isAcceptTermsAndConditions);
+  };
+
+  const handleSignUpClicked = (event) => {
+    event.preventDefault();
+    if (email.length > 0) {
+      // verfy email using regex
+      dispatch(setEmail(email));
+    }
+    dispatch(
+      sendUserDetailsForRegistration({
+        email,
+        userName,
+        firstName,
+        lastName,
+        country,
+        password,
+      })
+    ).then(()=>history.push('/userDashboard'));
+  };
+
   return (
     <Container component="main" maxWidth="xs" className={classes.container}>
       <ModalContainer
         open={open}
         handleClose={handleClose}
         Component={<TermsAndServicesContent totalGrid={12} />}
-        width={'50%'}
+        desktopWidth={"50%"}
+        desktopHeigth={"90%"}
+        mobileWidth={"90%"}
+        mobileHeigth={"80%"}
+        overflow={"scroll"}
       />
       <CssBaseline />
       <div className={classes.paper}>
         <form className={classes.form} noValidate>
           <SmallHeading title={"Found Something"} />
           <Grid
-            
             container
             spacing={1}
             alignItems="flex-end"
@@ -109,9 +152,8 @@ export default function RegisterModalForm({ handleSignInClicked }) {
               <div class="separator">OR</div>
             </Grid>
           </Grid>
-          
+
           <Grid container spacing={2}>
-            
             <Grid item xs={6} sm={6} md={6}>
               <StandardTextField
                 variant="outlined"
@@ -134,8 +176,8 @@ export default function RegisterModalForm({ handleSignInClicked }) {
               <StandardTextField
                 variant="outlined"
                 label="Email Address"
-                value={userName}
-                onChange={(value) => setUserName(value)}
+                value={email}
+                onChange={(value) => setEmail(value)}
                 size={"small"}
               />
             </Grid>
@@ -182,7 +224,14 @@ export default function RegisterModalForm({ handleSignInClicked }) {
             </Grid>
             <Grid item xs={12} md={12} sm={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                control={
+                  <Checkbox
+                    value="allowExtraEmails"
+                    color="primary"
+                    checked={isAcceptTermsAndConditions}
+                    onChange={handleACceptTermsAndConditions}
+                  />
+                }
                 label="I accept the terms and the conditions"
               />
               <FormLabel
@@ -198,7 +247,7 @@ export default function RegisterModalForm({ handleSignInClicked }) {
             variant="contained"
             color={colors.white}
             bgColor={colors.secondary}
-            handleClick={() => alert("sign up")}
+            handleClick={handleSignUpClicked}
             title="Sign Up"
             width="100%"
           />

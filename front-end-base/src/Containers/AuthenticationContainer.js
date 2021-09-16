@@ -69,7 +69,6 @@ function AuthenticationContainer(props) {
 
   useEffect(() => {
     if (scrollPosition > height * 0.9) {
-  
       setPackageContainerStickyNess("UnStickThePackageContainer");
     } else {
       setPackageContainerStickyNess("StickThePackageContainer");
@@ -132,7 +131,7 @@ function AuthenticationContainer(props) {
   );
 }
 
-const SignUPContainer = ({handleSignInClicked}) => {
+const SignUPContainer = ({ handleSignInClicked }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   const [isSignUpWithEmailClicked, setIsSignUpWithEmailClicked] =
@@ -141,13 +140,9 @@ const SignUPContainer = ({handleSignInClicked}) => {
 
   const handleSignUpWithEmailClicked = (value) => {
     setUserEmail(value);
-    setIsSignUpWithEmailClicked(false);
+    setIsSignUpWithEmailClicked(!isSignUpWithEmailClicked);
   };
-  const hello=(value)=>{
-    setUserEmail(value);
-   setIsSignUpWithEmailClicked(false);
-    alert(value)
-  }
+
   return (
     <Grid container className={classes.loginInForm}>
       <Grid
@@ -164,12 +159,10 @@ const SignUPContainer = ({handleSignInClicked}) => {
       >
         {isSignUpWithEmailClicked ? (
           <Register
-            handleSignUpWithEmailClicked={hello}
+            handleSignUpWithEmailClicked={handleSignUpWithEmailClicked}
           />
         ) : (
-          <RegisterDetails
-          handleSignInClicked={handleSignInClicked}
-          />
+          <RegisterDetails handleSignInClicked={handleSignInClicked} />
         )}
       </Grid>
       <Grid

@@ -25,12 +25,12 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   checkUserId,
   checkUserPassword,
-} from "../Slices/AuthenticationPageSlices/LoginFormSlicer";
+} from "../Slices/AuthenticationPageSlices/LoginFormSlice";
 import {
   selectUserId,
   selectUserPassword,
   selectUserToken,
-} from "../Slices/AuthenticationPageSlices/LoginFormSlicer";
+} from "../Slices/AuthenticationPageSlices/LoginFormSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {

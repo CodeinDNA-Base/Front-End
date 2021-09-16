@@ -39,22 +39,35 @@ const SideMainContainer = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   // hanlder
-  const handleJoinNowClick = () => {setOpen(true)};
-  const handleExploreThePlaceClick = () => {alert('navigate to nadir project page')};
+  const handleJoinNowClick = () => {
+    setOpen(true);
+  };
+  const handleExploreThePlaceClick = () => {
+    alert("navigate to nadir project page");
+  };
 
   // for modal
-   
-   const [open, setOpen] = React.useState(false);
 
-   const handleClose = () => {
-     setOpen(false);
-   };
-   const handleViewTermsClick = () => {
-     setOpen(true);
-   };
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleViewTermsClick = () => {
+    setOpen(true);
+  };
   return (
     <div>
-      <ModalContainer  width={'30%'} height={'90%'} open={open} handleClose={handleClose} Component={<RegisterModalForm />}/>
+      <ModalContainer
+        desktopWidth={"auto"}
+        desktopHeigth={"auto"}
+        mobileWidth={'80%'}
+        mobileHeigth={'auto'}
+        overflow={'hidden'}
+        open={open}
+        handleClose={handleClose}
+        Component={<RegisterModalForm />}
+      />
       <p className={classes.title}>Join Siba Overflow Today </p>
 
       <p className={classes.subtitle}>

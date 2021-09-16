@@ -14,7 +14,7 @@ import {
   selectStandardQueries,
   sendContactFormDetails,
   loadStandardQueries,
-} from "../Slices/AboutPageSlices/ContactUsGlobalFormSlicer";
+} from "../Slices/AboutPageSlices/ContactUsGlobalFormSlice";
 
 // temp queries
 const queries = [

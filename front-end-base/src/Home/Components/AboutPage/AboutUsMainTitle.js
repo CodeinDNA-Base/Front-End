@@ -6,10 +6,12 @@ import Box from "@material-ui/core/Box";
 import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 import colors from "../../../Theme/colors";
 import { Headingfonts, TextFonts } from "../../../Theme/fonts";
-import ContactFormModal from "./ContactFormModal";
+import ModalContainer from "../../../CustomComponents/UI/Support/ModalContainer";
+import ContactUsGlobalForm from "./ContactUsGlobalForm";
 
 // string constants
 import { CAREER_TITLE, CAREER_SUBTITLE } from "../../Strings/AboutUsStrings";
+
 
 const AboutUsMainTitleStyles = makeStyles((theme) => ({
   subtitle: {
@@ -52,7 +54,17 @@ const AboutUsMainTitleText = () => {
   return (
     <div>
       <p className={classes.title}>{CAREER_TITLE} </p>
-      <ContactFormModal open={open} handleClose={handleClose} />
+      <ModalContainer
+        ContactFormModal
+        open={open}
+        handleClose={handleClose}
+        Component={<ContactUsGlobalForm />}
+        desktopWidth={"50%"}
+        desktopHeigth={"auto"}
+        mobileWidth={'80%'}
+        mobileHeigth={'auto'}
+        overflow={'hidden'}
+      />
 
       <p className={classes.subtitle}>{CAREER_SUBTITLE}</p>
       <Box style={{ marginTop: 20 }}>

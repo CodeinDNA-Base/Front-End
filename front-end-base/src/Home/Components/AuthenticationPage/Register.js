@@ -1,16 +1,22 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import colors from "../../../Theme/colors";
-import MailIcon from '@material-ui/icons/Mail';
+import MailIcon from "@material-ui/icons/Mail";
 import { TextFieldWithIcon } from "../../../CustomComponents/UI/Form/TextFields";
 import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 import { SmallHeading } from "../../../CustomComponents/UI/Text/SmallHeading";
 import "../Styles/hrStyle.css";
 import CustomAlerts from "../../../CustomComponents/UI/Support/Alerts";
-import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
-const useStyles = makeStyles((theme) => ({
+import AlternateEmailRoundedIcon from "@material-ui/icons/AlternateEmailRounded";
+
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import { setEmail } from "../Slices/AuthenticationPageSlices/RegisterDetailsSlice";
+
+// styles
+const registerStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: colors.white,
   },
@@ -26,21 +32,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register({handleSignUpWithEmailClicked}) {
-  const classes = useStyles();
-  // useEffect(()=>{alert('in register')},[])
-  const [userPassword, setUserPassword] = useState("");
+export default function Register({ handleSignUpWithEmailClicked }) {
+  const classes = registerStyles();
+
+  // local states
   const [userEmail, setUserEmail] = useState("");
   const [isIncorrectEmail, setIsIncorrectEmail] = useState(false);
-  const handleEmailPressEnter=()=>{
 
-  }
-  const handleContinueWithEmailClick=()=>{
-    if(userEmail.length > 0)
-    handleSignUpWithEmailClicked(userEmail);
-      else
-      alert('Please Enter your Email first')
-  }
+  // redux
+  const dispatch = useDispatch();
+
+  // handlers
+  const handleContinueWithEmailClick = () => {
+    if (userEmail.length > 0) {
+      dispatch(setEmail(userEmail));
+      handleSignUpWithEmailClicked(userEmail);
+    } else {
+      alert("Please Enter your Email first");
+    }
+  };
 
   const handleUserEmail = (value) => {
     setUserEmail(value);
@@ -57,8 +67,6 @@ export default function Register({handleSignUpWithEmailClicked}) {
           value={userEmail}
           onChange={handleUserEmail}
           type={"email"}
-    
-        
         />
         <CustomAlerts
           title={" Would you like to use your work email instead? "}
@@ -70,7 +78,7 @@ export default function Register({handleSignUpWithEmailClicked}) {
           bgColor={colors.white}
           color={colors.warning}
         />
-        
+
         <Grid
           style={{ marginTop: "5%" }}
           container
@@ -98,11 +106,10 @@ export default function Register({handleSignUpWithEmailClicked}) {
               color={colors.white}
               bgColor={colors.info}
               margin={"3% 0% 10%  0%"}
-              icon={<MailIcon  />}
+              icon={<MailIcon />}
             />
           </Grid>
         </Grid>
-        
       </form>
     </Box>
   );

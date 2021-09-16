@@ -16,13 +16,24 @@ import { SmallHeading } from "../../../CustomComponents/UI/Text/SmallHeading";
 import { TextFonts } from "../../../Theme/fonts";
 import { FormLabel, useMediaQuery } from "@material-ui/core";
 import ModalContainer from "../../../CustomComponents/UI/Support/ModalContainer";
-import {TermsAndServicesContent} from "../AboutPage/TermsAndServices";
-const useStyles = makeStyles((theme) => ({
+import { TermsAndServicesContent } from "../AboutPage/TermsAndServices";
+import { useHistory } from "react-router";
+
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import {
+  sendUserDetailsForRegistration,
+  selectBasicDetailsOfUser,
+  selectEmail,
+} from "../Slices/AuthenticationPageSlices/RegisterDetailsSlice";
+
+// styles
+const registerDetailsStyles = makeStyles((theme) => ({
   formControl: {
     width: "100%",
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -58,32 +69,72 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RegisterDetails({ handleSignInClicked }) {
+  // local states
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
-  const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
+  const classes = registerDetailsStyles(isDesktopOrLaptopOrTabletScreen);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [country, setCountry] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  // useEffect(()=>{alert('in register details')},[])
-  const handleSignInClick = () => {
-    handleSignInClicked();
-  };
+  const [isAcceptTermsAndConditions, setIsAcceptTermsAndConditions] =
+    useState(false);
+  const history = useHistory();
 
   // for modal
   const [open, setOpen] = React.useState(false);
 
+  // redux
+  const dispatch = useDispatch();
+  const user_email = useSelector(selectEmail);
+
+  // handlers
+  const handleSignInClick = (event) => {
+    event.preventDefault();
+    handleSignInClicked();
+  };
   const handleClose = () => {
     setOpen(false);
   };
   const handleViewTermsClick = () => {
     setOpen(true);
   };
+
+  const handleACceptTermsAndConditions = () => {
+    setIsAcceptTermsAndConditions(!isAcceptTermsAndConditions);
+  };
+
+  const handleSignUpClick = (event) => {
+    event.preventDefault();
+    // check each input value
+    if (isAcceptTermsAndConditions) {
+      dispatch(
+        sendUserDetailsForRegistration({
+          user_email,
+          userName,
+          firstName,
+          lastName,
+          country,
+          password,
+        })
+      ).then(() => {
+      history.push('/userDashboard')
+      });
+    } else {
+      alert("Please Accept Terms and Conditions");
+    }
+  };
+
   return (
     <Container component="main" maxWidth="xs" className={classes.container}>
       <ModalContainer
         open={open}
         handleClose={handleClose}
+        desktopWidth={"50%"}
+        desktopHeigth={"90%"}
+        mobileWidth={"90%"}
+        mobileHeigth={"80%"}
+        overflow={"scroll"}
         Component={<TermsAndServicesContent totalGrid={12} />}
       />
       <CssBaseline />
@@ -152,10 +203,20 @@ export default function RegisterDetails({ handleSignInClicked }) {
             </Grid>
             <Grid item xs={12} md={12} sm={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                control={
+                  <Checkbox
+                    value="acceptTerms"
+                    color="primary"
+                    checked={isAcceptTermsAndConditions}
+                    onChange={handleACceptTermsAndConditions}
+                  />
+                }
                 label="I accept the terms and the conditions"
               />
-              <FormLabel className={classes.viewTermsLabel} onClick={handleViewTermsClick}>
+              <FormLabel
+                className={classes.viewTermsLabel}
+                onClick={handleViewTermsClick}
+              >
                 View Terms
               </FormLabel>
             </Grid>
@@ -165,7 +226,7 @@ export default function RegisterDetails({ handleSignInClicked }) {
             variant="contained"
             color={colors.white}
             bgColor={colors.secondary}
-            handleClick={() => alert("sign up")}
+            handleClick={handleSignUpClick}
             title="Sign Up"
             width="100%"
           />

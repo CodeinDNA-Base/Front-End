@@ -44,24 +44,30 @@ const TermsAndServicesStyles = makeStyles(() => ({
     lineHeight: "1.6",
   },
 }));
-const TermsAndServices = () => {
+const TermsAndServices = ({ totalGrid }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = TermsAndServicesStyles(isDesktopOrLaptopOrTabletScreen);
   return (
     <Grid container justifyContent="center" className={classes.root}>
       <Grid item md={2}></Grid>
-      <TermsAndServicesContent />
+      <TermsAndServicesContent totalGrid={totalGrid} />
       <Grid item md={2}></Grid>
     </Grid>
   );
 };
 
-export const TermsAndServicesContent = ({totalGrid}) => {
+export const TermsAndServicesContent = ({ totalGrid }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = TermsAndServicesStyles(isDesktopOrLaptopOrTabletScreen);
   return (
-
-    <Grid conatiner item xs={12} md={totalGrid} sm={12} className={classes.Conatiner}>
+    <Grid
+      conatiner
+      item
+      xs={12}
+      md={totalGrid}
+      sm={12}
+      className={classes.Conatiner}
+    >
       <HomePageComponentsHeading
         title={TERMSANDSERVICES_TITLE}
         description={"Welcome to CodeInDNA.com"}
