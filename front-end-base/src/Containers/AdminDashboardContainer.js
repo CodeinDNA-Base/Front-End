@@ -39,13 +39,13 @@ import ManageTransactions from '../Admin Dashborad/Components/ManageTransactions
 import ManageUserAccounts from '../Admin Dashborad/Components/ManageUserAccounts/ManageUserAccounts';
 import ManageUserPermissions from '../Admin Dashborad/Components/ManageUserPermisions/ManageUserPermissions';
 import Home from '../Admin Dashborad/Components/Home/Home';
+import ManageOrderRequests from '../Admin Dashborad/Components/ManageOrderResquests/ManageOrderRequests';
 import ManageOffers from '../Admin Dashborad/Components/ManageOffers/ManageOffers';
 import LogedInAdminProfile from '../Admin Dashborad/Components/ManageAdminProfile/LogedInAdminProfile';
 import { Headings } from '../Admin Dashborad/Components/Support/Headings';
 import OnlineAdmins from '../Admin Dashborad/Components/Support/OnlineAdmins';
 import AdminProfile from '../Admin Dashborad/Components/ManageAdminProfile/AdminProfile'
 import Notifications from '../Admin Dashborad/Components/ManageAdminProfile/Notifications';
-
 const drawerWidth = 250;
 const drawerIconHeight = 25;
 const drawerIconWidth = 25;
@@ -64,7 +64,7 @@ export default function AdminDashboardContainer() {
   const allScreens = [<ManageChats/>,<ManageMasterDatabase/>,<ManageOrders/>,
     <ManageProjects/>,<ManageReviews/>,<ManageServices/>,
     <ManageTeams/>,<ManageTransactions/>,<ManageUserAccounts/>,
-    <ManageUserPermissions/>,<Home/>,<ManageOffers/>,<LogedInAdminProfile/>,<AdminProfile/>];
+    <ManageUserPermissions/>,<Home/>,<ManageOffers/>,<LogedInAdminProfile/>,<AdminProfile/>,<ManageOrderRequests/>];
 
 const [currentOpenedScreen,setCurrentOpenedScreen]=useState(allScreens[10]);
 
@@ -83,6 +83,7 @@ const [currentOpenedScreen,setCurrentOpenedScreen]=useState(allScreens[10]);
 * 11 : ManageOffers
 * 12 : LogedInAdminProfile
 * 13 : AdminProfile
+* 14 : ManagerOrderRequests
 */
 
 const handelManageOptionClickEvent = (event,index) =>
@@ -312,6 +313,15 @@ const renderMenu = (
             >
               <ListItemIcon><img  width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/ios-filled/100/000000/service.png"/></ListItemIcon>
               <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageServicesOption} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
+            </ListItem>
+        </List>
+        <Divider />
+        <List>
+            <ListItem button  onClick={()=>{handelManageOptionClickEvent(this,14)}}
+            selected={(7===currentPageId) ? true : false}
+            classes={{ selected: classes.active }}>
+              <ListItemIcon> <img width={drawerIconWidth} height={drawerIconHeight} src="https://img.icons8.com/external-itim2101-fill-itim2101/64/000000/external-order-online-shopping-itim2101-fill-itim2101.png"/>    </ListItemIcon>
+              <ListItemText primary={<Headings text={stringCollection.AdminDashboardContainer.ManageOrderRequests} fontSize={drawerFontSize} fontWeight={drawerFontWeight}/>} /> 
             </ListItem>
         </List>
         <Divider />

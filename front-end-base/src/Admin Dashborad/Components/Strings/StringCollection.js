@@ -13,6 +13,7 @@ const stringCollection = {
         ManageUserPermissionsOption:"User Permissions",
         HomeOption:"Home",
         ManageOffersOption:"Offers",
+        
     },
     AdminDashboardContainer:{
         NavBarTitle:"ADMIN",
@@ -28,6 +29,7 @@ const stringCollection = {
         ManageUserPermissionsOption:"User Permissions",
         HomeOption:"Home",
         ManageOffersOption:"Offers",
+        ManageOrderRequests:"Order Requests"
     },
    ManageProjects:{
        ProjectManagerTitle:"Project Manager",
