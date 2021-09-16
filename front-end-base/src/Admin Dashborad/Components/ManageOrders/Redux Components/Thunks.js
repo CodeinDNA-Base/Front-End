@@ -4,6 +4,8 @@ import {
     DataLoader_ForListOfCompletedOrders,
     DataLoader_ForListOfDeliveredOrders,
     DataLoader_ForListOfInProgressOrders,
+    DataLoader_ForListOfInRevisionOrder,
+    DataLoader_ForListOfLateOrder,
      } from "./APIEndPoints";
 
 export const loadListOfDeliveredOrders =  createAsyncThunk(
@@ -43,6 +45,31 @@ export const loadListOfCanceledOrder =  createAsyncThunk(
     'ordersManagerPanel/loadListOfCanceledOrder',
     async()=>{
         const response = DataLoader_ForListOfCanceledOrder().then((resp)=>{
+            return resp
+        },(error)=>{
+            throw error;
+        })
+        return response;
+    }
+)
+
+export const loadListOfLatedOrder =  createAsyncThunk(
+    'ordersManagerPanel/loadListOfLatedOrder',
+    async()=>{
+        const response = DataLoader_ForListOfLateOrder().then((resp)=>{
+            return resp
+        },(error)=>{
+            throw error;
+        })
+        return response;
+    }
+)
+
+
+export const loadListOfInRevsionOrder =  createAsyncThunk(
+    'ordersManagerPanel/loadListOfInRevsionOrder',
+    async()=>{
+        const response = DataLoader_ForListOfInRevisionOrder().then((resp)=>{
             return resp
         },(error)=>{
             throw error;

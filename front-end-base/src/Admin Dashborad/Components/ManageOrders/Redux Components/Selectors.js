@@ -13,3 +13,10 @@ export const  selectListOfCompletedOrders = (state)=>{
 export const  selectListOfCanceledOrder = (state)=>{
     return state.ordersManagerPanel.listOfCanceledOrder;
 }
+
+export const  selectListOfLateOrder = (state)=>{
+    return state.ordersManagerPanel.listOfLateOrders;
+}
+export const  selectListOfInRevisionOrder = (state)=>{
+    return state.ordersManagerPanel.listOfInRevisionOrders;
+}

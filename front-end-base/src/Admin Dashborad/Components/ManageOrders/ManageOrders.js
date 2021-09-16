@@ -10,7 +10,8 @@ import ShowCanceledOrdersTab from './ShowCanceledOrdersTab';
 import ShowCompleteOrdersTab from './ShowCompleteOrdersTab';
 import ShowDeliveredOrdersTab from './ShowDeliveredOrdersTab';
 import ShowUnCompleteOrdersTab from './ShowUnCompleteOrdersTab';
-
+import ShowLatedOrdersTab from './ShowLatedOrdersTab'
+import ShowInRevisionOrdersTab from './ShowInRevisionOrdersTab';
 function ManageOrders(props) {
   const [value, setValue] = React.useState(0);
     const classes = useStyles();
@@ -50,6 +51,8 @@ function ManageOrders(props) {
                           <Tab className={classes.tabElementStyle} label={stringCollection.ManageOrders.ShowCompleteOrdersTabText} {...a11yProps(1)} />
                           <Tab className={classes.tabElementStyle} label={stringCollection.ManageOrders.ShowCanceledOrdersTabText} {...a11yProps(2)} />
                           <Tab className={classes.tabElementStyle} label={"Delivered"} {...a11yProps(3)} />
+                          <Tab className={classes.tabElementStyle} label={"Late"} {...a11yProps(4)} />
+                          <Tab className={classes.tabElementStyle} label={"In-Revision"} {...a11yProps(5)} />
                                        
                         </Tabs>
                         </AppBar>
@@ -59,7 +62,7 @@ function ManageOrders(props) {
                              
                               
                              
-                            <Card className={classes.tabPanelContainer}>
+                  <Card className={classes.tabPanelContainer}>
                     <CardContent>
                               
                               <Grid container>
@@ -77,6 +80,12 @@ function ManageOrders(props) {
                                        </TabPanel>
                                        <TabPanel value={value} index={3}>
                                          <ShowDeliveredOrdersTab/>
+                                       </TabPanel>
+                                       <TabPanel value={value} index={4}>
+                                         <ShowLatedOrdersTab/>
+                                       </TabPanel>
+                                       <TabPanel value={value} index={5}>
+                                         <ShowInRevisionOrdersTab/>
                                        </TabPanel>
                                   </Grid>
                                   

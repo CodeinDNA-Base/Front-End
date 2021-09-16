@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import produce from 'immer'
-import { loadListOfDeliveredOrders,loadListOfInProgressOrders,loadListOfCompletedOrders,loadListOfCanceledOrder } from "./Thunks";
+import { 
+        loadListOfDeliveredOrders,loadListOfInProgressOrders,
+        loadListOfCompletedOrders,loadListOfCanceledOrder,
+        loadListOfInRevsionOrder,loadListOfLatedOrder
+     } from "./Thunks";
 const initialState={
     listOfDeliveredOrders:[],
     listOfInProgressOrders:[],
     listOfCompletedOrders:[],
     listOfCanceledOrder:[],
+    listOfLateOrders:[],
+    listOfInRevisionOrders:[],
 
     isLoading_LoadListOfDeliveredOrders: false,
     hasError_LoadListOfDeliveredOrders: false,
@@ -19,12 +25,20 @@ const initialState={
     isLoading_LoadListOfCanceledOrder: false,
     hasError_LoadListOfCanceledOrder: false,
 
+    isLoading_LoadListOfInRevsionOrder: false,
+    hasError_LoadListOfInRevsionOrder: false,
+
+    isLoading_LoadListOfLatedOrder: false,
+    hasError_LoadListOfLatedOrder: false,
+
 }
 
 const options = {
     name: "ordersManagerPanel",
     initialState: initialState,
-    reducers: {},
+    reducers: {
+        
+    },
     extraReducers: {
         // loadListOfDeliveredOrders
         [loadListOfDeliveredOrders.pending]: (state, action) => {
@@ -84,6 +98,38 @@ const options = {
         [loadListOfCanceledOrder.rejected]: (state, action) => {
             state.isLoading_LoadListOfCanceledOrder = false;
             state.hasError_LoadListOfCanceledOrder = true;
+        },
+
+
+        
+         // loadListOfInRevsionOrder
+         [loadListOfInRevsionOrder.pending]: (state, action) => {
+            state.isLoading_LoadListOfInRevsionOrder = true;
+            state.hasError_LoadListOfInRevsionOrder = false;
+        },
+        [loadListOfInRevsionOrder.fulfilled]: (state, action) => {
+            state.listOfInRevisionOrders = action.payload;
+            state.isLoading_LoadListOfInRevsionOrder = false;
+            state.hasError_LoadListOfInRevsionOrder = false;
+        },
+        [loadListOfInRevsionOrder.rejected]: (state, action) => {
+            state.isLoading_LoadListOfInRevsionOrder = false;
+            state.hasError_LoadListOfInRevsionOrder = true;
+        },
+
+        //loadListOfLatedOrder
+        [loadListOfLatedOrder.pending]: (state, action) => {
+            state.isLoading_LoadListOfLatedOrder = true;
+            state.hasError_LoadListOfLatedOrder = false;
+        },
+        [loadListOfLatedOrder.fulfilled]: (state, action) => {
+            state.listOfLateOrders = action.payload;
+            state.isLoading_LoadListOfLatedOrder = false;
+            state.hasError_LoadListOfLatedOrder = false;
+        },
+        [loadListOfLatedOrder.rejected]: (state, action) => {
+            state.isLoading_LoadListOfLatedOrder = false;
+            state.hasError_LoadListOfLatedOrder = true;
         },
 
     }
