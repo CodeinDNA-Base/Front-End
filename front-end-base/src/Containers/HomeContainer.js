@@ -1,29 +1,40 @@
 import React, { useState, useEffect } from "react";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { positions } from "@material-ui/system";
-import LatestProjects from "../Home/Components/LatestProjects";
-// import { compose, spacing, palette, breakpoints } from "@material-ui/system";
-// import styled from "styled-components";
-import Services from "../Home/Components/Services";
-import MainContainer from "../Home/Components/MainContainer";
-import ExploreArea from "../Home/Components/ExploreArea";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import MotivationalArea from "../Home/Components/MotivationalArea";
-import Header from "../Home/Components/Header";
-import UserReview from "../Home/Components/UserReviews";
-import Technologies from "../Home/Components/Technologies";
-import WhatWeOffer from "../Home/Components/WhatWeOffer";
 import { useWindowDimensions } from "../Home/Components/WindowDimensions";
 import { AppBar, makeStyles } from "@material-ui/core";
+
+// custom components
+import LatestProjects from "../Home/Components/HomePage/LatestProjects";
+import Services from "../Home/Components/HomePage/Services";
+import MainContainer from "../Home/Components/HomePage/MainContainer";
+import MotivationalArea from "../Home/Components/HomePage/MotivationalArea";
+import UserReview from "../Home/Components/HomePage/UserReviews";
+import Technologies from "../Home/Components/HomePage/Technologies";
+import WhatWeOffer from "../Home/Components/HomePage/WhatWeOffer";
+
+// navbar
+import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
+
+// footer
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
+
+// colors
 import colors, { ColorGradient } from "../Theme/colors";
-import LoginForm, { PasswordForm } from "../Home/Components/LoginForm";
-import Register from "../Home/Components/Register";
-import RegisterDetails from "../Home/Components/RegisterDetails";
-import { CustomCard } from "../CustomComponents/UI/Support/CustomCard";
-import ServicePage from "../Home/Components/ServicesPage";
+
+// navbar parameters
+import {
+  navbarMenuOptions,
+  drawerMenuOptions,
+  darwerMenuExtraOptions,
+  navbarTabsOptions,
+  drawerListItemAvatar,
+  isNavbarTabs,
+  isNavBarIconButtons,
+  isAvatar,
+} from "./SupportFiles/HomePageNavbarParameters";
+
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -100,9 +111,17 @@ function HomeContainer(props) {
       {/* Header */}
       <Grid item xs={12}>
         <AppBar>
-          <Header
+          <CustomNavbar
             handelTabIndex={handelTabIndex}
             packageContainerStickyNess={packageContainerStickyNess}
+            navbarMenuOptions={navbarMenuOptions}
+            isNavbarTabs={isNavbarTabs}
+            navbarTabsOptions={navbarTabsOptions}
+            isAvatar={isAvatar}
+            isNavBarIconButtons={isNavBarIconButtons}
+            drawerMenuOptions={drawerMenuOptions}
+            darwerMenuExtraOptions={darwerMenuExtraOptions}
+            drawerListItemAvatar={drawerListItemAvatar}
           />
         </AppBar>
       </Grid>
@@ -115,6 +134,7 @@ function HomeContainer(props) {
         </Grid>
         <Grid sm={1} md={1} item></Grid>
       </Grid>
+
       {/* Services*/}
       <Grid container spacing={0} className={classes.services}>
         <Grid sm={1} md={1} item></Grid>
@@ -123,6 +143,7 @@ function HomeContainer(props) {
         </Grid>
         <Grid sm={1} md={1} item></Grid>
       </Grid>
+
       {/* Technologies */}
       <Grid container spacing={0} className={classes.Technologies}>
         <Grid sm={1} md={1} item></Grid>
@@ -131,6 +152,7 @@ function HomeContainer(props) {
         </Grid>
         <Grid sm={1} md={1} item></Grid>
       </Grid>
+
       {/* projects */}
       <Grid container className={classes.latestProjects}>
         <Grid sm={1} md={2} item></Grid>
@@ -146,6 +168,7 @@ function HomeContainer(props) {
         </Grid>
         <Grid sm={1} md={1} item></Grid>
       </Grid>
+
       {/*User reviews */}
       <Grid container className={classes.userReview}>
         <Grid sm={1} md={1} item></Grid>
@@ -163,6 +186,7 @@ function HomeContainer(props) {
         </Grid>
         <Grid sm={1} md={1} item></Grid>
       </Grid>
+
       {/* footer*/}
       <Grid container className={classes.footer} spacing={0}>
         <Grid item md={12} xs={12} sm={12}>

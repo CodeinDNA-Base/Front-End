@@ -12,10 +12,7 @@ import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
 import colors, { ColorGradient } from "../Theme/colors";
 
 // custom components
-import ServicePage from "../Home/Components/SubServicesPage/ServicesPage";
-
-// navbar
-import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
+import AboutUsMenu from "../Home/Components/AboutPage/AboutUsMenu";
 // navbar parameters
 import {
   navbarMenuOptions,
@@ -27,26 +24,36 @@ import {
   isNavBarIconButtons,
   isAvatar,
 } from "./SupportFiles/HomePageNavbarParameters";
+// navbar
+import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
+
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     backgroundColor: colors.white,
   },
-
   footer: {
     marginTop: "10%",
   },
-  loginInForm: {
-    backgroundColor: colors.white,
-    paddingTop: "7%",
+
+  aboutUsMainTitle: {
+    padding: "0%  2% 0% 2%",
+    backgroundImage: ColorGradient.lightSkyBlue,
+    borderRadius: 10,
+  },
+  aboutUsMainTitleContainer: {
+    margin: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? "10%  3% 5% 3%" : "35% 5% 5% 5%",
+    width: (isDesktopOrLaptopOrTabletScreen) =>
+      isDesktopOrLaptopOrTabletScreen ? "94%" : "90%",
+  },
+  ourMission: {
     marginTop: (isDesktopOrLaptopOrTabletScreen) =>
-      isDesktopOrLaptopOrTabletScreen ? "1%" : "25%",
+      !isDesktopOrLaptopOrTabletScreen && "10%",
   },
 }));
-// const Box = styled.div`
-// 	${breakpoints(compose(spacing, palette))}
-// `;
-function SubServicesContainer(props) {
+
+function AboutUsContainer(props) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const { height, width } = useWindowDimensions();
   const [packageContainerStickyNess, setPackageContainerStickyNess] =
@@ -80,7 +87,12 @@ function SubServicesContainer(props) {
   }, []);
 
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
-
+  const navbarMenuOptions = [
+    { title: "About", route: "about" },
+    { title: "Conatct", route: "contact" },
+    { title: "Login", route: "login" },
+    { title: "Register", route: "register" },
+  ];
   return (
     <div className={classes.root}>
       {/* Header */}
@@ -100,12 +112,8 @@ function SubServicesContainer(props) {
         </AppBar>
       </Grid>
 
-      <Grid container style={{ marginTop: "10%" }}>
-        <Grid xs={1} sm={1} md={1} item></Grid>
-        <Grid xs={10} sm={10} md={10} container item>
-          <ServicePage />
-        </Grid>
-        <Grid xs={1} sm={1} md={1} item></Grid>
+      <Grid container justifyContent="center">
+        <AboutUsMenu />
       </Grid>
 
       {/* footer*/}
@@ -122,4 +130,4 @@ function SubServicesContainer(props) {
   );
 }
 
-export default SubServicesContainer;
+export default AboutUsContainer;

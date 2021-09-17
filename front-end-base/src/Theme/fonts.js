@@ -5,7 +5,7 @@ export const Headingfonts = {
   large: "5vw Jura , sans-serif", //heading like gigs for mobile device
   medium: "3vw Jura , sans-serif", // normal text size for mobile device
   small: "2.5vw Jura , sans-serif", // heading like gigs for desktop device
-  extraSmall: "1.7vw Jura , sans-serif",
+  extraSmall: "1.3vw Jura , sans-serif",
   extraExtraSmall: "1vw Jura, sans-serif",
 };
 

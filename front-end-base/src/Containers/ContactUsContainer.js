@@ -4,49 +4,35 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useWindowDimensions } from "../Home/Components/WindowDimensions";
 import { AppBar, makeStyles } from "@material-ui/core";
 
-// footer
+//footer
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
 
-// colors
+//colors
 import colors, { ColorGradient } from "../Theme/colors";
 
 // custom components
-import ServicePage from "../Home/Components/SubServicesPage/ServicesPage";
+import ContactUsGlobalForm from "../Home/Components/AboutPage/ContactUsGlobalForm";
 
-// navbar
+// navabr
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
-// navbar parameters
-import {
-  navbarMenuOptions,
-  drawerMenuOptions,
-  darwerMenuExtraOptions,
-  navbarTabsOptions,
-  drawerListItemAvatar,
-  isNavbarTabs,
-  isNavBarIconButtons,
-  isAvatar,
-} from "./SupportFiles/HomePageNavbarParameters";
+
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     backgroundColor: colors.white,
   },
-
   footer: {
     marginTop: "10%",
   },
-  loginInForm: {
-    backgroundColor: colors.white,
-    paddingTop: "7%",
+
+  contactForm: {
     marginTop: (isDesktopOrLaptopOrTabletScreen) =>
-      isDesktopOrLaptopOrTabletScreen ? "1%" : "25%",
+      isDesktopOrLaptopOrTabletScreen ? "10%" : "35%",
   },
 }));
-// const Box = styled.div`
-// 	${breakpoints(compose(spacing, palette))}
-// `;
-function SubServicesContainer(props) {
+
+function ContactUsContainer(props) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const { height, width } = useWindowDimensions();
   const [packageContainerStickyNess, setPackageContainerStickyNess] =
@@ -80,7 +66,14 @@ function SubServicesContainer(props) {
   }, []);
 
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
-
+  // navbr options
+  const navbarMenuOptions = [
+    { title: "About", route: "about" },
+    { title: "Conatct", route: "contact" },
+    { title: "Login", route: "login" },
+    { title: "Register", route: "register" },
+  ];
+   
   return (
     <div className={classes.root}>
       {/* Header */}
@@ -91,21 +84,17 @@ function SubServicesContainer(props) {
             packageContainerStickyNess={packageContainerStickyNess}
             navbarMenuOptions={navbarMenuOptions}
             isNavbarTabs={false}
-            isAvatar={false}
-            isNavBarIconButtons={false}
-            drawerMenuOptions={drawerMenuOptions}
-            darwerMenuExtraOptions={darwerMenuExtraOptions}
-            drawerListItemAvatar={drawerListItemAvatar}
           />
         </AppBar>
       </Grid>
 
-      <Grid container style={{ marginTop: "10%" }}>
-        <Grid xs={1} sm={1} md={1} item></Grid>
-        <Grid xs={10} sm={10} md={10} container item>
-          <ServicePage />
+      {/** Contact form */}
+      <Grid container className={classes.contactForm} spacing={0}>
+        <Grid item md={3} xs={1} sm={2}></Grid>
+        <Grid item md={6} xs={10} sm={8}>
+          <ContactUsGlobalForm />
         </Grid>
-        <Grid xs={1} sm={1} md={1} item></Grid>
+        <Grid item md={3} xs={1} sm={2}></Grid>
       </Grid>
 
       {/* footer*/}
@@ -122,4 +111,4 @@ function SubServicesContainer(props) {
   );
 }
 
-export default SubServicesContainer;
+export default ContactUsContainer;
