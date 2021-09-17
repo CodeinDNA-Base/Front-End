@@ -19,6 +19,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { selectAll, selectListOfOders, selectListOfOffers } from '../Redux Components/Selectors';
 import {loadListOfOffers,loadListOfOrders} from '../Redux Components/Thunks'
+import { fontFamily } from '../../../../Theme/fonts';
 function createDataForLinkedAccountTable(AccountType, UserName) {
     return {AccountType,UserName};
 }
@@ -36,6 +37,7 @@ const columnsForListOfOffersTable = [
     { id: 'placementDate', label: 'Placement Date', minWidth: 200, },
     { id: 'status', label: 'Status', minWidth: 200 },
   ];
+
   const columnsForListOfOrdersTable = [
     { id: 'id', label: 'ID', minWidth: 170 },
     { id: 'catagory', label: 'Catagory', minWidth: 100 },
@@ -43,8 +45,6 @@ const columnsForListOfOffersTable = [
     { id: 'price', label: 'Final Price', minWidth: 100 },
     { id: 'status', label: 'Status', minWidth: 100 },
   ];  
-
-
 
 function ViewUserAccount(props) {
     const [rowsForLinkedAccountTable,setRowsForLinkedAccountTable]=useState([]);
@@ -118,6 +118,7 @@ function ViewUserAccount(props) {
     setRowsPerpageForOdersTable(+event.target.value);
     setpageForOdersTable(0);
   };
+
     return (
         <div>
             <Grid container>
@@ -233,8 +234,8 @@ function ViewUserAccount(props) {
                                <Table sx={{ minWidth: 650 }} aria-label="simple table">
                                  <TableHead>
                                    <TableRow>
-                                     <TableCell>Account Type</TableCell>
-                                     <TableCell>Account user name</TableCell>
+                                     <TableCell style={{fontFamily,fontSize:20,fontWeight:'bold' }}>Account Type</TableCell>
+                                     <TableCell style={{fontFamily,fontSize:20,fontWeight:'bold' }}>Account user name</TableCell>
                                    </TableRow>
                                  </TableHead>
                                  <TableBody>
@@ -243,10 +244,10 @@ function ViewUserAccount(props) {
                                        key={row.AccountType}
                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                      >
-                                       <TableCell component="th" scope="row">
+                                       <TableCell component="th" scope="row" style={{fontFamily,fontSize:17,fontWeight:'' }}>
                                          {row.AccountType}
                                        </TableCell>
-                                       <TableCell >{row.UserName}</TableCell>
+                                       <TableCell style={{fontFamily,fontSize:17,fontWeight:'' }}>{row.UserName}</TableCell>
                                       
                                      </TableRow>
                                    ))}
@@ -295,7 +296,7 @@ function ViewUserAccount(props) {
                                                     <TableCell
                                                       key={column.id}
                                                       align={column.align}
-                                                      style={{ minWidth: column.minWidth }}
+                                                      style={{ minWidth: column.minWidth,fontFamily:fontFamily,fontSize:20,fontWeight:'bold' }}
                                                     >   
                                                       {column.label}
                                                     </TableCell>
@@ -316,8 +317,8 @@ function ViewUserAccount(props) {
                                                             <TableCell
                                                             key={column.id}
                                                             align={column.align}
-                                                            style={{ minWidth: column.minWidth }}
-                                                             >   
+                                                            style={{ minWidth: column.minWidth,fontFamily:fontFamily,fontSize:17,fontWeight:'' }}
+                                                            >   
                                                                {value}
                                                              </TableCell>
                                                           );
@@ -388,7 +389,7 @@ function ViewUserAccount(props) {
                                                  <TableCell
                                                    key={column.id}
                                                    align={column.align}
-                                                   style={{ minWidth: column.minWidth }}
+                                                   style={{ minWidth: column.minWidth,fontFamily:fontFamily,fontSize:20,fontWeight:'bold' }}
                                                  >
                                                    {column.label}
                                                  </TableCell>
@@ -404,10 +405,12 @@ function ViewUserAccount(props) {
                                                      { columnsForListOfOrdersTable.map((column) => {
                                                        const value = row[column.id];
                                                        return (
-                                                         <TableCell key={column.id} align={column.align}>
-                                                           {column.format && typeof value === 'number'
-                                                             ? column.format(value)
-                                                             : value}
+                                                        <TableCell
+                                                        key={column.id}
+                                                        align={column.align}
+                                                        style={{ minWidth: column.minWidth,fontFamily:fontFamily,fontSize:17,fontWeight:'' }}
+                                                        >   
+                                                           {value}
                                                          </TableCell>
                                                        );
                                                      })}
