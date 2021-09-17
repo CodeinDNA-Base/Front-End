@@ -176,7 +176,6 @@ const PurchaseHistory = () => {
   }, [dispatch]);
 
 
-
   return (
     <Card className={classes.root} elevation={2}>
       <CardHeader

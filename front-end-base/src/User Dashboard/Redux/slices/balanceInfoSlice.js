@@ -5,7 +5,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchPurchaseHistory = createAsyncThunk(
   "userDashboard/fetchPurchaseHistory",
-  async (user_Id_Or_Email_or_username) => {
+  async () => {
     //get this parameter
     const info = await fetch(`https://randomuser.me/api/`); //send request to custom API
     const infoDetails = await info.json();

@@ -33,7 +33,7 @@ import { Rating } from "@material-ui/lab";
 //Icons
 
 import MenuIcon from "@material-ui/icons/Menu";
-import NotificationIcon from "@material-ui/icons/NotificationImportant";
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
@@ -45,7 +45,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
 import ExploreIcon from "@material-ui/icons/Explore";
 import FeaturedPlayListIcon from "@material-ui/icons/FeaturedPlayList";
-
+import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 //Routing
 import { Link } from "react-router-dom";
 
@@ -157,13 +157,14 @@ const useStyles = makeStyles((theme) => ({
 export const Menubar = (props) => {
   const classes = useStyles();
 
-  const [notificationMenuAnchor, setNotificationMenuAnchor] =
-    React.useState(null);
+  const [notificationMenuAnchor, setNotificationMenuAnchor] =useState(null);
   const isNotificationMenuOpen = Boolean(notificationMenuAnchor);
 
   //Notification Menu
   const handleNotificationMenuOpen = (event) => {
+    console.log(event.currentTarget)
     setNotificationMenuAnchor(event.currentTarget);
+  
   };
 
   const handleNotificationMenuClose = () => {
@@ -182,7 +183,7 @@ export const Menubar = (props) => {
     },
     {
       notificationId: 1,
-      content: "Payment method added",
+      content: "Payment method added asdj dasjk dasdk dsakd asdj dasjk dasdk dsakd asdj dasjk dasdk dsakd",
       time: new Date().toLocaleTimeString(),
       icon: <LogoutIcon />,
       route: "/",
@@ -231,10 +232,7 @@ export const Menubar = (props) => {
     },
   ];
   const notificationMenuId = "primary-search-account-menu";
-  const renderNotificationMenu = (
-    
-      <Menu
-
+  const renderNotificationMenu = (<Menu
       className={classes.notificationMenu}
       anchorEl={notificationMenuAnchor}
       id={notificationMenuId}
@@ -262,9 +260,7 @@ export const Menubar = (props) => {
 
       {notificationDetails.map(
         ({ notificationId, content, time, icon, route }) => {
-          return (
-            <>
-              <Link
+          return (<Link
                 to={route}
                 style={{ textDecoration: "none", color: "black" }}
               >
@@ -273,14 +269,11 @@ export const Menubar = (props) => {
                   <ListItemText
 
                     primary={<span className={classes.notificationText}>{content}</span>}
-                    secondary={
-                      <span className={classes.timeStyles}>{time}</span>
-                    }
+                    secondary={<span className={classes.timeStyles}>{time}</span>}
                   />
                 </ListItem>
+                <Divider />
               </Link>
-              <Divider />
-            </>
           );
         }
       )}
@@ -288,7 +281,7 @@ export const Menubar = (props) => {
 <div className={classes.notificationAppBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="open drawer">
-            <Speaker />
+            <VolumeUpIcon />
           </IconButton>
           <div className={classes.grow} />
           <IconButton color="inherit">
@@ -525,7 +518,7 @@ export const Menubar = (props) => {
             </Box>
 
             <Badge badgeContent={8} color="primary" className={classes.notificationIcon} onClick={handleNotificationMenuOpen}>
-            <NotificationIcon />
+            <CircleNotificationsIcon />
             </Badge>
             <Avatar
               className={classes.avatar}
