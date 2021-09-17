@@ -63,13 +63,22 @@ function ViewUserAccount(props) {
     const {isLoading_loadListOfOrders,isLoading_loadListOfOffers}  = useSelector(selectAll);
    
     useEffect(()=>{
+      setRowsForOdersListTable(produce(rowsForOdersListTables,draft=>{
+        draft=[];
+        return draft;
+      }))
+      setRowsForOffersListTable(produce(rowsForOffersListTable,draft=>{
+        draft=[];
+        return draft;
+      }))
+
         setRowsForLinkedAccountTable(produce(rowsForLinkedAccountTable,draft=>{
             draft=[];
             props.selectedUserAccount.otherLinkedAccounts.forEach(element => {
             draft.push(createDataForLinkedAccountTable(element.accountType,element.accountUserName))    
             });
             return draft;
-        }))
+        }));      
     },[]);
     useEffect(()=>{
         setRowsForOffersListTable(produce(rowsForOffersListTable,draft=>{
@@ -167,7 +176,11 @@ function ViewUserAccount(props) {
                             <div style={{borderBottom:lightBorder,borderRight:lightBorder}}>
                                 <Headings text={`Last Login: ${props.selectedUserAccount.lastLoginDate} @ ${props.selectedUserAccount.lastLoginTime}`} fontSize={18} fontWeight={'bold'}/>
                             </div>
-                
+                            <div style={{borderBottom:lightBorder,borderRight:lightBorder}}>
+                                <Headings text={`Date and time of  block: ${props.selectedUserAccount.dateOfBlock} @ ${props.selectedUserAccount.timeOfBlock}`} fontSize={18} fontWeight={'bold'}/>
+                            </div><div style={{borderBottom:lightBorder,borderRight:lightBorder,backgroundColor:'red'}}>
+                                <Headings text={`Reason of block: ${props.selectedUserAccount.reasonOfBlock}`} fontSize={18} fontWeight={'bold'}/>
+                            </div>
                             
                         </Grid>
                         <Grid item xs={4}>
@@ -175,7 +188,7 @@ function ViewUserAccount(props) {
                             <div style={{textAlign:'center',marginTop:'3rem'}}>
                                 <img width={200} height={200} src={props.selectedUserAccount.profileImage}/>
                             </div>
-                            <div style={{textAlign:"center",marginTop:'1rem'}}>
+                            {/* <div style={{textAlign:"center",marginTop:'1rem'}}>
                             <RoundButton
                                       title={"Suspend Account"}
                                       width={200}
@@ -198,7 +211,7 @@ function ViewUserAccount(props) {
                                         alert("Call the API which will block the account..")
                                     }}
                                      />
-                            </div>
+                            </div> */}
                             <div style={{textAlign:"center",marginTop:'1rem'}}>
                             <RoundButton
                                       title={"View"}

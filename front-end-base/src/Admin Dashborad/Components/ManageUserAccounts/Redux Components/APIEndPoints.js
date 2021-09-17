@@ -1,4 +1,4 @@
-import { listOfActiveUserAccounts } from "./TempData";
+import { listOfActiveUserAccounts, listOfBlockedUserAccounts } from "./TempData";
 import {ListOfDeliveredOrders} from '../../ManageOrders/Redux Components/TempData'
 import {listOfNewrequestRequests} from '../../ManageOrderResquests/Redux Components/TempData'
 export const  DataLoader_ForListActiveUserAccounts = ()=>{
@@ -14,7 +14,7 @@ export const  DataLoader_ForListBlockedUserAccounts = ()=>{
     return new Promise(function(resolve,rejected){
        console.log("A call has arrived to DataLoader_ForListBlockedUserAccounts")
        setTimeout(() => {
-           resolve()
+           resolve(listOfBlockedUserAccounts)
        }, 3000);
    })
 }
