@@ -7,9 +7,10 @@ export const listOfActiveUserAccounts=[
         phone:"+923053206339",
         profileImage:"https://firebasestorage.googleapis.com/v0/b/user-accounts-7cdc4.appspot.com/o/zeeshan.jpeg?alt=media&token=2b357d32-39c7-4369-88ad-c8b06599a9f9",
         lastLoginDate:"4-3-2012",
-        lasLoginTime:"3:33 PM",
+        lastLoginTime:"3:33 PM",
         lastSeen:"Online",
         totalAmmountSpent:23,
+        accountRunningStatus:"Active",
         accountCreationDate:"4-2-2012",
         accountCreationTime:"4:00 PM",
         accountStatus:"Suspend",
@@ -67,7 +68,8 @@ export const listOfActiveUserAccounts=[
         phone:"+923053206739",
         profileImage:"https://firebasestorage.googleapis.com/v0/b/user-accounts-7cdc4.appspot.com/o/zeeshan.jpeg?alt=media&token=2b357d32-39c7-4369-88ad-c8b06599a9f9",
         lastLoginDate:"4-3-2012",
-        lasLoginTime:"3:33 PM",
+        lastLoginTime:"3:33 PM",
+        accountRunningStatus:"Active",
         lastSeen:"Offline",
         accountCreationDate:"4-2-2012",
         accountCreationTime:"4:00 PM",
@@ -127,8 +129,9 @@ export const listOfActiveUserAccounts=[
         phone:"+923053206309",
         profileImage:"https://firebasestorage.googleapis.com/v0/b/user-accounts-7cdc4.appspot.com/o/zeeshan.jpeg?alt=media&token=2b357d32-39c7-4369-88ad-c8b06599a9f9",
         lastLoginDate:"4-3-2012",
-        lasLoginTime:"3:33 PM",
+        lastLoginTime:"3:33 PM",
         lastSeen:"Online",
+        accountRunningStatus:"Active",
         accountCreationDate:"4-2-2012",
         accountCreationTime:"4:00 PM",
         accountStatus:"Not Verified", // Verified // Suspend ...
@@ -137,11 +140,11 @@ export const listOfActiveUserAccounts=[
         countary:"Indoneshia",
         otherLinkedAccounts:[
             {
-                accountType:"GithubAccount",
+                accountType:"Github",
                 accountUserName:"zeeshan-thedeveloper"
             },
             {
-                accountType:"FacebookAccount",
+                accountType:"Facebook",
                 accountUserName:"zeeshan soomro"
             },
         ],
@@ -181,3 +184,4 @@ export const listOfActiveUserAccounts=[
     }
 
 ]
+

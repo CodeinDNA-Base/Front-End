@@ -1,15 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 import produce from 'immer'
-import { loadListOfActiveUserAccounts,loadListOfBlockedUserAccounts } from "./Thunks";
+import { 
+        loadListOfActiveUserAccounts,
+        loadListOfBlockedUserAccounts,
+        loadListOfOffers,loadListOfOrders
+     } from "./Thunks";
 const initialState={
     listOfActiveUserAccounts:[],
     listOfBlockedUserAccounts:[],
-
+    listOfOffers:[],
+    listOfOrders:[],
     isLoading_LoadListOfActiveUserAccounts: false,
     hasError_LoadListOfActiveUserAccounts: false,
 
     isLoading_LoadListOfBlockedUserAccounts: false,
     hasError_LoadListOfBlockedUserAccounts: false,
+    
+    isLoading_loadListOfOrders: false,
+    hasError_loadListOfOrders: false,
+
+    isLoading_loadListOfOffers: false,
+    hasError_loadListOfOffers: false,
 }
 
 const options = {
@@ -47,6 +58,36 @@ const options = {
         [loadListOfBlockedUserAccounts.rejected]: (state, action) => {
             state.isLoading_LoadListOfBlockedUserAccounts = false;
             state.hasError_LoadListOfBlockedUserAccounts = true;
+        },
+
+          // // loadListOfOffers
+          [loadListOfOffers.pending]: (state, action) => {
+            state.isLoading_loadListOfOffers = true;
+            state.hasError_loadListOfOffers = false;
+        },
+        [loadListOfOffers.fulfilled]: (state, action) => {
+            state.listOfOffers = action.payload;
+            state.isLoading_loadListOfOffers = false;
+            state.hasError_loadListOfOffers = false;
+        },
+        [loadListOfOffers.rejected]: (state, action) => {
+            state.isLoading_loadListOfOffers = false;
+            state.hasError_loadListOfOffers = true;
+        },
+
+          // // loadListOfOffers
+          [loadListOfOrders.pending]: (state, action) => {
+            state.isLoading_loadListOfOrders = true;
+            state.hasError_loadListOfOrders = false;
+        },
+        [loadListOfOrders.fulfilled]: (state, action) => {
+            state.listOfOrders = action.payload;
+            state.isLoading_loadListOfOrders = false;
+            state.hasError_loadListOfOrders = false;
+        },
+        [loadListOfOrders.rejected]: (state, action) => {
+            state.isLoading_loadListOfOrders = false;
+            state.hasError_loadListOfOrders = true;
         },
     }
 }

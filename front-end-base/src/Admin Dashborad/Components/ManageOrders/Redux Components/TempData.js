@@ -19,6 +19,7 @@ export const ListOfDeliveredOrders=[
         orderType:"Custom Order",
         orderDuration:"10 days",
         orderItemQuantity:"2",
+        orderStatus:"Delivered",
         orderDeliveryFiles:[
             {
                 type:"File",
@@ -91,6 +92,7 @@ export const ListOfDeliveredOrders=[
         orderType:"Custom Order",
         orderDuration:"10 days",
         orderItemQuantity:"2",
+        orderStatus:"Delivered",
         orderDeliveryFiles:[
             {
                 type:"File",
@@ -163,6 +165,7 @@ export const ListOfDeliveredOrders=[
         orderType:"Custom Order",
         orderDuration:"10 days",
         orderItemQuantity:"2",
+        orderStatus:"Delivered",
         orderDeliveryFiles:[
             {
                 type:"File",
@@ -234,6 +237,7 @@ export const ListOfDeliveredOrders=[
         orderSubmitionDate:"2-2-2032",
         orderType:"Custom Order",
         orderDuration:"10 days",
+        orderStatus:"Delivered",
         orderItemQuantity:"2",
         orderDeliveryFiles:[
             {
@@ -301,6 +305,7 @@ export const ListOfDeliveredOrders=[
         orderPlacementDate:"4-4-2010",  //dd-mm-yy
         orderPlacementTime:"6:40 PM",  //dd-mm-yy
         orderStartDate:"4-4-201",
+        orderStatus:"Delivered",
         orderStartTime:"5:00 PM",
         orderSubmitionTime:"5:00 PM",
         orderSubmitionDate:"2-2-2032",
@@ -379,6 +384,7 @@ export const ListOfDeliveredOrders=[
         orderSubmitionDate:"2-2-2032",
         orderType:"Custom Order",
         orderDuration:"10 days",
+        orderStatus:"Delivered",
         orderItemQuantity:"2",
         orderDeliveryFiles:[
             {

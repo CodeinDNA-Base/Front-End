@@ -1,5 +1,6 @@
 import { listOfActiveUserAccounts } from "./TempData";
-
+import {ListOfDeliveredOrders} from '../../ManageOrders/Redux Components/TempData'
+import {listOfNewrequestRequests} from '../../ManageOrderResquests/Redux Components/TempData'
 export const  DataLoader_ForListActiveUserAccounts = ()=>{
     return new Promise(function(resolve,rejected){
        console.log("A call has arrived to DataLoader_ForListActiveUserAccounts")
@@ -17,4 +18,23 @@ export const  DataLoader_ForListBlockedUserAccounts = ()=>{
        }, 3000);
    })
 }
+
+export const  DataLoader_ForListOfOffers = ()=>{
+    return new Promise(function(resolve,rejected){
+       console.log("A call has arrived to DataLoader_ForListOfOffers")
+       setTimeout(() => {
+           resolve(listOfNewrequestRequests)
+       }, 3000);
+   })
+}
+
+export const  DataLoader_ForListOfOders = ()=>{
+    return new Promise(function(resolve,rejected){
+       console.log("A call has arrived to DataLoader_ForListOfOders")
+       setTimeout(() => {
+           resolve(ListOfDeliveredOrders)
+       }, 3000);
+   })
+}
+
 

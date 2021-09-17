@@ -12,6 +12,7 @@ export const listOfNewrequestRequests = [
         requestPlacementTime:"6:40 PM",  //dd-mm-yy
         requestType:"Custom request",
         requestDuration:"10 days",
+        requestStatus:"Pending",
         listOfAttachment:[
             {
                 type:"File",
@@ -54,6 +55,7 @@ export const listOfNewrequestRequests = [
         requestPlacementTime:"6:40 PM",  //dd-mm-yy
         requestType:"Custom request",
         requestDuration:"10 days",
+        requestStatus:"Pending",
         listOfAttachment:[
             {
                 type:"File",
@@ -96,6 +98,7 @@ export const listOfNewrequestRequests = [
         requestPlacementTime:"6:40 PM",  //dd-mm-yy
         requestType:"Custom request",
         requestDuration:"10 days",
+        requestStatus:"Pending",
         listOfAttachment:[
             {
                 type:"File",
@@ -138,6 +141,7 @@ export const listOfNewrequestRequests = [
         requestPlacementTime:"6:40 PM",  //dd-mm-yy
         requestType:"Custom request",
         requestDuration:"10 days",
+        requestStatus:"Pending",
         listOfAttachment:[
             {
                 type:"File",
@@ -180,6 +184,7 @@ export const listOfNewrequestRequests = [
         requestPlacementTime:"6:40 PM",  //dd-mm-yy
         requestType:"Custom request",
         requestDuration:"10 days",
+        requestStatus:"Pending",
         listOfAttachment:[
             {
                 type:"File",
@@ -228,6 +233,7 @@ export const listDeclinedOrderRequests=[
         requestDeclineReason:"fdsfdsfs",
         requestDeclineNoteToClient:"fdsfdsfs",
         requestType:"Custom request",
+        requestStatus:"Pending",
         requestDuration:"10 days",
         listOfAttachment:[
             {
@@ -275,6 +281,7 @@ export const listDeclinedOrderRequests=[
         requestDeclineNoteToClient:"fdsfdsfs",
         requestType:"Custom request",
         requestDuration:"10 days",
+        requestStatus:"Pending",
         listOfAttachment:[
             {
                 type:"File",
@@ -320,6 +327,7 @@ export const listDeclinedOrderRequests=[
         requestDeclineReason:"fdsfdsfs",
         requestDeclineNoteToClient:"fdsfdsfs",
         requestType:"Custom request",
+        requestStatus:"Pending",
         requestDuration:"10 days",
         listOfAttachment:[
             {
@@ -367,6 +375,7 @@ export const listDeclinedOrderRequests=[
         requestDeclineNoteToClient:"fdsfdsfs",
         requestType:"Custom request",
         requestDuration:"10 days",
+        requestStatus:"Pending",
         listOfAttachment:[
             {
                 type:"File",
