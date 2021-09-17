@@ -16,7 +16,7 @@ const CustomCardStyles = makeStyles(() => ({
     maxWidth: ({ isDesktopOrLaptopOrTabletScreen }) =>
       isDesktopOrLaptopOrTabletScreen ? 260 : 160,
     cursor: "pointer",
-    position:'relative'
+    position: "relative",
   },
 
   detailBox: {
@@ -55,36 +55,15 @@ const CustomCardStyles = makeStyles(() => ({
     pointer: "progress",
   },
 }));
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-    title: "SEO",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Web Developement",
-    author: "author",
-  },
 
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Graphic Designing",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-    title: "Voice",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Desktop Development",
-    author: "author",
-  },
-];
-
-export const CustomCard = () => {
+export const CustomCard = ({
+  subServiceTitle,
+  basicPackageDeliveryTime,
+  basicPackagePrice,
+  subServiceRating,
+  subServiceTotalRatedOrders,
+  subServiceThumbnails,
+}) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const [navButtonAndFavIconVisibility, setNavButtonAndFavIconVisibility] =
     useState("hidden");
@@ -115,20 +94,20 @@ export const CustomCard = () => {
           />
         )}
         <CustomCardCarousel
-          itemData={itemData}
+          subServiceThumbnails={subServiceThumbnails}
           navButtonAndFavIconVisibility={navButtonAndFavIconVisibility}
         />
       </Box>
       <Box className={classes.detailBox}>
         <Typography component="h6" className={classes.title}>
-          You will get custom website in react and node js
+          { Array.from(subServiceTitle).slice(0,50) }{Array.from(subServiceTitle).length > 50 && '...'}
         </Typography>
 
         <Box display="flex" style={{ marginTop: "5%", marginBottom: "5%" }}>
           <Box width="10%">
             <AvTimerRoundedIcon fontSize="small" />
           </Box>
-          <Box flexShrink={0}>2 days Delivery</Box>
+          <Box flexShrink={0}>{basicPackageDeliveryTime} Delivery</Box>
         </Box>
         <hr style={{ marginTop: "5%", marginBottom: "5%" }} />
         <Box display="flex">
@@ -136,14 +115,16 @@ export const CustomCard = () => {
             <Typography className={classes.textLight}>
               From{" "}
               <Typography component="span" className={classes.textBold}>
-                30$
+                {basicPackagePrice + "$"}
               </Typography>
             </Typography>
           </Box>
           <Box flexShrink={0}>
             <StarRoundedIcon style={{ color: colors.secondary }} />{" "}
           </Box>
-          <Box flexShrink={0}>4.5 (2000)</Box>
+          <Box flexShrink={0}>
+            {subServiceRating} {`(${subServiceTotalRatedOrders})`}
+          </Box>
         </Box>
       </Box>
     </Grid>

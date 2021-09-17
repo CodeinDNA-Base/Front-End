@@ -8,7 +8,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-
 export default function ServiceCard({ image, color, title, description }) {
   // styles
   const useStyles = makeStyles({
@@ -27,9 +26,12 @@ export default function ServiceCard({ image, color, title, description }) {
     },
   });
   const classes = useStyles();
-
+  // handlers
+  const handleServiceCardClick = () => {
+    alert("navigate to sub service page");
+  };
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick={handleServiceCardClick}>
       <CardActionArea>
         <CardMedia
           component="img"

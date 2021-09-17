@@ -26,9 +26,11 @@ export const CategoryChips = ({
   bgColor = colors.white,
   link,
   margin,
+  id,
+  handleClick
 }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
-  const CategoryChipsStyles = makeStyles({ color, bgColor, margin });
+  const CategoryChipsStyles = makeStyles({ color, bgColor, margin ,});
   return (
     <div className={CategoryChipsStyles.root} style={{ margin: margin }}>
       <Chip
@@ -36,6 +38,7 @@ export const CategoryChips = ({
         component="a"
         href={link}
         clickable
+        onClick={()=>handleClick(id)}
         variant="outlined"
         style={{
           font: isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,

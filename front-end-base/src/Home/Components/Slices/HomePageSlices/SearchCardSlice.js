@@ -86,5 +86,8 @@ export const selectSearchResults = (state) =>
 export const selectServicesAndSubServices = (state) =>
   state.searchByCategory.serviceAndSubServices;
 
+export const selectFirstService = (state) =>
+  state.searchByCategory.serviceAndSubServices[0];
+
 // reducer
 export default searchCardSlice.reducer;

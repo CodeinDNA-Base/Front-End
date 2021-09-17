@@ -14,7 +14,7 @@ const CustomCardCarouselStyles = makeStyles(() => ({
     }
   }));
 
-export const CustomCardCarousel=({itemData,navButtonAndFavIconVisibility})=>{
+export const CustomCardCarousel=({subServiceThumbnails,navButtonAndFavIconVisibility})=>{
     const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
     const classes=CustomCardCarouselStyles({isDesktopOrLaptopOrTabletScreen});
 return(
@@ -41,9 +41,9 @@ return(
 
           // OR
         >
-            {itemData.map((item,index)=>{
+            {subServiceThumbnails.map((thumbnail,index)=>{
                 return( <Box key={'img_'+index}>
-                    <img src={item.img} className={classes.image} />
+                    <img src={thumbnail} className={classes.image} />
                   </Box>)
             })}
          

@@ -21,7 +21,8 @@ import teamDetailReducer from "./Home/Components/Slices/AboutPageSlices/OurTeamS
 import searchbyCategoryReducer from "./Home/Components/Slices/HomePageSlices/SearchCardSlice";
 import contactFormDetaildReducer from "./Home/Components/Slices/AboutPageSlices/ContactUsGlobalFormSlice";
 import registerDetailsReducer from "./Home/Components/Slices/AuthenticationPageSlices/RegisterDetailsSlice";
-
+import { SUBSERVICES } from "./Home/Components/Slices/SubServicesPageSlices/SubServiceConstants";
+import subServicesReducer from "./Home/Components/Slices/SubServicesPageSlices/SubServiceSlice";
 export default configureStore({
   reducer: {
     [LATESTPROJECTS]: latestProjectsReducer,
@@ -32,5 +33,6 @@ export default configureStore({
     [SEARCHBYCATEGORY]: searchbyCategoryReducer,
     [CONTACTFORMDETAILS]: contactFormDetaildReducer,
     [REGISTERDETAILS]: registerDetailsReducer,
+    [SUBSERVICES]: subServicesReducer,
   },
 });

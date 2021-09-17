@@ -78,7 +78,14 @@ const itemData = [
   },
 ];
 
-export const MobileCustomCard = () => {
+export const MobileCustomCard = ({
+  subServiceTitle,
+  basicPackageDeliveryTime,
+  basicPackagePrice,
+  subServiceRating,
+  subServiceTotalRatedOrders,
+  subServiceThumbnails,
+}) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const [navButtonAndFavIconVisibility, setNavButtonAndFavIconVisibility] =
     useState("hidden");
@@ -99,14 +106,12 @@ export const MobileCustomCard = () => {
       <Box style={{ display: "flex", borderBottom:'2px solid black',}}>
         <Box width="40%">
           <MobileCustomCardCarousel
-            itemData={itemData}
+            subServiceThumbnails={subServiceThumbnails}
             navButtonAndFavIconVisibility={navButtonAndFavIconVisibility}
           />
         </Box>
         <Box width="50%" className={classes.detailBox} flexShrink={0}>
-          <p>
-            You will get custom website in react
-          </p>
+        { Array.from(subServiceTitle).slice(0,50) }{Array.from(subServiceTitle).length > 50 && '...'}
           {isFavIconSelected ? (
           <FavoriteIcon
             className={classes.favouriteIcon}
@@ -128,14 +133,14 @@ export const MobileCustomCard = () => {
             <Typography className={classes.textLight}>
               From{" "}
               <Typography component="span" className={classes.textBold}>
-                30$
+                {basicPackagePrice + '$'}
               </Typography>
             </Typography>
           </Box>
           <Box flexShrink={0}>
             <StarRoundedIcon style={{ color: colors.secondary }} />{" "}
           </Box>
-          <Box flexShrink={0}>4.5 (2000)</Box>
+          <Box flexShrink={0}>{subServiceRating} {`(${subServiceTotalRatedOrders})`}</Box>
         </Box>
       </Box>
     </Grid>
