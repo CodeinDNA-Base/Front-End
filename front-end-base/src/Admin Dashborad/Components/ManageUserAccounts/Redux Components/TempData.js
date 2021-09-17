@@ -253,3 +253,13 @@ export const listOfBlockedUserAccounts=[
     },
 
 ]
+ 
+
+export const NumberOfAccountsWithRespectToStatusChart = [
+    { id:"Active Accounts", label: "Active Accounts",  y: 10  },
+	{ id:"Blocked",label: "Blocked Accounts", y: 25  },
+    { id:"Complete Accounts",label: "Complete Accounts", y: 25  },
+    { id:"In-Complete Accounts",label: "In-Complete Accounts", y: 25  },
+    
+]
+

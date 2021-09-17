@@ -13,4 +13,8 @@ export const  selectListOfOders = (state)=>{
 export const  selectListOfOffers = (state)=>{
     return state.userAccountManagerPanel.listOfOffers;
 }
+export const  selectfNumberOfAccountsWithRespectToStatusChart  = (state)=>{
+    return state.userAccountManagerPanel.numberOfAccountsWithRespectToStatusChartData;
+}
+
 

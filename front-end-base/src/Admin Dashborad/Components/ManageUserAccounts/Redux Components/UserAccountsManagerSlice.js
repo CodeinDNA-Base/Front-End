@@ -3,13 +3,17 @@ import produce from 'immer'
 import { 
         loadListOfActiveUserAccounts,
         loadListOfBlockedUserAccounts,
-        loadListOfOffers,loadListOfOrders
+        loadListOfOffers,loadListOfOrders,
+        loadListOfNumberOfAccountsWithRespectToStatusChart
      } from "./Thunks";
 const initialState={
     listOfActiveUserAccounts:[],
     listOfBlockedUserAccounts:[],
     listOfOffers:[],
     listOfOrders:[],
+    numberOfAccountsWithRespectToStatusChartData:[],
+
+    
     isLoading_LoadListOfActiveUserAccounts: false,
     hasError_LoadListOfActiveUserAccounts: false,
 
@@ -21,6 +25,9 @@ const initialState={
 
     isLoading_loadListOfOffers: false,
     hasError_loadListOfOffers: false,
+
+    isLoading_loadListOfNumberOfAccountsWithRespectToStatusChart: false,
+    hasError_loadListOfNumberOfAccountsWithRespectToStatusChart: false,
 }
 
 const options = {
@@ -87,6 +94,21 @@ const options = {
         },
         [loadListOfOrders.rejected]: (state, action) => {
             state.isLoading_loadListOfOrders = false;
+            state.hasError_loadListOfOrders = true;
+        },
+
+           // // loadListOfNumberOfAccountsWithRespectToStatusChart
+           [loadListOfNumberOfAccountsWithRespectToStatusChart.pending]: (state, action) => {
+            state.isLoading_loadListOfNumberOfAccountsWithRespectToStatusChart = true;
+            state.hasError_loadListOfNumberOfAccountsWithRespectToStatusChart = false;
+        },
+        [loadListOfNumberOfAccountsWithRespectToStatusChart.fulfilled]: (state, action) => {
+            state.numberOfAccountsWithRespectToStatusChartData = action.payload;
+            state.isLoading_loadListOfNumberOfAccountsWithRespectToStatusChart = false;
+            state.hasError_loadListOfOrders = false;
+        },
+        [loadListOfNumberOfAccountsWithRespectToStatusChart.rejected]: (state, action) => {
+            state.isLoading_loadListOfNumberOfAccountsWithRespectToStatusChart = false;
             state.hasError_loadListOfOrders = true;
         },
     }
