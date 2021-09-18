@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import produce from 'immer'
-
+import { loadDataOfListOfAllOffers } from "./Thunks";
 const initialState ={
     listOfAllOffers:[],
     tempCreateNewOfferDataHolder:{
@@ -17,7 +17,11 @@ const initialState ={
             offerImage:null,
             isEditingEnabled: false
         }
-    }
+    },
+      
+    isLoading_loadDataOfListOfAllOffers : false,
+    hasErrorloadDataOfListOfAllOffers : false,
+
     
 }
 
@@ -40,19 +44,19 @@ const options = {
     },
     extraReducers: {
         // loadDataOfLastChoosedDisplayMode
-        // [loadDataOfLastChoosedDisplayMode.pending]: (state, action) => {
-        //     state.isLoading_LastChoosedDisplayMode = true;
-        //     state.hasError_LastChoosedDisplayMode = false;
-        // },
-        // [loadDataOfLastChoosedDisplayMode.fulfilled]: (state, action) => {
-        //     state.lastChoosedDisplayMode = action.payload;
-        //     state.isLoading_LastChoosedDisplayMode = false;
-        //     state.hasError_LastChoosedDisplayMode = false;
-        // },
-        // [loadDataOfLastChoosedDisplayMode.rejected]: (state, action) => {
-        //     state.isLoading_LastChoosedDisplayMode = false;
-        //     state.hasError_LastChoosedDisplayMode = true;
-        // },
+        [loadDataOfListOfAllOffers.pending]: (state, action) => {
+            state.isLoading_loadDataOfListOfAllOffers = true;
+            state.hasErrorloadDataOfListOfAllOffers = false;
+        },
+        [loadDataOfListOfAllOffers.fulfilled]: (state, action) => {
+            state.listOfAllOffers = action.payload;
+            state.isLoading_loadDataOfListOfAllOffers = false;
+            state.hasErrorloadDataOfListOfAllOffers = false;
+        },
+        [loadDataOfListOfAllOffers.rejected]: (state, action) => {
+            state.isLoading_loadDataOfListOfAllOffers = false;
+            state.hasErrorloadDataOfListOfAllOffers = true;
+        },
 
     },
 }
