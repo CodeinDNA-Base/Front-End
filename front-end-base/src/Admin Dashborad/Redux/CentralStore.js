@@ -6,6 +6,7 @@ import { serviceManagerReducer } from "../Components/ManageServices/Redux Compon
 import {ordersManagerReducer} from '../Components/ManageOrders/Redux Components/OrderManagerSlice';
 import { requestManagerReducer } from "../Components/ManageOrderResquests/Redux Components/RequestManagerSlice";
 import { userAccountManagerReducer } from "../Components/ManageUserAccounts/Redux Components/UserAccountsManagerSlice";
+import { reviewsManagerReducer } from "../Components/ManageReviews/Redux Components/ReviewsManagerSlice";
 import thunk from "redux-thunk"
 import { composeWithDevTools } from 'redux-devtools-extension'
 
@@ -20,7 +21,8 @@ export default function configureStore(preloadedState) {
                     serviceManagerPanel:serviceManagerReducer,
                     ordersManagerPanel:ordersManagerReducer,
                     requestsManagerPanel:requestManagerReducer,
-                    userAccountManagerPanel:userAccountManagerReducer
+                    userAccountManagerPanel:userAccountManagerReducer,
+                    reviewsManagerPanel:reviewsManagerReducer
                   }), preloadedState, composedEnhancers)
   return store
 }

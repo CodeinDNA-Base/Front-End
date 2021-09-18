@@ -1,31 +1,11 @@
-import React,{useState} from 'react';
-import {makeStyles } from '@material-ui/core/styles';
-import ReviewsListContainer from './DiscardedReviewsSubComponents/ReviewsListContainer';
-import ReviewView from './DiscardedReviewsSubComponents/ReviewView';
+import React from 'react';
 
 function DiscardedReviewsTab(props) {
-    const classes =useStyles();
-    const [screenSwitcher,setScreenSwitcher]=useState(true);
-    const hanelScreenSwitch = (event,index) =>{
-      setScreenSwitcher(!screenSwitcher);
-    }
     return (
         <div>
-            <div className={classes.topControlsBar}>
-                {(screenSwitcher) ? <ReviewsListContainer  hanelScreenSwitch={hanelScreenSwitch}/> : <ReviewView hanelScreenSwitch={hanelScreenSwitch}/>}
-            </div>
+            <h1>DiscardedReviewsTab</h1>
         </div>
     );
 }
 
-const useStyles=makeStyles((theme)=>({
-    topControlsBar:{
-        // backgroundColor:"blue",
-        height:70,
-        border:'1px solid #f7f2f7',
-        marginTop:"1%"
-      },
-   
-    
-}))
 export default DiscardedReviewsTab;

@@ -260,6 +260,5 @@ export const NumberOfAccountsWithRespectToStatusChart = [
 	{ id:"Blocked",label: "Blocked Accounts", y: 25  },
     { id:"Complete Accounts",label: "Complete Accounts", y: 25  },
     { id:"In-Complete Accounts",label: "In-Complete Accounts", y: 25  },
-    
 ]
 
