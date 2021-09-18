@@ -16,9 +16,6 @@ export const listOfNewReviews = [
         reviewTargetService:"Desktop App",
         reviewTargetSubService:"C#",   
         reviewPublishStatus:"Not Published",
-        
-
-
     },
     {
         reviewId:"ERD3322",
