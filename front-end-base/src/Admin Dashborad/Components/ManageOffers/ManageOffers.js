@@ -52,9 +52,9 @@ function ManageOffers(props) {
                      >
                      
                           <Tab  className={classes.tabElementStyle} label={stringCollection.ManageOffers.ViewAllOffersTabText} {...a11yProps(0)} />
-                          <Tab className={classes.tabElementStyle} label={stringCollection.ManageOffers.SummuryTabText} {...a11yProps(1)} />
-                          <Tab  className={classes.tabElementStyle} label={stringCollection.ManageOffers.CreateNewOfferTabText} {...a11yProps(2)} />
-                          <Tab  className={classes.tabElementStyle} label={stringCollection.ManageOffers.CreatAndEmailOfferTabText} {...a11yProps(3)} />
+                          <Tab  className={classes.tabElementStyle} label={stringCollection.ManageOffers.CreateNewOfferTabText} {...a11yProps(1)} />
+                          <Tab className={classes.tabElementStyle} label={stringCollection.ManageOffers.SummuryTabText} {...a11yProps(2)} />
+                          {/* <Tab  className={classes.tabElementStyle} label={stringCollection.ManageOffers.CreatAndEmailOfferTabText} {...a11yProps(3)} /> */}
                          
                         </Tabs>
                         </AppBar>
@@ -71,18 +71,18 @@ function ManageOffers(props) {
                                 
                                   <Grid xs={12}>
                                       
-                                  <TabPanel value={value} index={0}>
+                              <TabPanel value={value} index={0}>
                                 <ViewAllOffersTab/>
                               </TabPanel>
-                              <TabPanel value={value} index={1}>
+                              <TabPanel value={value} index={2}>
                                 <StatisticsTab/>
                               </TabPanel>
-                              <TabPanel value={value} index={2}>
+                              <TabPanel value={value} index={1}>
                                 <CreateNewOfferTab/>
                               </TabPanel>
-                              <TabPanel value={value} index={3}>
+                              {/* <TabPanel value={value} index={3}>
                                 <CreateAndEmailOfferTab/>
-                              </TabPanel>
+                              </TabPanel> */}
                              
                                    
                                   </Grid>
