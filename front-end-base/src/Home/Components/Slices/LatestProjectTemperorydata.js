@@ -212,3 +212,56 @@ export const serviceWithSubServices = [
     subServices: ["React Native", "Angular", "Vue"],
   },
 ];
+
+
+export const TrendingTechnologies=[
+  {
+    technologyId:1,
+    technologyIconName:'',
+    technologytitle:'React Native'
+  },{
+    technologyId:2,
+    technologyIconName:'',
+    technologytitle:'React JS'
+  },{
+    technologyId:3,
+    technologyIconName:'',
+    technologytitle:'Express JS'
+  },{
+    technologyId:4,
+    technologyIconName:'',
+    technologytitle:'Spring Boot'
+  },{
+    technologyId:5,
+    technologyIconName:'',
+    technologytitle:'Angular JS'
+  },{
+    technologyId:6,
+    technologyIconName:'',
+    technologytitle:'Node JS'
+  },  {
+    technologyId:7,
+    technologyIconName:'',
+    technologytitle:'Python'
+  },{
+    technologyId:8,
+    technologyIconName:'',
+    technologytitle:'Java'
+  },{
+    technologyId:9,
+    technologyIconName:'',
+    technologytitle:'Vue JS'
+  },{
+    technologyId:10,
+    technologyIconName:'',
+    technologytitle:'Flutter'
+  },{
+    technologyId:11,
+    technologyIconName:'',
+    technologytitle:'Laravel'
+  },{
+    technologyId:12,
+    technologyIconName:'',
+    technologytitle:'Django'
+  }
+]

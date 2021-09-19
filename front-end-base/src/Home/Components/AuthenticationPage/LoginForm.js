@@ -26,12 +26,10 @@ import {
   checkUserId,
   checkUserPassword,
 } from "../Slices/AuthenticationPageSlices/LoginFormSlice";
-import {
-  selectUserId,
-  selectUserPassword,
-  selectUserToken,
-} from "../Slices/AuthenticationPageSlices/LoginFormSlice";
 
+
+
+// styles
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: colors.white,
@@ -43,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "5%",
     //paddingLeft: isDesktopOrLaptopOrTabletScreen => isDesktopOrLaptopOrTabletScreen ? '1%' : '5%'
   },
-
+  center: { textAlign: "center" },
   text: {
     marginBottom: "5%",
   },
@@ -70,6 +68,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+// password form where user enter password for login
 export const PasswordForm = ({ userEmail }) => {
   const [userPassword, setUserPassword] = useState("");
   const [isIncorrectPassword, setIsIncorrectPassword] = useState(false);
@@ -94,13 +94,7 @@ export const PasswordForm = ({ userEmail }) => {
   };
   const handleLoginClick = () => {
     if (userPassword.length > 0) {
-      dispatch(checkUserPassword({ userPassword })).then(
-        () => {
-          alert("password verified");
-          setUserPassword("");
-        },
-        () => alert("error")
-      );
+      dispatch(checkUserPassword({ userPassword }));
     } else {
       alert("please enter password");
     }
@@ -109,7 +103,8 @@ export const PasswordForm = ({ userEmail }) => {
     <Box boxShadow={2} justifyContent="center" alignContent="center">
       <ForgetPasswordModal open={open} handleClose={handleClose} />
       <form className={classes.form}>
-        <SmallHeading title={`Welcome ${userEmail}`} />
+        <SmallHeading title={`Welcome`} />
+        <h5 className={classes.center}>{userEmail}</h5>
         <TextFieldWithIcon
           label="Password"
           icon={<LockIcon />}
@@ -178,6 +173,8 @@ export const PasswordForm = ({ userEmail }) => {
   );
 };
 
+
+// login form where user can select login option
 export default function LoginForm({
   handleLoginWithEmailClicked,
   handleSignUpClicked,
@@ -197,6 +194,7 @@ export default function LoginForm({
   const { checkUserPasswordAndReturnUserDetailsIfExistsIsLoading } =
     useSelector((state) => state.loginDetails);
 
+    
   // handlers
   const handleUserId = (value) => {
     setUserId(value);

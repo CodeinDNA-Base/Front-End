@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectAllServices } from "../Slices/HomePageSlices/ServicesSlices";
 import { loadAllServices } from "../Slices/HomePageSlices/ServicesSlices";
 
+
 const ServiceCardContainerForDesktop = ({ services_chunck, isLoading }) => {
   const colorArray = ["#F0F7F8", "#FAF8F6", "#F6F9F8", "#FDF6F4"];
   return (

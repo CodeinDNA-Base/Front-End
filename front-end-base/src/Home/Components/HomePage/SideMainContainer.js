@@ -8,6 +8,8 @@ import { useMediaQuery } from "@material-ui/core";
 import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 import ModalContainer from "../../../CustomComponents/UI/Support/ModalContainer";
 import RegisterModalForm from "../AuthenticationPage/RegisterModalForm";
+
+// styles
 const useStyles = makeStyles((theme) => ({
   subtitle: {
     font: (isDesktopOrLaptopOrTabletScreen) =>

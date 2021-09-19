@@ -7,7 +7,7 @@ import { userDetails } from "./TempData";
 
 
 export const checkUserId = createAsyncThunk(
-  `${LOGININDETAILS}/getUserDetails`,
+  `${LOGININDETAILS}/checkUserId`,
   async ({userId}, thunkAPI) => {
     const data = await fetch(
       "https://randomuser.me/api/0.6/?format=SQL&results=10"
@@ -27,7 +27,7 @@ const checkUserPasswordAndReturnUserDetailsIfExists = createAsyncThunk(
     const json = await data.json();
     console.log('user details')
     console.log(userDetails)
-    return {userPassword,userDetails};
+    return {userDetails,userPassword};
   }
 );
 
@@ -54,16 +54,20 @@ const sliceOptions = {
   },
   extraReducers: {
     [checkUserPasswordAndReturnUserDetailsIfExists.pending]: (state, action) => {
+      console.log('in pending of login form slicer')
       state.checkUserPasswordAndReturnUserDetailsIfExistsIsLoading = true;
       state.checkUserPasswordAndReturnUserDetailsIfExistsHasError = false;
     },
     [checkUserPasswordAndReturnUserDetailsIfExists.fulfilled]: (state, action) => {
       state.userDetails = action.payload.userDetails;
       state.userPassword=action.payload.userPassword;
+      console.log('in fullfiled of login form slicer')
+      console.log( action.payload)
       state.checkUserPasswordAndReturnUserDetailsIfExistsIsLoading = false;
       state.checkUserPasswordAndReturnUserDetailsIfExistsHasError = false;
     },
     [checkUserPasswordAndReturnUserDetailsIfExists.rejected]: (state, action) => {
+      console.log('in rejected of login form slicer')
       state.checkUserPasswordAndReturnUserDetailsIfExistsIsLoading = false;
       state.checkUserPasswordAndReturnUserDetailsIfExistsHasError = true;
     },

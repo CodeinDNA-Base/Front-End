@@ -6,6 +6,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Stars from "../Stars";
 import { useMediaQuery } from "@material-ui/core";
+
+// styles
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -46,6 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+// review card
 export default function ReviewCard({
   firstName,
   image,

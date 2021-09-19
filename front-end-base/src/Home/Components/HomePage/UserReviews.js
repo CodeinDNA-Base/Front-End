@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-//import Carousel from "react-material-ui-carousel";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import HeaderTitle from "../HeaderTitle";
 import ReviewCard from "./ReviewCard";
+
 // carousel
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -16,18 +16,14 @@ import { loadLatestReviews } from "../Slices/HomePageSlices/UserReviewsSlice";
 import { selectUserReviews } from "../Slices/HomePageSlices/UserReviewsSlice";
 import { useSelector, useDispatch } from "react-redux";
 
+// styles
 const useStyles = makeStyles((theme) => ({
   root: {
-    // display: "flex",
-    // flexWrap: "wrap",
-    // justifyContent: "space-around",
     overflow: "hidden",
-    //backgroundColor: theme.palette.background.paper,
   },
 
   imageList: {
     flexWrap: "nowrap",
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
   },
   title: {
@@ -49,34 +45,6 @@ const useStyles = makeStyles((theme) => ({
   listItems: {},
 }));
 
-// const itemData = [
-//   {
-//     img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-//     title: "SEO",
-//     author: "author",
-//   },
-//   {
-//     img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-//     title: "Web Developement",
-//     author: "author",
-//   },
-
-//   {
-//     img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-//     title: "Graphic Designing",
-//     author: "author",
-//   },
-//   {
-//     img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-//     title: "Voice",
-//     author: "author",
-//   },
-//   {
-//     img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-//     title: "Desktop Development",
-//     author: "author",
-//   },
-// ];
 
 function DesktopReviewCard({ hasError, isLoading, latest_reviews }) {
   return (
@@ -159,16 +127,16 @@ const MobileReviewCard = ({ hasError, isLoading, latest_reviews }) => {
     <Grid xs={12} container justifyContent="center" alignItems="center">
       <Grid item xs={1}></Grid>
       <Grid item xs={10}>
-      <Carousel
-        axis="horizontal"
-        infiniteLoop
-        autoPlay
-        interval={5000}
-        showArrows={false}
-        showStatus={false}
-        showThumbs={false}
-        showIndicators={false}
-      >
+        <Carousel
+          axis="horizontal"
+          infiniteLoop
+          autoPlay
+          interval={5000}
+          showArrows={false}
+          showStatus={false}
+          showThumbs={false}
+          showIndicators={false}
+        >
           {!isLoading &&
             latest_reviews.map((review) => (
               <ReviewCard

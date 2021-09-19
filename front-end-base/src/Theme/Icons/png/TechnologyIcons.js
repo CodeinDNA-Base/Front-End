@@ -16,26 +16,27 @@ import { Typography } from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   IconContainer: {
-    alignItems: "center",
-    alignSelf: "center",
+   
     marginTop: "20%",
     marginBottom: "20%",
+    cursor: "pointer",
+    justifyContent:'center'
   },
   IconTitle: {
     font: (isDesktopOrLaptopOrTabletScreen) =>
       isDesktopOrLaptopOrTabletScreen
         ? Headingfonts.extraSmall
         : Headingfonts.large,
-    textAlign: "center",
+    alignSelf:'center'
   },
 }));
-export const ReactIcon = ({ title, color, fontsize, handleClick }) => {
+export const CustomIcon = ({ icon, handleClick, title }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
 
   return (
     <div className={classes.IconContainer} onClick={handleClick}>
-      <ShoppingBasket style={{ fontSize: fontsize, color: color }} />
+      {icon}
       <Typography variant="h5" classes={{ root: classes.IconTitle }}>
         {title}
       </Typography>

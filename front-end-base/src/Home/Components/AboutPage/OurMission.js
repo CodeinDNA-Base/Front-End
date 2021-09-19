@@ -10,6 +10,7 @@ import { DividerInProjects } from "../HorizontalLine";
 // string constants
 import { MISSION_TITLE, MISSION_SUBTITLE } from "../../Strings/AboutUsStrings";
 
+// styles
 const OurMissionStyles = makeStyles(() => ({
   subtitle: {
     font: (isDesktopOrLaptopOrTabletScreen) =>
@@ -25,6 +26,8 @@ const OurMissionStyles = makeStyles(() => ({
   },
 }));
 
+
+// OurMission component
 export const OurMission = () => {
   return (
     <Grid container justifyContent="center">

@@ -6,6 +6,7 @@ import { useMediaQuery } from "@material-ui/core";
 import colors, { ColorGradient } from "../../../Theme/colors";
 import { makeStyles } from "@material-ui/core";
 
+// styles
 const CareersStyles = makeStyles((theme) => ({
   aboutUsMainTitle: {
     padding: "0%  2% 0% 2%",
@@ -24,6 +25,8 @@ const CareersStyles = makeStyles((theme) => ({
       !isDesktopOrLaptopOrTabletScreen && "10%",
   },
 }));
+
+// career componnet
  const Careers = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = CareersStyles(isDesktopOrLaptopOrTabletScreen);

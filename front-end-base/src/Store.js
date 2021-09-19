@@ -8,6 +8,7 @@ import {
   ALLSERVICES,
   LATESTREVIEWS,
   SEARCHBYCATEGORY,
+  TRENDINGTECHNOLOGIES,
 } from "./Home/Components/Slices/HomePageSlices/HomePageConstants";
 import {
   LOGININDETAILS,
@@ -23,6 +24,8 @@ import contactFormDetaildReducer from "./Home/Components/Slices/AboutPageSlices/
 import registerDetailsReducer from "./Home/Components/Slices/AuthenticationPageSlices/RegisterDetailsSlice";
 import { SUBSERVICES } from "./Home/Components/Slices/SubServicesPageSlices/SubServiceConstants";
 import subServicesReducer from "./Home/Components/Slices/SubServicesPageSlices/SubServiceSlice";
+import trendingTechnologiesReducer from "./Home/Components/Slices/HomePageSlices/TrendingTechnologiesSlice";
+
 export default configureStore({
   reducer: {
     [LATESTPROJECTS]: latestProjectsReducer,
@@ -34,5 +37,6 @@ export default configureStore({
     [CONTACTFORMDETAILS]: contactFormDetaildReducer,
     [REGISTERDETAILS]: registerDetailsReducer,
     [SUBSERVICES]: subServicesReducer,
+    [TRENDINGTECHNOLOGIES]: trendingTechnologiesReducer,
   },
 });

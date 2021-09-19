@@ -2,6 +2,7 @@ import HeaderTitle from "../HeaderTitle";
 import { Grid } from "@material-ui/core";
 import TechnologyIcons from "./TechnologyIcons";
 import { DividerInservices } from "../HorizontalLine";
+
 const Technologies = () => {
   return (
     <Grid container spacing={0}>
@@ -13,7 +14,7 @@ const Technologies = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <HeaderTitle title={"Technologies"} />
+        <HeaderTitle title={"Trending Technologies"} />
 
         <TechnologyIcons />
       </Grid>

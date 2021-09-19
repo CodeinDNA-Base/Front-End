@@ -11,6 +11,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 // strings Constants
 import {COMPANY_OVERVIEW,COMPANY_OVERVIEW_TITLE,ABOUTUS_EXPLORE_TITLE} from '../../Strings/AboutUsStrings'
 
+// styles
 const AboutUsStyles = makeStyles(() => ({
   media: {
     maxWidth: `100%`,
@@ -34,6 +35,9 @@ const AboutUsStyles = makeStyles(() => ({
       isDesktopOrLaptopOrTabletScreen ? "5%" : "8%",
   },
 }));
+
+
+// About Us component
 const AboutUs = (props) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = AboutUsStyles(isDesktopOrLaptopOrTabletScreen);

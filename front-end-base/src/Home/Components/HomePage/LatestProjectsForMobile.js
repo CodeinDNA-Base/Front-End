@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
 import ImageListItemBar from "@material-ui/core/ImageListItemBar";
-import IconButton from "@material-ui/core/IconButton";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { ColorGradient } from "../../../Theme/colors";
 
 // redux
@@ -12,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectLatestProjects } from "../Slices/HomePageSlices/LatestProjectSlice";
 import { loadLatestProjects } from "../Slices/HomePageSlices/LatestProjectSlice";
 
+
+// styles
 const useStyles = makeStyles((theme) => ({
   actionArea: {
     borderRadius: 16,
@@ -65,11 +65,7 @@ export default function LatestProjectsForMobile() {
                 root: classes.titleBar,
                 title: classes.title,
               }}
-              // actionIcon={
-              //   <IconButton aria-label={`star ${project.projectTitle}`}>
-              //     <StarBorderIcon className={classes.title} />
-              //   </IconButton>
-              // }
+             
             />
           </ImageListItem>
         ))}
