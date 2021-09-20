@@ -8,8 +8,8 @@ import { queries } from "./temp";
 // thunk
 export const sendContactFormDetails = createAsyncThunk(
   `${CONTACTFORMDETAILS}/sendContactFormDetails`,
-  async ({ name, email, description, userQuery }, thunkAPI) => {
-    alert(`${name} ${email} ${description} ${userQuery}`);
+  async ({ name, email, description, userQuery ,encodedData}, thunkAPI) => {
+    //alert(`${name} ${email} ${description} ${userQuery}`);
     //post data
   }
 );

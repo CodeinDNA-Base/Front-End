@@ -8,8 +8,8 @@ import { TextFonts } from "../../../Theme/fonts";
 import { useMediaQuery } from "@material-ui/core";
 import AttachmentSharpIcon from "@material-ui/icons/AttachmentSharp";
 import { Chip } from "@material-ui/core";
-import { Paper } from "@material-ui/core";
-import { styled } from "@material-ui/core";
+import { Paper, Tooltip } from "@material-ui/core";
+import { styled, withStyles } from "@material-ui/core";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -17,6 +17,16 @@ import {
   sendContactFormDetails,
   loadStandardQueries,
 } from "../Slices/AboutPageSlices/ContactUsGlobalFormSlice";
+
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: colors.highlighter,
+    color: colors.black,
+    boxShadow: theme.shadows[1],
+    fontSize: 11,
+    fontWeight: "bolder",
+  },
+}))(Tooltip);
 
 // temp queries
 const queries = [
@@ -46,7 +56,10 @@ const useContactFormStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "start",
     flexWrap: "wrap",
-
+    minHeight: "0px",
+    maxHeight: "100px",
+    overflowY: "scroll",
+    marginTop: "1%",
     "& > *": {
       margin: theme.spacing(0.5),
     },
@@ -76,6 +89,11 @@ const useContactFormStyles = makeStyles((theme) => ({
     transform: "rotate(145deg)",
     cursor: "pointer",
   },
+  chipDesign: {
+    backgroundColor: colors.white,
+    color: colors.primary,
+    fontWeight: "bolder",
+  },
 }));
 
 //ContactUsGlobalForm
@@ -96,9 +114,6 @@ const ContactUsGlobalForm = () => {
     (state) => state.contactFormDetails
   );
 
-  // local states for upladed files
-  const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [fileNames, setFileName] = useState([]);
   useEffect(() => {
     dispatch(loadStandardQueries());
   }, [dispatch]);
@@ -114,6 +129,10 @@ const ContactUsGlobalForm = () => {
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+
+  // local states for upladed files
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [totalUploadedFileSizes, setTotalUploadedFileSizes] = useState(0);
 
   // hanlders
   const handleSetName = (event) => {
@@ -146,7 +165,7 @@ const ContactUsGlobalForm = () => {
     event.preventDefault();
     let userQuery = isDisplayOtherQueryField === "none" ? query : customeQuery;
     dispatch(
-      sendContactFormDetails({ name, email, description, userQuery })
+      sendContactFormDetails({ name, email, description, userQuery ,uploadedFiles})
     ).then(() => {
       alert("submitted");
       clearForm();
@@ -160,10 +179,10 @@ const ContactUsGlobalForm = () => {
     setEmail("");
     setName("");
   };
+
+  // hanlder for file upload
   const handleUploadedFileDelete = (id) => {
-    setUploadedFiles((Files) =>
-      Files.filter((file,index) => index !== id)
-    );
+    setUploadedFiles((Files) => Files.filter((file, index) => index !== id));
   };
   const FileNamesChips = () => {
     return (
@@ -171,6 +190,7 @@ const ContactUsGlobalForm = () => {
         {uploadedFiles.map((file, index) => {
           return (
             <Chip
+              className={classes.chipDesign}
               key={index}
               label={file.name}
               onDelete={() => handleUploadedFileDelete(index)}
@@ -180,19 +200,34 @@ const ContactUsGlobalForm = () => {
       </div>
     );
   };
-
+  const checkFileSize = (size) => {
+    // to convert bytes to MB
+    const TWENTYFIVEMB = 25 * 1024 * 1024;
+    let calcultaeEstimatedSize = totalUploadedFileSizes + size;
+    if (calcultaeEstimatedSize > TWENTYFIVEMB) {
+      alert("size Exceeds to 25 mb");
+      return 0;
+    } else {
+      setTotalUploadedFileSizes(calcultaeEstimatedSize);
+      return 1;
+    }
+  };
   const handleFileUpload = async (e) => {
     for (let file of e.target.files) {
-      let data = await encodeFileBase64(file);
-      let obj = await {
-        name: file.name,
-        size: file.size,
-        type: file.type,
-        encodedData: data,
-      };
-      console.log(obj);
-      setUploadedFiles((allFiles) => [...allFiles, obj]);
-      console.log(uploadedFiles);
+      // check if file size not exceeds 25 MB than covert file and add it to array of uploaded files
+      let canFileBeAdded = checkFileSize(file.size);
+      if (canFileBeAdded) {
+        let data = await encodeFileBase64(file);
+        let obj = await {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          encodedData: data,
+        };
+        console.log(obj);
+        setUploadedFiles((allFiles) => [...allFiles, obj]);
+        console.log(uploadedFiles);
+      }
     }
   };
 
@@ -302,7 +337,7 @@ const ContactUsGlobalForm = () => {
           required
         />
         <input
-          accept=".json,.csv,.txt,.text,application/json,text/csv,text/plain,image/*,application/pdf,application/msword"
+          // accept=".json,.csv,.txt,.text,application/json,text/csv,text/plain,image/*,application/pdf,application/msword,application/*"
           style={{ display: "none" }}
           type="file"
           name="files"
@@ -310,13 +345,17 @@ const ContactUsGlobalForm = () => {
           multiple
           id="uploadFilesInContactForm"
         />
-        <label
-          htmlFor="uploadFilesInContactForm"
-          className={classes.attachmentIcon}
+        <LightTooltip
+          title="You can attach upto 25 MB"
+          aria-label="upload Files"
         >
-          <AttachmentSharpIcon />
-        </label>
-
+          <label
+            htmlFor="uploadFilesInContactForm"
+            className={classes.attachmentIcon}
+          >
+            <AttachmentSharpIcon />
+          </label>
+        </LightTooltip>
         <FileNamesChips />
 
         <RoundButton
