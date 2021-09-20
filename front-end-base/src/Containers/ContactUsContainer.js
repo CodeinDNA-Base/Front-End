@@ -16,7 +16,17 @@ import ContactUsGlobalForm from "../Home/Components/AboutPage/ContactUsGlobalFor
 
 // navabr
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
-
+// navbar parameters
+import {
+  navbarMenuOptions,
+  drawerMenuOptions,
+  darwerMenuExtraOptions,
+  navbarTabsOptions,
+  drawerListItemAvatar,
+  isNavbarTabs,
+  isNavBarIconButtons,
+  isAvatar,
+} from "./SupportFiles/HomePageNavbarParameters";
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -76,17 +86,23 @@ function ContactUsContainer(props) {
    
   return (
     <div className={classes.root}>
-      {/* Header */}
-      <Grid item xs={12}>
+     {/* Header */}
+     <Grid item xs={12}>
         <AppBar>
           <CustomNavbar
             handelTabIndex={handelTabIndex}
             packageContainerStickyNess={packageContainerStickyNess}
             navbarMenuOptions={navbarMenuOptions}
             isNavbarTabs={false}
+            isAvatar={false}
+            isNavBarIconButtons={false}
+            drawerMenuOptions={drawerMenuOptions}
+            darwerMenuExtraOptions={darwerMenuExtraOptions}
+            drawerListItemAvatar={drawerListItemAvatar}
           />
         </AppBar>
       </Grid>
+
 
       {/** Contact form */}
       <Grid container className={classes.contactForm} spacing={0}>

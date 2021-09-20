@@ -17,7 +17,6 @@ const TeamCardStyles = makeStyles((theme) => ({
     margin: "auto",
     borderRadius: theme.spacing(2), // 16px
     transition: "0.3s",
-    // boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)',
     position: "relative",
     maxWidth: "100%",
     marginLeft: "auto",

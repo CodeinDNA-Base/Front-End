@@ -7,7 +7,9 @@ import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
 import { TextFonts } from "../../../Theme/fonts";
 import { useMediaQuery } from "@material-ui/core";
 import AttachmentSharpIcon from "@material-ui/icons/AttachmentSharp";
-
+import { Chip } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+import { styled } from "@material-ui/core";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -27,7 +29,7 @@ const queries = [
 ];
 
 // styles
-const useContactFormStyles = makeStyles(() => ({
+const useContactFormStyles = makeStyles((theme) => ({
   textArea: {
     marginTop: (isDesktopOrLaptopOrTabletScreen) =>
       isDesktopOrLaptopOrTabletScreen ? "5%" : "7%",
@@ -39,6 +41,15 @@ const useContactFormStyles = makeStyles(() => ({
   fonts: {
     font: (isDesktopOrLaptopOrTabletScreen) =>
       isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
+  },
+  fileNameChips: {
+    display: "flex",
+    justifyContent: "start",
+    flexWrap: "wrap",
+
+    "& > *": {
+      margin: theme.spacing(0.5),
+    },
   },
   margin: {
     marginTop: (isDesktopOrLaptopOrTabletScreen) =>
@@ -67,7 +78,6 @@ const useContactFormStyles = makeStyles(() => ({
   },
 }));
 
-
 //ContactUsGlobalForm
 const ContactUsGlobalForm = () => {
   // redux
@@ -86,6 +96,9 @@ const ContactUsGlobalForm = () => {
     (state) => state.contactFormDetails
   );
 
+  // local states for upladed files
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [fileNames, setFileName] = useState([]);
   useEffect(() => {
     dispatch(loadStandardQueries());
   }, [dispatch]);
@@ -147,6 +160,51 @@ const ContactUsGlobalForm = () => {
     setEmail("");
     setName("");
   };
+  const handleUploadedFileDelete = (id) => {
+    setUploadedFiles((Files) =>
+      Files.filter((file,index) => index !== id)
+    );
+  };
+  const FileNamesChips = () => {
+    return (
+      <div className={classes.fileNameChips}>
+        {uploadedFiles.map((file, index) => {
+          return (
+            <Chip
+              key={index}
+              label={file.name}
+              onDelete={() => handleUploadedFileDelete(index)}
+            />
+          );
+        })}
+      </div>
+    );
+  };
+
+  const handleFileUpload = async (e) => {
+    for (let file of e.target.files) {
+      let data = await encodeFileBase64(file);
+      let obj = await {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        encodedData: data,
+      };
+      console.log(obj);
+      setUploadedFiles((allFiles) => [...allFiles, obj]);
+      console.log(uploadedFiles);
+    }
+  };
+
+  const encodeFileBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   return (
     <Grid container justifyContent="center" alignItems="center">
       <form className={classes.card}>
@@ -243,9 +301,24 @@ const ContactUsGlobalForm = () => {
           onChange={handleSetDescription}
           required
         />
-        <div className={classes.attachmentIcon} onClick={() => alert("attach")}>
+        <input
+          accept=".json,.csv,.txt,.text,application/json,text/csv,text/plain,image/*,application/pdf,application/msword"
+          style={{ display: "none" }}
+          type="file"
+          name="files"
+          onChange={handleFileUpload}
+          multiple
+          id="uploadFilesInContactForm"
+        />
+        <label
+          htmlFor="uploadFilesInContactForm"
+          className={classes.attachmentIcon}
+        >
           <AttachmentSharpIcon />
-        </div>
+        </label>
+
+        <FileNamesChips />
+
         <RoundButton
           title={"Submit"}
           width={"100%"}
