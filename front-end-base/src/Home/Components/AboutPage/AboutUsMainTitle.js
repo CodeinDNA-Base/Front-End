@@ -55,7 +55,7 @@ const AboutUsMainTitleText = () => {
     <div>
       <p className={classes.title}>{CAREER_TITLE} </p>
       <ModalContainer
-        ContactFormModal
+        
         open={open}
         handleClose={handleClose}
         Component={<ContactUsGlobalForm />}

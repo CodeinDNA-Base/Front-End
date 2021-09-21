@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: 20,
     marginLeft: 10,
   },
-  root: { backgroundColor: colors.highlighter },
+ 
 }));
 
 const LatestProjects = (props) => {
@@ -25,7 +25,7 @@ const LatestProjects = (props) => {
     alert('go to nadir projects page')
   }
   return (
-    <div className={classes.root}>
+    <div >
       <HeaderTitle
         title={"Projects"}
         description={`Get projects done using cutting edge technologies like react, spring boot and more...!`}

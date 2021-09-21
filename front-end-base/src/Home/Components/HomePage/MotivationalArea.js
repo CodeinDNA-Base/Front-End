@@ -6,11 +6,12 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Headingfonts } from "../../../Theme/fonts";
 import colors from "../../../Theme/colors";
-import { Button } from "@material-ui/core";
+import ModalContainer from "../../../CustomComponents/UI/Support/ModalContainer";
 // carousel
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
+import ContactNowForm from "./ContactNow";
 
 // styles
 const useStyles = makeStyles((theme) => ({
@@ -91,7 +92,15 @@ const SliderItemInMotivationalArea = ({
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   // handlers
-  const handleTitleButtonClick = () => {};
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleTitleButtonClick = () => {
+    setOpen(true);
+  };
   return (
     <Grid container spacing={0}>
       {!isDesktopOrLaptopOrTabletScreen && <Grid xs={1} sm={1}></Grid>}
@@ -104,6 +113,16 @@ const SliderItemInMotivationalArea = ({
         md={7}
         className={classes.bgColor}
       >
+        <ModalContainer
+          open={open}
+          handleClose={handleClose}
+          Component={<ContactNowForm />}
+          desktopWidth={"50%"}
+          desktopHeigth={"auto"}
+          mobileWidth={"80%"}
+          mobileHeigth={"auto"}
+          overflow={"hidden"}
+        />
         <p className={classes.title}>{title}</p>
 
         <p className={classes.subtitle}>{subtitle} </p>

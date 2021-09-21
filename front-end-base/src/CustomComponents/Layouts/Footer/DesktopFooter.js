@@ -41,8 +41,91 @@ const DesktopFooter = (props) => {
   return (
     <Grid classes={{ root: classes.root }}>
       <Grid container spacing={0}>
-        <Grid  sm={1} md={1} item></Grid>
+        <Grid sm={1} md={1} item></Grid>
         <Grid xs={12} sm={10} md={10} item container>
+          <Grid item xs={12} sm={6} md={3}>
+            <ul className={classes.ulStyle}>
+              <li className={classes.listHeading}>Technologies</li>
+
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>React JS</li>
+              </Link>
+
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Node JS</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>React Native</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Angular JS</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Vue JS</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Flutter</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Express</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Spring Boot</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Python</li>
+              </Link>
+            </ul>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <ul className={classes.ulStyle}>
+              <li className={classes.listHeading}>Categories</li>
+
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>UX/UI Designing</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Programming & Tech</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Artificial Intelligence</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Data analytics</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Machine learning</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Writting & Translation</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Bussiness</li>
+              </Link>
+            </ul>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <ul className={classes.ulStyle}>
+              <li className={classes.listHeading}>About</li>
+
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>About Us</li>
+              </Link>
+
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Our Team</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Careers</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>Contact</li>
+              </Link>
+              <Link to="#" className={gernalClasses.linkStyle}>
+                <li className={classes.liStyle}>{`Terms & Services`}</li>
+              </Link>
+            </ul>
+          </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <ul className={classes.ulStyle}>
               <li className={classes.listHeading}>Resources</li>
@@ -62,80 +145,8 @@ const DesktopFooter = (props) => {
               </Link>
             </ul>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>About</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Team</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Support</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Online Meetings</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Members</li>
-              </Link>
-            </ul>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>Terms & Services</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Team</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Support</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>TOS Rules</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Online Meetings</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-            </ul>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>Technologies</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Team</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Support</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>React Js</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Express JS</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Online Meetings</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-            </ul>
-          </Grid>
         </Grid>
-        <Grid  sm={1} md={1} item></Grid>
+        <Grid sm={1} md={1} item></Grid>
       </Grid>
 
       <SocialIcons />
