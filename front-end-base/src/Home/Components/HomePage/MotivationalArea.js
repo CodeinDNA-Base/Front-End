@@ -1,13 +1,18 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Carousel from "react-material-ui-carousel";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Headingfonts } from "../../../Theme/fonts";
 import colors from "../../../Theme/colors";
 import { Button } from "@material-ui/core";
+// carousel
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import { RoundButton } from "../../../CustomComponents/UI/Buttons/RoundButton";
+
+// styles
 const useStyles = makeStyles((theme) => ({
   btnContained: {
     font: (isDesktopOrLaptopOrTabletScreen) =>
@@ -36,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
         : Headingfonts.extraLarge,
     color: colors.highlighter,
     marginLeft: "5%",
+    textAlign: "start",
   },
   media: {
     width: "100%",
@@ -44,32 +50,19 @@ const useStyles = makeStyles((theme) => ({
   bgColor: {
     backgroundImage: "linear-gradient(#66163b, #72103d, #7e1a49, #72103d)",
   },
-
 }));
 
 const MotivationalArea = () => {
   return (
     <Carousel
-      NextIcon={<NavigateNextIcon />}
-      PrevIcon={<NavigateBeforeIcon />}
-      animation="slide"
-      timeout={500}
-      cycleNavigation={false}
-      indicatorIconButtonProps={{
-        style: {
-          display: "none",
-        },
-      }}
-      navButtonsProps={{
-        // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
-        style: {
-          backgroundColor: "white",
-          color: "black",
-          opacity: 1,
-        },
-      }}
-
-      // OR
+      axis="horizontal"
+      infiniteLoop
+      autoPlay
+      interval={4000}
+      showArrows={true}
+      showStatus={false}
+      showThumbs={false}
+      showIndicators={false}
     >
       <SliderItemInMotivationalArea
         title="Grow With Us"
@@ -97,6 +90,8 @@ const SliderItemInMotivationalArea = ({
 }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
+  // handlers
+  const handleTitleButtonClick = () => {};
   return (
     <Grid container spacing={0}>
       {!isDesktopOrLaptopOrTabletScreen && <Grid xs={1} sm={1}></Grid>}
@@ -112,14 +107,14 @@ const SliderItemInMotivationalArea = ({
         <p className={classes.title}>{title}</p>
 
         <p className={classes.subtitle}>{subtitle} </p>
-        <Button
-          variant="contained"
-          classes={{
-            root: classes.btnContained, // class name, e.g. `classes-nesting-root-x`
-          }}
-        >
-          {btntitle}
-        </Button>
+        <RoundButton
+          title={btntitle}
+          variant={`outlined`}
+          color={colors.white}
+          margin={"0% 0% 5% 5%"}
+          borderColor={colors.white}
+          handleClick={handleTitleButtonClick}
+        />
       </Grid>
       <Grid item xs={4} sm={4} md={5}>
         <img src={image} className={classes.media} />

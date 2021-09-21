@@ -10,6 +10,7 @@ import AttachmentSharpIcon from "@material-ui/icons/AttachmentSharp";
 import { Chip } from "@material-ui/core";
 import { Paper, Tooltip } from "@material-ui/core";
 import { styled, withStyles } from "@material-ui/core";
+import CustomAlerts from "../../../CustomComponents/UI/Support/Alerts";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -129,6 +130,7 @@ const ContactUsGlobalForm = () => {
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [openAlert, setOpenAlert] = useState(false);
 
   // local states for upladed files
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -165,7 +167,13 @@ const ContactUsGlobalForm = () => {
     event.preventDefault();
     let userQuery = isDisplayOtherQueryField === "none" ? query : customeQuery;
     dispatch(
-      sendContactFormDetails({ name, email, description, userQuery ,uploadedFiles})
+      sendContactFormDetails({
+        name,
+        email,
+        description,
+        userQuery,
+        uploadedFiles,
+      })
     ).then(() => {
       alert("submitted");
       clearForm();
@@ -200,12 +208,13 @@ const ContactUsGlobalForm = () => {
       </div>
     );
   };
+  
   const checkFileSize = (size) => {
     // to convert bytes to MB
     const TWENTYFIVEMB = 25 * 1024 * 1024;
     let calcultaeEstimatedSize = totalUploadedFileSizes + size;
     if (calcultaeEstimatedSize > TWENTYFIVEMB) {
-      alert("size Exceeds to 25 mb");
+      setOpenAlert(true);
       return 0;
     } else {
       setTotalUploadedFileSizes(calcultaeEstimatedSize);
@@ -345,6 +354,7 @@ const ContactUsGlobalForm = () => {
           multiple
           id="uploadFilesInContactForm"
         />
+        
         <LightTooltip
           title="You can attach upto 25 MB"
           aria-label="upload Files"
@@ -356,7 +366,20 @@ const ContactUsGlobalForm = () => {
             <AttachmentSharpIcon />
           </label>
         </LightTooltip>
+
+
+        {/* Uploaded files set as chips for users */}
         <FileNamesChips />
+        <CustomAlerts
+          title={`Size exceeds 25 MB, In case send any drive or dropbox Link`}
+          open={openAlert}
+          severity={`warning`}
+          size="small"
+          setOpen={setOpenAlert}
+          bgColor={colors.white}
+          color={colors.warning}
+          width={"100%"}
+        />
 
         <RoundButton
           title={"Submit"}

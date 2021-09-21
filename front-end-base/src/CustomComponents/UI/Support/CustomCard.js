@@ -17,6 +17,7 @@ const CustomCardStyles = makeStyles(() => ({
       isDesktopOrLaptopOrTabletScreen ? 260 : 160,
     cursor: "pointer",
     position: "relative",
+    minHeight: 300
   },
 
   detailBox: {
@@ -26,6 +27,7 @@ const CustomCardStyles = makeStyles(() => ({
     font: ({ isDesktopOrLaptopOrTabletScreen }) =>
       isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
     fontWeight: "bolder",
+    marginTop:'2%'
   },
   deliveryTime: {
     font: ({ isDesktopOrLaptopOrTabletScreen }) =>

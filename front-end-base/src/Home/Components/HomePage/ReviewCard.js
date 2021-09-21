@@ -4,15 +4,16 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import Stars from "../Stars";
+import { Rating } from "@material-ui/lab";
 import { useMediaQuery } from "@material-ui/core";
-
+import { TextFonts } from "../../../Theme/fonts";
 // styles
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    backgroundColor: "#FAF8F6",
-    cursor:'pointer'
+    backgroundColor: "#F7F2F1",
+    cursor:'pointer',
+    border:'1px solid #F7F2F1'
   },
   details: {
     display: "flex",
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flex: "1 0 auto",
+
   },
 
   cover: {
@@ -46,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: (isDesktopOrLaptopOrTabletScreen) =>
       isDesktopOrLaptopOrTabletScreen ? "0" : "10%",
   },
+  reviewText:{
+    font:TextFonts.XXSmall,
+    textAlign:'start',
+    
+  }
 }));
 
 
@@ -63,7 +70,7 @@ export default function ReviewCard({
   const handleReviewCardClick=()=>{
     alert('card is clicked')
   }
-
+  const reviewTextarray=Array.from(reviewText)
   return (
     <Card className={classes.root} onClick={handleReviewCardClick}>
       <div className={classes.media}>
@@ -72,16 +79,17 @@ export default function ReviewCard({
 
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography variant="subtitle1" color="textSecondary">
-            {reviewText}
-          </Typography>
+          <h5 className={classes.reviewText}>
+            {reviewTextarray.slice(0,130) }
+            {reviewTextarray.length > 130 && '...' }
+          </h5>
           <Typography component="h5" variant="h5" style={{ marginTop: "3%" }}>
             {firstName + " " + lastName}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography variant="h6" color="textPrimary">
             {country}
           </Typography>
-          <Stars fontSize={"small"} noOfStars={reviewRating} color="primary" />
+          <Rating name="read-only" value={5} readOnly />
         </CardContent>
       </div>
     </Card>

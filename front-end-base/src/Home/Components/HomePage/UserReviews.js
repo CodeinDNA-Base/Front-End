@@ -131,7 +131,7 @@ const MobileReviewCard = ({ hasError, isLoading, latest_reviews }) => {
           axis="horizontal"
           infiniteLoop
           autoPlay
-          interval={5000}
+          interval={3000}
           showArrows={false}
           showStatus={false}
           showThumbs={false}

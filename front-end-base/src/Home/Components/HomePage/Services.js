@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import Carousel from "react-material-ui-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -95,7 +96,7 @@ export default function Services() {
         />
         {/* <HeaderTitle title={"Services"} /> */}
       </Grid>
-      <Carousel
+      {/* <Carousel
         NextIcon={<NavigateNextIcon />}
         PrevIcon={<NavigateBeforeIcon />}
         animation="slide"
@@ -116,7 +117,17 @@ export default function Services() {
         }}
 
         // OR
-      >
+      > */}
+      <Carousel
+      axis="horizontal"
+      infiniteLoop
+      autoPlay
+      interval={4000}
+      showArrows={true}
+      showStatus={false}
+      showThumbs={false}
+      showIndicators={false}
+    >
         {isDesktopOrLaptopOrTabletScreen
           ? [
               { start: 0, end: 4 },

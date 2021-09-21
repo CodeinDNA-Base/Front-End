@@ -39,7 +39,7 @@ const CustomCardStyles = makeStyles(() => ({
     fontSize: 20,
     padding: "3%",
     position: "absolute",
-    bottom:'40%',
+    bottom:'45%',
     left: "85%",
     backgroundColor: "white",
     borderRadius: "50%",
