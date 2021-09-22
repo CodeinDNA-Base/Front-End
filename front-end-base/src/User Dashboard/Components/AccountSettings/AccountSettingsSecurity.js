@@ -36,16 +36,21 @@ import CloseIcon from "@mui/icons-material/Close";
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
+//thunks
+import { fetchSecurityQuestionDetails, fetchPasswordDetails, fetchSetNewPassword } from "../../Redux/slices/securityInfoSlice";
+
 //Action creators
 
 //selectors
 import {
-  selectSecurityInfo,
-  selectIsSecurityInfoLoading,
-  selectHasSecurityInfoError,
+  selectSecurityQuestionInfo,
+  selectIsLoadingSecurityQuestionInfo,
+  selectHasErrorSecurityQuestionInfo,
+  selectPasswordInfo,
+  selectIsLoadingPasswordInfo,
+  selectHasErrorPasswordInfo
 } from "../../Redux/slices/securityInfoSlice";
-//thunks
-import { fetchSecurityInfoDetails } from "../../Redux/slices/securityInfoSlice";
+
 
 export const AccountSettingsSecurity = (props) => {
   return (
@@ -119,13 +124,27 @@ const Password = () => {
 
   //Redux operations
   const dispatch = useDispatch();
-  const securityInfo = useSelector(selectSecurityInfo);
-  const isLoading = useSelector(selectIsSecurityInfoLoading);
-  const encounteredError = useSelector(selectHasSecurityInfoError);
+  const alreadySetPassword = useSelector(selectPasswordInfo);
+  const isLoading = useSelector(selectIsLoadingPasswordInfo);
+  const encounteredError = useSelector(selectHasErrorPasswordInfo);
 
   useEffect(() => {
-    dispatch(fetchSecurityInfoDetails("Give user id here who is logged in"));
+    dispatch(fetchPasswordDetails("Give user id here who is logged in"));
   }, [dispatch]);
+
+  function handleUpdatePassword(){
+    if(alreadySetPassword!=oldPassword){
+      alert("Incorrect Old password")
+      return;
+    }
+    else if(newPassword!=confirmPassword){
+      alert("Password doesn't match")
+      return;
+    }
+    else{
+      dispatch(fetchSetNewPassword({newPassword:newPassword}))
+    }
+  }
 
   return (
     <Card className={classes.root} elevation={2}>
@@ -185,7 +204,7 @@ const Password = () => {
       <CardContent>
         <CardHeader
           action={
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={handleUpdatePassword}>
               Update
             </Button>
           }
@@ -315,53 +334,117 @@ export const SecurityQuestionModal = (props) => {
   const classes = modalFormStyles();
 
   const [isSecurityQuestionAdded, setIsSecurityQuestionAdded] = useState(true);
+  const[newAnswer, setNewAnswer]=useState('')
+  const[oldAnswer, setOldAnswer]=useState('')
+  const [newSecurityQuestion, setNewSecurityQuestion] = useState('');
 
   function handleClose() {
     props.handleClose();
   }
 
   function handleAddSecurityQuestion() {}
-
   function handleAddUpdatedQuestion() {}
+
+  function handleNewSecurityQuestionAnswer(e){
+    console.log(e.target.value)
+    setNewAnswer(e.target.value)
+  }
+
+  function handleOldSecurityQuestionAnswer(e){
+    setOldAnswer(e.target.value)
+  }
+
+  function handleNewSecurityQuestion(question) {
+    setNewSecurityQuestion(question);
+  }
+
   return (
     <div>
       <Grid container>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Card className={classes.root} elevation={0}>
             <CardHeader
-              title={<h3>Security Question</h3>}
-              action={
-                <Box>
-                  <CloseIcon
-                    onClick={handleClose}
-                    className={classes.closeBtn}
-                  />
+              title={
+                <Box display="flex">
+                  <Box flex="1" mt={-3}>
+                    <h3>Security Question</h3>
+                  </Box>
+                  <Box>
+                    <CloseIcon
+                      onClick={handleClose}
+                      className={classes.closeBtn}
+                    />
+                  </Box>
                 </Box>
               }
             />
-            <Divider />
+            <Box mt={-4}>
+              <Divider />
+            </Box>
             <CardContent>
               <form>
                 <FormControl fullWidth>
                   {isSecurityQuestionAdded ? (
-                    <label>
-                      Before you can set a new security question, you’ll have to
-                      answer your current one correctly.
-                    </label>
+                    <>
+                      <label>
+                        Before you can set a new security question, you’ll have
+                        to answer your current one correctly.
+                      </label>
+
+                      <Box mt={1}>
+                        <strong>What was name of your primary school?</strong>
+                      </Box>
+                      <Box mt={2}>
+                        <TextField
+                          label="Your Answer"
+                          id="outlined-size-small"
+                          variant="outlined"
+                          type="text"
+                          size="small"
+                          value={oldAnswer}
+                          required
+                          fullWidth
+                          onChange={handleOldSecurityQuestionAnswer}
+                        />
+                      </Box>
+                    </>
                   ) : (
                     <label>Choose a question that you can remember</label>
                   )}
                 </FormControl>
-                <SecurityQuestionOptions />
+                <Box mt={1}>
+                  <strong>Set a New Question</strong>
+                </Box>
+                <Box display="flex">
+                  <SecurityQuestionOptions handleSecurityQuestion={handleNewSecurityQuestion} />
+                  {
+                    newSecurityQuestion.length>2?
+                    <Box ml={2} mt={2}>
+                    <TextField
+                      label="Your Answer"
+                      id="outlined-size-small"
+                      variant="outlined"
+                      type="text"
+                      size="medium"
+                      value={newAnswer}
+                      required
+                      fullWidth
+                      onChange={handleNewSecurityQuestionAnswer}
+                    />
+                  </Box>
+                  :""
+                  }
+                </Box>
               </form>
             </CardContent>
             <CardContent>
               <CardHeader
                 action={
-                  <Box display="flex" mt={-4}>
+                  <Box display="flex" mt={1}>
+                    <Box></Box>
                     <Box>
                       <Button
-                        variant="contained"
+                        variant="outlined"
                         color="primary"
                         size="medium"
                         onClick={handleClose}
@@ -373,7 +456,7 @@ export const SecurityQuestionModal = (props) => {
                       {isSecurityQuestionAdded ? (
                         <Button
                           variant="contained"
-                          color="secondary"
+                          color="primary"
                           size="medium"
                           onClick={handleAddSecurityQuestion}
                         >
@@ -408,11 +491,13 @@ const optionsStyles = makeStyles((theme) => ({
   },
 }));
 
-const SecurityQuestionOptions = () => {
+const SecurityQuestionOptions = (props) => {
   const classes = optionsStyles();
   const [securityQuestion, setSecurityQuestion] = useState(0);
 
   function handleSecurityQuestion(event) {
+    console.log(event.target.value)
+    props.handleSecurityQuestion(event.target.value)
     setSecurityQuestion(event.target.value);
   }
 
@@ -463,8 +548,9 @@ const SecurityQuestionOptions = () => {
       questionContent: "What is the name of your favorite childhood friend?",
     },
   ];
+
   return (
-    <FormControl fullWidth>
+    <FormControl>
       <Box mt={2} display="flex">
         <Box>
           <Select
@@ -476,7 +562,7 @@ const SecurityQuestionOptions = () => {
             value={securityQuestion}
             onChange={handleSecurityQuestion}
           >
-            <MenuItem value={0} disabled>
+            <MenuItem value="Select Security Question" disabled>
               <Typography className={classes.text}>
                 Select Security Question
               </Typography>
@@ -484,7 +570,7 @@ const SecurityQuestionOptions = () => {
 
             {questions.map(({ questionId, questionContent }) => {
               return (
-                <MenuItem value={questionId}>
+                <MenuItem value={questionContent}>
                   <Typography className={classes.text}>
                     {questionContent}
                   </Typography>

@@ -212,3 +212,13 @@ export const dashboardNotificationsData = [
     route:"/"
     },
 ];
+
+
+export const securityQuestionData={
+  question:"What was name of your first Primary School?",
+  answer:"Govt. BPS LA"
+}
+
+export const passwordData={
+  userPassword:"_nzn#$#$#$1",
+}
