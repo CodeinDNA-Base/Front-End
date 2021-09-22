@@ -13,7 +13,12 @@ import {
   Card,
   CardHeader,
   CardContent,
-  Select
+  Select,
+  Grid,
+  TextareaAutosize,
+  Backdrop,
+  Modal,
+  Fade,
 } from "@material-ui/core";
 
 //material-UI styles
@@ -24,22 +29,23 @@ import { useBorderSelectStyles } from "@mui-treasury/styles/select/border";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CloseIcon from "@mui/icons-material/Close";
 //Resources
 
-
 //Redux
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 //Action creators
 
 //selectors
 import {
   selectSecurityInfo,
   selectIsSecurityInfoLoading,
-  selectHasSecurityInfoError
-} from "../../Redux/slices/securityInfoSlice"
+  selectHasSecurityInfoError,
+} from "../../Redux/slices/securityInfoSlice";
 //thunks
-import {fetchSecurityInfoDetails} from "../../Redux/slices/securityInfoSlice"
+import { fetchSecurityInfoDetails } from "../../Redux/slices/securityInfoSlice";
 
 export const AccountSettingsSecurity = (props) => {
   return (
@@ -74,7 +80,6 @@ const passwordStyles = makeStyles((theme) => ({
 }));
 
 const Password = () => {
-  
   const classes = passwordStyles();
 
   const [strength, setStrength] = useState(0);
@@ -83,7 +88,6 @@ const Password = () => {
   const [oldPassword, setOldPassword] = useState();
   const [newPassword, setNewPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-
 
   function handleOldPassword(event) {
     setOldPassword(event.target.value);
@@ -113,17 +117,15 @@ const Password = () => {
     setConfirmPassword(event.target.value);
   }
 
-
   //Redux operations
-  const dispatch=useDispatch()
-  const securityInfo=useSelector(selectSecurityInfo)
-  const isLoading=useSelector(selectIsSecurityInfoLoading)
-  const encounteredError=useSelector(selectHasSecurityInfoError)
+  const dispatch = useDispatch();
+  const securityInfo = useSelector(selectSecurityInfo);
+  const isLoading = useSelector(selectIsSecurityInfoLoading);
+  const encounteredError = useSelector(selectHasSecurityInfoError);
 
-
-useEffect(() => {
-  dispatch(fetchSecurityInfoDetails("Give user id here who is logged in"));
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchSecurityInfoDetails("Give user id here who is logged in"));
+  }, [dispatch]);
 
   return (
     <Card className={classes.root} elevation={2}>
@@ -207,25 +209,195 @@ const securityQuestionStyles = makeStyles((theme) => ({
     width: "50%",
     padding: "2rem",
   },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: "2px",
+    boxShadow: theme.shadows[2],
+    padding: theme.spacing(2, 2, 2),
+  },
 }));
 
 const SecurityQuestion = () => {
   const classes = securityQuestionStyles();
+  //this will be fetched from API
+  const [isSecurityQuestionAdded, setIsSecurityQuestionAdded] = useState(true);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Card className={classes.root} elevation={2}>
-      <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <EditIcon />
-          </IconButton>
-        }
-        title={<Typography variant="h4">Security Question</Typography>}
-      />
-      <Divider />
-      <CardContent>
-        <SecurityQuestionOptions />
-      </CardContent>
-    </Card>
+    <>
+      <Card className={classes.root} elevation={2}>
+        <CardHeader
+          action={
+            <IconButton aria-label="settings">
+              {isSecurityQuestionAdded ? (
+                <EditIcon onClick={handleOpen} />
+              ) : (
+                <AddCircleIcon onClick={handleOpen} />
+              )}
+            </IconButton>
+          }
+          title={<Typography variant="h4">Security Question</Typography>}
+        />
+        <Divider />
+        <CardContent>
+          {isSecurityQuestionAdded ? (
+            <Box display="flex">
+              <Box mt={2.5}>
+                <CheckCircleIcon color="success" />
+              </Box>
+              <Box ml={1}>
+                <h3>Security Question is Enabled</h3>
+              </Box>
+            </Box>
+          ) : (
+            <h3>Add a security Question to protect your account </h3>
+          )}
+        </CardContent>
+      </Card>
+
+      <Modal
+        aria-labelledby="securityQuestionModal"
+        aria-describedby="securityQuestionForm"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <Box mt={-4}>
+              <SecurityQuestionModal
+                id="warningModal"
+                handleClose={handleClose}
+              />
+            </Box>
+          </div>
+        </Fade>
+      </Modal>
+    </>
+  );
+};
+
+const modalFormStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: "2rem",
+  },
+  attachFilesBtn: {
+    flex: 1,
+  },
+  descriptionBox: {
+    fontFamily: "verdana",
+    fontSize: 16,
+  },
+  closeBtn: {
+    cursor: "pointer",
+  },
+}));
+
+export const SecurityQuestionModal = (props) => {
+  const classes = modalFormStyles();
+
+  const [isSecurityQuestionAdded, setIsSecurityQuestionAdded] = useState(true);
+
+  function handleClose() {
+    props.handleClose();
+  }
+
+  function handleAddSecurityQuestion() {}
+
+  function handleAddUpdatedQuestion() {}
+  return (
+    <div>
+      <Grid container>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Card className={classes.root} elevation={0}>
+            <CardHeader
+              title={<h3>Security Question</h3>}
+              action={
+                <Box>
+                  <CloseIcon
+                    onClick={handleClose}
+                    className={classes.closeBtn}
+                  />
+                </Box>
+              }
+            />
+            <Divider />
+            <CardContent>
+              <form>
+                <FormControl fullWidth>
+                  {isSecurityQuestionAdded ? (
+                    <label>
+                      Before you can set a new security question, you’ll have to
+                      answer your current one correctly.
+                    </label>
+                  ) : (
+                    <label>Choose a question that you can remember</label>
+                  )}
+                </FormControl>
+                <SecurityQuestionOptions />
+              </form>
+            </CardContent>
+            <CardContent>
+              <CardHeader
+                action={
+                  <Box display="flex" mt={-4}>
+                    <Box>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="medium"
+                        onClick={handleClose}
+                      >
+                        Cancel
+                      </Button>
+                    </Box>
+                    <Box ml={3}>
+                      {isSecurityQuestionAdded ? (
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          size="medium"
+                          onClick={handleAddSecurityQuestion}
+                        >
+                          Update
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          size="medium"
+                          onClick={handleAddSecurityQuestion}
+                        >
+                          Add
+                        </Button>
+                      )}
+                    </Box>
+                  </Box>
+                }
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 
@@ -269,28 +441,28 @@ const SecurityQuestionOptions = () => {
     );
   };
 
-  const questions=[
+  const questions = [
     {
-      questionId:1,
-      questionContent:"What was the name of your elementary school?"
+      questionId: 1,
+      questionContent: "What was the name of your elementary school?",
     },
     {
-      questionId:2,
-      questionContent:"What was the name of your first pet?"
+      questionId: 2,
+      questionContent: "What was the name of your first pet?",
     },
     {
-      questionId:3,
-      questionContent:"What was your childhood nickname?"
+      questionId: 3,
+      questionContent: "What was your childhood nickname?",
     },
     {
-      questionId:4,
-      questionContent:"In what city did your parents meet?"
+      questionId: 4,
+      questionContent: "In what city did your parents meet?",
     },
     {
-      questionId:5,
-      questionContent:"What is the name of your favorite childhood friend?"
-    },    
-  ]
+      questionId: 5,
+      questionContent: "What is the name of your favorite childhood friend?",
+    },
+  ];
   return (
     <FormControl fullWidth>
       <Box mt={2} display="flex">
@@ -306,19 +478,19 @@ const SecurityQuestionOptions = () => {
           >
             <MenuItem value={0} disabled>
               <Typography className={classes.text}>
-              Select Security Question
+                Select Security Question
               </Typography>
             </MenuItem>
 
-            {
-              questions.map(({questionId, questionContent})=>{
-                return<MenuItem value={questionId}>
+            {questions.map(({ questionId, questionContent }) => {
+              return (
+                <MenuItem value={questionId}>
                   <Typography className={classes.text}>
                     {questionContent}
                   </Typography>
                 </MenuItem>
-              })
-            }
+              );
+            })}
           </Select>
         </Box>
       </Box>

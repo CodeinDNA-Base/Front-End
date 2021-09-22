@@ -7,7 +7,7 @@ import { userDetails } from "./TempData";
 
 
 export const checkUserId = createAsyncThunk(
-  `${LOGININDETAILS}/getUserDetails`,
+  `${LOGININDETAILS}/checkUserId`,
   async ({userId}, thunkAPI) => {
     const data = await fetch(
       "https://randomuser.me/api/0.6/?format=SQL&results=10"
@@ -25,9 +25,8 @@ const checkUserPasswordAndReturnUserDetailsIfExists = createAsyncThunk(
       "https://randomuser.me/api/0.6/?format=SQL&results=10"
     );
     const json = await data.json();
-    console.log('user details')
-    console.log(userDetails)
-    return {userPassword,userDetails};
+    
+    return userDetails;
   }
 );
 
@@ -59,7 +58,7 @@ const sliceOptions = {
     },
     [checkUserPasswordAndReturnUserDetailsIfExists.fulfilled]: (state, action) => {
       state.userDetails = action.payload.userDetails;
-      state.userPassword=action.payload.userPassword;
+      // state.userPassword=action.payload.userPassword;
       state.checkUserPasswordAndReturnUserDetailsIfExistsIsLoading = false;
       state.checkUserPasswordAndReturnUserDetailsIfExistsHasError = false;
     },
@@ -87,12 +86,11 @@ export const loginFormSLice = createSlice(sliceOptions);
 
 // selectors
 export const selectUserId = (state) => state.loginDetails.userId;
-
 export const selectUserToken = (state) => state.loginDetails.userToken;
-
 export const selectUserDetails = (state) => state.loginDetails.userDetails;
-
 export const selectUserPassword = (state) => state.loginDetails.userPassword;
+export const selectUserDetailsHasError=state=>state.loginDetails.checkUserPasswordAndReturnUserDetailsIfExistsHasError;
+export const selectUserDetailsIsLoading=state=>state.loginDetails.checkUserPasswordAndReturnUserDetailsIfExistsIsLoading;
 
 // actions
 export{ checkUserPasswordAndReturnUserDetailsIfExists as checkUserPassword}

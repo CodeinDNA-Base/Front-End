@@ -21,13 +21,10 @@ And when clicked on any of these orders, goto view order page and bring all the 
 viewOrderSlice
 --------------------------------------------------------------------------------------------------------
 balanceInfoSlice: Used in settings/balanaceSettings
-                Must return an array where first index of array must hold total balance and other should be objects each object representing purchased service for purchase history holding balanceInformation of user
-
+                Must return a value from database containing users current balance
+                Must return an array of objects each object representing purchased service for purchase history holding balanceInformation of user
+                
     [
-        balance:{
-            availableBalance: 451,
-
-        }
         {
             orderId:
             purchaseTitle: MERN website for business

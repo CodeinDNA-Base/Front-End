@@ -1,5 +1,6 @@
 //ReactJS
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Scrollbars } from "react-custom-scrollbars-2";
 
 //Material-UI core
 import {
@@ -33,7 +34,7 @@ import { Rating } from "@material-ui/lab";
 //Icons
 
 import MenuIcon from "@material-ui/icons/Menu";
-import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
 import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
@@ -45,13 +46,29 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
 import ExploreIcon from "@material-ui/icons/Explore";
 import FeaturedPlayListIcon from "@material-ui/icons/FeaturedPlayList";
-import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+import VolumeUpIcon from "@material-ui/icons/VolumeUp";
+import VolumeOffIcon from "@material-ui/icons/VolumeOff"
+
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 //Routing
 import { Link } from "react-router-dom";
 
 //Local Resources
 import logo from "../Resources/upwork.svg";
 import profilePic from "../Resources/nadir.jpg";
+
+
+//Redux
+import {useDispatch, useSelector} from "react-redux"
+
+//action creators
+
+//selectors
+import {selectNotifications, selectIsLoadingNotifications, selectHasErrorNotifications} from "../Redux/slices/dashboardNotificationsSlice"
+
+//thunks
+import {fetchNotifications} from "../Redux/slices/dashboardNotificationsSlice"
 
 //Styles and CSS
 import "./Styles/MenubarStyles.css";
@@ -124,115 +141,74 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     marginTop: "0.5rem",
-
   },
   profileMenu: {
     marginTop: "0.5rem",
   },
-  notificationMenu:{
+  notificationMenu: {
     marginTop: "0.5rem",
   },
   timeStyles: {
     fontSize: "0.7rem",
     fontWeight: "bold",
   },
-  notificationIcon:{
-    marginTop:15,
-    marginRight:25,
-    marginLeft:10,
-    cursor:"pointer",
-
+  notificationIcon: {
+    marginTop: 15,
+    marginRight: 25,
+    marginLeft: 10,
+    cursor: "pointer",
   },
-  notificationText:{
-    overflow:"hidden"
+  notificationText: {
+    overflow: "hidden",
   },
-  notificationAppBar:{
-    top: 'auto',
-    bottom: 0,
-    position:"sticky",
-    backgroundColor:"#C1C1C1"
+  notificationAppBar: {
+    top: "auto",
+    position: "sticky",
+    backgroundColor: "#FFFFFF",
+  },
+  linkStyle:{
+    textDecoration:"none",
+    color:"#000000"
   }
 }));
 
 export const Menubar = (props) => {
   const classes = useStyles();
 
-  const [notificationMenuAnchor, setNotificationMenuAnchor] =useState(null);
+  
+  //Notification Menu
+
+  const [notificationMenuAnchor, setNotificationMenuAnchor] = useState(null);
+  const[isVolumeOn, setIsVolumeOn]=useState(true)
   const isNotificationMenuOpen = Boolean(notificationMenuAnchor);
 
-  //Notification Menu
   const handleNotificationMenuOpen = (event) => {
-    console.log(event.currentTarget)
+    console.log(event.currentTarget);
     setNotificationMenuAnchor(event.currentTarget);
-  
   };
 
   const handleNotificationMenuClose = () => {
     setNotificationMenuAnchor(null);
   };
 
+  function handleNotificationVolume(){
+    setIsVolumeOn(prev=>!prev)
+  }
   //Notification Menu options/items
 
-  const notificationDetails = [
-    {
-      notificationId: 0,
-      content: "Payment method added dja asdj dasjk dasdk dsakd",
-      time: new Date().toLocaleTimeString(),
-      icon: <LogoutIcon />,
-      route: "/",
-    },
-    {
-      notificationId: 1,
-      content: "Payment method added asdj dasjk dasdk dsakd asdj dasjk dasdk dsakd asdj dasjk dasdk dsakd",
-      time: new Date().toLocaleTimeString(),
-      icon: <LogoutIcon />,
-      route: "/",
-    },
-    {
-      notificationId: 2,
-      content: "Payment method added",
-      time: new Date().toLocaleTimeString(),
-      icon: <LogoutIcon />,
-      route: "/",
-    },
-    {
-      notificationId: 3,
-      content: "Payment method added",
-      time: new Date().toLocaleTimeString(),
-      icon: <LogoutIcon />,
-      route: "/",
-    },
-    {
-      notificationId: 3,
-      content: "Payment method added",
-      time: new Date().toLocaleTimeString(),
-      icon: <LogoutIcon />,
-      route: "/",
-    },
-    {
-      notificationId: 3,
-      content: "Payment method added",
-      time: new Date().toLocaleTimeString(),
-      icon: <LogoutIcon />,
-      route: "/",
-    },
-    {
-      notificationId: 3,
-      content: "Payment method added",
-      time: new Date().toLocaleTimeString(),
-      icon: <LogoutIcon />,
-      route: "/",
-    },
-    {
-      notificationId: 3,
-      content: "Payment method added",
-      time: new Date().toLocaleTimeString(),
-      icon: <LogoutIcon />,
-      route: "/",
-    },
-  ];
+  const dispatch=useDispatch()
+  const notificationsData=useSelector(selectNotifications)
+  const isLoading=useSelector(selectIsLoadingNotifications)
+  const encounteredError=useSelector(selectHasErrorNotifications)
+
+  useEffect(() => {
+    dispatch(fetchNotifications('email of user or id'))
+  }, [dispatch])
+
   const notificationMenuId = "primary-search-account-menu";
-  const renderNotificationMenu = (<Menu
+  const renderNotificationMenu = (
+    
+    <Menu
       className={classes.notificationMenu}
       anchorEl={notificationMenuAnchor}
       id={notificationMenuId}
@@ -251,45 +227,67 @@ export const Menubar = (props) => {
       TransitionComponent={Zoom}
       PaperProps={{
         style: {
-          maxHeight: 48 * 10,
+          maxHeight: 100 * 10,
           width: "35ch",
         },
       }}
     >
-
-
-      {notificationDetails.map(
-        ({ notificationId, content, time, icon, route }) => {
-          return (<Link
-                to={route}
+      <Scrollbars autoHeight autoHide>
+        {notificationsData.map((notf, index) => {
+            return (
+              <Link
+                to={notf.route}
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <ListItem button key={notificationId}>
-                  <ListItemIcon>{icon}</ListItemIcon>
+                <ListItem button key={notf.notificationId}>
+                  <ListItemIcon>{notf.icon}</ListItemIcon>
                   <ListItemText
-
-                    primary={<span className={classes.notificationText}>{content}</span>}
-                    secondary={<span className={classes.timeStyles}>{time}</span>}
+                    primary={
+                      <span className={classes.notificationText}>
+                        {notf.content}
+                      </span>
+                    }
+                    secondary={
+                      <span className={classes.timeStyles}>{notf.deliveryTime}</span>
+                    }
                   />
                 </ListItem>
                 <Divider />
               </Link>
-          );
-        }
-      )}
-
-<div className={classes.notificationAppBar}>
+            );
+          }
+        )}
+      </Scrollbars>
+      <Box className={classes.notificationAppBar}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="open drawer">
-            <VolumeUpIcon />
-          </IconButton>
+          {isVolumeOn ? (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleNotificationVolume}
+            >
+              <VolumeUpIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleNotificationVolume}
+            >
+              <VolumeOffIcon />
+            </IconButton>
+          )}
+
           <div className={classes.grow} />
+          <Link to="/settings" className={classes.linkStyle}>
           <IconButton color="inherit">
             <SettingsIcon />
           </IconButton>
+          </Link>
         </Toolbar>
-      </div>
-
+      </Box>
     </Menu>
   );
 
@@ -517,8 +515,13 @@ export const Menubar = (props) => {
               })}
             </Box>
 
-            <Badge badgeContent={8} color="primary" className={classes.notificationIcon} onClick={handleNotificationMenuOpen}>
-            <CircleNotificationsIcon />
+            <Badge
+              badgeContent={8}
+              color="primary"
+              className={classes.notificationIcon}
+              onClick={handleNotificationMenuOpen}
+            >
+              <CircleNotificationsIcon />
             </Badge>
             <Avatar
               className={classes.avatar}

@@ -29,9 +29,6 @@ const recentlyViewedProjectsSlice = createSlice({
       state.hasError = false;
     },
     [fetchProjectDetails.fulfilled]: (state, action) => {
-      console.log("-----------------------------------------------------------------")
-      console.log(action.payload)
-      console.log("-----------------------------------------------------------------")
       state.projects=action.payload;
       state.isLoading = false;
       state.hasError = false;

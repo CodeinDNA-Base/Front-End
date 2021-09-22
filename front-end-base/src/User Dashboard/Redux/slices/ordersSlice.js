@@ -1,3 +1,8 @@
+
+/******************* 
+This slice contains data for active, complete and cancelled orders in ongoing orders tab on dashboard
+******************* */
+
 //redux-oolkit
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -5,7 +10,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchOrderDetails = createAsyncThunk(
   "userDashboard/fetchOrderDetails",                             //action String : created in actions.js
   async (status) => {                      
-                                                                  //Get order details:  given status->active, cancelled 
+                                                              //Get order details:  given status->active, cancelled 
     const orders = await fetch(`https://randomuser.me/api/`);     //send request to custom API
     const data = await orders.json();
     return data;
@@ -29,9 +34,6 @@ const ordersSlice = createSlice({
       state.hasError = false;
     },
     [fetchOrderDetails.fulfilled]: (state, action) => {
-      console.log("-----------------------------------------------------------------")
-      console.log(action.payload)
-      console.log("-----------------------------------------------------------------")
       state.orders=action.payload;
       state.isLoading = false;
       state.hasError = false;

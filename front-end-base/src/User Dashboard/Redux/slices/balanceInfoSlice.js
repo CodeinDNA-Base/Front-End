@@ -1,80 +1,75 @@
 //redux-oolkit
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { purchaseHistory, availableBalance } from "./dummyData";
+import produce from "immer"
 
 //Thunks
 
+//Fetch purchase history of user
 export const fetchPurchaseHistory = createAsyncThunk(
   "userDashboard/fetchPurchaseHistory",
-  async () => {
+  async () => {                                     
     //get this parameter
     const info = await fetch(`https://randomuser.me/api/`); //send request to custom API
     const infoDetails = await info.json();
-    return infoDetails;
+    //for noew, return from dummy data
+    return purchaseHistory;
   }
 );
+
+//Just ger balance of user
 
 export const fetchBalance = createAsyncThunk(
   "userDashboard/fetchBalance",
   async (user_Id_Or_Email_or_username) => {
     //get this parameter
-    const info = await fetch(`https://randomuser.me/api/`); //send request to custom API
-    const infoDetails = await info.json();
-    return infoDetails;
+    const balance = await fetch(`https://randomuser.me/api/`); //send request to custom API
+    const jsonBalance = await balance.json();
+    //for noew, return from dummy data
+    return availableBalance;
   }
 );
 
 const balanceInfoSlice = createSlice({
-  name: "dashboardTrendingServices",
+  name: "balanceInfo",
   initialState: {
-    balance: null, //this is object that contains all the required fields needed to show on personalinfo section of settings/profile
-    purchaseHistory: null,
-    isLoading: false,
-    hasError: false,
+    balance: null,      
+    purchaseHistory: [],
+    isBalanceLoading: false,
+    hasBalanceError: false,
+    isPurchaseHistoryLoading:false,
+    hasPurchaseHistoryError:false,
   },
-
-  //in future, i will store balance in variable, will extract it from action.payload in fulfilled
-  //while store all purchases in purchaseHistory array of objects
   reducers: {
-    getThisMonthPurchaseHistory: (state, action) => {
-      //return for this month
-    },
-    getLast3MonthsPurchaseHistory: (state, action) => {
-      //return for last 3
-    },
-    getLast1YearPurchaseHistory: (state, action) => {
-      //return for last this month
-    },
-    getAllTimePurchaseHistory: (state, action) => {
-      return state.purchaseHistory;
-    },
+    
   },
 
   extraReducers: {
     [fetchPurchaseHistory.pending]: (state, action) => {
-      state.isLoading = true;
-      state.hasError = false;
+      state.isPurchaseHistoryLoading = true;
+      state.hasPurchaseHistoryError = false;
     },
     [fetchPurchaseHistory.fulfilled]: (state, action) => {
       state.purchaseHistory = action.payload;
-      state.isLoading = false;
-      state.hasError = false;
+      state.isPurchaseHistoryLoading = false;
+      state.hasPurchaseHistoryError = false;
     },
     [fetchPurchaseHistory.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.hasError = true;
+      state.isPurchaseHistoryLoading = false;
+      state.hasPurchaseHistoryError = true;
     },
     [fetchBalance.pending]: (state, action) => {
-      state.isLoading = true;
-      state.hasError = false;
+      state.isBalanceLoading = true;
+      state.hasBalanceError = false;
     },
     [fetchBalance.fulfilled]: (state, action) => {
       state.balance = action.payload;
-      state.isLoading = false;
-      state.hasError = false;
+      state.isBalanceLoading = false;
+      state.hasBalanceError = false;
     },
     [fetchBalance.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.hasError = true;
+      state.isBalanceLoading = false;
+      state.hasBalanceError = true;
     },
   },
 });
@@ -82,21 +77,14 @@ const balanceInfoSlice = createSlice({
 const { actions, reducer } = balanceInfoSlice;
 export default reducer;
 
-export const {
-  getThisMonthPurchaseHistory,
-  getLast3MonthsPurchaseHistory,
-  getLast1YearPurchaseHistory,
-  getAllTimePurchaseHistory,
-} = actions;
-
 export const selectBalance = (state) => state.balanceInfo.balance;
 export const selectIsBalanceLoading = (state) =>
-  state.balanceInfo.isLoading;
-export const selectHasBalanceError = (state) => state.balanceInfo.hasError;
+  state.balanceInfo.isBalanceLoading;
+export const selectHasBalanceError = (state) => state.balanceInfo.hasBalanceError;
 
 export const selectPurchaseHistory = (state) =>
-  state.balanceInfo.purchaseHistory;
+state.balanceInfo.purchaseHistory;
 export const selectIsPurchaseHistoryLoading = (state) =>
-  state.balanceInfo.isLoading;
+  state.balanceInfo.isPurchaseHistoryLoading;
 export const selectHasPurchaseHistoryError = (state) =>
-  state.balanceInfo.hasError;
+  state.balanceInfo.hasPurchaseHistoryError;

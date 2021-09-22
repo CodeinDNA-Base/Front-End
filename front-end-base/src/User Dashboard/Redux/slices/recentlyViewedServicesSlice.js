@@ -29,9 +29,6 @@ const recentlyViewedServicesSlice = createSlice({
       state.hasError = false;
     },
     [fetchServiceDetails.fulfilled]: (state, action) => {
-      console.log("-----------------------------------------------------------------")
-      console.log(action.payload)
-      console.log("-----------------------------------------------------------------")
       state.services=action.payload;
       state.isLoading = false;
       state.hasError = false;

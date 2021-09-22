@@ -51,14 +51,14 @@ const useStyles = makeStyles(() => ({
 
 const LatestProjectsForDesktop = (props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const latest_Projects = useSelector(selectLatestProjects);
-  const { isLoading } = useSelector((state) => state.latestProjects);
-  const { hasError } = useSelector((state) => state.latestProjects);
+  // const dispatch = useDispatch();
+  // const latest_Projects = useSelector(selectLatestProjects);
+  // const { isLoading } = useSelector((state) => state.latestProjects);
+  // const { hasError } = useSelector((state) => state.latestProjects);
 
-  useEffect(() => {
-    dispatch(loadLatestProjects());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadLatestProjects());
+  // }, [dispatch]);
 
   const styles = useStyles({ color: "#203f52" });
   const styles2 = useStyles({ color: "#4d137f" });
@@ -67,7 +67,7 @@ const LatestProjectsForDesktop = (props) => {
   return (
     <Grid container spacing={0} style={{ marginTop: "2%" }}>
       <Grid xs={0} sm={1} md={1} item></Grid>
-      {!isLoading && (
+      {/* {!isLoading && (
         <Grid xs={12} sm={10} md={10} item container spacing={4}>
           <Grid item xs={12} sm={9} md={6}>
             <CustomCard
@@ -102,7 +102,7 @@ const LatestProjectsForDesktop = (props) => {
             />
           </Grid>
         </Grid>
-      )}
+      )} */}
       <Grid xs={0} sm={1} md={1} item></Grid>
     </Grid>
   );

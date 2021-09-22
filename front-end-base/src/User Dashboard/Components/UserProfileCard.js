@@ -22,14 +22,16 @@ import CardSkeleton from "../../CustomComponents/UI/Skelton/CardSkeleton";
 import { useDispatch, useSelector } from "react-redux";
 
 //Thunks
-import { fetchUserDetails } from "../Redux/slices/userProfileSlice";
+//No need of this thunk actually
+import { checkUserPassword } from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
 
 //selectors
 import {
-  selectUserProfile,
-  selectIsProfileLoading,
-  selectHasProfileError,
-} from "../Redux/slices/userProfileSlice";
+  selectUserDetails,
+  selectUserDetailsHasError,
+  selectUserDetailsIsLoading,
+} from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
+import { Button } from "antd";
 
 //actionCreators
 
@@ -114,31 +116,29 @@ export const ProfileCard = React.memo(function ProfileCard() {
   const shadowStyles = useFadedShadowStyles();
 
   const dispatch=useDispatch()
-  const profileData=useSelector(selectUserProfile)
-  const isLoading=useSelector(selectIsProfileLoading)
-  const encounteredError=useSelector(selectHasProfileError)
+  const profileData=useSelector(selectUserDetails)
+  const isLoading=useSelector(selectUserDetailsIsLoading)
+  const encounteredError=useSelector(selectUserDetailsHasError)
 
-  // const {fullName,
-  //   rating,
-  //   responseTime,
-  //   lastSeen,
-  //   balance,
-  //   amountSpent,
-  //   isPaymentverified,
-  //   totalPurchases,
-  //   totalRatedPurchases,
-  // }=useSelector(selectUserProfile)
 
+  function handleClick(){
+    console.log(profileData)
+  }
+  //No need of this useeffect actually
   useEffect(() => {
-    dispatch(fetchUserDetails("email"));
+    dispatch(checkUserPassword({ userPassword:"4545" }));
   }, [dispatch]);
-
 
   return (
     <>
     {
-            isLoading ? (
-                <CardSkeleton width={200} height={300} />
+            isLoading ? (<>
+                <CardSkeleton width={200} height={300}
+                />
+                {/* <Button onClick={handleClick}>
+                  Click
+                </Button> */}
+                </>
             ) :
 
       <Card className={cx(styles.card/*, shadowStyles.root*/)}>
@@ -154,9 +154,7 @@ export const ProfileCard = React.memo(function ProfileCard() {
             <Avatar
               className={styles.avatar}
               src={profileData && profileData.results[0].picture.large}
-              onClick={() => {
-                alert("Go to my profile page");
-              }}
+              onClick={handleClick}
               style={{ cursor: "pointer" }}
             />
           </StyledBadge>
