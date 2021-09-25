@@ -12,7 +12,7 @@ import { DividerInProjects } from "../HorizontalLine";
 import { useMediaQuery } from "@material-ui/core";
 import { MobileCustomCard } from "../../../CustomComponents/UI/Support/MobileCustomCard";
 import { FilterOptions } from "./FilterOptions";
-
+import { CustomLoading } from "../../../CustomComponents/UI/Support/CustomLoading";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -22,7 +22,7 @@ import {
 import {
   loadServiceWithSubServices,
   selectServicesAndSubServices,
-  selectFirstService
+  selectFirstService,
 } from "../Slices/HomePageSlices/SearchCardSlice";
 
 export const ServicePage = () => {
@@ -32,7 +32,7 @@ export const ServicePage = () => {
   const { isLoading } = useSelector((state) => state.subServices);
   const { hasError } = useSelector((state) => state.subServices);
   const services_and_subServices = useSelector(selectServicesAndSubServices);
-  const select_defaultService=useSelector(selectFirstService);
+  const select_defaultService = useSelector(selectFirstService);
 
   // from serach card
   const { loadServiceWithSubServicesHasError } = useSelector(
@@ -52,7 +52,7 @@ export const ServicePage = () => {
       // );
     });
     console.log("in sub services");
-  }, [dispatch,services_and_subServices]);
+  }, [dispatch, services_and_subServices]);
 
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   // by default first one is always selected
@@ -61,7 +61,6 @@ export const ServicePage = () => {
     subCategoriesOfSelectedCategoryChip,
     setSubCategoriesOfSelectedCategoryChip,
   ] = useState([]);
-
 
   const handleSelectedCategoryChipClick = (chip_id) => {
     setSelectedCategoryChipId(chip_id);
@@ -72,7 +71,6 @@ export const ServicePage = () => {
     );
     console.log(subCategoriesOfSelectedCategoryChip);
   };
-
 
   return (
     <Grid container spacing={6} justifyContent="center">
@@ -93,7 +91,7 @@ export const ServicePage = () => {
         margin={"0% 0% 2% 0%"}
       />
 
-      {!isLoading &&
+      {!isLoading ? (
         sub_services.map((service) => (
           <Grid item>
             {isDesktopOrLaptopOrTabletScreen ? (
@@ -116,7 +114,10 @@ export const ServicePage = () => {
               />
             )}
           </Grid>
-        ))}
+        ))
+      ) : (
+        <CustomLoading />
+      )}
 
       <Grid container justifyContent="flex-end">
         <Box p={isDesktopOrLaptopOrTabletScreen ? 2 : 0} mr={6}>

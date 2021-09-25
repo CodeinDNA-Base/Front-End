@@ -14,6 +14,7 @@ import TermsAndServices from "./TermsAndServices";
 import OurTeam from "./OurTeam";
 import ContactUsGlobalForm from "./ContactUsGlobalForm";
 import AboutUs from "./AboutUs";
+import FAQS from "./FAQS";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -63,6 +64,13 @@ const AboutUsMenuStyles = makeStyles((theme) => ({
     marginTop: (isDesktopOrLaptopOrTabletScreen) =>
       isDesktopOrLaptopOrTabletScreen ? "3%" : "10%",
   },
+  FAQSConatiner: {
+    backgroundColor: colors.highlighter,
+    paddingBottom: "3%",
+    paddingTop: "3%",
+    // border: `1px solid ${colors.lightGray}`,
+    borderRadius: 10,
+  },
 }));
 
 export default function AboutUsMenu() {
@@ -92,6 +100,7 @@ export default function AboutUsMenu() {
           <Tab label="Careers" {...a11yProps(2)} />
           <Tab label="Terms & Services" {...a11yProps(3)} />
           <Tab label="Contact Us" {...a11yProps(4)} />
+          <Tab label="FAQS" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -107,15 +116,19 @@ export default function AboutUsMenu() {
         <TermsAndServices totalGrid={8} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <Grid
-          container
-          className={classes.contactForm}
-          spacing={0}
-          
-        >
+        <Grid container className={classes.contactForm} spacing={0}>
           <Grid item md={3} xs={1} sm={2}></Grid>
           <Grid item md={6} xs={10} sm={8}>
             <ContactUsGlobalForm />
+          </Grid>
+          <Grid item md={3} xs={1} sm={2}></Grid>
+        </Grid>
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        <Grid container className={classes.FAQSConatiner} spacing={0}>
+          <Grid item md={3} xs={1} sm={2}></Grid>
+          <Grid item md={6} xs={10} sm={8}>
+            <FAQS />
           </Grid>
           <Grid item md={3} xs={1} sm={2}></Grid>
         </Grid>

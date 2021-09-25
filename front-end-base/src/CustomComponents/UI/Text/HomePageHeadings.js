@@ -7,8 +7,8 @@ import colors from "../../../Theme/colors";
 
 const HeadingStyles = makeStyles(() => ({
   HomePageComponentsHeadingGrid: {
-    margin: ({margin})=>margin,
-    textAlign: ({textAlign})=>textAlign,
+    margin: ({ margin }) => margin,
+    textAlign: ({ textAlign }) => textAlign,
   },
 
   HomePageComponentsHeadingTitle: {
@@ -17,19 +17,18 @@ const HeadingStyles = makeStyles(() => ({
         ? Headingfonts.medium
         : Headingfonts.extraExtraLarge,
     fontWeight: ({ isDesktopOrLaptopOrTabletScreen }) =>
-    isDesktopOrLaptopOrTabletScreen && 'bolder' ,
+      isDesktopOrLaptopOrTabletScreen && "bolder",
     color: ({ titleColor }) => titleColor,
+    marginTop: "0px",
+    marginBottom: "0px",
   },
   HomePageComponentsHeadingDescription: {
     font: ({ isDesktopOrLaptopOrTabletScreen }) =>
-    isDesktopOrLaptopOrTabletScreen
-      ? TextFonts.extraSmall
-      : TextFonts.large,
-  color: ({ descriptionColor}) => descriptionColor,
-  fontWeight: ({ isDesktopOrLaptopOrTabletScreen }) =>
-  isDesktopOrLaptopOrTabletScreen && 'bolder' ,
+      isDesktopOrLaptopOrTabletScreen ? TextFonts.extraSmall : TextFonts.large,
+    color: ({ descriptionColor }) => descriptionColor,
+    fontWeight: ({ isDesktopOrLaptopOrTabletScreen }) =>
+      isDesktopOrLaptopOrTabletScreen && "bolder",
   },
-
 }));
 
 export function HomePageComponentsHeading({
@@ -37,8 +36,8 @@ export function HomePageComponentsHeading({
   description,
   titleColor,
   descriptionColor,
-  margin="2%",
-  textAlign='center'
+  margin = "2%",
+  textAlign = "center",
 }) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = HeadingStyles({
@@ -46,8 +45,7 @@ export function HomePageComponentsHeading({
     titleColor,
     descriptionColor,
     margin,
-    textAlign
-
+    textAlign,
   });
   return (
     <Grid
@@ -66,4 +64,3 @@ export function HomePageComponentsHeading({
     </Grid>
   );
 }
-

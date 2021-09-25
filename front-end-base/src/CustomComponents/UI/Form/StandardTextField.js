@@ -8,15 +8,15 @@ import colors from "../../../Theme/colors";
 
 const useTextFieldStyles = makeStyles(() => ({
   input: {
-   
-    font: ({isDesktopOrLaptopOrTabletScreen}) =>
+    font: ({ isDesktopOrLaptopOrTabletScreen }) =>
       isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
     color: colors.black,
     // height:  ({isDesktopOrLaptopOrTabletScreen}) =>
     // isDesktopOrLaptopOrTabletScreen ? 10 :5,
-   
   },
-
+  field: {
+    margin: ({ margin }) => margin,
+  },
 }));
 export const StandardTextField = ({
   label,
@@ -25,24 +25,30 @@ export const StandardTextField = ({
   width,
   variant,
   margin,
-  type='text',
-  size
+  type = "text",
+  size,
+  disabled = false,
 }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
-  const classes = useTextFieldStyles({isDesktopOrLaptopOrTabletScreen,width,margin});
+  const classes = useTextFieldStyles({
+    isDesktopOrLaptopOrTabletScreen,
+    width,
+    margin,
+  });
 
   return (
-        <TextField
-          label={label}
-          value={value}
-          onChange={({ target }) => onChange(target.value)}
-          InputProps={{ classes: { input: classes.input } }}
-          variant={variant}
-          fullWidth
-          required
-          type={type}
-          size={size}
-        />
-     
+    <TextField
+      label={label}
+      value={value}
+      onChange={({ target }) => onChange(target.value)}
+      InputProps={{ classes: { input: classes.input } }}
+      className={classes.field}
+      variant={variant}
+      fullWidth
+      required
+      type={type}
+      size={size}
+      disabled={disabled}
+    />
   );
 };

@@ -13,6 +13,7 @@ import {
 import {
   LOGININDETAILS,
   REGISTERDETAILS,
+  RESETPASSWORD,
 } from "./Home/Components/Slices/AuthenticationPageSlices/AuthenticationPageConstants";
 import {
   TEAMDETAIL,
@@ -22,6 +23,7 @@ import teamDetailReducer from "./Home/Components/Slices/AboutPageSlices/OurTeamS
 import searchbyCategoryReducer from "./Home/Components/Slices/HomePageSlices/SearchCardSlice";
 import contactFormDetaildReducer from "./Home/Components/Slices/AboutPageSlices/ContactUsGlobalFormSlice";
 import registerDetailsReducer from "./Home/Components/Slices/AuthenticationPageSlices/RegisterDetailsSlice";
+import resetPasswordReducer from "./Home/Components/Slices/AuthenticationPageSlices/ResetPasswordSlice";
 import { SUBSERVICES } from "./Home/Components/Slices/SubServicesPageSlices/SubServiceConstants";
 import subServicesReducer from "./Home/Components/Slices/SubServicesPageSlices/SubServiceSlice";
 import trendingTechnologiesReducer from "./Home/Components/Slices/HomePageSlices/TrendingTechnologiesSlice";
@@ -38,5 +40,6 @@ export default configureStore({
     [REGISTERDETAILS]: registerDetailsReducer,
     [SUBSERVICES]: subServicesReducer,
     [TRENDINGTECHNOLOGIES]: trendingTechnologiesReducer,
+    [RESETPASSWORD]: resetPasswordReducer,
   },
 });

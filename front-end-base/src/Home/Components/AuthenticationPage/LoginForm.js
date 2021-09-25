@@ -101,7 +101,7 @@ export const PasswordForm = ({ userEmail }) => {
   };
   return (
     <Box boxShadow={2} justifyContent="center" alignContent="center">
-      <ForgetPasswordModal open={open} handleClose={handleClose} />
+      <ForgetPasswordModal open={open} handleClose={handleClose} userEmail={userEmail} />
       <form className={classes.form}>
         <SmallHeading title={`Welcome`} />
         <h5 className={classes.center}>{userEmail}</h5>

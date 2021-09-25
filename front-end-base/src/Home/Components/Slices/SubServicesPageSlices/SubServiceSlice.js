@@ -9,7 +9,7 @@ export const loadSubServices = createAsyncThunk(
     const data = await fetch(
       "https://randomuser.me/api/0.6/?format=SQL&results=10"
     );
-    console.log('loading')
+    console.log("loading");
     const json = await data.json();
     return topRatedSubServicesData;
   }
@@ -33,8 +33,7 @@ const sliceOptions = {
     [loadSubServices.fulfilled]: (state, action) => {
       state.hasError = false;
       state.isLoading = false;
-       state.allSubServices=action.payload
-      
+      state.allSubServices = action.payload;
     },
     [loadSubServices.rejected]: (state, action) => {
       state.hasError = false;
@@ -47,6 +46,9 @@ const subServiceSlice = createSlice(sliceOptions);
 
 // selectors
 export const selectSubServices = (state) => state.subServices.allSubServices;
+export const selectSubServicesIsLoading = (state) =>
+  state.subServices.isLoading;
+export const selectSubServicesHasError = (state) => state.subServices.hasError;
 
 //reducer
 export default subServiceSlice.reducer;

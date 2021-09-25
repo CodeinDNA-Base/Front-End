@@ -31,6 +31,8 @@ const checkUserPasswordAndReturnUserDetailsIfExists = createAsyncThunk(
   }
 );
 
+
+
 // slice options
 const sliceOptions = {
   name: `${LOGININDETAILS}`,
