@@ -31,9 +31,12 @@ import {
   selectUserDetailsHasError,
   selectUserDetailsIsLoading,
 } from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
-import { Button } from "antd";
 
 //actionCreators
+
+
+//custom components
+import {lightBorder} from "../../Theme/borders"
 
 export const UserProfileCard = () => {
   
@@ -46,7 +49,8 @@ export const UserProfileCard = () => {
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
-    borderRadius: 12,
+    // borderRadius: 12,
+    border:lightBorder,
     textAlign: "center",
   },
   avatar: {
@@ -141,7 +145,7 @@ export const ProfileCard = React.memo(function ProfileCard() {
                 </>
             ) :
 
-      <Card className={cx(styles.card/*, shadowStyles.root*/)}>
+      <Card className={cx(styles.card/*, shadowStyles.root*/)} elevation={0}>
         <CardContent>
           <StyledBadge
             overlap="circular"
@@ -166,7 +170,7 @@ export const ProfileCard = React.memo(function ProfileCard() {
             }}
             style={{ cursor: "pointer" }}
           >
-            {profileData && profileData.results[0].email}
+            {"letssee@gmail.com"}
           </h3>
           <Box p={1} mt={0}>
             <Rating value={3} size="small" readOnly></Rating>

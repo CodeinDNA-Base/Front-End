@@ -16,22 +16,25 @@ import { Link } from "react-router-dom";
 
 //Resources
 
+//Custo components
+import HeaderText from "../../CustomComponents/UI/HeaderText/HeaderText";
+
 export const RecentlyViewedServices = () => {
   const isMdLgXl = useMediaQuery("(min-width: 960px)");
   return (
     <>
-      <h5>Recently Viewed Services</h5>
+      <HeaderText text="Recently Viewed Services" fontSize={24} fontFamily={"san-serif"}/>
       {isMdLgXl ? (
         <Grid container>
           {Array(4)
             .fill()
             .map((index) => {
               return (
-                              <Grid item md={6} lg={3} xl={3}>
-                  <Link to="services" style={{textDecoration:"none"}}>
-                  <Box mr={2} mt={2}>
-                    <ServiceCard />
-                  </Box>
+                <Grid item md={6} lg={3} xl={4}>
+                  <Link to="services" style={{ textDecoration: "none" }}>
+                    <Box mt={2}>
+                      <ServiceCard />
+                    </Box>
                   </Link>
                 </Grid>
               );
@@ -44,10 +47,10 @@ export const RecentlyViewedServices = () => {
             .map((index) => {
               return (
                 <Grid item xs={12} sm={12}>
-                  <Link to="services" style={{textDecoration:"none"}}>
-                  <Box mt={2}>
-                    <MobileServiceCard />
-                  </Box>
+                  <Link to="services" style={{ textDecoration: "none" }}>
+                    <Box mt={2}>
+                      <MobileServiceCard />
+                    </Box>
                   </Link>
                 </Grid>
               );

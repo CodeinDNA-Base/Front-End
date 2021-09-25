@@ -27,17 +27,20 @@ import profilePic from "../Resources/nadir.jpg";
 import { useDispatch, useSelector } from "react-redux";
 
 //Thunks
-import { fetchUserDetails } from "../Redux/slices/userProfileSlice";
+//No need of this thunk actually
+import { checkUserPassword } from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
 
 //selectors
 import {
-  selectUserProfile,
-  selectIsProfileLoading,
-  selectHasProfileError,
-} from "../Redux/slices/userProfileSlice";
-import { Skeleton } from "antd";
+  selectUserDetails,
+  selectUserDetailsHasError,
+  selectUserDetailsIsLoading,
+} from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
 
 //actionCreators
+
+//custom components
+import {lightBorder} from "../../Theme/borders"
 
 export const UserProfileCardForMobile = () => {
   return (
@@ -49,7 +52,7 @@ export const UserProfileCardForMobile = () => {
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
-    borderRadius: 12,
+    // border:lightBorder,
     textAlign: "center",
   },
   avatar: {
@@ -115,15 +118,19 @@ const StyledBadge = withStyles((theme) => ({
 
 export const ProfileCard = React.memo(function ProfileCard() {
   const styles = useStyles();
-  const dispatch=useDispatch()
   
-  const userDetails=useSelector(selectUserProfile)
-  const isLoading=useSelector(selectIsProfileLoading)
-  const encounteredError=useSelector(selectHasProfileError)
+  const dispatch=useDispatch()
+  const profileData=useSelector(selectUserDetails)
+  const isLoading=useSelector(selectUserDetailsIsLoading)
+  const encounteredError=useSelector(selectUserDetailsHasError)
 
 
+  function handleClick(){
+    console.log(profileData)
+  }
+  //No need of this useeffect actually
   useEffect(() => {
-    dispatch(fetchUserDetails("orderId that was clicked"));
+    dispatch(checkUserPassword({ userPassword:"4545" }));
   }, [dispatch]);
 
   

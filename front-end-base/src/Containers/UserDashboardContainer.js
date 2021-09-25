@@ -15,7 +15,7 @@ import { LinkedAccounts } from "../User Dashboard/Components/LinkedAccounts";
 import { OngoingOrders } from "../User Dashboard/Components/OngoingOrders";
 import { TrendingServices } from "../User Dashboard/Components/TrendingServices";
 import { RecentlyViewedServices } from "../User Dashboard/Components/RecentlyViewedServices";
-import {RecentlyViewedProjects} from "../User Dashboard/Components/RecentlyViewedProjects";
+import { RecentlyViewedProjects } from "../User Dashboard/Components/RecentlyViewedProjects";
 
 //CSS
 import "../User Dashboard/Components/Styles/FooterStyles.css";
@@ -33,13 +33,13 @@ import { AccountSettingsNotifications } from "../User Dashboard/Components/Accou
 import { AccountSettingsBalance } from "../User Dashboard/Components/AccountSettings/AccountSettingsBalance";
 import { AccountSettingsCriticalSection } from "../User Dashboard/Components/AccountSettings/AccountSettingsCriticalSection";
 
-import {Orders} from "../User Dashboard/Components/Orders"
+import { Orders } from "../User Dashboard/Components/Orders";
 
-import {ChatModule} from "../User Dashboard/Components/ChatModule"
-import {ViewOrder} from "../User Dashboard/Components/ViewOrder"
+import { ChatModule } from "../User Dashboard/Components/ChatModule";
+import { ViewOrder } from "../User Dashboard/Components/ViewOrder";
 import { PostRequestFromMobile } from "../User Dashboard/Components/PostRequestFromMobile";
-import {PreviousPost} from "../User Dashboard/Components/PreviousPost"
-import {ViewPostDetails} from "../User Dashboard/Components/ViewPostDetails"
+import { PreviousPost } from "../User Dashboard/Components/PreviousPost";
+import { ViewPostDetails } from "../User Dashboard/Components/ViewPostDetails";
 
 import Scroll from "./Scroll";
 export const UserDashboardContainer = () => {
@@ -58,7 +58,7 @@ export const UserDashboardSettings = () => {
       <DashboardMenu />
       <SettingsContainer />
       <FooterComponent />
-      </Scroll>
+    </Scroll>
   );
 };
 
@@ -66,7 +66,7 @@ export const UserDashboardOrders = () => {
   return (
     <Scroll>
       <DashboardMenu />
-      <OrdersContainer/>
+      <OrdersContainer />
       <FooterComponent />
     </Scroll>
   );
@@ -77,51 +77,51 @@ export const UserDashboardChat = () => {
   return (
     <Scroll>
       <DashboardMenu />
-      <ChatContainer/>
-     {(isDesktopOrLaptopOrTabletScreen) ? <FooterComponent /> : ''}
+      <ChatContainer />
+      {isDesktopOrLaptopOrTabletScreen ? <FooterComponent /> : ""}
     </Scroll>
   );
 };
 
-export const UserDashboardViewOrder=()=>{
+export const UserDashboardViewOrder = () => {
   return (
     <Scroll>
       <DashboardMenu />
-      <ViewOrderContainer/>
+      <ViewOrderContainer />
       <FooterComponent />
     </Scroll>
   );
-}
+};
 
-export const PostRequestFromMobileUserDashboard=()=>{
+export const PostRequestFromMobileUserDashboard = () => {
   return (
     <Scroll>
       <DashboardMenu />
-      <PostRequestFromMobileContainer/>
+      <PostRequestFromMobileContainer />
       <FooterComponent />
     </Scroll>
   );
-}
+};
 
-export const UserDashboardShowPreviousPosts=()=>{
-  return(
+export const UserDashboardShowPreviousPosts = () => {
+  return (
     <Scroll>
       <DashboardMenu />
-      <PreviousPostContainer/>
+      <PreviousPostContainer />
       <FooterComponent />
     </Scroll>
-  )
-}
+  );
+};
 
-export const UserDashboardViewPostDetails=()=>{
-  return(
+export const UserDashboardViewPostDetails = () => {
+  return (
     <Scroll>
       <DashboardMenu />
-      <ViewPostDetailsContainer/>
+      <ViewPostDetailsContainer />
       <FooterComponent />
     </Scroll>
-  )
-}
+  );
+};
 
 const DashboardMenu = () => {
   return (
@@ -139,8 +139,8 @@ const DashboardHome = () => {
     <div className="bodySection1">
       <Grid container>
         <Grid item xs={0} sm={1} md={1} lg={1} xl={2}></Grid>
- {/* Hide profile card, linked accounts and post request options on mobile screen */}
- <Hidden only={["xs"]}>
+        {/* Hide profile card, linked accounts and post request options on mobile screen */}
+        <Hidden only={["xs"]}>
           <Grid item sm={3} md={3} lg={2} xl={2}>
             <Box>
               <UserProfileCard />
@@ -152,8 +152,8 @@ const DashboardHome = () => {
               <LinkedAccounts />
             </Box>
           </Grid>
-          </Hidden>
-          <Hidden only={["sm", "md", "lg", "xl"]}>
+        </Hidden>
+        <Hidden only={["sm", "md", "lg", "xl"]}>
           <Grid item xs={2}></Grid>
           <Grid item xs={8}>
             <Box mt={-8} mb={5}>
@@ -170,7 +170,7 @@ const DashboardHome = () => {
           <Box ml={isDesktopOrLaptopOrTabletScreen ? 8 : 0} mt={4} p={0.5}>
             <TrendingServices />
           </Box>
-          <Box
+          {/* <Box
             ml={isDesktopOrLaptopOrTabletScreen ? 8 : 0}
             mt={4}
             p={0.5}
@@ -179,12 +179,24 @@ const DashboardHome = () => {
             <Box mt={4}>
             <RecentlyViewedProjects />
             </Box>
+          </Box> */}
+        </Grid>
+      </Grid>
+
+{/* Grid for recent projects and services */}
+      <Grid container>
+        <Grid item xs={1} sm={1} md={1} lg={3} xl={2}></Grid>
+
+        <Grid item xs={12} sm={7} md={7} lg={8} xl={7}>
+          <Box ml={isDesktopOrLaptopOrTabletScreen ? 8 : 0} mt={4} p={0.5}>
+            <RecentlyViewedServices />
+            <Box mt={4}>
+              <RecentlyViewedProjects />
+            </Box>
           </Box>
         </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
       </Grid>
     </div>
-
   );
 };
 
@@ -240,7 +252,6 @@ export const SettingsContainer = () => {
     <div className="bodySection1">
       <Grid container>
         <Grid item xs={0} sm={1} md={1} lg={1} xl={2}></Grid>
-
         {/* Hide profile card, linked accounts and post request options on mobile screen */}
         <Hidden only={["xs"]}>
           <Grid item sm={3} md={3} lg={2} xl={2}>
@@ -249,17 +260,16 @@ export const SettingsContainer = () => {
             </Box>
           </Grid>
         </Hidden>
-
         <Grid item xs={12} sm={7} md={7} lg={7} xl={7}>
           <Box>{renderStep}</Box>
-        </Grid> <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
+        </Grid>{" "}
+        <Grid item xs={1} sm={1} md={1} lg={2} xl={2}></Grid>
       </Grid>
     </div>
   );
 };
 
 const OrdersContainer = () => {
-
   return (
     <div className="bodySection1">
       <Grid container>
@@ -275,23 +285,23 @@ const OrdersContainer = () => {
   );
 };
 
-const ChatContainer=()=>{
+const ChatContainer = () => {
   return (
     <div>
       <Grid container>
         {/* <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid> */}
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           {/* <Box> */}
-            <ChatModule />
+          <ChatModule />
           {/* </Box> */}
         </Grid>
         {/* <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid> */}
       </Grid>
     </div>
   );
-}
+};
 
-const ViewOrderContainer=()=>{
+const ViewOrderContainer = () => {
   return (
     <div className="bodySection1">
       <Grid container>
@@ -305,9 +315,9 @@ const ViewOrderContainer=()=>{
       </Grid>
     </div>
   );
-}
+};
 
-const PreviousPostContainer=()=>{
+const PreviousPostContainer = () => {
   return (
     <div className="bodySection1">
       <Grid container>
@@ -321,8 +331,8 @@ const PreviousPostContainer=()=>{
       </Grid>
     </div>
   );
-}
-const PostRequestFromMobileContainer=()=>{
+};
+const PostRequestFromMobileContainer = () => {
   return (
     <div className="bodySection1">
       <Grid container>
@@ -336,9 +346,9 @@ const PostRequestFromMobileContainer=()=>{
       </Grid>
     </div>
   );
-}
+};
 
-export const ViewPostDetailsContainer=()=>{
+export const ViewPostDetailsContainer = () => {
   return (
     <div className="bodySection1">
       <Grid container>
@@ -352,7 +362,7 @@ export const ViewPostDetailsContainer=()=>{
       </Grid>
     </div>
   );
-}
+};
 const FooterComponent = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   return (

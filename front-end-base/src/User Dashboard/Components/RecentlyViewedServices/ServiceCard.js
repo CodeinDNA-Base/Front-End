@@ -14,9 +14,6 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import colors from "../../../Theme/colors";
 import { TextFonts, HeadingFonts } from "../../../Theme/fonts";
 
-//custom components
-import { CardCarousel } from "./CardCarousel";
-
 //resources
 
 
@@ -30,12 +27,15 @@ import { selectRecentServices,selectHasServiceError, selectIsServiceLoading } fr
 import { fetchServiceDetails } from '../../Redux/slices/recentlyViewedServicesSlice';
 
 
+//Custom components
+import {lightBorder} from "../../../Theme/borders"
+import { CardCarousel } from "./CardCarousel";
+
 const CustomCardStyles = makeStyles(() => ({
   root: {
-    boxShadow:
-      "0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.19)",
+    border:lightBorder,
     maxWidth: ({ isDesktopOrLaptopOrTabletScreen }) =>
-      isDesktopOrLaptopOrTabletScreen ? 260 : 160,
+    isDesktopOrLaptopOrTabletScreen ? 200 : 160,
     cursor: "pointer",
     position:'relative'
   },
@@ -46,7 +46,7 @@ const CustomCardStyles = makeStyles(() => ({
   title: {
     font: ({ isDesktopOrLaptopOrTabletScreen }) =>
       isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
-    fontWeight: "bolder",
+      fontWeight: "bolder",
   },
   deliveryTime: {
     font: ({ isDesktopOrLaptopOrTabletScreen }) =>
@@ -75,6 +75,9 @@ const CustomCardStyles = makeStyles(() => ({
       navButtonAndFavIconVisibility,
     pointer: "progress",
   },
+  serviceContainer:{
+    border:lightBorder
+  }
 }));
 const itemData = [
   {

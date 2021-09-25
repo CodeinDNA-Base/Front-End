@@ -30,6 +30,11 @@ import {
 } from "../Redux/slices/trendingServicesSlice";
 
 //actionCreators
+
+
+import {lightBorder} from "../../Theme/borders"
+import { makeStyles } from "@material-ui/core";
+
 export const TrendingServices = () => {
   return (
     <div>
@@ -39,22 +44,29 @@ export const TrendingServices = () => {
   );
 };
 
+const useStyles=makeStyles(()=>({
+  carouselContainer:{
+    border:lightBorder
+  }
+}))
 const TrendingServiceCarousel = () => {
+
+  const classes=useStyles()
   const data = [
     {
-      id: 1,
+      id: "S45451-1",
       image: RoughImage2,
     },
     {
-      id: 2,
+      id: "S45451-2",
       image: RoughImage3,
     },
     {
-      id: 3,
+      id: "S45451-3",
       image: RoughImage2,
     },
     {
-      id: 4,
+      id: "S45451-4",
       image: RoughImage3,
     },
   ];
@@ -75,7 +87,8 @@ const TrendingServiceCarousel = () => {
   }
 
   return (
-    <Carousel
+    <Box className={classes.carouselContainer}>
+          <Carousel
       axis="horizontal"
       infiniteLoop
       autoPlay
@@ -85,15 +98,15 @@ const TrendingServiceCarousel = () => {
       showThumbs={false}
     >
       {data.map(({ image, id }, i) => (
-        <Box>
+        <Box onClick={() => redirectToTrendingService(id)}>
           <img
             src={image}
             id={id}
-            onClick={() => redirectToTrendingService(id)}
             className="serviceImage"
           ></img>
         </Box>
       ))}
     </Carousel>
+    </Box>
   );
 };

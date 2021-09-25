@@ -38,6 +38,9 @@ import {
 import { fetchProjectDetails } from "../../Redux/slices/recentlyViewedProjectsSlice";
 import { Rating } from "@material-ui/lab";
 
+//Custom components
+import {lightBorder} from "../../../Theme/borders"
+
 export const RecentProjectsForMobile = () => {
 
   return (
@@ -62,47 +65,34 @@ export const RecentProjectsForMobile = () => {
 };
 
 const useStyles = makeStyles(() => ({
-  actionArea: {
-    borderRadius: 16,
-    transition: "0.2s",
-    "&:hover": {
-      transform: "scaleY(1.01)",
-    },
-  },
 
   card: ({ color }) => ({
     maxWidth: 192,
-    borderRadius: 16,
+    border:lightBorder,
     boxShadow: "none",
     "&:hover": {
-      boxShadow: `0 6px 12px 0 ${Color(color)
+      boxShadow: `0 6px 12px 0 ${Color('#fff')
         .rotate(-12)
         .darken(0.2)
         .fade(0.5)}`,
     },
-    backgroundColor: "#203f52",
+    backgroundColor: "#fff",
   }),
-  content: ({ color }) => {
-    return {
-      backgroundColor: color,
-      padding: "10px",
-    };
-  },
   media: {
     width: "100%",
   },
   title: {
     fontFamily: "Keania One",
     fontSize: "12px",
-    color: "#fff",
+    color: "#000",
     textTransform: "uppercase",
   },
   subtitle: {
     fontFamily: "Montserrat",
-    color: "#fff",
+    color: "#000",
     opacity: 0.87,
     marginTop: "1rem",
-    fontWeight: 500,
+    fontWeight: 700,
     fontSize: 14,
   },
 }));
@@ -121,7 +111,6 @@ const CustomCard = () => {
   }, [dispatch]);
 
   return (
-    <CardActionArea className={classes.actionArea}>
       <Card className={classes.card}>
         <CardMedia
           className={classes.media}
@@ -144,6 +133,5 @@ const CustomCard = () => {
           </Box>
         </CardContent>
       </Card>
-    </CardActionArea>
   );
 };

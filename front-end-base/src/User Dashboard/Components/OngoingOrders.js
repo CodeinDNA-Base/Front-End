@@ -39,6 +39,9 @@ import { fetchOrderDetails } from "../Redux/slices/ordersSlice";
 import  {selectOrders, selectHasOrderError, selectIsOrderLoading } from "../Redux/slices/ordersSlice"
 import ListSkeleton from "../../CustomComponents/UI/Skelton/ListSkeleton";
 
+//custom components
+import {lightBorder} from "../../Theme/borders"
+
 const ongoingOrderStyles = makeStyles({
   container: {
     flex: 1,
@@ -46,6 +49,9 @@ const ongoingOrderStyles = makeStyles({
   heading: {
     font: TextFonts.large,
   },
+  headingPane:{
+    border:lightBorder
+  }
 });
 
 export const OngoingOrders = () => {
@@ -84,7 +90,7 @@ export const OngoingOrders = () => {
 
   return (
     <div>
-      <Box boxShadow={2} display="flex">
+      <Box /*boxShadow={3}*/ display="flex" className={classes.headingPane}>
         <Box ml={2} className={classes.container}>
           <h3>Active Orders -0($0)</h3>
         </Box>
@@ -92,10 +98,16 @@ export const OngoingOrders = () => {
           <OrderOptions setOptionHandler={setOptionHandler} />
         </Box>
       </Box>
-      <Box>{
-        isLoading?<ListSkeleton height={5}/>:
-        renderSelectedOption
-      }</Box>
+      <Box>
+      {
+        Array(5).fill().map(()=>{
+          return <Box>{
+            isLoading?<ListSkeleton height={5}/>:
+            renderSelectedOption
+          }</Box>
+        })
+      }
+      </Box>
     </div>
   );
 };
@@ -119,6 +131,7 @@ const activeOrderCardStyles = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
     },
+    border:lightBorder
   },
   square: {
     color: theme.palette.getContrastText(deepOrange[500]),
@@ -167,7 +180,7 @@ const ActiveOrderCard = () => {
 
   const isItMobile = useMediaQuery("(max-width: 600px)");
   return (
-    <Box className={classes.root} p={0.5} boxShadow={1} mt={2}>
+    <Box className={classes.root} p={0.5} mt={2}>
       <Grid container>
         <Grid item lg={2} xs={2}>
           <Box flex={"auto"}>
@@ -238,6 +251,7 @@ const completedOrderCardStyles = makeStyles((theme) => ({
     display: "flex",
     "& > *": {
       margin: theme.spacing(1),
+      border:lightBorder
     },
   },
   square: {
@@ -289,7 +303,7 @@ const CompletedOrderCard = () => {
   const classes = completedOrderCardStyles();
   const isItMobile = useMediaQuery("(max-width: 600px)");
   return (
-    <Box className={classes.root} p={0.5} boxShadow={1} mt={2}>
+    <Box className={classes.root} p={0.5} mt={2}>
       <Grid container>
         <Grid item lg={2} xs={2}>
           <Box flex={"auto"}>
@@ -372,6 +386,7 @@ const cancelledOrderCardStyles = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
     },
+    border:lightBorder
   },
   square: {
     color: theme.palette.getContrastText(deepOrange[500]),
@@ -422,7 +437,7 @@ const CancelledOrderCard = () => {
   const classes = cancelledOrderCardStyles();
   const isItMobile = useMediaQuery("(max-width: 600px)");
   return (
-    <Box className={classes.root} p={0.5} boxShadow={1} mt={2}>
+    <Box className={classes.root} p={0.5} mt={2}>
       <Grid container>
         <Grid item lg={2} xs={2}>
           <Box flex={"auto"}>

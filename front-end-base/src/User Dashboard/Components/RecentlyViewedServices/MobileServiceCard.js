@@ -27,10 +27,10 @@ import { selectRecentServices,selectHasServiceError, selectIsServiceLoading } fr
 //thunks
 import { fetchServiceDetails } from '../../Redux/slices/recentlyViewedServicesSlice';
 
+import { lightBorder } from "../../../Theme/borders";
 const CustomCardStyles = makeStyles(() => ({
   root: {
-    boxShadow:
-      "0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.19)",
+    border:lightBorder,
     maxWidth: "100%",
     cursor: "pointer",
     position: "relative",

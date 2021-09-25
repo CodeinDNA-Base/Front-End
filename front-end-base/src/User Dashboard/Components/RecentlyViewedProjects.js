@@ -13,12 +13,10 @@ import "../Color/Colors.css";
 
 //Resources
 
-
 //custom components
 import { RecentProjectsForMobile } from "./RecentlyViewProjects/RecentProjectsForMobile";
 import { RecentProjectsForDesktop } from "./RecentlyViewProjects/RecentProjectsForDesktop";
-import HeaderTitle from "./RecentlyViewProjects/HeaderTitle";
-
+import HeaderText from "../../CustomComponents/UI/HeaderText/HeaderText"
 
 const useStyles = makeStyles(() => ({
   btnContained: {
@@ -34,8 +32,8 @@ export const RecentlyViewedProjects = (props) => {
   const classes = useStyles();
 
   return (
-    <div className="highlighter">
-      <HeaderTitle title={"Recently Viewed Projects"} />
+    <div>
+      <HeaderText text="Recently Viewed Projects" fontSize={24} fontFamily={"san-serif"}/>
       {isDesktopOrLaptopOrTabletScreen ? (
         <RecentProjectsForDesktop />
       ) : (
@@ -47,7 +45,7 @@ export const RecentlyViewedProjects = (props) => {
           <Button
             variant="contained"
             classes={{
-              root: classes.btnContained, // class name, e.g. `classes-nesting-root-x`
+              root: classes.btnContained,
             }}
           >
             See More Projects

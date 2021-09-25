@@ -46,6 +46,7 @@ import { FilterList } from "@material-ui/icons";
 //Styles and Theme
 import "./Styles/PreviousPost.css";
 import { Link } from "react-router-dom";
+import Searchbar from "../../CustomComponents/UI/Searchbar/Searchbar";
 
 
 //Router
@@ -198,14 +199,7 @@ const Headingbar = () => {
           className={classes.boxContainer}
           ml={isItSmallOrExtraSmall ? -1 : 0}
         >
-          <EmailSubscribe
-            onSubmit={(searchTerm) => alert(`You searched ${searchTerm}.`)}
-            useStyles={useReadyEmailSubscribeStyles}
-            inputClearedAfterSubmit
-          >
-            <EmailTextInput placeholder="Search Post" />
-            <SubmitButton>Search</SubmitButton>
-          </EmailSubscribe>
+            <Searchbar placeholder="Seach Anything"/>
         </Box>
         <Box flex={1}></Box>
         <Box>

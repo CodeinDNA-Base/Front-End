@@ -24,6 +24,7 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
+  useMediaQuery,
 } from "@material-ui/core";
 
 //Mateirial-UI styles
@@ -47,10 +48,8 @@ import LogoutIcon from "@material-ui/icons/ExitToApp";
 import ExploreIcon from "@material-ui/icons/Explore";
 import FeaturedPlayListIcon from "@material-ui/icons/FeaturedPlayList";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
-import VolumeOffIcon from "@material-ui/icons/VolumeOff"
+import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 //Routing
 import { Link } from "react-router-dom";
 
@@ -58,25 +57,33 @@ import { Link } from "react-router-dom";
 import logo from "../Resources/upwork.svg";
 import profilePic from "../Resources/nadir.jpg";
 
-
 //Redux
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 
 //action creators
 
 //selectors
-import {selectNotifications, selectIsLoadingNotifications, selectHasErrorNotifications} from "../Redux/slices/dashboardNotificationsSlice"
+import {
+  selectNotifications,
+  selectIsLoadingNotifications,
+  selectHasErrorNotifications,
+} from "../Redux/slices/dashboardNotificationsSlice";
 
 //thunks
-import {fetchNotifications} from "../Redux/slices/dashboardNotificationsSlice"
+import { fetchNotifications } from "../Redux/slices/dashboardNotificationsSlice";
 
 //Styles and CSS
 import "./Styles/MenubarStyles.css";
 import { PostAdd, Speaker } from "@material-ui/icons";
 
+//Custom components
+
+import Searchbar from "../../CustomComponents/UI/Searchbar/Searchbar";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
+    zIndex:10,
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
@@ -166,20 +173,19 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     backgroundColor: "#FFFFFF",
   },
-  linkStyle:{
-    textDecoration:"none",
-    color:"#000000"
-  }
+  linkStyle: {
+    textDecoration: "none",
+    color: "#000000",
+  },
 }));
 
 export const Menubar = (props) => {
   const classes = useStyles();
 
-  
   //Notification Menu
 
   const [notificationMenuAnchor, setNotificationMenuAnchor] = useState(null);
-  const[isVolumeOn, setIsVolumeOn]=useState(true)
+  const [isVolumeOn, setIsVolumeOn] = useState(true);
   const isNotificationMenuOpen = Boolean(notificationMenuAnchor);
 
   const handleNotificationMenuOpen = (event) => {
@@ -191,23 +197,22 @@ export const Menubar = (props) => {
     setNotificationMenuAnchor(null);
   };
 
-  function handleNotificationVolume(){
-    setIsVolumeOn(prev=>!prev)
+  function handleNotificationVolume() {
+    setIsVolumeOn((prev) => !prev);
   }
   //Notification Menu options/items
 
-  const dispatch=useDispatch()
-  const notificationsData=useSelector(selectNotifications)
-  const isLoading=useSelector(selectIsLoadingNotifications)
-  const encounteredError=useSelector(selectHasErrorNotifications)
+  const dispatch = useDispatch();
+  const notificationsData = useSelector(selectNotifications);
+  const isLoading = useSelector(selectIsLoadingNotifications);
+  const encounteredError = useSelector(selectHasErrorNotifications);
 
   useEffect(() => {
-    dispatch(fetchNotifications('email of user or id'))
-  }, [dispatch])
+    dispatch(fetchNotifications("email of user or id"));
+  }, [dispatch]);
 
   const notificationMenuId = "primary-search-account-menu";
   const renderNotificationMenu = (
-    
     <Menu
       className={classes.notificationMenu}
       anchorEl={notificationMenuAnchor}
@@ -234,29 +239,30 @@ export const Menubar = (props) => {
     >
       <Scrollbars autoHeight autoHide>
         {notificationsData.map((notf, index) => {
-            return (
-              <Link
-                to={notf.route}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <ListItem button key={notf.notificationId}>
-                  <ListItemIcon>{notf.icon}</ListItemIcon>
-                  <ListItemText
-                    primary={
-                      <span className={classes.notificationText}>
-                        {notf.content}
-                      </span>
-                    }
-                    secondary={
-                      <span className={classes.timeStyles}>{notf.deliveryTime}</span>
-                    }
-                  />
-                </ListItem>
-                <Divider />
-              </Link>
-            );
-          }
-        )}
+          return (
+            <Link
+              to={notf.route}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <ListItem button key={notf.notificationId}>
+                <ListItemIcon>{notf.icon}</ListItemIcon>
+                <ListItemText
+                  primary={
+                    <span className={classes.notificationText}>
+                      {notf.content}
+                    </span>
+                  }
+                  secondary={
+                    <span className={classes.timeStyles}>
+                      {notf.deliveryTime}
+                    </span>
+                  }
+                />
+              </ListItem>
+              <Divider />
+            </Link>
+          );
+        })}
       </Scrollbars>
       <Box className={classes.notificationAppBar}>
         <Toolbar>
@@ -282,9 +288,9 @@ export const Menubar = (props) => {
 
           <div className={classes.grow} />
           <Link to="/settings" className={classes.linkStyle}>
-          <IconButton color="inherit">
-            <SettingsIcon />
-          </IconButton>
+            <IconButton color="inherit">
+              <SettingsIcon />
+            </IconButton>
           </Link>
         </Toolbar>
       </Box>
@@ -473,6 +479,8 @@ export const Menubar = (props) => {
     },
   ];
 
+  const isMobile = useMediaQuery("(max-width: 600px)");
+
   return (
     <div className={classes.grow}>
       <AppBar className={classes.menuContainer}>
@@ -486,7 +494,7 @@ export const Menubar = (props) => {
             </Link>
           </Hidden>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
+            {/* <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
@@ -497,7 +505,12 @@ export const Menubar = (props) => {
               }}
               inputProps={{ "aria-label": "search" }}
               onClick={handleSearch}
-            />
+            /> */}
+            {isMobile ? (
+              <Searchbar placeholder="Seach Anything" width={265}/>
+            ) : (
+              <Searchbar placeholder="Seach Anything" />
+            )}
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -719,7 +732,7 @@ function DrawerComponent() {
   );
 
   return (
-    <div>
+    <Box ml={-2}>
       <React.Fragment key="left">
         <IconButton
           aria-label="show more"
@@ -738,6 +751,6 @@ function DrawerComponent() {
           {drawerOptionList("Left")}
         </SwipeableDrawer>
       </React.Fragment>
-    </div>
+    </Box>
   );
 }
