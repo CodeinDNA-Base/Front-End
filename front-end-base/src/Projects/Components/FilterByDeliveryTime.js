@@ -1,106 +1,136 @@
 //ReactJS
-import React from 'react'
+import React, { useState } from "react";
 
 //Material-UI core
-import { Box, makeStyles, Typography, useMediaQuery } from "@material-ui/core";
-import { Radio, RadioGroup, FormControlLabel, Button } from "@material-ui/core";
+import {
+  Box,
+  makeStyles,
+  Typography,
+  useMediaQuery,
+  MenuItem,
+  Select,
+  Grid
+} from "@material-ui/core";
 
 //Material-UI styles
+import { useBorderSelectStyles } from "@mui-treasury/styles/select/border";
+
+//Custom Components
 
 //Icons
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+//Styles and Theme
 
-//Style and theme
+//Redux
+import { useDispatch, useSelector } from "react-redux";
 
-//Resources
+//selectors
+//action creators
 
-const ratingStyleHook = makeStyles((theme) => ({
-
-  elements:{
-    display:"inline",
+const optionsStyles = makeStyles((theme) => ({
+  categoryText: {
+    fontWeight: "bold",
+    color: "black",
   },
-  ratingContainer:{
-    flex:1
-  }
-  }));
-  
-export const FilterByDeliveryTime = () => {
+  categoryBox: {
+    flex: 1,
+  },
+}));
 
-    const classes = ratingStyleHook();
-    const [value, setValue] = React.useState("");
-    
-    const options=[
-        {
-            optionTitle:"1 day",
-            value:1,
-        },
-        {
-            optionTitle:"3 days",
-            value:3,
-        },
-        {
-            optionTitle:"5 days",
-            value:5,
-        },
-        {
-            optionTitle:"7 days",
-            value:7
-        },
-        {
-            optionTitle:"15 days",
-            value:15
-        },
-        {
-            optionTitle:"1 month",
-            value:30
-        },
-        {
-            optionTitle:"1-3 months",
-            value:90
-        },
-    ]
-    const handleRadioChange = (event) => {
-        console.log(event.target.value);
-        setValue(event.target.value);
-    };
-    
-    const isItXsOrSm = useMediaQuery("(max-width: 959px)");
+export const FilterByDeliveryTime = () => {
+  const classes = optionsStyles();
+
+  const borderSelectClasses = useBorderSelectStyles();
+
+  const menuProps = {
+    classes: {
+      list: borderSelectClasses.list,
+    },
+    anchorOrigin: {
+      vertical: "bottom",
+      horizontal: "left",
+    },
+    transformOrigin: {
+      vertical: "top",
+      horizontal: "left",
+    },
+    getContentAnchorEl: null,
+  };
+
+  const iconComponent = (props) => {
     return (
-      <Box>
-               <Typography variant="h6">Deliver Time (days)</Typography>
-        <Box display={isItXsOrSm?"":"flex"}>
-        <Box className={classes.ratingContainer}>
-        <RadioGroup
-          aria-label="Rating"
-          name="ratingOptions"
-          value={value}
-          onChange={handleRadioChange}
-          className={classes.elements}
-          
-        >
-          {options.map(({optionTitle, value}) => {
-            return (
-              <FormControlLabel
-                value={""+value}
-                control={<Radio size="small" color="primary"/>}
-                label={<Typography>{optionTitle}</Typography>}
-              />
-            );
-          })}
-        </RadioGroup>
-        </Box>
-        <Box mt={isItXsOrSm?1:0}>
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          fullWidth
-        >
-          Clear Filters
-        </Button>
-        </Box>
-        </Box>
-      </Box>
-        
+      <ExpandMoreIcon
+        className={props.className + " " + borderSelectClasses.icon}
+      />
     );
   };
-  
+
+  const isItSmallOrExtraSmall = useMediaQuery("(max-width: 960px)");
+
+  const [postStatus, setPostStatus] = useState('none');
+
+  // const dispatch=useDispatch()
+  const handlePostStatusChange = (event) => {
+    setPostStatus(event.target.value);
+    // dispatch(filterByPrice(event.target.value))
+  };
+
+    const options = [
+    {
+      optionTitle: "Less than $100",
+      value: '0-100',
+    },
+    {
+      optionTitle: "$100-$500",
+      value: '100-500',
+    },
+    {
+      optionTitle: "$500-$1k",
+      value: '500-1000',
+    },
+    {
+      optionTitle: "$1k-$10k",
+      value: '1000-10000',
+    },
+    {
+      optionTitle: "Above $10k",
+      value: '10000-all',
+    },
+  ];
+
+
+  return (
+    <Grid container>
+      <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+        <Box>
+          <Select
+            disableUnderline
+            classes={{ root: borderSelectClasses.select }}
+            labelId="inputLabel"
+            IconComponent={iconComponent}
+            MenuProps={menuProps}
+            value={postStatus}
+            onChange={handlePostStatusChange}
+          >
+            <MenuItem value={'none'} disabled>
+              <Typography className={classes.categoryText}>
+                Post Price
+              </Typography>
+            </MenuItem>
+            {
+              options.map(({optionTitle, value})=>{
+                return (
+                  <MenuItem value={value}>
+                  <Typography className={classes.categoryText}>
+                    {optionTitle}
+                  </Typography>
+                </MenuItem>
+                )
+              })
+            }
+          </Select>
+        </Box>
+      </Grid>
+    </Grid>
+  );
+};

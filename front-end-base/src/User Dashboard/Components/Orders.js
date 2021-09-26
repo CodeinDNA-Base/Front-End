@@ -1,5 +1,6 @@
 //ReactJS
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 
@@ -21,7 +22,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Fade
+  Fade,
 } from "@material-ui/core";
 
 //Material-UI
@@ -29,12 +30,29 @@ import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 
 //Styles and theme
 
-import "./Styles/Orders.css"
+import "./Styles/Orders.css";
 //Icons
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 
 //Resources
+
+//Redux
+
+import { useDispatch, useSelector } from "react-redux";
+//action creators
+
+//selectors
+
+import {
+  selectAllOrders,
+  selectAreAllOrdersLoading,
+  selectHasError,
+} from "../Redux/slices/allOrdersSlice";
+//thunks
+
+import { fetchAllOrders } from "../Redux/slices/allOrdersSlice";
+import { lightBorder } from "../../Theme/borders";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -73,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     justifyContent: "center",
     backgroundColor: theme.palette.background.paper,
+    border: lightBorder,
   },
   scroller: {
     flexGrow: 0,
@@ -133,7 +152,7 @@ export const Orders = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar position="static" color="default" elevation={0}>
         <Tabs
           classes={{ root: classes.root, scroller: classes.scroller }}
           value={value}
@@ -173,313 +192,207 @@ export const Orders = () => {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <OrdersTable tabTitle="Newest Orders" status="Newest" />
+          <OrdersTable tabTitle="Newest Orders" status="newest" />
         </TabPanel>
 
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <OrdersTable tabTitle="Active Orders" status="Active" />
+          <OrdersTable tabTitle="Active Orders" status="active" />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <OrdersTable tabTitle="Late Orders" status="Late" />
+          <OrdersTable tabTitle="Late Orders" status="late" />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <OrdersTable tabTitle="Delivered Orders" status="Delivered" />
+          <OrdersTable tabTitle="Delivered Orders" status="delivered" />
         </TabPanel>
 
         <TabPanel value={value} index={4} dir={theme.direction}>
-          <OrdersTable tabTitle="Completed Orders" status="Completed" />
+          <OrdersTable tabTitle="Completed Orders" status="completed" />
         </TabPanel>
         <TabPanel value={value} index={5} dir={theme.direction}>
-          <OrdersTable tabTitle="Cancelled Orders" status="Cancelled" />
+          <OrdersTable tabTitle="Cancelled Orders" status="cancelled" />
         </TabPanel>
       </SwipeableViews>
     </div>
   );
 };
 
-
-
-
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: "#011C38",
+    color: "#fff",
+    fontWeight: 700,
   },
   body: {
     fontSize: 14,
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
-
-
+const StyledTableRow = withStyles((theme) => ({}))(TableRow);
 
 const tableStyles = makeStyles({
   table: {
-    minWidth:700,
+    minWidth: 700,
   },
 });
 
-const OrdersTable=(props)=>{
-  const newestOrdersDetail = [
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-  ];
-  
-  const activeOrdersDetail = [
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-  ];
-  
-  const lateOrdersDetail = [
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      deliveredOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      deliveredOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      deliveredOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-  ];
+const OrdersTable = (props) => {
+  //Fetch respective orders from store when clicked on particular tab
 
-  const deliveredOrdersDetail = [
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      deliveredOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      deliveredOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      deliveredOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-  ];
+  const dispatch = useDispatch();
 
-  const completedOrdersDetail = [
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      deliveredOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      deliveredOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      deliveredOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-  ];
+  const allOrders = useSelector(selectAllOrders);
+  const isLoading = useSelector(selectAreAllOrdersLoading);
+  const encounteredError = useSelector(selectHasError);
+  const [orders, setOrders] = useState([]);
 
-  const cancelledOrdersDetail = [
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-    {
-      orderId:12,
-      seller:"CODEINDNA",
-      serviceOrProject:"Web Development",
-      dueOn:new Date().toLocaleDateString(),
-      price:451,
-      status:"New", 
-    },
-  ];
-  
-  function checkStatus(){
-    if(status=="Newest")
-      return newestOrdersDetail;
-    else if(status=="Active")
-      return activeOrdersDetail;
-    else if(status=="Late")
-      return lateOrdersDetail;
-    else if(status=="Delivered")
-      return deliveredOrdersDetail;
-    else if(status=="Completed")
-      return completedOrdersDetail;
-    else if(status=="Cancelled")
-      return cancelledOrdersDetail;
+  useEffect(() => {
+    dispatch(
+      //pass an object, telling which orders to load: in this case load all
+      fetchAllOrders({
+        active: true,
+        completed: true,
+        cancelled: true,
+        all: true,
+        late: true,
+        newest: true,
+        delivered: true,
+      })
+    );
+  }, [dispatch]);
 
+  useEffect(() => {
+    setOrders(allOrders);
+  }, [allOrders]);
+
+  function checkStatus() {
+    if (status == "newest") {
+      if (!isLoading) {
+        return orders.filter((order) => order.status == "newest");
+      } else {
+        return orders;
+      }
+    } else if (status == "active")
+      if (!isLoading) {
+        return orders.filter((order) => order.status == "active");
+      } else {
+        return orders;
+      }
+    else if (status == "late")
+      if (!isLoading) {
+        return orders.filter((order) => order.status == "late");
+      } else {
+        return orders;
+      }
+    else if (status == "delivered")
+      if (!isLoading) {
+        return orders.filter((order) => order.status == "delivered");
+      } else {
+        return orders;
+      }
+    else if (status == "completed")
+      if (!isLoading) {
+        return orders.filter((order) => order.status == "completed");
+      } else {
+        return orders;
+      }
+    else if (status == "cancelled")
+      if (!isLoading) {
+        return orders.filter((order) => order.status == "cancelled");
+      } else {
+        return orders;
+      }
   }
-  
+
   const classes = tableStyles();
-  
-  const status=props.status;
-  const title=props.tabTitle;
+
+  const status = props.status;
+  const title = props.tabTitle;
 
   return (
-    <div>
-    <h4>{title}</h4>
-    
-    <TableContainer>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Seller</StyledTableCell>
-            <StyledTableCell align="right">Service/Project</StyledTableCell>
-            <StyledTableCell align="right">Due On</StyledTableCell>
-            {
-              (status=="Delivered" || status=="Completed" || status=="Late")? 
-              <StyledTableCell align="right">Delivered On</StyledTableCell>:""
-            }
-            <StyledTableCell align="right">Total Price</StyledTableCell>
-            <StyledTableCell align="right">Status</StyledTableCell>
-            <StyledTableCell align="right">More</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {checkStatus().map((order) => (
-            <StyledTableRow hover={true} key={order.orderId} className="tableRow">
-              <StyledTableCell component="th" scope="row">
-                {order.seller}
-              </StyledTableCell>
-              <StyledTableCell align="right">{order.serviceOrProject}</StyledTableCell>
-              <StyledTableCell align="right">{order.dueOn}</StyledTableCell>
-              {
-              (status=="Delivered" || status=="Completed" || status=="Late")? 
-                <StyledTableCell align="right">{order.deliveredOn}</StyledTableCell>:""
-              }
-              <StyledTableCell align="right">${order.price}</StyledTableCell>
-              <StyledTableCell align="right">{order.status}</StyledTableCell>
-              <StyledTableCell align="right"><OrderOptionsMenu status={props.status}/></StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </div>
+    <Box mt={-3}>
+      <h4>{title}</h4>
+
+      <TableContainer>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Seller</StyledTableCell>
+              <StyledTableCell align="right">Service/Project</StyledTableCell>
+              <StyledTableCell align="right">Due On</StyledTableCell>
+              {status == "delivered" ||
+              status == "completed" ||
+              status == "late" ? (
+                <StyledTableCell align="right">Delivered On</StyledTableCell>
+              ) : (
+                ""
+              )}
+              <StyledTableCell align="right">Total Price</StyledTableCell>
+              <StyledTableCell align="right">Status</StyledTableCell>
+              <StyledTableCell align="right">More</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {isLoading ? (
+              <h1>Loading data</h1>
+            ) : (
+              checkStatus().map((order) => (
+                <StyledTableRow key={order.orderId}>
+                  <StyledTableCell component="th" scope="row">
+                    {order.seller}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {order.service_project_title}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{order.dueOn}</StyledTableCell>
+                  {status == "delivered" ||
+                  status == "completed" ||
+                  status == "late" ? (
+                    <StyledTableCell align="right">
+                      {order.deliveredOn}
+                    </StyledTableCell>
+                  ) : (
+                    ""
+                  )}
+                  <StyledTableCell align="right">
+                    ${order.totalPrice}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {order.status}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    <OrderOptionsMenu orderId={order.orderId} />
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
-}
+};
 
+function OrderOptionsMenu(props) {
+  const [orderId, setOrderId] = useState();
 
+  useEffect(() => {
+    setOrderId(props.orderId);
+  }, [props]);
 
-
-function OrderOptionsMenu() {
-  
-  const options = [{
+  const options = [
+    {
       optionTitle: "View Order",
       route: "/vieworder",
-  },
-  {
-    optionTitle: "Contact Seller",
-    route: "/messaging",
-  }
+    },
+
+    {
+      optionTitle: "Contact Seller",
+      route: "/messaging",
+    },
   ];
 
   const ITEM_HEIGHT = 48;
-  
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -502,7 +415,6 @@ function OrderOptionsMenu() {
         <MoreVertIcon />
       </IconButton>
       <Menu
-        
         id="long-menu"
         anchorEl={anchorEl}
         keepMounted
@@ -511,19 +423,25 @@ function OrderOptionsMenu() {
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
+            width: "20ch",
           },
         }}
         TransitionComponent={Fade}
       >
-        {options.map(({optionTitle, route}) =>{
-          return(
-            <Link to={route} className="linkStyle">
-            <MenuItem key={optionTitle}>
-              {optionTitle}
-            </MenuItem>
+        {options.map(({ optionTitle, route }) => {
+          return (
+            <Link
+              to={{
+                pathname: route,
+                state: {
+                  orderId: orderId,
+                },
+              }}
+              className="linkStyle"
+            >
+              <MenuItem key={optionTitle}>{optionTitle}</MenuItem>
             </Link>
-          )
+          );
         })}
       </Menu>
     </div>

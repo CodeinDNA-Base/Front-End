@@ -4,103 +4,139 @@ import React, { useState } from "react";
 //Material-UI core
 import {
   Box,
-  FormControlLabel,
   makeStyles,
-  Radio,
-  RadioGroup,
   Typography,
   useMediaQuery,
+  MenuItem,
+  Select,
+  Grid
 } from "@material-ui/core";
 
 //Material-UI styles
+import { useBorderSelectStyles } from "@mui-treasury/styles/select/border";
 
 //Custom Components
 
 //Icons
-
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 //Styles and Theme
 
-//Router
+//Redux
+import { useDispatch, useSelector } from "react-redux";
 
-//Resources
+//selectors
+import {
+  selectFilteredCategory,
+  selectFilteredPrice,
+  selectFilteredStatus,
+} from "../../Redux/slices/previousPostsFilterSlice";
+//action creators
+import {filterByCategory, filterByPrice, filterByStatus} from "../../Redux/slices/previousPostsFilterSlice"
 
-const priceFilterStyles = makeStyles((theme) => ({
-  elements: {
-    display: "inline",
+const optionsStyles = makeStyles((theme) => ({
+  categoryText: {
+    fontWeight: "bold",
+    color: "black",
   },
-  ratingContainer: {
+  categoryBox: {
     flex: 1,
   },
 }));
 
 export const FilterByPrice = () => {
-  const classes = priceFilterStyles();
-  const [value, setValue] = React.useState("");
+  const classes = optionsStyles();
 
-  const options = [
-    {
-      optionTitle: "Any time",
-      value: 0,
+  const borderSelectClasses = useBorderSelectStyles();
+
+  const menuProps = {
+    classes: {
+      list: borderSelectClasses.list,
     },
-    {
-      optionTitle: "1 day",
-      value: 1,
+    anchorOrigin: {
+      vertical: "bottom",
+      horizontal: "left",
     },
-    {
-      optionTitle: "3 days",
-      value: 3,
+    transformOrigin: {
+      vertical: "top",
+      horizontal: "left",
     },
-    {
-      optionTitle: "5 days",
-      value: 5,
-    },
-    {
-      optionTitle: "7 days",
-      value: 7,
-    },
-    {
-      optionTitle: "15 days",
-      value: 15,
-    },
-    {
-      optionTitle: "1 month",
-      value: 30,
-    },
-    {
-      optionTitle: "1-3 months",
-      value: 90,
-    },
-  ];
-  const handleRadioChange = (event) => {
-    console.log(event.target.value);
-    setValue(event.target.value);
+    getContentAnchorEl: null,
   };
 
-  const isItXsOrSm = useMediaQuery("(max-width: 959px)");
+  const iconComponent = (props) => {
+    return (
+      <ExpandMoreIcon
+        className={props.className + " " + borderSelectClasses.icon}
+      />
+    );
+  };
+
+  const isItSmallOrExtraSmall = useMediaQuery("(max-width: 960px)");
+
+  const [postStatus, setPostStatus] = useState('none');
+
+  const dispatch=useDispatch()
+  const handlePostStatusChange = (event) => {
+    setPostStatus(event.target.value);
+    dispatch(filterByPrice(event.target.value))
+  };
+
+    const options = [
+    {
+      optionTitle: "Less than $100",
+      value: '0-100',
+    },
+    {
+      optionTitle: "$100-$500",
+      value: '100-500',
+    },
+    {
+      optionTitle: "$500-$1k",
+      value: '500-1000',
+    },
+    {
+      optionTitle: "$1k-$10k",
+      value: '1000-10000',
+    },
+    {
+      optionTitle: "Above $10k",
+      value: '10000-all',
+    },
+  ];
+
+
   return (
-    <Box>
-      <Typography variant="h6">Post Price</Typography>
-      <Box display={isItXsOrSm ? "" : "flex"}>
-        <Box className={classes.ratingContainer}>
-          <RadioGroup
-            aria-label="Rating"
-            name="ratingOptions"
-            value={value}
-            onChange={handleRadioChange}
-            className={classes.elements}
+    <Grid container>
+      <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+        <Box>
+          <Select
+            disableUnderline
+            classes={{ root: borderSelectClasses.select }}
+            labelId="inputLabel"
+            IconComponent={iconComponent}
+            MenuProps={menuProps}
+            value={postStatus}
+            onChange={handlePostStatusChange}
           >
-            {options.map(({ optionTitle, value }) => {
-              return (
-                <FormControlLabel
-                  value={"" + value}
-                  control={<Radio size="small" color="primary" />}
-                  label={<Typography>{optionTitle}</Typography>}
-                />
-              );
-            })}
-          </RadioGroup>
+            <MenuItem value={'none'} disabled>
+              <Typography className={classes.categoryText}>
+                Post Price
+              </Typography>
+            </MenuItem>
+            {
+              options.map(({optionTitle, value})=>{
+                return (
+                  <MenuItem value={value}>
+                  <Typography className={classes.categoryText}>
+                    {optionTitle}
+                  </Typography>
+                </MenuItem>
+                )
+              })
+            }
+          </Select>
         </Box>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 };

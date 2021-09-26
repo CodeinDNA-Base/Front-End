@@ -1,117 +1,137 @@
-import React from "react";
+//ReactJS
+import React, { useState } from "react";
 
+//Material-UI core
 import {
-  TextField,
-  Button,
-  Typography,
-  Slider,
+  Box,
   makeStyles,
+  Typography,
+  useMediaQuery,
+  MenuItem,
+  Select,
+  Grid
 } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    justifyContent: "center",
-    backgroundColor: theme.palette.background.paper,
+//Material-UI styles
+import { useBorderSelectStyles } from "@mui-treasury/styles/select/border";
+
+//Custom Components
+
+//Icons
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+//Styles and Theme
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+
+//selectors
+
+//action creators
+
+const optionsStyles = makeStyles((theme) => ({
+  categoryText: {
+    fontWeight: "bold",
+    color: "black",
   },
-  scroller: {
-    flexGrow: 0,
-  },
-  priceRangeFormTextFields: {
-    [theme.breakpoints.down("sm")]: {
-      width: "48%",
-      marginTop: "1rem",
-    },
-    marginLeft: "2%",
-  },
-  priceRangeFormButtons: {
-    [theme.breakpoints.up("md")]: {
-      marginTop: "-0.6rem",
-      marginLeft: "1rem",
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "48%",
-      marginTop: "1rem",
-    },
-    marginLeft: "2%",
+  categoryBox: {
+    flex: 1,
   },
 }));
 
 export const FilterByPrice = () => {
-  const classes = useStyles();
+  const classes = optionsStyles();
 
-  return (
-    <div>
-      <form className={classes.priceRangeForm} noValidate autoComplete="off">
-        <Typography variant="h6">Price Range $</Typography>
-        <PriceRange />
+  const borderSelectClasses = useBorderSelectStyles();
 
-        <TextField
-          label="Min"
-          id="outlined-size-small"
-          defaultValue=""
-          variant="outlined"
-          size="small"
-          className={classes.priceRangeFormTextFields}
-        />
-        <TextField
-          label="Max"
-          id="outlined-size-small"
-          defaultValue=""
-          variant="outlined"
-          size="small"
-          className={classes.priceRangeFormTextFields}
-        />
-        <Button
-          variant="contained"
-          className={classes.priceRangeFormButtons}
-          style={{ backgroundColor: "#011c38", color: "white" }}
-          size="small"
-        >
-          Apply
-        </Button>
-        <Button
-          variant="contained"
-          className={classes.priceRangeFormButtons}
-          color="secondary"
-          size="small"
-        >
-          Clear
-        </Button>
-      </form>
-    </div>
-  );
-};
-
-const stylesHook = makeStyles((theme) => ({
-  root: {
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-      marginBottom: "2px",
+  const menuProps = {
+    classes: {
+      list: borderSelectClasses.list,
     },
-    width: "18rem",
-  },
-}));
-
-function valuetext(value) {
-  return `${value}°C`;
-}
-
-const PriceRange = () => {
-  const classes = stylesHook();
-  const [value, setValue] = React.useState([5, 50]);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+    anchorOrigin: {
+      vertical: "bottom",
+      horizontal: "left",
+    },
+    transformOrigin: {
+      vertical: "top",
+      horizontal: "left",
+    },
+    getContentAnchorEl: null,
   };
 
+  const iconComponent = (props) => {
+    return (
+      <ExpandMoreIcon
+        className={props.className + " " + borderSelectClasses.icon}
+      />
+    );
+  };
+
+  const isItSmallOrExtraSmall = useMediaQuery("(max-width: 960px)");
+
+  const [postStatus, setPostStatus] = useState('none');
+
+  const dispatch=useDispatch()
+  const handlePostStatusChange = (event) => {
+    setPostStatus(event.target.value);
+    // dispatch(filterByPrice(event.target.value))
+  };
+
+    const options = [
+    {
+      optionTitle: "Less than $100",
+      value: '0-100',
+    },
+    {
+      optionTitle: "$100-$500",
+      value: '100-500',
+    },
+    {
+      optionTitle: "$500-$1k",
+      value: '500-1000',
+    },
+    {
+      optionTitle: "$1k-$10k",
+      value: '1000-10000',
+    },
+    {
+      optionTitle: "Above $10k",
+      value: '10000-all',
+    },
+  ];
+
+
   return (
-    <Slider
-      value={value}
-      onChange={handleChange}
-      valueLabelDisplay="auto"
-      aria-labelledby="range-slider"
-      getAriaValueText={valuetext}
-      className={classes.root}
-    />
+    <Grid container>
+      <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+        <Box>
+          <Select
+            disableUnderline
+            classes={{ root: borderSelectClasses.select }}
+            labelId="inputLabel"
+            IconComponent={iconComponent}
+            MenuProps={menuProps}
+            value={postStatus}
+            onChange={handlePostStatusChange}
+          >
+            <MenuItem value={'none'} disabled>
+              <Typography className={classes.categoryText}>
+                Post Price
+              </Typography>
+            </MenuItem>
+            {
+              options.map(({optionTitle, value})=>{
+                return (
+                  <MenuItem value={value}>
+                  <Typography className={classes.categoryText}>
+                    {optionTitle}
+                  </Typography>
+                </MenuItem>
+                )
+              })
+            }
+          </Select>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };

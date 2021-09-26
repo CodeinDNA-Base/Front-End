@@ -1,30 +1,31 @@
- //ReactJS
- import React from "react";
+//ReactJS
+import React, { useState, useEffect } from "react";
+import { Scrollbars } from "react-custom-scrollbars-2";
 
- //Material-UI core
- import {
-   AppBar,
-   Divider,
-   IconButton,
-   InputBase,
-   Menu,
-   Typography,
-   Zoom, Badge,
-   Toolbar,
-   Button,
-   Box,
-   useScrollTrigger,
-   Hidden,
-   Fab,
-   Fade,
-   SwipeableDrawer,
-   List,
-   ListItem,
-   ListItemIcon,
-   ListItemText,
-   ListItemAvatar,
-   Avatar,
- } from "@material-ui/core";
+//Material-UI core
+import {
+  AppBar,
+  Divider,
+  IconButton,
+  InputBase,
+  Menu,
+  Typography,
+  Zoom,
+  Badge,
+  Toolbar,
+  Box,
+  useScrollTrigger,
+  Hidden,
+  Fab,
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  useMediaQuery,
+} from "@material-ui/core";
 
 //Mateirial-UI styles
 import { alpha, makeStyles, withStyles } from "@material-ui/core/styles";
@@ -34,7 +35,7 @@ import { Rating } from "@material-ui/lab";
 //Icons
 
 import MenuIcon from "@material-ui/icons/Menu";
-import NotificationIcon from "@material-ui/icons/NotificationImportant";
+import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
 import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
@@ -44,6 +45,10 @@ import OrdersIcon from "@material-ui/icons/AddShoppingCart";
 import InboxIcon from "@material-ui/icons/Inbox";
 import SettingsIcon from "@material-ui/icons/Settings";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
+import ExploreIcon from "@material-ui/icons/Explore";
+import FeaturedPlayListIcon from "@material-ui/icons/FeaturedPlayList";
+import VolumeUpIcon from "@material-ui/icons/VolumeUp";
+import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 
 //Routing
 import { Link } from "react-router-dom";
@@ -52,14 +57,33 @@ import { Link } from "react-router-dom";
 import logo from "../Resources/upwork.svg";
 import profilePic from "../Resources/nadir.jpg";
 
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+
+//action creators
+
+//selectors
+import {
+  selectNotifications,
+  selectIsLoadingNotifications,
+  selectHasErrorNotifications,
+} from "../Redux/slices/dashboardNotificationsSlice";
+
+//thunks
+import { fetchNotifications } from "../Redux/slices/dashboardNotificationsSlice";
+
 //Styles and CSS
 import "./Styles/MenubarStyles.css";
-import { PostAdd } from "@material-ui/icons";
+import { PostAdd, Speaker } from "@material-ui/icons";
 
+//Custom components
+
+import Searchbar from "../../CustomComponents/UI/Searchbar/Searchbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
+    zIndex:10,
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
@@ -76,21 +100,6 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
-    },
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
     },
   },
   searchIcon: {
@@ -126,210 +135,289 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "0.5rem",
   },
   profileMenu: {
-    marginTop: "1rem",
+    marginTop: "0.5rem",
+  },
+  notificationMenu: {
+    marginTop: "0.5rem",
+  },
+  timeStyles: {
+    fontSize: "0.7rem",
+    fontWeight: "bold",
+  },
+  notificationIcon: {
+    marginTop: 15,
+    marginRight: 25,
+    marginLeft: 10,
+    cursor: "pointer",
+  },
+  notificationText: {
+    overflow: "hidden",
+  },
+  notificationAppBar: {
+    top: "auto",
+    position: "sticky",
+    backgroundColor: "#FFFFFF",
+  },
+  linkStyle: {
+    textDecoration: "none",
+    color: "#000000",
   },
 }));
 
 export const Menubar = (props) => {
   const classes = useStyles();
-  
-  const [notificationMenuAnchor, setNotificationMenuAnchor] = React.useState(null);
-  const isNotificationMenuOpen = Boolean(notificationMenuAnchor);
-
 
   //Notification Menu
-  const   handleNotificationMenuOpen = (event) => {
+
+  const [notificationMenuAnchor, setNotificationMenuAnchor] = useState(null);
+  const [isVolumeOn, setIsVolumeOn] = useState(true);
+  const isNotificationMenuOpen = Boolean(notificationMenuAnchor);
+
+  const handleNotificationMenuOpen = (event) => {
+    console.log(event.currentTarget);
     setNotificationMenuAnchor(event.currentTarget);
   };
 
-  const   handleNotificationMenuClose = () => {
+  const handleNotificationMenuClose = () => {
     setNotificationMenuAnchor(null);
   };
 
+  function handleNotificationVolume() {
+    setIsVolumeOn((prev) => !prev);
+  }
   //Notification Menu options/items
-  
-  const notificationDetails=[
-    {
-      notificationId:0,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
-    },
-    {
-      notificationId:1,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
-    },
-    {
-      notificationId:2,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
-    },
-    {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
-    },
-    {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
-    },
-    {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
-    },
-    {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
-    },
-    {
-      notificationId:3,
-      content:"Payment method added",
-      time:new Date().toLocaleTimeString(),
-      icon:<LogoutIcon />,
-      route:"/"
-    },
-    
-  ]
+
+  const dispatch = useDispatch();
+  const notificationsData = useSelector(selectNotifications);
+  const isLoading = useSelector(selectIsLoadingNotifications);
+  const encounteredError = useSelector(selectHasErrorNotifications);
+
+  useEffect(() => {
+    dispatch(fetchNotifications("email of user or id"));
+  }, [dispatch]);
+
   const notificationMenuId = "primary-search-account-menu";
   const renderNotificationMenu = (
-  <Menu
-    className={classes.profileMenu}
-    anchorEl={notificationMenuAnchor}
-    id={notificationMenuId}
-    keepMounted
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    open={isNotificationMenuOpen}
-    onClose={handleNotificationMenuClose}
-    TransitionComponent={Zoom}
+    <Menu
+      className={classes.notificationMenu}
+      anchorEl={notificationMenuAnchor}
+      id={notificationMenuId}
+      keepMounted
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      open={isNotificationMenuOpen}
+      onClose={handleNotificationMenuClose}
+      TransitionComponent={Zoom}
+      PaperProps={{
+        style: {
+          maxHeight: 100 * 10,
+          width: "35ch",
+        },
+      }}
+    >
+      <Scrollbars autoHeight autoHide>
+        {notificationsData.map((notf, index) => {
+          return (
+            <Link
+              to={notf.route}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <ListItem button key={notf.notificationId}>
+                <ListItemIcon>{notf.icon}</ListItemIcon>
+                <ListItemText
+                  primary={
+                    <span className={classes.notificationText}>
+                      {notf.content}
+                    </span>
+                  }
+                  secondary={
+                    <span className={classes.timeStyles}>
+                      {notf.deliveryTime}
+                    </span>
+                  }
+                />
+              </ListItem>
+              <Divider />
+            </Link>
+          );
+        })}
+      </Scrollbars>
+      <Box className={classes.notificationAppBar}>
+        <Toolbar>
+          {isVolumeOn ? (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleNotificationVolume}
+            >
+              <VolumeUpIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleNotificationVolume}
+            >
+              <VolumeOffIcon />
+            </IconButton>
+          )}
 
-    PaperProps={{
-      style: {
-        maxHeight: 48 * 10,
-        width: '30ch',
-      },
-    }}
-  >
-    {notificationDetails.map(({ notificationId, content, time, icon, route }) => {
-        return (
-          <>
-          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
-          <ListItem button key={notificationId}>
-            <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={content} />
-          </ListItem>
+          {/* <div className={classes.grow} /> */}
+          <Link to="/settings" className={classes.linkStyle}>
+            <IconButton color="inherit">
+              <SettingsIcon />
+            </IconButton>
           </Link>
-          <Divider />
-          </>
-        );
-      })}
+        </Toolbar>
+      </Box>
     </Menu>
   );
 
+  //User profile Menu
 
-//User profile Menu
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const isMenuOpen = Boolean(anchorEl);
 
-const [anchorEl, setAnchorEl] = React.useState(null);
-const isMenuOpen = Boolean(anchorEl);
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-const handleProfileMenuOpen = (event) => {
-  setAnchorEl(event.currentTarget);
-};
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
-const handleMenuClose = () => {
-  setAnchorEl(null);
-};
+  const profileMenuOptions = [
+    {
+      optionTitle: "Settings",
+      optionIcon: <SettingsIcon />,
+      route: "/settings",
+    },
+    {
+      optionTitle: "Logout",
+      optionIcon: <LogoutIcon />,
+      route: "/",
+    },
+  ];
 
-const profileMenuOptions = [
-  {
-    optionTitle: "Settings",
-    optionIcon: <SettingsIcon />,
-    route: "/settings",
-  },
-  {
-    optionTitle: "Logout",
-    optionIcon: <LogoutIcon />,
-    route: "/",
-  },
-];
-
-const menuId = "primary-search-account-menu";
-const renderMenu = (
-  <Menu
-    className={classes.profileMenu}
-    anchorEl={anchorEl}
-    id={menuId}
-    keepMounted
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    open={isMenuOpen}
-    onClose={handleMenuClose}
-    TransitionComponent={Zoom}
-    // elevation={4}
-  >
-    <ListItem>
-      <ListItemAvatar>
-        <Avatar
-          src={profilePic}
-          onClick={() => {
-            alert("Display Full Image of User");
-          }}
-          style={{ cursor: "pointer" }}
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      className={classes.profileMenu}
+      anchorEl={anchorEl}
+      id={menuId}
+      keepMounted
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+      TransitionComponent={Zoom}
+      // elevation={4}
+    >
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar
+            src={profilePic}
+            onClick={() => {
+              alert("Display Full Image of User");
+            }}
+            style={{ cursor: "pointer" }}
+          />
+        </ListItemAvatar>
+        <ListItemText
+          className={classes.profileMenuInfo}
+          primary={<Typography variant="h6">Nadir Hussain</Typography>}
         />
-      </ListItemAvatar>
-      <ListItemText
-        className={classes.profileMenuInfo}
-        primary={<Typography variant="h6">Nadir Hussain</Typography>}
-      />
-    </ListItem>
-    <Divider />
-    {profileMenuOptions.map(({ optionTitle, optionIcon, route }) => {
+      </ListItem>
+      <Divider />
+      {profileMenuOptions.map(({ optionTitle, optionIcon, route }) => {
         return (
           <Link to={route} style={{ textDecoration: "none", color: "black" }}>
-          <ListItem button key={optionTitle}>
-            <ListItemIcon>{optionIcon}</ListItemIcon>
+            <ListItem button key={optionTitle}>
+              <ListItemIcon>{optionIcon}</ListItemIcon>
               <ListItemText primary={optionTitle} />
-          </ListItem>
+            </ListItem>
           </Link>
         );
       })}
     </Menu>
   );
 
-  function handleSearch(event) {
+  //Explore menu
+  const [exploreMenuAnchor, setExploreMenuAnchor] = useState(null);
+  const isExploreMenuOpen = Boolean(exploreMenuAnchor);
 
-  }
+  const handleExploreMenuOpen = (event) => {
+    setExploreMenuAnchor(event.currentTarget);
+  };
+
+  const handleExploreMenuClose = () => {
+    setExploreMenuAnchor(null);
+  };
+
+  const exploreMenuOptions = [
+    {
+      optionTitle: "Services",
+      optionIcon: <FeaturedPlayListIcon />,
+      route: "/services",
+    },
+    {
+      optionTitle: "Projects",
+      optionIcon: <FeaturedPlayListIcon />,
+      route: "/searchproject",
+    },
+  ];
+
+  const exploreMenuId = "primary-search-account-menu";
+  const renderExploreMenu = (
+    <Menu
+      className={classes.profileMenu}
+      anchorEl={exploreMenuAnchor}
+      id={exploreMenuId}
+      keepMounted
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      open={isExploreMenuOpen}
+      onClose={handleExploreMenuClose}
+      TransitionComponent={Zoom}
+      // elevation={4}
+    >
+      {exploreMenuOptions.map(({ optionTitle, optionIcon, route }) => {
+        return (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+            <ListItem button key={optionTitle}>
+              <ListItemIcon>{optionIcon}</ListItemIcon>
+              <ListItemText primary={optionTitle} />
+            </ListItem>
+          </Link>
+        );
+      })}
+    </Menu>
+  );
+
+  function handleSearch(event) {}
 
   function ScrollTop(props) {
     const { children, window } = props;
@@ -376,51 +464,51 @@ const renderMenu = (
     },
   ];
 
+  const isMobile = useMediaQuery("(max-width: 600px)");
+
   return (
     <div className={classes.grow}>
       <AppBar className={classes.menuContainer}>
         <Toolbar>
-        <Hidden only={["lg", "xl"]}>
+          <Hidden only={["lg", "xl"]}>
             <DrawerComponent />
           </Hidden>
           <Hidden only={["xs"]}>
-          <Link to="/">
+            <Link to="/">
               <img src={logo} style={{ cursor: "pointer" }} />
             </Link>
           </Hidden>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-              onClick={handleSearch}
-            />
-          </div>
+          <Box ml={isMobile?2:6}>
+            {isMobile ? (
+              <Searchbar placeholder="Seach Anything" width={265}/>
+            ) : (
+              <Searchbar placeholder="Seach Anything" />
+            )}
+          </Box>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Box spacing={2} m={2}>
-            {menuOptions.map(({ optionTitle, route }) => {
-                return (
-                    <Link to={route} className="menuBarItem">
-                      {optionTitle}
-                    </Link>
+              {menuOptions.map(({ optionTitle, route }) => {
+                return optionTitle == "Explore" ? (
+                  <Link className="menuBarItem" onClick={handleExploreMenuOpen}>
+                    Explore
+                  </Link>
+                ) : (
+                  <Link to={route} className="menuBarItem">
+                    {optionTitle}
+                  </Link>
                 );
               })}
             </Box>
-            <IconButton
-              aria-label="account of current user"
-              aria-haspopup="true"
+
+            <Badge
+              badgeContent={8}
+              color="primary"
+              className={classes.notificationIcon}
               onClick={handleNotificationMenuOpen}
-              color="inherit"
             >
-              <NotificationIcon />
-            </IconButton>
+              <CircleNotificationsIcon />
+            </Badge>
             <Avatar
               className={classes.avatar}
               src={profilePic}
@@ -432,6 +520,7 @@ const renderMenu = (
       </AppBar>
       {renderMenu}
       {renderNotificationMenu}
+      {renderExploreMenu}
       <Toolbar id="back-to-top-anchor" />
       <ScrollTop {...props}>
         <Fab
@@ -510,11 +599,20 @@ function DrawerComponent() {
       optionIcon: <InboxIcon />,
       route: "/inbox",
     },
-
+    {
+      optionTitle: "Explore Services",
+      optionIcon: <ExploreIcon />,
+      route: "/services",
+    },
+    {
+      optionTitle: "Explore Project",
+      optionIcon: <ExploreIcon />,
+      route: "/searchproject",
+    },
     {
       optionTitle: "Post Request",
       optionIcon: <PostAdd />,
-      route:"/postrequest"
+      route: "/postrequest",
     },
     {
       optionTitle: "Orders",
@@ -527,7 +625,7 @@ function DrawerComponent() {
       route: "/settings",
     },
   ];
-const classes = drawerStyles();
+  const classes = drawerStyles();
   const [state, setState] = React.useState({
     left: false,
   });
@@ -559,33 +657,32 @@ const classes = drawerStyles();
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right",
-              }} variant="dot"
-              >
-                <Avatar
-                  className={classes.avatar}
-                  src={profilePic}
-                  onClick={() => {
-                    alert("Display Full Image of User");
-                  }}
-                  style={{ cursor: "pointer" }}
-                />
-              </StyledBadge>
-            </ListItemAvatar>
-            <ListItemText
-              className={classes.profileInfo}
-              primary={<Typography variant="h6">Nadir Hussain</Typography>}
-              secondary={<Rating value="3" size="small" readOnly />}
-            />
-          </ListItem>
-        </List>
-  
-        <Divider />
-        <List>{drawerOptions.map(({ optionTitle, optionIcon, route }) => (
-          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
-            <ListItem
-              button
-              key={optionTitle}
+              }}
+              variant="dot"
             >
+              <Avatar
+                className={classes.avatar}
+                src={profilePic}
+                onClick={() => {
+                  alert("Display Full Image of User");
+                }}
+                style={{ cursor: "pointer" }}
+              />
+            </StyledBadge>
+          </ListItemAvatar>
+          <ListItemText
+            className={classes.profileInfo}
+            primary={<Typography variant="h6">Nadir Hussain</Typography>}
+            secondary={<Rating value="3" size="small" readOnly />}
+          />
+        </ListItem>
+      </List>
+
+      <Divider />
+      <List>
+        {drawerOptions.map(({ optionTitle, optionIcon, route }) => (
+          <Link to={route} style={{ textDecoration: "none", color: "black" }}>
+            <ListItem button key={optionTitle}>
               <ListItemIcon>{optionIcon}</ListItemIcon>
               <ListItemText primary={optionTitle} />
             </ListItem>
@@ -608,7 +705,7 @@ const classes = drawerStyles();
   );
 
   return (
-    <div>
+    <Box ml={-2}>
       <React.Fragment key="left">
         <IconButton
           aria-label="show more"
@@ -627,6 +724,6 @@ const classes = drawerStyles();
           {drawerOptionList("Left")}
         </SwipeableDrawer>
       </React.Fragment>
-    </div>
+    </Box>
   );
 }

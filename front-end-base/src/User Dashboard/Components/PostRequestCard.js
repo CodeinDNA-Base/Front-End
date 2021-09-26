@@ -30,13 +30,17 @@ import { Link } from "react-router-dom";
 
 //Resources
 
+//custom components
+import {lightBorder} from "../../Theme/borders"
+
 export const PostRequestCard = () => {
   return <RequestCard />;
 };
 
 const requestCardStyles = makeStyles((theme) => ({
   card: {
-    borderRadius: 12,
+    // borderRadius: 12,
+    border:lightBorder,
     textAlign: "center",
   },
   statValue: {
@@ -73,7 +77,7 @@ const RequestCard = React.memo(function ProfileCard() {
 
   return (
     <div>
-      <Card className={cx(classes.card, shadowStyles.root)}>
+      <Card className={cx(classes.card, /*shadowStyles.root*/)} elevation={0}>
         <CardContent>
           <p className={classes.statValue}>
             Get offers from sellers for your project

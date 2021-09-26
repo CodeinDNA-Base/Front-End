@@ -1,5 +1,5 @@
 //ReactJS
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //Material-UI core
 import {
@@ -23,14 +23,6 @@ import {
 
 //Material-UI styles
 
-import {
-  EmailSubscribe,
-  EmailTextInput,
-  SubmitButton,
-} from "@mui-treasury/components/EmailSubscribe";
-
-import { useReadyEmailSubscribeStyles } from "@mui-treasury/styles/emailSubscribe/ready";
-
 //Custom Components: imported from PreviousPosts folder
 import { PostRequestModal } from "./PostRequestModal";
 
@@ -46,15 +38,34 @@ import { FilterList } from "@material-ui/icons";
 //Styles and Theme
 import "./Styles/PreviousPost.css";
 import { Link } from "react-router-dom";
+import Searchbar from "../../CustomComponents/UI/Searchbar/Searchbar";
+import { lightBorder } from "../../Theme/borders";
+import { Chip } from "@mui/material";
 
 //Router
 
 //Resources
 
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectFilteredCategory,
+  selectFilteredPrice,
+  selectFilteredStatus,
+} from "../Redux/slices/previousPostsFilterSlice";
+
+//action creators
+import {
+  filterByCategory,
+  filterByPrice,
+  filterByStatus,
+} from "../Redux/slices/previousPostsFilterSlice";
+
 const postStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border: lightBorder,
   },
   modal: {
     display: "flex",
@@ -98,40 +109,30 @@ export const PreviousPost = () => {
         </Box>
         <Box>
           <Button variant="contained" color="primary" onClick={handleOpen}>
-            Post Request
+            Post New Request
           </Button>
         </Box>
       </Box>
 
-      <Card className={classes.root} elevation={2}>
+      <Card className={classes.root} elevation={0}>
         <CardContent>
           <Headingbar />
         </CardContent>
         <Divider />
         <CardContent>
-          {Array(5)
-            .fill()
-            .map(() => {
-              return (
-                <div>
-                  <PreviousPostContainer />
-                  <Divider />
-                </div>
-              );
-            })}
+            <PreviousPostContainer />
         </CardContent>
 
         <Divider />
         <CardContent>
-            <Box display={isItXs?"Block":"flex"}>
-                <Box flex={1} mt={4}>
-                <Typography>Post 1 of 1</Typography>
-                </Box>
-                <Box>
-                <PostPagination />
-
-                </Box>
+          <Box display={isItXs ? "Block" : "flex"}>
+            <Box flex={1} mt={4}>
+              <Typography>Post 1 of 1</Typography>
             </Box>
+            <Box>
+              <PostPagination />
+            </Box>
+          </Box>
         </CardContent>
       </Card>
 
@@ -197,14 +198,7 @@ const Headingbar = () => {
           className={classes.boxContainer}
           ml={isItSmallOrExtraSmall ? -1 : 0}
         >
-          <EmailSubscribe
-            onSubmit={(searchTerm) => alert(`You searched ${searchTerm}.`)}
-            useStyles={useReadyEmailSubscribeStyles}
-            inputClearedAfterSubmit
-          >
-            <EmailTextInput placeholder="Search Post" />
-            <SubmitButton>Search</SubmitButton>
-          </EmailSubscribe>
+          <Searchbar placeholder="Seach Anything" opacity={1} />
         </Box>
         <Box flex={1}></Box>
         <Box>
@@ -239,7 +233,20 @@ const FilterOptionContainer = (props) => {
   const classes = filterStyles();
   const isItXs = useMediaQuery("(max-width: 599px)");
 
+  const dispatch = useDispatch();
   function handleCloseAccordion() {
+    props.handleCloseAccordion();
+  }
+
+  function handleApplyFilters() {
+    alert("Apply");
+    props.handleCloseAccordion();
+  }
+  function handleClearFilters() {
+    dispatch(filterByCategory(null));
+    dispatch(filterByPrice(null));
+    dispatch(filterByStatus(null));
+
     props.handleCloseAccordion();
   }
 
@@ -252,8 +259,6 @@ const FilterOptionContainer = (props) => {
             <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
               <FilterByStatus />
               {isItXs ? <Divider orientation="horizontal" /> : ""}
-
-              {/* Imported From PreviousPost folder */}
             </Grid>
             <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
               {/* Imported From PreviousPost folder */}
@@ -277,11 +282,79 @@ const FilterOptionContainer = (props) => {
           >
             Close Filters
           </Button>
-          <Button variant="contained" size="small" color="primary">
+
+          <Button
+            variant="outlined"
+            size="small"
+            color="primary"
+            onClick={handleClearFilters}
+          >
+            Clear Filters
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            color="primary"
+            onClick={handleApplyFilters}
+          >
             Apply Filters
           </Button>
         </AccordionActions>
+        <FilterChips />
       </Accordion>
+    </Box>
+  );
+};
+
+const FilterChips = () => {
+  const category = useSelector(selectFilteredCategory);
+  const price = useSelector(selectFilteredPrice);
+  const status = useSelector(selectFilteredStatus);
+
+  const [filters, setFilters] = useState([]);
+
+  useEffect(() => {
+    const chipData = [
+      {
+        title: category,
+        key: "category",
+      },
+      {
+        title: price,
+        key: "price",
+      },
+      {
+        title: status,
+        key: "status",
+      },
+    ];
+    setFilters(chipData);
+  }, [category, price, status]);
+
+  function handleRelatedProjectDelete(chipToDelete) {
+    setFilters((chips) =>
+      chips.filter((chip) => chip.key !== chipToDelete.key)
+    );
+  }
+
+  return (
+    <Box>
+      {filters
+        ? filters.map((data) => {
+            return data.title ? (
+              <Chip
+                style={{ marginRight: "1rem" }}
+                key={data.key}
+                label={data.title}
+                onDelete={() => {
+                  handleRelatedProjectDelete(data);
+                }}
+              />
+            ) : (
+              ""
+            );
+          })
+        : ""}
     </Box>
   );
 };

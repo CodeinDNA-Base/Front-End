@@ -1,5 +1,7 @@
 //ReactJS
 import React from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 //Material-UI
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -8,21 +10,26 @@ import {
   Divider,
   Chip,
   Typography,
-  MobileStepper,
   Button,
+  Box,
+  Card,
+  useMediaQuery,
 } from "@material-ui/core";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import LikeIcon from "@material-ui/icons/ThumbUp";
 import WishListIcon from "@material-ui/icons/Favorite";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
 import { Rating } from "@material-ui/lab";
 
 //CSS
-import "./Styles/ProjectContainer.css";
-import LoremIpsum, { Avatar, loremIpsum } from "react-lorem-ipsum";
+import LoremIpsum from "react-lorem-ipsum";
+
+import { lightBorder } from "../../Theme/borders";
 
 const componentStyles = makeStyles((theme) => ({
+  container:{
+    border:lightBorder,
+    marginBottom:'1rem',
+    padding:'4px',
+  },
   section: {
     margin: theme.spacing(1.5),
   },
@@ -34,7 +41,7 @@ const componentStyles = makeStyles((theme) => ({
 export const ProjectContainer = () => {
   const classes = componentStyles();
   return (
-    <div className="projectContainerComponent">
+    <div className={classes.container}>
       <div>
         <Grid container>
           <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
@@ -87,6 +94,7 @@ const sectionStyle = makeStyles((theme) => ({
 
 const MiddleDividers = () => {
   const classes = sectionStyle();
+  const isItXs = useMediaQuery("(max-width: 599px)");
 
   return (
     <div className={classes.root}>
@@ -105,18 +113,21 @@ const MiddleDividers = () => {
             container
             justifyContent="center"
           >
-            <div>
+            <Box>
               <Typography variant="h5">$45.54</Typography>
-            </div>
-            <div>
+            </Box>
+            <Box display={!isItXs?"flex":""}>
+            <Box mt={0.5}>
               <Rating size="small" readOnly value={2} />
-            </div>
-            <div>
-              <Typography>Sales(913)</Typography>
-            </div>
+            </Box>
+            <Box mt={-2.2} ml={isItXs?3:0}>
+              <h5>(512)</h5>
+            </Box>
+            </Box>
+
           </Grid>
         </Grid>
-        <LoremIpsum />
+        <p style={{textAlign:'justify'}}><LoremIpsum /></p>
       </div>
       <Divider variant="middle" />
       <div className={classes.section3}>
@@ -156,123 +167,54 @@ const MiddleDividers = () => {
   );
 };
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const tutorialSteps = [
-  {
-    label: "San Francisco – Oakland Bay Bridge, United States",
-    imgPath:
-      "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
-  },
-  {
-    label: "Bird",
-    imgPath:
-      "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
-  },
-  {
-    label: "Bali, Indonesia",
-    imgPath:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80",
-  },
-  {
-    label: "NeONBRAND Digital Marketing, Las Vegas, United States",
-    imgPath:
-      "https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60",
-  },
-  {
-    label: "Goč, Serbia",
-    imgPath:
-      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
-  },
-];
-
-const carouselStyle = makeStyles((theme) => ({
-  root: {
-    maxWidth: "100%",
-    flexGrow: 1,
-  },
-  header: {
-    display: "flex",
-    alignItems: "center",
-    // paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
-  },
-  img: {
-    height: 240,
-    display: "block",
-    maxWidth: "100%",
-    overflow: "hidden",
-    width: "100%",    
-
-  },
-}));
+const galleryStyles=makeStyles((theme)=>({
+  galleryImage:{
+    maxHeight:"16rem",
+  }
+}))
 
 function CarouselItem() {
-  const classes = carouselStyle();
-  const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStepChange = (step) => {
-    setActiveStep(step);
-  };
-
-  return (
-    <div className={classes.root}>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {tutorialSteps.map((step, index) => (
-          <div key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <img
-                className={classes.img}
-                src={step.imgPath}
-                alt={step.label}
-              />
-            ) : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        variant="text"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-          >
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-          </Button>
-        }
-      />
-    </div>
-  );
+  const gallery = [
+    {
+      label: "San Francisco – Oakland Bay Bridge, United States",
+      imgPath:
+        "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+    {
+      label: "Bird",
+      imgPath:
+        "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+    {
+      label: "Bali, Indonesia",
+      imgPath:
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80",
+    },
+    {
+      label: "NeONBRAND Digital Marketing, Las Vegas, United States",
+      imgPath:
+        "https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+    {
+      label: "Goč, Serbia",
+      imgPath:
+        "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+  ];
+  
+  const classes=galleryStyles()
+  return(
+ 
+  <Carousel axis='horizontal' infiniteLoop autoPlay interval={3000} showArrows={false} showStatus={false} showThumbs={false}>
+  {
+    gallery.map(image=>{
+      return <div>
+        <img src={image.imgPath} className={classes.galleryImage}/>
+      </div>
+    })
+  }    
+  </Carousel>
+  )
 }

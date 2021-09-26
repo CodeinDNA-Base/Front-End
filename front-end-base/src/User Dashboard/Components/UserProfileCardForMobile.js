@@ -1,5 +1,5 @@
 //ReactJS
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 //Material-UI core
 import {
@@ -23,6 +23,25 @@ import cx from "clsx";
 //Resources
 import profilePic from "../Resources/nadir.jpg";
 
+//react-redux
+import { useDispatch, useSelector } from "react-redux";
+
+//Thunks
+//No need of this thunk actually
+import { checkUserPassword } from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
+
+//selectors
+import {
+  selectUserDetails,
+  selectUserDetailsHasError,
+  selectUserDetailsIsLoading,
+} from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
+
+//actionCreators
+
+//custom components
+import {lightBorder} from "../../Theme/borders"
+
 export const UserProfileCardForMobile = () => {
   return (
     <div>
@@ -33,7 +52,7 @@ export const UserProfileCardForMobile = () => {
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
-    borderRadius: 12,
+    // border:lightBorder,
     textAlign: "center",
   },
   avatar: {
@@ -99,7 +118,22 @@ const StyledBadge = withStyles((theme) => ({
 
 export const ProfileCard = React.memo(function ProfileCard() {
   const styles = useStyles();
+  
+  const dispatch=useDispatch()
+  const profileData=useSelector(selectUserDetails)
+  const isLoading=useSelector(selectUserDetailsIsLoading)
+  const encounteredError=useSelector(selectUserDetailsHasError)
 
+
+  function handleClick(){
+    console.log(profileData)
+  }
+  //No need of this useeffect actually
+  useEffect(() => {
+    dispatch(checkUserPassword({ userPassword:"4545" }));
+  }, [dispatch]);
+
+  
   return (
     <Card className={cx(styles.card)} elevation={0}>
       <CardContent>

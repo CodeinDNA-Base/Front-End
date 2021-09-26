@@ -1,5 +1,5 @@
 //ReactJS
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //Material-UI core
 import {
@@ -11,21 +11,57 @@ import {
   Typography,
   Card,
   CardHeader,
-  CardContent
-
+  CardContent,
 } from "@material-ui/core";
 
 //Material-UI styles
 import { makeStyles } from "@material-ui/core/styles";
 
-
 //Material-UI icons
-
 
 //Styles and theme
 
-
 //Resources
+
+//react-redux
+import { useDispatch, useSelector } from "react-redux";
+
+//Thunks
+import {
+  fetchMobileNotificationSettings,
+  fetchDesktopNotificationSettings,
+  fetchEmailNotificationSettings,
+  updateMobileNotificationSettings,
+  updateDesktopNotificationSettings,
+  updateEmailNotificationSettings,
+} from "../../Redux/slices/notificationInfoSlice";
+
+//selectors;
+import {
+  selectMobileNotifications,
+  selectDesktopNotifications,
+  selectEmailNotifications,
+  selectIsLoadingMobileNotifications,
+  selectIsLoadingDesktopNotifications,
+  selectIsLoadingEmailNotifications,
+  selectHasErrorMobileNotifications,
+  selectHasErrorDesktopNotifications,
+  selectHasErrorEmailNotifications,
+
+  //updation selectors
+  selectHasUpdatedMobileNotifications,
+  selectHasUpdatedDesktopNotifications,
+  selectHasUpdatedEmailNotifications,
+  
+  selectHasErrorUpdatingMobileNotifications,
+  selectHasErrorUpdatingDesktopNotifications,
+  selectHasErrorUpdatingEmailNotifications,
+
+  selectIsUpdatingMobileNotifications,
+  selectIsUpdatingDesktopNotifications,
+  selectIsUpdatingEmailNotifications
+} from "../../Redux/slices/notificationInfoSlice";
+import { lightBorder } from "../../../Theme/borders";
 
 export const AccountSettingsNotifications = (props) => {
   return (
@@ -52,6 +88,8 @@ const mobileNotificationsStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   avatar: {
     width: 120,
@@ -63,55 +101,70 @@ const mobileNotificationsStyles = makeStyles((theme) => ({
 const MobileNotifications = () => {
   const classes = mobileNotificationsStyles();
 
-  const mobileNotifications = [
-    {
-      key: "inboxMessages",
-      value: "Inbox Messages",
-    },
-    {
-      key: "orderMessages",
-      value: "Order Messages",
-    },
-    {
-      key: "orderUpdates",
-      value: "Order Updates",
-    },
-    {
-      key: "dnaOffers",
-      value: "Offers by Codeindna.com",
-    },
-    {
-      key: "myAccount",
-      value: "My Account",
-    },
-    {
-      key: "support",
-      value: "Help and Support by Codeindna.com",
-    },
-  ];
+  //Redux store: operations
+  const dispatch = useDispatch();
+  const notifications = useSelector(selectMobileNotifications);
+  const isLoading = useSelector(selectIsLoadingMobileNotifications);
+  const encounteredError = useSelector(selectHasErrorMobileNotifications);
+
+  const [notificationsData, setNotificationsData] = useState([]);
+
+  useEffect(() => {
+    dispatch(fetchMobileNotificationSettings("email or id of user"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    setNotificationsData(notifications);
+  }, [notifications]);
   
+  function handleNotificationChange(index) {
+    setNotificationsData((prev) => {
+      let previousNotfs = [...prev];
+      let modifiedNotf = { ...previousNotfs[index] };
+      modifiedNotf.permission = !modifiedNotf.permission;
+      previousNotfs[index] = modifiedNotf;
+      return previousNotfs;
+    });
+  }
+
+  function handleUpdateNotifications(){
+    dispatch(updateMobileNotificationSettings(notificationsData))
+  }
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader
         title={<Typography variant="h4">Set Mobile Notifications</Typography>}
       />
       <Divider />
       <CardContent>
         <h4>Receive Notification for</h4>
-        {mobileNotifications.map((notf) => {
-          return (
-            <Box>
-              <Checkbox value={notf.key} color="primary"></Checkbox>
-              <FormLabel>{notf.value}</FormLabel>
-            </Box>
-          );
-        })}
+        {isLoading ? (
+          <h4>Loading settings .... </h4>
+        ) : (
+          notificationsData.map((notf, index) => {
+            return (
+              <Box>
+                <Checkbox
+                  value={index}
+                  color="primary"
+                  checked={notf.permission}
+                  onChange={() => handleNotificationChange(index)}
+                ></Checkbox>
+                <FormLabel>{notf.content}</FormLabel>
+              </Box>
+            );
+          })
+        )}
       </CardContent>
       <Divider />
       <CardContent>
         <CardHeader
           action={
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleUpdateNotifications}
+            >
               Update
             </Button>
           }
@@ -125,6 +178,8 @@ const desktopNotificationsStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   avatar: {
     width: 120,
@@ -139,55 +194,71 @@ const desktopNotificationsStyles = makeStyles((theme) => ({
 
 const DesktopNotifications = () => {
   const classes = desktopNotificationsStyles();
-  const desktopNotifications = [
-    {
-      key: "inboxMessages",
-      value: "Inbox Messages",
-    },
-    {
-      key: "orderMessages",
-      value: "Order Messages",
-    },
-    {
-      key: "orderUpdates",
-      value: "Order Updates",
-    },
-    {
-      key: "dnaOffers",
-      value: "Offers by Codeindna.com",
-    },
-    {
-      key: "myAccount",
-      value: "My Account",
-    },
-    {
-      key: "support",
-      value: "Help and Support by Codeindna.com",
-    },
-  ];
+
+  //Redux store: operations
+  const dispatch = useDispatch();
+  const notifications = useSelector(selectDesktopNotifications);
+  const isLoading = useSelector(selectIsLoadingDesktopNotifications);
+  const encounteredError = useSelector(selectHasErrorDesktopNotifications);
+
+  const [notificationsData, setNotificationsData] = useState([]);
+
+  useEffect(() => {
+    dispatch(fetchDesktopNotificationSettings("email or id of user"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    setNotificationsData(notifications);
+  }, [notifications]);
+  
+  function handleNotificationChange(index) {
+    setNotificationsData((prev) => {
+      let previousNotfs = [...prev];
+      let modifiedNotf = { ...previousNotfs[index] };
+      modifiedNotf.permission = !modifiedNotf.permission;
+      previousNotfs[index] = modifiedNotf;
+      return previousNotfs;
+    });
+  }
+
+  function handleUpdateNotifications(){
+    dispatch(updateDesktopNotificationSettings(notificationsData))
+  }
+
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader
         title={<Typography variant="h4">Set Desktop Notifications</Typography>}
       />
       <Divider />
       <CardContent>
         <h4>Receive Desktop Notifications for</h4>
-        {desktopNotifications.map((notf) => {
-          return (
-            <Box>
-              <Checkbox value={notf.key} color="primary"></Checkbox>
-              <FormLabel>{notf.value}</FormLabel>
-            </Box>
-          );
-        })}
+        {isLoading ? (
+          <h4>Loading settings ...</h4>
+        ) : (
+          notifications.map((notf, index) => {
+            return (
+              <Box>
+                <Checkbox
+                  value={index}
+                  color="primary"
+                  checked={notf.permission}
+                  onChange={() => handleNotificationChange(index)}
+                ></Checkbox>
+                <FormLabel>{notf.content}</FormLabel>
+              </Box>
+            );
+          })
+        )}
       </CardContent>
       <Divider />
       <CardContent>
         <CardHeader
           action={
-            <Button variant="contained" color="primary">
-              Update{" "}
+            <Button variant="contained" color="primary"
+            onClick={handleUpdateNotifications}
+            >
+              Update
             </Button>
           }
         />
@@ -200,6 +271,7 @@ const emailNotificationsStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
   },
   avatar: {
     width: 120,
@@ -214,55 +286,71 @@ const emailNotificationsStyles = makeStyles((theme) => ({
 
 const EmailNotifications = () => {
   const classes = emailNotificationsStyles();
-  const emailNotifications = [
-    {
-      key: "inboxMessages",
-      value: "Inbox Messages",
-    },
-    {
-      key: "orderMessages",
-      value: "Order Messages",
-    },
-    {
-      key: "orderUpdates",
-      value: "Order Updates",
-    },
-    {
-      key: "dnaOffers",
-      value: "Offers by Codeindna.com",
-    },
-    {
-      key: "myAccount",
-      value: "My Account",
-    },
-    {
-      key: "support",
-      value: "Help and Support by Codeindna.com",
-    },
-  ];
+
+  //Redux store: operations
+  const dispatch = useDispatch();
+  const notifications = useSelector(selectEmailNotifications);
+  const isLoading = useSelector(selectIsLoadingEmailNotifications);
+  const encounteredError = useSelector(selectHasErrorEmailNotifications);
+
+  const [notificationsData, setNotificationsData] = useState([]);
+
+  useEffect(() => {
+    dispatch(fetchEmailNotificationSettings("email or id of user"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    setNotificationsData(notifications);
+  }, [notifications]);
+  
+  function handleNotificationChange(index) {
+    setNotificationsData((prev) => {
+      let previousNotfs = [...prev];
+      let modifiedNotf = { ...previousNotfs[index] };
+      modifiedNotf.permission = !modifiedNotf.permission;
+      previousNotfs[index] = modifiedNotf;
+      return previousNotfs;
+    });
+  }
+
+  function handleUpdateNotifications(){
+    dispatch(updateEmailNotificationSettings(notificationsData))
+  }
+
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader
         title={<Typography variant="h4">Set Email Notifications</Typography>}
       />
       <Divider />
       <CardContent>
         <h4>Receive Emails for</h4>
-        {emailNotifications.map((notf) => {
-          return (
-            <Box>
-              <Checkbox value={notf.key} color="primary"></Checkbox>
-              <FormLabel>{notf.value}</FormLabel>
-            </Box>
-          );
-        })}
+        {isLoading ? (
+          <h4>Loading settings ... </h4>
+        ) : (
+          notifications.map((notf, index) => {
+            return (
+              <Box>
+                <Checkbox
+                  value={index}
+                  color="primary"
+                  checked={notf.permission}
+                  onChange={() => handleNotificationChange(index)}
+                ></Checkbox>
+                <FormLabel>{notf.content}</FormLabel>
+              </Box>
+            );
+          })
+        )}
       </CardContent>
       <Divider />
       <CardContent>
         <CardHeader
           action={
-            <Button variant="contained" color="primary">
-              Update{" "}
+            <Button variant="contained" color="primary"
+            onClick={handleUpdateNotifications}
+            >
+              Update
             </Button>
           }
         />

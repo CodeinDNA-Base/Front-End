@@ -41,6 +41,22 @@ import "../Styles/AccountSettingsPersonalInfo.css";
 //Resources
 import profilePic from "../../Resources/nadir.jpg";
 
+//react-redux
+import { useDispatch, useSelector } from "react-redux";
+
+//Thunks
+import { fetchPersonalInfoDetails } from "../../Redux/slices/personalInfoSlice";
+
+//selectors
+import {
+  selectPersonalInfo,
+  selectIsPersonalInfoLoading,
+  selectHasPersonalInfoError,
+} from "../../Redux/slices/personalInfoSlice";
+import { lightBorder } from "../../../Theme/borders";
+
+//actionCreators
+
 export const AccountSettingsPersonalInfo = (props) => {
   return (
     <div>
@@ -65,6 +81,8 @@ const accountInfoStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   modal: {
     display: "flex",
@@ -105,9 +123,20 @@ const AccountInfo = () => {
     setName(event.target.value);
   }
 
+
+  //Redux store: operations
+  const dispatch=useDispatch()
+  const personalInfo=useSelector(selectPersonalInfo)
+  const isLoading=useSelector(selectIsPersonalInfoLoading)
+  const encounteredError=useSelector(selectHasPersonalInfoError)
+
+  useEffect(() => {
+    dispatch(fetchPersonalInfoDetails("email or id of user"));
+  }, [dispatch]);
+
   return (
     <div>
-      <Card className={classes.root} elevation={2}>
+      <Card className={classes.root} elevation={0}>
         <CardHeader
           action={
             <IconButton>
@@ -186,6 +215,8 @@ const contactInfoStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   linkedAccountsContainer: {
     flex: 1,
@@ -237,7 +268,7 @@ const ContactInfo = () => {
 
   return (
     <div>
-      <Card className={classes.root} elevation={2}>
+      <Card className={classes.root} elevation={0}>
         <CardHeader
           action={
             <IconButton aria-label="settings">

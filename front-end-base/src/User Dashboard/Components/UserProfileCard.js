@@ -1,27 +1,56 @@
-import React from "react";
+
+//ReactJS
+import React, { useEffect, useState } from "react";
+
+//Material-ui core
 import cx from "clsx";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Box, Badge } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Avatar from "@material-ui/core/Avatar";
-import Divider from "@material-ui/core/Divider";
+import { makeStyles, withStyles, Box, Badge, Card,CardContent,Divider } from "@material-ui/core";
+//material-ui styles
 import { useFadedShadowStyles } from "@mui-treasury/styles/shadow/faded";
-//Resources
-import profilePic from "../Resources/nadir.jpg";
 import { Rating } from "@material-ui/lab";
 
+//icons
+import Avatar from "@material-ui/core/Avatar";
+
+//theme and styles
+
+//custom components
+import CardSkeleton from "../../CustomComponents/UI/Skelton/CardSkeleton";
+//Resources
+
+//react-redux
+import { useDispatch, useSelector } from "react-redux";
+
+//Thunks
+//No need of this thunk actually
+import { checkUserPassword } from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
+
+//selectors
+import {
+  selectUserDetails,
+  selectUserDetailsHasError,
+  selectUserDetailsIsLoading,
+} from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
+
+//actionCreators
+
+
+//custom components
+import {lightBorder} from "../../Theme/borders"
+
 export const UserProfileCard = () => {
+  
   return (
     <div>
-      <ProfileCard></ProfileCard>
+        <ProfileCard></ProfileCard>
     </div>
   );
 };
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
-    borderRadius: 12,
+    // borderRadius: 12,
+    border:lightBorder,
     textAlign: "center",
   },
   avatar: {
@@ -86,85 +115,110 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 export const ProfileCard = React.memo(function ProfileCard() {
+
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
-  return (
-    <Card className={cx(styles.card, shadowStyles.root)}>
-      <CardContent>
-        <StyledBadge
-          overlap="circular"
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
-          }}
-          variant="dot"
-        >
-          {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
-          <Avatar
-            className={styles.avatar}
-            src={profilePic}
-            onClick={() => {
-              alert("Go to my profile page");
-            }}
-            style={{ cursor: "pointer" }}
-          />
-        </StyledBadge>
 
-        <h3
-          className={styles.heading}
-          onClick={() => {
-            alert("Go my profile page");
-          }}
-          style={{ cursor: "pointer" }}
-        >
-          Alan Podemski
-        </h3>
-        <Box p={1} mt={0}>
-          <Rating value={3} size="small" readOnly></Rating>
-          <span
+  const dispatch=useDispatch()
+  const profileData=useSelector(selectUserDetails)
+  const isLoading=useSelector(selectUserDetailsIsLoading)
+  const encounteredError=useSelector(selectUserDetailsHasError)
+
+
+  function handleClick(){
+    console.log(profileData)
+  }
+  //No need of this useeffect actually
+  useEffect(() => {
+    dispatch(checkUserPassword({ userPassword:"4545" }));
+  }, [dispatch]);
+
+  return (
+    <>
+    {
+            isLoading ? (<>
+                <CardSkeleton width={200} height={300}
+                />
+                {/* <Button onClick={handleClick}>
+                  Click
+                </Button> */}
+                </>
+            ) :
+
+      <Card className={cx(styles.card/*, shadowStyles.root*/)} elevation={0}>
+        <CardContent>
+          <StyledBadge
+            overlap="circular"
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            variant="dot"
+          >
+            <Avatar
+              className={styles.avatar}
+              src={profileData && profileData.results[0].picture.large}
+              onClick={handleClick}
+              style={{ cursor: "pointer" }}
+            />
+          </StyledBadge>
+
+          <h3
+            className={styles.heading}
             onClick={() => {
-              alert("Go to reviews from Sellers");
+              alert("Go my profile page");
             }}
             style={{ cursor: "pointer" }}
           >
-            {" "}
-            4.7
-          </span>
+            {"letssee@gmail.com"}
+          </h3>
+          <Box p={1} mt={0}>
+            <Rating value={3} size="small" readOnly></Rating>
+            <span
+              onClick={() => {
+                alert("Go to reviews from Sellers");
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              {455}
+            </span>
+          </Box>
+        </CardContent>
+        <Divider light />
+        <Box display={"flex"}>
+          <Box p={1} flex={"auto"}>
+            <p className={styles.statLabel}>Response Time</p>
+            <p className={styles.statValue}>1 Hour</p>
+          </Box>
+          <Box p={1} flex={"auto"}>
+            <p className={styles.statLabel}>Last Seen</p>
+            <p className={styles.statValue}>Active</p>
+          </Box>
         </Box>
-      </CardContent>
-      <Divider light />
-      <Box display={"flex"}>
-        <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Response Time</p>
-          <p className={styles.statValue}>1 Hour</p>
+        <Divider light />
+        <Box display={"flex"}>
+          <Box p={1} flex={"auto"}>
+            <p className={styles.statLabel}>Balance</p>
+            <p className={styles.statValue}>$451</p>
+          </Box>
+          <Box p={1} flex={"auto"}>
+            <p className={styles.statLabel}>Amount Spent</p>
+            <p className={styles.statValue}>+1k$</p>
+          </Box>
         </Box>
-        <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Last Seen</p>
-          <p className={styles.statValue}>Active</p>
+        <Divider light />
+        <Box display={"flex"}>
+          <Box p={1} flex={"auto"}>
+            <p className={styles.statLabel}>Payment method</p>
+            <p className={styles.statValue}>Verfified</p>
+          </Box>
+          <Box p={1} flex={"auto"}>
+            <p className={styles.statLabel}>Total Purchases</p>
+            <p className={styles.statValue}>27</p>
+          </Box>
         </Box>
-      </Box>
-      <Divider light />
-      <Box display={"flex"}>
-        <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Balance</p>
-          <p className={styles.statValue}>100$</p>
-        </Box>
-        <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Amount Spent</p>
-          <p className={styles.statValue}>+1K$</p>
-        </Box>
-      </Box>
-      <Divider light />
-      <Box display={"flex"}>
-        <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Payment method</p>
-          <p className={styles.statValue}>Verified</p>
-        </Box>
-        <Box p={1} flex={"auto"}>
-          <p className={styles.statLabel}>Total Purchases</p>
-          <p className={styles.statValue}>007</p>
-        </Box>
-      </Box>
-    </Card>
+      </Card>
+}
+    </>
   );
 });

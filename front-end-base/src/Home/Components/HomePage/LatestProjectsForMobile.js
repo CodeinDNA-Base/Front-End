@@ -43,19 +43,19 @@ const useStyles = makeStyles((theme) => ({
 export default function LatestProjectsForMobile() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const latest_Projects = useSelector(selectLatestProjects);
-  const { isLoading } = useSelector((state) => state.latestProjects);
-  const { hasError } = useSelector((state) => state.latestProjects);
+  // const latest_Projects = useSelector(selectLatestProjects);
+  // const { isLoading } = useSelector((state) => state.latestProjects);
+  // const { hasError } = useSelector((state) => state.latestProjects);
 
-  useEffect(() => {
-    dispatch(loadLatestProjects());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadLatestProjects());
+  // }, [dispatch]);
 
   return (
     <div className={classes.root}>
       <ImageList className={classes.imageList} cols={1.2} gap={8}>
         {" "}
-        {latest_Projects.map((project) => (
+        {/* {latest_Projects.map((project) => (
           <ImageListItem key={project.projectId} className={classes.actionArea}>
             <img src={project.projectImage} alt={project.projectTitle} />
             <ImageListItemBar
@@ -68,7 +68,7 @@ export default function LatestProjectsForMobile() {
              
             />
           </ImageListItem>
-        ))}
+        ))} */}
       </ImageList>
     </div>
   );
