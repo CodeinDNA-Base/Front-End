@@ -1,13 +1,22 @@
 import Grid from "@material-ui/core/Grid";
-import colors from "../../../Theme/colors";
-import { Headingfonts, TextFonts } from "../../../Theme/fonts";
 import AppleIcon from "@material-ui/icons/Apple";
 import AndroidRoundedIcon from "@material-ui/icons/AndroidRounded";
 import SocialIcons from "./SocialIcons";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { DividerInFooter } from "./DividerInFooter";
+
+//colors and fonts
+import colors from "../../../Theme/colors";
+import { Headingfonts, TextFonts } from "../../../Theme/fonts";
 import gernalClassesStyles from "../../../Theme/gernalStyles";
+
+//routing
+import { Link } from "react-router-dom";
+
+// strings
+import { FooterLists } from "./Strings";
+
+//styles
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: colors.primary,
@@ -35,107 +44,38 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+// desktop footer
 const DesktopFooter = (props) => {
   const classes = useStyles();
   const gernalClasses = gernalClassesStyles();
   return (
     <Grid classes={{ root: classes.root }}>
       <Grid container spacing={0}>
-        <Grid  sm={1} md={1} item></Grid>
+        <Grid sm={1} md={1} item></Grid>
         <Grid xs={12} sm={10} md={10} item container>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>Resources</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Team</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Support</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Online Meetings</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-            </ul>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>About</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Team</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Support</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Online Meetings</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Members</li>
-              </Link>
-            </ul>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>Terms & Services</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Team</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Support</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>TOS Rules</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Online Meetings</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-            </ul>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>Technologies</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Team</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Support</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>React Js</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Express JS</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Online Meetings</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-            </ul>
-          </Grid>
+          {FooterLists.map((listItem, index) => {
+            return (
+              <Grid item xs={12} sm={6} md={3}>
+                <ul className={classes.ulStyle} key={`FooterList_${index}`}>
+                  <li className={classes.listHeading}>
+                    {listItem.headingName}
+                  </li>
+                  {listItem.listItems.map((item) => {
+                    return (
+                      <Link
+                        to={`${item.route}`}
+                        className={gernalClasses.linkStyle}
+                      >
+                        <li className={classes.liStyle}>{item.itemName}</li>
+                      </Link>
+                    );
+                  })}
+                </ul>
+              </Grid>
+            );
+          })}
         </Grid>
-        <Grid  sm={1} md={1} item></Grid>
+        <Grid sm={1} md={1} item></Grid>
       </Grid>
 
       <SocialIcons />

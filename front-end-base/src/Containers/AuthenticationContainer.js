@@ -1,29 +1,38 @@
 import React, { useState, useEffect } from "react";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { positions } from "@material-ui/system";
-import LatestProjects from "../Home/Components/LatestProjects";
-// import { compose, spacing, palette, breakpoints } from "@material-ui/system";
-// import styled from "styled-components";
-import Services from "../Home/Components/Services";
-import MainContainer from "../Home/Components/MainContainer";
-import ExploreArea from "../Home/Components/ExploreArea";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import MotivationalArea from "../Home/Components/MotivationalArea";
-import Header from "../Home/Components/Header";
-import UserReview from "../Home/Components/UserReviews";
-import Technologies from "../Home/Components/Technologies";
-import WhatWeOffer from "../Home/Components/WhatWeOffer";
 import { useWindowDimensions } from "../Home/Components/WindowDimensions";
 import { AppBar, makeStyles } from "@material-ui/core";
+
+// footer
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
+
+// colors
 import colors, { ColorGradient } from "../Theme/colors";
-import LoginForm, { PasswordForm } from "../Home/Components/LoginForm";
-import Register from "../Home/Components/Register";
-import RegisterDetails from "../Home/Components/RegisterDetails";
-import { CustomCard } from "../CustomComponents/UI/Support/CustomCard";
-import ServicePage from "../Home/Components/ServicesPage";
+
+// custom compoents
+import LoginForm, {
+  PasswordForm,
+} from "../Home/Components/AuthenticationPage/LoginForm";
+import Register from "../Home/Components/AuthenticationPage/Register";
+import RegisterDetails from "../Home/Components/AuthenticationPage/RegisterDetails";
+
+// navbar
+import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
+
+// navbar parameters
+import {
+  navbarMenuOptions,
+  drawerMenuOptions,
+  darwerMenuExtraOptions,
+  navbarTabsOptions,
+  drawerListItemAvatar,
+  isNavbarTabs,
+  isNavBarIconButtons,
+  isAvatar,
+} from "./SupportFiles/HomePageNavbarParameters";
+
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -60,7 +69,6 @@ function AuthenticationContainer(props) {
 
   useEffect(() => {
     if (scrollPosition > height * 0.9) {
-      console.log("S:" + scrollPosition);
       setPackageContainerStickyNess("UnStickThePackageContainer");
     } else {
       setPackageContainerStickyNess("StickThePackageContainer");
@@ -79,15 +87,29 @@ function AuthenticationContainer(props) {
   }, []);
 
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
-
+  const navbarMenuOptions = [
+    { title: "About", route: "about" },
+    { title: "Conatct", route: "contact" },
+    { title: "Login", route: "login" },
+    { title: "Register", route: "register" },
+  ];
   return (
     <div className={classes.root}>
       {/* Header */}
       <Grid item xs={12}>
         <AppBar>
-          <Header
+          <CustomNavbar
             handelTabIndex={handelTabIndex}
             packageContainerStickyNess={packageContainerStickyNess}
+            navbarMenuOptions={navbarMenuOptions}
+            isNavbarTabs={false}
+            isAvatar={false}
+            isNavBarIconButtons={false}
+            drawerMenuOptions={drawerMenuOptions}
+            darwerMenuExtraOptions={darwerMenuExtraOptions}
+            drawerListItemAvatar={drawerListItemAvatar}
+              // pass array for keeping record of components loading progress bar
+              isComponentsLoaded={[]}
           />
         </AppBar>
       </Grid>
@@ -95,7 +117,7 @@ function AuthenticationContainer(props) {
       {isLoginOrSignUp ? (
         <LoginInContainer handleSignUpClicked={handleSignUpClicked} />
       ) : (
-        <SignUPContainer />
+        <SignUPContainer handleSignInClicked={handleSignUpClicked} />
       )}
       {/* footer*/}
       <Grid container className={classes.footer} spacing={0}>
@@ -111,7 +133,7 @@ function AuthenticationContainer(props) {
   );
 }
 
-const SignUPContainer = () => {
+const SignUPContainer = ({ handleSignInClicked }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
   const [isSignUpWithEmailClicked, setIsSignUpWithEmailClicked] =
@@ -122,6 +144,7 @@ const SignUPContainer = () => {
     setUserEmail(value);
     setIsSignUpWithEmailClicked(!isSignUpWithEmailClicked);
   };
+
   return (
     <Grid container className={classes.loginInForm}>
       <Grid
@@ -141,9 +164,7 @@ const SignUPContainer = () => {
             handleSignUpWithEmailClicked={handleSignUpWithEmailClicked}
           />
         ) : (
-          <RegisterDetails
-            handleSignUpWithEmailClicked={handleSignUpWithEmailClicked}
-          />
+          <RegisterDetails handleSignInClicked={handleSignInClicked} />
         )}
       </Grid>
       <Grid

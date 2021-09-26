@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   alert: {
     backgroundColor: ({ bgColor }) => bgColor,
     color: ({ color }) => color,
+    fontWeight:'bolder'
   },
 }));
 
@@ -28,7 +29,6 @@ export default function CustomAlerts({
   bgColor,
 }) {
   const classes = useStyles({ width, bgColor, color });
-  // const [open, setOpen] = React.useState(true);
 
   return (
     <Grid

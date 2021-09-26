@@ -47,7 +47,7 @@ export const RoundButton = ({
       variant={variant}
       onClick={handleClick}
       classes={{ root: classes.root }}
-      startIcon={icon  }
+      startIcon={icon}
       type={type}
       fullWidth
       

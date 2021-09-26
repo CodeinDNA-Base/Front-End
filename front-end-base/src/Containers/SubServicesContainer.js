@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from "react";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { positions } from "@material-ui/system";
-import LatestProjects from "../Home/Components/LatestProjects";
-// import { compose, spacing, palette, breakpoints } from "@material-ui/system";
-// import styled from "styled-components";
-import Services from "../Home/Components/Services";
-import MainContainer from "../Home/Components/MainContainer";
-import ExploreArea from "../Home/Components/ExploreArea";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import MotivationalArea from "../Home/Components/MotivationalArea";
-import Header from "../Home/Components/Header";
-import UserReview from "../Home/Components/UserReviews";
-import Technologies from "../Home/Components/Technologies";
-import WhatWeOffer from "../Home/Components/WhatWeOffer";
 import { useWindowDimensions } from "../Home/Components/WindowDimensions";
-import { AppBar, makeStyles } from "@material-ui/core";
+import { AppBar, makeStyles, Box } from "@material-ui/core";
+
+// footer
 import DesktopFooter from "../CustomComponents/Layouts/Footer/DesktopFooter";
 import MobileFooter from "../CustomComponents/Layouts/Footer/MobileFooter";
+
+// colors
 import colors, { ColorGradient } from "../Theme/colors";
-import LoginForm, { PasswordForm } from "../Home/Components/LoginForm";
-import Register from "../Home/Components/Register";
-import RegisterDetails from "../Home/Components/RegisterDetails";
-import { CustomCard } from "../CustomComponents/UI/Support/CustomCard";
-import ServicePage from "../Home/Components/ServicesPage";
+
+// custom components
+import ServicePage from "../Home/Components/SubServicesPage/ServicesPage";
+
+
+// navbar
+import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
+
+// navbar parameters
+import {
+  navbarMenuOptions,
+  drawerMenuOptions,
+  darwerMenuExtraOptions,
+  navbarTabsOptions,
+  drawerListItemAvatar,
+  isNavbarTabs,
+  isNavBarIconButtons,
+  isAvatar,
+} from "./SupportFiles/HomePageNavbarParameters";
+
+//redux
+import { useSelector } from "react-redux";
+
+// styles
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -40,9 +50,7 @@ const useStyles = makeStyles(() => ({
       isDesktopOrLaptopOrTabletScreen ? "1%" : "25%",
   },
 }));
-// const Box = styled.div`
-// 	${breakpoints(compose(spacing, palette))}
-// `;
+
 function SubServicesContainer(props) {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const { height, width } = useWindowDimensions();
@@ -51,11 +59,13 @@ function SubServicesContainer(props) {
   const [sticknessFlag, setSticknessFlag] = useState(true);
   const [currentSelectedTabIndex, setCurrentSelectedTabIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
-
- 
-  const handleScroll = () => {
-    setScrollPosition(window.pageYOffset);
-  };
+  //redux
+  const isSubServicesCardsLoaded = useSelector(
+    (state) => state.subServices.isLoading
+  );
+  const isServicesWithSubServicesLoaded = useSelector(
+    (state) => state.searchByCategory.loadServiceWithSubServicesIsLoading
+  );
 
   useEffect(() => {
     if (scrollPosition > height * 0.9) {
@@ -66,16 +76,21 @@ function SubServicesContainer(props) {
     }
   }, [scrollPosition > height * 0.9]);
 
-  const handelTabIndex = (event, index = 0) => {
-    setCurrentSelectedTabIndex(index);
-  };
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // handlers
+  const handleScroll = () => {
+    setScrollPosition(window.pageYOffset);
+  };
+  const handelTabIndex = (event, index = 0) => {
+    setCurrentSelectedTabIndex(index);
+  };
 
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
 
@@ -84,9 +99,21 @@ function SubServicesContainer(props) {
       {/* Header */}
       <Grid item xs={12}>
         <AppBar>
-          <Header
+          <CustomNavbar
             handelTabIndex={handelTabIndex}
             packageContainerStickyNess={packageContainerStickyNess}
+            navbarMenuOptions={navbarMenuOptions}
+            isNavbarTabs={false}
+            isAvatar={false}
+            isNavBarIconButtons={false}
+            drawerMenuOptions={drawerMenuOptions}
+            darwerMenuExtraOptions={darwerMenuExtraOptions}
+            drawerListItemAvatar={drawerListItemAvatar}
+            // pass array for keeping record of components loading progress bar
+            isComponentsLoaded={[
+              isServicesWithSubServicesLoaded,
+              isSubServicesCardsLoaded,
+            ]}
           />
         </AppBar>
       </Grid>
@@ -99,7 +126,6 @@ function SubServicesContainer(props) {
         <Grid xs={1} sm={1} md={1} item></Grid>
       </Grid>
 
-      
       {/* footer*/}
       <Grid container className={classes.footer} spacing={0}>
         <Grid item md={12} xs={12} sm={12}>

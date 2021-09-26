@@ -7,10 +7,16 @@ import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
+
+// colors and fonts
 import gernalClassesStyles from "../../../Theme/gernalStyles";
 import colors from "../../../Theme/colors";
 import { Headingfonts, TextFonts } from "../../../Theme/fonts";
 
+//strings
+import { FooterLists } from "./Strings";
+
+//styles
 const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: theme.typography.pxToRem(12),
@@ -43,138 +49,42 @@ const MobileFooterLists = () => {
   };
   return (
     <Grid item xs={10}>
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-        classes={{
-          root: classes.themeColor,
-        }}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.listHeading}>Resources</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ul className={classes.ulStyle}>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Team</li>
-            </Link>
-
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Support</li>
-            </Link>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Online Meetings</li>
-            </Link>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>new Technologies</li>
-            </Link>
-          </ul>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel2"}
-        onChange={handleChange("panel2")}
-        classes={{
-          root: classes.themeColor,
-        }}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.listHeading}>
-            Terms & Services
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ul className={classes.ulStyle}>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Team</li>
-            </Link>
-
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Support</li>
-            </Link>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Online Meetings</li>
-            </Link>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>new Technologies</li>
-            </Link>
-          </ul>
-        </AccordionDetails>{" "}
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel3"}
-        onChange={handleChange("panel3")}
-        classes={{
-          root: classes.themeColor,
-        }}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.listHeading}>
-            Teams & Support
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ul className={classes.ulStyle}>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Team</li>
-            </Link>
-
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Support</li>
-            </Link>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Online Meetings</li>
-            </Link>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>new Technologies</li>
-            </Link>
-          </ul>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel4"}
-        onChange={handleChange("panel4")}
-        classes={{
-          root: classes.themeColor,
-        }}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.listHeading}>Technologies</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ul className={classes.ulStyle}>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Team</li>
-            </Link>
-
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Support</li>
-            </Link>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>Online Meetings</li>
-            </Link>
-            <Link to="#" className={gernalClasses.linkStyle}>
-              <li className={classes.liStyle}>new Technologies</li>
-            </Link>
-          </ul>
-        </AccordionDetails>
-      </Accordion>
+      {FooterLists.map((listItem, index) => {
+        return (
+          <Accordion
+            expanded={expanded === `Panel${index}`}
+            onChange={handleChange(`Panel${index}`)}
+            classes={{
+              root: classes.themeColor,
+            }}
+            key={`FooterItem_${index}`}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography className={classes.listHeading}>
+                {listItem.headingName}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <ul className={classes.ulStyle}>
+                {listItem.listItems.map((item, index) => {
+                  return (
+                    <Link
+                      to={`${item.route}`}
+                      className={gernalClasses.linkStyle}
+                    >
+                      <li className={classes.liStyle}>{item.itemName}</li>
+                    </Link>
+                  );
+                })}
+              </ul>
+            </AccordionDetails>
+          </Accordion>
+        );
+      })}
     </Grid>
   );
 };

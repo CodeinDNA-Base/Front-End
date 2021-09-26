@@ -9,14 +9,20 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import AvTimerRoundedIcon from "@material-ui/icons/AvTimerRounded";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { CustomCardCarousel } from "./CustomCardCarousel";
+import Skeleton from "@mui/material/Skeleton";
+import { lightBorder } from "../../../Theme/borders";
+
+// styles
 const CustomCardStyles = makeStyles(() => ({
   root: {
-    boxShadow:
-      "0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.19)",
+    // boxShadow:
+    //   "0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.19)",
     maxWidth: ({ isDesktopOrLaptopOrTabletScreen }) =>
       isDesktopOrLaptopOrTabletScreen ? 260 : 160,
     cursor: "pointer",
-    position:'relative'
+    position: "relative",
+    minHeight: 300,
+    border: lightBorder,
   },
 
   detailBox: {
@@ -26,6 +32,7 @@ const CustomCardStyles = makeStyles(() => ({
     font: ({ isDesktopOrLaptopOrTabletScreen }) =>
       isDesktopOrLaptopOrTabletScreen ? TextFonts.XXSmall : TextFonts.medium,
     fontWeight: "bolder",
+    marginTop: "2%",
   },
   deliveryTime: {
     font: ({ isDesktopOrLaptopOrTabletScreen }) =>
@@ -55,36 +62,8 @@ const CustomCardStyles = makeStyles(() => ({
     pointer: "progress",
   },
 }));
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-    title: "SEO",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Web Developement",
-    author: "author",
-  },
 
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Graphic Designing",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-    title: "Voice",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Desktop Development",
-    author: "author",
-  },
-];
-
-export const CustomCard = () => {
+export const DesktopCustomCard = ({ subService, isLoading }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const [navButtonAndFavIconVisibility, setNavButtonAndFavIconVisibility] =
     useState("hidden");
@@ -94,6 +73,7 @@ export const CustomCard = () => {
     navButtonAndFavIconVisibility,
     isFavIconSelected,
   });
+
   return (
     <Grid
       container
@@ -102,49 +82,81 @@ export const CustomCard = () => {
       onMouseEnter={() => setNavButtonAndFavIconVisibility("visible")}
       onMouseLeave={() => setNavButtonAndFavIconVisibility("hidden")}
     >
-      <Box className={classes.carousel}>
-        {isFavIconSelected ? (
-          <FavoriteIcon
-            className={classes.favouriteIcon}
-            onClick={() => setIsFavIconSelected(!isFavIconSelected)}
-          />
-        ) : (
-          <FavoriteBorderIcon
-            className={classes.favouriteIcon}
-            onClick={() => setIsFavIconSelected(!isFavIconSelected)}
-          />
-        )}
-        <CustomCardCarousel
-          itemData={itemData}
-          navButtonAndFavIconVisibility={navButtonAndFavIconVisibility}
-        />
-      </Box>
-      <Box className={classes.detailBox}>
-        <Typography component="h6" className={classes.title}>
-          You will get custom website in react and node js
-        </Typography>
+      {isLoading ? (
+        <Box>
+          <Skeleton height={160} width={255} variant="rectangular" />
+        </Box>
+      ) : (
+        <Box>
+          {isFavIconSelected ? (
+            <FavoriteIcon
+              className={classes.favouriteIcon}
+              onClick={() => setIsFavIconSelected(!isFavIconSelected)}
+            />
+          ) : (
+            <FavoriteBorderIcon
+              className={classes.favouriteIcon}
+              onClick={() => setIsFavIconSelected(!isFavIconSelected)}
+            />
+          )}
 
-        <Box display="flex" style={{ marginTop: "5%", marginBottom: "5%" }}>
-          <Box width="10%">
-            <AvTimerRoundedIcon fontSize="small" />
-          </Box>
-          <Box flexShrink={0}>2 days Delivery</Box>
+          <CustomCardCarousel
+            subServiceThumbnails={subService.subServiceThumbnails}
+            navButtonAndFavIconVisibility={navButtonAndFavIconVisibility}
+          />
         </Box>
+      )}
+
+      <Box className={classes.detailBox}>
+        {isLoading ? (
+          <Box>
+            <Skeleton height={40} width={200} variant="rectangle" />
+          </Box>
+        ) : (
+          <Typography component="h6" className={classes.title}>
+            {Array.from(subService.subServiceTitle).slice(0, 50)}
+            {Array.from(subService.subServiceTitle).length > 50 && "..."}
+          </Typography>
+        )}
+        {isLoading ? (
+          <Box>
+            <Skeleton height={20} width="70%" />
+          </Box>
+        ) : (
+          <Box display="flex" style={{ marginTop: "5%", marginBottom: "5%" }}>
+            <Box width="10%">
+              <AvTimerRoundedIcon fontSize="small" />
+            </Box>
+            <Box flexShrink={0}>
+              {subService.basicPackageDeliveryTime} Delivery
+            </Box>
+          </Box>
+        )}
         <hr style={{ marginTop: "5%", marginBottom: "5%" }} />
-        <Box display="flex">
-          <Box width="100%">
-            <Typography className={classes.textLight}>
-              From{" "}
-              <Typography component="span" className={classes.textBold}>
-                30$
+
+        {isLoading ? (
+          <Box>
+            <Skeleton height={20} width="70%" />
+          </Box>
+        ) : (
+          <Box display="flex">
+            <Box width="100%">
+              <Typography className={classes.textLight}>
+                From{" "}
+                <Typography component="span" className={classes.textBold}>
+                  {subService.basicPackagePrice + "$"}
+                </Typography>
               </Typography>
-            </Typography>
+            </Box>
+            <Box flexShrink={0}>
+              <StarRoundedIcon style={{ color: colors.secondary }} />{" "}
+            </Box>
+            <Box flexShrink={0}>
+              {subService.subServiceRating}{" "}
+              {`(${subService.subServiceTotalRatedOrders})`}
+            </Box>
           </Box>
-          <Box flexShrink={0}>
-            <StarRoundedIcon style={{ color: colors.secondary }} />{" "}
-          </Box>
-          <Box flexShrink={0}>4.5 (2000)</Box>
-        </Box>
+        )}
       </Box>
     </Grid>
   );

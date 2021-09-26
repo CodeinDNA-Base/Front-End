@@ -10,6 +10,7 @@ const colors = {
   success: "#4caf50",
   warning: "#ff9800",
   info: "#2196f3", //light blue
+  lightBorderColor:"#e8eaed"
 };
 
 export const ColorGradient = {
