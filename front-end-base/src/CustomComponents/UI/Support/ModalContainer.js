@@ -65,7 +65,6 @@ export default function ModalContainer({
     >
       <Fade in={open}>
         <div className={classes.paper}>{Component}
-       
         </div>
        
       </Fade>

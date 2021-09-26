@@ -5,7 +5,7 @@ import "./index.css";
 import Entrance from "./Containers/Entrance";
 //import Test from './Containers/Test';
 import { Provider } from "react-redux";
-import store from "./User Dashboard/Redux/store";
+import store from './CentralRedux/CentralRedux';
 
 ReactDOM.render(
   <Provider store={store}>

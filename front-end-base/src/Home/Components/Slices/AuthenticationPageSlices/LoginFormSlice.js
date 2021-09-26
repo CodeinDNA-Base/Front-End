@@ -99,6 +99,10 @@ export const selectUserToken = (state) => state.loginDetails.userToken;
 export const selectUserDetails = (state) => state.loginDetails.userDetails;
 
 export const selectUserPassword = (state) => state.loginDetails.userPassword;
+export const selectUserDetailsHasError=state=>state.loginDetails.checkUserPasswordAndReturnUserDetailsIfExistsHasError;
+export const selectUserDetailsIsLoading=state=>state.loginDetails.checkUserPasswordAndReturnUserDetailsIfExistsIsLoading;
+
+
 
 // actions
 export{ checkUserPasswordAndReturnUserDetailsIfExists as checkUserPassword}
