@@ -50,6 +50,7 @@ import {
   selectIsLoadingPasswordInfo,
   selectHasErrorPasswordInfo
 } from "../../Redux/slices/securityInfoSlice";
+import { lightBorder } from "../../../Theme/borders";
 
 
 export const AccountSettingsSecurity = (props) => {
@@ -76,6 +77,8 @@ const passwordStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   avatar: {
     width: 120,
@@ -147,7 +150,7 @@ const Password = () => {
   }
 
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader title={<Typography variant="h4">Password</Typography>} />
       <Divider />
       <CardContent>
@@ -218,6 +221,8 @@ const securityQuestionStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   avatar: {
     width: 120,
@@ -257,7 +262,7 @@ const SecurityQuestion = () => {
 
   return (
     <>
-      <Card className={classes.root} elevation={2}>
+      <Card className={classes.root} elevation={0}>
         <CardHeader
           action={
             <IconButton aria-label="settings">

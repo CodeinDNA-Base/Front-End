@@ -170,28 +170,16 @@ const DashboardHome = () => {
           <Box ml={isDesktopOrLaptopOrTabletScreen ? 8 : 0} mt={4} p={0.5}>
             <TrendingServices />
           </Box>
-          {/* <Box
+          <Box
             ml={isDesktopOrLaptopOrTabletScreen ? 8 : 0}
             mt={4}
             p={0.5}
           >
+            <Box>
             <RecentlyViewedServices />
+            </Box>
             <Box mt={4}>
             <RecentlyViewedProjects />
-            </Box>
-          </Box> */}
-        </Grid>
-      </Grid>
-
-{/* Grid for recent projects and services */}
-      <Grid container>
-        <Grid item xs={1} sm={1} md={1} lg={3} xl={2}></Grid>
-
-        <Grid item xs={12} sm={7} md={7} lg={8} xl={7}>
-          <Box ml={isDesktopOrLaptopOrTabletScreen ? 8 : 0} mt={4} p={0.5}>
-            <RecentlyViewedServices />
-            <Box mt={4}>
-              <RecentlyViewedProjects />
             </Box>
           </Box>
         </Grid>

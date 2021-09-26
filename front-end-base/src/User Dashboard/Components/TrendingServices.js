@@ -46,7 +46,7 @@ export const TrendingServices = () => {
 
 const useStyles=makeStyles(()=>({
   carouselContainer:{
-    border:lightBorder
+    // border:lightBorder
   }
 }))
 const TrendingServiceCarousel = () => {

@@ -5,7 +5,6 @@ import { configureStore } from "@reduxjs/toolkit";
 //Brought from loginform of Homepage
 import userProfileReducer from "../../Home/Components/Slices/AuthenticationPageSlices/LoginFormSlice";
 
-import ordersReducer from "./slices/ordersSlice";
 import recentlyViewedProjectsReducer from "./slices/recentlyViewedProjectsSlice";
 import recentlyViewedServicesReducer from "./slices/recentlyViewedServicesSlice";
 import viewOrderReducer from "./slices/viewOrderSlice";
@@ -18,6 +17,10 @@ import paymentInfoReducer from "./slices/paymentInfoSlice";
 import securityInfoSlice from "./slices/securityInfoSlice";
 import dashboardNotificationsReducer from "./slices/dashboardNotificationsSlice";
 import criticalSectionReducer from "./slices/criticalSectionSlice"
+
+import previousPostFiltersReducer from "./slices/previousPostsFilterSlice"
+import previousPostsReducer from "./slices/previousPostsSlice"
+import viewPostReducer from "./slices/viewPostSlice"
 
 //From Nageeta's work
 import latestProjectsReducer from "../../Home/Components/Slices/HomePageSlices/LatestProjectSlice";
@@ -49,7 +52,6 @@ const store = configureStore({
   reducer: {
     //temporarily replace userProfileKey with loginDetails
     loginDetails: userProfileReducer,
-    orders: ordersReducer,
     recentProjects: recentlyViewedProjectsReducer,
     recentServices: recentlyViewedServicesReducer,
     viewOrder: viewOrderReducer,
@@ -63,6 +65,9 @@ const store = configureStore({
     paymentInfo: paymentInfoReducer,
     securityInfo: securityInfoSlice,
     criticalInfo:criticalSectionReducer,
+    previousPostFilters:previousPostFiltersReducer,
+    previousPosts:previousPostsReducer,
+    viewPost:viewPostReducer,
 
     [LATESTPROJECTS]: latestProjectsReducer,
     [ALLSERVICES]: allServicesReducer,

@@ -41,18 +41,18 @@ const LinkedAccountsCard = React.memo(function ProfileCard() {
     <Card className={cx(classes.card, /*shadowStyles.root*/)} elevation={0}>
       <CardContent>
         <p className={classes.statValue}>Linked Accounts</p>
-        <Box m={1} pt={3}>
-          <IconButton color="primary">
-            <LinkedIn fontSize="large" />
-          </IconButton>
+        <Box margin="auto" pt={3} mt={3}>
+          {/* <IconButton color="primary"> */}
+            <LinkedIn fontSize="large" color="primary" />
+          {/* </IconButton> */}
 
-          <IconButton color="primary">
-            <Github fontSize="large" />
-          </IconButton>
+          {/* <IconButton color="primary"> */}
+            <Github fontSize="large" color="primary"/>
+          {/* </IconButton> */}
 
-          <IconButton color="primary">
-            <Facebook fontSize="large" />
-          </IconButton>
+          {/* <IconButton color="primary"> */}
+            <Facebook fontSize="large" color="primary"/>
+          {/* </IconButton> */}
         </Box>
       </CardContent>
     </Card>

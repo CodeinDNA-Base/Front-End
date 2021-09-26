@@ -29,10 +29,10 @@ import { LoremIpsum } from "react-lorem-ipsum";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 //Routing
+import { useLocation, Link } from "react-router-dom";
 
 //Styles and theme
 import "./Styles/ViewOrder.css";
-import { Link } from "react-router-dom";
 //Icons
 import CheckedIcon from "@material-ui/icons/CheckCircle"
 import { ProjectChatModule } from "./ProjectChatModule";
@@ -54,6 +54,10 @@ import {selectOrder,
 //thunks
 import {fetchOrderDetails} from "../Redux/slices/viewOrderSlice"
 
+//Custom components
+import { lightBorder } from "../../Theme/borders";
+
+import { Breadcrumbs } from "@mui/material";
 export const ViewOrder = (props) => {
 
   return (
@@ -66,7 +70,8 @@ export const ViewOrder = (props) => {
 const orderDetailsStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
-    marginTop: "2rem",
+    marginTop: "2rem", 
+    border:lightBorder,
   },orderChatContainer:{
     maxWidth: "100%",
     marginTop: "2rem",
@@ -77,13 +82,12 @@ const orderDetailsStyles = makeStyles((theme) => ({
   stepperForMobile:{
     marginLeft:"-30px"
   },
-  stepperForPC:{
-    
+  orderCardHeader:{
+    backgroundColor:'#fff'
   }
 }));
 
 const OrderDetails = () => {
-
 
   const classes = orderDetailsStyles();
   const[projectCost, setProjectCost]=useState(4115)
@@ -92,20 +96,44 @@ const OrderDetails = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   
   const dispatch=useDispatch()
+  const location=useLocation()
+
   const orderDetails=useSelector(selectOrder)
   const isLoading=useSelector(selectIsOrderLoading)
   const encounteredError=useSelector(selectHasOrderError)
 
+  const[order, setOrder]=useState({})
 
   useEffect(() => {
-    dispatch(fetchOrderDetails("orderId that was clicked"));
+    dispatch(fetchOrderDetails(location.state.orderId));
   }, [dispatch]);
 
+  useEffect(()=>{
+    setOrder(orderDetails)
+  },[orderDetails])
   
   return (
     <div>
-    <Card className={classes.root} elevation={2}>
+        <Box display="flex">
+        <Box flex={1}>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link  to="/userdashboard">
+              Dashboard
+            </Link>
+            <Link  to="vieworder">
+              View Order
+            </Link>
+          </Breadcrumbs>
+        </Box>
+        <Box>
+        </Box>
+      </Box>
+      {
+        isLoading?<h5>Loading data</h5>:
+      
+    <Card className={classes.root} elevation={0}>
       <CardHeader
+        className={classes.orderCardHeader}
         title={<div className={isItSmallOrExtraSmall?classes.stepperForMobile:classes.stepperForPC}>
                 <OrderSteps className={classes.stepperStyle}/>
               </div>
@@ -115,10 +143,7 @@ const OrderDetails = () => {
             <Tooltip
               title={
                 <Typography>
-                  Include all the necessary details needed to complete your
-                  request. For example: If you are looking for a logo, you can
-                  specify your company name, business type, preferred color,
-                  etc.
+                  Codeindna team is working on this order.
                 </Typography>
               }
               TransitionComponent={Zoom}
@@ -126,7 +151,7 @@ const OrderDetails = () => {
               arrow
             >
               <h4 style={{ backgroundColor: "lightblue", padding: isItSmallOrExtraSmall?"0px":"2px"}}>
-                Ongoing
+                {order.status}
               </h4>
             </Tooltip>
           </Box>
@@ -136,18 +161,18 @@ const OrderDetails = () => {
       <CardContent>
         <Box display="flex">
           <Box ml={isItSmallOrExtraSmall?0:2}>
-            <h3>Order #FO71C98CFE3C7</h3>
+            <h3>Order {order.orderId}</h3>
           </Box>
           <Box ml={isItSmallOrExtraSmall?0:4}>
             <Link to="/messaging" className="linkStyleCustomized">
-              <h3>View Service</h3>
+              <h3>View Service </h3>
             </Link>
           </Box>
           <Box ml={isItSmallOrExtraSmall?0:4} className={classes.cardContent}>
-            <h3>August 12,2021</h3>
+            <h3>{order.date}</h3>
           </Box>
           <Box>
-            <h3>${projectCost}</h3>
+            <h3>${order.totalPrice}</h3>
           </Box>
         </Box>
       </CardContent>
@@ -161,17 +186,17 @@ const OrderDetails = () => {
       <Divider />
       <cardContent>
         <Box p={2}>
-          <PackageAndProjectDetails />
+          <PackageAndProjectDetails/>
         </Box>
         <Box display="flex">
         <Box className={classes.cardContent} />
         <Box mr={2}>
-        <h3>Total: ${projectCost}</h3>
+        <h3>Total: ${order.totalPrice}</h3>
         </Box>
         </Box>
       </cardContent>
     </Card>
-        
+    }    
     <Card className={classes.orderChatContainer} elevation={2}>
       <CardHeader
         title={<Typography>
@@ -193,8 +218,14 @@ const OrderDetails = () => {
   );
 };
 
-
+const stepperStyles=makeStyles(()=>({
+  orderCardHeader:{
+    backgroundColor:'#fff'
+  }
+}))
 const OrderSteps = () => {
+  
+  const classes=stepperStyles()
 
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = [
@@ -220,7 +251,7 @@ const OrderSteps = () => {
 
   const isItSmallOrExtraSmall = useMediaQuery("(max-width: 960px)");
     return (
-    <Stepper alternativeLabel={isItSmallOrExtraSmall} activeStep={activeStep}>
+    <Stepper alternativeLabel={isItSmallOrExtraSmall} activeStep={activeStep} className={classes.orderCardHeader}>
       {steps.map(({ stepid, stepTitle, stepToolTip }) => {
         return (
           <Tooltip
@@ -242,9 +273,9 @@ const OrderSteps = () => {
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.action.hover,
-    color: theme.palette.common.black,
-    fontWeight: "bold",
+    backgroundColor: '#011C38',
+    color: '#fff',
+    fontWeight: 700,
   },
   body: {
     fontSize: 14,
@@ -262,21 +293,16 @@ const tableStyles = makeStyles({
 
 const PackageAndProjectDetails = () => {
   const classes = tableStyles();
-  const packageDetails = [
-    {
-      serviceTitle: "Develop MERN Website",
-      offers: [
-        "Application Audit",
-        "Project Plan",
-        "Cost Estimation",
-        "45 Minutes Live Consultation",
-        "10 Questions Answered"
-      ],
-      quantity:3,
-      duration:"7 days",
-      amount:4115,
-    },
-  ];
+
+  const orderDetails=useSelector(selectOrder)
+  const isLoading=useSelector(selectIsOrderLoading)
+  
+  const[order, setOrder]=useState()
+  
+  useEffect(()=>{
+    setOrder(orderDetails)
+  },[orderDetails])
+
   return (
     <div>
       <TableContainer>
@@ -290,11 +316,13 @@ const PackageAndProjectDetails = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {packageDetails.map(({serviceTitle, offers, quantity, duration, amount}) => (
-              <TableRow key={serviceTitle} className="tableRow">
+            {
+              isLoading || !order?<h5>Loading package details ... </h5>:
+            
+              <TableRow key={order.service_project_title} className="tableRow">
                 <StyledTableCell component="th" scope="row">
-                  {serviceTitle}
-                  {offers.map((offer)=>{
+                  {order.service_project_title}
+                  {order.packageOffers.map((offer)=>{
                     return(
                       <Box mt={1} ml={2} display="flex">
                         <Box>
@@ -308,11 +336,11 @@ const PackageAndProjectDetails = () => {
                     })}
                 </StyledTableCell>
                 
-                <StyledTableCell align="right" className={classes.cellData}>{quantity}</StyledTableCell>
-                <StyledTableCell align="right" className={classes.cellData}>{duration}</StyledTableCell>
-                <StyledTableCell align="right" className={classes.cellData}>${amount}</StyledTableCell>
+                <StyledTableCell align="right" className={classes.cellData}>{order.quantity}</StyledTableCell>
+                <StyledTableCell align="right" className={classes.cellData}>{order.durationDays}</StyledTableCell>
+                <StyledTableCell align="right" className={classes.cellData}>${order.totalPrice}</StyledTableCell>
               </TableRow>
-            ))}
+            }
           </TableBody>
         </Table>
       </TableContainer>

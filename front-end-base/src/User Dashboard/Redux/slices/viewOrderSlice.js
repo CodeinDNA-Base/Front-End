@@ -1,21 +1,22 @@
 //redux-oolkit
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {orderDetails} from "./dummyData"
 
 //Thunks
 export const fetchOrderDetails = createAsyncThunk(
-  "userDashboard/fetchOrderDetails",                             //action String : created in actions.js
-  async (status) => {                      
-                                                                  //Get order details:  given status->active, cancelled 
+  "userDashboard/fetchOrderDetails",                             
+  async (orderId) => {
+    console.log("To thunk: "+orderId)             //Get order details:  given status->active, cancelled 
     const orders = await fetch(`https://randomuser.me/api/`);     //send request to custom API
     const data = await orders.json();
-    return data;
+    return orderDetails;
   }
 );
 
 const viewOrdersSlice = createSlice({
   name: "orders",
   initialState: {
-    order: null,           //this is  objects that will hold order details once thunk is fulfilled
+    order: {},           //this is  objects that will hold order details once thunk is fulfilled
     isLoading: false,
     hasError: false,
   },

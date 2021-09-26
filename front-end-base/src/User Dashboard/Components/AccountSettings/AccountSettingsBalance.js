@@ -52,7 +52,12 @@ import {
 
 //action creators
 
+//Custom components
+import {lightBorder} from "../../../Theme/borders"
+
 export const AccountSettingsBalance = (props) => {
+
+
   return (
     <div>
       <Box mb={2}>
@@ -76,6 +81,7 @@ const currentBalanceStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
   },
   cardContent: {
     flex: 1,
@@ -118,7 +124,7 @@ const CurrentBalance = () => {
 
   return (
     <>
-      <Card className={classes.root} elevation={2}>
+      <Card className={classes.root} elevation={0}>
         <CardHeader
           title={<Typography variant="h4">Current Balance</Typography>}
         />
@@ -177,6 +183,7 @@ const purchaseHistoryStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
   },
   cardContent: {
     flex: 1,
@@ -208,7 +215,7 @@ const PurchaseHistory = () => {
     window.print();
   }
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader
         title={<Typography variant="h4">Purchase History</Typography>}
         action={

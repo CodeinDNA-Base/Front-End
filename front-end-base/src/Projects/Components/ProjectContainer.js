@@ -13,16 +13,23 @@ import {
   Button,
   Box,
   Card,
+  useMediaQuery,
 } from "@material-ui/core";
 import LikeIcon from "@material-ui/icons/ThumbUp";
 import WishListIcon from "@material-ui/icons/Favorite";
 import { Rating } from "@material-ui/lab";
 
 //CSS
-import "./Styles/ProjectContainer.css";
-import LoremIpsum, { Avatar, loremIpsum } from "react-lorem-ipsum";
+import LoremIpsum from "react-lorem-ipsum";
+
+import { lightBorder } from "../../Theme/borders";
 
 const componentStyles = makeStyles((theme) => ({
+  container:{
+    border:lightBorder,
+    marginBottom:'1rem',
+    padding:'4px',
+  },
   section: {
     margin: theme.spacing(1.5),
   },
@@ -34,7 +41,7 @@ const componentStyles = makeStyles((theme) => ({
 export const ProjectContainer = () => {
   const classes = componentStyles();
   return (
-    <div className="projectContainerComponent">
+    <div className={classes.container}>
       <div>
         <Grid container>
           <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
@@ -87,6 +94,7 @@ const sectionStyle = makeStyles((theme) => ({
 
 const MiddleDividers = () => {
   const classes = sectionStyle();
+  const isItXs = useMediaQuery("(max-width: 599px)");
 
   return (
     <div className={classes.root}>
@@ -105,15 +113,18 @@ const MiddleDividers = () => {
             container
             justifyContent="center"
           >
-            <div>
+            <Box>
               <Typography variant="h5">$45.54</Typography>
-            </div>
+            </Box>
+            <Box display={!isItXs?"flex":""}>
             <Box mt={0.5}>
               <Rating size="small" readOnly value={2} />
             </Box>
-            <div>
-              <Typography>Sales(913)</Typography>
-            </div>
+            <Box mt={-2.2} ml={isItXs?3:0}>
+              <h5>(512)</h5>
+            </Box>
+            </Box>
+
           </Grid>
         </Grid>
         <p style={{textAlign:'justify'}}><LoremIpsum /></p>

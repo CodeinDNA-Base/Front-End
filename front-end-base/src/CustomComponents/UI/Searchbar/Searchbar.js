@@ -7,6 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import { makeStyles } from '@material-ui/core';
+import { lightBorder } from '../../../Theme/borders';
 
 const useStyles=makeStyles((theme)=>({
     
@@ -32,7 +33,7 @@ export default function Searchbar(props) {
   return (
     <Paper
       component="form"      
-      sx={{ p: '0px 2px', display: 'flex',alignItems: 'center', backgroundColor:backgroundColor, width: width, borderRadius:borderRadius, height:height, opacity:opacity }}
+      sx={{ p: '0px 2px', display: 'flex',alignItems: 'center', backgroundColor:backgroundColor, width: width, borderRadius:borderRadius, height:height, opacity:opacity, border:lightBorder, boxShadow:0 }}
     >
       <InputBase
         sx={{ ml: 1, flex: 1, color:color, fontFamily:fontFamily, fontSize:fontSize }}

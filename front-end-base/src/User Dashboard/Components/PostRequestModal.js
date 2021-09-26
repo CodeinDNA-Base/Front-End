@@ -28,6 +28,7 @@ import { useBorderSelectStyles } from "@mui-treasury/styles/select/border";
 
 //Icons
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import CloseIcon from "@mui/icons-material/Close";
 
 //Custom Components
 
@@ -47,6 +48,9 @@ const modalFormStyles = makeStyles((theme) => ({
       fontFamily: "verdana",
       fontSize: 16,
     },
+    closeBtn:{
+      cursor:'pointer'
+    }
   }));
 
   
@@ -67,6 +71,15 @@ export const PostRequestModal = (props) => {
       //Call handle close method of parent component
       props.handleClose()
     }
+
+    function handleSaveAsDraft(){
+      alert("Send Data to database as draft")
+      //Call handle close method of parent component
+      props.handleClose()
+    }
+    function handleClose(){
+      props.handleClose()
+    }
   
     return (
       <div>
@@ -76,9 +89,15 @@ export const PostRequestModal = (props) => {
         <CardHeader
           title={
             <Typography variant="h5">
-              Describe the service you are looking for- Please be detailed as much
-              as you can
+              Describe the service you are looking for- Be more detailed
             </Typography>
+          }
+          action={
+            <Box className={classes.closeBtn}>
+            <CloseIcon
+              onClick={handleClose}
+            />
+          </Box>
           }
         />
         <Divider />
@@ -150,6 +169,18 @@ export const PostRequestModal = (props) => {
               </Box>
             }
             action={
+              <Box display="flex">
+                <Box>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                onClick={handleSubmitRequest}
+              >
+              Save as Draft
+              </Button>
+              </Box>
+              <Box ml={2}>
               <Button
                 variant="contained"
                 color="primary"
@@ -158,6 +189,8 @@ export const PostRequestModal = (props) => {
               >
                 Submit Request
               </Button>
+              </Box>
+            </Box>
             }
           />
         </CardContent>

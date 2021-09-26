@@ -61,6 +61,7 @@ import {
   selectIsUpdatingDesktopNotifications,
   selectIsUpdatingEmailNotifications
 } from "../../Redux/slices/notificationInfoSlice";
+import { lightBorder } from "../../../Theme/borders";
 
 export const AccountSettingsNotifications = (props) => {
   return (
@@ -87,6 +88,8 @@ const mobileNotificationsStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   avatar: {
     width: 120,
@@ -128,7 +131,7 @@ const MobileNotifications = () => {
     dispatch(updateMobileNotificationSettings(notificationsData))
   }
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader
         title={<Typography variant="h4">Set Mobile Notifications</Typography>}
       />
@@ -175,6 +178,8 @@ const desktopNotificationsStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   avatar: {
     width: 120,
@@ -221,7 +226,7 @@ const DesktopNotifications = () => {
   }
 
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader
         title={<Typography variant="h4">Set Desktop Notifications</Typography>}
       />
@@ -266,6 +271,7 @@ const emailNotificationsStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
   },
   avatar: {
     width: 120,
@@ -290,7 +296,7 @@ const EmailNotifications = () => {
   const [notificationsData, setNotificationsData] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchDesktopNotificationSettings("email or id of user"));
+    dispatch(fetchEmailNotificationSettings("email or id of user"));
   }, [dispatch]);
 
   useEffect(() => {
@@ -312,7 +318,7 @@ const EmailNotifications = () => {
   }
 
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader
         title={<Typography variant="h4">Set Email Notifications</Typography>}
       />

@@ -34,6 +34,7 @@ import {
 } from "../../Redux/slices/paymentInfoSlice"
 //thunks
 import {fetchPaymentInfoDetails} from "../../Redux/slices/paymentInfoSlice"
+import { lightBorder } from "../../../Theme/borders";
 
 export const AccountSettingsPaymentMethods = (props) => {
   return (
@@ -59,6 +60,7 @@ const attachedMethodsStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
   },
   avatar: {
     width: 120,
@@ -84,7 +86,7 @@ useEffect(() => {
 }, [dispatch]);
 
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader
         title={<Typography variant="h4">Already Attached</Typography>}
       />
@@ -115,6 +117,8 @@ const availableMethodsStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   avatar: {
     width: 120,
@@ -132,7 +136,7 @@ const AvailableMethods = () => {
 
 
   return (
-    <Card className={classes.root} elevation={2}>
+    <Card className={classes.root} elevation={0}>
       <CardHeader
         title={<Typography variant="h4">Available for you</Typography>}
       />

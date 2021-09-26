@@ -1,14 +1,18 @@
 //ReactJS
-import React, { useState } from "react";
 import PropTypes from "prop-types";
+
+//ReactJS
+import React, { useState, useEffect } from "react";
 
 //Material-UI core
 import {
-  AppBar,
-  Tabs,
-  Tab,
+  Button,
+  Grid,
+  useMediaQuery,
+  Chip,
   Typography,
   Box,
+  Divider,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -19,10 +23,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 //Icons
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
 //Custom Components
 import { FilterByCategory } from "./FilterByCategory";
-import { FilterByAttribues } from "./FilterByAttributes";
 import { FilterByPrice } from "./FilterByPrice";
 import { FilterByRating } from "./FilterByRating";
 import { FilterByDeliveryTime } from "./FilterByDeliveryTime";
@@ -30,61 +32,17 @@ import { FilterByDeliveryTime } from "./FilterByDeliveryTime";
 //Styles
 
 //Resources
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`scrollable-auto-tabpanel-${index}`}
-      aria-labelledby={`scrollable-auto-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    "aria-controls": `scrollable-auto-tabpanel-${index}`,
-  };
-}
+import { lightBorder } from "../../Theme/borders";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    justifyContent: "center",
-    backgroundColor: theme.palette.background.paper,
+  container: {
+    border: lightBorder,
   },
-  scroller: {
-    flexGrow: 0,
-  },
-  heading:{
-    fontFamily:"verdana",
-    fontWeight:"bold",
-    fontSize:"20px"
-  },
-  appBar:{
-    zIndex:1
-  }
 }));
 
 export const FilterOptions = () => {
   const classes = useStyles();
-  
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -95,10 +53,9 @@ export const FilterOptions = () => {
 
   const open = Boolean(anchorEl);
 
-
   return (
     <Box mb={5}>
-      <Accordion elevation={2}>
+      <Accordion elevation={0} className={classes.container}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -107,45 +64,141 @@ export const FilterOptions = () => {
           <Typography variant="h6">Apply Filter- Reach your choice</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <AppBar position="static" className={classes.appBar} color="default" elevation={0}>
-            <Tabs
-              classes={{ root: classes.root, scroller: classes.scroller }}
-              value={value}
-              onChange={handleChange}
-              indicatorColor="primary"
-              textColor="primary"
-              variant={"scrollable"}
-              scrollButtons={"on"}
-            >
-              <Tab label="Category" {...a11yProps(0)} />
-              <Tab label="Attributes" {...a11yProps(1)} />
-              <Tab label="Price" {...a11yProps(2)} />
-              <Tab label="Ratings" {...a11yProps(3)} />
-              <Tab label="Item Five" {...a11yProps(4)} />
-              <Tab label="Delivery Time" {...a11yProps(5)} />
-            </Tabs>
-
-          <TabPanel value={value} index={0}>
-            <FilterByCategory />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <FilterByAttribues />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <FilterByPrice />
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            <FilterByRating />
-          </TabPanel>
-          <TabPanel value={value} index={4}>
-            <h4>UnKnown Filter</h4>
-          </TabPanel>
-          <TabPanel value={value} index={5}>
-            <FilterByDeliveryTime />
-          </TabPanel>
-          </AppBar>
+          <FilterOptionContainer />
         </AccordionDetails>
       </Accordion>
+    </Box>
+  );
+};
+
+const filterStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
+}));
+
+const FilterOptionContainer = () => {
+  const classes = filterStyles();
+  const isItXs = useMediaQuery("(max-width: 599px)");
+
+  // const dispatch = useDispatch();
+
+  function handleApplyFilters() {
+    alert("Apply");
+  }
+  function handleClearFilters() {
+    // dispatch(filterByCategory(null));
+    // dispatch(filterByPrice(null));
+    // dispatch(filterByStatus(null));
+  }
+
+  return (
+    <Box className={classes.root}>
+      <Grid container>
+        <Grid item xs={1} />
+        <Box mt={1}>
+        <Grid item xs={11} sm={4} md={4} lg={4} xl={4}>
+          <FilterByCategory />
+        </Grid>
+        </Box>
+        <Grid item xs={1} />
+        <Box mt={1}>
+        <Grid item xs={11} sm={4} md={4} lg={4} xl={4}>
+          <FilterByPrice />
+        </Grid>
+        </Box>
+        <Box mt={1}>
+        <Grid item xs={1} />
+        <Grid item xs={11} sm={4} md={4} lg={4} xl={4}>
+          <FilterByDeliveryTime />
+        </Grid>
+        </Box>
+      </Grid>
+      <Box mt={1}>
+      <Divider />
+      </Box>
+      <Box display="flex" mt={3}>
+        <Box flex="1"></Box>
+        <Box display="flex">
+          <Box mr={2}>
+            <Button
+              variant="outlined"
+              size="small"
+              color="primary"
+              onClick={handleClearFilters}
+            >
+              Clear Filters
+            </Button>
+          </Box>
+
+          <Box>
+            <Button
+              variant="contained"
+              size="small"
+              color="primary"
+              onClick={handleApplyFilters}
+            >
+              Apply Filters
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+      <Box mt={2}>
+      <FilterChips />
+      </Box>
+    </Box>
+  );
+};
+
+const FilterChips = () => {
+  // const category = useSelector(selectFilteredCategory);
+  // const price = useSelector(selectFilteredPrice);
+  // const status = useSelector(selectFilteredStatus);
+
+  const [filters, setFilters] = useState([]);
+  const chipData = [
+    {
+      title: "category",
+      key: "category",
+    },
+    {
+      title: "price",
+      key: "price",
+    },
+    {
+      title: "status",
+      key: "status",
+    },
+  ];
+
+  useEffect(() => {
+    setFilters(chipData);
+  }, []);
+
+  function handleRelatedProjectDelete(chipToDelete) {
+    setFilters((chips) =>
+      chips.filter((chip) => chip.key !== chipToDelete.key)
+    );
+  }
+
+  return (
+    <Box>
+      {filters
+        ? filters.map((data) => {
+            return data.title ? (
+              <Chip
+                style={{ marginRight: "1rem" }}
+                key={data.key}
+                label={data.title}
+                onDelete={() => {
+                  handleRelatedProjectDelete(data);
+                }}
+              />
+            ) : (
+              ""
+            );
+          })
+        : ""}
     </Box>
   );
 };

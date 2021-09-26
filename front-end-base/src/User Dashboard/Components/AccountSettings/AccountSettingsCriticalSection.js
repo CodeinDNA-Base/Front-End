@@ -39,6 +39,7 @@ import {
   selectIsLoadingDeletion,
   selectHasErrorInDeletion,
 } from "../../Redux/slices/criticalSectionSlice";
+import { lightBorder } from "../../../Theme/borders";
 
 //Styles and theme
 
@@ -69,6 +70,7 @@ const deleteAccountStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
   },
   avatar: {
     width: 120,
@@ -102,7 +104,7 @@ const DeleteAccount = () => {
 
   return (
     <>
-      <Card className={classes.root} elevation={2}>
+      <Card className={classes.root} elevation={0}>
         <CardHeader
           title={<Typography variant="h4">Delete Account</Typography>}
         />

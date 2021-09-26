@@ -53,6 +53,7 @@ import {
   selectIsPersonalInfoLoading,
   selectHasPersonalInfoError,
 } from "../../Redux/slices/personalInfoSlice";
+import { lightBorder } from "../../../Theme/borders";
 
 //actionCreators
 
@@ -80,6 +81,8 @@ const accountInfoStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   modal: {
     display: "flex",
@@ -133,7 +136,7 @@ const AccountInfo = () => {
 
   return (
     <div>
-      <Card className={classes.root} elevation={2}>
+      <Card className={classes.root} elevation={0}>
         <CardHeader
           action={
             <IconButton>
@@ -212,6 +215,8 @@ const contactInfoStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     marginTop: "2rem",
+    border:lightBorder
+
   },
   linkedAccountsContainer: {
     flex: 1,
@@ -263,7 +268,7 @@ const ContactInfo = () => {
 
   return (
     <div>
-      <Card className={classes.root} elevation={2}>
+      <Card className={classes.root} elevation={0}>
         <CardHeader
           action={
             <IconButton aria-label="settings">
