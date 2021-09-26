@@ -16,3 +16,8 @@ export const TextFonts = {
   extraSmall: "500 1.5vw 'Roboto' , sans-serif",
   XXSmall: "500 1vw 'Roboto' , sans-serif", // normal text size for desktop device
 };
+
+export const fontFamily={
+  fontFamily_1:"Jura , sans-serif",
+  fontFamily_2:"'Roboto' , sans-serif"
+}

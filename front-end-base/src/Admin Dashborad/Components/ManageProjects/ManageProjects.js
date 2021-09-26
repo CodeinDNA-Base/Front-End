@@ -1,17 +1,23 @@
-import React,{useState} from 'react';
-import { makeStyles,Grid,AppBar} from '@material-ui/core';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React,{useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import useWindowDimensions from '../useWindowDimensions';
-
+import { fontFamily } from '../../../Theme/fonts';
+import { Headings } from '../Support/Headings';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { 
+    Card,CardHeader,CardContent,CardActionArea,Typography,Tab,Tabs,makeStyles,Grid,AppBar,Box
+  } 
+  from '@material-ui/core';
 import { stringCollection } from '../Strings/StringCollection';
 import AddNewProjectTab from './AddNewProjectTab'
-import SearchTab from './SearchTab'
 import SetTreadnigProjectTab from './SetTredingProjectTab'
 import ViewAllProjectsTab from './ViewAllProjectsTab'
+
+import { lightBorder } from '../../../Theme/borders';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { selectAll, selectListOfProjects } from './Redux Components/Selectors';
+import { loadDataOfLastChoosedDisplayMode, loadDataOfLastDataUpdateTime, loadDataOfLastUpdateDateAndTime, loadDataOfListOfDraftProjects, loadDataOfListOfDynamicProjects, loadDataOfListOfProjects, loadDataOfListOfStaticProjects } from './Redux Components/Thunks';
 
 function ManageProjects(props) {
     const classes =useStyles();
@@ -20,28 +26,31 @@ function ManageProjects(props) {
     const tabIconHeight=30;
     const tabIconWidth=30;
 
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        //load all data for one time.
+        dispatch(loadDataOfListOfProjects());
+    },[])
+    
+
     const handleChange = (event, newValue) => {
       setValue(newValue);
-    };                  
+    };
     return (
        <Grid container >
-            <Grid item lg={12} xs={12}>
-                <div className={classes.titleBar}>
-                    <h1>{stringCollection.ManageProjects.ProjectManagerTitle}</h1>
-                </div>
-            </Grid>
-            <Grid item lg={12} xs={12}>
-                    {/* Options tab */}
-                    <AppBar position="static" color="default">
-
-                    {/* <div className={classes.root}> */}
+         <Grid item xs={1}></Grid>
+         <Grid item xs={10}>
+           <Grid container>
+             
+              <Grid item lg={12} xs={12}>
+                <Card className={classes.tabBarAndFilersContainer}>
+                  <CardContent>
+                    <Headings text={stringCollection.ManageProjects.ProjectManagerTitle} fontSize={30} fontWeight={'bolder'}/>
+                    <AppBar position="static" color="inherit"
+                      style={{border: '1px solid #e8eaed',borderRadius:'0%',marginTop:'1rem'}}
+                      elevation={0}
+                     >
                         <Tabs
-                          // orientation="vertical"
-                          // variant="scrollable"
-                          // value={value}
-                          // onChange={handleChange}
-                          // aria-label="Vertical tabs example"
-                          // className={classes.tabs}
                            value={value}
                            onChange={handleChange}
                            indicatorColor="primary"
@@ -50,33 +59,46 @@ function ManageProjects(props) {
                            scrollButtons="auto"
                            aria-label="scrollable auto tabs example"
                         >
-                        
-                          <Tab   label={stringCollection.ManageProjects.ShowAllTabText} {...a11yProps(0)} />
-                          <Tab   label={stringCollection.ManageProjects.AddNewProjectTabText} {...a11yProps(1)} />
-                          <Tab   label={stringCollection.ManageProjects.SetTreadnigProjectTabText} {...a11yProps(2)} />
-                          <Tab   label={stringCollection.ManageProjects.SearchProjectTabText} {...a11yProps(3)} />
-                         
+                          <Tab className={classes.tabElementStyle}  label={stringCollection.ManageProjects.ShowAllTabText} {...a11yProps(0)} />
+                          <Tab className={classes.tabElementStyle}  label={stringCollection.ManageProjects.AddNewProjectTabText} {...a11yProps(1)} />
+                          <Tab className={classes.tabElementStyle}  label={stringCollection.ManageProjects.SetTreadnigProjectTabText} {...a11yProps(2)} />
                         </Tabs>
 
-                        </AppBar>
+                     </AppBar>
+                  </CardContent>
+                </Card>
 
-                              <TabPanel value={value} index={0}>
-                                <ViewAllProjectsTab/>
-                              </TabPanel>
-                              <TabPanel value={value} index={1}>
-                                <AddNewProjectTab/>
-                              </TabPanel>
-                              <TabPanel value={value} index={2}>
-                                <SetTreadnigProjectTab/>  
-                              </TabPanel>
-                              <TabPanel value={value} index={3}>
-                                <SearchTab/>
-                              </TabPanel>
+                <Card className={classes.tabPanelContainer}>
+                    <CardContent>
+                              
+                              <Grid container>
+                                
+                                  <Grid xs={12}>
+                                       <TabPanel value={value} index={0}>
+                                          <ViewAllProjectsTab/>
+                                       </TabPanel>
+                                       <TabPanel value={value} index={1}>
+                                         <AddNewProjectTab/>
+                                       </TabPanel>
+                                       <TabPanel value={value} index={2}>
+                                         <SetTreadnigProjectTab/>  
+                                       </TabPanel>
+                                  </Grid>
+                                  
+                                  
+                              </Grid>
+                              
 
-                            {/* </div> */}
-            </Grid>
-            
+                    </CardContent>
+                </Card>    
+              
+                </Grid>
+               
+           </Grid>
+         </Grid>
+         <Grid item xs={1}></Grid>
        </Grid>
+      
     );
 }
 
@@ -93,6 +115,20 @@ const useStyles = makeStyles((theme)=>({
       },
       titleBar:{
         // marginTop:50
+      },
+      tabElementStyle:{
+        fontFamily:fontFamily.fontFamily_1,
+        textDecorationColor:'black',
+        color:'black',
+        fontWeight:'bold',
+        fontSize:'1rem',
+        textTransform:'capitalize'
+      },
+      tabBarAndFilersContainer:{
+        marginTop:'2rem'
+      },
+      tabPanelContainer:{
+        marginTop:'0rem'
       }
 }))
 

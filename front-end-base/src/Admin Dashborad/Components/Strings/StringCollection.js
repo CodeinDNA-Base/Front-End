@@ -1,6 +1,6 @@
 const stringCollection = {
-    AdminDashboardContainer:{
-        NavBarTitle:"CodeInDNA.com",
+    AdminDashboardDrawer:{
+        NavBarTitle:"ADMIN",
         ManageChatsOption:"Chats",
         ManageMasterDatabaseOption:"Manage Master database",
         ManageOrdersOption:"Orders",
@@ -13,6 +13,23 @@ const stringCollection = {
         ManageUserPermissionsOption:"User Permissions",
         HomeOption:"Home",
         ManageOffersOption:"Offers",
+        
+    },
+    AdminDashboardContainer:{
+        NavBarTitle:"ADMIN",
+        ManageChatsOption:"Chats",
+        ManageMasterDatabaseOption:"Manage Master database",
+        ManageOrdersOption:"Orders",
+        ManageProjectsOption:"Projects",
+        ManageReviewsOption:"Customer Reviews",
+        ManageServicesOption:"Services",
+        ManageTeamsOption:"Teams",
+        ManageTransactionsOption:"Transactions",
+        ManageUserAccountsOption:"User Accounts",
+        ManageUserPermissionsOption:"User Permissions",
+        HomeOption:"Home",
+        ManageOffersOption:"Offers",
+        ManageOrderRequests:"Order Requests"
     },
    ManageProjects:{
        ProjectManagerTitle:"Project Manager",
@@ -49,7 +66,7 @@ const stringCollection = {
    ManageOrders:{
        OrdersManagerTitle:"Orders Manager",
        DeliverOrderTabText:"Deliver ",
-       ShowNewOrdersTabText:"New ",
+       ShowNewOrdersTabText:"",
        ShowUnCompleteOrdersTabText:"In-progress ",
        ShowCompleteOrdersTabText:"Complete ",
        ShowCanceledOrdersTabText:"Canceled ",

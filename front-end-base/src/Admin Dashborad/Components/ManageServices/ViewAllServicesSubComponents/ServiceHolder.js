@@ -1,5 +1,5 @@
 import { Grid, makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -18,18 +18,26 @@ import Box from '@material-ui/core/Box';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFlag,faThumbsUp,faThumbsDown} from '@fortawesome/free-solid-svg-icons'
-import './Styles.css'
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
 
+import { faFlag,faThumbsUp,faThumbsDown} from '@fortawesome/free-solid-svg-icons'
+
+import { lightBorder } from '../../../../Theme/borders';
+import { RoundButton } from '../../../../CustomComponents/UI/Buttons/RoundButton';
+import colors from '../../../../Theme/colors';
 const ITEM_HEIGHT = 40;
 
-function ServiceHolder(props) {
+function ServiceHolder({showMenueSelectionOpt,...props}) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [isChecked,setIsChecked] = useState(false);
     const open = Boolean(anchorEl);
-    const [value, setValue] = React.useState(2);
-    const [hover, setHover] = React.useState(-1);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -44,40 +52,33 @@ function ServiceHolder(props) {
     
   };
 
+  const handelCheckBoxChange = () =>{
+    setIsChecked(!isChecked);
+  }
+
   const options = [
-    'Edit',  
-    'Get Share link',
+    'View'
   ];
-  const labels = {
-    0.5: 'Useless',
-    1: 'Useless+',
-    1.5: 'Poor',
-    2: 'Poor+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Good',
-    4: 'Good+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
-  };
+  const optionsWhileSelection=[
+    'Select'
+  ]
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        // avatar={
-        //   <Avatar aria-label="recipe" className={classes.avatar}>
-        //     CodeinDNA
-        //   </Avatar>
-        // }
-        action={
-     <IconButton aria-label="settings">
-            <div>
-      <IconButton
+    <Card className={classes.root}
+        elevation={0}
+         
+    >
+    <CardHeader
+  action={
+    <div>
+            <IconButton aria-label="settings">
+        <div>
+        <IconButton
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <MoreVertIcon />
+      <MoreVertIcon />
       </IconButton>
       <Menu
         id="long-menu"
@@ -92,74 +93,91 @@ function ServiceHolder(props) {
           },
         }}
       >
-        {options.map((option,index) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
-            // handleClose(index)
-            props.handelOptionSelection(e,index,props.projectKey)
-            setAnchorEl(null);
-    
-          }}>
-            {option}
-          </MenuItem>
-        ))}
+        <div>
+          {
+            (showMenueSelectionOpt===true) ? (
+              <div>
+                 {optionsWhileSelection.map((option,index) => (
+                  <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
+                    // handleClose(index)
+                    props.handelOptionSelection(props.data)
+                    setAnchorEl(null);
+                    
+                  }}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </div>
+            ) : (
+              <div>
+                {options.map((option,index) => (
+                  <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e)=>{
+                    // handleClose(index)
+                    props.handelOptionSelection(props.data)
+                    setAnchorEl(null);
+                    
+                  }}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </div>
+            )
+          }
+        </div>
+        
       </Menu>
-    </div>
-          </IconButton>
+      </div>
+      </IconButton>
+      </div>
+
         }
-        title={props.projectTitle}
-        subheader="September 14, 2016"
+        title={props.data.serviceTitle}
+      //  / subheader={props.data.serviceDesc}
       />
+
       <CardMedia
         className={classes.media}
-        image={props.img}
-        title="Paella dish"
-      />
-      <CardContent>
-       
-        {/* <div className={classes.ratingBar}>
-
-        <div className={classes.ratingsRoot}>
-        <h3 className={classes.ratingText}>Rating</h3>
-        <Rating
-        name="hover-feedback"
-        value={value}
-        precision={0.5}
-        onChange={(event, newValue) => {
-          setValue(newValue);
+        image={props.data.thumbnailImageUri}
+        style={{cursor:'pointer'}}
+        onClick={()=>{
+          window.open(props.data.clientSideViewUrl, "_blank")
         }}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
-        }}
-        />
-        
-            {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
-            </div>
-        </div> */}
-        {/* <div className={classes.reviewBar}> */}
-             {/* <div className={classes.wasItHelpFullOrNotContainer}> */}
-                {/* Was helpfull or not */}
-                {/* <div className="Thumb"> */}
-                {/* Thumbs up */}
-                {/* <FontAwesomeIcon size="sm" icon={faThumbsUp} /> */}
-                {/* </div> */}
-                {/* <div className="ThumbFonts"> */}
-                    {/* Help full */}
-                    {/* <h6>Likes [12]</h6> */}
-                {/* </div> */}
-                {/* <div className="Thumb"> */}
-                {/* Thumbs up */}
-                {/* <FontAwesomeIcon size="sm" icon={faThumbsDown} /> */}
-                {/* </div> */}
-                {/* <div className="ThumbFonts"> */}
-                    {/* Help full */}
-                    {/* <h6>Dislikes [22]</h6> */}
-                {/* </div> */}
-            {/* </div> */}
-        {/* </div> */}
-        
-      </CardContent>
      
-      
+      />
+      <CardContent
+       style={{cursor:'pointer'}}
+       onClick={()=>{
+        window.open(props.data.clientSideViewUrl, "_blank")
+      }}
+   
+      >
+        {/* <Grid container>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={4} style={{textAlign:'center'}}>
+              <RoundButton
+                title={"Apply"}
+                width={40}
+                color={colors.white}
+                bgColor={colors.primary}
+                margin={"0% 0% 0%  0%"}
+               // handleClick={hand_PriceRange_Apply}
+               />
+          </Grid>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={4} style={{textAlign:'center'}}>
+              <RoundButton
+                title={"Apply"}
+                width={40}
+                color={colors.white}
+                bgColor={colors.primary}
+                margin={"0% 0% 0%  0%"}
+               // handleClick={hand_PriceRange_Apply}
+               />
+          </Grid>
+          <Grid item xs={1}></Grid>
+         
+        </Grid> */}
+      </CardContent> 
     </Card>
   );
 }
@@ -167,53 +185,17 @@ const useStyles = makeStyles((theme)=>({
     container:{
         height:390
     },
-    bottomButtons:{
-      paddingLeft:'25%'
-    },
-    bottomButtonsContainer:{
-      
-        height:50,
-        width:'100%'
-    },
     root: {
         maxWidth: 345,
+        border:lightBorder,
       },
       media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
+        marginLeft:'2%',
+        marginRight:'2%',
       },
-      expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-          duration: theme.transitions.duration.shortest,
-        }),
-      },
-      expandOpen: {
-        transform: 'rotate(180deg)',
-      },
-      avatar: {
-        backgroundColor:"#1f0678",
-        fontSize:7
-      },
-      ratingsRoot: {
-        width: 200,
-        display: 'flex',
-        alignItems: 'center',
-      },
-      ratingBar:{
-
-      },
-      reviewBar:{
-        marginTop:-30,
-        height:50
-      },
-      ratingText:{
-          paddingRight:'6%'
-      },
-      wasItHelpFullOrNotContainer:{
-       
-    }
+     
 }))
 
 export default ServiceHolder;

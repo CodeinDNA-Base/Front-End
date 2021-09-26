@@ -1,154 +1,78 @@
 import React,{useState} from 'react';
-import {makeStyles} from '@material-ui/core';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
+import {Grid, makeStyles} from '@material-ui/core';
 
-import ProjectBasicInfoForm from './AddNewProjectSteps/ProjectBasicInfoForm'
-import UploadImages from './AddNewProjectSteps/UploadImages';
+import { SidebarForPageChanging } from './AddNewProjectSteps/SidebarForPageChanging';
+import BasicInfoForm from './AddNewProjectSteps/BasicInfoForm';
+import Media from './AddNewProjectSteps/Media';
 import Preview from './AddNewProjectSteps/Preview';
+import Publish from './AddNewProjectSteps/Publish';
+import {lightBorder} from '../../../Theme/borders'
+import { WraningAlert } from '../Support/Alerts';
 
 function AddNewProjectTab(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
+  const [isLockClosed,setIsLockClosed]=useState(false);
+  const [isModelOpen, setIsModelOpen] = useState(false);
+  
+  const [currentPanel,setCurrentPanel]=useState(<BasicInfoForm setIsLockClosed={setIsLockClosed}/>);
+  
+  const setCurrentStepNumber = (value)=>{
+  
+      switch (value) {
+        case 0:
+          setIsLockClosed(false);
+          setCurrentPanel(<BasicInfoForm setIsLockClosed={setIsLockClosed}/>)
+          break;
+        case 1:
+          setIsLockClosed(false);
+          setCurrentPanel(<Media setIsLockClosed={setIsLockClosed}/>)
+          break;
+        case 2:
+          setCurrentPanel(<Preview/>)
+          break;
+        case 3:
+          setCurrentPanel(<Publish/>)
+          break;  
+        default:
+          setCurrentPanel(<h1>Please set a existing panel</h1>)
+          break;
+      }
+   
+    
+    
+  }
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
+  
+  const handleModelOpen = () => {
+     setIsModelOpen(true);
+   };
+ 
+  const handleModelClose = () => {
+     setIsModelOpen(false);
+   };
   return (
-    <div className={classes.root}>
-      <Stepper activeStep={activeStep} className={classes.StepperContainer} >
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      <div>
-        {activeStep === steps.length ? (
-          <div>
-
-            <div className={classes.savingOptionsContainer}>
-
-                                <Button
-                                  variant="contained"
-                                  component="label"
-                                  className={classes.button}
-                                 
-                                >
-                                  Publish 
-                    
-                                </Button>
-
-                                <Button
-                                  variant="contained"
-                                  component="label"
-                                  className={classes.button}
-                                 
-                                >
-                                  Save draft 
-                    
-                                </Button>
-
-                                
-                                <Button
-                                  variant="contained"
-                                  component="label"
-                                  className={classes.button}
-                                  onClick={handleReset}
-                                >
-                                  Reset All
-                    
-                                </Button>
-
-            </div>
-            
-          </div>
-        ) : (
-          <div >
-
-               <div>
-                     {getStepContent(activeStep)}
-               </div>
-            
-              <div className={classes.bottomButtonContainer}>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Save &  Next'}
-              </Button>
-              </div>
-          </div>
-        )}
-      </div>
+    <div>
+        <Grid container>
+            <Grid item xs={3} className={classes.sideBarContainer}>
+                <SidebarForPageChanging handleModelClose={handleModelClose} handleModelOpen={handleModelOpen} isLockClosed={isLockClosed} setCurrentStepNumber={setCurrentStepNumber}/>
+            </Grid>
+            <Grid item xs={9} className={classes.formasAndOtherStuffContainer}>
+                {currentPanel}
+                <WraningAlert text={"Please hit the lock before switching to other panel"} open={isModelOpen} handleOpen={handleModelOpen} handleClose={handleModelClose} />
+            </Grid>
+        </Grid>    
     </div>
   );
 }
-function getSteps() {
-  return ['Basic info of project','Upload Images','Preview'];
-}
-
-function getStepContent(stepIndex) {
-  switch (stepIndex) {
-    case 0:
-      return <ProjectBasicInfoForm/>;
-    case 1:
-     return <UploadImages/>;
-      // return "Sample";
-    case 2:
-      return <Preview/>;
-      // return "Sample";
-    default:
-      return 'Unknown stepIndex';
-  }
-}
 
 const useStyles = makeStyles((theme)=>({
-   root: {
-    width: '100%',
-  },
-  backButton: {
-    marginRight: theme.spacing(1),
-  },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
- 
-  bottomButtonContainer:{
-    marginLeft:'80%'
-
-  },
-  savingOptionsContainer:{
-    width:'20%',
-    marginLeft:'40%',
-    marginTop:'5%'
-  },
-  button:{
-    display:'block',
-    marginTop:10,
-    textAlign:'center'
-
-},
-resetBtn:{
-  marginLeft:'40%'
-}
+    sideBarContainer:{
+      // backgroundColor:"green"
+    },
+    formasAndOtherStuffContainer:{
+      // backgroundColor:'blue'
+      // borderLeft:lightBorder
+    }
 }));
 
 export default AddNewProjectTab;

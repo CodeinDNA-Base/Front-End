@@ -1,31 +1,62 @@
-import React,{useState} from 'react';
-import {makeStyles } from '@material-ui/core/styles';
-import ReviewsListContainer from './DiscardedReviewsSubComponents/ReviewsListContainer';
-import ReviewView from './DiscardedReviewsSubComponents/ReviewView';
-
+import { makeStyles } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { lightBorder } from '../../../Theme/borders';
+import { Headings } from '../Support/Headings';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ListOfDiscardedReview from './DiscardedReviewsSubComponents/ListOfDiscardedReview'
+import { useDispatch } from 'react-redux';
+import { loadListOfPublishedReviews } from './Redux Components/Thunks';
+import ViewReview from './DiscardedReviewsSubComponents/ViewReview';
 function DiscardedReviewsTab(props) {
-    const classes =useStyles();
+    const classes = useStyles();
     const [screenSwitcher,setScreenSwitcher]=useState(true);
-    const hanelScreenSwitch = (event,index) =>{
-      setScreenSwitcher(!screenSwitcher);
+    const [selectedReview,setselectedReview]=useState();
+    const [isViewProjectOpen,setIsViewProjectOpen]=useState(false);
+    const handelOptionSelection = (selectedProject)=>{
+        setselectedReview(selectedProject);
+        handeScreenSwitch();
     }
+    const handeScreenSwitch = ()=>{
+        setIsViewProjectOpen(!isViewProjectOpen);
+    }
+    
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(loadListOfPublishedReviews());
+    },[])
     return (
-        <div>
-            <div className={classes.topControlsBar}>
-                {(screenSwitcher) ? <ReviewsListContainer  hanelScreenSwitch={hanelScreenSwitch}/> : <ReviewView hanelScreenSwitch={hanelScreenSwitch}/>}
+        <div className={classes.container}>
+            <div>
+                    {
+                        (isViewProjectOpen===true) ? (
+                            
+                            <div >
+                                <div onClick={handeScreenSwitch} style={{cursor:'pointer'}}>
+                                    <ArrowBackIosIcon/>
+                                </div>
+                                <div style={{marginTop:'1rem'}}>
+                                    <ViewReview selectedReview={selectedReview}/>
+                                </div>
+                            </div>
+                        ):(
+                            <div style={{marginTop:'1rem'}}>
+                                <ListOfDiscardedReview showMenueSelectionOpt={false}  handelOptionSelection={handelOptionSelection}/>
+                            </div>
+                        )
+                        
+                    }
             </div>
         </div>
     );
 }
 
-const useStyles=makeStyles((theme)=>({
-    topControlsBar:{
-        // backgroundColor:"blue",
-        height:70,
-        border:'1px solid #f7f2f7',
-        marginTop:"1%"
-      },
-   
-    
+const useStyles = makeStyles((theme)=>({
+    container:{
+
+    },
+    topNav:{
+       
+    }
 }))
 export default DiscardedReviewsTab;
