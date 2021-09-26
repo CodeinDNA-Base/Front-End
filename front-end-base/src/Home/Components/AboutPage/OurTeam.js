@@ -7,17 +7,19 @@ import { HomePageComponentsHeading } from "../../../CustomComponents/UI/Text/Hom
 import TeamCard from "./TeamCard";
 
 // string constants
-import { TEAM_TITLE ,TEAM_SUBTITLE} from "../../Strings/AboutUsStrings";
+import { TEAM_TITLE, TEAM_SUBTITLE } from "../../Strings/AboutUsStrings";
 
 // reducer
 import { useSelector, useDispatch } from "react-redux";
 import { loadTeamDetail } from "../Slices/AboutPageSlices/OurTeamSlices";
 import { selectTeamDetail } from "../Slices/AboutPageSlices/OurTeamSlices";
+import { lightBorder } from "../../../Theme/borders";
 
 // styles
 const OurTeamStyles = makeStyles(() => ({
   root: {
     backgroundImage: ColorGradient.lightSkyBlue,
+    borderTop:lightBorder,
     borderRadius: 10,
   },
   cardStyle: {
@@ -51,17 +53,11 @@ const OurTeam = () => {
           descriptionColor={colors.lightBlack}
         />
 
-        {!isLoading &&
-          team_detail.map((member) => (
-            <div className={classes.cardStyle}>
-              <TeamCard
-                img={member.memberProfilePicture}
-                name={member.memberFirstName + " " + member.memberLastName}
-                position={member.memberRole}
-                description={member.memberIntroductionText}
-              />
-            </div>
-          ))}
+        {team_detail.map((member) => (
+          <div className={classes.cardStyle}>
+            <TeamCard member={member} isLoading={isLoading} />
+          </div>
+        ))}
       </Grid>
       <Grid item md={2}></Grid>
     </Grid>

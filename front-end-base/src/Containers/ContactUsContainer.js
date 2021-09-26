@@ -37,8 +37,9 @@ const useStyles = makeStyles(() => ({
   },
 
   contactForm: {
-    marginTop: (isDesktopOrLaptopOrTabletScreen) =>
+    paddingTop: (isDesktopOrLaptopOrTabletScreen) =>
       isDesktopOrLaptopOrTabletScreen ? "10%" : "35%",
+     
   },
 }));
 
@@ -83,11 +84,11 @@ function ContactUsContainer(props) {
     { title: "Login", route: "login" },
     { title: "Register", route: "register" },
   ];
-   
+
   return (
     <div className={classes.root}>
-     {/* Header */}
-     <Grid item xs={12}>
+      {/* Header */}
+      <Grid item xs={12}>
         <AppBar>
           <CustomNavbar
             handelTabIndex={handelTabIndex}
@@ -99,10 +100,11 @@ function ContactUsContainer(props) {
             drawerMenuOptions={drawerMenuOptions}
             darwerMenuExtraOptions={darwerMenuExtraOptions}
             drawerListItemAvatar={drawerListItemAvatar}
+            // pass array for keeping record of components loading progress bar
+            isComponentsLoaded={[]}
           />
         </AppBar>
       </Grid>
-
 
       {/** Contact form */}
       <Grid container className={classes.contactForm} spacing={0}>

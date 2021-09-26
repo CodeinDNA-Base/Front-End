@@ -13,7 +13,7 @@ import colors, { ColorGradient } from "../Theme/colors";
 
 // custom components
 import ServicePage from "../Home/Components/SubServicesPage/ServicesPage";
-import { CustomLoading } from "../CustomComponents/UI/Support/CustomLoading";
+
 
 // navbar
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
@@ -30,7 +30,8 @@ import {
   isAvatar,
 } from "./SupportFiles/HomePageNavbarParameters";
 
-
+//redux
+import { useSelector } from "react-redux";
 
 // styles
 const useStyles = makeStyles(() => ({
@@ -58,6 +59,13 @@ function SubServicesContainer(props) {
   const [sticknessFlag, setSticknessFlag] = useState(true);
   const [currentSelectedTabIndex, setCurrentSelectedTabIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
+  //redux
+  const isSubServicesCardsLoaded = useSelector(
+    (state) => state.subServices.isLoading
+  );
+  const isServicesWithSubServicesLoaded = useSelector(
+    (state) => state.searchByCategory.loadServiceWithSubServicesIsLoading
+  );
 
   useEffect(() => {
     if (scrollPosition > height * 0.9) {
@@ -84,7 +92,6 @@ function SubServicesContainer(props) {
     setCurrentSelectedTabIndex(index);
   };
 
- 
   const classes = useStyles(isDesktopOrLaptopOrTabletScreen);
 
   return (
@@ -102,20 +109,22 @@ function SubServicesContainer(props) {
             drawerMenuOptions={drawerMenuOptions}
             darwerMenuExtraOptions={darwerMenuExtraOptions}
             drawerListItemAvatar={drawerListItemAvatar}
+            // pass array for keeping record of components loading progress bar
+            isComponentsLoaded={[
+              isServicesWithSubServicesLoaded,
+              isSubServicesCardsLoaded,
+            ]}
           />
         </AppBar>
       </Grid>
 
-        <Grid container style={{ marginTop: "10%" }}>
-          <Grid xs={1} sm={1} md={1} item></Grid>
-          <Grid xs={10} sm={10} md={10} container item>
-            <ServicePage />
-          </Grid>
-          <Grid xs={1} sm={1} md={1} item></Grid>
+      <Grid container style={{ marginTop: "10%" }}>
+        <Grid xs={1} sm={1} md={1} item></Grid>
+        <Grid xs={10} sm={10} md={10} container item>
+          <ServicePage />
         </Grid>
-     
-        
-   
+        <Grid xs={1} sm={1} md={1} item></Grid>
+      </Grid>
 
       {/* footer*/}
       <Grid container className={classes.footer} spacing={0}>

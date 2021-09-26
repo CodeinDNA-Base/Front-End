@@ -5,20 +5,23 @@ import { OurMission } from "./OurMission";
 import { useMediaQuery } from "@material-ui/core";
 import colors, { ColorGradient } from "../../../Theme/colors";
 import { makeStyles } from "@material-ui/core";
+import { lightBorder } from "../../../Theme/borders";
+
 
 // styles
 const CareersStyles = makeStyles((theme) => ({
   aboutUsMainTitle: {
     padding: "0%  2% 0% 2%",
     backgroundImage: ColorGradient.lightSkyBlue,
-    borderRadius: 10,
+    borderTop:lightBorder,
+    borderRadius:10
   },
 
   aboutUsMainTitleContainer: {
-    margin: (isDesktopOrLaptopOrTabletScreen) =>
-      isDesktopOrLaptopOrTabletScreen ? "1%  3% 5% 3%" : "5% 5% 5% 5%",
-    width: (isDesktopOrLaptopOrTabletScreen) =>
-      isDesktopOrLaptopOrTabletScreen ? "94%" : "90%",
+    // margin: (isDesktopOrLaptopOrTabletScreen) =>
+    //   isDesktopOrLaptopOrTabletScreen ? "0%  1% 5% 1%" : "4% 5% 5% 5%",
+    // width: (isDesktopOrLaptopOrTabletScreen) =>
+    //   isDesktopOrLaptopOrTabletScreen ? "100%" : "90%",
   },
   ourMission: {
     marginTop: (isDesktopOrLaptopOrTabletScreen) =>

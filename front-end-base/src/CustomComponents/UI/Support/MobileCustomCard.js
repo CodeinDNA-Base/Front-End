@@ -9,6 +9,10 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import AvTimerRoundedIcon from "@material-ui/icons/AvTimerRounded";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { MobileCustomCardCarousel } from "./MobileCustomCardCarousel";
+import Skeleton from "@mui/material/Skeleton";
+import { lightBorder } from "../../../Theme/borders";
+
+//styles
 const CustomCardStyles = makeStyles(() => ({
   root: {
     boxShadow:
@@ -39,53 +43,18 @@ const CustomCardStyles = makeStyles(() => ({
     fontSize: 20,
     padding: "3%",
     position: "absolute",
-    bottom:'45%',
+    bottom: "45%",
     left: "85%",
     backgroundColor: "white",
     borderRadius: "50%",
     fill: ({ isFavIconSelected }) =>
       isFavIconSelected ? colors.error : colors.secondary,
-    
+
     pointer: "progress",
   },
 }));
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-    title: "SEO",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Web Developement",
-    author: "author",
-  },
 
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Graphic Designing",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1446669052213-5dcff53f1f3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1053&amp;q=80",
-    title: "Voice",
-    author: "author",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1591628001888-76cc02e0c276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1050&amp;q=80",
-    title: "Desktop Development",
-    author: "author",
-  },
-];
-
-export const MobileCustomCard = ({
-  subServiceTitle,
-  basicPackageDeliveryTime,
-  basicPackagePrice,
-  subServiceRating,
-  subServiceTotalRatedOrders,
-  subServiceThumbnails,
-}) => {
+export const MobileCustomCard = ({ subService, isLoading }) => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   const [navButtonAndFavIconVisibility, setNavButtonAndFavIconVisibility] =
     useState("hidden");
@@ -103,44 +72,70 @@ export const MobileCustomCard = ({
       onMouseEnter={() => setNavButtonAndFavIconVisibility("visible")}
       onMouseLeave={() => setNavButtonAndFavIconVisibility("hidden")}
     >
-      <Box style={{ display: "flex", borderBottom:'2px solid black',}}>
-        <Box width="40%">
-          <MobileCustomCardCarousel
-            subServiceThumbnails={subServiceThumbnails}
-            navButtonAndFavIconVisibility={navButtonAndFavIconVisibility}
-          />
-        </Box>
-        <Box width="50%" className={classes.detailBox} flexShrink={0}>
-        { Array.from(subServiceTitle).slice(0,50) }{Array.from(subServiceTitle).length > 50 && '...'}
-          {isFavIconSelected ? (
-          <FavoriteIcon
-            className={classes.favouriteIcon}
-            onClick={() => setIsFavIconSelected(!isFavIconSelected)}
-          />
+      <Box style={{ display: "flex", borderBottom: "2px solid black" }}>
+        {isLoading ? (
+          <Skeleton height={80} width={110} variant="rectangle" />
         ) : (
-          <FavoriteBorderIcon
-            className={classes.favouriteIcon}
-            onClick={() => setIsFavIconSelected(!isFavIconSelected)}
-          />
+          <Box width="40%">
+            <MobileCustomCardCarousel
+              subServiceThumbnails={subService.subServiceThumbnails}
+              navButtonAndFavIconVisibility={navButtonAndFavIconVisibility}
+            />
+          </Box>
         )}
-        </Box>
+        {isLoading ? (
+          <Box p={1}>
+            <Skeleton height={20} width={150} variant="text" />
+            <Skeleton height={20} width="80%" variant="text" />
+          </Box>
+        ) : (
+          <Box width="50%" className={classes.detailBox} flexShrink={0}>
+            {Array.from(subService.subServiceTitle).slice(0, 50)}
+            {Array.from(subService.subServiceTitle).length > 50 && "..."}
+            {isFavIconSelected ? (
+              <FavoriteIcon
+                className={classes.favouriteIcon}
+                onClick={() => setIsFavIconSelected(!isFavIconSelected)}
+              />
+            ) : (
+              <FavoriteBorderIcon
+                className={classes.favouriteIcon}
+                onClick={() => setIsFavIconSelected(!isFavIconSelected)}
+              />
+            )}
+          </Box>
+        )}
       </Box>
-      
-      <Box width='100%' p={1} m={1}>
-       
+
+      <Box width="100%" p={1} m={1}>
         <Box display="flex">
           <Box width="100%">
-            <Typography className={classes.textLight}>
-              From{" "}
-              <Typography component="span" className={classes.textBold}>
-                {basicPackagePrice + '$'}
+            {isLoading ? (
+              <Skeleton width="40%" variant="text" />
+            ) : (
+              <Typography className={classes.textLight}>
+                From{" "}
+                <Typography component="span" className={classes.textBold}>
+                  {subService.basicPackagePrice + "$"}
+                </Typography>
               </Typography>
-            </Typography>
+            )}
           </Box>
           <Box flexShrink={0}>
-            <StarRoundedIcon style={{ color: colors.secondary }} />{" "}
+            {isLoading ? (
+              <Skeleton width={20} height={20} variant="circular" />
+            ) : (
+              <StarRoundedIcon style={{ color: colors.secondary }} />
+            )}
           </Box>
-          <Box flexShrink={0}>{subServiceRating} {`(${subServiceTotalRatedOrders})`}</Box>
+          {isLoading ? (
+            <Skeleton variant="text" width="30%" />
+          ) : (
+            <Box flexShrink={0}>
+              {subService.subServiceRating}{" "}
+              {`(${subService.subServiceTotalRatedOrders})`}
+            </Box>
+          )}
         </Box>
       </Box>
     </Grid>

@@ -5,6 +5,7 @@ import colors from "../../../Theme/colors";
 import { makeStyles } from "@material-ui/core";
 import { SmallHeading } from "../../../CustomComponents/UI/Text/SmallHeading";
 import { HomePageComponentsHeading } from "../../../CustomComponents/UI/Text/HomePageHeadings";
+import { lightBorder } from "../../../Theme/borders";
 
 // string constants
 import {
@@ -15,23 +16,25 @@ import {
   TERMSANDSERVICES_VIOLATION,
 } from "../../Strings/AboutUsStrings";
 
+
+//styles
 const TermsAndServicesStyles = makeStyles(() => ({
   root: {
     backgroundColor: colors.highlighter,
     paddingBottom: "3%",
     paddingTop: "3%",
-    // border: `1px solid ${colors.lightGray}`,
+    borderTop:lightBorder,
     borderRadius: 10,
   },
   Conatiner: {
-    border: `1px solid ${colors.lightGray}`,
-    borderRadius: 10,
+    border: lightBorder,
     backgroundColor: colors.white,
     paddingLeft: (isDesktopOrLaptopOrTabletScreen) =>
       isDesktopOrLaptopOrTabletScreen ? "2%" : "4%",
     paddingRight: (isDesktopOrLaptopOrTabletScreen) =>
       isDesktopOrLaptopOrTabletScreen ? "2%" : "4%",
     paddingBottom: "5%",
+    paddingTop:'2%'
   },
   paragraph: {
     marginBottom: (isDesktopOrLaptopOrTabletScreen) =>

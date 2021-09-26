@@ -3,6 +3,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SUBSERVICES } from "./SubServiceConstants";
 
 // think
+/**this one thunk will be used to load
+1- random services
+2- filtered services
+3- related to any category
+**/
 export const loadSubServices = createAsyncThunk(
   `${SUBSERVICES}/getsubServices`,
   async (args, thunkAPI) => {

@@ -11,6 +11,8 @@ import { Chip } from "@material-ui/core";
 import { Paper, Tooltip } from "@material-ui/core";
 import { styled, withStyles } from "@material-ui/core";
 import CustomAlerts from "../../../CustomComponents/UI/Support/Alerts";
+import { lightBorder } from "../../../Theme/borders";
+
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -19,6 +21,7 @@ import {
   loadStandardQueries,
 } from "../Slices/AboutPageSlices/ContactUsGlobalFormSlice";
 
+//custom tooltip
 const LightTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: colors.highlighter,
@@ -78,12 +81,15 @@ const useContactFormStyles = makeStyles((theme) => ({
       isDesktopOrLaptopOrTabletScreen && "1%",
   },
   card: {
-    boxShadow:
-      "0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.19)",
+    // boxShadow:
+    //   "0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.19)",
     width: "80%",
     paddingLeft: "10%",
     paddingRight: "10%",
     paddingBottom: "5%",
+    backgroundColor: colors.white,
+    border: lightBorder,
+    textAlign: "center",
   },
   attachmentIcon: {
     float: "left",
@@ -208,7 +214,7 @@ const ContactUsGlobalForm = () => {
       </div>
     );
   };
-  
+
   const checkFileSize = (size) => {
     // to convert bytes to MB
     const TWENTYFIVEMB = 25 * 1024 * 1024;
@@ -354,7 +360,7 @@ const ContactUsGlobalForm = () => {
           multiple
           id="uploadFilesInContactForm"
         />
-        
+
         <LightTooltip
           title="You can attach upto 25 MB"
           aria-label="upload Files"
@@ -366,7 +372,6 @@ const ContactUsGlobalForm = () => {
             <AttachmentSharpIcon />
           </label>
         </LightTooltip>
-
 
         {/* Uploaded files set as chips for users */}
         <FileNamesChips />
@@ -383,7 +388,7 @@ const ContactUsGlobalForm = () => {
 
         <RoundButton
           title={"Submit"}
-          width={"100%"}
+          width={"50%"}
           color={colors.white}
           bgColor={colors.secondary}
           margin={"5% 0% 0%  0%"}

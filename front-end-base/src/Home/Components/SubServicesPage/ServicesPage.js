@@ -1,6 +1,6 @@
 import { Grid } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import { CustomCard } from "../../../CustomComponents/UI/Support/CustomCard";
+import { DesktopCustomCard } from "../../../CustomComponents/UI/Support/CustomCard";
 import { HomePageComponentsHeading } from "../../../CustomComponents/UI/Text/HomePageHeadings";
 import { CategoryChips } from "../../../CustomComponents/UI/Support/CategoryChips";
 import { SubCategoriesToChips } from "./SubCategoriesToChips";
@@ -12,7 +12,7 @@ import { DividerInProjects } from "../HorizontalLine";
 import { useMediaQuery } from "@material-ui/core";
 import { MobileCustomCard } from "../../../CustomComponents/UI/Support/MobileCustomCard";
 import { FilterOptions } from "./FilterOptions";
-import { CustomLoading } from "../../../CustomComponents/UI/Support/CustomLoading";
+
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -81,9 +81,9 @@ export const ServicePage = () => {
         style={{ backgroundImage: ColorGradient.lightSkyBlue }}
       >
         <HomePageComponentsHeading title="Advanced Search" />
-        <Grid container justifyContent="center" alignItems="center">
+        {/* <Grid container justifyContent="center" alignItems="center">
           <FilterOptions />
-        </Grid>
+        </Grid> */}
       </Grid>
       <DividerInProjects />
       <HomePageComponentsHeading
@@ -91,33 +91,15 @@ export const ServicePage = () => {
         margin={"0% 0% 2% 0%"}
       />
 
-      {!isLoading ? (
-        sub_services.map((service) => (
-          <Grid item>
-            {isDesktopOrLaptopOrTabletScreen ? (
-              <CustomCard
-                subServiceTitle={service.subServiceTitle}
-                basicPackageDeliveryTime={service.basicPackageDeliveryTime}
-                basicPackagePrice={service.basicPackagePrice}
-                subServiceRating={service.subServiceRating}
-                subServiceTotalRatedOrders={service.subServiceTotalRatedOrders}
-                subServiceThumbnails={service.subServiceThumbnails}
-              />
-            ) : (
-              <MobileCustomCard
-                subServiceTitle={service.subServiceTitle}
-                basicPackageDeliveryTime={service.basicPackageDeliveryTime}
-                basicPackagePrice={service.basicPackagePrice}
-                subServiceRating={service.subServiceRating}
-                subServiceTotalRatedOrders={service.subServiceTotalRatedOrders}
-                subServiceThumbnails={service.subServiceThumbnails}
-              />
-            )}
-          </Grid>
-        ))
-      ) : (
-        <CustomLoading />
-      )}
+      {sub_services.map((subService) => (
+        <Grid item>
+          {isDesktopOrLaptopOrTabletScreen ? (
+            <DesktopCustomCard isLoading={isLoading} subService={subService} />
+          ) : (
+            <MobileCustomCard isLoading={true} subService={subService} />
+          )}
+        </Grid>
+      ))}
 
       <Grid container justifyContent="flex-end">
         <Box p={isDesktopOrLaptopOrTabletScreen ? 2 : 0} mr={6}>

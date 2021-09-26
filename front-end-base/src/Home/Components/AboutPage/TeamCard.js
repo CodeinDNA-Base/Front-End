@@ -12,6 +12,10 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useBlogTextInfoContentStyles } from "@mui-treasury/styles/textInfoContent/blog";
 import colors from "../../../Theme/colors";
 import { Typography } from "@material-ui/core";
+import Skeleton from "@mui/material/Skeleton";
+import { Box } from "@mui/system";
+
+//styles
 const TeamCardStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
@@ -82,12 +86,7 @@ const TeamCardStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TeamCard = React.memo(function BlogCard({
-  img,
-  name,
-  description,
-  position,
-}) {
+export const TeamCard = React.memo(function BlogCard({ member, isLoading }) {
   const [expanded, setExpanded] = React.useState(false);
   const styles = TeamCardStyles({ expanded });
   const { button: buttonStyles, ...contentStyles } =
@@ -96,33 +95,58 @@ export const TeamCard = React.memo(function BlogCard({
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const description_array = Array.from(description);
-  //const shadowStyles = useOverShadowStyles();
+
   return (
     <Card className={cx(styles.root)}>
-      <CardMedia className={styles.media} image={img} />
-      <CardContent className={styles.content}>
-        <TextInfoContent
-          classes={contentStyles}
-          overline={position}
-          heading={name}
-          body={description_array.slice(0, 90)}
+      {isLoading ? (
+        <Skeleton variant="rectangular" height={200} width={220} />
+      ) : (
+        <CardMedia
+          className={styles.media}
+          image={member.memberProfilePicture}
         />
-        <span className={styles.readMoreButton}>Read More</span>
-        <IconButton
-          className={clsx(styles.expand, {
-            [styles.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
+      )}{" "}
+      <CardContent className={styles.content}>
+        {isLoading ? (
+          <Box>
+            <Skeleton variant="text" width="40%" />
+            <Skeleton variant="text" width={290} />{" "}
+            <Skeleton variant="text" width="60%" />
+          </Box>
+        ) : (
+          <TextInfoContent
+            classes={contentStyles}
+            overline={member.memberRole}
+            heading={member.memberFirstName + " " + member.memberLastName}
+            body={Array.from(member.memberIntroductionText).slice(0, 90)}
+          />
+        )}
+
+        {isLoading ? (
+          <Skeleton variant="text" width="20%" />
+        ) : (
+          <span className={styles.readMoreButton}>Read More</span>
+        )}
+        {isLoading ? (
+          <Skeleton variant="text" width="8%" />
+        ) : (
+          <IconButton
+            className={clsx(styles.expand, {
+              [styles.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        )}
       </CardContent>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{description_array.slice(90)}</Typography>
+          <Typography paragraph>
+            {Array.from(member.memberIntroductionText).slice(90)}
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>

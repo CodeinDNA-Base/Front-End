@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
   listItems: {},
 }));
 
-
 function DesktopReviewCard({ hasError, isLoading, latest_reviews }) {
   return (
     <Grid
@@ -81,13 +80,15 @@ function DesktopReviewCard({ hasError, isLoading, latest_reviews }) {
             latest_reviews.slice(0, 2).map((review) => (
               <Grid xs={10} sm={5} md={5} item>
                 <ReviewCard
-                  key={review.reviewId}
-                  image={review.reviewClientImage}
-                  firstName={review.reviewClientFirstName}
-                  lastName={review.reviewClientLastName}
-                  reviewRating={review.reviewRating}
-                  country={review.reviewClientCountry}
-                  reviewText={review.reviewText}
+                  review={review}
+                  isLoading={isLoading}
+                  // key={review.reviewId}
+                  // image={review.reviewClientImage}
+                  // firstName={review.reviewClientFirstName}
+                  // lastName={review.reviewClientLastName}
+                  // reviewRating={review.reviewRating}
+                  // country={review.reviewClientCountry}
+                  // reviewText={review.reviewText}
                 />
               </Grid>
             ))}
@@ -106,13 +107,15 @@ function DesktopReviewCard({ hasError, isLoading, latest_reviews }) {
             latest_reviews.slice(2, 4).map((review) => (
               <Grid xs={10} sm={5} md={5} item>
                 <ReviewCard
-                  key={review.reviewId}
-                  image={review.reviewClientImage}
-                  firstName={review.reviewClientFirstName}
-                  lastName={review.reviewClientLastName}
-                  reviewRating={review.reviewRating}
-                  country={review.reviewClientCountry}
-                  reviewText={review.reviewText}
+                  review={review}
+                  isLoading={isLoading}
+                  // key={review.reviewId}
+                  // image={review.reviewClientImage}
+                  // firstName={review.reviewClientFirstName}
+                  // lastName={review.reviewClientLastName}
+                  // reviewRating={review.reviewRating}
+                  // country={review.reviewClientCountry}
+                  // reviewText={review.reviewText}
                 />
               </Grid>
             ))}
@@ -137,18 +140,19 @@ const MobileReviewCard = ({ hasError, isLoading, latest_reviews }) => {
           showThumbs={false}
           showIndicators={false}
         >
-          {!isLoading &&
-            latest_reviews.map((review) => (
-              <ReviewCard
-                key={review.reviewId}
-                image={review.reviewClientImage}
-                firstName={review.reviewClientFirstName}
-                lastName={review.reviewClientLastName}
-                reviewStars={review.reviewStars}
-                country={review.reviewClientCountry}
-                reviewText={review.reviewText}
-              />
-            ))}
+          {latest_reviews.map((review) => (
+            <ReviewCard
+              review={review}
+              // key={review.reviewId}
+              // image={review.reviewClientImage}
+              // firstName={review.reviewClientFirstName}
+              // lastName={review.reviewClientLastName}
+              // reviewStars={review.reviewStars}
+              // country={review.reviewClientCountry}
+              // reviewText={review.reviewText}
+              isLoading={isLoading}
+            />
+          ))}
         </Carousel>
       </Grid>
       <Grid item xs={1}></Grid>

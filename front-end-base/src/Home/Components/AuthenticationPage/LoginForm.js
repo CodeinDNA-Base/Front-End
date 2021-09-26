@@ -19,6 +19,7 @@ import { Checkbox } from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 import ForgetPasswordModal from "./ForgetPasswordModal";
 import AlternateEmailRoundedIcon from "@material-ui/icons/AlternateEmailRounded";
+import { lightBorder } from "../../../Theme/borders";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
@@ -39,9 +40,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10%",
     alignItems: "center",
     paddingTop: "5%",
+    border:lightBorder
     //paddingLeft: isDesktopOrLaptopOrTabletScreen => isDesktopOrLaptopOrTabletScreen ? '1%' : '5%'
   },
-  center: { textAlign: "center" },
+  center: { textAlign: "center",lineHeight:2 },
   text: {
     marginBottom: "5%",
   },
@@ -100,10 +102,10 @@ export const PasswordForm = ({ userEmail }) => {
     }
   };
   return (
-    <Box boxShadow={2} justifyContent="center" alignContent="center">
+    <Box justifyContent="center" alignContent="center">
       <ForgetPasswordModal open={open} handleClose={handleClose} userEmail={userEmail} />
       <form className={classes.form}>
-        <SmallHeading title={`Welcome`} />
+        <SmallHeading title={`Welcome`} margin={'0% 0% 0% 0%'} />
         <h5 className={classes.center}>{userEmail}</h5>
         <TextFieldWithIcon
           label="Password"
@@ -217,7 +219,7 @@ export default function LoginForm({
   };
 
   return (
-    <Box boxShadow={2} justifyContent="center" alignContent="center">
+    <Box justifyContent="center" alignContent="center">
       <form className={classes.form}>
         <SmallHeading title={"Login to CODEINDNA"} />
         <TextFieldWithIcon

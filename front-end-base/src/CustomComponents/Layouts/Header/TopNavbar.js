@@ -17,10 +17,15 @@ import { Divider } from "@material-ui/core";
 import { Hidden } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import colors from "../../../Theme/colors";
-import { TextFonts, Headingfonts } from "../../../Theme/fonts";
 import { useMediaQuery } from "@material-ui/core";
 import { Box } from "@material-ui/core";
+import Searchbar from "../../UI/Searchbar/Searchbar";
+
+// colors and fonts
+import colors from "../../../Theme/colors";
+import { TextFonts, Headingfonts } from "../../../Theme/fonts";
+
+//styles
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -142,17 +147,11 @@ export default function TopNavbar({
             <Link to="/"> CODE IN DNA</Link>
           </IconButton>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
+            {isDesktopOrLaptopOrTabletScreen ? (
+              <Searchbar placeholder="Seach Anything" />
+            ) : (
+              <Searchbar placeholder="Seach Anything" width={265} />
+            )}
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

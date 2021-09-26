@@ -108,6 +108,8 @@ function AuthenticationContainer(props) {
             drawerMenuOptions={drawerMenuOptions}
             darwerMenuExtraOptions={darwerMenuExtraOptions}
             drawerListItemAvatar={drawerListItemAvatar}
+              // pass array for keeping record of components loading progress bar
+              isComponentsLoaded={[]}
           />
         </AppBar>
       </Grid>

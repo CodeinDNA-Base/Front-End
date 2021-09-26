@@ -55,7 +55,6 @@ const AboutUsMainTitleText = () => {
     <div>
       <p className={classes.title}>{CAREER_TITLE} </p>
       <ModalContainer
-        
         open={open}
         handleClose={handleClose}
         Component={<ContactUsGlobalForm />}
@@ -67,7 +66,7 @@ const AboutUsMainTitleText = () => {
       />
 
       <p className={classes.subtitle}>{CAREER_SUBTITLE}</p>
-      <Box style={{ marginTop: 20 }}>
+      <Box >
         <RoundButton
           title="Contact Us"
           color={colors.white}

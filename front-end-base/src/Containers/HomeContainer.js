@@ -35,6 +35,10 @@ import {
   isAvatar,
 } from "./SupportFiles/HomePageNavbarParameters";
 
+//redux
+import { useSelector, useDispatch } from "react-redux";
+
+//styles
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -80,6 +84,22 @@ function HomeContainer(props) {
   const [currentSelectedTabIndex, setCurrentSelectedTabIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
 
+  //-------------------------------------------------------------------------------
+  // for redux
+  const isLatestProjectsLoaded = useSelector(
+    (state) => state.latestProjects.isLoading
+  );
+  const isServicesLoaded = useSelector((state) => state.allServices.isLoading);
+  const isTrendingTechnologyIconsLoaded = useSelector(
+    (state) => state.trendingTechnologies.isLoading
+  );
+  const isLatestUserReviewsLoaded = useSelector(
+    (state) => state.latestReviews.isLoading
+  );
+  const isServicesWithSubServicesLoaded = useSelector(
+    (state) => state.searchByCategory.loadServiceWithSubServicesIsLoading
+  );
+  //-------------------------------------------------------------------------------
   const handleScroll = () => {
     setScrollPosition(window.pageYOffset);
   };
@@ -122,6 +142,14 @@ function HomeContainer(props) {
             drawerMenuOptions={drawerMenuOptions}
             darwerMenuExtraOptions={darwerMenuExtraOptions}
             drawerListItemAvatar={drawerListItemAvatar}
+            // pass array for keeping record of components loading progress bar
+            isComponentsLoaded={[
+              isLatestProjectsLoaded,
+              isTrendingTechnologyIconsLoaded,
+              isLatestUserReviewsLoaded,
+              isServicesLoaded,
+              isServicesWithSubServicesLoaded
+            ]}
           />
         </AppBar>
       </Grid>

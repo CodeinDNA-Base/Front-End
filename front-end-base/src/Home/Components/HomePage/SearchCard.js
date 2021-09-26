@@ -124,6 +124,7 @@ export default function SearchCard() {
   return (
     <Card
       className={classes.root}
+      elevation={0}
       classes={{ root: state.raised ? classes.cardHovered : "" }}
       onMouseOver={() => setState({ raised: true, shadow: 3 })}
       onMouseOut={() => setState({ raised: false, shadow: 1 })}

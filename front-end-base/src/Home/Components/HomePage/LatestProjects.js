@@ -37,13 +37,14 @@ const LatestProjects = (props) => {
       )}
       <Grid container spacing={0} style={{ marginTop: "4%" }}>
         <Grid xs={0} sm={1} md={1} item></Grid>
-        <Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
+        <Grid xs={12} sm={10} md={10} item style={{ textAlign:'center' }}>
           <RoundButton
-            variant="contained"
+            variant="outlined"
            title={`See more projects`}
-           color={colors.white}
-           bgColor={colors.primary}
+           color={colors.primary}
+           bgColor={colors.white}
            handleClick={handleSeeMoreProjectsClick}
+           margin={'2% 0% 0% 0%'}
 
          />
          

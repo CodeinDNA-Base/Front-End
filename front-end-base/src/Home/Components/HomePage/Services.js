@@ -15,7 +15,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectAllServices } from "../Slices/HomePageSlices/ServicesSlices";
 import { loadAllServices } from "../Slices/HomePageSlices/ServicesSlices";
 
-
 const ServiceCardContainerForDesktop = ({ services_chunck, isLoading }) => {
   const colorArray = ["#F0F7F8", "#FAF8F6", "#F6F9F8", "#FDF6F4"];
   return (
@@ -28,17 +27,15 @@ const ServiceCardContainerForDesktop = ({ services_chunck, isLoading }) => {
       justifyContent="center"
       alignItems="center"
     >
-      {!isLoading &&
-        services_chunck.map((service, index) => (
-          <Grid xs={10} sm={5} md={3} item key={service.serviceId}>
-            <ServiceCard
-              image={service.serviceImage}
-              color={colorArray[index]}
-              title={service.serviceName}
-              description={service.serviceDescription}
-            />
-          </Grid>
-        ))}
+      {services_chunck.map((service, index) => (
+        <Grid xs={10} sm={5} md={3} item key={service.serviceId}>
+          <ServiceCard
+            color={colorArray[index]}
+            isLoading={isLoading}
+            service={service}
+          />
+        </Grid>
+      ))}
     </Grid>
   );
 };
@@ -48,27 +45,27 @@ const ServiceCardContainerForMobile = ({ service, isLoading }) => {
     <Grid
       xs={12}
       sm={12}
+      md={12}
       item
       container
       justifyContent="center"
       alignItems="center"
     >
-      {!isLoading && (
-        <Grid xs={10} sm={5} item>
+      {
+        <Grid item>
           <ServiceCard
-            image={service.serviceImage}
-            title={service.serviceName}
-            description={service.serviceDescription}
+            service={service}
             color={"#F0F7F8"}
+            isLoading={isLoading}
           />
         </Grid>
-      )}
+      }
     </Grid>
   );
 };
 
 export default function Services() {
-  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 576px)");
   const { isLoading } = useSelector((state) => state.allServices);
   const { hasError } = useSelector((state) => state.allServices);
   const all_services = useSelector(selectAllServices);
@@ -119,15 +116,15 @@ export default function Services() {
         // OR
       > */}
       <Carousel
-      axis="horizontal"
-      infiniteLoop
-      autoPlay
-      interval={4000}
-      showArrows={true}
-      showStatus={false}
-      showThumbs={false}
-      showIndicators={false}
-    >
+        axis="horizontal"
+        infiniteLoop
+        autoPlay
+        interval={4000}
+        showArrows={true}
+        showStatus={false}
+        showThumbs={false}
+        showIndicators={false}
+      >
         {isDesktopOrLaptopOrTabletScreen
           ? [
               { start: 0, end: 4 },

@@ -13,6 +13,7 @@ import colors, { ColorGradient } from "../Theme/colors";
 
 // custom components
 import AboutUsMenu from "../Home/Components/AboutPage/AboutUsMenu";
+
 // navbar parameters
 import {
   navbarMenuOptions,
@@ -24,9 +25,14 @@ import {
   isNavBarIconButtons,
   isAvatar,
 } from "./SupportFiles/HomePageNavbarParameters";
+
 // navbar
 import CustomNavbar from "../CustomComponents/Layouts/Header/CustomNavbar";
 
+//redux
+
+
+//styles
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -108,6 +114,8 @@ function AboutUsContainer(props) {
             drawerMenuOptions={drawerMenuOptions}
             darwerMenuExtraOptions={darwerMenuExtraOptions}
             drawerListItemAvatar={drawerListItemAvatar}
+            // pass array for keeping record of components loading progress bar
+            isComponentsLoaded={[]}
           />
         </AppBar>
       </Grid>

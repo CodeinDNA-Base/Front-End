@@ -20,7 +20,7 @@ export default class CustomNavbar extends React.Component {
       handelTabIndex: props.handelTabIndex.bind(props.handelTabIndex()),
       handelTabChangeEvent: this.handelTabChangeEvent.bind(this),
       progress: 0,
-      timerId: "",
+      componentsLoadingProgressId: "",
       isBarDisplay: "visible",
     };
   }
@@ -31,20 +31,30 @@ export default class CustomNavbar extends React.Component {
       currentSelectedTabIndex: indexSelected,
     });
   };
+
+  //--------------------------------------
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
-    const timer = setInterval(() => {
-      const diff = Math.random() * 10;
-      let pro = Math.min(this.state.progress + diff, 100);
-      this.setState({ progress: pro });
-      console.log(this.state.progress);
-    }, 500);
 
-    this.setState({ timerId: timer });
+    const increamentPerSingleComponent =
+      100 / this.props.isComponentsLoaded.length;
+    console.log("loading array length is " + increamentPerSingleComponent);
+
+    // for progrssbar
+    const componentsLoadingProgress = setInterval(() => {
+      let pro = this.state.progress + increamentPerSingleComponent;
+      let absolutePro = Math.min(pro, 100);
+      console.log(absolutePro);
+      this.setState({ progress: absolutePro });
+    }, [this.props.isComponentsLoaded]);
+
+    this.setState({ componentsLoadingProgressId: componentsLoadingProgress });
   }
+  //--------------------------------------
+
   componentDidUpdate() {
     if (this.state.progress === 100) {
-      clearInterval(this.state.timerId);
+      clearInterval(this.state.componentsLoadingProgressId);
       this.setState({ isBarDisplay: "none", progress: 101 });
     }
   }
@@ -52,7 +62,6 @@ export default class CustomNavbar extends React.Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
   handleScroll = () => {
-    // console.log(document.body.getBoundingClientRect());
     this.setState({
       scrollPos: document.body.getBoundingClientRect().top,
       show: document.body.getBoundingClientRect().top > this.state.scrollPos,
@@ -60,7 +69,6 @@ export default class CustomNavbar extends React.Component {
   };
 
   render() {
-    // console.log(this.state);
     return (
       <AppBar style={{ backgroundColor: "transparent" }}>
         <div className="navdiv">

@@ -3,25 +3,28 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core";
 import Color from "color";
 import HeaderTitle from "../HeaderTitle";
-import { CustomCard } from "./ProjectCard";
+import { ProjectCard } from "./ProjectCard";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { selectLatestProjects } from "../Slices/HomePageSlices/LatestProjectSlice";
 import { loadLatestProjects } from "../Slices/HomePageSlices/LatestProjectSlice";
+import {lightBorder} from '../../../Theme/borders'
 
+//styles
 const useStyles = makeStyles(() => ({
- 
   card: ({ color }) => ({
     minWidth: 256,
-    borderRadius: 16,
+   // borderRadius: 16,
     boxShadow: "none",
+    border:lightBorder,
     "&:hover": {
       boxShadow: `0 6px 12px 0 ${Color(color)
         .rotate(-12)
         .darken(0.2)
         .fade(0.5)}`,
     },
+
   }),
   content: ({ color }) => {
     return {
@@ -67,42 +70,38 @@ const LatestProjectsForDesktop = (props) => {
   return (
     <Grid container spacing={0} style={{ marginTop: "2%" }}>
       <Grid xs={0} sm={1} md={1} item></Grid>
-      {!isLoading && (
+      {
         <Grid xs={12} sm={10} md={10} item container spacing={4}>
           <Grid item xs={12} sm={9} md={6}>
-            <CustomCard
+            <ProjectCard
               classes={styles}
-              title={latest_Projects[0].projectTitle}
-              subtitle={latest_Projects[0].projectSubtitle}
-              image={latest_Projects[0].projectImage}
+              project={latest_Projects[0]}
+              isLoading={isLoading}
             />
           </Grid>
           <Grid item xs={12} sm={9} md={6}>
-            <CustomCard
+            <ProjectCard
               classes={styles2}
-              title={latest_Projects[1].projectTitle}
-              subtitle={latest_Projects[1].projectSubtitle}
-              image={latest_Projects[1].projectImage}
+              project={latest_Projects[1]}
+              isLoading={isLoading}
             />
           </Grid>
           <Grid item xs={12} sm={9} md={6}>
-            <CustomCard
+            <ProjectCard
               classes={styles3}
-              title={latest_Projects[2].projectTitle}
-              subtitle={latest_Projects[2].projectSubtitle}
-              image={latest_Projects[2].projectImage}
+              project={latest_Projects[2]}
+              isLoading={isLoading}
             />
           </Grid>
           <Grid item xs={12} sm={9} md={6}>
-            <CustomCard
+            <ProjectCard
               classes={styles4}
-              title={latest_Projects[3].projectTitle}
-              subtitle={latest_Projects[3].projectSubtitle}
-              image={latest_Projects[3].projectImage}
+              project={latest_Projects[3]}
+              isLoading={isLoading}
             />
           </Grid>
         </Grid>
-      )}
+      }
       <Grid xs={0} sm={1} md={1} item></Grid>
     </Grid>
   );

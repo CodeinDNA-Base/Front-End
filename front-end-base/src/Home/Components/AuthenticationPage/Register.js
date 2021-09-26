@@ -10,10 +10,13 @@ import { SmallHeading } from "../../../CustomComponents/UI/Text/SmallHeading";
 import "../Styles/hrStyle.css";
 import CustomAlerts from "../../../CustomComponents/UI/Support/Alerts";
 import AlternateEmailRoundedIcon from "@material-ui/icons/AlternateEmailRounded";
+import { lightBorder } from "../../../Theme/borders";
+
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { setEmail } from "../Slices/AuthenticationPageSlices/RegisterDetailsSlice";
+
 
 // styles
 const registerStyles = makeStyles((theme) => ({
@@ -25,6 +28,7 @@ const registerStyles = makeStyles((theme) => ({
     marginTop: "10%",
     alignItems: "center",
     paddingTop: "3%",
+    border:lightBorder
   },
 
   text: {
@@ -58,7 +62,7 @@ export default function Register({ handleSignUpWithEmailClicked }) {
   };
 
   return (
-    <Box boxShadow={2} justifyContent="center" alignContent="center">
+    <Box  justifyContent="center" alignContent="center">
       <form className={classes.form}>
         <SmallHeading title={"Get your free account"} />
         <TextFieldWithIcon

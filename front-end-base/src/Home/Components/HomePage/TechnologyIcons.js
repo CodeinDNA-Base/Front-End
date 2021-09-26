@@ -37,7 +37,7 @@ export default function TechnologyIcons() {
       justifyContent="center"
       alignItems="center"
     >
-      {!isLoading &&
+      {
         trending_technologies.map((technology) => (
           <Grid
             item
@@ -50,9 +50,10 @@ export default function TechnologyIcons() {
             key ={technology.technologyId}
           >
             <CustomIcon
-              title={technology.technologytitle}
+              technology={technology}
               icon={<PersonPinIcon style={{fontSize:isDesktopOrLaptopOrTabletScreen ? 60 : 40}} />}
-              handleClick={()=>handleClick(technology.technologyId)}
+              handleClick={()=>handleClick()}
+              isLoading={isLoading}
             />
           </Grid>
         ))}

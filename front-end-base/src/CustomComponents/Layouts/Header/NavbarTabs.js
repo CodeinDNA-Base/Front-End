@@ -5,6 +5,9 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import {lightBorder} from '../../../Theme/borders'
+import colors from "../../../Theme/colors";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -43,12 +46,15 @@ export default function SecondaryNavbar(props) {
       flexGrow: 1,
       width: "100%",
       backgroundColor: theme.palette.background.paper,
+      border:  props.packageContainerStickyNess === "StickThePackageContainer"
+      ? colors.primary
+      : lightBorder,
     },
     appbar: {
       backgroundColor:
         props.packageContainerStickyNess === "StickThePackageContainer"
-          ? "#011c38"
-          : "#f8f9fa",
+          ? colors.primary
+          : colors.highlighter,
       boxShadow: "none",
       transition: "background-color 2s ease-in",
       WebkitTransition: "background-color 2s ease-in",

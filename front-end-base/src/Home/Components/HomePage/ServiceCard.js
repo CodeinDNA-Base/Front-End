@@ -7,8 +7,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Skeleton from "@mui/material/Skeleton";
+import { Box } from "@mui/system";
+import { lightBorder } from "../../../Theme/borders";
 
-export default function ServiceCard({ image, color, title, description }) {
+export default function ServiceCard({ service, color, isLoading }) {
   // styles
   const useStyles = makeStyles({
     root: {
@@ -16,8 +19,9 @@ export default function ServiceCard({ image, color, title, description }) {
       marginRight: "6%",
       backgroundColor: color,
       textAlign: "center",
-      border: `15px solid ${color}`,
+      //border: `15px solid ${color}`,
       minHeight: 350,
+      border: lightBorder,
     },
     Img: {},
   });
@@ -26,32 +30,52 @@ export default function ServiceCard({ image, color, title, description }) {
   const handleServiceCardClick = () => {
     alert("navigate to sub service page");
   };
-  const descriptionArray = Array.from(description);
+  
   return (
-    <Card className={classes.root} onClick={handleServiceCardClick}>
+    <Card
+      className={classes.root}
+      onClick={handleServiceCardClick}
+      elevation={0}
+    >
       <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Sevice Image"
-          image={image}
-          classes={{ img: classes.Img }}
-          title="Service Image"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {descriptionArray.slice(0, 125)}
-            {descriptionArray.length > 125 && "..."}
-          </Typography>
-        </CardContent>
+        {isLoading ? (
+          <Skeleton variant="rectangular" width={250} height={150} />
+        ) : (
+          <CardMedia
+            component="img"
+            height="150"
+            alt="Sevice Image"
+            image={service.serviceImage}
+            classes={{ img: classes.Img }}
+            title="Service Image"
+          />
+        )}
+        {isLoading ? (
+          <Box>
+            <Skeleton height={40} />
+            <Skeleton width="60%" height={20} />
+          </Box>
+        ) : (
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {service.serviceName}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {Array.from(service.serviceDescription).slice(0, 125)}
+              {Array.from(service.serviceDescription).length > 125 && "..."}
+            </Typography>
+          </CardContent>
+        )}
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          See More
-        </Button>
-      </CardActions>
+      {isLoading ? (
+        <Skeleton width="30%" />
+      ) : (
+        <CardActions>
+          <Button size="small" color="primary">
+            See More
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 }

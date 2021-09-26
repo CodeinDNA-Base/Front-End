@@ -1,13 +1,22 @@
 import Grid from "@material-ui/core/Grid";
-import colors from "../../../Theme/colors";
-import { Headingfonts, TextFonts } from "../../../Theme/fonts";
 import AppleIcon from "@material-ui/icons/Apple";
 import AndroidRoundedIcon from "@material-ui/icons/AndroidRounded";
 import SocialIcons from "./SocialIcons";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { DividerInFooter } from "./DividerInFooter";
+
+//colors and fonts
+import colors from "../../../Theme/colors";
+import { Headingfonts, TextFonts } from "../../../Theme/fonts";
 import gernalClassesStyles from "../../../Theme/gernalStyles";
+
+//routing
+import { Link } from "react-router-dom";
+
+// strings
+import { FooterLists } from "./Strings";
+
+//styles
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: colors.primary,
@@ -35,6 +44,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+// desktop footer
 const DesktopFooter = (props) => {
   const classes = useStyles();
   const gernalClasses = gernalClassesStyles();
@@ -43,108 +53,27 @@ const DesktopFooter = (props) => {
       <Grid container spacing={0}>
         <Grid sm={1} md={1} item></Grid>
         <Grid xs={12} sm={10} md={10} item container>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>Technologies</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>React JS</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Node JS</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>React Native</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Angular JS</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Vue JS</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Flutter</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Express</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Spring Boot</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Python</li>
-              </Link>
-            </ul>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>Categories</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>UX/UI Designing</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Programming & Tech</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Artificial Intelligence</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Data analytics</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Machine learning</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Writting & Translation</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Bussiness</li>
-              </Link>
-            </ul>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>About</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>About Us</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Our Team</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Careers</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Contact</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>{`Terms & Services`}</li>
-              </Link>
-            </ul>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <ul className={classes.ulStyle}>
-              <li className={classes.listHeading}>Resources</li>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Team</li>
-              </Link>
-
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Support</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>Online Meetings</li>
-              </Link>
-              <Link to="#" className={gernalClasses.linkStyle}>
-                <li className={classes.liStyle}>new Technologies</li>
-              </Link>
-            </ul>
-          </Grid>
+          {FooterLists.map((listItem, index) => {
+            return (
+              <Grid item xs={12} sm={6} md={3}>
+                <ul className={classes.ulStyle} key={`FooterList_${index}`}>
+                  <li className={classes.listHeading}>
+                    {listItem.headingName}
+                  </li>
+                  {listItem.listItems.map((item) => {
+                    return (
+                      <Link
+                        to={`${item.route}`}
+                        className={gernalClasses.linkStyle}
+                      >
+                        <li className={classes.liStyle}>{item.itemName}</li>
+                      </Link>
+                    );
+                  })}
+                </ul>
+              </Grid>
+            );
+          })}
         </Grid>
         <Grid sm={1} md={1} item></Grid>
       </Grid>

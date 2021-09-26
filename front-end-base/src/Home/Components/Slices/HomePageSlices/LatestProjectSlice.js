@@ -54,5 +54,6 @@ export const latestProjectSlice = createSlice(sliceOptions);
 // selectors
 export const selectLatestProjects = (state) => state.latestProjects.projects;
 
+
 // export default reducers
 export default latestProjectSlice.reducer;
