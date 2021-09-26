@@ -3,12 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
 import ImageListItemBar from "@material-ui/core/ImageListItemBar";
-import { ColorGradient } from "../../../Theme/colors";
+import colors, { ColorGradient } from "../../../Theme/colors";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { selectLatestProjects } from "../Slices/HomePageSlices/LatestProjectSlice";
 import { loadLatestProjects } from "../Slices/HomePageSlices/LatestProjectSlice";
+import { Headingfonts, TextFonts } from "../../../Theme/fonts";
 
 
 // styles
@@ -33,29 +34,31 @@ const useStyles = makeStyles((theme) => ({
     transform: "translateZ(0)",
   },
   title: {
-    color: theme.palette.primary.light,
+    color: colors.white,
+    font:Headingfonts.large
   },
   titleBar: {
     background: ColorGradient.purple,
+    font:Headingfonts.medium
   },
 }));
 
 export default function LatestProjectsForMobile() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const latest_Projects = useSelector(selectLatestProjects);
-  // const { isLoading } = useSelector((state) => state.latestProjects);
-  // const { hasError } = useSelector((state) => state.latestProjects);
+  const latest_Projects = useSelector(selectLatestProjects);
+  const { isLoading } = useSelector((state) => state.latestProjects);
+  const { hasError } = useSelector((state) => state.latestProjects);
 
-  // useEffect(() => {
-  //   dispatch(loadLatestProjects());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadLatestProjects());
+  }, [dispatch]);
 
   return (
     <div className={classes.root}>
-      <ImageList className={classes.imageList} cols={1.2} gap={8}>
+      <ImageList className={classes.imageList} cols={1.5} gap={16}>
         {" "}
-        {/* {latest_Projects.map((project) => (
+        {latest_Projects.map((project) => (
           <ImageListItem key={project.projectId} className={classes.actionArea}>
             <img src={project.projectImage} alt={project.projectTitle} />
             <ImageListItemBar
@@ -68,7 +71,7 @@ export default function LatestProjectsForMobile() {
              
             />
           </ImageListItem>
-        ))} */}
+        ))}
       </ImageList>
     </div>
   );

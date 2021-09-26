@@ -43,7 +43,7 @@ export default function TechnologyIcons() {
             item
             md={2}
             sm={2}
-            xs={3}
+            xs={4}
             container
             justifyContent="center"
             alignItems="center"

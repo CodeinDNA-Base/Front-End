@@ -23,14 +23,17 @@ export default function ServiceCard({ service, color, isLoading }) {
       minHeight: 350,
       border: lightBorder,
     },
-    Img: {},
+    Img: {
+      width: "100%",
+      height: 160,
+    },
   });
   const classes = useStyles();
   // handlers
   const handleServiceCardClick = () => {
     alert("navigate to sub service page");
   };
-  
+
   return (
     <Card
       className={classes.root}
@@ -43,7 +46,7 @@ export default function ServiceCard({ service, color, isLoading }) {
         ) : (
           <CardMedia
             component="img"
-            height="150"
+            height="160"
             alt="Sevice Image"
             image={service.serviceImage}
             classes={{ img: classes.Img }}

@@ -14,18 +14,17 @@ const useStyles = makeStyles(() => ({
     borderRadius: 20,
     marginLeft: 10,
   },
- 
 }));
 
 const LatestProjects = (props) => {
-  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
+  const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 768px)");
   const classes = useStyles();
   // hanlders
-  const handleSeeMoreProjectsClick=()=>{
-    alert('go to nadir projects page')
-  }
+  const handleSeeMoreProjectsClick = () => {
+    alert("go to nadir projects page");
+  };
   return (
-    <div >
+    <Grid container justifyContent="center" alignItems="center">
       <HeaderTitle
         title={"Projects"}
         description={`Get projects done using cutting edge technologies like react, spring boot and more...!`}
@@ -37,21 +36,19 @@ const LatestProjects = (props) => {
       )}
       <Grid container spacing={0} style={{ marginTop: "4%" }}>
         <Grid xs={0} sm={1} md={1} item></Grid>
-        <Grid xs={12} sm={10} md={10} item style={{ textAlign:'center' }}>
+        <Grid xs={12} sm={10} md={10} item style={{ textAlign: "center" }}>
           <RoundButton
             variant="outlined"
-           title={`See more projects`}
-           color={colors.primary}
-           bgColor={colors.white}
-           handleClick={handleSeeMoreProjectsClick}
-           margin={'2% 0% 0% 0%'}
-
-         />
-         
+            title={`See more projects`}
+            color={colors.primary}
+            bgColor={colors.white}
+            handleClick={handleSeeMoreProjectsClick}
+            margin={"2% 0% 0% 0%"}
+          />
         </Grid>
         <Grid xs={0} sm={1} md={1} item></Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 };
 export default LatestProjects;
