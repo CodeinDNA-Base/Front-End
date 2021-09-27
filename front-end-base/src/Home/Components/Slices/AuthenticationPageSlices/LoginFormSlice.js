@@ -18,7 +18,7 @@ export const checkUserId = createAsyncThunk(
   }
 );
 
-const checkUserPasswordAndReturnUserDetailsIfExists = createAsyncThunk(
+export const checkUserPasswordAndReturnUserDetailsIfExists = createAsyncThunk(
   `${LOGININDETAILS}/getUserDetails`,
   async ({userPassword}, thunkAPI) => {
     const data = await fetch(

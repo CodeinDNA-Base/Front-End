@@ -124,19 +124,26 @@ export const ProfileCard = React.memo(function ProfileCard() {
   const isLoading=useSelector(selectUserDetailsIsLoading)
   const encounteredError=useSelector(selectUserDetailsHasError)
 
-
-  function handleClick(){
-    console.log(profileData)
-  }
-  //No need of this useeffect actually
   useEffect(() => {
     dispatch(checkUserPassword({ userPassword:"4545" }));
   }, [dispatch]);
 
+  function handleProfileClick(){
+    console.log("Goto Profile")
+  }
+
+  const[userDetails, setUserDetails]=useState({})
+  useEffect(()=>{
+    setUserDetails(profileData)
+  },[profileData])
+
   
   return (
     <Card className={cx(styles.card)} elevation={0}>
-      <CardContent>
+      {
+        isLoading?<h1>Loading ...</h1>:
+        <Box>
+        <CardContent>
         <StyledBadge
           overlap="circular"
           anchorOrigin={{
@@ -147,10 +154,8 @@ export const ProfileCard = React.memo(function ProfileCard() {
         >
           <Avatar
             className={styles.avatar}
-            src={profilePic}
-            onClick={() => {
-              alert("Go to my profile page/ Settings");
-            }}
+            src={userDetails.userProfileImage}
+            onClick={handleProfileClick}
             style={{ cursor: "pointer" }}
           />
         </StyledBadge>
@@ -162,18 +167,17 @@ export const ProfileCard = React.memo(function ProfileCard() {
           }}
           style={{ cursor: "pointer" }}
         >
-          Nadir Hussain
+          {userDetails.userFirstName+" "+userDetails.userLastName}
         </h3>
         <Box p={1} mt={0}>
-          <Rating value={3} size="small" readOnly></Rating>
+          <Rating value={userDetails.userRating} size="small" readOnly></Rating>
           <span
             onClick={() => {
               alert("Go to reviews from Sellers");
             }}
             style={{ cursor: "pointer" }}
           >
-            {" "}
-            4.7
+            {userDetails.userRating}
           </span>
         </Box>
       </CardContent>
@@ -181,13 +185,15 @@ export const ProfileCard = React.memo(function ProfileCard() {
       <Box display={"flex"}>
         <Box p={1} flex={"auto"}>
           <p className={styles.statLabel}>Response Time</p>
-          <p className={styles.statValue}>1 Hour</p>
+          <p className={styles.statValue}>{userDetails.userResponseTime}</p>
         </Box>
         <Box p={1} flex={"auto"}>
           <p className={styles.statLabel}>Balance</p>
-          <p className={styles.statValue}>100$</p>
+          <p className={styles.statValue}>${userDetails.userBalance}</p>
         </Box>
       </Box>
+      </Box>
+      }
     </Card>
   );
 });

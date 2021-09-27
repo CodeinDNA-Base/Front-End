@@ -43,11 +43,9 @@ export const RecentProjectsForDesktop = () => {
         .map((item) => {
           return (
             <Grid item md={6} lg={3} xl={3}>
-              <Link to="searchproject" style={{ textDecoration: "none" }}>
                 <Box mt={2}>
                   <CustomCard />
                 </Box>
-              </Link>
             </Grid>
           );
         })}

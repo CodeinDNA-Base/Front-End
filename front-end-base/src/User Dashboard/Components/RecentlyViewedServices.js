@@ -31,11 +31,9 @@ export const RecentlyViewedServices = () => {
             .map((index) => {
               return (
                 <Grid item md={6} lg={3} xl={4}>
-                  <Link to="services" style={{ textDecoration: "none" }}>
                     <Box mt={2}>
                       <ServiceCard />
                     </Box>
-                  </Link>
                 </Grid>
               );
             })}

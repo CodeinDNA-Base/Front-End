@@ -40,6 +40,7 @@ import { ViewOrder } from "../User Dashboard/Components/ViewOrder";
 import { PostRequestFromMobile } from "../User Dashboard/Components/PostRequestFromMobile";
 import { PreviousPost } from "../User Dashboard/Components/PreviousPost";
 import { ViewPostDetails } from "../User Dashboard/Components/ViewPostDetails";
+import {Favorites} from "../User Dashboard/Components/Favorites"
 
 import Scroll from "./Scroll";
 export const UserDashboardContainer = () => {
@@ -118,6 +119,16 @@ export const UserDashboardViewPostDetails = () => {
     <Scroll>
       <DashboardMenu />
       <ViewPostDetailsContainer />
+      <FooterComponent />
+    </Scroll>
+  );
+};
+
+export const UserDashboardFavorites = () => {
+  return (
+    <Scroll>
+      <DashboardMenu />
+      <ShowFavorites />
       <FooterComponent />
     </Scroll>
   );
@@ -351,6 +362,22 @@ export const ViewPostDetailsContainer = () => {
     </div>
   );
 };
+
+const ShowFavorites=()=>{
+  return(
+  <div className="bodySection1">
+  <Grid container>
+    <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+    <Grid item xs={12} sm={10} md={10} lg={8} xl={8}>
+      <Box>
+        <Favorites />
+      </Box>
+    </Grid>
+    <Grid item xs={0} sm={1} md={1} lg={2} xl={2}></Grid>
+  </Grid>
+</div>
+);
+}
 const FooterComponent = () => {
   const isDesktopOrLaptopOrTabletScreen = useMediaQuery("(min-width: 960px)");
   return (

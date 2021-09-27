@@ -10,7 +10,8 @@ import {
   UserDashboardViewOrder,
   PostRequestFromMobileUserDashboard,
   UserDashboardShowPreviousPosts,
-  UserDashboardViewPostDetails
+  UserDashboardViewPostDetails,
+  UserDashboardFavorites
 } from "./UserDashboardContainer";
 import { SearchProjectsContainer } from "./SearchProjectsContainer";
 
@@ -48,7 +49,7 @@ function Entrance(props) {
         <Route exact path="/viewpost" component={UserDashboardViewPostDetails} />    
         <Route exact path="/admin" component={AdminDashboardContainer} />
         <Route exact path="/services" component={SubServicesContainer} />
-
+        <Route exact path="/favorites" component={UserDashboardFavorites} />
       </Switch>
     </Router>
   );

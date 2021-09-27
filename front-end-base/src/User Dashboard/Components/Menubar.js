@@ -7,7 +7,6 @@ import {
   AppBar,
   Divider,
   IconButton,
-  InputBase,
   Menu,
   Typography,
   Zoom,
@@ -28,7 +27,7 @@ import {
 } from "@material-ui/core";
 
 //Mateirial-UI styles
-import { alpha, makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
 import { Rating } from "@material-ui/lab";
@@ -36,9 +35,8 @@ import { Rating } from "@material-ui/lab";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
-import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-
+import FavoriteIcon  from "@material-ui/icons/FavoriteBorderRounded";
 import HomeIcon from "@material-ui/icons/Home";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import OrdersIcon from "@material-ui/icons/AddShoppingCart";
@@ -462,6 +460,10 @@ export const Menubar = (props) => {
       optionTitle: "Explore",
       route: "/explore",
     },
+    {
+      optionTitle: "Favorites",
+      route: "/favorites",
+    },
   ];
 
   const isMobile = useMediaQuery("(max-width: 600px)");
@@ -618,6 +620,11 @@ function DrawerComponent() {
       optionTitle: "Orders",
       optionIcon: <OrdersIcon />,
       route: "/orders",
+    },
+    {
+      optionTitle: "Favorites",
+      optionIcon: <FavoriteIcon />,
+      route: "/favorites",
     },
     {
       optionTitle: "Settings",

@@ -125,24 +125,24 @@ export const ProfileCard = React.memo(function ProfileCard() {
   const encounteredError=useSelector(selectUserDetailsHasError)
 
 
-  function handleClick(){
-    console.log(profileData)
+  function handleProfileClick(){
+    console.log("Goto Profile")
   }
-  //No need of this useeffect actually
   useEffect(() => {
     dispatch(checkUserPassword({ userPassword:"4545" }));
   }, [dispatch]);
 
+  const[userDetails, setUserDetails]=useState({})
+  useEffect(()=>{
+    setUserDetails(profileData)
+  },[profileData])
+  
   return (
     <>
     {
-            isLoading ? (<>
+            isLoading ? (
                 <CardSkeleton width={200} height={300}
                 />
-                {/* <Button onClick={handleClick}>
-                  Click
-                </Button> */}
-                </>
             ) :
 
       <Card className={cx(styles.card/*, shadowStyles.root*/)} elevation={0}>
@@ -157,8 +157,8 @@ export const ProfileCard = React.memo(function ProfileCard() {
           >
             <Avatar
               className={styles.avatar}
-              src={profileData && profileData.results[0].picture.large}
-              onClick={handleClick}
+              src={userDetails.userProfileImage}
+              onClick={handleProfileClick}
               style={{ cursor: "pointer" }}
             />
           </StyledBadge>
@@ -170,17 +170,17 @@ export const ProfileCard = React.memo(function ProfileCard() {
             }}
             style={{ cursor: "pointer" }}
           >
-            {"letssee@gmail.com"}
+            {userDetails.userFirstName+" "+userDetails.userLastName}
           </h3>
           <Box p={1} mt={0}>
-            <Rating value={3} size="small" readOnly></Rating>
+            <Rating value={userDetails.userRating} size="small" readOnly></Rating>
             <span
               onClick={() => {
                 alert("Go to reviews from Sellers");
               }}
               style={{ cursor: "pointer" }}
             >
-              {455}
+              {userDetails.userRating}
             </span>
           </Box>
         </CardContent>
@@ -188,33 +188,33 @@ export const ProfileCard = React.memo(function ProfileCard() {
         <Box display={"flex"}>
           <Box p={1} flex={"auto"}>
             <p className={styles.statLabel}>Response Time</p>
-            <p className={styles.statValue}>1 Hour</p>
+            <p className={styles.statValue}>{userDetails.userResponseTime}</p>
           </Box>
           <Box p={1} flex={"auto"}>
             <p className={styles.statLabel}>Last Seen</p>
-            <p className={styles.statValue}>Active</p>
+            <p className={styles.statValue}>{userDetails.userLastSeen}</p>
           </Box>
         </Box>
         <Divider light />
         <Box display={"flex"}>
           <Box p={1} flex={"auto"}>
             <p className={styles.statLabel}>Balance</p>
-            <p className={styles.statValue}>$451</p>
+            <p className={styles.statValue}>${userDetails.userBalance}</p>
           </Box>
           <Box p={1} flex={"auto"}>
             <p className={styles.statLabel}>Amount Spent</p>
-            <p className={styles.statValue}>+1k$</p>
+            <p className={styles.statValue}>{userDetails.userAmountSpent}</p>
           </Box>
         </Box>
         <Divider light />
         <Box display={"flex"}>
           <Box p={1} flex={"auto"}>
             <p className={styles.statLabel}>Payment method</p>
-            <p className={styles.statValue}>Verfified</p>
+            <p className={styles.statValue}>{userDetails.userPaymentMethod==1?"Vefified":"Not vefified"}</p>
           </Box>
           <Box p={1} flex={"auto"}>
             <p className={styles.statLabel}>Total Purchases</p>
-            <p className={styles.statValue}>27</p>
+            <p className={styles.statValue}>{userDetails.userTotalPurchases}</p>
           </Box>
         </Box>
       </Card>

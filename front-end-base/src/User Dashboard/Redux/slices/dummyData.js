@@ -307,3 +307,16 @@ export const previousPostDetails={
     }
   ],
 }
+
+// export const recentlyViewedServices=[
+//   {
+//     serviceId:"454S45SWRDPDL1",
+//     serviceTitle:"You will get Custom Website",
+//     serviceThumbnail:ServiceImage3,
+//     serviceGallery: [ServiceImage, ServiceImage2, ServiceImage3],
+//     deliveryDays:2 days,
+//     ratings: 4,
+//     numberOfRatings:2000,
+//     basicPrice:451
+//   }
+// ]
