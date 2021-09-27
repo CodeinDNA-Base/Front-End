@@ -1,5 +1,5 @@
 //ReactJS
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 
 //Material-UI
 import Grid from "@material-ui/core/Grid";
@@ -24,43 +24,31 @@ import { Link } from "react-router-dom";
 //resources
 
 //Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 //action creators
 
 //selectors
-import { selectRecentProjects,selectHasProjectError, selectIsProjectLoading } from '../../Redux/slices/recentlyViewedProjectsSlice';
+import {
+  selectRecentProjects,
+  selectRecentProjectIsLoading,
+  selectRecentProjectHasError,
+} from "../../Redux/slices/recentlyViewedProjectsSlice";
+
 //thunks
-import { fetchProjectDetails } from '../../Redux/slices/recentlyViewedProjectsSlice';
-import { Rating } from '@material-ui/lab';
-import { lightBorder } from '../../../Theme/borders';
+import { fetchRecentlyViewedProjects } from "../../Redux/slices/recentlyViewedProjectsSlice";
 
-export const RecentProjectsForDesktop = () => {
-
-  return (
-    <Grid container spacing={0} style={{ marginTop: "2%" }}>
-      {Array(4)
-        .fill()
-        .map((item) => {
-          return (
-            <Grid item md={6} lg={3} xl={3}>
-                <Box mt={2}>
-                  <CustomCard />
-                </Box>
-            </Grid>
-          );
-        })}
-      <Grid xs={0} sm={1} md={1} item></Grid>
-    </Grid>
-  );
-};
+import { Rating } from "@material-ui/lab";
+import { lightBorder } from "../../../Theme/borders";
+import { CardActions } from "@mui/material";
 
 const useStyles = makeStyles(() => ({
   card: ({ color }) => ({
     maxWidth: 192,
+    minHeight: 235,
     // borderRadius: 16,
-    border:lightBorder,
+    border: lightBorder,
     "&:hover": {
-      boxShadow: `0 6px 4px 0 ${Color('#fff')
+      boxShadow: `0 6px 4px 0 ${Color("#fff")
         .rotate(-12)
         .darken(0.2)
         .fade(0.5)}`,
@@ -84,44 +72,68 @@ const useStyles = makeStyles(() => ({
     fontWeight: 800,
     fontSize: 14,
   },
+  box:{
+    float:'right'
+  }
 }));
 
-const CustomCard = () => {
+export const RecentProjectsForDesktop = () => {
   const classes = useStyles();
 
-  const dispatch=useDispatch()
-  const recentProjects=useSelector(selectRecentProjects)
-  const isLoading=useSelector(selectIsProjectLoading)
-  const encounteredError=useSelector(selectHasProjectError)
+  const dispatch = useDispatch();
+  const recentProjects = useSelector(selectRecentProjects);
+  const isLoading = useSelector(selectRecentProjectIsLoading);
+  const encounteredError = useSelector(selectRecentProjectHasError);
 
-  //Now from orders, get active, cancelled and completed orders by checking their status
   useEffect(() => {
-      dispatch(fetchProjectDetails("status")) //dispatch thunk with status of order or simply bring all orders for this user
-  }, [dispatch])
+    dispatch(fetchRecentlyViewedProjects());
+  }, [dispatch]);
 
+  const [projects, setProjects] = useState([]);
+  useEffect(() => {
+    setProjects(recentProjects);
+  }, [recentProjects]);
 
   return (
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.media}
-          component={"img"}
-          image={
-            "https://images.unsplash.com/photo-1490971688337-f2c79913ea7d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-          }
-        />
-        <CardContent className={classes.content}>
-          <Typography className={classes.title}>
-            Offline Whatsapp for Desktop
-          </Typography>
-          <Box display="flex">
-            <Box flex={1}>
-              <Typography className={classes.subtitle}>$125</Typography>
-            </Box>
-            <Box mt={2}>
-              <Rating value={5} size="small" readOnly />
-            </Box>
-          </Box>
-        </CardContent>
-      </Card>
+    <Grid container spacing={0} style={{ marginTop: "2%" }}>
+      {isLoading ? (
+        <h5>Loading Project ..</h5>
+      ) : (
+        projects.map((item) => {
+          return (
+            <Grid item md={6} lg={3} xl={3}>
+              <Box mt={2}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.media}
+                    component={"img"}
+                    image={item.projectThumbnail}
+                  />
+                  <CardContent className={classes.content}>
+                    <Typography className={classes.title}>
+                      {item.projectTitle}
+                    </Typography>
+                    </CardContent>
+                    <CardActions>
+                    <Box display="flex" >
+                      <Box flex={1}>
+                        <Typography className={classes.subtitle}>
+                          ${item.basicPrice}
+                        </Typography>
+                      </Box>
+                      <Box mt={2} className={classes.box}>
+                        <Rating value={item.ratings} size="small" readOnly />
+                      </Box>
+                    </Box>
+                  </CardActions>
+
+                </Card>
+              </Box>
+            </Grid>
+          );
+        })
+      )}
+      <Grid xs={0} sm={1} md={1} item></Grid>
+    </Grid>
   );
 };
