@@ -7,7 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import {
   makeStyles,
   Card,
-  CardActionArea,
   CardMedia,
   CardContent,
   Typography,
@@ -43,7 +42,7 @@ import { CardActions } from "@mui/material";
 
 const useStyles = makeStyles(() => ({
   card: ({ color }) => ({
-    maxWidth: 192,
+    maxWidth: 185,
     minHeight: 235,
     // borderRadius: 16,
     border: lightBorder,
@@ -72,8 +71,9 @@ const useStyles = makeStyles(() => ({
     fontWeight: 800,
     fontSize: 14,
   },
-  box:{
-    float:'right'
+  linkStyle:{
+    textDecoration:'none',
+    color:'#000'
   }
 }));
 
@@ -95,7 +95,7 @@ export const RecentProjectsForDesktop = () => {
   }, [recentProjects]);
 
   return (
-    <Grid container spacing={0} style={{ marginTop: "2%" }}>
+    <Grid container spacing={0} style={{ margin: "auto" }}>
       {isLoading ? (
         <h5>Loading Project ..</h5>
       ) : (
@@ -103,31 +103,34 @@ export const RecentProjectsForDesktop = () => {
           return (
             <Grid item md={6} lg={3} xl={3}>
               <Box mt={2}>
+                <Link to={{
+                  pathname:"/viewproject",
+                  state:{projectId:item.projectId}
+                }}
+                className={classes.linkStyle}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.media}
                     component={"img"}
                     image={item.projectThumbnail}
                   />
-                  <CardContent className={classes.content}>
+                  <CardContent>
                     <Typography className={classes.title}>
                       {item.projectTitle}
                     </Typography>
-                    </CardContent>
-                    <CardActions>
-                    <Box display="flex" >
-                      <Box flex={1}>
-                        <Typography className={classes.subtitle}>
-                          ${item.basicPrice}
-                        </Typography>
-                      </Box>
-                      <Box mt={2} className={classes.box}>
-                        <Rating value={item.ratings} size="small" readOnly />
-                      </Box>
+                  </CardContent>
+                  <CardActions>
+                    <Box flex={1}>
+                      <Typography className={classes.subtitle}>
+                        ${item.basicPrice}
+                      </Typography>
+                    </Box>
+                    <Box mt={2} flexShrink={0}>
+                      <Rating value={item.ratings} size="small" readOnly />
                     </Box>
                   </CardActions>
-
                 </Card>
+                </Link>
               </Box>
             </Grid>
           );

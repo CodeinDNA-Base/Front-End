@@ -39,11 +39,12 @@ import { Rating } from "@material-ui/lab";
 
 //Custom components
 import { lightBorder } from "../../../Theme/borders";
+import { CardActions } from "@mui/material";
 
 const useStyles = makeStyles(() => ({
   card: ({ color }) => ({
-    maxWidth: 192,
-    minHeight:300,
+    maxWidth: 185,
+    minHeight: 235,
     border: lightBorder,
     boxShadow: "none",
     "&:hover": {
@@ -71,6 +72,10 @@ const useStyles = makeStyles(() => ({
     fontWeight: 700,
     fontSize: 14,
   },
+  linkStyle:{
+    textDecoration:'none',
+    color:'#000'
+  }
 }));
 
 export const RecentProjectsForMobile = () => {
@@ -102,9 +107,11 @@ export const RecentProjectsForMobile = () => {
                 <Link
                   to={{
                     pathname: "/viewproject",
-                    state: { projectId: item.projectId },
+                    state: { 
+                      projectId: item.projectId 
+                    },
                   }}
-                  style={{ textDecoration: "none" }}
+                  className={classes.linkStyle}
                 >
                   <Box mt={4} mr={2}>
                     <Card className={classes.card}>
@@ -117,21 +124,21 @@ export const RecentProjectsForMobile = () => {
                         <Typography className={classes.title}>
                           {item.projectTitle}
                         </Typography>
-                        <Box display="flex">
-                          <Box flex={1}>
+                      </CardContent>
+                      <CardActions>
+                          <Box>
                             <Typography className={classes.subtitle}>
                               ${item.basicPrice}
                             </Typography>
                           </Box>
-                          <Box mt={2}>
+                          <Box mt={2} flexShrink={0}>
                             <Rating
                               value={item.ratings}
                               size="small"
                               readOnly
                             />
                           </Box>
-                        </Box>
-                      </CardContent>
+                          </CardActions>
                     </Card>
                   </Box>
                 </Link>

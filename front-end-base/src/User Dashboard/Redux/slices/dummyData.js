@@ -313,7 +313,7 @@ export const recentlyViewedServices=[
     serviceId:"S454S45SWRDPDL1",
     serviceTitle:"You will get Custom Website",
     serviceThumbnail:ServiceImage3,
-    serviceGallery: [ServiceImage, ServiceImage2, ServiceImage3],
+    serviceGallery: [],//array of images
     deliveryDays:2,
     ratings: 4,
     numberOfRatings:2000,
@@ -323,7 +323,7 @@ export const recentlyViewedServices=[
     serviceId:"S454S45SWRDP",
     serviceTitle:"Javadoc for my app",
     serviceThumbnail:ServiceImage3,
-    serviceGallery: [ServiceImage, ServiceImage2, ServiceImage3],
+    serviceGallery: [],//array of images: maybe object each
     deliveryDays:2,
     ratings: 4,
     numberOfRatings:2000,
@@ -333,7 +333,7 @@ export const recentlyViewedServices=[
     serviceId:"S454S45SW",
     serviceTitle:"Winforms: Movie recommender",
     serviceThumbnail:ServiceImage3,
-    serviceGallery: [ServiceImage, ServiceImage2, ServiceImage3],
+    serviceGallery: [],//array of images
     deliveryDays:2,
     ratings: 4,
     numberOfRatings:2000,
@@ -343,7 +343,7 @@ export const recentlyViewedServices=[
     serviceId:"S454S45SW7",
     serviceTitle:"Model Training, testing and deployment",
     serviceThumbnail:ServiceImage3,
-    serviceGallery: [ServiceImage, ServiceImage2, ServiceImage3],
+    serviceGallery: [],//array of images
     deliveryDays:2,
     ratings: 4,
     numberOfRatings:2000,
